@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+import '../../../../models/enum/wiki_rating_type.dart';
+import '../../../../core/service/dynamic_link_service.dart';
+import '../../../../core/presentation/widgets/ending_of_screen.dart';
+import '../../../../core/utils/image_dimensions.dart';
+import '../../dto/wiki_data_dto.dart';
+import '../../../../core/utils/my_colors.dart';
+import '../widgets/wiki_subtitle.dart';
+import '../widgets/wiki_sliver_app_bar.dart';
+import '../widgets/wiki_title.dart';
+
+class WikiScreen extends StatefulWidget {
+  final WikiDataDto wikiData;
+  final String wikiType;
+  final ScrollController scrollController;
+  final Widget wikiDetails;
+  final ImageDimensions? imageDimensions;
+  final bool isBackButtonOn;
+
+  WikiScreen({
+    Key? key,
+    required this.wikiData,
+    required this.wikiType,
+    required this.scrollController,
+    required this.wikiDetails,
+    required this.imageDimensions,
+    required this.isBackButtonOn,
+  }) : super(key: key);
+
+  @override
+  _WikiScreenState createState() => _WikiScreenState();
+}
+
+class _WikiScreenState extends State<WikiScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<Uri> _setShareLinkToPage() async {
+    String _pathToPage =
+        '${widget.wikiData.type.navigationRoute}?id=${widget.wikiData.id}&name=${widget.wikiData.name}&imageLink=${widget.wikiData.imageLink}&country=${widget.wikiData.country.toString()}';
+    widget.imageDimensions != null
+        ? _pathToPage +=
+            '&imageHeight=${widget.imageDimensions!.imageHeight}&imageWidth=${widget.imageDimensions!.imageWidth}'
+        : _pathToPage += '&imageHeight=null&imageWidth=null';
+    return await DynamicLinkService.createDynamicLink(_pathToPage);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: MyColors.screenBackground,
+      body: SafeArea(
+        child: CustomScrollView(
+          controller: widget.scrollController,
+          //todo check on android
+          physics:
+              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          slivers: [
+            FutureBuilder(
+              future: _setShareLinkToPage(),
+              builder: (context, AsyncSnapshot<Uri> snapshot) =>
+                  WikiSliverAppBar(
+                title: widget.wikiData.name,
+                subtitle: widget.wikiType,
+                flexibleSpaceImageLink: widget.wikiData.imageLink,
+                scrollController: widget.scrollController,
+                imageDimensions: widget.imageDimensions,
+                isBackButtonOn: widget.isBackButtonOn,
+                wikiData: widget.wikiData,
+                shareLink: snapshot.data!, //todo ! risky
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  WikiTitle(title: widget.wikiData.name),
+                  SizedBox(height: 8),
+                  WikiSubtitle(
+                    entityType: widget.wikiType,
+                    overallFollowers: widget.wikiData.overallFollowers,
+                    country: widget.wikiData.country,
+                  ),
+                  widget.wikiDetails,
+                  EndingOfScreen(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

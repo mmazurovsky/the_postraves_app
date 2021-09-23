@@ -1,0 +1,175 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:screen_brightness/screen_brightness.dart';
+import '../../../../core/presentation/widgets/entity_presentation/followable_data.dart';
+import '../../../../core/utils/image_dimensions.dart';
+import '../../../../core/presentation/widgets/app_bar_back_button.dart';
+import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
+import '../../../../core/presentation/widgets/my_cached_network_image.dart';
+import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
+import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
+import '../../../../core/utils/my_colors.dart';
+import '../../../../core/utils/my_text_styles.dart';
+import '../../dto/wiki_data_dto.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class WikiShareScreen extends StatelessWidget {
+  final Uri shareLink;
+  final WikiDataDto wikiData;
+  final ImageDimensions imageDimensions;
+
+  WikiShareScreen({
+    Key? key,
+    required this.shareLink,
+    required this.wikiData,
+    required this.imageDimensions,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: MySimpleAppBar(
+        leading: AppBarBackButton(),
+        title: Text(
+          AppLocalizations.of(context)!.share,
+          style: MyTextStyles.appBarTitle,
+        ),
+      ),
+      backgroundColor: MyColors.screenBackground,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            children: [
+              SizedBox(height: 30),
+              MyHorizontalPadding(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        child: MyCachedNetworkImage(
+                          wikiData.imageLink,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 18,
+                    ),
+                    Flexible(
+                      child: FollowableData(
+                        followable: wikiData,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          MyHorizontalPadding(
+            child: Container(
+              decoration: BoxDecoration(
+                color: MyColors.forEventCard,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: EdgeInsets.all(30),
+              child: Column(
+                children: [
+                  QrImage(
+                    data: shareLink.toString(),
+                    version: QrVersions.auto,
+                    foregroundColor: MyColors.main,
+                    size: MediaQuery.of(context).size.width - 95,
+                    padding: EdgeInsets.all(0),
+                  ),
+                  SizedBox(height: 15),
+                  BrightnessSwitcher(),
+                ],
+              ),
+            ),
+          ),
+          Column(
+            children: [
+              MyElevatedButton(
+                mainAxisAlignment: MainAxisAlignment.center,
+                leadingIcon: Container(
+                  width: 18,
+                  height: 20,
+                  alignment: Alignment.topCenter,
+                  child: Icon(
+                    Ionicons.share_outline,
+                    color: MyColors.main,
+                    size: 18,
+                  ),
+                ),
+                text: AppLocalizations.of(context)!.shareLink,
+                buttonColor: MyColors.forEventCard,
+                textStyle: MyTextStyles.buttonWithMainColorThinner,
+                onTap: () async => await Share.share(shareLink.toString()),
+              ),
+              SizedBox(height: 30),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BrightnessSwitcher extends StatefulWidget {
+  BrightnessSwitcher({Key? key}) : super(key: key);
+
+  @override
+  _BrightnessSwitcherState createState() => _BrightnessSwitcherState();
+}
+
+class _BrightnessSwitcherState extends State<BrightnessSwitcher> {
+  late double _initialBrightness;
+  late bool _maxBrightness;
+
+  @override
+  void initState() {
+    super.initState();
+    _maxBrightness = false;
+    _setCurrentBrightness();
+  }
+
+  Future<void> _setCurrentBrightness() async {
+    _initialBrightness = await ScreenBrightness.current;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          AppLocalizations.of(context)!.maxBrightness,
+          style: MyTextStyles.buttonWithMainColor,
+          overflow: TextOverflow.ellipsis,
+        ),
+        CupertinoSwitch(
+          activeColor: MyColors.accent,
+          value: _maxBrightness,
+          onChanged: (value) {
+            if (_maxBrightness != value) {
+              setState(() {
+                _maxBrightness = value;
+              });
+              _maxBrightness
+                  ? ScreenBrightness.setScreenBrightness(1.0)
+                  : ScreenBrightness.setScreenBrightness(_initialBrightness);
+            }
+          },
+        ),
+      ],
+    );
+  }
+}
