@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ScaleAnimationWrapper extends StatefulWidget {
   final Widget child;
-  ScaleAnimationWrapper({
+  const ScaleAnimationWrapper({
     Key? key,
     required this.child,
   }) : super(key: key);

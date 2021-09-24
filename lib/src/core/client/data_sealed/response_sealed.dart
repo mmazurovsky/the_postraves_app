@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../error/failures.dart';
 
 part 'response_sealed.freezed.dart';

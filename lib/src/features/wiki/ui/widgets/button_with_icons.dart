@@ -12,7 +12,7 @@ class ButtonWithIcons extends StatelessWidget {
   final Function onButtonTap;
   final double verticalPadding;
   final Widget? trailingIcon;
-  ButtonWithIcons({
+  const ButtonWithIcons({
     Key? key,
     this.leadingIcon,
     required this.buttonText,
@@ -34,13 +34,11 @@ class ButtonWithIcons extends StatelessWidget {
             leading: leadingIcon,
             distanceBetweenLeadingAndText: 13,
             text: buttonText,
-            trailing: trailingIcon == null
-                ? Icon(
+            trailing: trailingIcon ?? Icon(
                     Ionicons.chevron_forward_outline,
                     size: 26,
                     color: MyColors.accent,
-                  )
-                : trailingIcon,
+                  ),
             textStyle: MyTextStyles.buttonWithArrow,
           ),
         ),

@@ -20,7 +20,7 @@ class UnityRemoteDataSourceImpl implements UnityRemoteDataSource {
   Future<List<EventShort>> fetchEventsForUnityById(
       {required int id, required Map<String, String> httpHeaders}) async {
     var decodedResponse;
-    decodedResponse = await RemoteClient.makePostRequestAndReturnResponse(
+    decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'unity/public/$id/events',
         httpHeaders: httpHeaders);
     return decodedResponse.map((json) => EventShort.fromJson(json)).toList();
@@ -30,7 +30,7 @@ class UnityRemoteDataSourceImpl implements UnityRemoteDataSource {
   Future<List<ArtistShort>> fetchArtistsForUnityById(
       {required int id, required Map<String, String> httpHeaders}) async {
     var decodedResponse;
-    decodedResponse = await RemoteClient.makePostRequestAndReturnResponse(
+    decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'unity/public/$id/artists',
         httpHeaders: httpHeaders);
     return decodedResponse.map((json) => ArtistShort.fromJson(json)).toList();

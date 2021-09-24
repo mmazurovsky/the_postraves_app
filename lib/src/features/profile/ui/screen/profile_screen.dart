@@ -14,7 +14,6 @@ import '../../../../models/user/user_profile.dart';
 import '../../../../core/presentation/widgets/details_horizontal_scrollable_list.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
-import '../../../../core/presentation/widgets/null_check_wrapper.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/presentation/widgets/section_spacer.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
@@ -49,13 +48,13 @@ class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
       builder: (context, state) {
         late Widget screenToReturn;
         state.maybeWhen(
-            initial: () => screenToReturn = LoadingScreen(),
+            initial: () => screenToReturn = const LoadingScreen(),
             authenticated: (userProfile) =>
                 screenToReturn = ProfileScreen(userProfile: userProfile),
             authenticatedWithoutAccount: () => screenToReturn =
                 CreateUserProfileScreen(
                     isPoppable: false, userProfileRepository: serviceLocator()),
-            unauthenticated: () => screenToReturn = SignInMethodsScreen(
+            unauthenticated: () => screenToReturn = const SignInMethodsScreen(
                   isPoppable: false,
                 ),
             orElse: () {});
@@ -87,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _scrollController = TabItem.PROFILE.tabScrollController;
+    _scrollController = TabItem.profile.tabScrollController;
   }
 
   @override
@@ -108,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       AppLocalizations.of(context)!.profileStatisticsLocationsOpened:
           Text(0.toString(), style: MyTextStyles.body),
       AppLocalizations.of(context)!.profileStatisticsDonations:
-          Text('0₽', style: MyTextStyles.body)
+          const Text('0₽', style: MyTextStyles.body)
     };
     _profileDetails = _ProfileDetails(
       userProfile: widget.userProfile,
@@ -149,11 +148,11 @@ class _ProfileDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         MyElevatedButton(
           //todo
           onTap: () {},
-          leadingIcon: Icon(
+          leadingIcon: const Icon(
             Ionicons.bookmark,
             size: 23,
             color: MyColors.mainOppositeColor,
@@ -164,22 +163,23 @@ class _ProfileDetails extends StatelessWidget {
           text: AppLocalizations.of(context)!.profileShowMyFollows,
           textStyle: MyTextStyles.buttonWithOppositeColor,
         ),
-        SizedBox(height: 25),
+        const SizedBox(height: 25),
         DetailsHorizontalScrollableList(titleBodyMap: profileDetails),
         SocialLinksList(
           instagramLink: userProfile.instagramLink,
           telegramLink: userProfile.telegramLink,
         ),
-        SectionSpacer(),
-        NullCheckWrapper(
-          toBeChecked: userProfile.about,
-          children: [
-            WikiExpandableTextDescription(
-              userProfile.about!,
-            ),
-            SectionSpacer(),
-          ],
-        ),
+        const SectionSpacer(),
+        userProfile.about == null
+            ? Container()
+            : Column(
+                children: [
+                  WikiExpandableTextDescription(
+                    userProfile.about!,
+                  ),
+                  const SectionSpacer(),
+                ],
+              ),
         SectionTitle(
             sectionTitle: AppLocalizations.of(context)!.profileCurrentCity),
         ButtonWithIcons(
@@ -196,12 +196,12 @@ class _ProfileDetails extends StatelessWidget {
               ),
               Text(
                 userProfile.currentCity.country.emojiCode,
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
             ],
           ),
           buttonText: userProfile.currentCity.localizedName,
-          trailingIcon: Icon(
+          trailingIcon: const Icon(
             Ionicons.chevron_down,
             size: 26,
             color: MyColors.accent,
@@ -210,9 +210,9 @@ class _ProfileDetails extends StatelessWidget {
           onButtonTap: () {},
           verticalPadding: 14,
         ),
-        SectionDivider(needHorizontalMargin: true),
-        SectionSpacer(),
-        SectionSpacer(),
+        const SectionDivider(needHorizontalMargin: true),
+        const SectionSpacer(),
+        const SectionSpacer(),
         MyElevatedButton(
           text: AppLocalizations.of(context)!.profileSignOut,
           buttonColor: MyColors.main,
@@ -220,13 +220,14 @@ class _ProfileDetails extends StatelessWidget {
           onTap: () => BlocProvider.of<AuthenticationCubit>(context).singOut(),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
-        SectionSpacer(),
+        const SectionSpacer(),
         MyElevatedButton(
           //todo
           text: 'Clear search history',
           buttonColor: MyColors.main,
           textStyle: MyTextStyles.buttonWithOppositeColor,
-          onTap: () => BlocProvider.of<SearchCubit>(context).removeAllSearchRecords(),
+          onTap: () =>
+              BlocProvider.of<SearchCubit>(context).removeAllSearchRecords(),
           mainAxisAlignment: MainAxisAlignment.center,
         )
       ],

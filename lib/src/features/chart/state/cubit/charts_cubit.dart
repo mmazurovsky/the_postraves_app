@@ -13,7 +13,7 @@ class ChartsCubit extends Cubit<ChartsState> {
   ChartsCubit(this.artistChartsRepository) : super(ChartsState.initial());
 
   void showCharts(City currentCity) async {
-    emit(ChartsState.loading());
+    emit(const ChartsState.loading());
     final overallArtists =
         artistChartsRepository.fetchOverallChart(currentCity);
     final weeklyArtists = artistChartsRepository.fetchWeeklyChart(currentCity);

@@ -6,7 +6,6 @@ import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/utils/my_assets.dart';
 import 'icon_button_trigerring_flushbar.dart';
 
 class AddressSection extends StatelessWidget {

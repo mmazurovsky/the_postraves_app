@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
-import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/utils/my_assets.dart';
-import '../../../../models/enum/view_mode.dart';
 import 'package:ionicons/ionicons.dart';
+
+import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
+import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
+import '../../../../core/utils/my_assets.dart';
+import '../../../../core/utils/my_colors.dart';
+import '../../../../core/utils/my_constants.dart';
+import '../../../../core/utils/my_text_styles.dart';
+import '../../../../models/enum/view_mode.dart';
+import '../../state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
 
 class SortModeSwitcher extends StatelessWidget {
   @override
@@ -57,7 +58,7 @@ class SortMode extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: isSelected
-          ? () => null
+          ? () => {}
           : () {
               if (viewMode == ViewMode.SORT_BY_RATING) {
                 BlocProvider.of<ViewSwitcherCubit>(context).showByRatingView();

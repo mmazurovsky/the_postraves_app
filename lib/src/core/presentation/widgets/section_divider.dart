@@ -21,7 +21,7 @@ class SectionDivider extends StatelessWidget {
 class _MyDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Divider(
+    return const Divider(
       color: MyColors.forDividers,
       thickness: MyConstants.dividerThickness,
       height: 0.5,

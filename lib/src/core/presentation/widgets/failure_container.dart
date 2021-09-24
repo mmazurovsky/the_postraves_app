@@ -4,13 +4,10 @@ import '../../utils/my_text_styles.dart';
 
 class FailureContainer extends StatelessWidget {
   final String failureMessage;
-  // final IconData icon;
-  // final Function function;
   const FailureContainer(
     this.failureMessage,
-    // required this.icon,
-    // required this.function,
-  );
+    [Key? key]
+  ) : super(key:key);
 
   @override
   Widget build(BuildContext context) {

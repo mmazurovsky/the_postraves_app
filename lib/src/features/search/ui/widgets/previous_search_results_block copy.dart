@@ -14,7 +14,7 @@ class PreviousSearchResultsBlock extends StatelessWidget {
   final List<UnifiedSearchModel> results;
   final Function deleteFunction;
 
-  PreviousSearchResultsBlock({
+  const PreviousSearchResultsBlock({
     Key? key,
     required this.resultsName,
     required this.results,

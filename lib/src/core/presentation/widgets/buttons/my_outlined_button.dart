@@ -15,7 +15,7 @@ class MyOutlinedButton extends StatelessWidget {
   final double contentHorizontalPadding;
   final double? distanceBetweenLeadingAndText;
 
-  MyOutlinedButton({
+  const MyOutlinedButton({
     Key? key,
     required this.text,
     required this.textStyle,
@@ -28,6 +28,7 @@ class MyOutlinedButton extends StatelessWidget {
     this.contentHorizontalPadding = 0,
   }) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return MyHorizontalPadding(
       child: InkWell(

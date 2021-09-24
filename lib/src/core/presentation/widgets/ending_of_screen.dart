@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../utils/my_constants.dart';
 
 class EndingOfScreen extends StatelessWidget {
@@ -6,7 +7,7 @@ class EndingOfScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return const SizedBox(
       height: MyConstants.endingOfScreenOrSpaceBetweenElements,
     );
   }

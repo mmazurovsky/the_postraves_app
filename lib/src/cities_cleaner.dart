@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'core/authentication/state/cubit/authentication_cubit.dart';
 
+import 'core/authentication/state/cubit/authentication_cubit.dart';
 import 'core/presentation/widgets/loading_screen.dart';
 import 'core/repository/city_repository.dart';
 
@@ -9,7 +9,7 @@ class CitiesCleaner extends StatefulWidget {
   final Widget child;
   final CityRepository cityRepository;
 
-  CitiesCleaner({
+  const CitiesCleaner({
     Key? key,
     required this.child,
     required this.cityRepository,
@@ -43,7 +43,7 @@ class _CitiesCleanerState extends State<CitiesCleaner> {
               if (snapshot.hasData) {
                 return widget.child;
               } else {
-                return LoadingScreen();
+                return const LoadingScreen();
               }
             })
         : widget.child;

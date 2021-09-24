@@ -31,7 +31,7 @@ Map<String, dynamic> _$_$_ArtistFullToJson(_$_ArtistFull instance) =>
       'weeklyFollowers': instance.weeklyFollowers,
       'isFollowed': instance.isFollowed,
       'imageLink': instance.imageLink,
-      'country': instance.country,
+      'country': instance.country?.toJson(),
       'about': instance.about,
       'soundcloudLink': instance.soundcloudLink,
       'instagramLink': instance.instagramLink,

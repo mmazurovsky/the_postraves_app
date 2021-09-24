@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../state/cubit/charts_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
+import '../../../../core/presentation/widgets/failure_container.dart';
+import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
+import '../../../../core/presentation/widgets/search_container.dart';
+import '../../../../core/provider/current_city_provider.dart';
+import '../../../../core/utils/my_assets.dart';
+import '../../../../core/utils/my_colors.dart';
+import '../../../../core/utils/my_text_styles.dart';
 import '../../../../models/geo/city.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../models/shorts/artist_short.dart';
-import '../../../../core/provider/current_city_provider.dart';
-import 'package:provider/provider.dart';
-import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/presentation/widgets/failure_container.dart';
-import '../../../../core/presentation/widgets/search_container.dart';
-import '../../../../core/utils/my_assets.dart';
 import '../../../../my_navigation.dart';
+import '../../state/cubit/charts_cubit.dart';
 import '../widgets/rating_card_with_list_of_items.dart';
 import '../widgets/rating_weekly_winner_card.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChartsScreen extends StatefulWidget {
   const ChartsScreen({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class _ChartsScreenState extends State<ChartsScreen>
     super.didChangeDependencies();
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
       _currentCity = context.read<CurrentCityProvider>().currentCity!; //todo check it is ok to ! here
-      BlocProvider.of<ChartsCubit>(context)..showCharts(_currentCity);
+      BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity);
     }
   }
 
@@ -43,8 +44,8 @@ class _ChartsScreenState extends State<ChartsScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: NestedScrollView(
-        controller: TabItem.SEARCH.tabScrollController,
-        physics: BouncingScrollPhysics(),
+        controller: TabItem.search.tabScrollController,
+        physics: const BouncingScrollPhysics(),
         headerSliverBuilder: (context, value) {
           return [
             SliverPersistentHeader(
@@ -56,8 +57,8 @@ class _ChartsScreenState extends State<ChartsScreen>
         body: BlocBuilder<ChartsCubit, ChartsState>(
           builder: (context, state) {
             return state.when(
-                initial: () => LoadingScreen(),
-                loading: () => LoadingScreen(),
+                initial: () => const LoadingScreen(),
+                loading: () => const LoadingScreen(),
                 loaded: (bestArtist, weeklyChart, overallChart) => _Charts(
                     bestArtist: bestArtist,
                     weeklyChart: weeklyChart,
@@ -117,14 +118,14 @@ class _ChartsViewForEntity<T extends FollowableInterface>
     return SliverToBoxAdapter(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           MyHorizontalMargin(
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                '$sectionTitle',
+                sectionTitle,
                 style: MyTextStyles.ratingsTitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -164,7 +165,7 @@ class _ChartsViewForEntity<T extends FollowableInterface>
                   entities: overallChart!,
                 )
               : Container(),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
         ],

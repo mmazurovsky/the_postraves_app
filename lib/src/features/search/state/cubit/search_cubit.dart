@@ -11,15 +11,15 @@ part 'search_cubit.freezed.dart';
 
 class SearchCubit extends Cubit<SearchState> {
   final AggregatedSearchRepository _aggregatedSearchRepository;
-  SearchCubit(this._aggregatedSearchRepository) : super(SearchState.initial());
+  SearchCubit(this._aggregatedSearchRepository) : super(const SearchState.initial());
 
   void showPreviousSearches() {
-    emit(SearchState.loadingPreviousSearches());
+    emit(const SearchState.loadingPreviousSearches());
     _triggerShowingPreviousSearches();
   }
 
   void startSearch(String searchValue) async {
-    emit(SearchState.loadingNewSearch());
+    emit(const SearchState.loadingNewSearch());
     final searchResults =
         await _aggregatedSearchRepository.searchByAllRatingModels(searchValue);
     searchResults.when(

@@ -11,7 +11,7 @@ class SceneCardForTimetable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Container(
+      child: SizedBox(
         height: 190,
         child: Stack(
           alignment: Alignment.center,

@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import '../../models/geo/city.dart';
-
 import '../repository/city_repository.dart';
 
 class CityListProvider {
   final CityRepository _cityRepository;
   List<City> _myCityList = [];
-  Completer<List<City>> _citiesCompleter = Completer();
+  final Completer<List<City>> _citiesCompleter = Completer();
 
   CityListProvider(
     this._cityRepository,

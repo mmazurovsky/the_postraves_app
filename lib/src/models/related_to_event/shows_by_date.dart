@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../shorts/event_short.dart';
 
 part 'shows_by_date.freezed.dart';
@@ -14,7 +15,7 @@ class ShowsByDate with _$ShowsByDate {
   }) = _EventsByDate;
 
   String get weekdayAsString { //todo!!!
-    if (this.date.weekday == 1) {
+    if (date.weekday == 1) {
       return 'Пн';
     } else if (date.weekday == 2) {
       return 'Вт';

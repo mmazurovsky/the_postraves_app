@@ -10,7 +10,7 @@ import '../../../../dependency_injection.dart';
 import 'create_user_profile_screen.dart';
 
 class AuthOnActionScreenResolver extends StatelessWidget {
-  AuthOnActionScreenResolver({Key? key}) : super(key: key);
+  const AuthOnActionScreenResolver({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,11 @@ class AuthOnActionScreenResolver extends StatelessWidget {
                   route.settings.name == MyNavigationRoutes.unity,
             );
           });
-          return LoadingScreen();
+          return const LoadingScreen();
         },
-        unauthenticated: () => SignInMethodsScreen(
+        unauthenticated: () => const SignInMethodsScreen(
               isPoppable: true,
             ),
-        orElse: () => LoadingScreen());
+        orElse: () => const LoadingScreen());
   }
 }

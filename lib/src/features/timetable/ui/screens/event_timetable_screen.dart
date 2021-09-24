@@ -15,7 +15,7 @@ import '../widgets/artist_performances_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventTimetableScreen extends StatefulWidget {
-  EventTimetableScreen({
+  const EventTimetableScreen({
     Key? key,
     required this.eventId,
     required this.eventName,
@@ -63,9 +63,9 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
             color: Colors.white,
           ),
         ),
-        actions: [],
+        actions: const [],
         centerTitle: true,
-        title: Container(
+        title: SizedBox(
           width: MyConstants.appBarTitleWidth(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,7 +129,7 @@ class Timetable extends StatefulWidget {
   final TabController tabController;
   final Function onRefresh;
   final RefreshController refreshController;
-  Timetable({
+  const Timetable({
     Key? key,
     required this.timetableForSceneDtoList,
     required this.tabController,

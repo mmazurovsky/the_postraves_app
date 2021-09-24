@@ -1,19 +1,20 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
+import '../../../../core/utils/my_text_styles.dart';
 
 
 class WikiExpandableTextDescription extends StatefulWidget {
   final String text;
 
-  WikiExpandableTextDescription(this.text);
+  const WikiExpandableTextDescription(this.text);
 
   @override
   _WikiExpandableTextDescriptionState createState() =>
-      new _WikiExpandableTextDescriptionState();
+      _WikiExpandableTextDescriptionState();
 }
 
 class _WikiExpandableTextDescriptionState

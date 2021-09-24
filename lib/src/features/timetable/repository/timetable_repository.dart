@@ -1,7 +1,7 @@
 import '../../../core/client/data_sealed/response_sealed.dart';
 import '../../../core/client/remote_request_wrapper.dart';
-import '../data_sources/timetable_remote_data_source.dart';
 import '../../../models/related_to_event/timetable_for_scene.dart';
+import '../data_sources/timetable_remote_data_source.dart';
 
 abstract class TimetableRepository {
   Future<ResponseSealed<List<TimetableForScene>>> fetchTimetableFromRemote(int eventId);

@@ -1,8 +1,7 @@
+import '../../../core/client/remote_client.dart';
 import '../../../models/geo/city.dart';
 import '../../../models/related_to_event/shows_by_date.dart';
 import '../../../models/shorts/event_short.dart';
-
-import '../../../core/client/remote_client.dart';
 
 abstract class ShowsRemoteDataSource {
   Future<List<ShowsByDate>> fetchEventsByDate(
@@ -34,8 +33,8 @@ class ShowsRemoteDataSourceImpl<T> implements ShowsRemoteDataSource {
       {required City city, required Map<String, String> httpHeaders}) async {
     final dynamic decodedResponse =
         await RemoteClient.makeGetRequestAndReturnResponse(
-      endpointWithPath: 'event/public/relevantSortedByRating',
-      queryParameters: {'cityId': city.name},
+      endpointWithPath: 'event/public/relevantByRating',
+      queryParameters: {'cityName': city.name},
       httpHeaders: httpHeaders,
     );
 

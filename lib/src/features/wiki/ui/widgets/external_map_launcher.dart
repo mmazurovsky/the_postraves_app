@@ -11,7 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ExternalMapLauncher extends StatelessWidget {
   final Coordinate coordinate;
   final String placeName;
-  ExternalMapLauncher({
+  const ExternalMapLauncher({
     Key? key,
     required this.coordinate,
     required this.placeName,

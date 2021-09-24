@@ -32,8 +32,8 @@ Map<String, dynamic> _$_$_EventShortToJson(_$_EventShort instance) =>
       'isFollowed': instance.isFollowed,
       'status': _$EventStatusEnumMap[instance.status],
       'startDateTime': instance.startDateTime.toIso8601String(),
-      'place': instance.place,
-      'ticketPrices': instance.ticketPrices,
+      'place': instance.place.toJson(),
+      'ticketPrices': instance.ticketPrices.map((e) => e.toJson()).toList(),
       'imageLink': instance.imageLink,
     };
 

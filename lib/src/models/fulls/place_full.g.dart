@@ -34,7 +34,7 @@ Map<String, dynamic> _$_$_PlaceFullToJson(_$_PlaceFull instance) =>
       'weeklyFollowers': instance.weeklyFollowers,
       'isFollowed': instance.isFollowed,
       'imageLink': instance.imageLink,
-      'city': instance.city,
+      'city': instance.city.toJson(),
       'streetAddress': instance.streetAddress,
-      'coordinate': instance.coordinate,
+      'coordinate': instance.coordinate.toJson(),
     };

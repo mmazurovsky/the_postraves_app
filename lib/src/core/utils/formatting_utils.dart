@@ -92,13 +92,16 @@ class FormattingUtils {
     }
   }
 
+  // todo check without 
   static TicketPriceRange getTicketPriceRangeForTickets(
       List<TicketPrice> tickets) {
-    assert(tickets.length > 0);
+    assert(tickets.isNotEmpty);
     if (tickets.length > 1) {
       MoneyCurrency moneyCurrency = tickets.first.currency;
       List<double> prices = [];
-      tickets.forEach((ticket) => {prices.add(ticket.price)});
+      for (var ticket in tickets) {
+        prices.add(ticket.price);
+      }
       TicketPriceRange ticketPriceRange = TicketPriceRange(
         minPrice: prices.reduce(min),
         maxPrice: prices.reduce(max),

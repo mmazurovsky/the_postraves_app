@@ -25,11 +25,11 @@ class SelectionListView<LOCATION extends LocationInterface> extends StatelessWid
   Widget build(BuildContext context) {
     // todo scroll bar
     return ListView.separated(
-      padding: EdgeInsets.only(bottom: 30),
-      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      padding: const EdgeInsets.only(bottom: 30),
+      physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       shrinkWrap: isShrinkWrap,
       itemCount: context.read<CityListProvider>().cityList.length,
-      separatorBuilder: (context, i) => SizedBox(height: 8),
+      separatorBuilder: (context, i) => const SizedBox(height: 8),
       itemBuilder: (context, i) {
         LOCATION location = locations[i];
         return InkWell(
@@ -42,7 +42,7 @@ class SelectionListView<LOCATION extends LocationInterface> extends StatelessWid
                 alignment: Alignment.center,
                 child: Text(
                   location.countryEmoji,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
               trailing: location is Country

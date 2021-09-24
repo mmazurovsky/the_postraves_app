@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
+import '../../core/utils/my_constants.dart';
 import '../geo/country.dart';
 import '../interfaces/data_interfaces.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

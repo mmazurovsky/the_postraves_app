@@ -11,7 +11,7 @@ import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
 import '../../../../my_navigation.dart';
 
 class WikiSliverAppBar extends StatefulWidget {
-  WikiSliverAppBar({
+  const WikiSliverAppBar({
     Key? key,
     required this.title,
     required this.subtitle,
@@ -30,7 +30,7 @@ class WikiSliverAppBar extends StatefulWidget {
   final ImageDimensions? imageDimensions;
   final bool isBackButtonOn;
   final WikiDataDto wikiData;
-  final Uri shareLink;
+  final Uri? shareLink;
 
   @override
   _WikiSliverAppBarState createState() => _WikiSliverAppBarState();
@@ -89,7 +89,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
     }
 
     if (_backArrowOpacity != _calculatedBackArrowOpacity) {
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           _backArrowOpacity = _calculatedBackArrowOpacity;
         });
@@ -97,7 +97,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
     }
 
     if (_showAppBarTitle != _calculatedShowAppBarTitle) {
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           _showAppBarTitle = _calculatedShowAppBarTitle;
         });
@@ -130,7 +130,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
                 ),
                 onTap: () => NavigatorFunctions.pushShareWiki(
                   context: context,
-                  shareLink: widget.shareLink,
+                  shareLink: widget.shareLink!, //todo risky
                   wikiData: widget.wikiData,
                   imageDimensions: widget.imageDimensions,
                 ),
@@ -142,7 +142,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
       title: AnimatedOpacity(
         duration: Duration(milliseconds: 200),
         opacity: _showAppBarTitle ? 1.0 : 0.0,
-        child: Container(
+        child: SizedBox(
           //todo dont know how to calculate for different devices
           width: MyConstants.appBarTitleWidth(context),
           child: Column(
@@ -167,7 +167,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
       stretch: true,
       flexibleSpace: FlexibleSpaceBar(
         background: _flexibleSpaceImage,
-        stretchModes: [
+        stretchModes: const [
           StretchMode.zoomBackground,
         ],
       ),

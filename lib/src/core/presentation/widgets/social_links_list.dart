@@ -30,9 +30,9 @@ class SocialLinksList extends StatelessWidget {
             telegramLink != null
         ? Column(
             children: [
-              SectionSpacer(),
+              const SectionSpacer(),
               SectionTitle(sectionTitle: AppLocalizations.of(context)!.links),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               soundcloudLink != null
                   ? ButtonWithIcons(
                       buttonText: 'Soundcloud',
@@ -43,7 +43,7 @@ class SocialLinksList extends StatelessWidget {
                         height: 40,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
                               MyImages.soundcloudLogo,
@@ -63,7 +63,7 @@ class SocialLinksList extends StatelessWidget {
                         height: 40,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
                               MyImages.bandcampLogo,
@@ -83,7 +83,7 @@ class SocialLinksList extends StatelessWidget {
                         height: 40,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
                               MyImages.instagramLogo,
@@ -103,7 +103,7 @@ class SocialLinksList extends StatelessWidget {
                         height: 40,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
                               MyImages.telegramLogo,
@@ -114,8 +114,8 @@ class SocialLinksList extends StatelessWidget {
                       verticalPadding: 8,
                     )
                   : Container(),
-              SizedBox(height: 15),
-              SectionDivider(needHorizontalMargin: true),
+              const SizedBox(height: 15),
+              const SectionDivider(needHorizontalMargin: true),
             ],
           )
         : Container();

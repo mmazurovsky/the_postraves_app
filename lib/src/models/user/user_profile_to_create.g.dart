@@ -20,5 +20,5 @@ Map<String, dynamic> _$_$_UserProfileToCreateToJson(
     <String, dynamic>{
       'name': instance.name,
       'imageLink': instance.imageLink,
-      'currentCity': instance.currentCity,
+      'currentCity': instance.currentCity.toJson(),
     };

@@ -3,9 +3,10 @@ import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_constants.dart';
 
 class WikiSquaredOutlinedBookmarkButton extends StatelessWidget {
-  WikiSquaredOutlinedBookmarkButton(this._iconWidget, {Key? key}) : super(key: key);
+  const WikiSquaredOutlinedBookmarkButton(this._iconWidget, {Key? key}) : super(key: key);
   final Widget _iconWidget;
 
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => print('outlined tapped'),

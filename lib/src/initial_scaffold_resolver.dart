@@ -57,8 +57,9 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
       value.when(
           success: (data) {
             final currentCityFromLocal = data as City?;
-            if (currentCityFromLocal != null)
+            if (currentCityFromLocal != null) {
               currentCityProvider.changeCurrentCity(currentCityFromLocal);
+            }
           },
           failure: (failure, failureMessage) => {}); //todo failure processing
     });
@@ -122,7 +123,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
 }
 
 class CityPickerScaffold extends StatefulWidget {
-  CityPickerScaffold({Key? key}) : super(key: key);
+  const CityPickerScaffold({Key? key}) : super(key: key);
 
   @override
   _CityPickerScaffoldState createState() => _CityPickerScaffoldState();

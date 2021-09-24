@@ -17,7 +17,7 @@ class EventCardDetailsConcrete extends StatelessWidget {
   Widget build(BuildContext context) {
     return EventCardDetails(
       topLeftWidget: WidgetTextRow(
-        widget: Container(
+        widget: SizedBox(
           width: 20,
           child: Icon(
             Ionicons.location_outline,
@@ -28,7 +28,7 @@ class EventCardDetailsConcrete extends StatelessWidget {
         text: _event.place.name,
       ),
       bottomLeftWidget: WidgetTextRow(
-        widget: Container(
+        widget: SizedBox(
           width: 20,
           child: _event.status != EventStatus.LIVE
               ? Icon(Ionicons.calendar_clear_outline,
@@ -43,7 +43,7 @@ class EventCardDetailsConcrete extends StatelessWidget {
               ),
       ),
       topRightWidget: WidgetTextRow(
-        widget: Container(
+        widget: SizedBox(
           width: 20,
           child: Image.asset(
             MyImages.diamond,
@@ -54,7 +54,7 @@ class EventCardDetailsConcrete extends StatelessWidget {
         text: _event.overallFollowers.toString(),
       ),
       bottomRightWidget: WidgetTextRow(
-        widget: Container(
+        widget: SizedBox(
           width: 20,
           child:
               Icon(Ionicons.ticket_outline, size: 19, color: MyColors.accent),

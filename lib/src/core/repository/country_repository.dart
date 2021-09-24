@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import '../client/data_sealed/response_sealed.dart';
 import '../data_sources/country_local_data_source.dart';
 import '../data_sources/country_remote_data_source.dart';
@@ -52,7 +50,7 @@ class CountryRepositoryImpl implements CountryRepository {
     try {
       await countryLocalDataSource.deleteCountries();
       await countryLocalDataSource.saveCountries(countries);
-      return ResponseSealed.success(Void);
+      return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }
@@ -62,7 +60,7 @@ class CountryRepositoryImpl implements CountryRepository {
   Future<ResponseSealed<void>> removeCountriesFromLocal() async {
     try {
       await countryLocalDataSource.deleteCountries();
-      return ResponseSealed.success(Void);
+      return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }

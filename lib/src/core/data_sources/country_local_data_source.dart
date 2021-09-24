@@ -10,8 +10,8 @@ abstract class CountryLocalDataSource {
 }
 
 class CountryLocalDataSourceImpl implements CountryLocalDataSource {
-  static const String COUNTRIES_STORE = 'countries';
-  final _countriesStore = stringMapStoreFactory.store(COUNTRIES_STORE);
+  static const String countriesStore = 'countries';
+  final _countriesStore = stringMapStoreFactory.store(countriesStore);
 
   Future<Database> get _db async => await AppDatabase.instance.database;
 
@@ -31,11 +31,11 @@ class CountryLocalDataSourceImpl implements CountryLocalDataSource {
   @override
   Future<void> saveCountries(List<Country> countries) async {
     await deleteCountries();
-    countries.forEach((element) async {
+    for (var element in countries) {
       await _countriesStore.record(element.name).add(
             await _db,
             element.toJson(),
           );
-    });
+    }
   }
 }

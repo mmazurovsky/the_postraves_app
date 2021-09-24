@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_app/src/core/utils/formatting_utils.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
+import '../../core/utils/formatting_utils.dart';
+import '../../core/utils/my_constants.dart';
 import '../enum/event_status.dart';
 import '../geo/country.dart';
 import '../interfaces/data_interfaces.dart';
@@ -69,5 +69,5 @@ class EventFull
   }
 
   @override
-  Country? get country => this.country;
+  Country? get country => country;
 }

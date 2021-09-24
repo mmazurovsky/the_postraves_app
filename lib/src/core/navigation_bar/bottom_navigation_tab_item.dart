@@ -3,43 +3,43 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../my_navigation.dart';
 
-enum TabItem { SHOWS, SEARCH, PROFILE }
+enum TabItem { shows, search, profile }
 
 extension TabItemExtension on TabItem {
   static const Map<TabItem, String> _tabNameMap = {
-    TabItem.SHOWS: 'Афиша',
-    TabItem.SEARCH: 'Поиск',
-    TabItem.PROFILE: 'Профиль',
+    TabItem.shows: 'Афиша',
+    TabItem.search: 'Поиск',
+    TabItem.profile: 'Профиль',
   };
 
   static const _tabInactiveIconMap = {
-    TabItem.SHOWS: Ionicons.calendar_clear_outline,
-    TabItem.SEARCH: Ionicons.search_outline,
-    TabItem.PROFILE: Ionicons.id_card_outline,
+    TabItem.shows: Ionicons.calendar_clear_outline,
+    TabItem.search: Ionicons.search_outline,
+    TabItem.profile: Ionicons.id_card_outline,
   };
 
   static const _tabActiveIconMap = {
-    TabItem.SHOWS: Ionicons.calendar,
-    TabItem.SEARCH: Ionicons.search,
-    TabItem.PROFILE: Ionicons.id_card,
+    TabItem.shows: Ionicons.calendar,
+    TabItem.search: Ionicons.search,
+    TabItem.profile: Ionicons.id_card,
   };
 
   static const _tabRoute = {
-    TabItem.SHOWS: MyNavigationRoutes.shows,
-    TabItem.SEARCH: MyNavigationRoutes.ratings,
-    TabItem.PROFILE: MyNavigationRoutes.profileResolver,
+    TabItem.shows: MyNavigationRoutes.shows,
+    TabItem.search: MyNavigationRoutes.ratings,
+    TabItem.profile: MyNavigationRoutes.profileResolver,
   };
 
-  static var _navigatorKeys = {
-    TabItem.SHOWS: GlobalKey<NavigatorState>(),
-    TabItem.SEARCH: GlobalKey<NavigatorState>(),
-    TabItem.PROFILE: GlobalKey<NavigatorState>(),
+  static final _navigatorKeys = {
+    TabItem.shows: GlobalKey<NavigatorState>(),
+    TabItem.search: GlobalKey<NavigatorState>(),
+    TabItem.profile: GlobalKey<NavigatorState>(),
   };
 
-  static var _scrollControllers = {
-    TabItem.SHOWS: ScrollController(),
-    TabItem.SEARCH: ScrollController(),
-    TabItem.PROFILE: ScrollController(),
+  static final _scrollControllers = {
+    TabItem.shows: ScrollController(),
+    TabItem.search: ScrollController(),
+    TabItem.profile: ScrollController(),
   };
 
   IconData get tabActiveIcon => _tabActiveIconMap[this]!;

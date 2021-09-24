@@ -11,14 +11,14 @@ class WidgetTextRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 25,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           widget,
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Flexible(

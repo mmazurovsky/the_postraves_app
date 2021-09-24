@@ -13,10 +13,10 @@ abstract class CityLocalDataSource {
 }
 
 class CityLocalDataSourceImpl implements CityLocalDataSource {
-  static const String CITIES_STORE = 'cities';
-  static const String CURRENT_CITY_STORE = 'current_city';
-  final _citiesStore = stringMapStoreFactory.store(CITIES_STORE);
-  final _currentCityStore = stringMapStoreFactory.store(CURRENT_CITY_STORE);
+  static const String citiesStore = 'cities';
+  static const String currentCityStore = 'current_city';
+  final _citiesStore = stringMapStoreFactory.store(citiesStore);
+  final _currentCityStore = stringMapStoreFactory.store(currentCityStore);
 
   Future<Database> get _db async => await AppDatabase.instance.database;
 
@@ -46,12 +46,12 @@ class CityLocalDataSourceImpl implements CityLocalDataSource {
 
   @override
   Future<void> saveCities(List<City> cities) async {
-    cities.forEach((element) async {
+    for (var element in cities) {
       await _citiesStore.record(element.name).add(
             await _db,
             element.toJson(),
           );
-    });
+    }
   }
 
   @override

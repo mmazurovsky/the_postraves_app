@@ -1,4 +1,7 @@
 import '../../../core/client/data_sealed/response_sealed.dart';
+import '../../../core/client/remote_request_wrapper.dart';
+import '../../../core/error/exceptions.dart';
+import '../../../core/error/failures.dart';
 import '../../../models/interfaces/data_interfaces.dart';
 import '../../../models/related_to_search/aggregated_search_model.dart';
 import '../../../models/related_to_search/unified_search_model.dart';
@@ -6,10 +9,6 @@ import '../../../models/shorts/artist_short.dart';
 import '../../../models/shorts/event_short.dart';
 import '../../../models/shorts/place_short.dart';
 import '../../../models/shorts/unity_short.dart';
-import '../../../core/client/remote_request_wrapper.dart';
-
-import '../../../core/error/exceptions.dart';
-import '../../../core/error/failures.dart';
 import '../data_sources/search_local_data_source.dart';
 import '../data_sources/search_remote_data_source.dart';
 
@@ -81,7 +80,7 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
       setOfIds.contains(entityToSaveOrUpdate.id) 
       ? await searchLocalDataSource.updateSearchRecordInHistory(entityToSaveOrUpdate.copyWith(updatedDateTime: DateTime.now())) 
       : searchLocalDataSource.saveSearchRecordToHistory(entityToSaveOrUpdate);
-      return ResponseSealed.success(null);
+      return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }
@@ -93,7 +92,7 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
     final updatedEntity = entity.copyWith(updatedDateTime: DateTime.now());
     try {
       await searchLocalDataSource.updateSearchRecordInHistory(updatedEntity);
-      return ResponseSealed.success(null);
+      return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }

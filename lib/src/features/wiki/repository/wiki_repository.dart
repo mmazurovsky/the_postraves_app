@@ -1,7 +1,7 @@
 import '../../../core/client/data_sealed/response_sealed.dart';
 import '../../../core/client/remote_request_wrapper.dart';
-import '../data_sources/wiki_remote_data_source.dart';
 import '../../../models/interfaces/data_interfaces.dart';
+import '../data_sources/wiki_remote_data_source.dart';
 
 abstract class WikiRepository<FULLFOLLOWABLE extends FollowableInterface> {
   Future<ResponseSealed<FULLFOLLOWABLE>> fetchBasicDataById(int id);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../models/interfaces/data_interfaces.dart';
 import 'rating_entity_list_item.dart';
 

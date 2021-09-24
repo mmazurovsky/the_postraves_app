@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
+import '../../core/utils/my_constants.dart';
 import '../geo/city.dart';
 import '../geo/coordinate.dart';
 import '../geo/country.dart';
@@ -53,5 +53,5 @@ class PlaceFull
   }
 
   @override
-  Country? get country => this.country;
+  Country? get country => country;
 }

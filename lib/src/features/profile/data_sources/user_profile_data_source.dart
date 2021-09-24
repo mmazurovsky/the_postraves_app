@@ -23,7 +23,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   @override
   Future<UserProfile?> getUserAccount(
       {required Map<String, String> httpHeaders}) async {
-    var decodedResponse;
+    dynamic decodedResponse;
 
     try {
       decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
@@ -56,7 +56,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   Future<bool> checkNicknameIsFree(
       {required Map<String, String> httpHeaders,
       required String nickname}) async {
-    var decodedResponse;
+    dynamic decodedResponse;
 
     try {
       decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
@@ -75,9 +75,8 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
     required Map<String, String> httpHeaders,
     required UserProfileToUpdate updatedUserProfile,
   }) async {
-    var decodedResponse;
     try {
-      decodedResponse = await RemoteClient.makePutRequestAndReturnResponse(
+      await RemoteClient.makePutRequestAndReturnResponse(
         endpointWithPath: MyConstants.usersEndpoint + '/public/myAccount',
         httpHeaders: httpHeaders,
         body: updatedUserProfile.toJson(),

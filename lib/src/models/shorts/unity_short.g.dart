@@ -28,5 +28,5 @@ Map<String, dynamic> _$_$_UnityShortToJson(_$_UnityShort instance) =>
       'weeklyFollowers': instance.weeklyFollowers,
       'isFollowed': instance.isFollowed,
       'imageLink': instance.imageLink,
-      'country': instance.country,
+      'country': instance.country?.toJson(),
     };

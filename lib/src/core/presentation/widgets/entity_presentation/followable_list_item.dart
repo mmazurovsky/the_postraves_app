@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../models/related_to_search/unified_search_model.dart';
 import 'followable_data.dart';
 import '../../../utils/image_dimensions.dart';
 import '../../../utils/my_colors.dart';
@@ -17,7 +16,7 @@ class FollowableListItem<T extends SimpleFollowableInterface> extends StatefulWi
   final Function onItemTap;
   final Widget? startingWidget;
 
-  FollowableListItem({
+  const FollowableListItem({
     Key? key,
     required this.followable,
     this.startingWidget,
@@ -51,10 +50,8 @@ class _FollowableListItemState extends State<FollowableListItem> {
         );
       },
       child: Padding(
-        padding: widget.horizontalPadding == null
-            ? EdgeInsets.symmetric(
-                horizontal: MyConstants.horizontalPaddingOrMargin)
-            : EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
+        padding: 
+            EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
         child: MyRatingEntityVerticalPadding(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -65,13 +62,13 @@ class _FollowableListItemState extends State<FollowableListItem> {
                   : widget.startingWidget!,
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Container(
+                child: SizedBox(
                   width: 50,
                   height: 50,
                   child: _image,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 18,
               ),
               Expanded(
@@ -82,13 +79,13 @@ class _FollowableListItemState extends State<FollowableListItem> {
               widget.onIconTap != null
                   ? InkWell(
                       onTap: () => widget.onIconTap!(widget.followable),
-                      child: Icon(
+                      child: const Icon(
                         Icons.close,
                         color: Colors.grey,
                         size: 26,
                       ),
                     )
-                  : Icon(
+                  : const Icon(
                       Ionicons.chevron_forward_outline,
                       size: 26,
                       color: MyColors.accent,

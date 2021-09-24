@@ -46,7 +46,7 @@ class EventShortClientHelper implements FollowableClientHelper<EventShort> {
 
   @override
   String getEndpointForFollowable() {
-    return WikiFollowableType.ARTIST.endpoint;
+    return WikiFollowableType.EVENT.endpoint;
   }
 }
 
@@ -58,7 +58,7 @@ class EventFullClientHelper implements FollowableClientHelper<EventFull> {
 
   @override
   String getEndpointForFollowable() {
-    return WikiFollowableType.ARTIST.endpoint;
+    return WikiFollowableType.EVENT.endpoint;
   }
 }
 
@@ -70,7 +70,7 @@ class UnityShortClientHelper implements FollowableClientHelper<UnityShort> {
 
   @override
   String getEndpointForFollowable() {
-    return WikiFollowableType.ARTIST.endpoint;
+    return WikiFollowableType.UNITY.endpoint;
   }
 }
 
@@ -82,7 +82,7 @@ class UnityFullClientHelper implements FollowableClientHelper<UnityFull> {
 
   @override
   String getEndpointForFollowable() {
-    return WikiFollowableType.ARTIST.endpoint;
+    return WikiFollowableType.UNITY.endpoint;
   }
 }
 
@@ -94,7 +94,7 @@ class PlaceShortClientHelper implements FollowableClientHelper<PlaceShort> {
 
   @override
   String getEndpointForFollowable() {
-    return WikiFollowableType.ARTIST.endpoint;
+    return WikiFollowableType.PLACE.endpoint;
   }
 }
 
@@ -106,6 +106,6 @@ class PlaceFullClientHelper implements FollowableClientHelper<PlaceFull> {
 
   @override
   String getEndpointForFollowable() {
-    return WikiFollowableType.ARTIST.endpoint;
+    return WikiFollowableType.PLACE.endpoint;
   }
 }

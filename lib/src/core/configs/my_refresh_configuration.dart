@@ -15,7 +15,7 @@ class MyRefreshConfiguration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshConfiguration(
-      headerBuilder: () => ClassicHeader(
+      headerBuilder: () => const ClassicHeader(
         height: heightOfRefresh,
         spacing: 0,
         idleIcon: Icon(
@@ -34,7 +34,7 @@ class MyRefreshConfiguration extends StatelessWidget {
       skipCanRefresh: true,
       headerTriggerDistance:
           heightOfRefresh, // header trigger refresh trigger distance
-      springDescription: SpringDescription(
+      springDescription: const SpringDescription(
           stiffness: 170,
           damping: 16,
           mass:

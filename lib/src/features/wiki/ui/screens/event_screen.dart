@@ -6,7 +6,6 @@ import '../../state/event_cubit/event_cubit.dart';
 import '../../../../models/enum/event_status.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../models/fulls/event_full.dart';
-import '../../../../models/related_to_event/timetable_for_scene.dart';
 import '../../../../models/shorts/artist_short.dart';
 import '../../../../models/shorts/place_short.dart';
 import '../../../../models/shorts/unity_short.dart';
@@ -15,7 +14,6 @@ import '../../../../core/presentation/widgets/entity_presentation/rating_entity_
 import '../../../../core/presentation/widgets/details_horizontal_scrollable_list.dart';
 import '../../../../core/presentation/widgets/loading_screen.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button_without_padding.dart';
-import '../../../../core/presentation/widgets/null_check_wrapper.dart';
 import '../../../../core/service/open_link_service.dart';
 import '../../../../core/utils/image_dimensions.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -41,7 +39,7 @@ class EventScreen extends StatefulWidget {
   final int eventId;
   final String eventName;
   final ImageDimensions imageDimensions;
-  EventScreen({
+  const EventScreen({
     required this.eventImageLink,
     required this.eventId,
     required this.eventName,
@@ -118,7 +116,7 @@ class _EventDetails extends StatelessWidget {
   final List<ArtistShort> lineup;
   final List<TimetableForSceneDto> timetable;
 
-  _EventDetails({
+  const _EventDetails({
     Key? key,
     required this.loadedEvent,
     required this.unities,
@@ -207,17 +205,19 @@ class _EventDetails extends StatelessWidget {
             },
           ),
           SizedBox(height: 15),
-          NullCheckWrapper(
-            toBeChecked: loadedEvent.about,
-            children: [
-              WikiExpandableTextDescription(
-                loadedEvent.about!,
-              ),
-              SectionSpacer(),
-              SectionDivider(needHorizontalMargin: true),
-              SectionSpacer(),
-            ],
-          ),
+          loadedEvent.about == null
+              ? Container()
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    WikiExpandableTextDescription(
+                      loadedEvent.about!,
+                    ),
+                    SectionSpacer(),
+                    SectionDivider(needHorizontalMargin: true),
+                    SectionSpacer(),
+                  ],
+                ),
           SectionTitle(
               sectionTitle:
                   AppLocalizations.of(context)!.placeEntityNameSingular),

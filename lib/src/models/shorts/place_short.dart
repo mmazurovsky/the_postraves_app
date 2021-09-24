@@ -50,5 +50,5 @@ class PlaceShort
   }
 
   @override
-  Country? get country => this.country;
+  Country? get country => city.country;
 }

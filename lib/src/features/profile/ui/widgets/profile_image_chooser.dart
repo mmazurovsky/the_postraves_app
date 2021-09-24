@@ -14,7 +14,7 @@ import 'package:image_cropper/image_cropper.dart';
 class ProfileImageChooser extends StatefulWidget {
   final void Function(File) pickImage;
   final FocusNode nicknameFocusNode;
-  ProfileImageChooser({
+  const ProfileImageChooser({
     Key? key,
     required this.pickImage,
     required this.nicknameFocusNode
@@ -37,23 +37,23 @@ class _ProfileImageChooserState extends State<ProfileImageChooser> {
   Future<void> getImage() async {
     File pickedCroppedImageAsFile;
 
-    final pickedFile = await _imagePicker.getImage(source: ImageSource.gallery);
+    final pickedFile = await _imagePicker.pickImage(source: ImageSource.gallery);
     File? croppedFile;
     if (pickedFile != null) {
       croppedFile = await ImageCropper.cropImage(
           sourcePath: pickedFile.path,
-          aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
           aspectRatioPresets: [
             CropAspectRatioPreset.square,
           ],
           //todo check on android
-          androidUiSettings: AndroidUiSettings(
+          androidUiSettings: const AndroidUiSettings(
               toolbarTitle: 'Cropper',
               toolbarColor: Colors.deepOrange,
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
               lockAspectRatio: false),
-          iosUiSettings: IOSUiSettings(
+          iosUiSettings: const IOSUiSettings(
             minimumAspectRatio: 1.0,
             aspectRatioLockEnabled: true,
             resetAspectRatioEnabled: false,
@@ -96,22 +96,20 @@ class _ProfileImageChooserState extends State<ProfileImageChooser> {
                 child: Container(
                   height: 55,
                   width: 55,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: MyColors.forVeryDarkStuff,
                   ),
-                  child: _pickedImage == null
-                      ? Center(
+                  child: _pickedImage ?? const Center(
                           child: Icon(Ionicons.camera_outline,
                               color: MyColors.main, size: 26),
-                        )
-                      : _pickedImage,
+                        ),
                 ),
               ),
               distanceBetweenLeadingAndText: 13,
               text: _pickedImage == null
                   ? AppLocalizations.of(context)!.profileCreationAddAvatar
                   : AppLocalizations.of(context)!.profileCreationEditAvatar,
-              trailing: Icon(Ionicons.chevron_forward_outline,
+              trailing: const Icon(Ionicons.chevron_forward_outline,
                   color: MyColors.accent, size: 26),
               textStyle: MyTextStyles.body,
             ),

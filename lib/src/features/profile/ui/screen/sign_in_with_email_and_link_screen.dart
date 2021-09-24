@@ -12,7 +12,7 @@ import '../../../../my_navigation.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button_without_padding.dart';
 
 class SignInWithEmailAndLinkScreen extends StatefulWidget {
-  SignInWithEmailAndLinkScreen({Key? key}) : super(key: key);
+  const SignInWithEmailAndLinkScreen({Key? key}) : super(key: key);
 
   @override
   _SignInWithEmailAndLinkScreenState createState() =>
@@ -58,10 +58,9 @@ class _SignInWithEmailAndLinkScreenState
         if (state is AuthenticatedState ||
             state is AuthenticatedWithoutAccountState) {
           Navigator.of(context).popUntil((route) {
-            print(route.settings.name);
-            final boolean =
+            final isRouteProfileResolver =
                 route.settings.name == MyNavigationRoutes.profileResolver;
-            return boolean;
+            return isRouteProfileResolver;
           });
         }
       },
@@ -70,7 +69,7 @@ class _SignInWithEmailAndLinkScreenState
         appBar: AppBar(
           leading: AppBarButton(
             onTap: Navigator.of(context).pop,
-            iconWidget: Icon(
+            iconWidget: const Icon(
               Ionicons.chevron_back_outline,
               color: Colors.white,
             ),
@@ -84,13 +83,13 @@ class _SignInWithEmailAndLinkScreenState
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              MyHorizontalMargin(
+              const MyHorizontalMargin(
                 child: Text(
                   'Вход с Email',
                   style: MyTextStyles.authTitle,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Column(
@@ -108,15 +107,15 @@ class _SignInWithEmailAndLinkScreenState
                     textEditingController: _emailController,
                     validatorFunction: _emailValidator,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Opacity(
                       opacity: _infoTextOpacity,
-                      child: MyHorizontalPadding(
+                      child: const MyHorizontalPadding(
                           child: Text(
                         'На этот email была отправлена ссылка для входа',
                         style: MyTextStyles.body,
                       ))),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   MyElevatedButtonWithoutPadding(
                     mainAxisAlignment: MainAxisAlignment.center,
                     text: 'Получить ссылку для входа',

@@ -13,8 +13,8 @@ abstract class SearchLocalDataSource {
 }
 
 class SearchLocalDataSourceImpl implements SearchLocalDataSource {
-  static const String SEARCH_HISTORY_STORE = 'search_history';
-  final _searchHistoryStore = intMapStoreFactory.store(SEARCH_HISTORY_STORE);
+  static const String searchHistoryStore = 'search_history';
+  final _searchHistoryStore = intMapStoreFactory.store(searchHistoryStore);
 
   Future<Database> get _db async => await AppDatabase.instance.database;
 
@@ -48,6 +48,7 @@ class SearchLocalDataSourceImpl implements SearchLocalDataSource {
     );
   }
 
+  @override
   Future<void> updateSearchRecordInHistory(UnifiedSearchModel entity) async {
     final finder = Finder(filter: Filter.byKey(entity.id));
     await _searchHistoryStore.update(

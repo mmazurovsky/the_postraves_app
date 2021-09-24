@@ -22,13 +22,13 @@ class MyCachedNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return imageLink == null || imageLink!.length < 3
-        ? EmptyImagePlaceholder()
+        ? const EmptyImagePlaceholder()
         : CachedNetworkImage(
             imageUrl: imageLink!,
             imageBuilder: (context, provider) {
               provider
-                  .resolve(ImageConfiguration())
-                  .addListener(ImageStreamListener((imageInfo, bool) {
+                  .resolve(const ImageConfiguration())
+                  .addListener(ImageStreamListener((imageInfo, _) {
                 _imageCompleter.isCompleted
                     ? null
                     : _imageCompleter.complete(imageInfo);
@@ -40,7 +40,7 @@ class MyCachedNetworkImage extends StatelessWidget {
             },
             placeholder: (context, url) =>
                 Container(color: MyColors.forEventCard),
-            errorWidget: (context, url, smth) => EmptyImagePlaceholder(),
+            errorWidget: (context, url, smth) => const EmptyImagePlaceholder(),
           );
   }
 }

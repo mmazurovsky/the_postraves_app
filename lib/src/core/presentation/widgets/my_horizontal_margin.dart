@@ -13,7 +13,7 @@ class MyHorizontalMargin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: MyConstants.horizontalPaddingOrMargin,
       ),
       child: child,

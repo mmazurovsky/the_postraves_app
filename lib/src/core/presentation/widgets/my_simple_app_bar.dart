@@ -13,11 +13,11 @@ class MySimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: MyColors.screenBackground,
-      leading: leading == null ? Container() : leading,
-      title: title == null ? Container() : title,
+      leading: leading ?? Container(),
+      title: title ?? Container(),
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

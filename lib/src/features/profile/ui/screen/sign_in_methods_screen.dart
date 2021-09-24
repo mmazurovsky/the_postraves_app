@@ -28,7 +28,7 @@ class SignInMethodsScreen extends StatelessWidget {
       listener: (context, state) async {
         if (state is ErrorAuthState) {
           await MyFlushbar.showMyFlushbar(
-              flushbarIcon: Icon(
+              flushbarIcon: const Icon(
                 Ionicons.information_circle_outline,
                 color: Colors.white,
               ),
@@ -43,7 +43,7 @@ class SignInMethodsScreen extends StatelessWidget {
         buttons: [
           MyElevatedButton(
             mainAxisAlignment: MainAxisAlignment.center,
-            leadingIcon: Icon(
+            leadingIcon: const Icon(
               Ionicons.chatbox_ellipses_outline,
               size: 20,
               color: Colors.green,
@@ -57,7 +57,7 @@ class SignInMethodsScreen extends StatelessWidget {
           ),
           MyElevatedButton(
             mainAxisAlignment: MainAxisAlignment.center,
-            leadingIcon: Icon(
+            leadingIcon: const Icon(
               Ionicons.logo_google,
               size: 18,
               color: Colors.red,
@@ -70,7 +70,7 @@ class SignInMethodsScreen extends StatelessWidget {
           ),
           MyElevatedButton(
             mainAxisAlignment: MainAxisAlignment.center,
-            leadingIcon: Icon(
+            leadingIcon: const Icon(
               Ionicons.mail_outline,
               size: 20,
               color: Colors.blue,
@@ -84,7 +84,7 @@ class SignInMethodsScreen extends StatelessWidget {
           Platform.isIOS
               ? MyElevatedButton(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  leadingIcon: Icon(
+                  leadingIcon: const Icon(
                     Ionicons.logo_apple,
                     size: 19,
                     color: Colors.white,
@@ -115,7 +115,7 @@ class SignInMethodsScreen extends StatelessWidget {
                     onTap: () {},
                     child: RichText(
                       text: TextSpan(
-                        text: '${AppLocalizations.of(context)!.authDocsTerms}',
+                        text: AppLocalizations.of(context)!.authDocsTerms,
                         style: MyTextStyles.termsActive,
                       ),
                     ),
@@ -133,7 +133,7 @@ class SignInMethodsScreen extends StatelessWidget {
                     onTap: () {},
                     child: RichText(
                       text: TextSpan(
-                        text: '${AppLocalizations.of(context)!.authDocsPolicy}',
+                        text: AppLocalizations.of(context)!.authDocsPolicy,
                         style: MyTextStyles.termsActive,
                       ),
                     ),

@@ -37,7 +37,7 @@ class TabBarAsSliverPersistentHeader extends SliverPersistentHeaderDelegate {
         children: [
           Positioned.fill(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: MyColors.forDividers,
@@ -50,7 +50,7 @@ class TabBarAsSliverPersistentHeader extends SliverPersistentHeaderDelegate {
           MyHorizontalPadding(
             child: TabBar(
               isScrollable: isScrollable,
-              indicator: UnderlineTabIndicator(
+              indicator: const UnderlineTabIndicator(
                 borderSide: BorderSide(
                   width: 2,
                   color: MyColors.accent,

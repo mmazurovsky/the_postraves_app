@@ -22,9 +22,9 @@ _$_PlaceShort _$_$_PlaceShortFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_PlaceShortToJson(_$_PlaceShort instance) =>
     <String, dynamic>{
-      'city': instance.city,
+      'city': instance.city.toJson(),
       'streetAddress': instance.streetAddress,
-      'coordinate': instance.coordinate,
+      'coordinate': instance.coordinate.toJson(),
       'id': instance.id,
       'name': instance.name,
       'overallFollowers': instance.overallFollowers,

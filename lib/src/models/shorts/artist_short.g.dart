@@ -28,5 +28,5 @@ Map<String, dynamic> _$_$_ArtistShortToJson(_$_ArtistShort instance) =>
       'weeklyFollowers': instance.weeklyFollowers,
       'isFollowed': instance.isFollowed,
       'imageLink': instance.imageLink,
-      'country': instance.country,
+      'country': instance.country?.toJson(),
     };

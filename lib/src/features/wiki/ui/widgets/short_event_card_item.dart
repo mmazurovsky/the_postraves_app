@@ -74,7 +74,7 @@ class ShortEventCardItem extends StatelessWidget {
                 text: _event.place.city.localizedName,
               ),
               bottomLeftWidget: WidgetTextRow(
-                widget: Container(
+                widget: SizedBox(
                   width: 20,
                   child: Icon(
                     Ionicons.location_outline,
@@ -85,7 +85,7 @@ class ShortEventCardItem extends StatelessWidget {
                 text: _event.place.name,
               ),
               topRightWidget: WidgetTextRow(
-                widget: Container(
+                widget: SizedBox(
                   width: 20,
                   child: Image.asset(
                     MyImages.diamond,
@@ -96,7 +96,7 @@ class ShortEventCardItem extends StatelessWidget {
                 text: _event.overallFollowers.toString(),
               ),
               bottomRightWidget: WidgetTextRow(
-                widget: Container(
+                widget: SizedBox(
                   width: 20,
                   child: _event.status != EventStatus.LIVE
                       ? Icon(Ionicons.calendar_clear_outline,

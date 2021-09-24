@@ -16,6 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ViewSwitcherStateTearOff {
   const _$ViewSwitcherStateTearOff();
 
+  InitialViewState initial() {
+    return const InitialViewState();
+  }
+
   ByDateViewState byDate() {
     return const ByDateViewState();
   }
@@ -32,12 +36,14 @@ const $ViewSwitcherState = _$ViewSwitcherStateTearOff();
 mixin _$ViewSwitcherState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() byDate,
     required TResult Function() byRating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? byDate,
     TResult Function()? byRating,
     required TResult orElse(),
@@ -45,12 +51,14 @@ mixin _$ViewSwitcherState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitialViewState value) initial,
     required TResult Function(ByDateViewState value) byDate,
     required TResult Function(ByRatingViewState value) byRating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialViewState value)? initial,
     TResult Function(ByDateViewState value)? byDate,
     TResult Function(ByRatingViewState value)? byRating,
     required TResult orElse(),
@@ -73,6 +81,96 @@ class _$ViewSwitcherStateCopyWithImpl<$Res>
   final ViewSwitcherState _value;
   // ignore: unused_field
   final $Res Function(ViewSwitcherState) _then;
+}
+
+/// @nodoc
+abstract class $InitialViewStateCopyWith<$Res> {
+  factory $InitialViewStateCopyWith(
+          InitialViewState value, $Res Function(InitialViewState) then) =
+      _$InitialViewStateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$InitialViewStateCopyWithImpl<$Res>
+    extends _$ViewSwitcherStateCopyWithImpl<$Res>
+    implements $InitialViewStateCopyWith<$Res> {
+  _$InitialViewStateCopyWithImpl(
+      InitialViewState _value, $Res Function(InitialViewState) _then)
+      : super(_value, (v) => _then(v as InitialViewState));
+
+  @override
+  InitialViewState get _value => super._value as InitialViewState;
+}
+
+/// @nodoc
+
+class _$InitialViewState implements InitialViewState {
+  const _$InitialViewState();
+
+  @override
+  String toString() {
+    return 'ViewSwitcherState.initial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is InitialViewState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() byDate,
+    required TResult Function() byRating,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? byDate,
+    TResult Function()? byRating,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialViewState value) initial,
+    required TResult Function(ByDateViewState value) byDate,
+    required TResult Function(ByRatingViewState value) byRating,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialViewState value)? initial,
+    TResult Function(ByDateViewState value)? byDate,
+    TResult Function(ByRatingViewState value)? byRating,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InitialViewState implements ViewSwitcherState {
+  const factory InitialViewState() = _$InitialViewState;
 }
 
 /// @nodoc
@@ -115,6 +213,7 @@ class _$ByDateViewState implements ByDateViewState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() byDate,
     required TResult Function() byRating,
   }) {
@@ -124,6 +223,7 @@ class _$ByDateViewState implements ByDateViewState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? byDate,
     TResult Function()? byRating,
     required TResult orElse(),
@@ -137,6 +237,7 @@ class _$ByDateViewState implements ByDateViewState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitialViewState value) initial,
     required TResult Function(ByDateViewState value) byDate,
     required TResult Function(ByRatingViewState value) byRating,
   }) {
@@ -146,6 +247,7 @@ class _$ByDateViewState implements ByDateViewState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialViewState value)? initial,
     TResult Function(ByDateViewState value)? byDate,
     TResult Function(ByRatingViewState value)? byRating,
     required TResult orElse(),
@@ -201,6 +303,7 @@ class _$ByRatingViewState implements ByRatingViewState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() byDate,
     required TResult Function() byRating,
   }) {
@@ -210,6 +313,7 @@ class _$ByRatingViewState implements ByRatingViewState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? byDate,
     TResult Function()? byRating,
     required TResult orElse(),
@@ -223,6 +327,7 @@ class _$ByRatingViewState implements ByRatingViewState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitialViewState value) initial,
     required TResult Function(ByDateViewState value) byDate,
     required TResult Function(ByRatingViewState value) byRating,
   }) {
@@ -232,6 +337,7 @@ class _$ByRatingViewState implements ByRatingViewState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialViewState value)? initial,
     TResult Function(ByDateViewState value)? byDate,
     TResult Function(ByRatingViewState value)? byRating,
     required TResult orElse(),

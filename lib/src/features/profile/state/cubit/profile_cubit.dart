@@ -21,7 +21,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     this._userProfileRepository,
     this._firebaseImageRepository,
     this._authenticationBloc,
-  ) : super(ProfileState.initial());
+  ) : super(const ProfileState.initial());
 
   void createUserProfile(
       File? imageFile, String nickname, City currentCity) async {

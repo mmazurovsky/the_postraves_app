@@ -45,7 +45,7 @@ class MyNavigationRoutes {
 }
 
 class MyNavigator extends StatelessWidget {
-  MyNavigator({
+  const MyNavigator({
     required this.navigatorKey,
     required this.activeBottomTab,
   });
@@ -64,7 +64,7 @@ class MyNavigator extends StatelessWidget {
 
 class RouteGenerator {
   static Route generateRoute(RouteSettings routeSettings) {
-    final args = routeSettings.arguments as Map<String, dynamic>;
+    final args = routeSettings.arguments as Map<String, dynamic>?;
 
     if (routeSettings.name == MyNavigationRoutes.shows) {
       return MaterialPageRoute(
@@ -93,7 +93,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => EventScreen(
-                eventImageLink: args['imageLink'],
+                eventImageLink: args!['imageLink'],
                 eventId: args['id'],
                 eventName: args['name'],
                 imageDimensions: args['imageDimensions'],
@@ -102,7 +102,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => EventTimetableScreen(
-                eventId: args['eventId'],
+                eventId: args!['eventId'],
                 eventName: args['eventName'],
                 timetable: args['timetableDto'],
               ));
@@ -110,7 +110,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => ArtistScreen(
-                artistId: args['id'],
+                artistId: args!['id'],
                 artistName: args['name'],
                 country: args['country'],
                 artistImageLink: args['imageLink'],
@@ -120,7 +120,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => PlaceScreen(
-                placeId: args['id'],
+                placeId: args!['id'],
                 placeName: args['name'],
                 country: args['country'],
                 placeImageLink: args['imageLink'],
@@ -130,7 +130,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => UnityScreen(
-                unityId: args['id'],
+                unityId: args!['id'],
                 unityName: args['name'],
                 country: args['country'],
                 unityImageLink: args['imageLink'],
@@ -149,7 +149,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => WikiShareScreen(
-                shareLink: args['shareLink'],
+                shareLink: args!['shareLink'],
                 wikiData: args['wikiData'],
                 imageDimensions: args['imageDimensions'],
               ));

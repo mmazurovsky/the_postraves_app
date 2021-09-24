@@ -17,7 +17,7 @@ class WikiScreen extends StatefulWidget {
   final ImageDimensions? imageDimensions;
   final bool isBackButtonOn;
 
-  WikiScreen({
+  const WikiScreen({
     Key? key,
     required this.wikiData,
     required this.wikiType,
@@ -69,7 +69,7 @@ class _WikiScreenState extends State<WikiScreen> {
                 imageDimensions: widget.imageDimensions,
                 isBackButtonOn: widget.isBackButtonOn,
                 wikiData: widget.wikiData,
-                shareLink: snapshot.data!, //todo ! risky
+                shareLink: snapshot.data,
               ),
             ),
             SliverToBoxAdapter(

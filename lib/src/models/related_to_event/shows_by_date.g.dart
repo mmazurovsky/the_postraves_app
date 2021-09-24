@@ -18,5 +18,5 @@ _$_EventsByDate _$_$_EventsByDateFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$_$_EventsByDateToJson(_$_EventsByDate instance) =>
     <String, dynamic>{
       'date': instance.date.toIso8601String(),
-      'events': instance.events,
+      'events': instance.events.map((e) => e.toJson()).toList(),
     };

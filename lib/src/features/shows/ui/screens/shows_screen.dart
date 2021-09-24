@@ -22,7 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/my_assets.dart';
 
 class ShowsScreen extends StatefulWidget {
-  ShowsScreen();
+  const ShowsScreen();
 
   @override
   _ShowsScreenState createState() => _ShowsScreenState();
@@ -31,7 +31,7 @@ class ShowsScreen extends StatefulWidget {
 class _ShowsScreenState extends State<ShowsScreen> {
   late RefreshController _refreshController1;
   late RefreshController _refreshController2;
-  late City currentCity;
+  City? currentCity;
 
   @override
   void initState() {
@@ -46,19 +46,19 @@ class _ShowsScreenState extends State<ShowsScreen> {
     if (currentCity != context.watch<CurrentCityProvider>().currentCity) {
       currentCity =
           context.read<CurrentCityProvider>().currentCity!; //todo risky !
-      BlocProvider.of<ShowsCubit>(context).fullyLoadShows(currentCity);
+      BlocProvider.of<ShowsCubit>(context).fullyLoadShows(currentCity!); //todo risky !
     }
   }
 
   void _onRefresh() async {
-    BlocProvider.of<ShowsCubit>(context).refreshShows(currentCity);
+    BlocProvider.of<ShowsCubit>(context).refreshShows(currentCity!);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: NestedScrollView(
-        controller: TabItem.SHOWS.tabScrollController,
+        controller: TabItem.shows.tabScrollController,
         physics: BouncingScrollPhysics(),
         // todo wtf it so glithy
         // floatHeaderSlivers: true,

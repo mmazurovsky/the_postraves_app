@@ -11,10 +11,11 @@ import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
 import '../../../../my_navigation.dart';
 
 class EventCard extends StatefulWidget {
+  @override
   final Key key;
   final EventShort loadedEvent;
 
-  EventCard({required this.loadedEvent, required this.key}) : super(key: key);
+  const EventCard({required this.loadedEvent, required this.key}) : super(key: key);
 
   @override
   _EventCardState createState() => _EventCardState();
@@ -90,7 +91,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
                 children: [
                   Stack(
                     children: [
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: _widthOfCard / 2,
                         child: widget.loadedEvent.imageLink == null
@@ -114,7 +115,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '${widget.loadedEvent.name}',
+                          widget.loadedEvent.name,
                           style: MyTextStyles.cardEventTitle,
                           maxLines: 2,
                           overflow: TextOverflow.fade,

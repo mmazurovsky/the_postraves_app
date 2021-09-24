@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../geo/city.dart';
-import '../interfaces/data_interfaces.dart';
 import 'user_profile_to_update.dart';
 
 part 'user_profile.freezed.dart';
@@ -36,12 +35,12 @@ class UserProfile with _$UserProfile {
 
   UserProfileToUpdate createUserProfileToUpdate() {
     return UserProfileToUpdate(
-      name: this.name,
-      about: this.about,
-      imageLink: this.imageLink,
-      instagramLink: this.instagramLink,
-      telegramLink: this.telegramLink,
-      currentCity: this.currentCity,
+      name: name,
+      about: about,
+      imageLink: imageLink,
+      instagramLink: instagramLink,
+      telegramLink: telegramLink,
+      currentCity: currentCity,
     );
   }
 }

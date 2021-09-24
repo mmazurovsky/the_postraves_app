@@ -32,7 +32,7 @@ class FollowableData<T extends SimpleFollowableInterface> extends StatelessWidge
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Flexible(

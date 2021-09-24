@@ -14,14 +14,14 @@ class DetailsHorizontalScrollableList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 70,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          SizedBox(width: MyConstants.horizontalPaddingOrMargin),
+          const SizedBox(width: MyConstants.horizontalPaddingOrMargin),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               border: Border.symmetric(
                 horizontal: BorderSide(
                   width: MyConstants.dividerThickness,
@@ -31,12 +31,12 @@ class DetailsHorizontalScrollableList extends StatelessWidget {
             ),
             child: ListView.separated(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: titleBodyMap.length,
               separatorBuilder: (context, index) => Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: const [
                   SizedBox(width: 12),
                   VerticalDivider(
                     thickness: MyConstants.dividerThickness,
@@ -54,7 +54,7 @@ class DetailsHorizontalScrollableList extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: MyConstants.horizontalPaddingOrMargin),
+          const SizedBox(width: MyConstants.horizontalPaddingOrMargin),
         ],
       ),
     );

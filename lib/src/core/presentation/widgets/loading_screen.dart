@@ -10,9 +10,9 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 30),
+        padding: const EdgeInsets.symmetric(vertical: 30),
         alignment: Alignment.center,
-        child: MyLoadingIndicator(),
+        child: const MyLoadingIndicator(),
       ),
     );
   }

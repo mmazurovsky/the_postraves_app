@@ -17,12 +17,12 @@ class EventRepositoryImpl extends EventRepository {
   final RemoteRequestWrapper<List<ArtistShort>> remoteRequestWrapperArtists;
   final RemoteRequestWrapper<List<TimetableForScene>> remoteRequestWrapperTimetable;
 
-  EventRepositoryImpl({
-    required this.eventRemoteDataSource,
-    required this.remoteRequestWrapperUnities,
-    required this.remoteRequestWrapperArtists,
-    required this.remoteRequestWrapperTimetable,
-  });
+  EventRepositoryImpl(
+    this.eventRemoteDataSource,
+    this.remoteRequestWrapperUnities,
+    this.remoteRequestWrapperArtists,
+    this.remoteRequestWrapperTimetable,
+  );
 
   @override
   Future<ResponseSealed<List<UnityShort>>> fetchOrganizersForEventById(int id) async {

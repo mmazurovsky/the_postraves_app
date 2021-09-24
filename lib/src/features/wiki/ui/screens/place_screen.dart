@@ -10,7 +10,6 @@ import '../../../../models/related_to_place/scene.dart';
 import '../../../../models/shorts/event_short.dart';
 import '../../../../core/presentation/widgets/loading_screen.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/presentation/widgets/null_check_wrapper.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 import '../../../../core/presentation/widgets/social_links_list.dart';
 import '../../../../core/utils/image_dimensions.dart';
@@ -38,7 +37,7 @@ class PlaceScreen extends StatefulWidget {
   final String placeImageLink;
   final ImageDimensions imageDimensions;
 
-  PlaceScreen({
+  const PlaceScreen({
     required this.placeId,
     required this.placeName,
     required this.country,
@@ -78,7 +77,10 @@ class _PlaceScreenState extends State<PlaceScreen>
         if (state is PlaceLoadedState) {
           setState(() {
             _wikiRating = state.place.overallFollowers;
-            _wikiDetails = _PlaceDetails(loadedPlace: state.place, events: state.events, scenes: state.scenes);
+            _wikiDetails = _PlaceDetails(
+                loadedPlace: state.place,
+                events: state.events,
+                scenes: state.scenes);
           });
         } else if (state is PlaceLoadedState) {
           setState(() {
@@ -110,11 +112,11 @@ class _PlaceDetails extends StatelessWidget {
   final PlaceFull loadedPlace;
   final List<Scene> scenes;
   final List<EventShort> events;
-  _PlaceDetails({Key? key, 
-  required this.loadedPlace,
-  required this.scenes,
-  required this.events,
-  
+  const _PlaceDetails({
+    Key? key,
+    required this.loadedPlace,
+    required this.scenes,
+    required this.events,
   }) : super(key: key);
 
   @override
@@ -211,17 +213,18 @@ class _PlaceDetails extends StatelessWidget {
           SectionSpacer(),
           SectionDivider(needHorizontalMargin: true),
           SectionSpacer(),
-          NullCheckWrapper(
-            toBeChecked: loadedPlace.about,
-            children: [
-              WikiExpandableTextDescription(
-                loadedPlace.about!,
-              ),
-              SectionSpacer(),
-              SectionDivider(needHorizontalMargin: true),
-              SectionSpacer(),
-            ],
-          ),
+          loadedPlace.about == null
+              ? Container()
+              : Column(
+                  children: [
+                    WikiExpandableTextDescription(
+                      loadedPlace.about!,
+                    ),
+                    SectionSpacer(),
+                    SectionDivider(needHorizontalMargin: true),
+                    SectionSpacer(),
+                  ],
+                ),
           events.isEmpty
               ? Container()
               : Column(

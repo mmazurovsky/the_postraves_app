@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../utils/my_assets.dart';
 import '../../../utils/my_constants.dart';
@@ -28,9 +29,9 @@ class RatingEntityData<T extends FollowableInterface> extends StatelessWidget {
                     children: [
                       Text(
                         entity.country!.countryEmoji,
-                        style: TextStyle(fontSize: MyConstants.diamondWidth),
+                        style: const TextStyle(fontSize: MyConstants.diamondWidth),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                     ],
                   )
                 : Container(),
@@ -46,7 +47,7 @@ class RatingEntityData<T extends FollowableInterface> extends StatelessWidget {
         ),
         Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Row(
@@ -57,7 +58,7 @@ class RatingEntityData<T extends FollowableInterface> extends StatelessWidget {
                   MyImages.diamond,
                   width: MyConstants.diamondWidth,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   entity.overallFollowers.toString(),
                   style: MyTextStyles.shortEntityRating,

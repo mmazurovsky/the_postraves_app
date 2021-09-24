@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import '../client/data_sealed/response_sealed.dart';
 import '../../models/geo/city.dart';
 import '../client/remote_request_wrapper.dart';
@@ -65,7 +63,7 @@ class CityRepositoryImpl implements CityRepository {
     try {
       await cityLocalDataSource.deleteCities();
       await cityLocalDataSource.saveCities(cities);
-      return ResponseSealed.success(Void);
+      return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }
@@ -77,7 +75,7 @@ class CityRepositoryImpl implements CityRepository {
     try {
       await cityLocalDataSource.deleteCurrentCity();
       await cityLocalDataSource.saveCurrentCity(city);
-      return ResponseSealed.success(Void);
+      return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }
@@ -87,7 +85,7 @@ class CityRepositoryImpl implements CityRepository {
   Future<ResponseSealed<void>> removeCitiesFromLocal() async {
     try {
       await cityLocalDataSource.deleteCities();
-      return ResponseSealed.success(Void);
+      return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }
@@ -97,7 +95,7 @@ class CityRepositoryImpl implements CityRepository {
   Future<ResponseSealed<void>> removeCurrentCityFromLocal() async {
     try {
       await cityLocalDataSource.deleteCurrentCity();
-      return ResponseSealed.success(Void);
+      return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }

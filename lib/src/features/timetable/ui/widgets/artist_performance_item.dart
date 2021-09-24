@@ -3,7 +3,6 @@ import '../../../../models/enum/artist_performance_status.dart';
 import '../../../../models/shorts/artist_short.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
 import '../../../../core/utils/image_dimensions.dart';
-import '../../../../core/utils/my_assets.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
@@ -16,7 +15,7 @@ class ArtistPerformanceItem extends StatelessWidget {
   final DateTime startingDateTime;
   final DateTime endingDateTime;
 
-  ArtistPerformanceItem({
+  const ArtistPerformanceItem({
     Key? key,
     required this.artists,
     required this.startingDateTime,
@@ -28,8 +27,9 @@ class ArtistPerformanceItem extends StatelessWidget {
       return ArtistPerformanceStatus.PAST;
     } else if (DateTime.now().isBefore(startingDateTime)) {
       return ArtistPerformanceStatus.UPCOMING;
-    } else
+    } else {
       return ArtistPerformanceStatus.LIVE;
+    }
   }
 
   @override

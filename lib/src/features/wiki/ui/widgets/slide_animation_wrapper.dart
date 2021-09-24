@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SlideAnimationWrapper extends StatefulWidget {
   final Widget child;
-  SlideAnimationWrapper({
+  const SlideAnimationWrapper({
     Key? key,
     required this.child,
   }) : super(key: key);

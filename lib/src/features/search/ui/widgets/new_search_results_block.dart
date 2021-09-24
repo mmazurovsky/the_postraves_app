@@ -14,7 +14,7 @@ class NewSearchResultsBlock<T extends FollowableInterface>
   final String resultsName;
   final List<T> results;
 
-  NewSearchResultsBlock({
+  const NewSearchResultsBlock({
     Key? key,
     required this.resultsName,
     required this.results,

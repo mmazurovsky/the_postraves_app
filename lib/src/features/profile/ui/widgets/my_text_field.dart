@@ -36,7 +36,7 @@ class MyTextField extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) =>
             validatorFunction != null ? validatorFunction!(value) : null,
-        style: TextStyle(
+        style: const TextStyle(
           color: MyColors.main,
         ),
         decoration: InputDecoration(

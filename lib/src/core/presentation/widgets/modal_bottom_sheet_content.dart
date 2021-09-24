@@ -13,7 +13,7 @@ class ModalBottomSheetContent extends StatelessWidget {
   final Widget content;
   final double height;
 
-  ModalBottomSheetContent({
+  const ModalBottomSheetContent({
     Key? key,
     required this.iconData,
     required this.title,
@@ -25,7 +25,7 @@ class ModalBottomSheetContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: MyColors.bottomNavBar,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
@@ -38,19 +38,19 @@ class ModalBottomSheetContent extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Container(
                 width: 30,
                 height: 4,
                 color: MyColors.forInactiveStuff.withOpacity(0.2),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Icon(
                 iconData,
                 size: 40,
                 color: MyColors.main,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               MyHorizontalPadding(
                 child: Text(
                   title,
@@ -58,13 +58,13 @@ class ModalBottomSheetContent extends StatelessWidget {
                   style: MyTextStyles.modalBottomSheetTitle,
                 ),
               ),
-              SizedBox(height: 15),
-              SectionDivider(needHorizontalMargin: true),
-              SizedBox(height: 10),
+              const SizedBox(height: 15),
+              const SectionDivider(needHorizontalMargin: true),
+              const SizedBox(height: 10),
             ],
           ),
           Expanded(child: content),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           MyOutlinedButton(
             mainAxisAlignment: MainAxisAlignment.center,
             text: AppLocalizations.of(context)!.close,
@@ -72,10 +72,10 @@ class ModalBottomSheetContent extends StatelessWidget {
             borderColor: MyColors.main,
             textStyle: MyTextStyles.body,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
         ],
       ),
     );
-    ;
+    
   }
 }

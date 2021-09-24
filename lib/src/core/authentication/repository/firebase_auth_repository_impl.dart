@@ -3,7 +3,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../../client/data_sealed/response_sealed.dart';
 import '../../service/logger.dart';
 import '../../error/failures.dart';
-import 'package:dartz/dartz.dart';
 
 abstract class FirebaseAuthRepository {
   Future<ResponseSealed<UserCredential>> signUpWithEmailAndPassword(
@@ -42,18 +41,18 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     return user;
   }
 
+  @override
   Stream<User?> get userStream => _firebaseAuth.userChanges();
 
   @override
   Future<ResponseSealed<UserCredential>> signUpWithEmailAndPassword(
       {required String email, required String password}) async {
-    var userCredentials;
     try {
-      userCredentials = await _firebaseAuth.createUserWithEmailAndPassword(
+      final userCredentials = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return userCredentials;
+      return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      print(e);
+      //todo 
       // todo map error codes to failures
       return ResponseSealed.failure(UserNotFoundFailure());
     }
@@ -62,13 +61,12 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
   @override
   Future<ResponseSealed<UserCredential>> signInWithEmailAndPassword(
       {required String email, required String password}) async {
-    var userCredentials;
     try {
-      userCredentials = await _firebaseAuth.signInWithEmailAndPassword(
+      final userCredentials = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      print(e);
+      //todo
       // todo map error codes to failures
       return ResponseSealed.failure(UserNotFoundFailure());
     }
@@ -90,11 +88,10 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
           email: email, actionCodeSettings: actionCodeSettings);
     } on Exception catch (e) {
       //todo
-      print(e);
     }
 
     _storedEmailForLinkVerification = email;
-    return ResponseSealed.success(null);
+    return const ResponseSealed.success(null);
   }
 
   @override
@@ -106,7 +103,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
             email: _storedEmailForLinkVerification!, emailLink: link.toString());
         return ResponseSealed.success(userCredentials);
       } on FirebaseAuthException catch (e) {
-        print(e);
+        //todo
         // todo map error codes to failures
         return ResponseSealed.failure(UserNotFoundFailure());
       }
@@ -140,12 +137,10 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     );
 
     // Once signed in, return the UserCredential
-    var userCredentials;
     try {
-      userCredentials = await _firebaseAuth.signInWithCredential(credential);
+      final userCredentials = await _firebaseAuth.signInWithCredential(credential);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      print(e);
       // todo map error codes to failures
       return ResponseSealed.failure(UserNotFoundFailure());
     }
@@ -163,7 +158,6 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
       return ResponseSealed.success(await _firebaseAuth.signOut());
     } on FirebaseAuthException catch (e) {
       // todo
-      print(e);
       return ResponseSealed.failure(UserNotFoundFailure());
     }
   }

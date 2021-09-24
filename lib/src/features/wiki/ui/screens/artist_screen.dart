@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
+
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
-import '../../state/artist_cubit/artist_cubit.dart';
+import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
+import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
+import '../../../../core/presentation/widgets/section_divider.dart';
+import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/section_title.dart';
+import '../../../../core/presentation/widgets/social_links_list.dart';
+import '../../../../core/utils/image_dimensions.dart';
+import '../../../../core/utils/my_colors.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../models/fulls/artist_full.dart';
 import '../../../../models/geo/country.dart';
 import '../../../../models/shorts/event_short.dart';
 import '../../../../models/shorts/unity_short.dart';
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
-import '../../../../core/presentation/widgets/null_check_wrapper.dart';
-import '../../../../core/presentation/widgets/social_links_list.dart';
-import '../../../../core/utils/image_dimensions.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../dto/wiki_data_dto.dart';
-import '../widgets/short_event_card_item.dart';
-import 'wiki_screen.dart';
-import '../widgets/slide_animation_wrapper.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../my_navigation.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
+import '../../dto/wiki_data_dto.dart';
+import '../../state/artist_cubit/artist_cubit.dart';
 import '../widgets/column_of_custom_cards.dart';
+import '../widgets/short_event_card_item.dart';
+import '../widgets/slide_animation_wrapper.dart';
 import '../widgets/wiki_expandable_text_description.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'wiki_screen.dart';
 
 class ArtistScreen extends StatefulWidget {
   final int artistId;
@@ -35,7 +35,7 @@ class ArtistScreen extends StatefulWidget {
   final String artistImageLink;
   final ImageDimensions imageDimensions;
 
-  ArtistScreen({
+  const ArtistScreen({
     required this.artistId,
     required this.artistName,
     required this.country,
@@ -111,7 +111,7 @@ class _ArtistDetails extends StatelessWidget {
   final ArtistFull loadedArtist;
   final List<UnityShort> unities;
   final List<EventShort> events;
-  _ArtistDetails({
+  const _ArtistDetails({
     Key? key,
     required this.loadedArtist,
     required this.unities,
@@ -153,17 +153,18 @@ class _ArtistDetails extends StatelessWidget {
             soundcloudLink: loadedArtist.soundcloudLink,
             instagramLink: loadedArtist.instagramLink,
           ),
-          NullCheckWrapper(
-            toBeChecked: loadedArtist.about,
-            children: [
-              SectionSpacer(),
-              WikiExpandableTextDescription(
-                loadedArtist.about!,
-              ),
-              SectionSpacer(),
-              SectionDivider(needHorizontalMargin: true),
-            ],
-          ),
+          loadedArtist.about == null
+              ? Container()
+              : Column(
+                  children: [
+                    SectionSpacer(),
+                    WikiExpandableTextDescription(
+                      loadedArtist.about!,
+                    ),
+                    SectionSpacer(),
+                    SectionDivider(needHorizontalMargin: true),
+                  ],
+                ),
           unities.isEmpty
               ? Container()
               : Column(
@@ -201,7 +202,8 @@ class _ArtistDetails extends StatelessWidget {
                     SizedBox(height: 8),
                     ColumnOfCustomCards(
                       entities: events,
-                      buildCard: (EventShort event) => ShortEventCardItem(event),
+                      buildCard: (EventShort event) =>
+                          ShortEventCardItem(event),
                     ),
                     SectionSpacer(),
                   ],

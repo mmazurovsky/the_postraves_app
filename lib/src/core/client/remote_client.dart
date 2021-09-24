@@ -3,9 +3,9 @@ import 'dart:io';
 import '../service/logger.dart';
 import '../utils/my_constants.dart';
 import '../error/exceptions.dart';
-import 'package:http/http.dart' as httpClient;
+import 'package:http/http.dart' as http_client;
 
-class RemoteClient<T> {
+class RemoteClient {
 
   static Uri _createUri(String endpointWithPath,
       {Map<String, dynamic>? queryParameters}) {
@@ -16,19 +16,19 @@ class RemoteClient<T> {
       {required String endpointWithPath,
       required Map<String, String> httpHeaders,
       Map<String, dynamic>? queryParameters}) async {
-    final languageCode = Platform.localeName.substring(0,2);
+    final languageCode = Platform.localeName.substring(0,2).toLowerCase();
     final Map<String, dynamic> queryParametersWithLanguageCode = {
-      "languageCode": languageCode
+      "lang": languageCode
     };
     queryParametersWithLanguageCode.addAll(queryParameters ?? {});
     Uri uri = RemoteClient._createUri(endpointWithPath,
         queryParameters: queryParametersWithLanguageCode);
 
-    httpClient.Response response;
+    http_client.Response response;
     dynamic responseAsJsonDecoded;
     try {
       myGlobalLogger.info('GET ${uri.toString()}');
-      response = await httpClient.get(
+      response = await http_client.get(
         uri,
         headers: httpHeaders,
       );
@@ -52,10 +52,10 @@ class RemoteClient<T> {
     Uri uri = RemoteClient._createUri(endpointWithPath,
         queryParameters: queryParameters);
 
-    httpClient.Response response;
+    http_client.Response response;
     try {
       myGlobalLogger.info('POST ${uri.toString()}');
-      response = await httpClient.post(
+      response = await http_client.post(
         uri,
         headers: httpHeaders,
         body: jsonEncode(body),
@@ -76,10 +76,10 @@ class RemoteClient<T> {
     Uri uri = RemoteClient._createUri(endpointWithPath,
         queryParameters: queryParameters);
 
-    httpClient.Response response;
+    http_client.Response response;
     try {
       myGlobalLogger.info('PUT ${uri.toString()}');
-      response = await httpClient.put(
+      response = await http_client.put(
         uri,
         headers: httpHeaders,
         body: jsonEncode(body),
@@ -100,10 +100,10 @@ class RemoteClient<T> {
     Uri uri = RemoteClient._createUri(endpointWithPath,
         queryParameters: queryParameters);
 
-    httpClient.Response response;
+    http_client.Response response;
     try {
       myGlobalLogger.info('DELETE ${uri.toString()}');
-      response = await httpClient.delete(
+      response = await http_client.delete(
         uri,
         headers: httpHeaders,
         body: jsonEncode(body),

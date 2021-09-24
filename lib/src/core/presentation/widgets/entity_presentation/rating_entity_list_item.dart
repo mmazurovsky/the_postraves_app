@@ -16,7 +16,7 @@ class RatingEntityListItem<T extends FollowableInterface>
   final Function onItemTap;
   final Widget? startingWidget;
 
-  RatingEntityListItem({
+  const RatingEntityListItem({
     Key? key,
     required this.entity,
     this.startingWidget,
@@ -62,13 +62,13 @@ class _RatingEntityListItemState<T extends FollowableInterface>
                   : widget.startingWidget!,
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Container(
+                child: SizedBox(
                   width: 50,
                   height: 50,
                   child: _image,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 18,
               ),
               Expanded(
@@ -79,13 +79,13 @@ class _RatingEntityListItemState<T extends FollowableInterface>
               widget.onIconTap != null
                   ? InkWell(
                       onTap: () => widget.onIconTap!(widget.entity),
-                      child: Icon(
+                      child: const Icon(
                         Icons.close,
                         color: Colors.grey,
                         size: 26,
                       ),
                     )
-                  : Icon(
+                  : const Icon(
                       Ionicons.chevron_forward_outline,
                       size: 26,
                       color: MyColors.accent,

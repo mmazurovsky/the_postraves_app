@@ -36,5 +36,5 @@ Map<String, dynamic> _$_$_UnityFullToJson(_$_UnityFull instance) =>
       'weeklyFollowers': instance.weeklyFollowers,
       'isFollowed': instance.isFollowed,
       'imageLink': instance.imageLink,
-      'country': instance.country,
+      'country': instance.country?.toJson(),
     };

@@ -1,9 +1,6 @@
-
 import '../../../core/client/data_sealed/response_sealed.dart';
 import '../../../core/client/remote_request_wrapper.dart';
 import '../data_sources/artist_remote_data_source.dart';
-import '../data_sources/wiki_remote_data_source.dart';
-import '../../../models/interfaces/data_interfaces.dart';
 import '../../../models/shorts/event_short.dart';
 import '../../../models/shorts/unity_short.dart';
 

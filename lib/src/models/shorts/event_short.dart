@@ -40,12 +40,13 @@ class EventShort
   // @DateTimeConverter()
   // final DateTime startDateTime;
 
+  @override
   Country? get country {
-    return this.place.city.country;
+    return place.city.country;
   }
 
   TicketPriceRange get priceRangeOfTickets {
-    return FormattingUtils.getTicketPriceRangeForTickets(this.ticketPrices);
+    return FormattingUtils.getTicketPriceRangeForTickets(ticketPrices);
   }
 
   @override

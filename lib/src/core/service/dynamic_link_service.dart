@@ -64,8 +64,7 @@ class DynamicLinkService {
         }
       }
     }, onError: (OnLinkErrorException e) async {
-      print('onLinkError');
-      print(e.message);
+      //todo
     });
 
     final PendingDynamicLinkData? data =

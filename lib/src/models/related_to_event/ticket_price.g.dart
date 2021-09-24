@@ -8,7 +8,6 @@ part of 'ticket_price.dart';
 
 _$_TicketPrice _$_$_TicketPriceFromJson(Map<String, dynamic> json) {
   return _$_TicketPrice(
-    id: json['id'] as int,
     name: json['name'] as String,
     price: (json['price'] as num).toDouble(),
     currency: _$enumDecode(_$MoneyCurrencyEnumMap, json['currency']),
@@ -17,7 +16,6 @@ _$_TicketPrice _$_$_TicketPriceFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_TicketPriceToJson(_$_TicketPrice instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'name': instance.name,
       'price': instance.price,
       'currency': _$MoneyCurrencyEnumMap[instance.currency],

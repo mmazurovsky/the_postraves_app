@@ -22,7 +22,7 @@ class TimetableForSceneDto with _$TimetableForSceneDto {
     List<TimetableDayPerformancesDto> dayPerformances = [];
     Set<DateTime> sceneDays = {};
 
-    timetableForSceneModel.artistPerformances.forEach((performance) {
+    for (var performance in timetableForSceneModel.artistPerformances) {
       DateTime performanceDate = _getOnlyDate(performance.startingDateTime);
       if (sceneDays.contains(performanceDate)) {
         dayPerformances
@@ -38,7 +38,7 @@ class TimetableForSceneDto with _$TimetableForSceneDto {
           ),
         );
       }
-    });
+    }
 
     return TimetableForSceneDto(
         scene: timetableForSceneModel.scene,

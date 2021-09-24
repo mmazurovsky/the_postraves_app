@@ -9,7 +9,6 @@ import '../../../../models/shorts/artist_short.dart';
 import '../../../../models/shorts/event_short.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
 import '../../../../core/presentation/widgets/loading_screen.dart';
-import '../../../../core/presentation/widgets/null_check_wrapper.dart';
 import '../../../../core/presentation/widgets/social_links_list.dart';
 import '../../../../core/utils/image_dimensions.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -34,7 +33,7 @@ class UnityScreen extends StatefulWidget {
   final String unityImageLink;
   final ImageDimensions imageDimensions;
 
-  UnityScreen({
+  const UnityScreen({
     required this.unityId,
     required this.unityName,
     required this.country,
@@ -110,7 +109,7 @@ class _UnityDetails extends StatelessWidget {
   final UnityFull loadedUnity;
   final List<ArtistShort> artists;
   final List<EventShort> events;
-  _UnityDetails({
+  const _UnityDetails({
     Key? key,
     required this.loadedUnity,
     required this.artists,
@@ -147,17 +146,18 @@ class _UnityDetails extends StatelessWidget {
             instagramLink: loadedUnity.instagramLink,
           ),
           SectionSpacer(),
-          NullCheckWrapper(
-            toBeChecked: loadedUnity.about,
-            children: [
-              WikiExpandableTextDescription(
-                loadedUnity.about!,
-              ),
-              SectionSpacer(),
-              SectionDivider(needHorizontalMargin: true),
-              SectionSpacer(),
-            ],
-          ),
+          loadedUnity.about == null
+              ? Container()
+              : Column(
+                  children: [
+                    WikiExpandableTextDescription(
+                      loadedUnity.about!,
+                    ),
+                    SectionSpacer(),
+                    SectionDivider(needHorizontalMargin: true),
+                    SectionSpacer(),
+                  ],
+                ),
           artists.isEmpty
               ? Container()
               : Column(
@@ -194,7 +194,8 @@ class _UnityDetails extends StatelessWidget {
                     SizedBox(height: 8),
                     ColumnOfCustomCards(
                       entities: events,
-                      buildCard: (EventShort event) => ShortEventCardItem(event),
+                      buildCard: (EventShort event) =>
+                          ShortEventCardItem(event),
                     ),
                     SectionSpacer(),
                   ],

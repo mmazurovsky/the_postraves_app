@@ -127,7 +127,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
       child: Scaffold(
         appBar: MySimpleAppBar(
-          leading: widget.isPoppable ? AppBarBackButton() : null,
+          leading: widget.isPoppable ? const AppBarBackButton() : null,
         ),
         body: SafeArea(
           child: Container(
@@ -142,21 +142,19 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       MyHorizontalPadding(
-                        child: Container(
-                          child: Text(
-                            AppLocalizations.of(context)!.profileCreationTitle,
-                            style: MyTextStyles.authTitle,
-                            textAlign: TextAlign.center,
-                          ),
+                        child: Text(
+                          AppLocalizations.of(context)!.profileCreationTitle,
+                          style: MyTextStyles.authTitle,
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       ProfileImageChooser(
                           pickImage: _pickImage,
                           nicknameFocusNode: _nicknameFieldFocusNode),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       MyTextField(
                         focusNode: _nicknameFieldFocusNode,
                         title: AppLocalizations.of(context)!
@@ -169,7 +167,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                         activeBorderColor: MyColors.accent,
                         inactiveBorderColor: MyColors.main,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       MyOutlinedButton(
                         onTap: () {
                           _nicknameFieldFocusNode.unfocus();
@@ -189,19 +187,19 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                           alignment: Alignment.center,
                           child: Text(
                             _userCity.country.countryEmoji,
-                            style: TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20),
                           ),
                         ),
                         text: _userCity.localizedName,
                         textStyle: MyTextStyles.body,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        trailingIcon: Icon(
+                        trailingIcon: const Icon(
                           Ionicons.chevron_down_outline,
                           color: MyColors.accent,
                           size: 26,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       MyElevatedButton(
                         mainAxisAlignment: MainAxisAlignment.center,
                         leadingIcon: Image.asset(MyEmoji.finish, width: 20),
@@ -236,7 +234,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
 class _CitySelector extends StatefulWidget {
   final City activeCity;
   final Function onSelected;
-  _CitySelector({
+  const _CitySelector({
     Key? key,
     required this.activeCity,
     required this.onSelected,

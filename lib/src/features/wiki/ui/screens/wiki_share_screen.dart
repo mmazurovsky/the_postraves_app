@@ -21,7 +21,7 @@ class WikiShareScreen extends StatelessWidget {
   final WikiDataDto wikiData;
   final ImageDimensions imageDimensions;
 
-  WikiShareScreen({
+  const WikiShareScreen({
     Key? key,
     required this.shareLink,
     required this.wikiData,
@@ -52,7 +52,7 @@ class WikiShareScreen extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Container(
+                      child: SizedBox(
                         width: 50,
                         height: 50,
                         child: MyCachedNetworkImage(
@@ -124,7 +124,7 @@ class WikiShareScreen extends StatelessWidget {
 }
 
 class BrightnessSwitcher extends StatefulWidget {
-  BrightnessSwitcher({Key? key}) : super(key: key);
+  const BrightnessSwitcher({Key? key}) : super(key: key);
 
   @override
   _BrightnessSwitcherState createState() => _BrightnessSwitcherState();

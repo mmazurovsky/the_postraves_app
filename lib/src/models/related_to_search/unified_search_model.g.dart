@@ -28,7 +28,7 @@ Map<String, dynamic> _$_$_UnifiedSearchModelToJson(
       'imageLink': instance.imageLink,
       'type': _$WikiFollowableTypeEnumMap[instance.type],
       'updatedDateTime': instance.updatedDateTime.toIso8601String(),
-      'country': instance.country,
+      'country': instance.country?.toJson(),
     };
 
 K _$enumDecode<K, V>(

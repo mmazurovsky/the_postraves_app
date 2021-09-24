@@ -7,12 +7,7 @@ import 'package:provider/provider.dart';
 import 'bottom_navigation_tab_item.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
-  // final TabItem currentTab;
-  // final ValueChanged<TabItem> onSelectTab;
-
-  MyBottomNavigationBar(
-      // {required this.currentTab, required this.onSelectTab}
-      );
+  const MyBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
   _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
@@ -76,11 +71,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         }
       },
       items: [
-        _getBottomNavigationBarItem(currentTab == TabItem.SHOWS, TabItem.SHOWS),
+        _getBottomNavigationBarItem(currentTab == TabItem.shows, TabItem.shows),
         _getBottomNavigationBarItem(
-            currentTab == TabItem.SEARCH, TabItem.SEARCH),
+            currentTab == TabItem.search, TabItem.search),
         _getBottomNavigationBarItem(
-            currentTab == TabItem.PROFILE, TabItem.PROFILE),
+            currentTab == TabItem.profile, TabItem.profile),
       ],
     );
   }

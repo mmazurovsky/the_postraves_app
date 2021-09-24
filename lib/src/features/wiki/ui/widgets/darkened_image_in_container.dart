@@ -39,7 +39,7 @@ class _DarkenedImageInContainerState extends State<DarkenedImageInContainer> {
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Container(
+            child: SizedBox(
               height: 145,
               child: Stack(
                 alignment: Alignment.center,

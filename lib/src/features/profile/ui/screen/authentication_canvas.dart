@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 
+import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
@@ -27,7 +27,7 @@ class AuthenticationCanvas extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: MyColors.screenBackground,
-        leading: backButtonNeeded ? AppBarBackButton() : Container(),
+        leading: backButtonNeeded ? const AppBarBackButton() : Container(),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -49,7 +49,7 @@ class AuthenticationCanvas extends StatelessWidget {
               ? Container()
               : Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     MyHorizontalMargin(
@@ -61,7 +61,7 @@ class AuthenticationCanvas extends StatelessWidget {
                     ),
                   ],
                 ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Column(
@@ -72,7 +72,7 @@ class AuthenticationCanvas extends StatelessWidget {
                   return Column(
                     children: [
                       button,
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                     ],
@@ -81,7 +81,7 @@ class AuthenticationCanvas extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Column(
@@ -92,7 +92,7 @@ class AuthenticationCanvas extends StatelessWidget {
                   : MyHorizontalMargin(
                       child: bottomWidget!,
                     ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ],

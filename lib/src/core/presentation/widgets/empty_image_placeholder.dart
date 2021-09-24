@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+
 import '../../utils/my_colors.dart';
 
 class EmptyImagePlaceholder extends StatelessWidget {
@@ -8,7 +9,7 @@ class EmptyImagePlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: MyColors.forVeryDarkStuff,
-      child: Icon(
+      child: const Icon(
         Ionicons.diamond_outline,
         color: MyColors.main,
         size: 25,

@@ -23,7 +23,7 @@ _$_TimetablePerformance _$_$_TimetablePerformanceFromJson(
 Map<String, dynamic> _$_$_TimetablePerformanceToJson(
         _$_TimetablePerformance instance) =>
     <String, dynamic>{
-      'artists': instance.artists,
+      'artists': instance.artists.map((e) => e.toJson()).toList(),
       'startingDateTime': instance.startingDateTime.toIso8601String(),
       'endingDateTime': instance.endingDateTime.toIso8601String(),
       'typeOfPerformance': instance.typeOfPerformance,

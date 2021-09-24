@@ -24,11 +24,11 @@ class RatingCardWithListOfItems<T extends FollowableInterface>
 
     return MyHorizontalMargin(
       child: Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 20,
         ),
         child: Container(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7),
             color: MyColors.forEventCard,
@@ -52,15 +52,15 @@ class RatingCardWithListOfItems<T extends FollowableInterface>
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Divider(
+              const Divider(
                 color: MyColors.forDividers,
                 thickness: MyConstants.dividerThickness,
                 height: 1,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Column(
@@ -76,7 +76,7 @@ class RatingCardWithListOfItems<T extends FollowableInterface>
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 14,
               ),
               Align(
@@ -84,14 +84,14 @@ class RatingCardWithListOfItems<T extends FollowableInterface>
                 child: InkWell(
                   // todo
                   onTap: () {},
-                  child: Icon(
+                  child: const Icon(
                     Ionicons.chevron_down,
                     color: MyColors.accent,
                     size: 26,
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
             ],

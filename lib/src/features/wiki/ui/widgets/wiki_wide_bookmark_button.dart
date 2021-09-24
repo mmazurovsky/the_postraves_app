@@ -5,7 +5,7 @@ import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_text_styles.dart';
 
 class WikiWideBookmarkButton extends StatelessWidget {
-  WikiWideBookmarkButton({
+  const WikiWideBookmarkButton({
     Key? key,
     required this.buttonText,
     required this.onButtonTap,

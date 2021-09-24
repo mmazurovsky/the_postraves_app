@@ -12,7 +12,7 @@ class EventsList extends StatelessWidget {
   final Function onRefresh;
   final RefreshController refreshController;
 
-  EventsList({
+  const EventsList({
     Key? key,
     required this.eventsByRating,
     required this.onRefresh,
@@ -25,7 +25,7 @@ class EventsList extends StatelessWidget {
       enablePullDown: true,
       controller: refreshController,
       onRefresh: () => onRefresh(),
-      child: eventsByRating != null && eventsByRating.isNotEmpty
+      child: eventsByRating.isNotEmpty
           ? ListView.builder(
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.only(

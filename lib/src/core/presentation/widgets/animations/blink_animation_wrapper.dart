@@ -4,7 +4,7 @@ class BlinkAnimationWrapper extends StatefulWidget {
   final Function(Color) widgetBuilder;
   final Color startColor;
   final Color endColor;
-  BlinkAnimationWrapper({
+  const BlinkAnimationWrapper({
     Key? key,
     required this.widgetBuilder,
     required this.startColor,

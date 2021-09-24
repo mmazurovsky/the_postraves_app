@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'my_colors.dart';
 
 class MyTextStyles {
-  static const TextStyle cardEventTitle = const TextStyle(
+  static const TextStyle cardEventTitle = TextStyle(
     fontFamily: 'RobotoMono',
     fontSize: 27,
     fontWeight: FontWeight.w600,
@@ -11,7 +11,7 @@ class MyTextStyles {
     wordSpacing: -8,
   );
 
-  static const TextStyle cardSceneTitle = const TextStyle(
+  static const TextStyle cardSceneTitle = TextStyle(
     fontFamily: 'RobotoMono',
     fontSize: 28,
     fontWeight: FontWeight.w600,
@@ -19,7 +19,7 @@ class MyTextStyles {
     wordSpacing: -8,
   );
 
-  static const TextStyle cardSceneSubtitle = const TextStyle(
+  static const TextStyle cardSceneSubtitle = TextStyle(
     fontFamily: 'RobotoMono',
     fontSize: 15,
     fontWeight: FontWeight.w600,
@@ -29,35 +29,35 @@ class MyTextStyles {
 
   static const TextStyle wikiTitle = cardEventTitle;
 
-  static const TextStyle cardEventDetails = const TextStyle(
+  static const TextStyle cardEventDetails = TextStyle(
     fontFamily: 'IBMPlexMono',
     fontSize: 17,
     fontWeight: FontWeight.w500,
     color: MyColors.main,
   );
 
-  static const TextStyle cardEventBadge=const TextStyle(
+  static const TextStyle cardEventBadge=TextStyle(
     fontFamily: 'IBMPlexMono',
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: MyColors.main,
   );
 
-  static TextStyle showsByDateDate = TextStyle(
+  static TextStyle showsByDateDate = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 17,
     fontWeight: FontWeight.w600,
     color: MyColors.forInactiveStuff,
   );
 
-  static TextStyle modalBottomSheetTitle = TextStyle(
+  static TextStyle modalBottomSheetTitle = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 22,
     fontWeight: FontWeight.w600,
     color: MyColors.main,
   );
 
-  static const TextStyle showsViewSwitcherMode = const TextStyle(
+  static const TextStyle showsViewSwitcherMode = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 17,
@@ -65,14 +65,14 @@ class MyTextStyles {
     wordSpacing: -4,
   );
 
-  static const TextStyle ratingsTitle = const TextStyle(
+  static const TextStyle ratingsTitle = TextStyle(
     fontFamily: 'Roboto',
     color: MyColors.main,
     fontSize: 30,
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle ratingsWeeklyWinnerSubtitle = const TextStyle(
+  static const TextStyle ratingsWeeklyWinnerSubtitle = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.accent,
     fontSize: 17,
@@ -81,14 +81,14 @@ class MyTextStyles {
     letterSpacing: -0.6,
   );
 
-  static const TextStyle ratingsWeeklyWinnerTitle = const TextStyle(
+  static const TextStyle ratingsWeeklyWinnerTitle = TextStyle(
     fontFamily: 'Roboto',
     color: MyColors.main,
     fontSize: 35,
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle ratingsListTitle = const TextStyle(
+  static const TextStyle ratingsListTitle = TextStyle(
     fontFamily: 'RobotoMono',
     color: MyColors.main,
     fontSize: 23,
@@ -96,7 +96,7 @@ class MyTextStyles {
     wordSpacing: -4,
   );
 
-    static const TextStyle ratingsListTitleAccent = const TextStyle(
+    static const TextStyle ratingsListTitleAccent = TextStyle(
     fontFamily: 'RobotoMono',
     color: MyColors.accent,
     fontSize: 23,
@@ -104,7 +104,7 @@ class MyTextStyles {
     wordSpacing: -4,
   );
 
-  static const TextStyle searchTextPlaceholder = const TextStyle(
+  static const TextStyle searchTextPlaceholder = TextStyle(
     fontSize: 16,
     color: MyColors.forInactiveStuff,
   );
@@ -116,7 +116,7 @@ class MyTextStyles {
         wordSpacing: -3.5,
       );
 
-  static const TextStyle searchCancel = const TextStyle(
+  static const TextStyle searchCancel = TextStyle(
     fontFamily: 'Roboto',
     textBaseline: TextBaseline.alphabetic,
     color: MyColors.main,
@@ -133,49 +133,49 @@ class MyTextStyles {
     decoration: TextDecoration.none,
   );
 
-  static const TextStyle body = const TextStyle(
+  static const TextStyle body = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 17,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle bodyWithInactiveColor = const TextStyle(
+  static const TextStyle bodyWithInactiveColor = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
     fontSize: 17,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle small = const TextStyle(
+  static const TextStyle small = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
     fontSize: 13,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle termsInactive = const TextStyle(
+  static const TextStyle termsInactive = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
     fontSize: 13,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle termsActive = const TextStyle(
+  static const TextStyle termsActive = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 13,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle bodyWithAccentColor = const TextStyle(
+  static const TextStyle bodyWithAccentColor = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.accent,
     fontSize: 17,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle sectionTitle = const TextStyle(
+  static const TextStyle sectionTitle = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
     fontSize: 17,
@@ -183,14 +183,14 @@ class MyTextStyles {
     wordSpacing: -4,
   );
 
-  static const TextStyle longTextThinSmallAccentColor = const TextStyle(
+  static const TextStyle longTextThinSmallAccentColor = TextStyle(
     fontFamily: 'Roboto',
     color: MyColors.accent,
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle longTextThinSmallInactiveColor = const TextStyle(
+  static const TextStyle longTextThinSmallInactiveColor = TextStyle(
     fontFamily: 'Roboto',
     color: MyColors.forInactiveStuff,
     fontSize: 16,
@@ -198,21 +198,21 @@ class MyTextStyles {
     
   );
 
-  static const TextStyle bodyFat = const TextStyle(
+  static const TextStyle bodyFat = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 17,
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle shortEntityName = const TextStyle(
+  static const TextStyle shortEntityName = TextStyle(
     fontFamily: 'RobotoMono',
     color: Colors.white,
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle shortEntityRating = const TextStyle(
+  static const TextStyle shortEntityRating = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
     fontSize: 16,
@@ -221,19 +221,19 @@ class MyTextStyles {
 
   static const TextStyle shortEntityDetails = shortEntityRating;
 
-  static const TextStyle authTitle = const TextStyle(
+  static const TextStyle authTitle = TextStyle(
     color: MyColors.main,
     fontSize: 32,
     fontWeight: FontWeight.w700,
   );
 
-  static const TextStyle authSubtitle = const TextStyle(
+  static const TextStyle authSubtitle = TextStyle(
     color: MyColors.forInactiveStuff,
     fontSize: 17,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle buttonWithArrow = const TextStyle(
+  static const TextStyle buttonWithArrow = TextStyle(
     color: MyColors.main,
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -309,44 +309,44 @@ class MyTextStyles {
     color: MyColors.accent,
   );
 
-  static const TextStyle tab = const TextStyle(
+  static const TextStyle tab = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle appBarTitle = const TextStyle(
+  static const TextStyle appBarTitle = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle appTitle = const TextStyle(
+  static const TextStyle appTitle = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 20,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle appBarSubtitle = const TextStyle(
+  static const TextStyle appBarSubtitle = TextStyle(
     color: MyColors.forInactiveStuff,
     fontSize: 13,
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle timetableTime = const TextStyle(
+  static const TextStyle timetableTime = TextStyle(
     color: MyColors.main,
     fontWeight: FontWeight.w500,
     fontSize: 15,
   );
 
-  static const TextStyle placeAddress = const TextStyle(
+  static const TextStyle placeAddress = TextStyle(
     color: MyColors.main,
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle shortEventName = const TextStyle(
+  static const TextStyle shortEventName = TextStyle(
     fontFamily: 'RobotoMono',
     color: MyColors.main,
     fontSize: 21,

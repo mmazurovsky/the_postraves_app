@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
 import '../widgets/my_text_field.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -11,7 +9,7 @@ import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
 
 class SignInWithEmailAndPasswordScreen extends StatefulWidget {
-  SignInWithEmailAndPasswordScreen({Key? key}) : super(key: key);
+  const SignInWithEmailAndPasswordScreen({Key? key}) : super(key: key);
 
   @override
   _SignInWithEmailAndPasswordScreenState createState() =>
@@ -69,7 +67,7 @@ class _SignInWithEmailAndPasswordScreenState
       appBar: AppBar(
         leading: AppBarButton(
           onTap: Navigator.of(context).pop,
-          iconWidget: Icon(
+          iconWidget: const Icon(
             Ionicons.chevron_back_outline,
             color: Colors.white,
           ),
@@ -83,13 +81,13 @@ class _SignInWithEmailAndPasswordScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            MyHorizontalMargin(
+            const MyHorizontalMargin(
               child: Text(
                 'Вход с Email',
                 style: MyTextStyles.authTitle,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Column(
@@ -106,7 +104,7 @@ class _SignInWithEmailAndPasswordScreenState
                   activeBorderColor: MyColors.accent,
                   inactiveBorderColor: MyColors.main,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 MyTextField(
                   title: 'Пароль',
                   textInputType: TextInputType.visiblePassword,
@@ -117,7 +115,7 @@ class _SignInWithEmailAndPasswordScreenState
                   activeBorderColor: MyColors.accent,
                   inactiveBorderColor: MyColors.main,
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 MyElevatedButton(
                   mainAxisAlignment: MainAxisAlignment.center,
                   text: 'Войти',

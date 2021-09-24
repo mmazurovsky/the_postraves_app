@@ -22,7 +22,7 @@ Map<String, dynamic> _$_$_UserProfileToUpdateToJson(
         _$_UserProfileToUpdate instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'currentCity': instance.currentCity,
+      'currentCity': instance.currentCity.toJson(),
       'about': instance.about,
       'imageLink': instance.imageLink,
       'instagramLink': instance.instagramLink,

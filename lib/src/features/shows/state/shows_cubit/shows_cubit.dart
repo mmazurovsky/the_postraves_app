@@ -61,8 +61,8 @@ class ShowsCubit extends Cubit<ShowsState> {
     emit(ShowsState.loadedByRating(_eventsByRating!));
   }
 
-  void _loadShowsAndResolveView(City currentCity) {
-    _loadShowsFromRemote(currentCity);
+  void _loadShowsAndResolveView(City currentCity) async {
+    await _loadShowsFromRemote(currentCity);
     if (_currentView == null || _currentView == ViewMode.SORT_BY_DATE) {
       showByDateView();
     } else {
@@ -70,7 +70,7 @@ class ShowsCubit extends Cubit<ShowsState> {
     }
   }
 
-  void _loadShowsFromRemote(City currentCity) async {
+  Future<void> _loadShowsFromRemote(City currentCity) async {
     final Future<ResponseSealed<List<EventShort>>> byRatingRequest =
         showsRepository.fetchEventsByRatingFromRemote(currentCity);
 
@@ -100,5 +100,7 @@ class ShowsCubit extends Cubit<ShowsState> {
 
     _eventsByDate = stateShowsByDate;
     _eventsByRating = stateShowsByRating;
+
+    return;
   }
 }

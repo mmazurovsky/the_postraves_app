@@ -1,12 +1,8 @@
 import '../../../core/client/data_sealed/response_sealed.dart';
 import '../../../core/client/remote_request_wrapper.dart';
 import '../data_sources/place_remote_data_source.dart';
-import '../data_sources/place_remote_data_source.dart';
-import '../data_sources/wiki_remote_data_source.dart';
-import '../../../models/interfaces/data_interfaces.dart';
 import '../../../models/related_to_place/scene.dart';
 import '../../../models/shorts/event_short.dart';
-import '../../../models/shorts/unity_short.dart';
 
 abstract class PlaceRepository {
   Future<ResponseSealed<List<Scene>>> fetchScenesForPlaceById(int id);

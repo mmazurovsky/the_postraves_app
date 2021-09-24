@@ -9,12 +9,12 @@ abstract class UnityRepository {
   Future<ResponseSealed<List<EventShort>>> fetchEventsForArtistById(int id);
 }
 
-class ArtistRepositoryImpl extends UnityRepository {
+class UnityRepositoryImpl extends UnityRepository {
   final UnityRemoteDataSource unityRemoteDataSource;
   final RemoteRequestWrapper<List<EventShort>> remoteRequestWrapperEvents;
   final RemoteRequestWrapper<List<ArtistShort>> remoteRequestWrapperArtists;
 
-  ArtistRepositoryImpl({
+  UnityRepositoryImpl({
     required this.unityRemoteDataSource,
     required this.remoteRequestWrapperEvents,
     required this.remoteRequestWrapperArtists,

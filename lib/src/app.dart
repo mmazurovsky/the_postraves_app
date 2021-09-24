@@ -85,7 +85,7 @@ class AppState extends State<App> with WidgetsBindingObserver {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (_) => CurrentTabProvider(TabItem.SHOWS),
+            create: (_) => CurrentTabProvider(TabItem.shows),
           ),
           ChangeNotifierProvider(
             create: (_) => CurrentCityProvider(

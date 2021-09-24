@@ -24,7 +24,7 @@ Map<String, dynamic> _$_$_UserProfileToJson(_$_UserProfile instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'currentCity': instance.currentCity,
+      'currentCity': instance.currentCity.toJson(),
       'overallFollowers': instance.overallFollowers,
       'weeklyFollowers': instance.weeklyFollowers,
       'about': instance.about,

@@ -52,7 +52,7 @@ class _RatingWeeklyWinnerCardState<T extends FollowableInterface>
                 children: [
                   ShaderMask(
                     shaderCallback: (rect) {
-                      return LinearGradient(
+                      return const LinearGradient(
                         begin: Alignment.center,
                         end: Alignment.bottomCenter,
                         colors: [
@@ -64,7 +64,7 @@ class _RatingWeeklyWinnerCardState<T extends FollowableInterface>
                       );
                     },
                     blendMode: BlendMode.srcOver,
-                    child: Container(
+                    child: SizedBox(
                       width: double.infinity,
                       height: widthAndHeightOfImage,
                       child: MyCachedNetworkImage(widget.entity.imageLink),
@@ -105,7 +105,7 @@ class _RatingWeeklyWinnerCardState<T extends FollowableInterface>
                   top: 15,
                   bottom: 20,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: MyColors.forEventCard,
                 ),
                 child: RatingEntityListItem<T>(

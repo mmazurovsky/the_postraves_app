@@ -8,10 +8,8 @@ import '../../state/cubit/search_cubit.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../models/related_to_search/aggregated_search_model.dart';
 import '../../../../models/related_to_search/unified_search_model.dart';
-import '../../../../models/shorts/artist_short.dart';
 import '../../../../models/shorts/event_short.dart';
 import '../../../../models/shorts/place_short.dart';
-import '../../../../models/shorts/unity_short.dart';
 import '../widgets/previous_search_results_block%20copy.dart';
 import '../../../../core/presentation/widgets/loading_screen.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -25,7 +23,7 @@ import '../widgets/new_search_results_block.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchScreen extends StatefulWidget {
-  SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -52,10 +50,10 @@ class _SearchScreenState extends State<SearchScreen> {
     if (_searchFieldTimer != null) {
       _searchFieldTimer!.cancel();
     }
-    if (_textEditingController.text.length > 0) {
+    if (_textEditingController.text.isNotEmpty) {
       _toTriggerPreviousSearchesEvent = true;
       if (_textEditingController.text != _previousSearchValue) {
-        _searchFieldTimer = Timer(Duration(milliseconds: 500), () {
+        _searchFieldTimer = Timer(const Duration(milliseconds: 500), () {
           _previousSearchValue = _textEditingController.text;
           BlocProvider.of<SearchCubit>(context)
               .startSearch(_textEditingController.text);
@@ -93,7 +91,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: SafeArea(
         child: CustomScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             SliverPersistentHeader(
               pinned: true,
@@ -104,27 +102,25 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             SliverToBoxAdapter(
-              child: Container(
-                child: BlocBuilder<SearchCubit, SearchState>(
-                  buildWhen: (prevState, currState) =>
-                      currState is! InitialSearch,
-                  builder: (context, state) {
-                    if (state is LoadedPreviousSearches) {
-                      return _PreviousSearchesList(
-                        previousSearchRecords: state.found,
-                      );
-                    } else if (state is LoadingPreviousSearches ||
-                        state is LoadingNewSearch) {
-                      return LoadingScreen();
-                    } else if (state is LoadedNewSearch) {
-                      return _SearchResultsList(
-                        found: state.found,
-                      );
-                    } else {
-                      return FailureContainer("chto"); //todo
-                    }
-                  },
-                ),
+              child: BlocBuilder<SearchCubit, SearchState>(
+                buildWhen: (prevState, currState) =>
+                    currState is! InitialSearch,
+                builder: (context, state) {
+                  if (state is LoadedPreviousSearches) {
+                    return _PreviousSearchesList(
+                      previousSearchRecords: state.found,
+                    );
+                  } else if (state is LoadingPreviousSearches ||
+                      state is LoadingNewSearch) {
+                    return LoadingScreen();
+                  } else if (state is LoadedNewSearch) {
+                    return _SearchResultsList(
+                      found: state.found,
+                    );
+                  } else {
+                    return FailureContainer("chto"); //todo
+                  }
+                },
               ),
             ),
           ],
@@ -161,7 +157,7 @@ class _PreviousSearchesList extends StatelessWidget {
 
 class _SearchResultsList extends StatelessWidget {
   final AggregatedSearchModel found;
-  _SearchResultsList({Key? key, required this.found}) : super(key: key);
+  const _SearchResultsList({Key? key, required this.found}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

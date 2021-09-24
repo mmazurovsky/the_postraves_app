@@ -9,16 +9,17 @@ class SearchContainer extends StatelessWidget {
   final Widget rightContainerPart;
 
   const SearchContainer({
+    Key? key,
     required this.rightContainerPart,
     required this.leftContainerPart,
     required this.containerColor,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MyHorizontalMargin(
       child: Container(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           vertical: 8,
         ),
         decoration: BoxDecoration(
@@ -34,8 +35,8 @@ class SearchContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(Ionicons.search, size: 17, color: MyColors.forInactiveStuff),
-              SizedBox(
+              const Icon(Ionicons.search, size: 17, color: MyColors.forInactiveStuff),
+              const SizedBox(
                 width: 10,
               ),
               Expanded(

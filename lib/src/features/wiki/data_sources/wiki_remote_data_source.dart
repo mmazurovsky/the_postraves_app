@@ -52,8 +52,7 @@ class WikiRemoteDataSourceImpl<FULLFOLLOWABLE extends FollowableInterface>
     required int id,
     required Map<String, String> httpHeaders,
   }) async {
-    var decodedResponse;
-    decodedResponse = await RemoteClient.makePostRequestAndReturnResponse(
+    await RemoteClient.makePostRequestAndReturnResponse(
         endpointWithPath: 'user/myFollows/' +
             _followableClientHelper.getEndpointForFollowable() +
             '/$id',
@@ -63,8 +62,7 @@ class WikiRemoteDataSourceImpl<FULLFOLLOWABLE extends FollowableInterface>
 
   @override
   Future<void> unfollowFollowable({required int id, required Map<String, String> httpHeaders}) async {
-    var decodedResponse;
-    decodedResponse = await RemoteClient.makeDeleteRequestAndReturnResponse(
+    await RemoteClient.makeDeleteRequestAndReturnResponse(
         endpointWithPath: 'user/myFollows/' +
             _followableClientHelper.getEndpointForFollowable() +
             '/$id',

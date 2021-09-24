@@ -21,12 +21,10 @@ class _$TicketPriceTearOff {
   const _$TicketPriceTearOff();
 
   _TicketPrice call(
-      {required int id,
-      required String name,
+      {required String name,
       required double price,
       required MoneyCurrency currency}) {
     return _TicketPrice(
-      id: id,
       name: name,
       price: price,
       currency: currency,
@@ -43,7 +41,6 @@ const $TicketPrice = _$TicketPriceTearOff();
 
 /// @nodoc
 mixin _$TicketPrice {
-  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   MoneyCurrency get currency => throw _privateConstructorUsedError;
@@ -59,7 +56,7 @@ abstract class $TicketPriceCopyWith<$Res> {
   factory $TicketPriceCopyWith(
           TicketPrice value, $Res Function(TicketPrice) then) =
       _$TicketPriceCopyWithImpl<$Res>;
-  $Res call({int id, String name, double price, MoneyCurrency currency});
+  $Res call({String name, double price, MoneyCurrency currency});
 }
 
 /// @nodoc
@@ -72,16 +69,11 @@ class _$TicketPriceCopyWithImpl<$Res> implements $TicketPriceCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
     Object? currency = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -105,7 +97,7 @@ abstract class _$TicketPriceCopyWith<$Res>
           _TicketPrice value, $Res Function(_TicketPrice) then) =
       __$TicketPriceCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String name, double price, MoneyCurrency currency});
+  $Res call({String name, double price, MoneyCurrency currency});
 }
 
 /// @nodoc
@@ -120,16 +112,11 @@ class __$TicketPriceCopyWithImpl<$Res> extends _$TicketPriceCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
     Object? currency = freezed,
   }) {
     return _then(_TicketPrice(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -150,16 +137,11 @@ class __$TicketPriceCopyWithImpl<$Res> extends _$TicketPriceCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TicketPrice with DiagnosticableTreeMixin implements _TicketPrice {
   const _$_TicketPrice(
-      {required this.id,
-      required this.name,
-      required this.price,
-      required this.currency});
+      {required this.name, required this.price, required this.currency});
 
   factory _$_TicketPrice.fromJson(Map<String, dynamic> json) =>
       _$_$_TicketPriceFromJson(json);
 
-  @override
-  final int id;
   @override
   final String name;
   @override
@@ -169,7 +151,7 @@ class _$_TicketPrice with DiagnosticableTreeMixin implements _TicketPrice {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TicketPrice(id: $id, name: $name, price: $price, currency: $currency)';
+    return 'TicketPrice(name: $name, price: $price, currency: $currency)';
   }
 
   @override
@@ -177,7 +159,6 @@ class _$_TicketPrice with DiagnosticableTreeMixin implements _TicketPrice {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TicketPrice'))
-      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('currency', currency));
@@ -187,8 +168,6 @@ class _$_TicketPrice with DiagnosticableTreeMixin implements _TicketPrice {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _TicketPrice &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.price, price) ||
@@ -201,7 +180,6 @@ class _$_TicketPrice with DiagnosticableTreeMixin implements _TicketPrice {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(price) ^
       const DeepCollectionEquality().hash(currency);
@@ -219,16 +197,13 @@ class _$_TicketPrice with DiagnosticableTreeMixin implements _TicketPrice {
 
 abstract class _TicketPrice implements TicketPrice {
   const factory _TicketPrice(
-      {required int id,
-      required String name,
+      {required String name,
       required double price,
       required MoneyCurrency currency}) = _$_TicketPrice;
 
   factory _TicketPrice.fromJson(Map<String, dynamic> json) =
       _$_TicketPrice.fromJson;
 
-  @override
-  int get id => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override

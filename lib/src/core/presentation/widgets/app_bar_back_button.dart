@@ -10,7 +10,7 @@ class AppBarBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBarButton(
       onTap: Navigator.of(context).pop,
-      iconWidget: Icon(
+      iconWidget: const Icon(
         Ionicons.chevron_back_outline,
         color: Colors.white,
       ),

@@ -1,6 +1,6 @@
+import '../../../core/client/remote_client.dart';
 import '../../../models/related_to_place/scene.dart';
 import '../../../models/shorts/event_short.dart';
-import '../../../core/client/remote_client.dart';
 
 abstract class PlaceRemoteDataSource {
   Future<List<Scene>> fetchScenesForPlaceById({
@@ -19,20 +19,18 @@ class PlaceRemoteDataSourceImpl implements PlaceRemoteDataSource {
   @override
   Future<List<EventShort>> fetchEventsForPlaceById(
       {required int id, required Map<String, String> httpHeaders}) async {
-    var decodedResponse;
-    decodedResponse = await RemoteClient.makePostRequestAndReturnResponse(
+    final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'place/public/$id/events',
-        httpHeaders: httpHeaders);
+        httpHeaders: httpHeaders) as List<dynamic>;
     return decodedResponse.map((json) => EventShort.fromJson(json)).toList();
   }
 
   @override
   Future<List<Scene>> fetchScenesForPlaceById(
       {required int id, required Map<String, String> httpHeaders}) async {
-    var decodedResponse;
-    decodedResponse = await RemoteClient.makePostRequestAndReturnResponse(
+    final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'place/public/$id/scenes',
-        httpHeaders: httpHeaders);
+        httpHeaders: httpHeaders) as List<dynamic>;
     return decodedResponse.map((json) => Scene.fromJson(json)).toList();
   }
 }

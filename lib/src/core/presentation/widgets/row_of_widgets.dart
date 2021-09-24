@@ -18,7 +18,7 @@ class RowOfWidgets extends StatelessWidget {
               ? Row(
                   children: [
                     child,
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                   ],
                 )
               : Container())

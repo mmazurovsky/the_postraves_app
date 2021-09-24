@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import '../../../core/client/data_sealed/response_sealed.dart';
 import '../data_sources/shows_remote_data_source.dart';
 import '../../../models/geo/city.dart';

@@ -8,7 +8,7 @@ class ButtonContent extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final double? distanceBetweenLeadingAndText;
 
-  ButtonContent({
+  const ButtonContent({
     Key? key,
     this.leading,
     this.trailing,
@@ -35,9 +35,7 @@ class ButtonContent extends StatelessWidget {
                       children: [
                         leading!,
                         SizedBox(
-                          width: distanceBetweenLeadingAndText != null
-                              ? distanceBetweenLeadingAndText
-                              : 13,
+                          width: distanceBetweenLeadingAndText ?? 13,
                         ),
                       ],
                     )
@@ -57,7 +55,7 @@ class ButtonContent extends StatelessWidget {
             ? Container()
             : Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 13,
                   ),
                   trailing!,
