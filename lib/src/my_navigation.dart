@@ -270,7 +270,7 @@ class NavigatorFunctions {
   }
 
   static void pushRatingEntity<T extends FollowableInterface>(
-      BuildContext context, T unified, ImageDimensions imageDimensions) {
+      BuildContext context, T unified, ImageDimensions? imageDimensions) {
     if (unified is ArtistShort) {
       pushArtist(
         context: context,
@@ -312,7 +312,7 @@ class NavigatorFunctions {
   static void pushSearchEntity(
     BuildContext context,
     UnifiedSearchModel unified,
-    ImageDimensions imageDimensions,
+    ImageDimensions? imageDimensions,
   ) {
     if (unified.type == WikiFollowableType.ARTIST) {
       pushArtist(

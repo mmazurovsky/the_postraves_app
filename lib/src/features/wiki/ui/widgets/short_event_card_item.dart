@@ -23,7 +23,7 @@ class ShortEventCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DarkenedImageInContainer(
-      onTap: (ImageDimensions imageDimensions) => NavigatorFunctions.pushEvent(
+      onTap: (ImageDimensions? imageDimensions) => NavigatorFunctions.pushEvent(
         context: context,
         imageLink: _event.imageLink,
         id: _event.id,

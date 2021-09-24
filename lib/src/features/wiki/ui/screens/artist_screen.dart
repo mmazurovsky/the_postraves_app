@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
@@ -32,8 +32,8 @@ class ArtistScreen extends StatefulWidget {
   final int artistId;
   final String artistName;
   final Country country;
-  final String artistImageLink;
-  final ImageDimensions imageDimensions;
+  final String? artistImageLink;
+  final ImageDimensions? imageDimensions;
 
   const ArtistScreen({
     required this.artistId,
@@ -49,7 +49,7 @@ class ArtistScreen extends StatefulWidget {
 
 class _ArtistScreenState extends State<ArtistScreen>
     with SingleTickerProviderStateMixin {
-  late int? _wikiRating;
+  int? _wikiRating;
   static late String _wikiType;
   late Widget _wikiDetails;
   late ScrollController _scrollController;
@@ -177,7 +177,7 @@ class _ArtistDetails extends StatelessWidget {
                     RatingEntityList<UnityShort>(
                       entityList: unities,
                       onItemTap: (BuildContext context, UnityShort entity,
-                              ImageDimensions imageDimensions) =>
+                              ImageDimensions? imageDimensions) =>
                           NavigatorFunctions.pushUnity(
                         context: context,
                         id: entity.id,

@@ -35,10 +35,10 @@ import '../widgets/wiki_expandable_text_description.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventScreen extends StatefulWidget {
-  final String eventImageLink;
+  final String? eventImageLink;
   final int eventId;
   final String eventName;
-  final ImageDimensions imageDimensions;
+  final ImageDimensions? imageDimensions;
   const EventScreen({
     required this.eventImageLink,
     required this.eventId,
@@ -225,7 +225,7 @@ class _EventDetails extends StatelessWidget {
           RatingEntityListItem(
             entity: loadedEvent.place,
             onItemTap:
-                (context, PlaceShort entity, ImageDimensions imageDimensions) =>
+                (context, PlaceShort entity, ImageDimensions? imageDimensions) =>
                     NavigatorFunctions.pushPlace(
               context: context,
               id: entity.id,
@@ -249,7 +249,7 @@ class _EventDetails extends StatelessWidget {
                     RatingEntityList<UnityShort>(
                       entityList: unities,
                       onItemTap: (context, UnityShort entity,
-                              ImageDimensions imageDimensions) =>
+                              ImageDimensions? imageDimensions) =>
                           NavigatorFunctions.pushUnity(
                         context: context,
                         id: entity.id,
@@ -308,7 +308,7 @@ class _EventDetails extends StatelessWidget {
                     RatingEntityList(
                       entityList: lineup,
                       onItemTap: (context, ArtistShort entity,
-                              ImageDimensions imageDimensions) =>
+                              ImageDimensions? imageDimensions) =>
                           NavigatorFunctions.pushArtist(
                         context: context,
                         id: entity.id,

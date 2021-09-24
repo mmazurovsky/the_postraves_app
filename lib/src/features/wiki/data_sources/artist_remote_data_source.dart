@@ -19,20 +19,18 @@ class ArtistRemoteDataSourceImpl implements ArtistRemoteDataSource {
   @override
   Future<List<EventShort>> fetchEventsForArtistById(
       {required int id, required Map<String, String> httpHeaders}) async {
-    var decodedResponse;
-    decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
+    final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'artist/public/$id/events',
-        httpHeaders: httpHeaders);
+        httpHeaders: httpHeaders) as List<dynamic>;
     return decodedResponse.map((json) => EventShort.fromJson(json)).toList();
   }
 
   @override
   Future<List<UnityShort>> fetchUnitiesForArtistById(
       {required int id, required Map<String, String> httpHeaders}) async {
-    var decodedResponse;
-    decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
+    final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'artist/public/$id/unities',
-        httpHeaders: httpHeaders);
+        httpHeaders: httpHeaders) as List<dynamic>;
     return decodedResponse.map((json) => UnityShort.fromJson(json)).toList();
   }
 }

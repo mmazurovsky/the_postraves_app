@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_app/src/core/utils/date_time_converter.dart';
 import '../../core/utils/formatting_utils.dart';
 import '../../core/utils/my_constants.dart';
 import '../enum/event_status.dart';
@@ -30,7 +31,9 @@ class EventFull
     required int weeklyFollowers,
     required bool isFollowed,
     required EventStatus status,
+    @DateTimeConverter()
     required DateTime startDateTime,
+    @DateTimeConverter()
     required DateTime endDateTime,
     required PlaceShort place,
     String? imageLink,

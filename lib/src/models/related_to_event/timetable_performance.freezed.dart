@@ -22,16 +22,14 @@ class _$TimetablePerformanceTearOff {
 
   _TimetablePerformance call(
       {required List<ArtistShort> artists,
-      required DateTime startingDateTime,
-      required DateTime endingDateTime,
-      String? typeOfPerformance,
-      ArtistPerformanceStatus? performanceStatus}) {
+      @DateTimeConverter() required DateTime startingDateTime,
+      @DateTimeConverter() required DateTime endingDateTime,
+      String? typeOfPerformance}) {
     return _TimetablePerformance(
       artists: artists,
       startingDateTime: startingDateTime,
       endingDateTime: endingDateTime,
       typeOfPerformance: typeOfPerformance,
-      performanceStatus: performanceStatus,
     );
   }
 
@@ -46,11 +44,11 @@ const $TimetablePerformance = _$TimetablePerformanceTearOff();
 /// @nodoc
 mixin _$TimetablePerformance {
   List<ArtistShort> get artists => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get startingDateTime => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get endingDateTime => throw _privateConstructorUsedError;
   String? get typeOfPerformance => throw _privateConstructorUsedError;
-  ArtistPerformanceStatus? get performanceStatus =>
-      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,10 +63,9 @@ abstract class $TimetablePerformanceCopyWith<$Res> {
       _$TimetablePerformanceCopyWithImpl<$Res>;
   $Res call(
       {List<ArtistShort> artists,
-      DateTime startingDateTime,
-      DateTime endingDateTime,
-      String? typeOfPerformance,
-      ArtistPerformanceStatus? performanceStatus});
+      @DateTimeConverter() DateTime startingDateTime,
+      @DateTimeConverter() DateTime endingDateTime,
+      String? typeOfPerformance});
 }
 
 /// @nodoc
@@ -86,7 +83,6 @@ class _$TimetablePerformanceCopyWithImpl<$Res>
     Object? startingDateTime = freezed,
     Object? endingDateTime = freezed,
     Object? typeOfPerformance = freezed,
-    Object? performanceStatus = freezed,
   }) {
     return _then(_value.copyWith(
       artists: artists == freezed
@@ -105,10 +101,6 @@ class _$TimetablePerformanceCopyWithImpl<$Res>
           ? _value.typeOfPerformance
           : typeOfPerformance // ignore: cast_nullable_to_non_nullable
               as String?,
-      performanceStatus: performanceStatus == freezed
-          ? _value.performanceStatus
-          : performanceStatus // ignore: cast_nullable_to_non_nullable
-              as ArtistPerformanceStatus?,
     ));
   }
 }
@@ -122,10 +114,9 @@ abstract class _$TimetablePerformanceCopyWith<$Res>
   @override
   $Res call(
       {List<ArtistShort> artists,
-      DateTime startingDateTime,
-      DateTime endingDateTime,
-      String? typeOfPerformance,
-      ArtistPerformanceStatus? performanceStatus});
+      @DateTimeConverter() DateTime startingDateTime,
+      @DateTimeConverter() DateTime endingDateTime,
+      String? typeOfPerformance});
 }
 
 /// @nodoc
@@ -145,7 +136,6 @@ class __$TimetablePerformanceCopyWithImpl<$Res>
     Object? startingDateTime = freezed,
     Object? endingDateTime = freezed,
     Object? typeOfPerformance = freezed,
-    Object? performanceStatus = freezed,
   }) {
     return _then(_TimetablePerformance(
       artists: artists == freezed
@@ -164,10 +154,6 @@ class __$TimetablePerformanceCopyWithImpl<$Res>
           ? _value.typeOfPerformance
           : typeOfPerformance // ignore: cast_nullable_to_non_nullable
               as String?,
-      performanceStatus: performanceStatus == freezed
-          ? _value.performanceStatus
-          : performanceStatus // ignore: cast_nullable_to_non_nullable
-              as ArtistPerformanceStatus?,
     ));
   }
 }
@@ -177,10 +163,9 @@ class __$TimetablePerformanceCopyWithImpl<$Res>
 class _$_TimetablePerformance implements _TimetablePerformance {
   const _$_TimetablePerformance(
       {required this.artists,
-      required this.startingDateTime,
-      required this.endingDateTime,
-      this.typeOfPerformance,
-      this.performanceStatus});
+      @DateTimeConverter() required this.startingDateTime,
+      @DateTimeConverter() required this.endingDateTime,
+      this.typeOfPerformance});
 
   factory _$_TimetablePerformance.fromJson(Map<String, dynamic> json) =>
       _$_$_TimetablePerformanceFromJson(json);
@@ -188,17 +173,17 @@ class _$_TimetablePerformance implements _TimetablePerformance {
   @override
   final List<ArtistShort> artists;
   @override
+  @DateTimeConverter()
   final DateTime startingDateTime;
   @override
+  @DateTimeConverter()
   final DateTime endingDateTime;
   @override
   final String? typeOfPerformance;
-  @override
-  final ArtistPerformanceStatus? performanceStatus;
 
   @override
   String toString() {
-    return 'TimetablePerformance(artists: $artists, startingDateTime: $startingDateTime, endingDateTime: $endingDateTime, typeOfPerformance: $typeOfPerformance, performanceStatus: $performanceStatus)';
+    return 'TimetablePerformance(artists: $artists, startingDateTime: $startingDateTime, endingDateTime: $endingDateTime, typeOfPerformance: $typeOfPerformance)';
   }
 
   @override
@@ -216,10 +201,7 @@ class _$_TimetablePerformance implements _TimetablePerformance {
                     .equals(other.endingDateTime, endingDateTime)) &&
             (identical(other.typeOfPerformance, typeOfPerformance) ||
                 const DeepCollectionEquality()
-                    .equals(other.typeOfPerformance, typeOfPerformance)) &&
-            (identical(other.performanceStatus, performanceStatus) ||
-                const DeepCollectionEquality()
-                    .equals(other.performanceStatus, performanceStatus)));
+                    .equals(other.typeOfPerformance, typeOfPerformance)));
   }
 
   @override
@@ -228,8 +210,7 @@ class _$_TimetablePerformance implements _TimetablePerformance {
       const DeepCollectionEquality().hash(artists) ^
       const DeepCollectionEquality().hash(startingDateTime) ^
       const DeepCollectionEquality().hash(endingDateTime) ^
-      const DeepCollectionEquality().hash(typeOfPerformance) ^
-      const DeepCollectionEquality().hash(performanceStatus);
+      const DeepCollectionEquality().hash(typeOfPerformance);
 
   @JsonKey(ignore: true)
   @override
@@ -246,10 +227,9 @@ class _$_TimetablePerformance implements _TimetablePerformance {
 abstract class _TimetablePerformance implements TimetablePerformance {
   const factory _TimetablePerformance(
       {required List<ArtistShort> artists,
-      required DateTime startingDateTime,
-      required DateTime endingDateTime,
-      String? typeOfPerformance,
-      ArtistPerformanceStatus? performanceStatus}) = _$_TimetablePerformance;
+      @DateTimeConverter() required DateTime startingDateTime,
+      @DateTimeConverter() required DateTime endingDateTime,
+      String? typeOfPerformance}) = _$_TimetablePerformance;
 
   factory _TimetablePerformance.fromJson(Map<String, dynamic> json) =
       _$_TimetablePerformance.fromJson;
@@ -257,14 +237,13 @@ abstract class _TimetablePerformance implements TimetablePerformance {
   @override
   List<ArtistShort> get artists => throw _privateConstructorUsedError;
   @override
+  @DateTimeConverter()
   DateTime get startingDateTime => throw _privateConstructorUsedError;
   @override
+  @DateTimeConverter()
   DateTime get endingDateTime => throw _privateConstructorUsedError;
   @override
   String? get typeOfPerformance => throw _privateConstructorUsedError;
-  @override
-  ArtistPerformanceStatus? get performanceStatus =>
-      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TimetablePerformanceCopyWith<_TimetablePerformance> get copyWith =>

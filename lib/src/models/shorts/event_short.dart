@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_app/src/core/utils/date_time_converter.dart';
 import '../../core/utils/formatting_utils.dart';
 import '../../core/utils/my_constants.dart';
 import '../geo/country.dart';
@@ -28,6 +29,7 @@ class EventShort
     required int weeklyFollowers,
     required bool isFollowed,
     required EventStatus status,
+    @DateTimeConverter()
     required DateTime startDateTime,
     required PlaceShort place,
     required List<TicketPrice> ticketPrices,

@@ -18,7 +18,7 @@ class RatingListItem<T extends FollowableInterface> extends StatelessWidget {
     return RatingEntityListItem<T>(
       entity: entity,
       horizontalPadding: 0,
-      onItemTap: (context, T entity, ImageDimensions imageDimensions) =>
+      onItemTap: (context, T entity, ImageDimensions? imageDimensions) =>
           NavigatorFunctions.pushRatingEntity(context, entity, imageDimensions),
     );
   }

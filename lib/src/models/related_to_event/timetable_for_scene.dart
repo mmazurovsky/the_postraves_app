@@ -10,7 +10,7 @@ class TimetableForScene with _$TimetableForScene {
 
   const factory TimetableForScene({
     required Scene scene,
-    required List<TimetablePerformance> artistPerformances,
+    required List<TimetablePerformance> performances,
   }) = _TimetableForScene;
 
   factory TimetableForScene.fromJson(Map<String, dynamic> json) =>

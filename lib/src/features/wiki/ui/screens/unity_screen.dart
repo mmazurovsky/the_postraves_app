@@ -30,8 +30,8 @@ class UnityScreen extends StatefulWidget {
   final int unityId;
   final String unityName;
   final Country country;
-  final String unityImageLink;
-  final ImageDimensions imageDimensions;
+  final String? unityImageLink;
+  final ImageDimensions? imageDimensions;
 
   const UnityScreen({
     required this.unityId,
@@ -169,7 +169,7 @@ class _UnityDetails extends StatelessWidget {
                     RatingEntityList<ArtistShort>(
                       entityList: artists,
                       onItemTap: (context, ArtistShort entity,
-                              ImageDimensions imageDimensions) =>
+                              ImageDimensions? imageDimensions) =>
                           NavigatorFunctions.pushArtist(
                         context: context,
                         id: entity.id,

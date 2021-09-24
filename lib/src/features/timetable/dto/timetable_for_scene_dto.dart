@@ -22,7 +22,7 @@ class TimetableForSceneDto with _$TimetableForSceneDto {
     List<TimetableDayPerformancesDto> dayPerformances = [];
     Set<DateTime> sceneDays = {};
 
-    for (var performance in timetableForSceneModel.artistPerformances) {
+    for (var performance in timetableForSceneModel.performances) {
       DateTime performanceDate = _getOnlyDate(performance.startingDateTime);
       if (sceneDays.contains(performanceDate)) {
         dayPerformances

@@ -25,7 +25,7 @@ class ButtonWithIcons extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       highlightColor: MyColors.forButtonHighlight,
-      onTap: () => onButtonTap,
+      onTap: () => onButtonTap(),
       child: MyHorizontalPadding(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: verticalPadding),

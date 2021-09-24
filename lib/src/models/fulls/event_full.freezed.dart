@@ -27,8 +27,8 @@ class _$EventFullTearOff {
       required int weeklyFollowers,
       required bool isFollowed,
       required EventStatus status,
-      required DateTime startDateTime,
-      required DateTime endDateTime,
+      @DateTimeConverter() required DateTime startDateTime,
+      @DateTimeConverter() required DateTime endDateTime,
       required PlaceShort place,
       String? imageLink,
       String? about,
@@ -67,7 +67,9 @@ mixin _$EventFull {
   int get weeklyFollowers => throw _privateConstructorUsedError;
   bool get isFollowed => throw _privateConstructorUsedError;
   EventStatus get status => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get startDateTime => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get endDateTime => throw _privateConstructorUsedError;
   PlaceShort get place => throw _privateConstructorUsedError;
   String? get imageLink => throw _privateConstructorUsedError;
@@ -92,8 +94,8 @@ abstract class $EventFullCopyWith<$Res> {
       int weeklyFollowers,
       bool isFollowed,
       EventStatus status,
-      DateTime startDateTime,
-      DateTime endDateTime,
+      @DateTimeConverter() DateTime startDateTime,
+      @DateTimeConverter() DateTime endDateTime,
       PlaceShort place,
       String? imageLink,
       String? about,
@@ -204,8 +206,8 @@ abstract class _$EventFullCopyWith<$Res> implements $EventFullCopyWith<$Res> {
       int weeklyFollowers,
       bool isFollowed,
       EventStatus status,
-      DateTime startDateTime,
-      DateTime endDateTime,
+      @DateTimeConverter() DateTime startDateTime,
+      @DateTimeConverter() DateTime endDateTime,
       PlaceShort place,
       String? imageLink,
       String? about,
@@ -308,8 +310,8 @@ class _$_EventFull extends _EventFull {
       required this.weeklyFollowers,
       required this.isFollowed,
       required this.status,
-      required this.startDateTime,
-      required this.endDateTime,
+      @DateTimeConverter() required this.startDateTime,
+      @DateTimeConverter() required this.endDateTime,
       required this.place,
       this.imageLink,
       this.about,
@@ -333,8 +335,10 @@ class _$_EventFull extends _EventFull {
   @override
   final EventStatus status;
   @override
+  @DateTimeConverter()
   final DateTime startDateTime;
   @override
+  @DateTimeConverter()
   final DateTime endDateTime;
   @override
   final PlaceShort place;
@@ -428,8 +432,8 @@ abstract class _EventFull extends EventFull {
       required int weeklyFollowers,
       required bool isFollowed,
       required EventStatus status,
-      required DateTime startDateTime,
-      required DateTime endDateTime,
+      @DateTimeConverter() required DateTime startDateTime,
+      @DateTimeConverter() required DateTime endDateTime,
       required PlaceShort place,
       String? imageLink,
       String? about,
@@ -453,8 +457,10 @@ abstract class _EventFull extends EventFull {
   @override
   EventStatus get status => throw _privateConstructorUsedError;
   @override
+  @DateTimeConverter()
   DateTime get startDateTime => throw _privateConstructorUsedError;
   @override
+  @DateTimeConverter()
   DateTime get endDateTime => throw _privateConstructorUsedError;
   @override
   PlaceShort get place => throw _privateConstructorUsedError;

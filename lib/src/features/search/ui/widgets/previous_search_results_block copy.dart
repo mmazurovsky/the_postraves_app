@@ -34,7 +34,7 @@ class PreviousSearchResultsBlock extends StatelessWidget {
         FollowableList(
           followables: results,
           onItemTap:
-              (context, UnifiedSearchModel entity, ImageDimensions imageDimensions) {
+              (context, UnifiedSearchModel entity, ImageDimensions? imageDimensions) {
             NavigatorFunctions.pushSearchEntity(
                 context, entity, imageDimensions);
             BlocProvider.of<SearchCubit>(context).updateSearchRecord(entity);

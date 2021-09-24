@@ -19,7 +19,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class WikiShareScreen extends StatelessWidget {
   final Uri shareLink;
   final WikiDataDto wikiData;
-  final ImageDimensions imageDimensions;
+  final ImageDimensions? imageDimensions;
 
   const WikiShareScreen({
     Key? key,

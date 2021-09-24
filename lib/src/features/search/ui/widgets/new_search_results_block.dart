@@ -33,7 +33,7 @@ class NewSearchResultsBlock<T extends FollowableInterface>
         RatingEntityList<T>(
           entityList: results,
           onItemTap: <T extends FollowableInterface>(context, T entity,
-              ImageDimensions imageDimensions) {
+              ImageDimensions? imageDimensions) {
             NavigatorFunctions.pushRatingEntity(
                 context, entity, imageDimensions);
             BlocProvider.of<SearchCubit>(context).saveSearchRecord(entity);

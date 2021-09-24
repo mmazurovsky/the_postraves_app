@@ -48,7 +48,7 @@ class ArtistPerformanceItem extends StatelessWidget {
               horizontalPadding: MyConstants.horizontalPaddingOrMargin,
               entity: artist,
               onItemTap: (context, ArtistShort entity,
-                      ImageDimensions imageDimensions) =>
+                      ImageDimensions? imageDimensions) =>
                   NavigatorFunctions.pushArtist(
                 context: context,
                 id: entity.id,

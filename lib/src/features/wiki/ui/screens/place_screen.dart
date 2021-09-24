@@ -34,8 +34,8 @@ class PlaceScreen extends StatefulWidget {
   final int placeId;
   final String placeName;
   final Country country;
-  final String placeImageLink;
-  final ImageDimensions imageDimensions;
+  final String? placeImageLink;
+  final ImageDimensions? imageDimensions;
 
   const PlaceScreen({
     required this.placeId,
