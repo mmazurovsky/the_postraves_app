@@ -87,7 +87,7 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
           preferredSize: Size(double.infinity, 5),
           child: Container(
             child: TabBar(
-              indicatorColor: MyColors.main,
+              indicatorColor: MyColors.accent,
               controller: _tabController,
               tabs: widget.timetable.map((scene) => Container()).toList(),
             ),

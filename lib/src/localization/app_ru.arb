@@ -124,5 +124,6 @@
     "maxBrightness": "Сделать ярко",
     "emptyShowsStartText": "У нас нет информации о ближайших событиях в вашем текущем городе", 
     "emptyShowsEndText": "Если вы знаете о готовящемся большом событии, пожалуйста, напишите нам",
-    "emptyShowsLinkText": "здесь"
+    "emptyShowsLinkText": "здесь",
+    "from": "от"
 }

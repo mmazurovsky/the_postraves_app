@@ -124,5 +124,6 @@
     "maxBrightness": "Max brightness",
     "emptyShowsStartText": "We don't have information about upcoming events in your current city",
     "emptyShowsEndText": "If you know about some upcoming large-scale event, please, share it with us",
-    "emptyShowsLinkText": "here"
+    "emptyShowsLinkText": "here",
+    "from": "from"
 }

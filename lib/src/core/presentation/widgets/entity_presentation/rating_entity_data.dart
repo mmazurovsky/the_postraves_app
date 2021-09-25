@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/my_colors.dart';
 
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../utils/my_assets.dart';
@@ -54,10 +56,11 @@ class RatingEntityData<T extends FollowableInterface> extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  MyImages.diamond,
-                  width: MyConstants.diamondWidth,
-                ),
+                // Image.asset(
+                //   MyImages.diamond,
+                //   width: MyConstants.diamondWidth,
+                // ),
+                Icon(Ionicons.people_circle_outline, size: 19, color: MyColors.accent,),
                 const SizedBox(width: 8),
                 Text(
                   entity.overallFollowers.toString(),

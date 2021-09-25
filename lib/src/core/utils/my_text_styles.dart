@@ -36,17 +36,31 @@ class MyTextStyles {
     color: MyColors.main,
   );
 
-  static const TextStyle cardEventBadge=TextStyle(
+  static const TextStyle cardEventBadge = TextStyle(
     fontFamily: 'IBMPlexMono',
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: MyColors.main,
   );
 
-  static TextStyle showsByDateDate = const TextStyle(
+  static TextStyle showsByDateMonth = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 17,
     fontWeight: FontWeight.w600,
+    color: MyColors.forInactiveStuff,
+  );
+
+  static TextStyle showsByDateDate = const TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 19,
+    fontWeight: FontWeight.w600,
+    color: MyColors.forInactiveStuff,
+  );
+
+  static TextStyle showsByDateDay = const TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
     color: MyColors.forInactiveStuff,
   );
 
@@ -96,7 +110,7 @@ class MyTextStyles {
     wordSpacing: -4,
   );
 
-    static const TextStyle ratingsListTitleAccent = TextStyle(
+  static const TextStyle ratingsListTitleAccent = TextStyle(
     fontFamily: 'RobotoMono',
     color: MyColors.accent,
     fontSize: 23,
@@ -195,7 +209,6 @@ class MyTextStyles {
     color: MyColors.forInactiveStuff,
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    
   );
 
   static const TextStyle bodyFat = TextStyle(
@@ -261,11 +274,10 @@ class MyTextStyles {
   );
 
   static TextStyle buttonWithInactiveColor = const TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    color: MyColors.forInactiveStuff
-  );
+      fontFamily: 'Roboto',
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: MyColors.forInactiveStuff);
 
   static TextStyle buttonWithOppositeColor = const TextStyle(
     fontFamily: 'Roboto',

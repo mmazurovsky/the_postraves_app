@@ -29,7 +29,9 @@ class IconButtonTriggeringFlushbar extends StatelessWidget {
       },
       highlightColor: MyColors.forButtonHighlight,
       borderRadius: BorderRadius.circular(8),
-      child: Container(child: buttonIcon),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: buttonIcon),
     );
   }
 }

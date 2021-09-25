@@ -149,6 +149,7 @@ class _UnityDetails extends StatelessWidget {
           loadedUnity.about == null
               ? Container()
               : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     WikiExpandableTextDescription(
                       loadedUnity.about!,

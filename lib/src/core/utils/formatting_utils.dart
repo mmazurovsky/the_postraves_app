@@ -136,10 +136,9 @@ class FormattingUtils {
       }
     } else {
       return sprintf(
-        '%s – %s%s',
+        '${AppLocalizations.of(context)!.from} %s%s',
         [
           priceRangeOfTickets.minPrice.ceil(),
-          priceRangeOfTickets.maxPrice!.ceil(),
           priceRangeOfTickets.currency.currencySymbol,
         ],
       );

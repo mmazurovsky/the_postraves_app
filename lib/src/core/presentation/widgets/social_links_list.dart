@@ -13,6 +13,7 @@ class SocialLinksList extends StatelessWidget {
   final String? soundcloudLink;
   final String? telegramLink;
   final String? bandcampLink;
+  static const double _verticalPadding = 10;
 
   const SocialLinksList({
     Key? key,
@@ -51,7 +52,7 @@ class SocialLinksList extends StatelessWidget {
                           ),
                         ),
                       ),
-                      verticalPadding: 8,
+                      verticalPadding: _verticalPadding,
                     )
                   : Container(),
               bandcampLink != null
@@ -71,7 +72,7 @@ class SocialLinksList extends StatelessWidget {
                           ),
                         ),
                       ),
-                      verticalPadding: 8,
+                      verticalPadding: _verticalPadding,
                     )
                   : Container(),
               instagramLink != null
@@ -91,7 +92,7 @@ class SocialLinksList extends StatelessWidget {
                           ),
                         ),
                       ),
-                      verticalPadding: 8,
+                      verticalPadding: _verticalPadding,
                     )
                   : Container(),
               telegramLink != null
@@ -111,7 +112,7 @@ class SocialLinksList extends StatelessWidget {
                           ),
                         ),
                       ),
-                      verticalPadding: 8,
+                      verticalPadding: _verticalPadding,
                     )
                   : Container(),
               const SizedBox(height: 15),

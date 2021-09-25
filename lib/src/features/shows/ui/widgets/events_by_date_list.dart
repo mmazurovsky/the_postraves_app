@@ -8,6 +8,7 @@ import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import '../../../../models/related_to_event/shows_by_date.dart';
+import 'date_for_events_list.dart';
 import 'empty_shows_placeholder.dart';
 import 'event_card.dart';
 
@@ -31,36 +32,11 @@ class EventsByDateList extends StatelessWidget {
       child: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: eventsByDate.isEmpty
-            // todo placeholder
             ? [SliverToBoxAdapter(child: EmptyShowsPlaceholder())]
             : [
                 ...eventsByDate.map(
                   (dateElement) => SliverStickyHeader(
-                    header: Container(
-                      padding: EdgeInsets.only(
-                        left: MyConstants.horizontalPaddingOrMargin,
-                        right: MyConstants.horizontalPaddingOrMargin,
-                        top: 10,
-                        bottom: 15,
-                      ),
-                      decoration: BoxDecoration(
-                        color: MyColors.screenBackground,
-                        border: Border(
-                          bottom: BorderSide(
-                            color: MyColors.forDividers,
-                            width: MyConstants.dividerThickness,
-                          ),
-                        ),
-                      ),
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        FormattingUtils.getFormattedDateLong(
-                          context: context,
-                          dateTime: dateElement.date,
-                        ),
-                        style: MyTextStyles.showsByDateDate,
-                      ),
-                    ),
+                    header: DateForEventsList(dateElement.date),
                     sliver: SliverToBoxAdapter(
                       child: Column(
                         children: [

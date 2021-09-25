@@ -156,6 +156,7 @@ class _ArtistDetails extends StatelessWidget {
           loadedArtist.about == null
               ? Container()
               : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SectionSpacer(),
                     WikiExpandableTextDescription(

@@ -216,6 +216,7 @@ class _PlaceDetails extends StatelessWidget {
           loadedPlace.about == null
               ? Container()
               : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     WikiExpandableTextDescription(
                       loadedPlace.about!,

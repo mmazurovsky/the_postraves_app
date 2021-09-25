@@ -35,7 +35,7 @@ class EventCardDetailsConcrete extends StatelessWidget {
                   size: 19, color: MyColors.accent)
               : EventStatusIndicator(_event.status),
         ),
-        text: _event.status != EventStatus.UPCOMING
+        text: _event.status != EventStatus.UPCOMING && _event.status != EventStatus.PRESALE
             ? _event.status.getStatusName(context)
             : FormattingUtils.getFormattedDateShort(
                 context: context,
@@ -45,11 +45,13 @@ class EventCardDetailsConcrete extends StatelessWidget {
       topRightWidget: WidgetTextRow(
         widget: SizedBox(
           width: 20,
-          child: Image.asset(
-            MyImages.diamond,
-            width: 17,
-            height: 17,
-          ),
+          child: Icon(Ionicons.people_circle_outline, size: 19, color: MyColors.accent),
+          
+          // Image.asset(
+          //   MyImages.diamond,
+          //   width: 17,
+          //   height: 17,
+          // ),
         ),
         text: _event.overallFollowers.toString(),
       ),

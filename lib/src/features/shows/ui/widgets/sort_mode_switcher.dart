@@ -19,7 +19,7 @@ class SortModeSwitcher extends StatelessWidget {
         builder: (context, state) {
       return ModalBottomSheetContent(
         height: 380,
-        iconData: Ionicons.funnel_outline,
+        iconData: Ionicons.swap_vertical_outline,
         title: AppLocalizations.of(context)!.sortModeSwitcherTitle,
         content: MyHorizontalMargin(
           child: Row(

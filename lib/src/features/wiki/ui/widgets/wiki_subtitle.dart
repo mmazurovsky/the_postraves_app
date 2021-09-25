@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import '../../../../models/geo/country.dart';
 import '../../../../core/presentation/widgets/row_of_widgets.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -44,10 +45,11 @@ class WikiSubtitle extends StatelessWidget {
                   style: MyTextStyles.sectionTitle,
                 )
               : null,
-          Image.asset(
-            MyImages.diamond,
-            width: MyConstants.diamondWidth,
-          ),
+          // Image.asset(
+          //   MyImages.diamond,
+          //   width: MyConstants.diamondWidth,
+          // ),
+          const Icon(Ionicons.people_circle_outline, size: 19, color: MyColors.accent,),
           overallFollowers != null
               ? Text(
                   overallFollowers.toString(),

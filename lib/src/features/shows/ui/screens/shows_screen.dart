@@ -83,7 +83,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
                 AppBarButton(
                   containerOpacity: 0,
                   iconWidget: Icon(
-                    Ionicons.funnel_outline,
+                    Ionicons.swap_vertical_outline,
                     color: MyColors.main,
                     size: 25,
                   ),
