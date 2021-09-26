@@ -56,7 +56,7 @@ class SearchCubit extends Cubit<SearchState> {
     _triggerShowingPreviousSearches();
   }
 
-  Stream<SearchState> _triggerShowingPreviousSearches() async* {
+  void _triggerShowingPreviousSearches() async {
     ResponseSealed<List<UnifiedSearchModel>> searchHistoryRecords =
         await _aggregatedSearchRepository.findPreviousSearches();
 

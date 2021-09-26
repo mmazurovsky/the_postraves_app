@@ -49,7 +49,11 @@ class WikiSubtitle extends StatelessWidget {
           //   MyImages.diamond,
           //   width: MyConstants.diamondWidth,
           // ),
-          const Icon(Ionicons.people_circle_outline, size: 19, color: MyColors.accent,),
+          const Icon(
+            Ionicons.people_circle_outline,
+            size: 19,
+            color: MyColors.accent,
+          ),
           overallFollowers != null
               ? Text(
                   overallFollowers.toString(),

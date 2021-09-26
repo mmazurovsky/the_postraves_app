@@ -22,7 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/my_assets.dart';
 
 class ShowsScreen extends StatefulWidget {
-  const ShowsScreen();
+  const ShowsScreen([Key? key]) : super(key:key);
 
   @override
   _ShowsScreenState createState() => _ShowsScreenState();

@@ -7,6 +7,8 @@ import 'data_sealed/response_sealed.dart';
 import 'network_info.dart';
 
 abstract class RemoteRequestWrapper<T> {
+  RemoteRequestWrapper(Null Function() param0);
+
   Future<ResponseSealed<T>> call(Function argumentFunction);
 }
 

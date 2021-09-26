@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/core/utils/formatting_utils.dart';
 import 'package:the_postraves_app/src/core/utils/my_colors.dart';
 import 'package:the_postraves_app/src/core/utils/my_constants.dart';
@@ -11,69 +12,35 @@ class DateForEventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: MyConstants.horizontalPaddingOrMargin,
         right: MyConstants.horizontalPaddingOrMargin,
-        top: 10,
+        top: 15,
         bottom: 15,
       ),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: MyColors.screenBackground,
-        // border: Border(
-        //   bottom: BorderSide(
-        //     color: MyColors.forDividers,
-        //     width: MyConstants.dividerThickness,
-        //   ),
-        // ),
+        border: Border(
+          bottom: BorderSide(
+            color: MyColors.forDividers,
+            width: MyConstants.dividerThickness,
+          ),
+        ),
       ),
       alignment: Alignment.centerLeft,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Container(
-            width: 55,
-            height: 55,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(7),
-              border: Border.all(
-                color: MyColors.forInactiveStuff,
-              ),
+          const Icon(Ionicons.calendar_clear_outline, size: 18, color: MyColors.forInactiveStuff),
+          const SizedBox(width: 10,),
+          Text(
+            FormattingUtils.getFormattedDateLong(
+              context: context,
+              dateTime: _dateTime,
             ),
-            child: Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    _dateTime.day.toString(),
-                    style: MyTextStyles.showsByDateDate,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    "SAT", //todo
-                    style: MyTextStyles.showsByDateDay,
-                  )
-                ],
-              ),
-            ),
+            style: MyTextStyles.showsByDateDate,
           ),
-          //todo
-          // SizedBox(width: 8),
-          // Text(
-          //   "SEMPTEMBER",
-          //   style: MyTextStyles.showsByDateMonth,
-          // ),
         ],
       ),
-      // Text(
-      //   FormattingUtils.getFormattedDateLong(
-      //     context: context,
-      //     dateTime: _dateTime,
-      //   ),
-      //   style: MyTextStyles.showsByDateDate,
-      // ),
     );
   }
 }

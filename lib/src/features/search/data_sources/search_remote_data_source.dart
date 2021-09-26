@@ -17,34 +17,34 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
   Future<AggregatedSearchModel> searchByAllFollowables(
       {required String searchValue,
       required Map<String, String> httpHeaders}) async {
-    final dynamic requestEvents = RemoteClient.makeGetRequestAndReturnResponse(
+    final requestEvents = RemoteClient.makeGetRequestAndReturnResponse(
       endpointWithPath:
           '${WikiFollowableType.EVENT.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final dynamic requestArtists = RemoteClient.makeGetRequestAndReturnResponse(
+    final requestArtists = RemoteClient.makeGetRequestAndReturnResponse(
       endpointWithPath:
           '${WikiFollowableType.ARTIST.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final dynamic requestUnities = RemoteClient.makeGetRequestAndReturnResponse(
+    final requestUnities = RemoteClient.makeGetRequestAndReturnResponse(
       endpointWithPath:
           '${WikiFollowableType.UNITY.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final dynamic requestPlaces = RemoteClient.makeGetRequestAndReturnResponse(
+    final requestPlaces = RemoteClient.makeGetRequestAndReturnResponse(
       endpointWithPath:
           '${WikiFollowableType.PLACE.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final responseEvents = await requestEvents;
-    final responseArtists = await requestArtists;
-    final responseUnities = await requestUnities;
-    final responsePlaces = await requestPlaces;
+    final responseEvents = await requestEvents as List<dynamic>;
+    final responseArtists = await requestArtists as List<dynamic>;
+    final responseUnities = await requestUnities as List<dynamic>;
+    final responsePlaces = await requestPlaces as List<dynamic>;
 
     final decodedEvents =
         responseEvents.map((json) => EventShort.fromJson(json)).toList();

@@ -8,7 +8,7 @@ abstract class ChartsRemoteDataSource<SHORTFOLLOWABLE extends FollowableInterfac
       {required City city, required Map<String, String> httpHeaders});
   Future<List<SHORTFOLLOWABLE>> fetchWeeklyChart(
       {required City city, required Map<String, String> httpHeaders});
-  Future<SHORTFOLLOWABLE> fetchWeeklyBest(
+  Future<SHORTFOLLOWABLE?> fetchWeeklyBest(
       {required City city, required Map<String, String> httpHeaders});
 }
 
@@ -26,7 +26,7 @@ class ChartsRemoteDataSourceImpl<SHORTFOLLOWABLE extends FollowableInterface>
           '/public/weeklyRating',
       queryParameters: {'cityName': city.name, 'maxQuantity': 50.toString()},
       httpHeaders: httpHeaders,
-    );
+    ) as List<dynamic>;
 
     return response
         .map((json) => followableClientHelper.deserializeFollowable(json))
@@ -41,7 +41,7 @@ class ChartsRemoteDataSourceImpl<SHORTFOLLOWABLE extends FollowableInterface>
           '/public/overallRating',
       queryParameters: {'cityName': city.name, 'maxQuantity': 50.toString()},
       httpHeaders: httpHeaders,
-    );
+    ) as List<dynamic>;
 
     return response
         .map((json) => followableClientHelper.deserializeFollowable(json))
@@ -49,7 +49,7 @@ class ChartsRemoteDataSourceImpl<SHORTFOLLOWABLE extends FollowableInterface>
   }
 
   @override
-  Future<SHORTFOLLOWABLE> fetchWeeklyBest(
+  Future<SHORTFOLLOWABLE?> fetchWeeklyBest(
       {required City city, required Map<String, String> httpHeaders}) async {
     final response = await RemoteClient.makeGetRequestAndReturnResponse(
       endpointWithPath: followableClientHelper.getEndpointForFollowable() +
@@ -58,7 +58,7 @@ class ChartsRemoteDataSourceImpl<SHORTFOLLOWABLE extends FollowableInterface>
       httpHeaders: httpHeaders,
     );
 
-    final weeklyBest = followableClientHelper.deserializeFollowable(response);
+    final weeklyBest = response != null ? followableClientHelper.deserializeFollowable(response) : null;
     return weeklyBest;
   }
 }

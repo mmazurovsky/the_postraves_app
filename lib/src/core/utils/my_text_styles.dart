@@ -43,23 +43,9 @@ class MyTextStyles {
     color: MyColors.main,
   );
 
-  static TextStyle showsByDateMonth = const TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: 17,
-    fontWeight: FontWeight.w600,
-    color: MyColors.forInactiveStuff,
-  );
-
   static TextStyle showsByDateDate = const TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: 19,
-    fontWeight: FontWeight.w600,
-    color: MyColors.forInactiveStuff,
-  );
-
-  static TextStyle showsByDateDay = const TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: 10,
+    fontFamily: 'IBMPlexMono',
+    fontSize: 17,
     fontWeight: FontWeight.w500,
     color: MyColors.forInactiveStuff,
   );

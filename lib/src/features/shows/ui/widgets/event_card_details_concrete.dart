@@ -35,7 +35,8 @@ class EventCardDetailsConcrete extends StatelessWidget {
                   size: 19, color: MyColors.accent)
               : EventStatusIndicator(_event.status),
         ),
-        text: _event.status != EventStatus.UPCOMING && _event.status != EventStatus.PRESALE
+        text: _event.status != EventStatus.UPCOMING &&
+                _event.status != EventStatus.PRESALE
             ? _event.status.getStatusName(context)
             : FormattingUtils.getFormattedDateShort(
                 context: context,
@@ -43,23 +44,24 @@ class EventCardDetailsConcrete extends StatelessWidget {
               ),
       ),
       topRightWidget: WidgetTextRow(
-        widget: SizedBox(
+        widget: const SizedBox(
           width: 20,
-          child: Icon(Ionicons.people_circle_outline, size: 19, color: MyColors.accent),
-          
-          // Image.asset(
-          //   MyImages.diamond,
-          //   width: 17,
-          //   height: 17,
-          // ),
+          child: Icon(
+            Ionicons.people_circle_outline,
+            size: 19,
+            color: MyColors.accent,
+          ),
         ),
         text: _event.overallFollowers.toString(),
       ),
       bottomRightWidget: WidgetTextRow(
-        widget: SizedBox(
+        widget: const SizedBox(
           width: 20,
-          child:
-              Icon(Ionicons.ticket_outline, size: 19, color: MyColors.accent),
+          child: Icon(
+            Ionicons.ticket_outline,
+            size: 19,
+            color: MyColors.accent,
+          ),
         ),
         text: FormattingUtils.resolveTicketsPrice(
             context: context, priceRangeOfTickets: _event.priceRangeOfTickets),

@@ -30,8 +30,8 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  late TextEditingController _textEditingController;
-  late FocusNode _searchTabFocusNode;
+  TextEditingController? _textEditingController;
+  FocusNode? _searchTabFocusNode;
   Timer? _searchFieldTimer;
   String? _previousSearchValue;
   late bool _toTriggerPreviousSearchesEvent;
@@ -41,7 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
     super.initState();
     _textEditingController = TextEditingController();
     _toTriggerPreviousSearchesEvent = false;
-    _textEditingController.addListener(_textEditingControllerListener);
+    _textEditingController?.addListener(_textEditingControllerListener);
     _searchTabFocusNode = FocusNode()..requestFocus();
     BlocProvider.of<SearchCubit>(context).showPreviousSearches();
   }
@@ -50,13 +50,13 @@ class _SearchScreenState extends State<SearchScreen> {
     if (_searchFieldTimer != null) {
       _searchFieldTimer!.cancel();
     }
-    if (_textEditingController.text.isNotEmpty) {
+    if (_textEditingController!.text.isNotEmpty) {
       _toTriggerPreviousSearchesEvent = true;
-      if (_textEditingController.text != _previousSearchValue) {
+      if (_textEditingController!.text != _previousSearchValue) {
         _searchFieldTimer = Timer(const Duration(milliseconds: 500), () {
-          _previousSearchValue = _textEditingController.text;
+          _previousSearchValue = _textEditingController!.text;
           BlocProvider.of<SearchCubit>(context)
-              .startSearch(_textEditingController.text);
+              .startSearch(_textEditingController!.text);
         });
       }
     } else {
@@ -73,14 +73,14 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _onCancelSearch() {
-    _textEditingController.clear();
+    _textEditingController!.clear();
     Navigator.of(context).pop();
   }
 
   @override
   void dispose() {
-    _textEditingController.dispose();
-    _searchTabFocusNode.dispose();
+    _textEditingController?.dispose();
+    _searchTabFocusNode?.dispose();
     super.dispose();
   }
 
@@ -96,9 +96,9 @@ class _SearchScreenState extends State<SearchScreen> {
             SliverPersistentHeader(
               pinned: true,
               delegate: _SearchBar(
-                textEditingController: _textEditingController,
+                textEditingController: _textEditingController!,
                 onCancelSearch: _onCancelSearch,
-                focusNode: _searchTabFocusNode,
+                focusNode: _searchTabFocusNode!,
               ),
             ),
             SliverToBoxAdapter(

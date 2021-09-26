@@ -25,8 +25,8 @@ class ResolvedCityInitialScaffold extends StatelessWidget {
         index: context.watch<CurrentTabProvider>().currentTab.index,
         children: [
           _buildNavigatorForTab(TabItem.shows),
-          // _buildNavigatorForTab(TabItem.SEARCH),
-          // _buildNavigatorForTab(TabItem.PROFILE),
+          _buildNavigatorForTab(TabItem.search),
+          _buildNavigatorForTab(TabItem.profile),
         ],
       ),
       bottomNavigationBar: MyBottomNavigationBar(),

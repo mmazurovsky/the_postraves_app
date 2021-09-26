@@ -29,14 +29,14 @@ class ChartsScreen extends StatefulWidget {
 
 class _ChartsScreenState extends State<ChartsScreen>
     with TickerProviderStateMixin {
-  late City _currentCity;
+  City? _currentCity;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
       _currentCity = context.read<CurrentCityProvider>().currentCity!; //todo check it is ok to ! here
-      BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity);
+      BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity!);
     }
   }
 
@@ -88,7 +88,7 @@ class _Charts extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         _ChartsViewForEntity(
-          sectionTitle: AppLocalizations.of(context)!.ratingsTitle,
+          sectionTitle: AppLocalizations.of(context)!.chartsTitle,
           previousWeekWinner: bestArtist,
           weeklyChart: weeklyChart?.take(5).toList(),
           overallChart: overallChart?.take(5).toList(),
@@ -136,7 +136,7 @@ class _ChartsViewForEntity<T extends FollowableInterface>
               ? RatingWeeklyWinnerCard<T>(
                   entity: previousWeekWinner!,
                   nominationDescription:
-                      AppLocalizations.of(context)!.ratingsUsersChoice,
+                      AppLocalizations.of(context)!.chartsUsersChoice,
                   nomination:
                       '${previousWeekWinner!.getEntityNameSingularFormString(context)} ${AppLocalizations.of(context)!.ofTheWeek}'
                           .toUpperCase(),
@@ -148,7 +148,7 @@ class _ChartsViewForEntity<T extends FollowableInterface>
                   titleTextSpans: [
                     TextSpan(
                         text:
-                            AppLocalizations.of(context)!.ratingOfTheWeekTitle,
+                            AppLocalizations.of(context)!.chartOfTheWeekTitle,
                         style: MyTextStyles.ratingsListTitle),
                   ],
                   entities: weeklyChart!,
@@ -159,7 +159,7 @@ class _ChartsViewForEntity<T extends FollowableInterface>
                   imagePath: MyEmoji.dizzy,
                   titleTextSpans: [
                     TextSpan(
-                        text: AppLocalizations.of(context)!.ratingOverallTitle,
+                        text: AppLocalizations.of(context)!.chartOverallTitle,
                         style: MyTextStyles.ratingsListTitle),
                   ],
                   entities: overallChart!,

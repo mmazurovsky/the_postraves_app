@@ -160,14 +160,14 @@ class FormattingUtils {
 
   static String getFormattedDateLong(
       {required BuildContext context, required DateTime dateTime}) {
-    return sprintf('%s — %02i %s', [
+    return sprintf('%02i %s — %s', [
+      dateTime.day,
+      getMonthName(context: context, month: dateTime.month).toUpperCase(),
       getWeekdayName(
         context: context,
         weekdayNumber: dateTime.weekday,
         isShortened: false,
       ).toUpperCase(),
-      dateTime.day,
-      getMonthName(context: context, month: dateTime.month).toUpperCase(),
     ]);
   }
 

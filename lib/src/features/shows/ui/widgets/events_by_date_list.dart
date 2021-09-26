@@ -47,7 +47,11 @@ class EventsByDateList extends StatelessWidget {
                           ...dateElement.events
                               .map((event) => EventCard(
                                   key: ValueKey(event.id), loadedEvent: event))
-                              .toList()
+                              .toList(),
+                          Container(
+                            height: MyConstants
+                                .endingOfScreenOrSpaceBetweenElements,
+                          ),
                         ],
                       ),
                     ),

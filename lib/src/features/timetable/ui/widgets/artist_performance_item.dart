@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/my_assets.dart';
 import '../../../../models/enum/artist_performance_status.dart';
 import '../../../../models/shorts/artist_short.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
@@ -43,25 +45,44 @@ class ArtistPerformanceItem extends StatelessWidget {
       opacity: performanceStatus == ArtistPerformanceStatus.PAST ? 0.35 : 1,
       child: Column(
         children: [
-          ...artists.map(
-            (artist) => RatingEntityListItem(
-              horizontalPadding: MyConstants.horizontalPaddingOrMargin,
-              entity: artist,
-              onItemTap: (context, ArtistShort entity,
-                      ImageDimensions? imageDimensions) =>
-                  NavigatorFunctions.pushArtist(
-                context: context,
-                id: entity.id,
-                name: entity.name,
-                country: entity.country,
-                imageLink: entity.imageLink,
-                imageDimensions: imageDimensions,
-              ),
-            ),
-
-            //todo chain for b2b
+          ...artists.asMap().entries.map(
+            (entry) {
+              final index = entry.key;
+              final artist = entry.value;
+              final artistWidget = RatingEntityListItem(
+                horizontalPadding: MyConstants.horizontalPaddingOrMargin,
+                entity: artist,
+                onItemTap: (context, ArtistShort entity,
+                        ImageDimensions? imageDimensions) =>
+                    NavigatorFunctions.pushArtist(
+                  context: context,
+                  id: entity.id,
+                  name: entity.name,
+                  country: entity.country,
+                  imageLink: entity.imageLink,
+                  imageDimensions: imageDimensions,
+                ),
+              );
+              if (index + 1 != artists.length) {
+                return Column(
+                  children: [
+                    artistWidget,
+                    MyHorizontalPadding(
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 18),
+                          Image.asset(MyEmoji.link, width: 14),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return artistWidget;
+              }
+            },
           ),
-          SizedBox(height: 1),
+          const SizedBox(height: 1),
           MyHorizontalPadding(
             child: Stack(
               alignment: Alignment.centerLeft,
@@ -97,7 +118,7 @@ class ArtistPerformanceItem extends StatelessWidget {
                               ? Container(
                                   width: 7,
                                   height: 7,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: MyColors.accent,
                                   ),
@@ -122,7 +143,7 @@ class ArtistPerformanceItem extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 25),
         ],
       ),
     );

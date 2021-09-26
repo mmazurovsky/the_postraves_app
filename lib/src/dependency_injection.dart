@@ -26,6 +26,7 @@ import 'features/wiki/state/artist_cubit/artist_cubit.dart';
 import 'features/wiki/state/event_cubit/event_cubit.dart';
 import 'features/wiki/state/follow_cubit/follow_cubit.dart';
 import 'features/wiki/state/place_cubit/place_cubit.dart';
+import 'models/related_to_search/aggregated_search_model.dart';
 import 'models/shorts/event_short.dart';
 import 'core/data_sources/city_local_data_source.dart';
 import 'core/data_sources/city_remote_data_source.dart';
@@ -201,7 +202,12 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton<SearchLocalDataSource>(
       () => SearchLocalDataSourceImpl());
 
-  //* Features - Rating
+  serviceLocator
+      .registerLazySingleton<RemoteRequestWrapper<AggregatedSearchModel>>(() =>
+          RemoteRequestWrapperImpl<AggregatedSearchModel>(
+              serviceLocator(), serviceLocator()));
+
+  //* Features - Charts
   serviceLocator.registerLazySingleton(() => ChartsCubit(
         serviceLocator(),
       ));
@@ -233,6 +239,14 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerLazySingleton<ChartsRemoteDataSource<ArtistShort>>(
       () => ChartsRemoteDataSourceImpl<ArtistShort>(serviceLocator()));
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<ArtistShort>>(() =>
+      RemoteRequestWrapperImpl<ArtistShort>(
+          serviceLocator(), serviceLocator()));
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<ArtistShort?>>(() =>
+      RemoteRequestWrapperImpl<ArtistShort?>(
+          serviceLocator(), serviceLocator()));
 
   //* Features - Wiki
 
@@ -307,7 +321,7 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerLazySingleton<WikiRemoteDataSource<PlaceFull>>(
       () => WikiRemoteDataSourceImpl<PlaceFull>(serviceLocator()));
-  
+
   serviceLocator.registerLazySingleton<PlaceRemoteDataSource>(
       () => PlaceRemoteDataSourceImpl());
 
@@ -315,7 +329,8 @@ void setupServiceLocatorInjection() async {
       RemoteRequestWrapperImpl<PlaceFull>(serviceLocator(), serviceLocator()));
 
   serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<Scene>>>(() =>
-      RemoteRequestWrapperImpl<List<Scene>>(serviceLocator(), serviceLocator()));
+      RemoteRequestWrapperImpl<List<Scene>>(
+          serviceLocator(), serviceLocator()));
 
   //* Wiki UnityFull
   serviceLocator.registerLazySingleton(

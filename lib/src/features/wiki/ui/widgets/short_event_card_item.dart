@@ -85,12 +85,12 @@ class ShortEventCardItem extends StatelessWidget {
                 text: _event.place.name,
               ),
               topRightWidget: WidgetTextRow(
-                widget: SizedBox(
+                widget: const SizedBox(
                   width: 20,
-                  child: Image.asset(
-                    MyImages.diamond,
-                    width: 17,
-                    height: 17,
+                  child: Icon(
+                    Ionicons.people_circle_outline,
+                    size: 19,
+                    color: MyColors.accent,
                   ),
                 ),
                 text: _event.overallFollowers.toString(),

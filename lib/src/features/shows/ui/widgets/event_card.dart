@@ -11,7 +11,6 @@ import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
 import '../../../../my_navigation.dart';
 
 class EventCard extends StatefulWidget {
-  @override
   final Key key;
   final EventShort loadedEvent;
 
