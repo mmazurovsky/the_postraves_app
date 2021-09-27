@@ -1,6 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/my_navigation.dart';
 import '../authentication/repository/firebase_auth_repository_impl.dart';
 import '../authentication/state/cubit/authentication_cubit.dart';
 import '../navigation_bar/bottom_navigation_tab_item.dart';
@@ -39,28 +40,8 @@ class DynamicLinkService {
           BlocProvider.of<AuthenticationCubit>(context)
               .endSigningWithEmailLink(deepLink);
         } else {
-          String linkPath = deepLink.path;
-          int? imageHeight =
-              int.tryParse(deepLink.queryParameters['imageHeight']!);
-          int? imageWidth = int.tryParse(deepLink.queryParameters['imageWidth']!);
-
-          Map<String, dynamic> args = {
-            'id': int.parse(deepLink.queryParameters['id']!),
-            'name': deepLink.queryParameters['name'],
-            'country': deepLink.queryParameters['country'],
-            'imageLink': deepLink.queryParameters['imageLink'],
-            'imageDimensions': imageHeight != null && imageWidth != null
-                ? ImageDimensions(
-                    imageHeight,
-                    imageWidth,
-                  )
-                : null
-          };
-
-          currentTab.tabNavigatorKey.currentState!.pushNamed(
-            linkPath,
-            arguments: args,
-          );
+          NavigatorFunctions.pushFollowableFromDynamicLink(
+              currentTab: currentTab, deepLink: deepLink);
         }
       }
     }, onError: (OnLinkErrorException e) async {
@@ -78,14 +59,15 @@ class DynamicLinkService {
 
   static Future<Uri> createDynamicLink(String pathToPage) async {
     final dynamicLinkParams = DynamicLinkParameters(
-      uriPrefix: 'https://postravesapp.page.link',
+      uriPrefix:
+          'https://thepostravesapp.page.link', //todo change after removing old ios project from firebase
       link: Uri.parse('https://postraves.com$pathToPage'),
       iosParameters: IosParameters(
         appStoreId: '1301190736',
-        bundleId: 'com.mmazurovsky.postraves',
+        bundleId: 'com.mmazurovsky.thePostravesApp',
       ),
       androidParameters: AndroidParameters(
-        packageName: 'com.mmazurovsky.postraves_android',
+        packageName: 'com.mmazurovsky.postraves_android', //todo change
         fallbackUrl: Uri.parse(
             'https://apps.apple.com/us/app/fitness-lab-bodybuilding/id1301190736'),
       ),

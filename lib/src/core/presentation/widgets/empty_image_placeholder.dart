@@ -10,7 +10,7 @@ class EmptyImagePlaceholder extends StatelessWidget {
     return Container(
       color: MyColors.forVeryDarkStuff,
       child: const Icon(
-        Ionicons.diamond_outline,
+        Ionicons.image_outline,
         color: MyColors.main,
         size: 25,
       ),

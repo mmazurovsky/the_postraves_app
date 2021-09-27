@@ -39,11 +39,18 @@ class _WikiScreenState extends State<WikiScreen> {
 
   Future<Uri> _setShareLinkToPage() async {
     String _pathToPage =
-        '${widget.wikiData.type.navigationRoute}?id=${widget.wikiData.id}&name=${widget.wikiData.name}&imageLink=${widget.wikiData.imageLink}&country=${widget.wikiData.country.toString()}';
-    widget.imageDimensions != null
-        ? _pathToPage +=
-            '&imageHeight=${widget.imageDimensions!.imageHeight}&imageWidth=${widget.imageDimensions!.imageWidth}'
-        : _pathToPage += '&imageHeight=null&imageWidth=null';
+        '${widget.wikiData.type.navigationRoute}?id=${widget.wikiData.id}&name=${widget.wikiData.name}';
+    if (widget.wikiData.imageLink != null) {
+      _pathToPage += _pathToPage + '&imageLink=${widget.wikiData.imageLink}';
+    }
+    if (widget.wikiData.country != null) {
+      _pathToPage +=
+          '&countryName=${widget.wikiData.country!.name}&countryLocalizedName=${widget.wikiData.country!.localizedName}&countryEmojiCode=${widget.wikiData.country!.emojiCode}';
+    }
+    if (widget.imageDimensions != null) {
+      _pathToPage +=
+          '&imageHeight=${widget.imageDimensions!.imageHeight}&imageWidth=${widget.imageDimensions!.imageWidth}';
+    }
     return await DynamicLinkService.createDynamicLink(_pathToPage);
   }
 

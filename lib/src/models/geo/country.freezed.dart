@@ -23,7 +23,7 @@ class _$CountryTearOff {
   _Country call(
       {required String name,
       required String localizedName,
-      required String phoneCode,
+      String? phoneCode,
       required String emojiCode}) {
     return _Country(
       name: name,
@@ -45,7 +45,7 @@ const $Country = _$CountryTearOff();
 mixin _$Country {
   String get name => throw _privateConstructorUsedError;
   String get localizedName => throw _privateConstructorUsedError;
-  String get phoneCode => throw _privateConstructorUsedError;
+  String? get phoneCode => throw _privateConstructorUsedError;
   String get emojiCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ abstract class $CountryCopyWith<$Res> {
   factory $CountryCopyWith(Country value, $Res Function(Country) then) =
       _$CountryCopyWithImpl<$Res>;
   $Res call(
-      {String name, String localizedName, String phoneCode, String emojiCode});
+      {String name, String localizedName, String? phoneCode, String emojiCode});
 }
 
 /// @nodoc
@@ -88,7 +88,7 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
       phoneCode: phoneCode == freezed
           ? _value.phoneCode
           : phoneCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       emojiCode: emojiCode == freezed
           ? _value.emojiCode
           : emojiCode // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ abstract class _$CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
       __$CountryCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name, String localizedName, String phoneCode, String emojiCode});
+      {String name, String localizedName, String? phoneCode, String emojiCode});
 }
 
 /// @nodoc
@@ -134,7 +134,7 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
       phoneCode: phoneCode == freezed
           ? _value.phoneCode
           : phoneCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       emojiCode: emojiCode == freezed
           ? _value.emojiCode
           : emojiCode // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ class _$_Country extends _Country {
   const _$_Country(
       {required this.name,
       required this.localizedName,
-      required this.phoneCode,
+      this.phoneCode,
       required this.emojiCode})
       : super._();
 
@@ -161,7 +161,7 @@ class _$_Country extends _Country {
   @override
   final String localizedName;
   @override
-  final String phoneCode;
+  final String? phoneCode;
   @override
   final String emojiCode;
 
@@ -210,7 +210,7 @@ abstract class _Country extends Country {
   const factory _Country(
       {required String name,
       required String localizedName,
-      required String phoneCode,
+      String? phoneCode,
       required String emojiCode}) = _$_Country;
   const _Country._() : super._();
 
@@ -221,7 +221,7 @@ abstract class _Country extends Country {
   @override
   String get localizedName => throw _privateConstructorUsedError;
   @override
-  String get phoneCode => throw _privateConstructorUsedError;
+  String? get phoneCode => throw _privateConstructorUsedError;
   @override
   String get emojiCode => throw _privateConstructorUsedError;
   @override

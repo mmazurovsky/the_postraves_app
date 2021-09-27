@@ -10,7 +10,7 @@ _$_Country _$_$_CountryFromJson(Map<String, dynamic> json) {
   return _$_Country(
     name: json['name'] as String,
     localizedName: json['localizedName'] as String,
-    phoneCode: json['phoneCode'] as String,
+    phoneCode: json['phoneCode'] as String?,
     emojiCode: json['emojiCode'] as String,
   );
 }

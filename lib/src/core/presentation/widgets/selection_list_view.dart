@@ -47,7 +47,7 @@ class SelectionListView<LOCATION extends LocationInterface> extends StatelessWid
               ),
               trailing: location is Country
                   ? Text(
-                      location.phoneCode,
+                      location.phoneCode ?? "",
                       style: location == activeLocation
                           ? MyTextStyles.bodyWithAccentColor
                           : MyTextStyles.body,

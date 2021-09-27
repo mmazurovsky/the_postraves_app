@@ -31,7 +31,8 @@ class RatingEntityData<T extends FollowableInterface> extends StatelessWidget {
                     children: [
                       Text(
                         entity.country!.countryEmoji,
-                        style: const TextStyle(fontSize: MyConstants.diamondWidth),
+                        style:
+                            const TextStyle(fontSize: MyConstants.diamondWidth),
                       ),
                       const SizedBox(width: 8),
                     ],
@@ -56,11 +57,11 @@ class RatingEntityData<T extends FollowableInterface> extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Image.asset(
-                //   MyImages.diamond,
-                //   width: MyConstants.diamondWidth,
-                // ),
-                Icon(Ionicons.people_circle_outline, size: 19, color: MyColors.accent,),
+                const Icon(
+                  Ionicons.people_circle_outline,
+                  size: 19,
+                  color: MyColors.accent,
+                ),
                 const SizedBox(width: 8),
                 Text(
                   entity.overallFollowers.toString(),

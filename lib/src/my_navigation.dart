@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 import 'models/related_to_search/unified_search_model.dart';
 import 'features/chart/ui/screens/charts_screen.dart';
 import 'features/profile/ui/screen/auth_on_action_screen_resolver.dart';
@@ -179,6 +182,91 @@ class RouteGenerator {
 }
 
 class NavigatorFunctions {
+  static void pushFollowableFromDynamicLink({
+    required TabItem currentTab,
+    required Uri deepLink,
+  }) {
+    final id = int.parse(deepLink.queryParameters['id']!);
+    final name = deepLink.queryParameters['name']!;
+    final countryNameInLink = deepLink.queryParameters['countryName'];
+    final countryLocalizedNameInLink =
+        deepLink.queryParameters['countryLocalizedName'];
+    final countryEmojiCodeInLink = deepLink.queryParameters['countryEmojiCode'];
+    final country = countryNameInLink != null &&
+            countryLocalizedNameInLink != null &&
+            countryEmojiCodeInLink != null
+        ? Country(
+            name: countryNameInLink,
+            localizedName: countryLocalizedNameInLink,
+            emojiCode: countryEmojiCodeInLink)
+        : null;
+    final imageLink = deepLink.queryParameters['imageLink'];
+    final int? imageHeight = deepLink.queryParameters['imageHeight'] != null
+        ? int.tryParse(deepLink.queryParameters['imageHeight']!)
+        : null;
+    final int? imageWidth = deepLink.queryParameters['imageWidth'] != null
+        ? int.tryParse(deepLink.queryParameters['imageWidth']!)
+        : null;
+    final ImageDimensions? imageDimensions =
+        imageHeight != null && imageWidth != null
+            ? ImageDimensions(
+                imageHeight,
+                imageWidth,
+              )
+            : null;
+
+    final navigationRouteOfLink = deepLink.path;
+
+    // Map<String, dynamic> args = {
+    //   'id': int.parse(deepLink.queryParameters['id']!),
+    //   'name': deepLink.queryParameters['name'],
+    //   'imageLink': deepLink.queryParameters['imageLink'],
+    //   'country': country,
+    //   'imageDimensions': imageDimensions
+    // };
+
+    // currentTab.tabNavigatorKey.currentState!.pushNamed(
+    //   navigationRouteOfLink,
+    //   arguments: args,
+    // );
+
+    final currentContext = currentTab.tabNavigatorKey.currentContext!;
+
+    if (navigationRouteOfLink == MyNavigationRoutes.event) {
+      pushEvent(
+        context: currentContext,
+        id: id,
+        name: name,
+        imageLink: imageLink,
+        imageDimensions: imageDimensions,
+      );
+    } else if (navigationRouteOfLink == MyNavigationRoutes.artist) {
+      pushArtist(
+          context: currentContext,
+          id: id,
+          name: name,
+          imageLink: imageLink,
+          country: country,
+          imageDimensions: imageDimensions);
+    } else if (navigationRouteOfLink == MyNavigationRoutes.place) {
+      pushPlace(
+          context: currentContext,
+          id: id,
+          name: name,
+          imageLink: imageLink,
+          country: country,
+          imageDimensions: imageDimensions);
+    } else if (navigationRouteOfLink == MyNavigationRoutes.unity) {
+      pushUnity(
+          context: currentContext,
+          id: id,
+          name: name,
+          imageLink: imageLink,
+          country: country,
+          imageDimensions: imageDimensions);
+    }
+  }
+
   static void pushEvent({
     required BuildContext context,
     required int id,
