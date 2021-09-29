@@ -12,8 +12,7 @@ part 'unity_full.g.dart';
 class UnityFull with _$UnityFull
     implements
         FollowableInterface,
-        EntityNamesInterface,
-        EntityEndpointInterface {
+        EntityNamesInterface {
 
   const UnityFull._();
   const factory UnityFull({
@@ -40,10 +39,5 @@ class UnityFull with _$UnityFull
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.unityEntityNamePlural;
-  }
-
-  @override
-  String getEntityEndpoint() {
-    return MyConstants.unitiesEndpoint;
   }
 }

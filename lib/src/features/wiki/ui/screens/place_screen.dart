@@ -207,7 +207,7 @@ class _PlaceDetails extends StatelessWidget {
           ),
           SizedBox(height: 15),
           AddressSection(
-            cityName: loadedPlace.city.localizedName,
+            cityName: loadedPlace.city.localName,
             streetAddress: loadedPlace.streetAddress,
           ),
           SectionSpacer(),

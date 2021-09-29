@@ -22,12 +22,12 @@ class _$CountryTearOff {
 
   _Country call(
       {required String name,
-      required String localizedName,
+      required String localName,
       String? phoneCode,
       required String emojiCode}) {
     return _Country(
       name: name,
-      localizedName: localizedName,
+      localName: localName,
       phoneCode: phoneCode,
       emojiCode: emojiCode,
     );
@@ -44,7 +44,7 @@ const $Country = _$CountryTearOff();
 /// @nodoc
 mixin _$Country {
   String get name => throw _privateConstructorUsedError;
-  String get localizedName => throw _privateConstructorUsedError;
+  String get localName => throw _privateConstructorUsedError;
   String? get phoneCode => throw _privateConstructorUsedError;
   String get emojiCode => throw _privateConstructorUsedError;
 
@@ -58,7 +58,7 @@ abstract class $CountryCopyWith<$Res> {
   factory $CountryCopyWith(Country value, $Res Function(Country) then) =
       _$CountryCopyWithImpl<$Res>;
   $Res call(
-      {String name, String localizedName, String? phoneCode, String emojiCode});
+      {String name, String localName, String? phoneCode, String emojiCode});
 }
 
 /// @nodoc
@@ -72,7 +72,7 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
   @override
   $Res call({
     Object? name = freezed,
-    Object? localizedName = freezed,
+    Object? localName = freezed,
     Object? phoneCode = freezed,
     Object? emojiCode = freezed,
   }) {
@@ -81,9 +81,9 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      localizedName: localizedName == freezed
-          ? _value.localizedName
-          : localizedName // ignore: cast_nullable_to_non_nullable
+      localName: localName == freezed
+          ? _value.localName
+          : localName // ignore: cast_nullable_to_non_nullable
               as String,
       phoneCode: phoneCode == freezed
           ? _value.phoneCode
@@ -103,7 +103,7 @@ abstract class _$CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
       __$CountryCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name, String localizedName, String? phoneCode, String emojiCode});
+      {String name, String localName, String? phoneCode, String emojiCode});
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
-    Object? localizedName = freezed,
+    Object? localName = freezed,
     Object? phoneCode = freezed,
     Object? emojiCode = freezed,
   }) {
@@ -127,9 +127,9 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      localizedName: localizedName == freezed
-          ? _value.localizedName
-          : localizedName // ignore: cast_nullable_to_non_nullable
+      localName: localName == freezed
+          ? _value.localName
+          : localName // ignore: cast_nullable_to_non_nullable
               as String,
       phoneCode: phoneCode == freezed
           ? _value.phoneCode
@@ -148,7 +148,7 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
 class _$_Country extends _Country {
   const _$_Country(
       {required this.name,
-      required this.localizedName,
+      required this.localName,
       this.phoneCode,
       required this.emojiCode})
       : super._();
@@ -159,7 +159,7 @@ class _$_Country extends _Country {
   @override
   final String name;
   @override
-  final String localizedName;
+  final String localName;
   @override
   final String? phoneCode;
   @override
@@ -167,7 +167,7 @@ class _$_Country extends _Country {
 
   @override
   String toString() {
-    return 'Country(name: $name, localizedName: $localizedName, phoneCode: $phoneCode, emojiCode: $emojiCode)';
+    return 'Country(name: $name, localName: $localName, phoneCode: $phoneCode, emojiCode: $emojiCode)';
   }
 
   @override
@@ -176,9 +176,9 @@ class _$_Country extends _Country {
         (other is _Country &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.localizedName, localizedName) ||
+            (identical(other.localName, localName) ||
                 const DeepCollectionEquality()
-                    .equals(other.localizedName, localizedName)) &&
+                    .equals(other.localName, localName)) &&
             (identical(other.phoneCode, phoneCode) ||
                 const DeepCollectionEquality()
                     .equals(other.phoneCode, phoneCode)) &&
@@ -191,7 +191,7 @@ class _$_Country extends _Country {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(localizedName) ^
+      const DeepCollectionEquality().hash(localName) ^
       const DeepCollectionEquality().hash(phoneCode) ^
       const DeepCollectionEquality().hash(emojiCode);
 
@@ -209,7 +209,7 @@ class _$_Country extends _Country {
 abstract class _Country extends Country {
   const factory _Country(
       {required String name,
-      required String localizedName,
+      required String localName,
       String? phoneCode,
       required String emojiCode}) = _$_Country;
   const _Country._() : super._();
@@ -219,7 +219,7 @@ abstract class _Country extends Country {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  String get localizedName => throw _privateConstructorUsedError;
+  String get localName => throw _privateConstructorUsedError;
   @override
   String? get phoneCode => throw _privateConstructorUsedError;
   @override

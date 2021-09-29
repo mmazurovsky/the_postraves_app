@@ -19,8 +19,7 @@ class EventShort
     with _$EventShort
     implements
         FollowableInterface,
-        EntityNamesInterface,
-        EntityEndpointInterface {
+        EntityNamesInterface {
   const EventShort._();
   const factory EventShort({
     required int id,
@@ -59,10 +58,5 @@ class EventShort
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.eventEntityNamePlural;
-  }
-
-  @override
-  String getEntityEndpoint() {
-    return MyConstants.eventsEndpoint;
   }
 }

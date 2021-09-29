@@ -9,7 +9,7 @@ part of 'country.dart';
 _$_Country _$_$_CountryFromJson(Map<String, dynamic> json) {
   return _$_Country(
     name: json['name'] as String,
-    localizedName: json['localizedName'] as String,
+    localName: json['localName'] as String,
     phoneCode: json['phoneCode'] as String?,
     emojiCode: json['emojiCode'] as String,
   );
@@ -18,7 +18,7 @@ _$_Country _$_$_CountryFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$_$_CountryToJson(_$_Country instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'localizedName': instance.localizedName,
+      'localName': instance.localName,
       'phoneCode': instance.phoneCode,
       'emojiCode': instance.emojiCode,
     };

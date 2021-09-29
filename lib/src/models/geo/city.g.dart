@@ -9,13 +9,13 @@ part of 'city.dart';
 _$_City _$_$_CityFromJson(Map<String, dynamic> json) {
   return _$_City(
     name: json['name'] as String,
-    localizedName: json['localizedName'] as String,
+    localName: json['localName'] as String,
     country: Country.fromJson(json['country'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$_$_CityToJson(_$_City instance) => <String, dynamic>{
       'name': instance.name,
-      'localizedName': instance.localizedName,
+      'localName': instance.localName,
       'country': instance.country.toJson(),
     };

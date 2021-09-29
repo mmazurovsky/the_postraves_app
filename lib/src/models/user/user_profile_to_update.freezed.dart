@@ -22,7 +22,7 @@ class _$UserProfileToUpdateTearOff {
 
   _UserProfileToUpdate call(
       {required String name,
-      required City currentCity,
+      required String currentCity,
       String? about,
       String? imageLink,
       String? instagramLink,
@@ -48,7 +48,7 @@ const $UserProfileToUpdate = _$UserProfileToUpdateTearOff();
 /// @nodoc
 mixin _$UserProfileToUpdate {
   String get name => throw _privateConstructorUsedError;
-  City get currentCity => throw _privateConstructorUsedError;
+  String get currentCity => throw _privateConstructorUsedError;
   String? get about => throw _privateConstructorUsedError;
   String? get imageLink => throw _privateConstructorUsedError;
   String? get instagramLink => throw _privateConstructorUsedError;
@@ -67,13 +67,11 @@ abstract class $UserProfileToUpdateCopyWith<$Res> {
       _$UserProfileToUpdateCopyWithImpl<$Res>;
   $Res call(
       {String name,
-      City currentCity,
+      String currentCity,
       String? about,
       String? imageLink,
       String? instagramLink,
       String? telegramLink});
-
-  $CityCopyWith<$Res> get currentCity;
 }
 
 /// @nodoc
@@ -102,7 +100,7 @@ class _$UserProfileToUpdateCopyWithImpl<$Res>
       currentCity: currentCity == freezed
           ? _value.currentCity
           : currentCity // ignore: cast_nullable_to_non_nullable
-              as City,
+              as String,
       about: about == freezed
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
@@ -121,13 +119,6 @@ class _$UserProfileToUpdateCopyWithImpl<$Res>
               as String?,
     ));
   }
-
-  @override
-  $CityCopyWith<$Res> get currentCity {
-    return $CityCopyWith<$Res>(_value.currentCity, (value) {
-      return _then(_value.copyWith(currentCity: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -139,14 +130,11 @@ abstract class _$UserProfileToUpdateCopyWith<$Res>
   @override
   $Res call(
       {String name,
-      City currentCity,
+      String currentCity,
       String? about,
       String? imageLink,
       String? instagramLink,
       String? telegramLink});
-
-  @override
-  $CityCopyWith<$Res> get currentCity;
 }
 
 /// @nodoc
@@ -177,7 +165,7 @@ class __$UserProfileToUpdateCopyWithImpl<$Res>
       currentCity: currentCity == freezed
           ? _value.currentCity
           : currentCity // ignore: cast_nullable_to_non_nullable
-              as City,
+              as String,
       about: about == freezed
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
@@ -215,7 +203,7 @@ class _$_UserProfileToUpdate implements _UserProfileToUpdate {
   @override
   final String name;
   @override
-  final City currentCity;
+  final String currentCity;
   @override
   final String? about;
   @override
@@ -277,7 +265,7 @@ class _$_UserProfileToUpdate implements _UserProfileToUpdate {
 abstract class _UserProfileToUpdate implements UserProfileToUpdate {
   const factory _UserProfileToUpdate(
       {required String name,
-      required City currentCity,
+      required String currentCity,
       String? about,
       String? imageLink,
       String? instagramLink,
@@ -289,7 +277,7 @@ abstract class _UserProfileToUpdate implements UserProfileToUpdate {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  City get currentCity => throw _privateConstructorUsedError;
+  String get currentCity => throw _privateConstructorUsedError;
   @override
   String? get about => throw _privateConstructorUsedError;
   @override

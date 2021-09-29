@@ -1,12 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
-import '../service/logger.dart';
 import '../utils/my_constants.dart';
 import '../error/exceptions.dart';
 import 'package:http/http.dart' as http_client;
 
 class RemoteClient {
-
   static Uri _createUri(String endpointWithPath,
       {Map<String, dynamic>? queryParameters}) {
     return Uri.https(MyConstants.host, endpointWithPath, queryParameters);
@@ -16,7 +15,7 @@ class RemoteClient {
       {required String endpointWithPath,
       required Map<String, String> httpHeaders,
       Map<String, dynamic>? queryParameters}) async {
-    final languageCode = Platform.localeName.substring(0,2).toLowerCase();
+    final languageCode = Platform.localeName.substring(0, 2).toLowerCase();
     final Map<String, dynamic> queryParametersWithLanguageCode = {
       "lang": languageCode
     };
@@ -27,17 +26,24 @@ class RemoteClient {
     http_client.Response response;
     dynamic responseAsJsonDecoded;
     try {
-      myGlobalLogger.info('GET ${uri.toString()}');
+      log('GET ${uri.toString()}');
       response = await http_client.get(
         uri,
         headers: httpHeaders,
       );
-      //todo code ok?
-      if (response.statusCode == 500) {
-        throw ServerException();
+
+      if (response.statusCode.toString()[0] == '4' ||
+          response.statusCode.toString()[0] == '5') {
+        log('Status code is: ${response.statusCode}, body: ${response.body}');
+
+        throw Exception(); //todo
       }
-      responseAsJsonDecoded = json.decode(utf8.decode(response.bodyBytes));
-    } on Exception {
+
+      responseAsJsonDecoded = response.body.isNotEmpty
+          ? json.decode(utf8.decode(response.bodyBytes))
+          : null;
+    } on Exception catch (e) {
+      log(e.toString());
       throw ServerException();
     }
 
@@ -54,7 +60,7 @@ class RemoteClient {
 
     http_client.Response response;
     try {
-      myGlobalLogger.info('POST ${uri.toString()}');
+      log('POST ${uri.toString()}');
       response = await http_client.post(
         uri,
         headers: httpHeaders,
@@ -62,6 +68,12 @@ class RemoteClient {
       );
     } on Exception {
       throw ServerException();
+    }
+
+    if (response.statusCode.toString()[0] == '4' ||
+        response.statusCode.toString()[0] == '5') {
+      log('Status code is: ${response.statusCode}, body: ${response.body}');
+      throw Exception(); //todo
     }
 
     final responseAsJsonDecoded = json.decode(utf8.decode(response.bodyBytes));
@@ -78,7 +90,7 @@ class RemoteClient {
 
     http_client.Response response;
     try {
-      myGlobalLogger.info('PUT ${uri.toString()}');
+      log('PUT ${uri.toString()}');
       response = await http_client.put(
         uri,
         headers: httpHeaders,
@@ -86,6 +98,12 @@ class RemoteClient {
       );
     } on Exception {
       throw ServerException();
+    }
+
+    if (response.statusCode.toString()[0] == '4' ||
+        response.statusCode.toString()[0] == '5') {
+      log('Status code is: ${response.statusCode}, body: ${response.body}');
+      throw Exception(); //todo
     }
 
     final responseAsJsonDecoded = json.decode(utf8.decode(response.bodyBytes));
@@ -102,7 +120,7 @@ class RemoteClient {
 
     http_client.Response response;
     try {
-      myGlobalLogger.info('DELETE ${uri.toString()}');
+      log('DELETE ${uri.toString()}');
       response = await http_client.delete(
         uri,
         headers: httpHeaders,
@@ -110,6 +128,12 @@ class RemoteClient {
       );
     } on Exception {
       throw ServerException();
+    }
+
+    if (response.statusCode.toString()[0] == '4' ||
+        response.statusCode.toString()[0] == '5') {
+      log('Status code is: ${response.statusCode}, body: ${response.body}');
+      throw Exception(); //todo
     }
 
     final responseAsJsonDecoded = json.decode(utf8.decode(response.bodyBytes));

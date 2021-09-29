@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:the_postraves_app/src/core/utils/my_constants.dart';
 import '../../client/data_sealed/response_sealed.dart';
-import '../../service/logger.dart';
 import '../../error/failures.dart';
 
 abstract class FirebaseAuthRepository {
@@ -35,7 +37,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     try {
       user = _firebaseAuth.currentUser;
     } on FirebaseAuthException catch (e) {
-      myGlobalLogger.warning(e);
+      //todo
       signOut();
     }
     return user;
@@ -48,11 +50,11 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
   Future<ResponseSealed<UserCredential>> signUpWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      final userCredentials = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      final userCredentials = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      //todo 
+      //todo
       // todo map error codes to failures
       return ResponseSealed.failure(UserNotFoundFailure());
     }
@@ -77,8 +79,8 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
       {required String email}) async {
     ActionCodeSettings actionCodeSettings = ActionCodeSettings(
       url: 'https://postraves.com',
-      androidPackageName: 'com.mmazurovsky.postraves_android',
-      iOSBundleId: 'com.mmazurovsky.postraves',
+      androidPackageName: MyConstants.androidPackageName,
+      iOSBundleId: MyConstants.iosBundleId,
       handleCodeInApp: true,
       androidInstallApp: true,
     );
@@ -100,7 +102,8 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     if (_firebaseAuth.isSignInWithEmailLink(link.toString())) {
       try {
         final userCredentials = await _firebaseAuth.signInWithEmailLink(
-            email: _storedEmailForLinkVerification!, emailLink: link.toString());
+            email: _storedEmailForLinkVerification!,
+            emailLink: link.toString());
         return ResponseSealed.success(userCredentials);
       } on FirebaseAuthException catch (e) {
         //todo
@@ -126,7 +129,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     try {
       googleAuth = await googleUser!.authentication;
     } on NoSuchMethodError catch (e) {
-      myGlobalLogger.info('Google sign in has been cancelled: ', e);
+      log('Google sign in has been cancelled: ${e.toString()}');
       return ResponseSealed.failure(SignInViaGoogleFailure());
     }
 
@@ -138,7 +141,8 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
 
     // Once signed in, return the UserCredential
     try {
-      final userCredentials = await _firebaseAuth.signInWithCredential(credential);
+      final userCredentials =
+          await _firebaseAuth.signInWithCredential(credential);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
       // todo map error codes to failures

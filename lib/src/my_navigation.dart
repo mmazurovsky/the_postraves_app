@@ -197,7 +197,7 @@ class NavigatorFunctions {
             countryEmojiCodeInLink != null
         ? Country(
             name: countryNameInLink,
-            localizedName: countryLocalizedNameInLink,
+            localName: countryLocalizedNameInLink,
             emojiCode: countryEmojiCodeInLink)
         : null;
     final imageLink = deepLink.queryParameters['imageLink'];

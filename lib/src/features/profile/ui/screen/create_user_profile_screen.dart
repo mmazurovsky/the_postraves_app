@@ -190,7 +190,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                             style: const TextStyle(fontSize: 20),
                           ),
                         ),
-                        text: _userCity.localizedName,
+                        text: _userCity.localName,
                         textStyle: MyTextStyles.body,
                         mainAxisAlignment: MainAxisAlignment.start,
                         trailingIcon: const Icon(

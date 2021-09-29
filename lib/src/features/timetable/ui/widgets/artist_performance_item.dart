@@ -26,11 +26,11 @@ class ArtistPerformanceItem extends StatelessWidget {
 
   ArtistPerformanceStatus _resolvePerformanceStatus() {
     if (DateTime.now().isAfter(endingDateTime)) {
-      return ArtistPerformanceStatus.PAST;
+      return ArtistPerformanceStatus.PERF_PAST;
     } else if (DateTime.now().isBefore(startingDateTime)) {
-      return ArtistPerformanceStatus.UPCOMING;
+      return ArtistPerformanceStatus.PERF_UPCOMING;
     } else {
-      return ArtistPerformanceStatus.LIVE;
+      return ArtistPerformanceStatus.PERF_LIVE;
     }
   }
 
@@ -42,7 +42,7 @@ class ArtistPerformanceItem extends StatelessWidget {
         MyConstants.horizontalPaddingOrMargin * 2;
 
     return Opacity(
-      opacity: performanceStatus == ArtistPerformanceStatus.PAST ? 0.35 : 1,
+      opacity: performanceStatus == ArtistPerformanceStatus.PERF_PAST ? 0.35 : 1,
       child: Column(
         children: [
           ...artists.asMap().entries.map(

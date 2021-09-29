@@ -25,14 +25,8 @@ class ProfileImageChooser extends StatefulWidget {
 }
 
 class _ProfileImageChooserState extends State<ProfileImageChooser> {
-  late ImagePicker _imagePicker;
+  final ImagePicker _imagePicker = ImagePicker();
   Image? _pickedImage;
-
-  @override
-  void initState() {
-    super.initState();
-    _imagePicker = ImagePicker();
-  }
 
   Future<void> getImage() async {
     File pickedCroppedImageAsFile;

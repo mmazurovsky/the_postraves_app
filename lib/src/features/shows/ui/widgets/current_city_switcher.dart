@@ -34,7 +34,7 @@ class CurrentCitySwitcher extends StatelessWidget {
               context.read<ProfileCubit>().updateUserProfile(authState
                   .userProfile
                   .createUserProfileToUpdate()
-                  .copyWith(currentCity: tappedCity));
+                  .copyWith(currentCity: tappedCity.name));
             }
             Navigator.of(context).pop();
           }

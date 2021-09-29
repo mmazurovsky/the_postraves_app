@@ -13,8 +13,7 @@ class UnityShort
     with _$UnityShort
     implements
         FollowableInterface,
-        EntityNamesInterface,
-        EntityEndpointInterface {
+        EntityNamesInterface {
 
   const UnityShort._();
   const factory UnityShort({
@@ -39,10 +38,5 @@ class UnityShort
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.unityEntityNamePlural;
-  }
-
-  @override
-  String getEntityEndpoint() {
-    return MyConstants.unitiesEndpoint;
   }
 }

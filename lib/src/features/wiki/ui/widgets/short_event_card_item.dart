@@ -71,7 +71,7 @@ class ShortEventCardItem extends StatelessWidget {
                   child: Text(_event.place.city.country.emojiCode,
                       style: TextStyle(fontSize: MyConstants.diamondWidth)),
                 ),
-                text: _event.place.city.localizedName,
+                text: _event.place.city.localName,
               ),
               bottomLeftWidget: WidgetTextRow(
                 widget: SizedBox(

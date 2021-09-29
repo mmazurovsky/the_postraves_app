@@ -100,11 +100,6 @@ void setupServiceLocatorInjection() async {
       () => RemoteRequestWrapperImpl<List<Country>>(
           serviceLocator(), serviceLocator()));
 
-  serviceLocator.registerLazySingleton(
-      () => FirebaseStorage.instanceFor(app: serviceLocator<FirebaseApp>()));
-  serviceLocator.registerLazySingleton(() => FirebaseFirestore.instance);
-  serviceLocator.registerLazySingleton(() => FirebaseMessaging.instance);
-
   serviceLocator
       .registerLazySingleton<DynamicLinkService>(() => DynamicLinkService());
 
@@ -131,15 +126,26 @@ void setupServiceLocatorInjection() async {
       () => RemoteRequestWrapperImpl<List<PlaceShort>>(
           serviceLocator(), serviceLocator()));
 
+  //* Firebase
+
+  serviceLocator
+      .registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+
+  serviceLocator.registerLazySingleton<FirebaseStorage>(
+      () => FirebaseStorage.instanceFor(app: serviceLocator<FirebaseApp>()));
+
+  serviceLocator.registerLazySingleton<FirebaseFirestore>(
+      () => FirebaseFirestore.instance);
+
+  serviceLocator.registerLazySingleton<FirebaseMessaging>(
+      () => FirebaseMessaging.instance);
+
   //* Auth
   serviceLocator.registerLazySingleton<AuthenticationCubit>(
       () => AuthenticationCubit(serviceLocator(), serviceLocator()));
 
   serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
       () => FirebaseAuthRepositioryImpl(serviceLocator()));
-
-  serviceLocator
-      .registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
   serviceLocator.registerLazySingleton<UserProfileRepository>(() =>
       UserProfileRepositoryImpl(

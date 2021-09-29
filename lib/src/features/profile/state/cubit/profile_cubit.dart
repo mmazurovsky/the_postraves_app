@@ -6,7 +6,6 @@ import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../repository/firebase_image_repository_impl.dart';
 import '../../repository/user_profile_repository_impl.dart';
 import '../../../../models/geo/city.dart';
-import '../../../../models/user/user_profile_to_create.dart';
 import '../../../../models/user/user_profile_to_update.dart';
 
 part 'profile_state.dart';
@@ -30,10 +29,10 @@ class ProfileCubit extends Cubit<ProfileState> {
       final response = await _firebaseImageRepository.uploadImage(imageFile);
       imageLink = response;
     }
-    final userAccountToCreate = UserProfileToCreate(
+    final userAccountToCreate = UserProfileToUpdate(
       imageLink: imageLink,
       name: nickname,
-      currentCity: currentCity,
+      currentCity: currentCity.name,
     );
     final createdUserAccount =
         await _userProfileRepository.createUserAccount(userAccountToCreate);

@@ -14,21 +14,11 @@ class UserProfile with _$UserProfile {
     required City currentCity,
     required int overallFollowers,
     required int weeklyFollowers,
-    String? about,
     String? imageLink,
+    String? about,
     String? instagramLink,
     String? telegramLink,
   }) = _UserProfile;
-
-  // factory UserProfile.empty() => UserProfile(
-  //       id: 0,
-  //       name: 'Guest',
-  //       imageLink: null,
-  //       about: null,
-  //       instagramLink: null,
-  //       telegramLink: null,
-  //       currentCity:
-  //     );
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
@@ -40,7 +30,7 @@ class UserProfile with _$UserProfile {
       imageLink: imageLink,
       instagramLink: instagramLink,
       telegramLink: telegramLink,
-      currentCity: currentCity,
+      currentCity: currentCity.name,
     );
   }
 }

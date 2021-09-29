@@ -13,8 +13,7 @@ class ArtistFull
     with _$ArtistFull
     implements
         FollowableInterface,
-        EntityNamesInterface,
-        EntityEndpointInterface {
+        EntityNamesInterface {
 
   const ArtistFull._();
   const factory ArtistFull({
@@ -41,10 +40,5 @@ class ArtistFull
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.artistEntityNamePlural;
-  }
-
-  @override
-  String getEntityEndpoint() {
-    return MyConstants.artistsEndpoint;
   }
 }

@@ -54,7 +54,7 @@ class SelectionListView<LOCATION extends LocationInterface> extends StatelessWid
                     )
                   : null,
               distanceBetweenLeadingAndText: 13,
-              text: location.localizedName,
+              text: location.localName,
               textStyle: location == activeLocation
                   ? MyTextStyles.bodyWithAccentColor
                   : MyTextStyles.body,

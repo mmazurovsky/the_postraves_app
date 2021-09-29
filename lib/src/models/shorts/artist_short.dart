@@ -14,8 +14,7 @@ class ArtistShort
     implements
         FollowableInterface,
         BaseNameInterface,
-        EntityNamesInterface,
-        EntityEndpointInterface {
+        EntityNamesInterface {
 
   const ArtistShort._();
   const factory ArtistShort({
@@ -39,10 +38,5 @@ class ArtistShort
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.artistEntityNamePlural;
-  }
-
-  @override
-  String getEntityEndpoint() {
-    return MyConstants.artistsEndpoint;
   }
 }

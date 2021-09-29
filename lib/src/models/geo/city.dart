@@ -10,7 +10,7 @@ class City with _$City implements LocationInterface {
   const City._();
   const factory City({
     required String name,
-    required String localizedName,
+    required String localName,
     required Country country,
   }) = _City;
 

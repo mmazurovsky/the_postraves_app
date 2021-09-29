@@ -44,7 +44,7 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
                 children: [
                   TextSpan(
                     text:
-                        '${AppLocalizations.of(context)!.emptyShowsStartText} ${_currentCity.localizedName}.\n\n${AppLocalizations.of(context)!.emptyShowsEndText}',
+                        '${AppLocalizations.of(context)!.emptyShowsStartText} ${_currentCity.localName}.\n\n${AppLocalizations.of(context)!.emptyShowsEndText}',
                     style: MyTextStyles.body,
                   ),
                   WidgetSpan(

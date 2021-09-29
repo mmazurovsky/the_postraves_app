@@ -45,7 +45,7 @@ class _WikiScreenState extends State<WikiScreen> {
     }
     if (widget.wikiData.country != null) {
       _pathToPage +=
-          '&countryName=${widget.wikiData.country!.name}&countryLocalizedName=${widget.wikiData.country!.localizedName}&countryEmojiCode=${widget.wikiData.country!.emojiCode}';
+          '&countryName=${widget.wikiData.country!.name}&countryLocalizedName=${widget.wikiData.country!.localName}&countryEmojiCode=${widget.wikiData.country!.emojiCode}';
     }
     if (widget.imageDimensions != null) {
       _pathToPage +=

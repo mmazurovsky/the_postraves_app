@@ -41,7 +41,7 @@ class WikiSubtitle extends StatelessWidget {
               : null,
           country != null
               ? Text(
-                  country!.localizedName,
+                  country!.localName,
                   style: MyTextStyles.sectionTitle,
                 )
               : null,

@@ -13,7 +13,7 @@ abstract class BaseNameInterface {
 abstract class LocationInterface {
   String get countryEmoji;
   Country get country;
-  String get localizedName;
+  String get localName;
 }
 
 abstract class EntityNamesInterface {
@@ -21,9 +21,9 @@ abstract class EntityNamesInterface {
   String getEntityNamePluralFormString(BuildContext context);
 }
 
-abstract class EntityEndpointInterface {
-  String getEntityEndpoint();
-}
+// abstract class EntityEndpointInterface {
+//   String getEntityEndpoint();
+// }
 
 abstract class SimpleFollowableInterface
     implements BaseIdInterface, BaseNameInterface {

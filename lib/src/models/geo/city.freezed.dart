@@ -22,11 +22,11 @@ class _$CityTearOff {
 
   _City call(
       {required String name,
-      required String localizedName,
+      required String localName,
       required Country country}) {
     return _City(
       name: name,
-      localizedName: localizedName,
+      localName: localName,
       country: country,
     );
   }
@@ -42,7 +42,7 @@ const $City = _$CityTearOff();
 /// @nodoc
 mixin _$City {
   String get name => throw _privateConstructorUsedError;
-  String get localizedName => throw _privateConstructorUsedError;
+  String get localName => throw _privateConstructorUsedError;
   Country get country => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ mixin _$City {
 abstract class $CityCopyWith<$Res> {
   factory $CityCopyWith(City value, $Res Function(City) then) =
       _$CityCopyWithImpl<$Res>;
-  $Res call({String name, String localizedName, Country country});
+  $Res call({String name, String localName, Country country});
 
   $CountryCopyWith<$Res> get country;
 }
@@ -70,7 +70,7 @@ class _$CityCopyWithImpl<$Res> implements $CityCopyWith<$Res> {
   @override
   $Res call({
     Object? name = freezed,
-    Object? localizedName = freezed,
+    Object? localName = freezed,
     Object? country = freezed,
   }) {
     return _then(_value.copyWith(
@@ -78,9 +78,9 @@ class _$CityCopyWithImpl<$Res> implements $CityCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      localizedName: localizedName == freezed
-          ? _value.localizedName
-          : localizedName // ignore: cast_nullable_to_non_nullable
+      localName: localName == freezed
+          ? _value.localName
+          : localName // ignore: cast_nullable_to_non_nullable
               as String,
       country: country == freezed
           ? _value.country
@@ -102,7 +102,7 @@ abstract class _$CityCopyWith<$Res> implements $CityCopyWith<$Res> {
   factory _$CityCopyWith(_City value, $Res Function(_City) then) =
       __$CityCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String localizedName, Country country});
+  $Res call({String name, String localName, Country country});
 
   @override
   $CountryCopyWith<$Res> get country;
@@ -120,7 +120,7 @@ class __$CityCopyWithImpl<$Res> extends _$CityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
-    Object? localizedName = freezed,
+    Object? localName = freezed,
     Object? country = freezed,
   }) {
     return _then(_City(
@@ -128,9 +128,9 @@ class __$CityCopyWithImpl<$Res> extends _$CityCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      localizedName: localizedName == freezed
-          ? _value.localizedName
-          : localizedName // ignore: cast_nullable_to_non_nullable
+      localName: localName == freezed
+          ? _value.localName
+          : localName // ignore: cast_nullable_to_non_nullable
               as String,
       country: country == freezed
           ? _value.country
@@ -144,7 +144,7 @@ class __$CityCopyWithImpl<$Res> extends _$CityCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_City extends _City {
   const _$_City(
-      {required this.name, required this.localizedName, required this.country})
+      {required this.name, required this.localName, required this.country})
       : super._();
 
   factory _$_City.fromJson(Map<String, dynamic> json) =>
@@ -153,13 +153,13 @@ class _$_City extends _City {
   @override
   final String name;
   @override
-  final String localizedName;
+  final String localName;
   @override
   final Country country;
 
   @override
   String toString() {
-    return 'City(name: $name, localizedName: $localizedName, country: $country)';
+    return 'City(name: $name, localName: $localName, country: $country)';
   }
 
   @override
@@ -168,9 +168,9 @@ class _$_City extends _City {
         (other is _City &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.localizedName, localizedName) ||
+            (identical(other.localName, localName) ||
                 const DeepCollectionEquality()
-                    .equals(other.localizedName, localizedName)) &&
+                    .equals(other.localName, localName)) &&
             (identical(other.country, country) ||
                 const DeepCollectionEquality().equals(other.country, country)));
   }
@@ -179,7 +179,7 @@ class _$_City extends _City {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(localizedName) ^
+      const DeepCollectionEquality().hash(localName) ^
       const DeepCollectionEquality().hash(country);
 
   @JsonKey(ignore: true)
@@ -196,7 +196,7 @@ class _$_City extends _City {
 abstract class _City extends City {
   const factory _City(
       {required String name,
-      required String localizedName,
+      required String localName,
       required Country country}) = _$_City;
   const _City._() : super._();
 
@@ -205,7 +205,7 @@ abstract class _City extends City {
   @override
   String get name => throw _privateConstructorUsedError;
   @override
-  String get localizedName => throw _privateConstructorUsedError;
+  String get localName => throw _privateConstructorUsedError;
   @override
   Country get country => throw _privateConstructorUsedError;
   @override

@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'src/app.dart';
-import 'src/core/service/logger.dart';
 import 'src/core/utils/my_colors.dart';
 import 'src/dependency_injection.dart';
 
@@ -17,7 +16,6 @@ void main() async {
   setupServiceLocatorInjection();
   await Firebase.initializeApp();
   HttpOverrides.global = MyHttpOverrides();
-  setupLogger();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());

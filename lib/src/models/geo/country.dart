@@ -11,7 +11,7 @@ class Country with _$Country implements LocationInterface {
   const Country._();
   const factory Country({
     required String name,
-    required String localizedName,
+    required String localName,
     String? phoneCode,
     required String emojiCode,
   }) = _Country;

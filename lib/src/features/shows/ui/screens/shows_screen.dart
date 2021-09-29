@@ -13,7 +13,6 @@ import '../../../../core/utils/my_colors.dart';
 import '../../../../core/presentation/widgets/animations/my_slide_animated_switcher.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../core/presentation/widgets/my_flushbar.dart';
-import '../../../../core/service/logger.dart';
 import '../widgets/sort_mode_switcher.dart';
 import '../widgets/events_by_date_list.dart';
 import '../widgets/events_list.dart';
@@ -101,7 +100,6 @@ class _ShowsScreenState extends State<ShowsScreen> {
           listener: (context, state) {
             if (state is ShowsLoadedByDateState ||
                 state is ShowsLoadedByRatingState) {
-              myGlobalLogger.info('Shows loaded');
               _refreshController1.refreshCompleted();
               _refreshController2.refreshCompleted();
             } else if (state is ShowsFailureState) {

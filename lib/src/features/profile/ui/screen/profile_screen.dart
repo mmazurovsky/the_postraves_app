@@ -46,7 +46,7 @@ class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationCubit, AuthenticationState>(
       builder: (context, state) {
-        late Widget screenToReturn;
+        Widget screenToReturn = const LoadingScreen();
         state.maybeWhen(
             initial: () => screenToReturn = const LoadingScreen(),
             authenticated: (userProfile) =>
@@ -76,28 +76,22 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  static late String _profileType;
-  late ScrollController _scrollController;
-  late MyCachedNetworkImage _image;
-  late ImageDimensions? _imageDimensions;
-  late _ProfileDetails _profileDetails;
-  late Map<String, Widget> _userAccountDetails;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = TabItem.profile.tabScrollController;
-  }
+  String? _profileType;
+  final ScrollController _scrollController =
+      TabItem.profile.tabScrollController;
+  MyCachedNetworkImage? _image;
+  ImageDimensions? _imageDimensions;
+  _ProfileDetails? _profileDetails;
+  Map<String, Widget>? _userAccountDetails;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     _image = MyCachedNetworkImage(widget.userProfile.imageLink);
     Future.delayed(
         Duration.zero,
         () async =>
-            _imageDimensions = await ImageDimensions.getImageInfo(_image));
+            _imageDimensions = await ImageDimensions.getImageInfo(_image!));
     _profileType = AppLocalizations.of(context)!.userEntityNameSingular;
     _userAccountDetails = {
       AppLocalizations.of(context)!.profileStatisticsFollowsCount:
@@ -111,16 +105,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     };
     _profileDetails = _ProfileDetails(
       userProfile: widget.userProfile,
-      profileDetails: _userAccountDetails,
+      profileDetails: _userAccountDetails!,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return WikiScreen(
-      wikiType: _profileType,
+      wikiType: _profileType!, //todo ! ok?
       scrollController: _scrollController,
-      wikiDetails: _profileDetails,
+      wikiDetails: _profileDetails!,
       imageDimensions: _imageDimensions,
       isBackButtonOn: false,
       wikiData: WikiDataDto(
@@ -200,7 +194,7 @@ class _ProfileDetails extends StatelessWidget {
               ),
             ],
           ),
-          buttonText: userProfile.currentCity.localizedName,
+          buttonText: userProfile.currentCity.localName,
           trailingIcon: const Icon(
             Ionicons.chevron_down,
             size: 26,

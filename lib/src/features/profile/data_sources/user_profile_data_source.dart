@@ -1,6 +1,6 @@
-import '../../../core/utils/my_constants.dart';
+import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
+
 import '../../../models/user/user_profile.dart';
-import '../../../models/user/user_profile_to_create.dart';
 import '../../../models/user/user_profile_to_update.dart';
 
 import '../../../core/client/remote_client.dart';
@@ -11,7 +11,7 @@ abstract class UserProfileDataSource {
       {required Map<String, String> httpHeaders});
   Future<void> createUserProfile(
       {required Map<String, String> httpHeaders,
-      required UserProfileToCreate userAccountToCreate});
+      required UserProfileToUpdate userAccountToCreate});
   Future<void> updateUserProfile(
       {required Map<String, String> httpHeaders,
       required UserProfileToUpdate updatedUserProfile});
@@ -23,26 +23,20 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   @override
   Future<UserProfile?> getUserAccount(
       {required Map<String, String> httpHeaders}) async {
-    dynamic decodedResponse;
-
-    try {
-      decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
-        endpointWithPath: MyConstants.usersEndpoint + '/public/myAccount',
+    final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
+        endpointWithPath: WikiFollowableType.USER.endpoint + '/public/myProfile',
         httpHeaders: httpHeaders,
       );
-    } on Exception {
-      throw ServerException();
-    }
     return decodedResponse == null ? null : UserProfile.fromJson(decodedResponse); //todo check response for null
   }
 
   @override
   Future<void> createUserProfile(
       {required Map<String, String> httpHeaders,
-      required UserProfileToCreate userAccountToCreate}) async {
+      required UserProfileToUpdate userAccountToCreate}) async {
     try {
-      await RemoteClient.makePostRequestAndReturnResponse(
-        endpointWithPath: MyConstants.usersEndpoint + '/public/myAccount',
+      final response = await RemoteClient.makePostRequestAndReturnResponse(
+        endpointWithPath: WikiFollowableType.USER.endpoint + '/public/myProfile',
         httpHeaders: httpHeaders,
         body: userAccountToCreate.toJson(),
       );
@@ -61,7 +55,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
     try {
       decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath:
-            MyConstants.usersEndpoint + '/public/nicknameChecking/$nickname',
+            WikiFollowableType.USER.endpoint + '/public/nicknameCheck/$nickname',
         httpHeaders: httpHeaders,
       );
     } on Exception {
@@ -77,7 +71,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   }) async {
     try {
       await RemoteClient.makePutRequestAndReturnResponse(
-        endpointWithPath: MyConstants.usersEndpoint + '/public/myAccount',
+        endpointWithPath: WikiFollowableType.USER.endpoint + '/public/myProfile',
         httpHeaders: httpHeaders,
         body: updatedUserProfile.toJson(),
       );

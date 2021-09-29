@@ -15,8 +15,7 @@ class PlaceFull
     with _$PlaceFull
     implements
         FollowableInterface,
-        EntityNamesInterface,
-        EntityEndpointInterface {
+        EntityNamesInterface {
 
   const PlaceFull._();
   const factory PlaceFull({
@@ -45,11 +44,6 @@ class PlaceFull
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.placeEntityNamePlural;
-  }
-
-  @override
-  String getEntityEndpoint() {
-    return MyConstants.placesEndpoint;
   }
 
   @override

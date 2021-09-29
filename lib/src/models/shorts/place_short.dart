@@ -15,8 +15,7 @@ class PlaceShort
     with _$PlaceShort
     implements
         FollowableInterface,
-        EntityNamesInterface,
-        EntityEndpointInterface {
+        EntityNamesInterface {
 
   const PlaceShort._();
   const factory PlaceShort({
@@ -42,11 +41,6 @@ class PlaceShort
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.placeEntityNamePlural;
-  }
-
-  @override
-  String getEntityEndpoint() {
-    return MyConstants.placesEndpoint;
   }
 
   @override

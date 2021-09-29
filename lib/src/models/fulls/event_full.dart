@@ -20,8 +20,7 @@ class EventFull
     with _$EventFull
     implements
         FollowableInterface,
-        EntityNamesInterface,
-        EntityEndpointInterface {
+        EntityNamesInterface {
   // @DateTimeConverter()
   const EventFull._();
   const factory EventFull({
@@ -64,11 +63,6 @@ class EventFull
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.eventEntityNamePlural;
-  }
-
-  @override
-  String getEntityEndpoint() {
-    return MyConstants.eventsEndpoint;
   }
 
   @override
