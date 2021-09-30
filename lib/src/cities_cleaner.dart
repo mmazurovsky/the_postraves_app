@@ -21,7 +21,7 @@ class CitiesCleaner extends StatefulWidget {
 
 class _CitiesCleanerState extends State<CitiesCleaner> {
   // todo change this manually for testing
-  final bool _toClean = true;
+  final bool _toClean = false;
 
   @override
   void initState() {

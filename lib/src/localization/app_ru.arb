@@ -125,5 +125,9 @@
     "emptyShowsStartText": "У нас нет информации о ближайших событиях в вашем текущем городе", 
     "emptyShowsEndText": "Если вы знаете о готовящемся большом событии, пожалуйста, напишите нам",
     "emptyShowsLinkText": "здесь",
-    "from": "От"
+    "from": "От",
+    "signInWithEmail": "Вход с Email",
+    "getLinkToSignIn": " Войти",
+    "linkHasBeenSent": "Ссылка отправлена на указанный email,\nоткройте ее",
+    "emailIsNotCorrect": "Введен некорректный email"
 }

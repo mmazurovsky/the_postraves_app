@@ -125,5 +125,9 @@
     "emptyShowsStartText": "We don't have information about upcoming events in your current city",
     "emptyShowsEndText": "If you know about some upcoming large-scale event, please, share it with us",
     "emptyShowsLinkText": "here",
-    "from": "From"
+    "from": "From",
+    "signInWithEmail": "Sign in with Email",
+    "getLinkToSignIn": "Sign in",
+    "linkHasBeenSent": "The link sent to your email,\nopen it to sign in",
+    "emailIsNotCorrect": "Incorrect email"
 }
