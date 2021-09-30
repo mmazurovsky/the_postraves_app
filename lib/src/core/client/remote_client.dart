@@ -27,6 +27,7 @@ class RemoteClient {
     dynamic responseAsJsonDecoded;
     try {
       log('GET ${uri.toString()}');
+      log('GET ${httpHeaders.toString()}');
       response = await http_client.get(
         uri,
         headers: httpHeaders,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/buttons/my_elevated_button.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../widgets/my_text_field.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -116,7 +117,7 @@ class _SignInWithEmailAndLinkScreenState
                         style: MyTextStyles.body,
                       ))),
                   const SizedBox(height: 10),
-                  MyElevatedButtonWithoutPadding(
+                  MyElevatedButton(
                     mainAxisAlignment: MainAxisAlignment.center,
                     text: 'Получить ссылку для входа',
                     buttonColor: MyColors.accent,
