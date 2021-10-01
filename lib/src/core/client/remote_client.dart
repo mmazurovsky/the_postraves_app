@@ -11,6 +11,22 @@ class RemoteClient {
     return Uri.https(MyConstants.host, endpointWithPath, queryParameters);
   }
 
+  static dynamic _decodeResponseToJson(http_client.Response response) {
+    return response.body.isNotEmpty
+        ? json.decode(utf8.decode(response.bodyBytes))
+        : null;
+  }
+
+  static void _checkResponse(http_client.Response response) {
+    if (response.statusCode.toString()[0] == '4' ||
+        response.statusCode.toString()[0] == '5') {
+      final exceptionMessage =
+          'Status code is: ${response.statusCode}, body: ${response.body}';
+      log(exceptionMessage);
+      throw ServerException(); //todo
+    }
+  }
+
   static Future<dynamic> makeGetRequestAndReturnResponse(
       {required String endpointWithPath,
       required Map<String, String> httpHeaders,
@@ -23,31 +39,17 @@ class RemoteClient {
     Uri uri = RemoteClient._createUri(endpointWithPath,
         queryParameters: queryParametersWithLanguageCode);
 
-    http_client.Response response;
-    dynamic responseAsJsonDecoded;
-    try {
-      log('GET ${uri.toString()}');
-      log('GET ${httpHeaders.toString()}');
-      response = await http_client.get(
-        uri,
-        headers: httpHeaders,
-      );
+    log('GET ${uri.toString()}');
+    log('GET ${httpHeaders.toString()}');
 
-      if (response.statusCode.toString()[0] == '4' ||
-          response.statusCode.toString()[0] == '5') {
-        log('Status code is: ${response.statusCode}, body: ${response.body}');
+    final response = await http_client.get(
+      uri,
+      headers: httpHeaders,
+    );
 
-        throw Exception(); //todo
-      }
+    _checkResponse(response);
 
-      responseAsJsonDecoded = response.body.isNotEmpty
-          ? json.decode(utf8.decode(response.bodyBytes))
-          : null;
-    } on Exception catch (e) {
-      log(e.toString());
-      throw ServerException();
-    }
-
+    final responseAsJsonDecoded = _decodeResponseToJson(response);
     return responseAsJsonDecoded;
   }
 
@@ -59,25 +61,17 @@ class RemoteClient {
     Uri uri = RemoteClient._createUri(endpointWithPath,
         queryParameters: queryParameters);
 
-    http_client.Response response;
-    try {
-      log('POST ${uri.toString()}');
-      response = await http_client.post(
-        uri,
-        headers: httpHeaders,
-        body: jsonEncode(body),
-      );
-    } on Exception {
-      throw ServerException();
-    }
+    log('POST ${uri.toString()}');
 
-    if (response.statusCode.toString()[0] == '4' ||
-        response.statusCode.toString()[0] == '5') {
-      log('Status code is: ${response.statusCode}, body: ${response.body}');
-      throw Exception(); //todo
-    }
+    final response = await http_client.post(
+      uri,
+      headers: httpHeaders,
+      body: jsonEncode(body),
+    );
 
-    final responseAsJsonDecoded = json.decode(utf8.decode(response.bodyBytes));
+    _checkResponse(response);
+
+    final responseAsJsonDecoded = _decodeResponseToJson(response);
     return responseAsJsonDecoded;
   }
 
@@ -89,25 +83,17 @@ class RemoteClient {
     Uri uri = RemoteClient._createUri(endpointWithPath,
         queryParameters: queryParameters);
 
-    http_client.Response response;
-    try {
-      log('PUT ${uri.toString()}');
-      response = await http_client.put(
-        uri,
-        headers: httpHeaders,
-        body: jsonEncode(body),
-      );
-    } on Exception {
-      throw ServerException();
-    }
+    log('PUT ${uri.toString()}');
 
-    if (response.statusCode.toString()[0] == '4' ||
-        response.statusCode.toString()[0] == '5') {
-      log('Status code is: ${response.statusCode}, body: ${response.body}');
-      throw Exception(); //todo
-    }
+    final response = await http_client.put(
+      uri,
+      headers: httpHeaders,
+      body: jsonEncode(body),
+    );
 
-    final responseAsJsonDecoded = json.decode(utf8.decode(response.bodyBytes));
+    _checkResponse(response);
+
+    final responseAsJsonDecoded = _decodeResponseToJson(response);
     return responseAsJsonDecoded;
   }
 
@@ -119,25 +105,17 @@ class RemoteClient {
     Uri uri = RemoteClient._createUri(endpointWithPath,
         queryParameters: queryParameters);
 
-    http_client.Response response;
-    try {
-      log('DELETE ${uri.toString()}');
-      response = await http_client.delete(
-        uri,
-        headers: httpHeaders,
-        body: jsonEncode(body),
-      );
-    } on Exception {
-      throw ServerException();
-    }
+    log('DELETE ${uri.toString()}');
 
-    if (response.statusCode.toString()[0] == '4' ||
-        response.statusCode.toString()[0] == '5') {
-      log('Status code is: ${response.statusCode}, body: ${response.body}');
-      throw Exception(); //todo
-    }
+    final response = await http_client.delete(
+      uri,
+      headers: httpHeaders,
+      body: jsonEncode(body),
+    );
 
-    final responseAsJsonDecoded = json.decode(utf8.decode(response.bodyBytes));
+    _checkResponse(response);
+
+    final responseAsJsonDecoded = _decodeResponseToJson(response);
     return responseAsJsonDecoded;
   }
 }

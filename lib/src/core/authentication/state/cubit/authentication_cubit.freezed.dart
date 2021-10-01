@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AuthenticationStateTearOff {
   const _$AuthenticationStateTearOff();
 
-  InitialAuthState initial() {
+  InitialAuthState loading() {
     return const InitialAuthState();
   }
 
@@ -46,7 +46,7 @@ const $AuthenticationState = _$AuthenticationStateTearOff();
 mixin _$AuthenticationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() unauthenticated,
     required TResult Function() authenticatedWithoutAccount,
     required TResult Function(UserProfile userProfile) authenticated,
@@ -55,7 +55,7 @@ mixin _$AuthenticationState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? unauthenticated,
     TResult Function()? authenticatedWithoutAccount,
     TResult Function(UserProfile userProfile)? authenticated,
@@ -65,7 +65,7 @@ mixin _$AuthenticationState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitialAuthState value) initial,
+    required TResult Function(InitialAuthState value) loading,
     required TResult Function(UnauthenticatedState value) unauthenticated,
     required TResult Function(AuthenticatedWithoutAccountState value)
         authenticatedWithoutAccount,
@@ -75,7 +75,7 @@ mixin _$AuthenticationState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialAuthState value)? initial,
+    TResult Function(InitialAuthState value)? loading,
     TResult Function(UnauthenticatedState value)? unauthenticated,
     TResult Function(AuthenticatedWithoutAccountState value)?
         authenticatedWithoutAccount,
@@ -129,7 +129,7 @@ class _$InitialAuthState implements InitialAuthState {
 
   @override
   String toString() {
-    return 'AuthenticationState.initial()';
+    return 'AuthenticationState.loading()';
   }
 
   @override
@@ -143,27 +143,27 @@ class _$InitialAuthState implements InitialAuthState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() unauthenticated,
     required TResult Function() authenticatedWithoutAccount,
     required TResult Function(UserProfile userProfile) authenticated,
     required TResult Function() error,
   }) {
-    return initial();
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? unauthenticated,
     TResult Function()? authenticatedWithoutAccount,
     TResult Function(UserProfile userProfile)? authenticated,
     TResult Function()? error,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial();
+    if (loading != null) {
+      return loading();
     }
     return orElse();
   }
@@ -171,20 +171,20 @@ class _$InitialAuthState implements InitialAuthState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitialAuthState value) initial,
+    required TResult Function(InitialAuthState value) loading,
     required TResult Function(UnauthenticatedState value) unauthenticated,
     required TResult Function(AuthenticatedWithoutAccountState value)
         authenticatedWithoutAccount,
     required TResult Function(AuthenticatedState value) authenticated,
     required TResult Function(ErrorAuthState value) error,
   }) {
-    return initial(this);
+    return loading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialAuthState value)? initial,
+    TResult Function(InitialAuthState value)? loading,
     TResult Function(UnauthenticatedState value)? unauthenticated,
     TResult Function(AuthenticatedWithoutAccountState value)?
         authenticatedWithoutAccount,
@@ -192,8 +192,8 @@ class _$InitialAuthState implements InitialAuthState {
     TResult Function(ErrorAuthState value)? error,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if (loading != null) {
+      return loading(this);
     }
     return orElse();
   }
@@ -243,7 +243,7 @@ class _$UnauthenticatedState implements UnauthenticatedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() unauthenticated,
     required TResult Function() authenticatedWithoutAccount,
     required TResult Function(UserProfile userProfile) authenticated,
@@ -255,7 +255,7 @@ class _$UnauthenticatedState implements UnauthenticatedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? unauthenticated,
     TResult Function()? authenticatedWithoutAccount,
     TResult Function(UserProfile userProfile)? authenticated,
@@ -271,7 +271,7 @@ class _$UnauthenticatedState implements UnauthenticatedState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitialAuthState value) initial,
+    required TResult Function(InitialAuthState value) loading,
     required TResult Function(UnauthenticatedState value) unauthenticated,
     required TResult Function(AuthenticatedWithoutAccountState value)
         authenticatedWithoutAccount,
@@ -284,7 +284,7 @@ class _$UnauthenticatedState implements UnauthenticatedState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialAuthState value)? initial,
+    TResult Function(InitialAuthState value)? loading,
     TResult Function(UnauthenticatedState value)? unauthenticated,
     TResult Function(AuthenticatedWithoutAccountState value)?
         authenticatedWithoutAccount,
@@ -348,7 +348,7 @@ class _$AuthenticatedWithoutAccountState
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() unauthenticated,
     required TResult Function() authenticatedWithoutAccount,
     required TResult Function(UserProfile userProfile) authenticated,
@@ -360,7 +360,7 @@ class _$AuthenticatedWithoutAccountState
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? unauthenticated,
     TResult Function()? authenticatedWithoutAccount,
     TResult Function(UserProfile userProfile)? authenticated,
@@ -376,7 +376,7 @@ class _$AuthenticatedWithoutAccountState
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitialAuthState value) initial,
+    required TResult Function(InitialAuthState value) loading,
     required TResult Function(UnauthenticatedState value) unauthenticated,
     required TResult Function(AuthenticatedWithoutAccountState value)
         authenticatedWithoutAccount,
@@ -389,7 +389,7 @@ class _$AuthenticatedWithoutAccountState
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialAuthState value)? initial,
+    TResult Function(InitialAuthState value)? loading,
     TResult Function(UnauthenticatedState value)? unauthenticated,
     TResult Function(AuthenticatedWithoutAccountState value)?
         authenticatedWithoutAccount,
@@ -484,7 +484,7 @@ class _$AuthenticatedState implements AuthenticatedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() unauthenticated,
     required TResult Function() authenticatedWithoutAccount,
     required TResult Function(UserProfile userProfile) authenticated,
@@ -496,7 +496,7 @@ class _$AuthenticatedState implements AuthenticatedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? unauthenticated,
     TResult Function()? authenticatedWithoutAccount,
     TResult Function(UserProfile userProfile)? authenticated,
@@ -512,7 +512,7 @@ class _$AuthenticatedState implements AuthenticatedState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitialAuthState value) initial,
+    required TResult Function(InitialAuthState value) loading,
     required TResult Function(UnauthenticatedState value) unauthenticated,
     required TResult Function(AuthenticatedWithoutAccountState value)
         authenticatedWithoutAccount,
@@ -525,7 +525,7 @@ class _$AuthenticatedState implements AuthenticatedState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialAuthState value)? initial,
+    TResult Function(InitialAuthState value)? loading,
     TResult Function(UnauthenticatedState value)? unauthenticated,
     TResult Function(AuthenticatedWithoutAccountState value)?
         authenticatedWithoutAccount,
@@ -590,7 +590,7 @@ class _$ErrorAuthState implements ErrorAuthState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function() unauthenticated,
     required TResult Function() authenticatedWithoutAccount,
     required TResult Function(UserProfile userProfile) authenticated,
@@ -602,7 +602,7 @@ class _$ErrorAuthState implements ErrorAuthState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function()? unauthenticated,
     TResult Function()? authenticatedWithoutAccount,
     TResult Function(UserProfile userProfile)? authenticated,
@@ -618,7 +618,7 @@ class _$ErrorAuthState implements ErrorAuthState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(InitialAuthState value) initial,
+    required TResult Function(InitialAuthState value) loading,
     required TResult Function(UnauthenticatedState value) unauthenticated,
     required TResult Function(AuthenticatedWithoutAccountState value)
         authenticatedWithoutAccount,
@@ -631,7 +631,7 @@ class _$ErrorAuthState implements ErrorAuthState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialAuthState value)? initial,
+    TResult Function(InitialAuthState value)? loading,
     TResult Function(UnauthenticatedState value)? unauthenticated,
     TResult Function(AuthenticatedWithoutAccountState value)?
         authenticatedWithoutAccount,

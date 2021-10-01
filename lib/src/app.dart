@@ -90,6 +90,7 @@ class AppState extends State<App> with WidgetsBindingObserver {
           ChangeNotifierProvider(
             create: (_) => CurrentCityProvider(
               serviceLocator<CityRepository>(),
+              serviceLocator<ProfileCubit>(),
             ),
           ),
           Provider(

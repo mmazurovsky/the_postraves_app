@@ -36,11 +36,13 @@ class ProfileScreenResolver extends StatefulWidget {
 }
 
 class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<AuthenticationCubit>(context).updateAuthStatus();
-  }
+  
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // BlocProvider.of<AuthenticationCubit>(context).updateAuthStatus(); 
+  //   //todo check if commented is ok
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
       builder: (context, state) {
         Widget screenToReturn = const LoadingScreen();
         state.maybeWhen(
-            initial: () => screenToReturn = const LoadingScreen(),
+            loading: () => screenToReturn = const LoadingScreen(),
             authenticated: (userProfile) =>
                 screenToReturn = ProfileScreen(userProfile: userProfile),
             authenticatedWithoutAccount: () => screenToReturn =
@@ -103,6 +105,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       AppLocalizations.of(context)!.profileStatisticsDonations:
           const Text('0₽', style: MyTextStyles.body)
     };
+
+    // if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
+    //   _currentCity = context
+    //       .read<CurrentCityProvider>()
+    //       .currentCity!; //todo check it is ok to ! here
+    // }
+
     _profileDetails = _ProfileDetails(
       userProfile: widget.userProfile,
       profileDetails: _userAccountDetails!,

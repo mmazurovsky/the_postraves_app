@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_profile_to_update.dart';
+part of 'user_profile_to_write.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserProfileToUpdate _$_$_UserProfileToUpdateFromJson(
+_$_UserProfileToWrite _$_$_UserProfileToWriteFromJson(
     Map<String, dynamic> json) {
-  return _$_UserProfileToUpdate(
+  return _$_UserProfileToWrite(
     name: json['name'] as String,
     currentCity: json['currentCity'] as String,
     about: json['about'] as String?,
@@ -18,8 +18,8 @@ _$_UserProfileToUpdate _$_$_UserProfileToUpdateFromJson(
   );
 }
 
-Map<String, dynamic> _$_$_UserProfileToUpdateToJson(
-        _$_UserProfileToUpdate instance) =>
+Map<String, dynamic> _$_$_UserProfileToWriteToJson(
+        _$_UserProfileToWrite instance) =>
     <String, dynamic>{
       'name': instance.name,
       'currentCity': instance.currentCity,

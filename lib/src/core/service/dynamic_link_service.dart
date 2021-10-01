@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_postraves_app/src/core/utils/my_constants.dart';
 import 'package:the_postraves_app/src/my_navigation.dart';
-import '../authentication/repository/firebase_auth_repository_impl.dart';
+import '../authentication/repository/firebase_auth_repository.dart';
 import '../authentication/state/cubit/authentication_cubit.dart';
 import '../navigation_bar/bottom_navigation_tab_item.dart';
 import '../provider/current_tab_provider.dart';

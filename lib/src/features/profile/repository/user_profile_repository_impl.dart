@@ -1,6 +1,6 @@
 import '../../../core/client/data_sealed/response_sealed.dart';
 import '../../../models/user/user_profile.dart';
-import '../../../models/user/user_profile_to_update.dart';
+import '../../../models/user/user_profile_to_write.dart';
 
 import '../../../core/client/remote_request_wrapper.dart';
 import '../data_sources/user_profile_data_source.dart';
@@ -8,9 +8,9 @@ import '../data_sources/user_profile_data_source.dart';
 abstract class UserProfileRepository {
   Future<ResponseSealed<UserProfile?>> getUserAccount();
   Future<ResponseSealed<void>> createUserAccount(
-      UserProfileToUpdate userAccountToCreate);
+      UserProfileToWrite userAccountToCreate);
   Future<ResponseSealed<void>> updateUserAccount(
-      UserProfileToUpdate updatedUserAccount);
+      UserProfileToWrite updatedUserAccount);
   Future<ResponseSealed<bool>> checkNicknameIsFree(String nickname);
 }
 
@@ -42,7 +42,7 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
 
   @override
   Future<ResponseSealed<void>> createUserAccount(
-      UserProfileToUpdate userAccountToCreate) async {
+      UserProfileToWrite userAccountToCreate) async {
     return await remoteRequestWrapperUserAccount(
         (httpHeaders) => userAccountDataSource.createUserProfile(
               httpHeaders: httpHeaders,
@@ -52,7 +52,7 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
 
   @override
   Future<ResponseSealed<void>> updateUserAccount(
-      UserProfileToUpdate updatedUserAccount) async {
+      UserProfileToWrite updatedUserAccount) async {
     return await remoteRequestWrapperUserAccount(
         (httpHeaders) => userAccountDataSource.updateUserProfile(
               httpHeaders: httpHeaders,

@@ -94,7 +94,8 @@ class SignInMethodsScreen extends StatelessWidget {
                   textStyle: MyTextStyles.buttonWithMainColor,
                   // todo
 
-                  onTap: () {},
+                  onTap: () => BlocProvider.of<AuthenticationCubit>(context)
+                .signInWithApple(),
                 )
               : Container(),
         ],

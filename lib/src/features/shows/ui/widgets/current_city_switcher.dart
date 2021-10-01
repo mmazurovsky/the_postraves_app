@@ -3,13 +3,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
 import '../../../../core/presentation/widgets/selection_list_view.dart';
 import '../../../../core/provider/city_list_provider.dart';
 import '../../../../core/provider/current_city_provider.dart';
 import '../../../../models/geo/city.dart';
-import '../../../profile/state/cubit/profile_cubit.dart';
 
 class CurrentCitySwitcher extends StatelessWidget {
   const CurrentCitySwitcher({Key? key}) : super(key: key);
@@ -29,13 +27,6 @@ class CurrentCitySwitcher extends StatelessWidget {
         onLocationTap: (City tappedCity) {
           if (currentCity != tappedCity) {
             context.read<CurrentCityProvider>().changeCurrentCity(tappedCity);
-            final authState = context.read<AuthenticationCubit>().state;
-            if (authState is AuthenticatedState) {
-              context.read<ProfileCubit>().updateUserProfile(authState
-                  .userProfile
-                  .createUserProfileToUpdate()
-                  .copyWith(currentCity: tappedCity.name));
-            }
             Navigator.of(context).pop();
           }
         },

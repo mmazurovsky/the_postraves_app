@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'user_profile_to_update.dart';
+part of 'user_profile_to_write.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,22 +12,22 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-UserProfileToUpdate _$UserProfileToUpdateFromJson(Map<String, dynamic> json) {
-  return _UserProfileToUpdate.fromJson(json);
+UserProfileToWrite _$UserProfileToWriteFromJson(Map<String, dynamic> json) {
+  return _UserProfileToWrite.fromJson(json);
 }
 
 /// @nodoc
-class _$UserProfileToUpdateTearOff {
-  const _$UserProfileToUpdateTearOff();
+class _$UserProfileToWriteTearOff {
+  const _$UserProfileToWriteTearOff();
 
-  _UserProfileToUpdate call(
+  _UserProfileToWrite call(
       {required String name,
       required String currentCity,
       String? about,
       String? imageLink,
       String? instagramLink,
       String? telegramLink}) {
-    return _UserProfileToUpdate(
+    return _UserProfileToWrite(
       name: name,
       currentCity: currentCity,
       about: about,
@@ -37,16 +37,16 @@ class _$UserProfileToUpdateTearOff {
     );
   }
 
-  UserProfileToUpdate fromJson(Map<String, Object> json) {
-    return UserProfileToUpdate.fromJson(json);
+  UserProfileToWrite fromJson(Map<String, Object> json) {
+    return UserProfileToWrite.fromJson(json);
   }
 }
 
 /// @nodoc
-const $UserProfileToUpdate = _$UserProfileToUpdateTearOff();
+const $UserProfileToWrite = _$UserProfileToWriteTearOff();
 
 /// @nodoc
-mixin _$UserProfileToUpdate {
+mixin _$UserProfileToWrite {
   String get name => throw _privateConstructorUsedError;
   String get currentCity => throw _privateConstructorUsedError;
   String? get about => throw _privateConstructorUsedError;
@@ -56,15 +56,15 @@ mixin _$UserProfileToUpdate {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserProfileToUpdateCopyWith<UserProfileToUpdate> get copyWith =>
+  $UserProfileToWriteCopyWith<UserProfileToWrite> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserProfileToUpdateCopyWith<$Res> {
-  factory $UserProfileToUpdateCopyWith(
-          UserProfileToUpdate value, $Res Function(UserProfileToUpdate) then) =
-      _$UserProfileToUpdateCopyWithImpl<$Res>;
+abstract class $UserProfileToWriteCopyWith<$Res> {
+  factory $UserProfileToWriteCopyWith(
+          UserProfileToWrite value, $Res Function(UserProfileToWrite) then) =
+      _$UserProfileToWriteCopyWithImpl<$Res>;
   $Res call(
       {String name,
       String currentCity,
@@ -75,13 +75,13 @@ abstract class $UserProfileToUpdateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserProfileToUpdateCopyWithImpl<$Res>
-    implements $UserProfileToUpdateCopyWith<$Res> {
-  _$UserProfileToUpdateCopyWithImpl(this._value, this._then);
+class _$UserProfileToWriteCopyWithImpl<$Res>
+    implements $UserProfileToWriteCopyWith<$Res> {
+  _$UserProfileToWriteCopyWithImpl(this._value, this._then);
 
-  final UserProfileToUpdate _value;
+  final UserProfileToWrite _value;
   // ignore: unused_field
-  final $Res Function(UserProfileToUpdate) _then;
+  final $Res Function(UserProfileToWrite) _then;
 
   @override
   $Res call({
@@ -122,11 +122,11 @@ class _$UserProfileToUpdateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$UserProfileToUpdateCopyWith<$Res>
-    implements $UserProfileToUpdateCopyWith<$Res> {
-  factory _$UserProfileToUpdateCopyWith(_UserProfileToUpdate value,
-          $Res Function(_UserProfileToUpdate) then) =
-      __$UserProfileToUpdateCopyWithImpl<$Res>;
+abstract class _$UserProfileToWriteCopyWith<$Res>
+    implements $UserProfileToWriteCopyWith<$Res> {
+  factory _$UserProfileToWriteCopyWith(
+          _UserProfileToWrite value, $Res Function(_UserProfileToWrite) then) =
+      __$UserProfileToWriteCopyWithImpl<$Res>;
   @override
   $Res call(
       {String name,
@@ -138,15 +138,15 @@ abstract class _$UserProfileToUpdateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$UserProfileToUpdateCopyWithImpl<$Res>
-    extends _$UserProfileToUpdateCopyWithImpl<$Res>
-    implements _$UserProfileToUpdateCopyWith<$Res> {
-  __$UserProfileToUpdateCopyWithImpl(
-      _UserProfileToUpdate _value, $Res Function(_UserProfileToUpdate) _then)
-      : super(_value, (v) => _then(v as _UserProfileToUpdate));
+class __$UserProfileToWriteCopyWithImpl<$Res>
+    extends _$UserProfileToWriteCopyWithImpl<$Res>
+    implements _$UserProfileToWriteCopyWith<$Res> {
+  __$UserProfileToWriteCopyWithImpl(
+      _UserProfileToWrite _value, $Res Function(_UserProfileToWrite) _then)
+      : super(_value, (v) => _then(v as _UserProfileToWrite));
 
   @override
-  _UserProfileToUpdate get _value => super._value as _UserProfileToUpdate;
+  _UserProfileToWrite get _value => super._value as _UserProfileToWrite;
 
   @override
   $Res call({
@@ -157,7 +157,7 @@ class __$UserProfileToUpdateCopyWithImpl<$Res>
     Object? instagramLink = freezed,
     Object? telegramLink = freezed,
   }) {
-    return _then(_UserProfileToUpdate(
+    return _then(_UserProfileToWrite(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -188,8 +188,8 @@ class __$UserProfileToUpdateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserProfileToUpdate implements _UserProfileToUpdate {
-  const _$_UserProfileToUpdate(
+class _$_UserProfileToWrite implements _UserProfileToWrite {
+  const _$_UserProfileToWrite(
       {required this.name,
       required this.currentCity,
       this.about,
@@ -197,8 +197,8 @@ class _$_UserProfileToUpdate implements _UserProfileToUpdate {
       this.instagramLink,
       this.telegramLink});
 
-  factory _$_UserProfileToUpdate.fromJson(Map<String, dynamic> json) =>
-      _$_$_UserProfileToUpdateFromJson(json);
+  factory _$_UserProfileToWrite.fromJson(Map<String, dynamic> json) =>
+      _$_$_UserProfileToWriteFromJson(json);
 
   @override
   final String name;
@@ -215,13 +215,13 @@ class _$_UserProfileToUpdate implements _UserProfileToUpdate {
 
   @override
   String toString() {
-    return 'UserProfileToUpdate(name: $name, currentCity: $currentCity, about: $about, imageLink: $imageLink, instagramLink: $instagramLink, telegramLink: $telegramLink)';
+    return 'UserProfileToWrite(name: $name, currentCity: $currentCity, about: $about, imageLink: $imageLink, instagramLink: $instagramLink, telegramLink: $telegramLink)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UserProfileToUpdate &&
+        (other is _UserProfileToWrite &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.currentCity, currentCity) ||
@@ -252,27 +252,26 @@ class _$_UserProfileToUpdate implements _UserProfileToUpdate {
 
   @JsonKey(ignore: true)
   @override
-  _$UserProfileToUpdateCopyWith<_UserProfileToUpdate> get copyWith =>
-      __$UserProfileToUpdateCopyWithImpl<_UserProfileToUpdate>(
-          this, _$identity);
+  _$UserProfileToWriteCopyWith<_UserProfileToWrite> get copyWith =>
+      __$UserProfileToWriteCopyWithImpl<_UserProfileToWrite>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_UserProfileToUpdateToJson(this);
+    return _$_$_UserProfileToWriteToJson(this);
   }
 }
 
-abstract class _UserProfileToUpdate implements UserProfileToUpdate {
-  const factory _UserProfileToUpdate(
+abstract class _UserProfileToWrite implements UserProfileToWrite {
+  const factory _UserProfileToWrite(
       {required String name,
       required String currentCity,
       String? about,
       String? imageLink,
       String? instagramLink,
-      String? telegramLink}) = _$_UserProfileToUpdate;
+      String? telegramLink}) = _$_UserProfileToWrite;
 
-  factory _UserProfileToUpdate.fromJson(Map<String, dynamic> json) =
-      _$_UserProfileToUpdate.fromJson;
+  factory _UserProfileToWrite.fromJson(Map<String, dynamic> json) =
+      _$_UserProfileToWrite.fromJson;
 
   @override
   String get name => throw _privateConstructorUsedError;
@@ -288,6 +287,6 @@ abstract class _UserProfileToUpdate implements UserProfileToUpdate {
   String? get telegramLink => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$UserProfileToUpdateCopyWith<_UserProfileToUpdate> get copyWith =>
+  _$UserProfileToWriteCopyWith<_UserProfileToWrite> get copyWith =>
       throw _privateConstructorUsedError;
 }

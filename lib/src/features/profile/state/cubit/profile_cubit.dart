@@ -6,7 +6,7 @@ import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../repository/firebase_image_repository_impl.dart';
 import '../../repository/user_profile_repository_impl.dart';
 import '../../../../models/geo/city.dart';
-import '../../../../models/user/user_profile_to_update.dart';
+import '../../../../models/user/user_profile_to_write.dart';
 
 part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
@@ -29,7 +29,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       final response = await _firebaseImageRepository.uploadImage(imageFile);
       imageLink = response;
     }
-    final userAccountToCreate = UserProfileToUpdate(
+    final userAccountToCreate = UserProfileToWrite(
       imageLink: imageLink,
       name: nickname,
       currentCity: currentCity.name,
@@ -43,10 +43,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  void updateUserProfile(UserProfileToUpdate userProfileToUpdate,
+  void updateWholeUserProfile(UserProfileToWrite userProfileToUpdate,
       [File? imageFile]) async {
     String imageLink;
-    UserProfileToUpdate updateProfileWithImageLink = userProfileToUpdate;
+    UserProfileToWrite updateProfileWithImageLink = userProfileToUpdate;
     if (imageFile != null) {
       final response = await _firebaseImageRepository.uploadImage(imageFile);
       imageLink = response;
@@ -59,5 +59,21 @@ class ProfileCubit extends Cubit<ProfileState> {
     updatedUserProfile.when(
         success: (data) => _authenticationBloc.updateAuthStatus(),
         failure: (failure, failureMessage) {}); //todo
+  }
+
+  void updateOnlyCityInUserProfile(City newCity) async {
+    final userProfileBeforeUpdate = _authenticationBloc.currentUserFromBackend;
+    if (userProfileBeforeUpdate != null) {
+      final userProfileAfterUpdateAsWrite = userProfileBeforeUpdate
+          .convertToUserProfileToWrite()
+          .copyWith(currentCity: newCity.name);
+
+      final updatedUserProfile = await _userProfileRepository
+          .updateUserAccount(userProfileAfterUpdateAsWrite);
+
+      updatedUserProfile.when(
+          success: (data) => _authenticationBloc.updateAuthStatus(),
+          failure: (failure, failureMessage) {}); //todo
+    }
   }
 }

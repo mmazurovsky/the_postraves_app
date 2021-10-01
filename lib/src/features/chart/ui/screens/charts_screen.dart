@@ -35,7 +35,9 @@ class _ChartsScreenState extends State<ChartsScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
-      _currentCity = context.read<CurrentCityProvider>().currentCity!; //todo check it is ok to ! here
+      _currentCity = context
+          .read<CurrentCityProvider>()
+          .currentCity!; //todo check it is ok to ! here
       BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity!);
     }
   }
@@ -63,8 +65,7 @@ class _ChartsScreenState extends State<ChartsScreen>
                     bestArtist: bestArtist,
                     weeklyChart: weeklyChart,
                     overallChart: overallChart),
-                error: (errorMessage) =>
-                    FailureContainer(errorMessage));
+                error: (errorMessage) => FailureContainer(errorMessage));
           },
         ),
       ),
@@ -147,8 +148,7 @@ class _ChartsViewForEntity<T extends FollowableInterface>
                   imagePath: MyEmoji.fire,
                   titleTextSpans: [
                     TextSpan(
-                        text:
-                            AppLocalizations.of(context)!.chartOfTheWeekTitle,
+                        text: AppLocalizations.of(context)!.chartOfTheWeekTitle,
                         style: MyTextStyles.ratingsListTitle),
                   ],
                   entities: weeklyChart!,

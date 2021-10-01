@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../geo/city.dart';
-import 'user_profile_to_update.dart';
+import 'user_profile_to_write.dart';
 
 part 'user_profile.freezed.dart';
 part 'user_profile.g.dart';
@@ -23,8 +23,8 @@ class UserProfile with _$UserProfile {
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
 
-  UserProfileToUpdate createUserProfileToUpdate() {
-    return UserProfileToUpdate(
+  UserProfileToWrite convertToUserProfileToWrite() {
+    return UserProfileToWrite(
       name: name,
       about: about,
       imageLink: imageLink,

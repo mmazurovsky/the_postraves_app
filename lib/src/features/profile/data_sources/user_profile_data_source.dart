@@ -1,7 +1,7 @@
 import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
 
 import '../../../models/user/user_profile.dart';
-import '../../../models/user/user_profile_to_update.dart';
+import '../../../models/user/user_profile_to_write.dart';
 
 import '../../../core/client/remote_client.dart';
 import '../../../core/error/exceptions.dart';
@@ -11,10 +11,10 @@ abstract class UserProfileDataSource {
       {required Map<String, String> httpHeaders});
   Future<void> createUserProfile(
       {required Map<String, String> httpHeaders,
-      required UserProfileToUpdate userAccountToCreate});
+      required UserProfileToWrite userAccountToCreate});
   Future<void> updateUserProfile(
       {required Map<String, String> httpHeaders,
-      required UserProfileToUpdate updatedUserProfile});
+      required UserProfileToWrite updatedUserProfile});
   Future<bool> checkNicknameIsFree(
       {required Map<String, String> httpHeaders, required String nickname});
 }
@@ -33,7 +33,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   @override
   Future<void> createUserProfile(
       {required Map<String, String> httpHeaders,
-      required UserProfileToUpdate userAccountToCreate}) async {
+      required UserProfileToWrite userAccountToCreate}) async {
     try {
       final response = await RemoteClient.makePostRequestAndReturnResponse(
         endpointWithPath: WikiFollowableType.USER.endpoint + '/public/myProfile',
@@ -67,11 +67,11 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   @override
   Future<void> updateUserProfile({
     required Map<String, String> httpHeaders,
-    required UserProfileToUpdate updatedUserProfile,
+    required UserProfileToWrite updatedUserProfile,
   }) async {
     try {
       await RemoteClient.makePutRequestAndReturnResponse(
-        endpointWithPath: WikiFollowableType.USER.endpoint + '/public/myProfile',
+        endpointWithPath: WikiFollowableType.USER.endpoint + '/myProfile',
         httpHeaders: httpHeaders,
         body: updatedUserProfile.toJson(),
       );

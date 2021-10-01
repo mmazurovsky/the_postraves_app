@@ -31,7 +31,7 @@ import 'models/shorts/event_short.dart';
 import 'core/data_sources/city_local_data_source.dart';
 import 'core/data_sources/city_remote_data_source.dart';
 import 'core/repository/city_repository.dart';
-import 'core/authentication/repository/firebase_auth_repository_impl.dart';
+import 'core/authentication/repository/firebase_auth_repository.dart';
 import 'core/client/remote_request_wrapper.dart';
 import 'core/service/dynamic_link_service.dart';
 import 'core/client/network_info.dart';

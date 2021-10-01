@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../authentication/repository/firebase_auth_repository_impl.dart';
+import '../authentication/repository/firebase_auth_repository.dart';
 import '../error/failures.dart';
 
 import 'data_sealed/response_sealed.dart';
