@@ -157,14 +157,14 @@ class MyTextStyles {
   static const TextStyle termsInactive = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
-    fontSize: 13,
+    fontSize: 11,
     fontWeight: FontWeight.w400,
   );
 
   static const TextStyle termsActive = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
-    fontSize: 13,
+    fontSize: 11,
     fontWeight: FontWeight.w400,
   );
 

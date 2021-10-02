@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/provider/city_list_provider.dart';
 import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
 import '../../state/shows_cubit/shows_cubit.dart';
 import '../widgets/current_city_switcher.dart';
@@ -21,7 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/my_assets.dart';
 
 class ShowsScreen extends StatefulWidget {
-  const ShowsScreen([Key? key]) : super(key:key);
+  const ShowsScreen([Key? key]) : super(key: key);
 
   @override
   _ShowsScreenState createState() => _ShowsScreenState();
@@ -30,7 +31,8 @@ class ShowsScreen extends StatefulWidget {
 class _ShowsScreenState extends State<ShowsScreen> {
   late RefreshController _refreshController1;
   late RefreshController _refreshController2;
-  City? currentCity;
+  City? _currentCity;
+  List<City>? _cities;
 
   @override
   void initState() {
@@ -42,15 +44,18 @@ class _ShowsScreenState extends State<ShowsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (currentCity != context.watch<CurrentCityProvider>().currentCity) {
-      currentCity =
+    if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
+      _currentCity =
           context.read<CurrentCityProvider>().currentCity!; //todo risky !
-      BlocProvider.of<ShowsCubit>(context).fullyLoadShows(currentCity!); //todo risky !
+      BlocProvider.of<ShowsCubit>(context)
+          .fullyLoadShows(_currentCity!); //todo risky !
     }
+
+    _cities = context.watch<CityListProvider>().cityList;
   }
 
   void _onRefresh() async {
-    BlocProvider.of<ShowsCubit>(context).refreshShows(currentCity!);
+    BlocProvider.of<ShowsCubit>(context).refreshShows(_currentCity!);
   }
 
   @override
@@ -67,14 +72,20 @@ class _ShowsScreenState extends State<ShowsScreen> {
               floating: true,
               leading: AppBarButton(
                 containerOpacity: 0,
-                iconWidget: Icon(
+                iconWidget: const Icon(
                   Ionicons.location_outline,
                   color: MyColors.main,
                   size: 25,
                 ),
                 onTap: () => showModalBottomSheet(
                   context: context,
-                  builder: (context) => CurrentCitySwitcher(),
+                  builder: (context) => CurrentCitySwitcher(
+                    currentCity: _currentCity!,
+                    cities: _cities!,
+                    onSelected: (City newCurrentCity) => context
+                        .read<CurrentCityProvider>()
+                        .changeCurrentCity(newCurrentCity),
+                  ),
                 ),
               ),
               title: Image.asset(MyImages.diamond, width: 23),

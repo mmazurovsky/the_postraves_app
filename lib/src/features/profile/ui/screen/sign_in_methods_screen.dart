@@ -44,20 +44,6 @@ class SignInMethodsScreen extends StatelessWidget {
           MyElevatedButton(
             mainAxisAlignment: MainAxisAlignment.center,
             leadingIcon: const Icon(
-              Ionicons.chatbox_ellipses_outline,
-              size: 20,
-              color: Colors.green,
-            ),
-            text: AppLocalizations.of(context)!.authSignInWithSms,
-            buttonColor: MyColors.forEventCard,
-            textStyle: MyTextStyles.buttonForSms,
-            // todo
-            onTap: () => Navigator.of(context)
-                .pushNamed(MyNavigationRoutes.signInWithSms),
-          ),
-          MyElevatedButton(
-            mainAxisAlignment: MainAxisAlignment.center,
-            leadingIcon: const Icon(
               Ionicons.logo_google,
               size: 18,
               color: Colors.red,
@@ -67,19 +53,6 @@ class SignInMethodsScreen extends StatelessWidget {
             textStyle: MyTextStyles.buttonForGmail,
             onTap: () => BlocProvider.of<AuthenticationCubit>(context)
                 .signInWithGoogle(),
-          ),
-          MyElevatedButton(
-            mainAxisAlignment: MainAxisAlignment.center,
-            leadingIcon: const Icon(
-              Ionicons.mail_outline,
-              size: 20,
-              color: Colors.blue,
-            ),
-            text: AppLocalizations.of(context)!.authSignInWithEmail,
-            buttonColor: MyColors.forEventCard,
-            textStyle: MyTextStyles.buttonForEmail,
-            onTap: () => Navigator.of(context)
-                .pushNamed(MyNavigationRoutes.signInWithEmailLink),
           ),
           Platform.isIOS
               ? MyElevatedButton(
@@ -95,9 +68,22 @@ class SignInMethodsScreen extends StatelessWidget {
                   // todo
 
                   onTap: () => BlocProvider.of<AuthenticationCubit>(context)
-                .signInWithApple(),
+                      .signInWithApple(),
                 )
               : Container(),
+          MyElevatedButton(
+            mainAxisAlignment: MainAxisAlignment.center,
+            leadingIcon: const Icon(
+              Ionicons.mail_outline,
+              size: 20,
+              color: Colors.blue,
+            ),
+            text: AppLocalizations.of(context)!.authSignInWithEmail,
+            buttonColor: MyColors.forEventCard,
+            textStyle: MyTextStyles.buttonForEmail,
+            onTap: () => Navigator.of(context)
+                .pushNamed(MyNavigationRoutes.signInWithEmailLink),
+          ),
         ],
         bottomWidget: MyHorizontalPadding(
           child: RichText(
@@ -105,7 +91,7 @@ class SignInMethodsScreen extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: '${AppLocalizations.of(context)!.authDocsOur} ',
+                  text: '${AppLocalizations.of(context)!.authDocsStart}\n',
                   style: MyTextStyles.termsInactive,
                 ),
                 WidgetSpan(
@@ -123,7 +109,7 @@ class SignInMethodsScreen extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: ' ${AppLocalizations.of(context)!.authDocsAnd} ',
+                  text: ' ${AppLocalizations.of(context)!.and} ',
                   style: MyTextStyles.termsInactive,
                 ),
                 WidgetSpan(

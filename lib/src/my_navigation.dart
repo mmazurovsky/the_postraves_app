@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 import 'models/related_to_search/unified_search_model.dart';
@@ -43,7 +41,7 @@ class MyNavigationRoutes {
   static const String wikiShare = '/wikiShare';
   static const String user = '/user';
   static const String signInWithEmailLink = '/sign-in-with-email-link';
-  static const String signInWithSms = '/sign-in-with-sms';
+  // static const String signInWithSms = '/sign-in-with-sms';
   static const String signInEnterSmsCode = '/sign-in-enter-sms-code';
 }
 

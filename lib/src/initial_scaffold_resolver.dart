@@ -149,7 +149,7 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                       MyHorizontalPadding(
                         child: Text(
                           AppLocalizations.of(context)!
-                              .profileCreationChooseCityTitle,
+                              .selectCityTitle,
                           style: MyTextStyles.cardEventTitle,
                         ),
                       ),

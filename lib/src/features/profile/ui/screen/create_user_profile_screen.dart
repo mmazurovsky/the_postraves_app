@@ -5,16 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/features/shows/ui/widgets/current_city_switcher.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
 import '../../repository/user_profile_repository_impl.dart';
 import '../../state/cubit/profile_cubit.dart';
 import '../../../../models/geo/city.dart';
-import '../../../../core/presentation/widgets/selection_list_view.dart';
 import '../../../../core/provider/city_list_provider.dart';
 import '../../../../core/provider/current_city_provider.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/presentation/widgets/buttons/my_outlined_button.dart';
@@ -117,7 +116,8 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
               _formKey.currentState!.validate();
             }
           },
-          failure: (failure, failureMessage) {}); //todo transfer to bloc and failure processing
+          failure: (failure,
+              failureMessage) {}); //todo transfer to bloc and failure processing
     }
   }
 
@@ -172,11 +172,14 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                         onTap: () {
                           _nicknameFieldFocusNode.unfocus();
                           showModalBottomSheet(
-                              context: context,
-                              builder: (context) => _CitySelector(
-                                    activeCity: _userCity,
-                                    onSelected: _selectActiveCity,
-                                  ));
+                            context: context,
+                            builder: (context) =>
+                                CurrentCitySwitcher(
+                              currentCity: _userCity,
+                              cities: context.read<CityListProvider>().cityList,
+                              onSelected: _selectActiveCity,
+                            ),
+                          );
                         },
                         contentHorizontalPadding:
                             MyConstants.horizontalPaddingOrMargin,
@@ -228,54 +231,5 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
         ),
       ),
     );
-  }
-}
-
-class _CitySelector extends StatefulWidget {
-  final City activeCity;
-  final Function onSelected;
-  const _CitySelector({
-    Key? key,
-    required this.activeCity,
-    required this.onSelected,
-  }) : super(key: key);
-
-  @override
-  __CitySelectorState createState() => __CitySelectorState();
-}
-
-class __CitySelectorState extends State<_CitySelector> {
-  late City _localActiveCity;
-  late List<City> _cities;
-
-  @override
-  void initState() {
-    super.initState();
-    _localActiveCity = widget.activeCity;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _cities = context.read<CityListProvider>().cityList;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ModalBottomSheetContent(
-        height: 350,
-        iconData: Ionicons.location_outline,
-        title: AppLocalizations.of(context)!.profileCreationChooseCityTitle,
-        content: SelectionListView<City>(
-          locations: _cities,
-          activeLocation: _localActiveCity,
-          onLocationTap: (City cityTapped) {
-            setState(() {
-              _localActiveCity = cityTapped;
-            });
-            widget.onSelected(cityTapped);
-            Navigator.of(context).pop();
-          },
-        ));
   }
 }
