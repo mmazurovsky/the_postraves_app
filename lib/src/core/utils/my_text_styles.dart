@@ -55,14 +55,7 @@ class MyTextStyles {
     fontSize: 22,
     fontWeight: FontWeight.w600,
     color: MyColors.main,
-  );
-
-  static const TextStyle showsViewSwitcherMode = TextStyle(
-    fontFamily: 'IBMPlexMono',
-    color: MyColors.main,
-    fontSize: 17,
-    fontWeight: FontWeight.w400,
-    wordSpacing: -4,
+    wordSpacing: 3,
   );
 
   static const TextStyle ratingsTitle = TextStyle(
@@ -109,13 +102,6 @@ class MyTextStyles {
     color: MyColors.forInactiveStuff,
   );
 
-  static TextStyle ratingsPlaceNumber(Color color) => TextStyle(
-        color: color,
-        fontSize: 17,
-        fontWeight: FontWeight.w600,
-        wordSpacing: -3.5,
-      );
-
   static const TextStyle searchCancel = TextStyle(
     fontFamily: 'Roboto',
     textBaseline: TextBaseline.alphabetic,
@@ -136,7 +122,14 @@ class MyTextStyles {
     static const TextStyle modalBottomSheetItem = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
-    fontSize: 19,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle modalBottomSheetItemAccent = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.accent,
+    fontSize: 18,
     fontWeight: FontWeight.w500,
   );
 
@@ -158,6 +151,13 @@ class MyTextStyles {
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
     fontSize: 13,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle closeModalBottomSheet = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.main,
+    fontSize: 15,
     fontWeight: FontWeight.w500,
   );
 

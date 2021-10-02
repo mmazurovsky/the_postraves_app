@@ -18,12 +18,10 @@ class CurrentCitySwitcher extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CurrentCitySwitcherState createState() =>
-      _CurrentCitySwitcherState();
+  _CurrentCitySwitcherState createState() => _CurrentCitySwitcherState();
 }
 
-class _CurrentCitySwitcherState
-    extends State<CurrentCitySwitcher> {
+class _CurrentCitySwitcherState extends State<CurrentCitySwitcher> {
   late City _currentCity;
 
   @override

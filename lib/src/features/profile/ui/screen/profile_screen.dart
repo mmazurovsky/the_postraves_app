@@ -281,9 +281,12 @@ class SettingsList extends StatelessWidget {
     return ModalBottomSheetContent(
       height: MediaQuery.of(context).size.height * 0.5,
       iconData: Ionicons.cog_outline,
-      title: 'Settings',
-      content: ListView.builder(
+      title: 'Settings', //todo
+      content: ListView.separated(
+        padding: EdgeInsets.only(top: 10),
+        physics: NeverScrollableScrollPhysics(),
         itemCount: settingsList.length,
+        separatorBuilder: (_, i) => const SizedBox(height: 10),
         itemBuilder: (context, index) {
           return SettingsButton(settingsList[index]);
         },
@@ -302,7 +305,7 @@ class SettingsButton extends StatelessWidget {
       onTap: () => data.onTap(context),
       child: MyHorizontalPadding(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 5),
+          // padding: EdgeInsets.symmetric(vertical: 7),
           child: ButtonContent(
             leading: Container(
               height: 30,

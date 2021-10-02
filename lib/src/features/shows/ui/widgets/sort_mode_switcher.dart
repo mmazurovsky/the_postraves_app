@@ -21,21 +21,24 @@ class SortModeSwitcher extends StatelessWidget {
         height: 380,
         iconData: Ionicons.swap_vertical_outline,
         title: AppLocalizations.of(context)!.sortModeSwitcherTitle,
-        content: MyHorizontalMargin(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SortMode(
-                iconPath: MyEmoji.calendar,
-                viewMode: ViewMode.SORT_BY_DATE,
-                isSelected: state is ByDateViewState,
-              ),
-              SortMode(
-                iconPath: MyImages.diamond,
-                viewMode: ViewMode.SORT_BY_RATING,
-                isSelected: state is ByRatingViewState,
-              ),
-            ],
+        content: Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: MyHorizontalMargin(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SortMode(
+                  icon: Ionicons.calendar_clear_outline,
+                  viewMode: ViewMode.SORT_BY_DATE,
+                  isSelected: state is ByDateViewState,
+                ),
+                SortMode(
+                  icon: Ionicons.people_circle_outline,
+                  viewMode: ViewMode.SORT_BY_RATING,
+                  isSelected: state is ByRatingViewState,
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -44,12 +47,12 @@ class SortModeSwitcher extends StatelessWidget {
 }
 
 class SortMode extends StatelessWidget {
-  final String iconPath;
+  final IconData icon;
   final ViewMode viewMode;
   final bool isSelected;
   const SortMode({
     Key? key,
-    required this.iconPath,
+    required this.icon,
     required this.viewMode,
     required this.isSelected,
   }) : super(key: key);
@@ -83,16 +86,17 @@ class SortMode extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
-              iconPath,
-              width: 25,
+            Icon(
+              icon,
+              color: isSelected ? MyColors.accent : MyColors.main,
+              size: 25,
             ),
             SizedBox(
               height: 12,
             ),
             Text(
               viewMode.getButtonTitle(context),
-              style: MyTextStyles.showsViewSwitcherMode,
+              style: isSelected ? MyTextStyles.bodyWithAccentColor : MyTextStyles.body,
               maxLines: 2,
               textAlign: TextAlign.center,
             ),

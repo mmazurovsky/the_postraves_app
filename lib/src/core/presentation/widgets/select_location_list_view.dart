@@ -24,12 +24,13 @@ class SelectLocationListView<LOCATION extends LocationInterface> extends Statele
   @override
   Widget build(BuildContext context) {
     // todo scroll bar
-    return ListView.builder(
-      padding: const EdgeInsets.only(bottom: 30),
+    return ListView.separated(
+      
+      padding: const EdgeInsets.symmetric(vertical: 10),
       physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       shrinkWrap: isShrinkWrap,
       itemCount: locations.length,
-      // separatorBuilder: (context, i) => const SizedBox(height: 8),
+      separatorBuilder: (context, i) => const SizedBox(height: 10),
       itemBuilder: (context, i) {
         LOCATION location = locations[i];
         return InkWell(
@@ -37,13 +38,13 @@ class SelectLocationListView<LOCATION extends LocationInterface> extends Statele
           child: MyHorizontalPadding(
             child: ButtonContent(
               leading: Container(
-                padding: EdgeInsets.only(bottom: 8),
+                
                 height: 30,
                 width: 30,
                 alignment: Alignment.center,
                 child: Text(
                   location.countryEmoji,
-                  style: const TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 21),
                 ),
               ),
               trailing: location is Country
@@ -57,8 +58,8 @@ class SelectLocationListView<LOCATION extends LocationInterface> extends Statele
               distanceBetweenLeadingAndText: 13,
               text: location.localName,
               textStyle: location == activeLocation
-                  ? MyTextStyles.bodyWithAccentColor
-                  : MyTextStyles.body,
+                  ? MyTextStyles.modalBottomSheetItemAccent
+                  : MyTextStyles.modalBottomSheetItem,
               mainAxisAlignment: MainAxisAlignment.start,
             ),
           ),
