@@ -27,7 +27,7 @@ class _CitiesCleanerState extends State<CitiesCleaner> {
   void initState() {
     super.initState();
     if (_toClean) {
-      BlocProvider.of<AuthenticationCubit>(context).singOut();
+      BlocProvider.of<AuthenticationCubit>(context).signOut();
     }
   }
 

@@ -78,7 +78,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         );
   }
 
-  void singOut() async {
+  void signOut() async {
     await _firebaseRepository.signOut();
     updateAuthStatus();
   }

@@ -264,13 +264,13 @@ class SettingsList extends StatelessWidget {
       leadingIcon:
           Icon(Ionicons.log_out_outline, color: MyColors.main, size: 18),
       onTap: (BuildContext context) =>
-          BlocProvider.of<AuthenticationCubit>(context).deleteMyProfile(),
+          BlocProvider.of<AuthenticationCubit>(context).signOut(),
     ),
     _SettingsButtonData(
       text: 'Delete profile',
       leadingIcon: Icon(Ionicons.close_circle_outline, color: MyColors.main, size: 18),
       onTap: (BuildContext context) =>
-          BlocProvider.of<AuthenticationCubit>(context).deleteMyProfile(),
+          BlocProvider.of<AuthenticationCubit>(context).deleteMyProfile(), //todo check working
     ),
   ];
 
