@@ -30,7 +30,7 @@ class PreviousSearchResultsBlock extends StatelessWidget {
         SectionTitle(
           sectionTitle: resultsName,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         FollowableList(
           followables: results,
           onItemTap:
@@ -42,7 +42,6 @@ class PreviousSearchResultsBlock extends StatelessWidget {
           onIconTap: deleteFunction,
         ),
         SectionSpacer(),
-        SectionDivider(needHorizontalMargin: true),
       ],
     );
   }
