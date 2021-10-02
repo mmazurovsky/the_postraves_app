@@ -26,7 +26,7 @@ import '../widgets/short_event_card_item.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../widgets/wiki_expandable_text_description.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
-import 'wiki_screen.dart';
+import 'wiki_canvas.dart';
 
 class ArtistScreen extends StatefulWidget {
   final int artistId;
@@ -88,7 +88,7 @@ class _ArtistScreenState extends State<ArtistScreen>
           });
         }
       },
-      child: WikiScreen(
+      child: WikiCanvas(
         wikiType: _wikiType,
         scrollController: _scrollController,
         wikiDetails: _wikiDetails,

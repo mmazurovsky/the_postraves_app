@@ -21,7 +21,7 @@ import '../widgets/external_map_launcher.dart';
 import '../widgets/column_of_custom_cards.dart';
 import '../widgets/scene_card_for_event.dart';
 import '../widgets/short_event_card_item.dart';
-import 'wiki_screen.dart';
+import 'wiki_canvas.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
@@ -89,7 +89,7 @@ class _PlaceScreenState extends State<PlaceScreen>
           });
         }
       },
-      child: WikiScreen(
+      child: WikiCanvas(
         wikiType: _wikiType,
         scrollController: _scrollController,
         wikiDetails: _wikiDetails,
@@ -239,25 +239,25 @@ class _PlaceDetails extends StatelessWidget {
                       buildCard: (EventShort event) =>
                           ShortEventCardItem(event),
                     ),
-                    SectionSpacer(),
+                    // SectionSpacer(),
                   ],
                 ),
-          scenes.isEmpty
-              ? Container()
-              : Column(
-                  children: [
-                    SectionDivider(needHorizontalMargin: true),
-                    SectionSpacer(),
-                    SectionTitle(
-                      sectionTitle: AppLocalizations.of(context)!.scenes,
-                    ),
-                    SizedBox(height: 8),
-                    ColumnOfCustomCards<Scene>(
-                      entities: scenes,
-                      buildCard: (Scene scene) => SceneCardForEvent(scene),
-                    ),
-                  ],
-                ),
+          // scenes.isEmpty
+          //     ? Container()
+          //     : Column(
+          //         children: [
+          //           SectionDivider(needHorizontalMargin: true),
+          //           SectionSpacer(),
+          //           SectionTitle(
+          //             sectionTitle: AppLocalizations.of(context)!.scenes,
+          //           ),
+          //           SizedBox(height: 8),
+          //           ColumnOfCustomCards<Scene>(
+          //             entities: scenes,
+          //             buildCard: (Scene scene) => SceneCardForEvent(scene),
+          //           ),
+          //         ],
+          //       ),
         ],
       ),
     );

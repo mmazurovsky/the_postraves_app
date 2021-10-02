@@ -20,7 +20,7 @@ import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import '../../dto/wiki_data_dto.dart';
 import '../widgets/event_status_indicator.dart';
-import 'wiki_screen.dart';
+import 'wiki_canvas.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/utils/my_constants.dart';
@@ -92,7 +92,7 @@ class _EventScreenState extends State<EventScreen>
           });
         }
       },
-      child: WikiScreen(
+      child: WikiCanvas(
         wikiType: _wikiType,
         scrollController: _scrollController,
         wikiDetails: _wikiDetails,

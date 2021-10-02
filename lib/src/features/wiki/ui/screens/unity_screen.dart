@@ -14,7 +14,7 @@ import '../../../../core/utils/image_dimensions.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../dto/wiki_data_dto.dart';
 import '../widgets/short_event_card_item.dart';
-import 'wiki_screen.dart';
+import 'wiki_canvas.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../my_navigation.dart';
@@ -86,7 +86,7 @@ class _UnityScreenState extends State<UnityScreen>
           });
         }
       },
-      child: WikiScreen(
+      child: WikiCanvas(
         wikiType: _wikiType,
         scrollController: _scrollController,
         wikiDetails: _wikiDetails,

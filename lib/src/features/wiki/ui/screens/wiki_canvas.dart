@@ -9,7 +9,7 @@ import '../widgets/wiki_subtitle.dart';
 import '../widgets/wiki_sliver_app_bar.dart';
 import '../widgets/wiki_title.dart';
 
-class WikiScreen extends StatefulWidget {
+class WikiCanvas extends StatefulWidget {
   final WikiDataDto wikiData;
   final String wikiType;
   final ScrollController scrollController;
@@ -17,7 +17,7 @@ class WikiScreen extends StatefulWidget {
   final ImageDimensions? imageDimensions;
   final bool isBackButtonOn;
 
-  const WikiScreen({
+  const WikiCanvas({
     Key? key,
     required this.wikiData,
     required this.wikiType,
@@ -28,10 +28,10 @@ class WikiScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _WikiScreenState createState() => _WikiScreenState();
+  _WikiCanvasState createState() => _WikiCanvasState();
 }
 
-class _WikiScreenState extends State<WikiScreen> {
+class _WikiCanvasState extends State<WikiCanvas> {
   @override
   void initState() {
     super.initState();

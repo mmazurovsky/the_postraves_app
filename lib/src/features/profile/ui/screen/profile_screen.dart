@@ -10,7 +10,7 @@ import 'package:the_postraves_app/src/models/geo/city.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../core/presentation/widgets/loading_screen.dart';
-import '../../../wiki/ui/screens/wiki_screen.dart';
+import '../../../wiki/ui/screens/wiki_canvas.dart';
 import '../../../wiki/ui/widgets/button_with_icons.dart';
 import '../../../wiki/ui/widgets/wiki_expandable_text_description.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WikiScreen(
+    return WikiCanvas(
       wikiType: _profileType!, //todo ! ok?
       scrollController: _scrollController,
       wikiDetails: _profileDetails!,
