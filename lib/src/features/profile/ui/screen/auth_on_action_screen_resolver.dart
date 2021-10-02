@@ -20,7 +20,7 @@ class AuthOnActionScreenResolver extends StatelessWidget {
           return CreateUserProfileScreen(
               isPoppable: true, userProfileRepository: serviceLocator());
         },
-        authenticated: (userProfile) {
+        authenticated: (_) {
           SchedulerBinding.instance!.addPostFrameCallback((_) {
             Navigator.of(context).popUntil(
               (route) =>
@@ -35,6 +35,6 @@ class AuthOnActionScreenResolver extends StatelessWidget {
         unauthenticated: () => const SignInMethodsScreen(
               isPoppable: true,
             ),
-        orElse: () => const LoadingScreen());
+        orElse: () => const LoadingScreen()); //todo
   }
 }

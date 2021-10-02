@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/features/profile/ui/screen/update_profile_screen.dart';
 import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 import 'models/related_to_search/unified_search_model.dart';
 import 'features/chart/ui/screens/charts_screen.dart';
@@ -40,9 +41,10 @@ class MyNavigationRoutes {
   // static const String signInWithEmail = '/signInWithEmail';
   static const String wikiShare = '/wikiShare';
   static const String user = '/user';
+  static const String updateUser = '/updateUser';
   static const String signInWithEmailLink = '/sign-in-with-email-link';
   // static const String signInWithSms = '/sign-in-with-sms';
-  static const String signInEnterSmsCode = '/sign-in-enter-sms-code';
+  // static const String signInEnterSmsCode = '/sign-in-enter-sms-code';
 }
 
 class MyNavigator extends StatelessWidget {
@@ -158,6 +160,13 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => AuthOnActionScreenResolver());
+    } else if (routeSettings.name == MyNavigationRoutes.updateUser) {
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => UpdateProfileScreen(
+
+        ),
+      );
     } else {
       return _errorRoute();
     }
@@ -436,5 +445,11 @@ class NavigatorFunctions {
         imageDimensions: imageDimensions,
       );
     }
+  }
+
+  static void pushUpdateUser(
+    BuildContext context,
+  ) {
+    Navigator.of(context).pushNamed(MyNavigationRoutes.updateUser);
   }
 }

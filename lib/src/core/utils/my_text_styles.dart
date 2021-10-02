@@ -133,6 +133,13 @@ class MyTextStyles {
     decoration: TextDecoration.none,
   );
 
+    static const TextStyle modalBottomSheetItem = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.main,
+    fontSize: 19,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle body = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,

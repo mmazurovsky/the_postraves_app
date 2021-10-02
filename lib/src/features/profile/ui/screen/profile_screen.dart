@@ -2,14 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/buttons/button_content.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/buttons/my_outlined_button.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/modal_bottom_sheet_content.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/my_horizontal_padding.dart';
 import 'package:the_postraves_app/src/core/provider/city_list_provider.dart';
 import 'package:the_postraves_app/src/core/provider/current_city_provider.dart';
+import 'package:the_postraves_app/src/core/service/open_link_service.dart';
 import 'package:the_postraves_app/src/features/shows/ui/widgets/current_city_switcher.dart';
 import 'package:the_postraves_app/src/models/geo/city.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../my_navigation.dart';
 import '../../../wiki/ui/screens/wiki_canvas.dart';
 import '../../../wiki/ui/widgets/button_with_icons.dart';
 import '../../../wiki/ui/widgets/wiki_expandable_text_description.dart';
@@ -199,7 +204,10 @@ class _ProfileDetails extends StatelessWidget {
           borderColor: MyColors.main,
           // buttonColor: MyColors.forEventCard,
           textStyle: MyTextStyles.buttonWithMainColor,
-          onTap: () => BlocProvider.of<AuthenticationCubit>(context).singOut(),
+          onTap: () => showModalBottomSheet(
+            context: context,
+            builder: (context) => SettingsList(),
+          ),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
         // MyElevatedButton(
@@ -220,6 +228,95 @@ class _ProfileDetails extends StatelessWidget {
         //   mainAxisAlignment: MainAxisAlignment.center,
         // )
       ],
+    );
+  }
+}
+
+class _SettingsButtonData {
+  final String text;
+  final Widget leadingIcon;
+  final void Function(BuildContext) onTap;
+
+  _SettingsButtonData({
+    required this.text,
+    required this.leadingIcon,
+    required this.onTap,
+  });
+}
+
+class SettingsList extends StatelessWidget {
+  final List<_SettingsButtonData> settingsList = [
+    _SettingsButtonData(
+      text: 'Modify profile',
+      leadingIcon:
+          Icon(Ionicons.clipboard_outline, color: MyColors.main, size: 18),
+      onTap: (BuildContext context) =>
+          NavigatorFunctions.pushUpdateUser(context),
+    ),
+    _SettingsButtonData(
+      text: 'Write to us',
+      leadingIcon:
+          Icon(Ionicons.chatbox_outline, color: MyColors.main, size: 18),
+      onTap: (_) => OpenLinkService.openUrl("https://t.me/mmazurovsky"),
+    ),
+    _SettingsButtonData(
+      text: 'Sign out',
+      leadingIcon:
+          Icon(Ionicons.log_out_outline, color: MyColors.main, size: 18),
+      onTap: (BuildContext context) =>
+          BlocProvider.of<AuthenticationCubit>(context).deleteMyProfile(),
+    ),
+    _SettingsButtonData(
+      text: 'Delete profile',
+      leadingIcon: Icon(Ionicons.close_circle_outline, color: MyColors.main, size: 18),
+      onTap: (BuildContext context) =>
+          BlocProvider.of<AuthenticationCubit>(context).deleteMyProfile(),
+    ),
+  ];
+
+  SettingsList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ModalBottomSheetContent(
+      height: MediaQuery.of(context).size.height * 0.5,
+      iconData: Ionicons.cog_outline,
+      title: 'Settings',
+      content: ListView.builder(
+        itemCount: settingsList.length,
+        itemBuilder: (context, index) {
+          return SettingsButton(settingsList[index]);
+        },
+      ),
+    );
+  }
+}
+
+class SettingsButton extends StatelessWidget {
+  final _SettingsButtonData data;
+  const SettingsButton(this.data, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => data.onTap(context),
+      child: MyHorizontalPadding(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: ButtonContent(
+            leading: Container(
+              height: 30,
+              width: 30,
+              alignment: Alignment.center,
+              child: data.leadingIcon,
+            ),
+            distanceBetweenLeadingAndText: 13,
+            text: data.text,
+            textStyle: MyTextStyles.modalBottomSheetItem,
+            mainAxisAlignment: MainAxisAlignment.start,
+          ),
+        ),
+      ),
     );
   }
 }

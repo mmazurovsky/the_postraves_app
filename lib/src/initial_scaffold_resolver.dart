@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/authentication/state/cubit/authentication_cubit.dart';
 import 'core/provider/country_list_provider.dart';
-import 'core/presentation/widgets/selection_list_view.dart';
+import 'core/presentation/widgets/select_location_list_view.dart';
 import 'core/presentation/widgets/my_horizontal_padding.dart';
 import 'core/provider/city_list_provider.dart';
 import 'core/repository/city_repository.dart';
@@ -156,7 +156,7 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                       SizedBox(
                         height: 10,
                       ),
-                      SelectionListView<City>(
+                      SelectLocationListView<City>(
                         isShrinkWrap: true,
                         locations: context.read<CityListProvider>().cityList,
                         activeLocation: activeCity,

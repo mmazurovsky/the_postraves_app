@@ -82,4 +82,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     await _firebaseRepository.signOut();
     updateAuthStatus();
   }
+
+  void deleteMyProfile() async {
+    await _firebaseRepository.deleteMyProfile();
+    //todo also delete from backend
+    updateAuthStatus();
+  }
 }

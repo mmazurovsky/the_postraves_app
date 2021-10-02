@@ -8,12 +8,12 @@ import 'package:provider/provider.dart';
 import 'buttons/button_content.dart';
 import 'my_horizontal_padding.dart';
 
-class SelectionListView<LOCATION extends LocationInterface> extends StatelessWidget {
+class SelectLocationListView<LOCATION extends LocationInterface> extends StatelessWidget {
   final void Function(LOCATION) onLocationTap;
   final List<LOCATION> locations;
   final LOCATION? activeLocation;
   final bool isShrinkWrap;
-  const SelectionListView({
+  const SelectLocationListView({
     Key? key,
     required this.onLocationTap,
     required this.locations,
@@ -24,12 +24,12 @@ class SelectionListView<LOCATION extends LocationInterface> extends StatelessWid
   @override
   Widget build(BuildContext context) {
     // todo scroll bar
-    return ListView.separated(
+    return ListView.builder(
       padding: const EdgeInsets.only(bottom: 30),
       physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       shrinkWrap: isShrinkWrap,
-      itemCount: context.read<CityListProvider>().cityList.length,
-      separatorBuilder: (context, i) => const SizedBox(height: 8),
+      itemCount: locations.length,
+      // separatorBuilder: (context, i) => const SizedBox(height: 8),
       itemBuilder: (context, i) {
         LOCATION location = locations[i];
         return InkWell(
@@ -37,6 +37,7 @@ class SelectionListView<LOCATION extends LocationInterface> extends StatelessWid
           child: MyHorizontalPadding(
             child: ButtonContent(
               leading: Container(
+                padding: EdgeInsets.only(bottom: 8),
                 height: 30,
                 width: 30,
                 alignment: Alignment.center,

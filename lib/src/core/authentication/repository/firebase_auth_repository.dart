@@ -22,6 +22,7 @@ abstract class FirebaseAuthRepository {
   Future<ResponseSealed<UserCredential>> signInWithGoogle();
   Future<ResponseSealed<UserCredential>> signInWithApple();
   Future<ResponseSealed<void>> signOut();
+  Future<ResponseSealed<void>> deleteMyProfile();
   User? get currentUser;
   Stream<User?> get userStream;
   bool isSignInWithEmailLink(String link);
@@ -211,6 +212,16 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
   Future<ResponseSealed<void>> signOut() async {
     try {
       return ResponseSealed.success(await _firebaseAuth.signOut());
+    } on FirebaseAuthException catch (e) {
+      // todo
+      return ResponseSealed.failure(UserNotFoundFailure());
+    }
+  }
+
+  @override
+  Future<ResponseSealed<void>> deleteMyProfile() async {
+    try {
+      return ResponseSealed.success(await currentUser?.delete());
     } on FirebaseAuthException catch (e) {
       // todo
       return ResponseSealed.failure(UserNotFoundFailure());

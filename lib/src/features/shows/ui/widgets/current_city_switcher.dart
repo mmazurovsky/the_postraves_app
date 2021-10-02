@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
-import '../../../../core/presentation/widgets/selection_list_view.dart';
+import '../../../../core/presentation/widgets/select_location_list_view.dart';
 import '../../../../models/geo/city.dart';
 
 class CurrentCitySwitcher extends StatefulWidget {
@@ -38,7 +38,7 @@ class _CurrentCitySwitcherState
       height: 380,
       iconData: Ionicons.location_outline,
       title: AppLocalizations.of(context)!.selectCityTitle,
-      content: SelectionListView<City>(
+      content: SelectLocationListView<City>(
         locations: widget.cities,
         activeLocation: _currentCity,
         onLocationTap: (City cityTapped) {
