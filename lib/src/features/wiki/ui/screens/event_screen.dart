@@ -52,7 +52,6 @@ class EventScreen extends StatefulWidget {
 
 class _EventScreenState extends State<EventScreen>
     with SingleTickerProviderStateMixin {
-  static late String _wikiType;
   late ScrollController _scrollController;
   int? _wikiRating;
   late Widget _wikiDetails;
@@ -63,12 +62,6 @@ class _EventScreenState extends State<EventScreen>
     BlocProvider.of<EventCubit>(context).loadEvent(widget.eventId);
     _scrollController = ScrollController();
     _wikiDetails = LoadingScreen();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _wikiType = AppLocalizations.of(context)!.eventEntityNameSingular;
   }
 
   @override
@@ -93,7 +86,6 @@ class _EventScreenState extends State<EventScreen>
         }
       },
       child: WikiCanvas(
-        wikiType: _wikiType,
         scrollController: _scrollController,
         wikiDetails: _wikiDetails,
         imageDimensions: widget.imageDimensions,

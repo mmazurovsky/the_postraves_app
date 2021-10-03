@@ -50,7 +50,6 @@ class ArtistScreen extends StatefulWidget {
 class _ArtistScreenState extends State<ArtistScreen>
     with SingleTickerProviderStateMixin {
   int? _wikiRating;
-  static late String _wikiType;
   late Widget _wikiDetails;
   late ScrollController _scrollController;
 
@@ -60,12 +59,6 @@ class _ArtistScreenState extends State<ArtistScreen>
     BlocProvider.of<ArtistCubit>(context).loadArtist(widget.artistId);
     _scrollController = ScrollController();
     _wikiDetails = LoadingScreen();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _wikiType = AppLocalizations.of(context)!.artistEntityNameSingular;
   }
 
   @override
@@ -89,7 +82,6 @@ class _ArtistScreenState extends State<ArtistScreen>
         }
       },
       child: WikiCanvas(
-        wikiType: _wikiType,
         scrollController: _scrollController,
         wikiDetails: _wikiDetails,
         imageDimensions: widget.imageDimensions,

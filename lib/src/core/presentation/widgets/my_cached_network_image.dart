@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class MyCachedNetworkImage extends StatelessWidget {
   final Completer<ImageInfo> _imageCompleter;
   MyCachedNetworkImage(this.imageLink, {Key? key})
       : _imageCompleter = Completer<ImageInfo>(),
-        super(key: key);
+        super(key: ValueKey(imageLink));
 
   Future<ImageInfo?> get imageInfo async {
     return imageLink == null || imageLink!.length < 3
@@ -24,15 +25,20 @@ class MyCachedNetworkImage extends StatelessWidget {
     return imageLink == null || imageLink!.length < 3
         ? const EmptyImagePlaceholder()
         : CachedNetworkImage(
+            key: ValueKey(imageLink! + 'cached1'),
             imageUrl: imageLink!,
             imageBuilder: (context, provider) {
-              provider
-                  .resolve(const ImageConfiguration())
-                  .addListener(ImageStreamListener((imageInfo, _) {
-                _imageCompleter.isCompleted
-                    ? null
-                    : _imageCompleter.complete(imageInfo);
-              }));
+              provider.resolve(const ImageConfiguration()).addListener(
+                    ImageStreamListener(
+                      (imageInfo, _) {
+                        if (!_imageCompleter.isCompleted) {
+                          _imageCompleter.complete(imageInfo);
+                        }
+                      },
+                      onError: (exception, stackTrace) => log(
+                          'CachedNetworkImage exception: $exception, stacktrace: $stackTrace'),
+                    ),
+                  );
               return Image(
                 image: provider,
                 fit: BoxFit.cover,

@@ -10,33 +10,33 @@ class SceneCardForTimetable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SizedBox(
-        height: 190,
-        child: Stack(
-          alignment: Alignment.center,
-          fit: StackFit.expand,
-          children: [
-            MyCachedNetworkImage(scene.imageLink),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.75),
-              ),
+    return SizedBox(
+      height: 190,
+      child: Stack(
+        alignment: Alignment.center,
+        fit: StackFit.expand,
+        children: [
+          MyCachedNetworkImage(scene.imageLink),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.75),
             ),
-            Positioned(
-              bottom: 15,
-              left: 15,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(AppLocalizations.of(context)!.scene, style: MyTextStyles.cardSceneSubtitle),
-                  SizedBox(height: 3),
-                  Text(scene.name.toUpperCase(), style: MyTextStyles.cardSceneTitle),
-                ],
-              ),
+          ),
+          Positioned(
+            bottom: 15,
+            left: 15,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(AppLocalizations.of(context)!.scene,
+                    style: MyTextStyles.cardSceneSubtitle),
+                SizedBox(height: 3),
+                Text(scene.name.toUpperCase(),
+                    style: MyTextStyles.cardSceneTitle),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

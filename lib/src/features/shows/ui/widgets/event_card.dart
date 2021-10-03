@@ -57,7 +57,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
         imageLink: widget.loadedEvent.imageLink,
         id: widget.loadedEvent.id,
         name: widget.loadedEvent.name,
-        imageDimensions: await ImageDimensions.getImageInfo(_eventImage),
+        imageDimensions: await ImageDimensions.getImageDimensions(_eventImage),
       ),
     );
   }

@@ -25,7 +25,7 @@ class _DarkenedImageInContainerState extends State<DarkenedImageInContainer> {
   @override
   void initState() {
     super.initState();
-    _eventImage = MyCachedNetworkImage(widget.imageLink);
+    _eventImage = MyCachedNetworkImage(widget.imageLink, );
   }
 
   @override
@@ -35,7 +35,7 @@ class _DarkenedImageInContainerState extends State<DarkenedImageInContainer> {
         margin: const EdgeInsets.symmetric(vertical: 10),
         child: InkWell(
           onTap: () async {
-            widget.onTap(await ImageDimensions.getImageInfo(_eventImage));
+            widget.onTap(await ImageDimensions.getImageDimensions(_eventImage));
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),

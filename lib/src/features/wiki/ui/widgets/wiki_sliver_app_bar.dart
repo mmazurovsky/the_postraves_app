@@ -13,9 +13,6 @@ import '../../../../my_navigation.dart';
 class WikiSliverAppBar extends StatefulWidget {
   const WikiSliverAppBar({
     Key? key,
-    required this.title,
-    required this.subtitle,
-    required this.flexibleSpaceImageLink,
     required this.scrollController,
     required this.imageDimensions,
     required this.isBackButtonOn,
@@ -23,9 +20,6 @@ class WikiSliverAppBar extends StatefulWidget {
     required this.shareLink,
   }) : super(key: key);
 
-  final String title;
-  final String subtitle;
-  final String? flexibleSpaceImageLink;
   final ScrollController scrollController;
   final ImageDimensions? imageDimensions;
   final bool isBackButtonOn;
@@ -48,7 +42,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
   void initState() {
     super.initState();
     widget.scrollController.addListener(_scrollListener);
-    _flexibleSpaceImage = MyCachedNetworkImage(widget.flexibleSpaceImageLink);
+    _flexibleSpaceImage = MyCachedNetworkImage(widget.wikiData.imageLink);
     _showAppBarTitle = false;
   }
 
@@ -149,12 +143,12 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                widget.title,
+                widget.wikiData.name,
                 style: MyTextStyles.appBarTitle,
                 overflow: TextOverflow.fade,
               ),
               Text(
-                widget.subtitle,
+                widget.wikiData.type.getNameSingular(context),
                 style: MyTextStyles.appBarSubtitle,
                 overflow: TextOverflow.ellipsis,
               ),

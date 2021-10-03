@@ -47,7 +47,7 @@ class _RatingEntityListItemState<T extends FollowableInterface>
         widget.onItemTap(
           context,
           widget.entity,
-          await ImageDimensions.getImageInfo(_image),
+          await ImageDimensions.getImageDimensions(_image),
         );
       },
       child: Padding(

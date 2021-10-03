@@ -52,7 +52,7 @@ class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
         state.maybeWhen(
             loading: () => screenToReturn = const LoadingScreen(),
             authenticated: (userProfile) =>
-                screenToReturn = ProfileScreen(userProfile: userProfile),
+              screenToReturn = ProfileScreen(userProfile: userProfile),     
             authenticatedWithoutAccount: () => screenToReturn =
                 CreateUserProfileScreen(
                     isPoppable: false, userProfileRepository: serviceLocator()),
@@ -78,35 +78,41 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String? _profileType;
   final ScrollController _scrollController =
       TabItem.profile.tabScrollController;
-  MyCachedNetworkImage? _image;
-  ImageDimensions? _imageDimensions;
   _ProfileDetails? _profileDetails;
+  late MyCachedNetworkImage _myCachedNetworkImage;
+  ImageDimensions? _imageDimensions;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    _image = MyCachedNetworkImage(widget.userProfile.imageLink);
-
-    Future.delayed(
-        Duration.zero,
-        () async =>
-            _imageDimensions = await ImageDimensions.getImageInfo(_image!));
-
-    _profileType = AppLocalizations.of(context)!.userEntityNameSingular;
-
+  void initState() {
+    super.initState();
     _profileDetails = _ProfileDetails(
       userProfile: widget.userProfile,
     );
+    _myCachedNetworkImage = MyCachedNetworkImage(widget.userProfile.imageLink);
+    _assignImageDimensions();
+
+        // Future.delayed(
+        // Duration.zero,
+        // () async =>
+        //     _imageDimensions = await ImageDimensions.getImageInfo(_image!));
+
+  }
+
+  void _assignImageDimensions() async {
+    final imageDimensions =
+    //* I DON'T FUCKING KNOW WHY THIS FUTURE NEVER GETS RESOLVED
+        // await ImageDimensions.getImageDimensions(_myCachedNetworkImage);
+    widget.userProfile.imageLink != null ? ImageDimensions(500, 500) : null;
+    setState(() {
+      _imageDimensions = imageDimensions;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return WikiCanvas(
-      wikiType: _profileType!, //todo ! ok?
       scrollController: _scrollController,
       wikiDetails: _profileDetails!,
       imageDimensions: _imageDimensions,
@@ -227,34 +233,33 @@ class _SettingsButtonData {
 }
 
 class SettingsList extends StatelessWidget {
-
   List<_SettingsButtonData> _getSettingsList(BuildContext context) {
     return [
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.modifyProfile,
-        leadingIcon:
-            const Icon(Ionicons.clipboard_outline, color: MyColors.main, size: 18),
+        leadingIcon: const Icon(Ionicons.clipboard_outline,
+            color: MyColors.main, size: 18),
         onTap: (BuildContext context) =>
             NavigatorFunctions.pushUpdateUser(context),
       ),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.writeToUs,
-        leadingIcon:
-            const Icon(Ionicons.chatbox_outline, color: MyColors.main, size: 18),
+        leadingIcon: const Icon(Ionicons.chatbox_outline,
+            color: MyColors.main, size: 18),
         onTap: (_) =>
             OpenLinkService.openUrl("https://t.me/mmazurovsky"), //todo
       ),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.signOut,
-        leadingIcon:
-            const Icon(Ionicons.log_out_outline, color: MyColors.main, size: 18),
+        leadingIcon: const Icon(Ionicons.log_out_outline,
+            color: MyColors.main, size: 18),
         onTap: (BuildContext context) =>
             BlocProvider.of<AuthenticationCubit>(context).signOut(),
       ),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.deleteProfile,
-        leadingIcon:
-            const Icon(Ionicons.close_circle_outline, color: MyColors.main, size: 18),
+        leadingIcon: const Icon(Ionicons.close_circle_outline,
+            color: MyColors.main, size: 18),
         onTap: (BuildContext context) =>
             BlocProvider.of<AuthenticationCubit>(context)
                 .deleteMyProfile(), //todo check working

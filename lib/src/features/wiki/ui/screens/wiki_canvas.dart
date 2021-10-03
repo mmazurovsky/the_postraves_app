@@ -11,7 +11,6 @@ import '../widgets/wiki_title.dart';
 
 class WikiCanvas extends StatefulWidget {
   final WikiDataDto wikiData;
-  final String wikiType;
   final ScrollController scrollController;
   final Widget wikiDetails;
   final ImageDimensions? imageDimensions;
@@ -20,7 +19,6 @@ class WikiCanvas extends StatefulWidget {
   const WikiCanvas({
     Key? key,
     required this.wikiData,
-    required this.wikiType,
     required this.scrollController,
     required this.wikiDetails,
     required this.imageDimensions,
@@ -69,9 +67,6 @@ class _WikiCanvasState extends State<WikiCanvas> {
               future: _setShareLinkToPage(),
               builder: (context, AsyncSnapshot<Uri> snapshot) =>
                   WikiSliverAppBar(
-                title: widget.wikiData.name,
-                subtitle: widget.wikiType,
-                flexibleSpaceImageLink: widget.wikiData.imageLink,
                 scrollController: widget.scrollController,
                 imageDimensions: widget.imageDimensions,
                 isBackButtonOn: widget.isBackButtonOn,
@@ -86,7 +81,7 @@ class _WikiCanvasState extends State<WikiCanvas> {
                   WikiTitle(title: widget.wikiData.name),
                   SizedBox(height: 8),
                   WikiSubtitle(
-                    entityType: widget.wikiType,
+                    entityType: widget.wikiData.type.getNameSingular(context),
                     overallFollowers: widget.wikiData.overallFollowers,
                     country: widget.wikiData.country,
                   ),

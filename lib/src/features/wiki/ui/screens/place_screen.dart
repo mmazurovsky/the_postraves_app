@@ -51,7 +51,6 @@ class PlaceScreen extends StatefulWidget {
 
 class _PlaceScreenState extends State<PlaceScreen>
     with SingleTickerProviderStateMixin {
-  static late String _wikiType;
   int? _wikiRating;
   late Widget _wikiDetails;
   late ScrollController _scrollController;
@@ -62,12 +61,6 @@ class _PlaceScreenState extends State<PlaceScreen>
     BlocProvider.of<PlaceCubit>(context).loadPlace(widget.placeId);
     _scrollController = ScrollController();
     _wikiDetails = LoadingScreen();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _wikiType = AppLocalizations.of(context)!.placeEntityNameSingular;
   }
 
   @override
@@ -90,7 +83,6 @@ class _PlaceScreenState extends State<PlaceScreen>
         }
       },
       child: WikiCanvas(
-        wikiType: _wikiType,
         scrollController: _scrollController,
         wikiDetails: _wikiDetails,
         imageDimensions: widget.imageDimensions,

@@ -47,7 +47,6 @@ class UnityScreen extends StatefulWidget {
 
 class _UnityScreenState extends State<UnityScreen>
     with SingleTickerProviderStateMixin {
-  static late String _wikiType;
   int? _wikiRating;
   late Widget _wikiDetails;
   late ScrollController _scrollController;
@@ -58,12 +57,6 @@ class _UnityScreenState extends State<UnityScreen>
     BlocProvider.of<UnityCubit>(context).loadUnity(widget.unityId);
     _scrollController = ScrollController();
     _wikiDetails = LoadingScreen();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _wikiType = AppLocalizations.of(context)!.unityEntityNameSingular;
   }
 
   @override
@@ -87,7 +80,6 @@ class _UnityScreenState extends State<UnityScreen>
         }
       },
       child: WikiCanvas(
-        wikiType: _wikiType,
         scrollController: _scrollController,
         wikiDetails: _wikiDetails,
         imageDimensions: widget.imageDimensions,

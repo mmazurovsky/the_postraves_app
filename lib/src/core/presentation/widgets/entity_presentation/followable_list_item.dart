@@ -46,7 +46,7 @@ class _FollowableListItemState extends State<FollowableListItem> {
         widget.onItemTap(
           context,
           widget.followable,
-          await ImageDimensions.getImageInfo(_image),
+          await ImageDimensions.getImageDimensions(_image),
         );
       },
       child: Padding(
