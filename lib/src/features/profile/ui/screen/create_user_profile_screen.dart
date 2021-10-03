@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/features/profile/ui/widgets/nickname_text_field.dart';
 import 'package:the_postraves_app/src/features/shows/ui/widgets/current_city_switcher.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
@@ -21,7 +21,6 @@ import '../../../../core/utils/my_assets.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_text_styles.dart';
-import '../widgets/my_text_field.dart';
 import '../widgets/profile_image_chooser.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -40,22 +39,19 @@ class CreateUserProfileScreen extends StatefulWidget {
 }
 
 class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
-  late TextEditingController _nicknameEditingController;
   late City _userCity;
   File? _pickedImageAsFile;
   late GlobalKey<FormState> _formKey;
-  late bool _isNicknameFree;
   late FocusNode _nicknameFieldFocusNode;
-  late String _buttonText;
-  String? _previouslyCheckedNickname;
+  late TextEditingController _nicknameEditingController;
+  String? _buttonText;
 
   @override
   void initState() {
     super.initState();
+    _nicknameFieldFocusNode = FocusNode();
     _nicknameEditingController = TextEditingController();
     _formKey = GlobalKey<FormState>();
-    _isNicknameFree = true;
-    _nicknameFieldFocusNode = FocusNode();
   }
 
   @override
@@ -82,43 +78,12 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
     _pickedImageAsFile = imageFile;
   }
 
-  String? _nicknameValidator(String nickname) {
-    _resolveNickname(nickname);
-    if (nickname.length < 3 || nickname.length > 15) {
-      return AppLocalizations.of(context)!.profileCreationNicknameWarningLength;
-    } else if (!RegExp(r"^[a-zA-Zа-яА-Я0-9]*$").hasMatch(nickname)) {
-      // todo add german
-      return AppLocalizations.of(context)!
-          .profileCreationNicknameWarningSymbols;
-    } else if (!_isNicknameFree) {
-      return AppLocalizations.of(context)!.profileCreationNicknameWarningTaken;
-    } else {
-      return null;
-    }
+  void _unfocusTextFields() {
+    _nicknameFieldFocusNode.unfocus();
   }
 
-  void _resolveNickname(String nickname) async {
-    if (nickname.length > 2 &&
-        nickname.length < 16 &&
-        RegExp(r"^[a-zA-Zа-яА-Я0-9]*$").hasMatch(nickname) &&
-        nickname != _previouslyCheckedNickname) {
-      _previouslyCheckedNickname = nickname;
-      final response =
-          await widget.userProfileRepository.checkNicknameIsFree(nickname);
-
-      response.when(
-          success: (data) {
-            final responseIsNicknameFree = data as bool;
-            if (_isNicknameFree != responseIsNicknameFree) {
-              setState(() {
-                _isNicknameFree = responseIsNicknameFree;
-              });
-              _formKey.currentState!.validate();
-            }
-          },
-          failure: (failure,
-              failureMessage) {}); //todo transfer to bloc and failure processing
-    }
+  void _triggerFormValidation() {
+    _formKey.currentState!.validate();
   }
 
   @override
@@ -152,29 +117,35 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                         height: 20,
                       ),
                       ProfileImageChooser(
-                          pickImage: _pickImage,
-                          nicknameFocusNode: _nicknameFieldFocusNode),
-                      const SizedBox(height: 20),
-                      MyTextField(
-                        focusNode: _nicknameFieldFocusNode,
-                        title: AppLocalizations.of(context)!
-                            .profileCreationNickname,
-                        textInputType: TextInputType.text,
-                        isSecret: false,
-                        textEditingController: _nicknameEditingController,
-                        validatorFunction: _nicknameValidator,
-                        fillColor: Colors.transparent,
-                        activeBorderColor: MyColors.accent,
-                        inactiveBorderColor: MyColors.main,
+                        pickImage: _pickImage,
+                        onTap: () => _unfocusTextFields(),
                       ),
+                      const SizedBox(height: 20),
+                      NicknameTextField(
+                        focusNode: _nicknameFieldFocusNode, 
+                        textEditingController: _nicknameEditingController, 
+                        triggerValidation: () => _triggerFormValidation(),
+                        ),
+
+                      // MyTextField(
+                      //   focusNode: _nicknameFieldFocusNode,
+                      //   title: AppLocalizations.of(context)!
+                      //       .profileCreationNickname,
+                      //   textInputType: TextInputType.text,
+                      //   isSecret: false,
+                      //   textEditingController: _nicknameEditingController,
+                      //   validatorFunction: _nicknameValidator,
+                      //   fillColor: Colors.transparent,
+                      //   activeBorderColor: MyColors.accent,
+                      //   inactiveBorderColor: MyColors.main,
+                      // ),
                       const SizedBox(height: 20),
                       MyOutlinedButton(
                         onTap: () {
                           _nicknameFieldFocusNode.unfocus();
                           showModalBottomSheet(
                             context: context,
-                            builder: (context) =>
-                                CurrentCitySwitcher(
+                            builder: (context) => CurrentCitySwitcher(
                               currentCity: _userCity,
                               cities: context.read<CityListProvider>().cityList,
                               onSelected: _selectActiveCity,
@@ -206,11 +177,11 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                       MyElevatedButton(
                         mainAxisAlignment: MainAxisAlignment.center,
                         leadingIcon: Image.asset(MyEmoji.finish, width: 20),
-                        text: _buttonText,
+                        text: _buttonText!,
                         buttonColor: MyColors.accent,
                         textStyle: MyTextStyles.buttonWithOppositeColor,
                         onTap: () {
-                          _nicknameFieldFocusNode.unfocus();
+                          _unfocusTextFields();
                           if (_formKey.currentState!.validate()) {
                             setState(() {
                               _buttonText =

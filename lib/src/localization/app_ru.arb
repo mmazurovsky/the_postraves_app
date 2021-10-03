@@ -130,5 +130,10 @@
     "getLinkToSignIn": " Войти",
     "linkHasBeenSent": "Ссылка отправлена на указанный email,\nоткройте ее",
     "emailIsNotCorrect": "Введен некорректный email",
-    "settings": "Открыть настройки"
+    "openSettings": "Открыть настройки",
+    "settings": "Настройки",
+    "modifyProfile": "Изменить профиль",
+    "writeToUs": "Написать нам",
+    "signOut": "Выйти из профиля",
+    "deleteProfile": "Удалить профиль"
 }

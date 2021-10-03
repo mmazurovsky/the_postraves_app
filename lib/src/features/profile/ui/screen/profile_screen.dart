@@ -178,7 +178,6 @@ class _ProfileDetails extends StatelessWidget {
             size: 26,
             color: MyColors.accent,
           ),
-          //todo
           onButtonTap: () => showModalBottomSheet(
             context: context,
             builder: (context) => CurrentCitySwitcher(
@@ -200,7 +199,7 @@ class _ProfileDetails extends StatelessWidget {
             size: 20,
             color: MyColors.main,
           ),
-          text: AppLocalizations.of(context)!.settings,
+          text: AppLocalizations.of(context)!.openSettings,
           borderColor: MyColors.main,
           // buttonColor: MyColors.forEventCard,
           textStyle: MyTextStyles.buttonWithMainColor,
@@ -210,23 +209,6 @@ class _ProfileDetails extends StatelessWidget {
           ),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
-        // MyElevatedButton(
-        //   text: AppLocalizations.of(context)!.profileSignOut,
-        //   buttonColor: MyColors.main,
-        //   textStyle: MyTextStyles.buttonWithOppositeColor,
-        //   onTap: () => BlocProvider.of<AuthenticationCubit>(context).singOut(),
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        // ),
-        // const SectionSpacer(),
-        // MyElevatedButton(
-        //   //todo
-        //   text: 'Clear search history',
-        //   buttonColor: MyColors.main,
-        //   textStyle: MyTextStyles.buttonWithOppositeColor,
-        //   onTap: () =>
-        //       BlocProvider.of<SearchCubit>(context).removeAllSearchRecords(),
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        // )
       ],
     );
   }
@@ -245,46 +227,53 @@ class _SettingsButtonData {
 }
 
 class SettingsList extends StatelessWidget {
-  final List<_SettingsButtonData> settingsList = [
-    _SettingsButtonData(
-      text: 'Modify profile',
-      leadingIcon:
-          Icon(Ionicons.clipboard_outline, color: MyColors.main, size: 18),
-      onTap: (BuildContext context) =>
-          NavigatorFunctions.pushUpdateUser(context),
-    ),
-    _SettingsButtonData(
-      text: 'Write to us',
-      leadingIcon:
-          Icon(Ionicons.chatbox_outline, color: MyColors.main, size: 18),
-      onTap: (_) => OpenLinkService.openUrl("https://t.me/mmazurovsky"),
-    ),
-    _SettingsButtonData(
-      text: 'Sign out',
-      leadingIcon:
-          Icon(Ionicons.log_out_outline, color: MyColors.main, size: 18),
-      onTap: (BuildContext context) =>
-          BlocProvider.of<AuthenticationCubit>(context).signOut(),
-    ),
-    _SettingsButtonData(
-      text: 'Delete profile',
-      leadingIcon: Icon(Ionicons.close_circle_outline, color: MyColors.main, size: 18),
-      onTap: (BuildContext context) =>
-          BlocProvider.of<AuthenticationCubit>(context).deleteMyProfile(), //todo check working
-    ),
-  ];
 
-  SettingsList({Key? key}) : super(key: key);
+  List<_SettingsButtonData> _getSettingsList(BuildContext context) {
+    return [
+      _SettingsButtonData(
+        text: AppLocalizations.of(context)!.modifyProfile,
+        leadingIcon:
+            const Icon(Ionicons.clipboard_outline, color: MyColors.main, size: 18),
+        onTap: (BuildContext context) =>
+            NavigatorFunctions.pushUpdateUser(context),
+      ),
+      _SettingsButtonData(
+        text: AppLocalizations.of(context)!.writeToUs,
+        leadingIcon:
+            const Icon(Ionicons.chatbox_outline, color: MyColors.main, size: 18),
+        onTap: (_) =>
+            OpenLinkService.openUrl("https://t.me/mmazurovsky"), //todo
+      ),
+      _SettingsButtonData(
+        text: AppLocalizations.of(context)!.signOut,
+        leadingIcon:
+            const Icon(Ionicons.log_out_outline, color: MyColors.main, size: 18),
+        onTap: (BuildContext context) =>
+            BlocProvider.of<AuthenticationCubit>(context).signOut(),
+      ),
+      _SettingsButtonData(
+        text: AppLocalizations.of(context)!.deleteProfile,
+        leadingIcon:
+            const Icon(Ionicons.close_circle_outline, color: MyColors.main, size: 18),
+        onTap: (BuildContext context) =>
+            BlocProvider.of<AuthenticationCubit>(context)
+                .deleteMyProfile(), //todo check working
+      ),
+    ];
+  }
+
+  const SettingsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final settingsList = _getSettingsList(context);
     return ModalBottomSheetContent(
       height: MediaQuery.of(context).size.height * 0.5,
       iconData: Ionicons.cog_outline,
-      title: 'Settings', //todo
+      title: AppLocalizations.of(context)!.settings, //todo
       content: ListView.separated(
-        padding: EdgeInsets.only(top: 10),
-        physics: NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.only(top: 10),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: settingsList.length,
         separatorBuilder: (_, i) => const SizedBox(height: 10),
         itemBuilder: (context, index) {
@@ -304,20 +293,17 @@ class SettingsButton extends StatelessWidget {
     return InkWell(
       onTap: () => data.onTap(context),
       child: MyHorizontalPadding(
-        child: Container(
-          // padding: EdgeInsets.symmetric(vertical: 7),
-          child: ButtonContent(
-            leading: Container(
-              height: 30,
-              width: 30,
-              alignment: Alignment.center,
-              child: data.leadingIcon,
-            ),
-            distanceBetweenLeadingAndText: 13,
-            text: data.text,
-            textStyle: MyTextStyles.modalBottomSheetItem,
-            mainAxisAlignment: MainAxisAlignment.start,
+        child: ButtonContent(
+          leading: Container(
+            height: 30,
+            width: 30,
+            alignment: Alignment.center,
+            child: data.leadingIcon,
           ),
+          distanceBetweenLeadingAndText: 13,
+          text: data.text,
+          textStyle: MyTextStyles.modalBottomSheetItem,
+          mainAxisAlignment: MainAxisAlignment.start,
         ),
       ),
     );

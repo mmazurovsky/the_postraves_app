@@ -13,11 +13,11 @@ import 'package:image_cropper/image_cropper.dart';
 
 class ProfileImageChooser extends StatefulWidget {
   final void Function(File) pickImage;
-  final FocusNode nicknameFocusNode;
+  final void Function() onTap;
   const ProfileImageChooser({
     Key? key,
     required this.pickImage,
-    required this.nicknameFocusNode
+    required this.onTap
   }) : super(key: key);
 
   @override
@@ -73,7 +73,7 @@ class _ProfileImageChooserState extends State<ProfileImageChooser> {
       child: InkWell(
         highlightColor: MyColors.forButtonHighlight,
         onTap: () {
-          widget.nicknameFocusNode.unfocus();
+          widget.onTap();
           getImage();
         },
         child: Container(

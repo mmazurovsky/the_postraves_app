@@ -130,5 +130,10 @@
     "getLinkToSignIn": "Sign in",
     "linkHasBeenSent": "The link sent to your email,\nopen it to sign in",
     "emailIsNotCorrect": "Incorrect email",
-    "settings": "Open settings"
+    "openSettings": "Open settings",
+    "settings": "Settings",
+    "modifyProfile": "Modify profile",
+    "writeToUs": "Write to us",
+    "signOut": "Sign out",
+    "deleteProfile": "Delete profile"
 }

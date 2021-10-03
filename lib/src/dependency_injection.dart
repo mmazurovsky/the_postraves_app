@@ -132,7 +132,7 @@ void setupServiceLocatorInjection() async {
       .registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
   serviceLocator.registerLazySingleton<FirebaseStorage>(
-      () => FirebaseStorage.instanceFor(app: serviceLocator<FirebaseApp>()));
+      () => FirebaseStorage.instance);
 
   serviceLocator.registerLazySingleton<FirebaseFirestore>(
       () => FirebaseFirestore.instance);

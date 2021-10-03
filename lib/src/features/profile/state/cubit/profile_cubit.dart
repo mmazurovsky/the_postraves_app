@@ -76,4 +76,20 @@ class ProfileCubit extends Cubit<ProfileState> {
           failure: (failure, failureMessage) {}); //todo
     }
   }
+
+  Future<bool?> checkNicknameIsFree(String nickname) async {
+    final response = await _userProfileRepository.checkNicknameIsFree(nickname);
+
+    bool? isFree;
+    response.when(
+      success: (data) {
+        final responseIsNicknameFree = data as bool;
+        isFree = responseIsNicknameFree;
+      },
+      failure: (failure, failureMessage) {
+        isFree = false; //todo failure processing
+      },
+    );
+    return isFree;
+  }
 }
