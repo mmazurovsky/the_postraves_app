@@ -89,7 +89,7 @@ class _Charts extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         _ChartsViewForEntity(
-          sectionTitle: AppLocalizations.of(context)!.chartsTitle,
+          sectionTitle: AppLocalizations.of(context)!.featuredTitle,
           previousWeekWinner: bestArtist,
           weeklyChart: weeklyChart?.take(5).toList(),
           overallChart: overallChart?.take(5).toList(),
@@ -137,7 +137,7 @@ class _ChartsViewForEntity<T extends FollowableInterface>
               ? RatingWeeklyWinnerCard<T>(
                   entity: previousWeekWinner!,
                   nominationDescription:
-                      AppLocalizations.of(context)!.chartsUsersChoice,
+                      AppLocalizations.of(context)!.featuredUsersChoice,
                   nomination:
                       '${previousWeekWinner!.getEntityNameSingularFormString(context)} ${AppLocalizations.of(context)!.ofTheWeek}'
                           .toUpperCase(),

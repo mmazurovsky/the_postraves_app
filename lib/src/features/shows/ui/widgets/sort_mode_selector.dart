@@ -6,24 +6,23 @@ import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 
 import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/utils/my_assets.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import '../../../../models/enum/view_mode.dart';
 import '../../state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
 
-class SortModeSwitcher extends StatelessWidget {
+class SortModeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ViewSwitcherCubit, ViewSwitcherState>(
         builder: (context, state) {
       return ModalBottomSheetContent(
-        height: 380,
+        height: ScreenSize.height * 0.35,
         iconData: Ionicons.swap_vertical_outline,
-        title: AppLocalizations.of(context)!.sortModeSwitcherTitle,
+        title: AppLocalizations.of(context)!.sortModeSelectorTitle,
         content: Padding(
-          padding: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 8),
           child: MyHorizontalMargin(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

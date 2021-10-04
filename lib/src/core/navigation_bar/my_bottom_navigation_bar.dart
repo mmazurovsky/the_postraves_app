@@ -48,8 +48,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       backgroundColor: MyColors.bottomNavBar,
-      showSelectedLabels: false,
       showUnselectedLabels: false,
+      //* https://github.com/flutter/flutter/issues/86545
+      selectedFontSize: 0,
+      showSelectedLabels: false,
       onTap: (index) {
         thereWasTabChange = true;
         context

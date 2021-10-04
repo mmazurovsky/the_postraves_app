@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 
-import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
-import '../../../../core/presentation/widgets/select_location_list_view.dart';
-import '../../../../models/geo/city.dart';
+import 'modal_bottom_sheet_content.dart';
+import 'select_location_list_view.dart';
+import '../../../models/geo/city.dart';
 
-class CurrentCitySwitcher extends StatefulWidget {
+class CurrentCitySelector extends StatefulWidget {
   final City currentCity;
   final List<City> cities;
   final Function onSelected;
-  const CurrentCitySwitcher({
+  const CurrentCitySelector({
     Key? key,
     required this.currentCity,
     required this.cities,
@@ -18,10 +19,10 @@ class CurrentCitySwitcher extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CurrentCitySwitcherState createState() => _CurrentCitySwitcherState();
+  _CurrentCitySelectorState createState() => _CurrentCitySelectorState();
 }
 
-class _CurrentCitySwitcherState extends State<CurrentCitySwitcher> {
+class _CurrentCitySelectorState extends State<CurrentCitySelector> {
   late City _currentCity;
 
   @override
@@ -33,7 +34,7 @@ class _CurrentCitySwitcherState extends State<CurrentCitySwitcher> {
   @override
   Widget build(BuildContext context) {
     return ModalBottomSheetContent(
-      height: 380,
+      height: ScreenSize.height * 0.33,
       iconData: Ionicons.location_outline,
       title: AppLocalizations.of(context)!.selectCityTitle,
       content: SelectLocationListView<City>(

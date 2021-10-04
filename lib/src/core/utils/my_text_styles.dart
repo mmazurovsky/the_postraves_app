@@ -52,7 +52,7 @@ class MyTextStyles {
 
   static TextStyle modalBottomSheetTitle = const TextStyle(
     fontFamily: 'Roboto',
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: FontWeight.w600,
     color: MyColors.main,
     wordSpacing: 3,

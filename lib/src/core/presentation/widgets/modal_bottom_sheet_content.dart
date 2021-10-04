@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:the_postraves_app/src/core/utils/my_constants.dart';
 
 import '../../utils/my_colors.dart';
 import '../../utils/my_text_styles.dart';
@@ -35,32 +36,41 @@ class ModalBottomSheetContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              Container(
-                width: 30,
-                height: 4,
-                color: MyColors.forInactiveStuff.withOpacity(0.2),
-              ),
-              const SizedBox(height: 12),
-              Icon(
-                iconData,
-                size: 40,
-                color: MyColors.main,
-              ),
-              const SizedBox(height: 8),
-              MyHorizontalPadding(
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: MyTextStyles.modalBottomSheetTitle,
+          MyHorizontalPadding(
+            child: Column(
+              children: [
+                const SizedBox(height: 8),
+                Container(
+                  width: 30,
+                  height: 4,
+                  color: MyColors.forInactiveStuff.withOpacity(0.2),
                 ),
-              ),
-              const SizedBox(height: 15),
-              const SectionDivider(needHorizontalMargin: true),
-            ],
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(width: 3),
+                    Icon(
+                      iconData,
+                      size: 24,
+                      color: MyColors.main,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Flexible(
+                      child: Text(
+                        title,
+                        textAlign: TextAlign.start,
+                        style: MyTextStyles.modalBottomSheetTitle,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                const SectionDivider(needHorizontalMargin: false),
+              ],
+            ),
           ),
           Expanded(child: content),
           const SizedBox(height: 10),
@@ -75,6 +85,5 @@ class ModalBottomSheetContent extends StatelessWidget {
         ],
       ),
     );
-    
   }
 }

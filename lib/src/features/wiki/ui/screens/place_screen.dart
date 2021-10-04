@@ -17,7 +17,7 @@ import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../dto/wiki_data_dto.dart';
 import '../widgets/address_section.dart';
-import '../widgets/external_map_launcher.dart';
+import '../widgets/map_selector.dart';
 import '../widgets/column_of_custom_cards.dart';
 import '../widgets/scene_card_for_event.dart';
 import '../widgets/short_event_card_item.dart';
@@ -146,7 +146,7 @@ class _PlaceDetails extends StatelessWidget {
           InkWell(
             onTap: () => showModalBottomSheet(
               context: context,
-              builder: (context) => ExternalMapLauncher(
+              builder: (context) => MapSelector(
                 coordinate: loadedPlace.coordinate,
                 placeName: loadedPlace.name,
               ),

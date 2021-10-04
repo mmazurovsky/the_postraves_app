@@ -7,11 +7,11 @@ extension ViewModeExtension on ViewMode {
   static _getNameMapping(BuildContext context, ViewMode mode) {
     return {
       ViewMode.SORT_BY_DATE:
-          AppLocalizations.of(context)!.sortModeSwitcherByDate,
+          AppLocalizations.of(context)!.sortModeSelectorByDate,
       ViewMode.SORT_BY_RATING:
-          AppLocalizations.of(context)!.sortModeSwitcherByPopularity,
+          AppLocalizations.of(context)!.sortModeSelectorByPopularity,
       ViewMode.SHOW_RECOMMENDED:
-          AppLocalizations.of(context)!.sortModeSwitcherByRecommended,
+          AppLocalizations.of(context)!.sortModeSelectorByRecommended,
     }[mode];
   }
 

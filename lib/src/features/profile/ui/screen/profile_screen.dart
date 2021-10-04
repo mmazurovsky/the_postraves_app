@@ -10,7 +10,7 @@ import 'package:the_postraves_app/src/core/provider/city_list_provider.dart';
 import 'package:the_postraves_app/src/core/provider/current_city_provider.dart';
 import 'package:the_postraves_app/src/core/service/open_link_service.dart';
 import 'package:the_postraves_app/src/core/utils/screen_size.dart';
-import 'package:the_postraves_app/src/features/shows/ui/widgets/current_city_switcher.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/current_city_selector.dart';
 import 'package:the_postraves_app/src/models/geo/city.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
@@ -189,7 +189,7 @@ class _ProfileDetails extends StatelessWidget {
           ),
           onButtonTap: () => showModalBottomSheet(
             context: context,
-            builder: (context) => CurrentCitySwitcher(
+            builder: (context) => CurrentCitySelector(
               currentCity: context.watch<CurrentCityProvider>().currentCity!,
               cities: context.watch<CityListProvider>().cityList,
               onSelected: (City newCurrentCity) => context
@@ -214,7 +214,7 @@ class _ProfileDetails extends StatelessWidget {
           textStyle: MyTextStyles.buttonWithMainColor,
           onTap: () => showModalBottomSheet(
             context: context,
-            builder: (context) => SettingsList(),
+            builder: (context) => SettingsSelector(),
           ),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
@@ -235,7 +235,7 @@ class _SettingsButtonData {
   });
 }
 
-class SettingsList extends StatelessWidget {
+class SettingsSelector extends StatelessWidget {
   List<_SettingsButtonData> _getSettingsList(BuildContext context) {
     return [
       _SettingsButtonData(
@@ -270,13 +270,13 @@ class SettingsList extends StatelessWidget {
     ];
   }
 
-  const SettingsList({Key? key}) : super(key: key);
+  const SettingsSelector({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final settingsList = _getSettingsList(context);
     return ModalBottomSheetContent(
-      height: ScreenSize.height * 0.5,
+      height: ScreenSize.height * 0.4,
       iconData: Ionicons.cog_outline,
       title: AppLocalizations.of(context)!.settings, //todo
       content: ListView.separated(

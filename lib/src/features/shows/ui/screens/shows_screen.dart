@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/core/provider/city_list_provider.dart';
 import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
 import '../../state/shows_cubit/shows_cubit.dart';
-import '../widgets/current_city_switcher.dart';
+import '../../../../core/presentation/widgets/current_city_selector.dart';
 import '../../../../models/geo/city.dart';
 import '../../../../core/provider/current_city_provider.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ import '../../../../core/utils/my_colors.dart';
 import '../../../../core/presentation/widgets/animations/my_slide_animated_switcher.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../core/presentation/widgets/my_flushbar.dart';
-import '../widgets/sort_mode_switcher.dart';
+import '../widgets/sort_mode_selector.dart';
 import '../widgets/events_by_date_list.dart';
 import '../widgets/events_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,7 +79,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
                 ),
                 onTap: () => showModalBottomSheet(
                   context: context,
-                  builder: (context) => CurrentCitySwitcher(
+                  builder: (context) => CurrentCitySelector(
                     currentCity: _currentCity!,
                     cities: _cities!,
                     onSelected: (City newCurrentCity) => context
@@ -99,7 +99,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
                   ),
                   onTap: () => showModalBottomSheet(
                     context: context,
-                    builder: (context) => SortModeSwitcher(),
+                    builder: (context) => SortModeSelector(),
                   ),
                 ),
               ],

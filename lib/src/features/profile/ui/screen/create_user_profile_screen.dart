@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/features/profile/ui/widgets/nickname_text_field.dart';
-import 'package:the_postraves_app/src/features/shows/ui/widgets/current_city_switcher.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/current_city_selector.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
 import '../../repository/user_profile_repository_impl.dart';
@@ -145,7 +145,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                           _nicknameFieldFocusNode.unfocus();
                           showModalBottomSheet(
                             context: context,
-                            builder: (context) => CurrentCitySwitcher(
+                            builder: (context) => CurrentCitySelector(
                               currentCity: _userCity,
                               cities: context.read<CityListProvider>().cityList,
                               onSelected: _selectActiveCity,
