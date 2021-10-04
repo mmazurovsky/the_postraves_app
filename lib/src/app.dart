@@ -7,6 +7,7 @@ import 'core/authentication/state/cubit/authentication_cubit.dart';
 import 'core/provider/city_list_provider.dart';
 import 'core/provider/current_city_provider.dart';
 import 'core/repository/country_repository.dart';
+import 'core/utils/screen_size.dart';
 import 'features/chart/state/cubit/charts_cubit.dart';
 import 'features/profile/state/cubit/profile_cubit.dart';
 import 'features/search/state/cubit/search_cubit.dart';
@@ -38,6 +39,15 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> with WidgetsBindingObserver {
+  @override
+  void didChangeDependencies() {
+    ScreenSize.setSize(
+      MediaQuery.of(context).size.height,
+      MediaQuery.of(context).size.width,
+    );
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

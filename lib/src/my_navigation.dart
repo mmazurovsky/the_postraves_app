@@ -217,8 +217,8 @@ class NavigatorFunctions {
     final ImageDimensions? imageDimensions =
         imageHeight != null && imageWidth != null
             ? ImageDimensions(
-                imageHeight,
-                imageWidth,
+                imageHeight.toDouble(),
+                imageWidth.toDouble(),
               )
             : null;
 

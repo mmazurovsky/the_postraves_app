@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:screen_brightness/screen_brightness.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import '../../../../core/presentation/widgets/entity_presentation/followable_data.dart';
 import '../../../../core/utils/image_dimensions.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
@@ -86,7 +87,7 @@ class WikiShareScreen extends StatelessWidget {
                     data: shareLink.toString(),
                     version: QrVersions.auto,
                     foregroundColor: MyColors.main,
-                    size: MediaQuery.of(context).size.width - 95,
+                    size: ScreenSize.width - 95,
                     padding: EdgeInsets.all(0),
                   ),
                   SizedBox(height: 15),

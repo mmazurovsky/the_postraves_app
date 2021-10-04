@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/core/utils/my_assets.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import '../../../../models/enum/artist_performance_status.dart';
 import '../../../../models/shorts/artist_short.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
@@ -12,7 +13,7 @@ import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/utils/formatting_utils.dart';
 
-class ArtistPerformanceItem extends StatelessWidget {
+class ArtistPerformanceItem extends StatefulWidget {
   final List<ArtistShort> artists;
   final DateTime startingDateTime;
   final DateTime endingDateTime;
@@ -24,10 +25,25 @@ class ArtistPerformanceItem extends StatelessWidget {
     required this.endingDateTime,
   }) : super(key: key);
 
+  @override
+  State<ArtistPerformanceItem> createState() => _ArtistPerformanceItemState();
+}
+
+class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
+  late double lineWidth;
+  late ArtistPerformanceStatus performanceStatus;
+
+  @override
+  void initState() {
+    super.initState();
+    lineWidth = ScreenSize.width - MyConstants.horizontalPaddingOrMargin * 2;
+    performanceStatus = _resolvePerformanceStatus();
+  }
+
   ArtistPerformanceStatus _resolvePerformanceStatus() {
-    if (DateTime.now().isAfter(endingDateTime)) {
+    if (DateTime.now().isAfter(widget.endingDateTime)) {
       return ArtistPerformanceStatus.PERF_PAST;
-    } else if (DateTime.now().isBefore(startingDateTime)) {
+    } else if (DateTime.now().isBefore(widget.startingDateTime)) {
       return ArtistPerformanceStatus.PERF_UPCOMING;
     } else {
       return ArtistPerformanceStatus.PERF_LIVE;
@@ -36,16 +52,12 @@ class ArtistPerformanceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final performanceStatus = _resolvePerformanceStatus();
-
-    double lineWidth = MediaQuery.of(context).size.width -
-        MyConstants.horizontalPaddingOrMargin * 2;
-
     return Opacity(
-      opacity: performanceStatus == ArtistPerformanceStatus.PERF_PAST ? 0.35 : 1,
+      opacity:
+          performanceStatus == ArtistPerformanceStatus.PERF_PAST ? 0.35 : 1,
       child: Column(
         children: [
-          ...artists.asMap().entries.map(
+          ...widget.artists.asMap().entries.map(
             (entry) {
               final index = entry.key;
               final artist = entry.value;
@@ -63,7 +75,7 @@ class ArtistPerformanceItem extends StatelessWidget {
                   imageDimensions: imageDimensions,
                 ),
               );
-              if (index + 1 != artists.length) {
+              if (index + 1 != widget.artists.length) {
                 return Column(
                   children: [
                     artistWidget,
@@ -95,17 +107,18 @@ class ArtistPerformanceItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(1),
                   ),
                 ),
-                DateTime.now().isAfter(startingDateTime)
+                DateTime.now().isAfter(widget.startingDateTime)
                     ? Row(
                         children: [
                           Container(
-                            width: DateTime.now().isBefore(endingDateTime)
+                            width: DateTime.now()
+                                    .isBefore(widget.endingDateTime)
                                 ? lineWidth *
                                     (DateTime.now()
-                                            .difference(startingDateTime)
+                                            .difference(widget.startingDateTime)
                                             .inMinutes /
-                                        endingDateTime
-                                            .difference(startingDateTime)
+                                        widget.endingDateTime
+                                            .difference(widget.startingDateTime)
                                             .inMinutes)
                                 : lineWidth,
                             height: 2.5,
@@ -114,7 +127,7 @@ class ArtistPerformanceItem extends StatelessWidget {
                               borderRadius: BorderRadius.circular(1),
                             ),
                           ),
-                          DateTime.now().isBefore(endingDateTime)
+                          DateTime.now().isBefore(widget.endingDateTime)
                               ? Container(
                                   width: 7,
                                   height: 7,
@@ -136,9 +149,9 @@ class ArtistPerformanceItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(FormattingUtils.getFormattedTime(startingDateTime),
+                Text(FormattingUtils.getFormattedTime(widget.startingDateTime),
                     style: MyTextStyles.body),
-                Text(FormattingUtils.getFormattedTime(endingDateTime),
+                Text(FormattingUtils.getFormattedTime(widget.endingDateTime),
                     style: MyTextStyles.body),
               ],
             ),

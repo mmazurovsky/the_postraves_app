@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../dto/wiki_data_dto.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
@@ -44,15 +45,10 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
     widget.scrollController.addListener(_scrollListener);
     _flexibleSpaceImage = MyCachedNetworkImage(widget.wikiData.imageLink);
     _showAppBarTitle = false;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
     flexibleSpaceHeight = widget.imageDimensions == null
-        ? MediaQuery.of(context).size.width / 2.5
+        ? ScreenSize.width / 2.5
         : (widget.imageDimensions!.imageHeight *
-            MediaQuery.of(context).size.width /
+            ScreenSize.width /
             widget.imageDimensions!.imageWidth);
     _scrollOffsetFromWhichAppBarDarkeningEnds = flexibleSpaceHeight - 55;
     _scrollOffsetFromWhichAppBarDarkeningStarts =
@@ -60,8 +56,9 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
   }
 
   void _scrollListener() {
-    var _calculatedBackArrowOpacity;
-    var _calculatedShowAppBarTitle;
+    late double _calculatedBackArrowOpacity;
+    late bool _calculatedShowAppBarTitle;
+    
     if (widget.scrollController.offset <=
         _scrollOffsetFromWhichAppBarDarkeningStarts) {
       _calculatedBackArrowOpacity = 0.5;
@@ -115,6 +112,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
             )
           : null,
       actions: [
+        // todo dirty
         widget.wikiData.type != WikiFollowableType.USER
             ? AppBarButton(
                 containerOpacity: _backArrowOpacity,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
@@ -31,9 +32,9 @@ class _RatingWeeklyWinnerCardState<T extends FollowableInterface>
   static late double widthAndHeightOfImage;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    widthAndHeightOfImage = MediaQuery.of(context).size.width -
+  void initState() {
+    super.initState();
+    widthAndHeightOfImage = ScreenSize.width -
         MyConstants.horizontalPaddingOrMargin * 2;
   }
 

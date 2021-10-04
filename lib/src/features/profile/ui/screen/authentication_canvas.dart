@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
@@ -82,7 +83,7 @@ class AuthenticationCanvas extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: ScreenSize.height * 0.15,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,

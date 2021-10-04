@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 
 import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
@@ -73,7 +74,7 @@ class SortMode extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10),
         padding: EdgeInsets.all(15),
-        width: MediaQuery.of(context).size.width / 2 -
+        width: ScreenSize.width / 2 -
             MyConstants.horizontalPaddingOrMargin * 2,
         decoration: BoxDecoration(
           color: isSelected ? MyColors.forEventCard : Colors.transparent,

@@ -10,7 +10,6 @@ import 'src/app.dart';
 import 'src/core/utils/my_colors.dart';
 import 'src/dependency_injection.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocatorInjection();
@@ -48,7 +47,10 @@ class MyApp extends StatelessWidget {
         canvasColor: Colors.transparent,
         textSelectionTheme:
             const TextSelectionThemeData(cursorColor: MyColors.accent),
-        cupertinoOverrideTheme: const CupertinoThemeData(brightness: Brightness.dark), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: MyColors.accent),
+        cupertinoOverrideTheme:
+            const CupertinoThemeData(brightness: Brightness.dark),
+        colorScheme:
+            ColorScheme.fromSwatch().copyWith(secondary: MyColors.accent),
       ),
       home: const App(),
     );

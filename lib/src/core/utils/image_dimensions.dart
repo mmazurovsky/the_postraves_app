@@ -1,13 +1,13 @@
 import '../presentation/widgets/my_cached_network_image.dart';
 
 class ImageDimensions {
-  final int _imageHeight;
-  final int _imageWidth;
+  final double _imageHeight;
+  final double _imageWidth;
 
   ImageDimensions(this._imageHeight, this._imageWidth);
 
-  int get imageHeight => _imageHeight;
-  int get imageWidth => _imageWidth;
+  double get imageHeight => _imageHeight;
+  double get imageWidth => _imageWidth;
 
   static Future<ImageDimensions?> getImageDimensions(
       MyCachedNetworkImage image) async {
@@ -15,6 +15,7 @@ class ImageDimensions {
 
     return imageInfo == null
         ? null
-        : ImageDimensions(imageInfo.image.height, imageInfo.image.width);
+        : ImageDimensions(imageInfo.image.height.toDouble(),
+            imageInfo.image.width.toDouble());
   }
 }

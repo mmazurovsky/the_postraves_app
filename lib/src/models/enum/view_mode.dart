@@ -9,7 +9,7 @@ extension ViewModeExtension on ViewMode {
       ViewMode.SORT_BY_DATE:
           AppLocalizations.of(context)!.sortModeSwitcherByDate,
       ViewMode.SORT_BY_RATING:
-          AppLocalizations.of(context)!.sortModeSwitcherByRating,
+          AppLocalizations.of(context)!.sortModeSwitcherByPopularity,
       ViewMode.SHOW_RECOMMENDED:
           AppLocalizations.of(context)!.sortModeSwitcherByRecommended,
     }[mode];

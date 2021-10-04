@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import '../../../../models/shorts/event_short.dart';
 import 'event_card_details_concrete.dart';
 import '../../../../core/utils/image_dimensions.dart';
@@ -14,7 +15,8 @@ class EventCard extends StatefulWidget {
   final Key key;
   final EventShort loadedEvent;
 
-  const EventCard({required this.loadedEvent, required this.key}) : super(key: key);
+  const EventCard({required this.loadedEvent, required this.key})
+      : super(key: key);
 
   @override
   _EventCardState createState() => _EventCardState();
@@ -24,6 +26,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
   late MyCachedNetworkImage _eventImage;
   late AnimationController _controller;
   late Animation<double> _animation;
+  late double _widthOfCard;
 
   @override
   void initState() {
@@ -41,6 +44,8 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
       parent: _controller,
       curve: Curves.linear,
     );
+    _widthOfCard = ScreenSize.width -
+        2 * MyConstants.horizontalPaddingOrMargin;
   }
 
   @override
@@ -51,7 +56,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
 
   Future<void> _navigateToEvent() async {
     return Future.delayed(
-      Duration(milliseconds: 170),
+      const Duration(milliseconds: 170),
       () async => NavigatorFunctions.pushEvent(
         context: context,
         imageLink: widget.loadedEvent.imageLink,
@@ -64,8 +69,6 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final _widthOfCard = MediaQuery.of(context).size.width -
-        2 * MyConstants.horizontalPaddingOrMargin;
 
     return ScaleTransition(
       scale: _animation,
@@ -91,12 +94,11 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
                   Stack(
                     children: [
                       SizedBox(
-                        width: double.infinity,
-                        height: _widthOfCard / 2,
-                        child: widget.loadedEvent.imageLink == null
-                            ? EmptyImagePlaceholder()
-                            : _eventImage
-                      ),
+                          width: double.infinity,
+                          height: _widthOfCard / 2,
+                          child: widget.loadedEvent.imageLink == null
+                              ? EmptyImagePlaceholder()
+                              : _eventImage),
                     ],
                   ),
                   Container(

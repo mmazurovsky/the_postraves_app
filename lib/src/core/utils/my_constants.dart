@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 
 class MyConstants {
   static const double endingOfScreenOrSpaceBetweenElements = 20;
@@ -13,7 +14,7 @@ class MyConstants {
   static const double dividerThickness = 0.1;
   //todo how to calculate properly???
   static double appBarTitleWidth(BuildContext context) =>
-      MediaQuery.of(context).size.width * 0.6;
+      ScreenSize.width * 0.6;
   static const String googleApiKey = "AIzaSyA4px3CRR7ntosKlBA8RitMcoU6nUdMgGk";
   static const String googleMapId = '40e862bd8e6365a7';
   // static const String artistsEndpoint = 'artist';

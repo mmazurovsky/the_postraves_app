@@ -9,6 +9,7 @@ import 'package:the_postraves_app/src/core/presentation/widgets/my_horizontal_pa
 import 'package:the_postraves_app/src/core/provider/city_list_provider.dart';
 import 'package:the_postraves_app/src/core/provider/current_city_provider.dart';
 import 'package:the_postraves_app/src/core/service/open_link_service.dart';
+import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import 'package:the_postraves_app/src/features/shows/ui/widgets/current_city_switcher.dart';
 import 'package:the_postraves_app/src/models/geo/city.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
@@ -52,7 +53,7 @@ class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
         state.maybeWhen(
             loading: () => screenToReturn = const LoadingScreen(),
             authenticated: (userProfile) =>
-              screenToReturn = ProfileScreen(userProfile: userProfile),     
+                screenToReturn = ProfileScreen(userProfile: userProfile),
             authenticatedWithoutAccount: () => screenToReturn =
                 CreateUserProfileScreen(
                     isPoppable: false, userProfileRepository: serviceLocator()),
@@ -93,18 +94,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _myCachedNetworkImage = MyCachedNetworkImage(widget.userProfile.imageLink);
     _assignImageDimensions();
 
-        // Future.delayed(
-        // Duration.zero,
-        // () async =>
-        //     _imageDimensions = await ImageDimensions.getImageInfo(_image!));
-
+    // Future.delayed(
+    // Duration.zero,
+    // () async =>
+    //     _imageDimensions = await ImageDimensions.getImageDimensions(_myCachedNetworkImage));
   }
 
   void _assignImageDimensions() async {
     final imageDimensions =
-    //* I DON'T FUCKING KNOW WHY THIS FUTURE NEVER GETS RESOLVED
+        //* I DON'T FUCKING KNOW WHY THIS FUTURE NEVER GETS RESOLVED
         // await ImageDimensions.getImageDimensions(_myCachedNetworkImage);
-    widget.userProfile.imageLink != null ? ImageDimensions(500, 500) : null;
+        widget.userProfile.imageLink != null
+            ? ImageDimensions(ScreenSize.width,
+                ScreenSize.width)
+            : null;
     setState(() {
       _imageDimensions = imageDimensions;
     });
@@ -273,7 +276,7 @@ class SettingsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final settingsList = _getSettingsList(context);
     return ModalBottomSheetContent(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: ScreenSize.height * 0.5,
       iconData: Ionicons.cog_outline,
       title: AppLocalizations.of(context)!.settings, //todo
       content: ListView.separated(
