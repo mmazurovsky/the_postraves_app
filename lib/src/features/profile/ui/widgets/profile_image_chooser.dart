@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/my_cached_network_image.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
@@ -14,10 +15,12 @@ import 'package:image_cropper/image_cropper.dart';
 class ProfileImageChooser extends StatefulWidget {
   final void Function(File) pickImage;
   final void Function() onTap;
+  final MyCachedNetworkImage? initialImage;
   const ProfileImageChooser({
     Key? key,
     required this.pickImage,
-    required this.onTap
+    required this.onTap,
+    this.initialImage,
   }) : super(key: key);
 
   @override
@@ -31,7 +34,8 @@ class _ProfileImageChooserState extends State<ProfileImageChooser> {
   Future<void> getImage() async {
     File pickedCroppedImageAsFile;
 
-    final pickedFile = await _imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedFile =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
     File? croppedFile;
     if (pickedFile != null) {
       croppedFile = await ImageCropper.cropImage(
@@ -93,15 +97,19 @@ class _ProfileImageChooserState extends State<ProfileImageChooser> {
                   decoration: const BoxDecoration(
                     color: MyColors.forVeryDarkStuff,
                   ),
-                  child: _pickedImage ?? const Center(
-                          child: Icon(Ionicons.camera_outline,
-                              color: MyColors.main, size: 26),
-                        ),
+                  child: _pickedImage ??
+                      widget.initialImage ??
+                      const Center(
+                        child: Icon(Ionicons.camera_outline,
+                            color: MyColors.main, size: 26),
+                      ),
                 ),
               ),
               distanceBetweenLeadingAndText: 13,
               text: _pickedImage == null
-                  ? AppLocalizations.of(context)!.profileCreationAddAvatar
+                  ? widget.initialImage == null
+                      ? AppLocalizations.of(context)!.profileCreationAddAvatar
+                      : AppLocalizations.of(context)!.profileCreationEditAvatar
                   : AppLocalizations.of(context)!.profileCreationEditAvatar,
               trailing: const Icon(Ionicons.chevron_forward_outline,
                   color: MyColors.accent, size: 26),

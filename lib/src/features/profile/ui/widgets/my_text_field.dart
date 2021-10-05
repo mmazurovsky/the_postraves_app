@@ -13,24 +13,31 @@ class MyTextField extends StatelessWidget {
   final Color fillColor;
   final Color activeBorderColor;
   final Color inactiveBorderColor;
+  final String? initialValue;
+  final int? maxLines;
+  final String? hintText;
 
-  const MyTextField({
-    Key? key,
-    required this.title,
-    required this.textInputType,
-    required this.isSecret,
-    required this.textEditingController,
-    this.validatorFunction,
-    required this.fillColor,
-    required this.activeBorderColor,
-    required this.inactiveBorderColor,
-    this.focusNode,
-  }) : super(key: key);
+  const MyTextField(
+      {Key? key,
+      required this.title,
+      required this.textInputType,
+      required this.isSecret,
+      required this.textEditingController,
+      this.validatorFunction,
+      required this.fillColor,
+      required this.activeBorderColor,
+      required this.inactiveBorderColor,
+      this.focusNode,
+      this.initialValue,
+      this.maxLines,
+      this.hintText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MyHorizontalMargin(
       child: TextFormField(
+        initialValue: initialValue,
         focusNode: focusNode,
         controller: textEditingController,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -40,8 +47,11 @@ class MyTextField extends StatelessWidget {
           color: MyColors.main,
         ),
         decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: MyTextStyles.hintText,
           labelText: title,
           labelStyle: MyTextStyles.body,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
           filled: true,
           fillColor: fillColor,
           focusedBorder: OutlineInputBorder(
@@ -61,6 +71,7 @@ class MyTextField extends StatelessWidget {
         ),
         keyboardType: textInputType,
         obscureText: isSecret,
+        maxLines: maxLines,
       ),
     );
   }

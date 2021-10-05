@@ -133,6 +133,13 @@ class MyTextStyles {
     fontWeight: FontWeight.w500,
   );
 
+  static const TextStyle hintText = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.forInactiveStuff,
+    fontSize: 17,
+    fontWeight: FontWeight.w400,
+  );
+
   static const TextStyle body = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,

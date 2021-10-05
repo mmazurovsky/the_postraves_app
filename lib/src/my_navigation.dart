@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/features/profile/ui/screen/update_profile_screen.dart';
+import 'package:the_postraves_app/src/features/profile/ui/screen/modify_profile_screen.dart';
 import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 import 'models/related_to_search/unified_search_model.dart';
 import 'features/chart/ui/screens/charts_screen.dart';
@@ -163,9 +163,7 @@ class RouteGenerator {
     } else if (routeSettings.name == MyNavigationRoutes.updateUser) {
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => UpdateProfileScreen(
-
-        ),
+        builder: (_) => ModifyProfileScreen(),
       );
     } else {
       return _errorRoute();
@@ -447,7 +445,7 @@ class NavigatorFunctions {
     }
   }
 
-  static void pushUpdateUser(
+  static void pushModifyUser(
     BuildContext context,
   ) {
     Navigator.of(context).pushNamed(MyNavigationRoutes.updateUser);

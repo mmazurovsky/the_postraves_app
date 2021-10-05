@@ -25,6 +25,13 @@ class NicknameTextField extends StatefulWidget {
 class _NicknameTextFieldState extends State<NicknameTextField> {
   bool _isNicknameFree = true;
   String? _previouslyCheckedNickname;
+  String? _initialValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _initialValue = widget.textEditingController.text;
+  }
 
   ///* this function can't be async, so it can't use
   ///* async function inside that check is nickname free
@@ -33,6 +40,7 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
   String? _nicknameValidator(
     String nickname,
   ) {
+    if (_initialValue == nickname) return null;
     final nicknameErrorMessage = _basicCheckNickname(nickname);
     if (nicknameErrorMessage != null) return nicknameErrorMessage;
     _checkNicknameIsFreeThenWaitForResponseThenTriggerValidationAgain(nickname);

@@ -82,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final ScrollController _scrollController =
       TabItem.profile.tabScrollController;
   _ProfileDetails? _profileDetails;
-  late MyCachedNetworkImage _myCachedNetworkImage;
+  // late MyCachedNetworkImage _myCachedNetworkImage;
   ImageDimensions? _imageDimensions;
 
   @override
@@ -91,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _profileDetails = _ProfileDetails(
       userProfile: widget.userProfile,
     );
-    _myCachedNetworkImage = MyCachedNetworkImage(widget.userProfile.imageLink);
+    // _myCachedNetworkImage = MyCachedNetworkImage(widget.userProfile.imageLink);
     _assignImageDimensions();
 
     // Future.delayed(
@@ -105,8 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         //* I DON'T FUCKING KNOW WHY THIS FUTURE NEVER GETS RESOLVED
         // await ImageDimensions.getImageDimensions(_myCachedNetworkImage);
         widget.userProfile.imageLink != null
-            ? ImageDimensions(ScreenSize.width,
-                ScreenSize.width)
+            ? ImageDimensions(ScreenSize.width, ScreenSize.width)
             : null;
     setState(() {
       _imageDimensions = imageDimensions;
@@ -131,12 +130,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-class _ProfileDetails extends StatelessWidget {
+class _ProfileDetails extends StatefulWidget {
   final UserProfile userProfile;
   const _ProfileDetails({
     Key? key,
     required this.userProfile,
   }) : super(key: key);
+
+  @override
+  State<_ProfileDetails> createState() => _ProfileDetailsState();
+}
+
+class _ProfileDetailsState extends State<_ProfileDetails> {
+  void _closeModalBottomSheetAndPushModifyProfile() {
+    Navigator.of(context).pop();
+    Future.delayed(
+      const Duration(milliseconds: 300),
+      () => NavigatorFunctions.pushModifyUser(context),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,16 +172,16 @@ class _ProfileDetails extends StatelessWidget {
         ),
         const SizedBox(height: 25),
         SocialLinksList(
-          instagramLink: userProfile.instagramLink,
-          telegramLink: userProfile.telegramLink,
+          instagramLink: widget.userProfile.instagramLink,
+          telegramLink: widget.userProfile.telegramLink,
         ),
         const SectionSpacer(),
-        userProfile.about == null
+        widget.userProfile.about == null
             ? Container()
             : Column(
                 children: [
                   WikiExpandableTextDescription(
-                    userProfile.about!,
+                    widget.userProfile.about!,
                   ),
                   const SectionSpacer(),
                 ],
@@ -178,10 +190,10 @@ class _ProfileDetails extends StatelessWidget {
             sectionTitle: AppLocalizations.of(context)!.profileCurrentCity),
         ButtonWithIcons(
           leadingIcon: Text(
-            userProfile.currentCity.country.emojiCode,
+            widget.userProfile.currentCity.country.emojiCode,
             style: const TextStyle(fontSize: 20),
           ),
-          buttonText: userProfile.currentCity.localName,
+          buttonText: widget.userProfile.currentCity.localName,
           trailingIcon: const Icon(
             Ionicons.chevron_down,
             size: 26,
@@ -214,7 +226,7 @@ class _ProfileDetails extends StatelessWidget {
           textStyle: MyTextStyles.buttonWithMainColor,
           onTap: () => showModalBottomSheet(
             context: context,
-            builder: (context) => SettingsSelector(),
+            builder: (context) => SettingsSelector(_closeModalBottomSheetAndPushModifyProfile),
           ),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
@@ -236,15 +248,18 @@ class _SettingsButtonData {
 }
 
 class SettingsSelector extends StatelessWidget {
+  final void Function()
+      _functionToCloseModalBottomSheetAndNavigateToNewScreen;
+  const SettingsSelector(this._functionToCloseModalBottomSheetAndNavigateToNewScreen, {Key? key}) : super(key: key);
+
   List<_SettingsButtonData> _getSettingsList(BuildContext context) {
     return [
       _SettingsButtonData(
-        text: AppLocalizations.of(context)!.modifyProfile,
-        leadingIcon: const Icon(Ionicons.clipboard_outline,
-            color: MyColors.main, size: 18),
-        onTap: (BuildContext context) =>
-            NavigatorFunctions.pushUpdateUser(context),
-      ),
+          text: AppLocalizations.of(context)!.modifyProfile,
+          leadingIcon: const Icon(Ionicons.clipboard_outline,
+              color: MyColors.main, size: 18),
+          onTap: (_) =>
+              _functionToCloseModalBottomSheetAndNavigateToNewScreen(),),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.writeToUs,
         leadingIcon: const Icon(Ionicons.chatbox_outline,
@@ -269,8 +284,6 @@ class SettingsSelector extends StatelessWidget {
       ),
     ];
   }
-
-  const SettingsSelector({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
