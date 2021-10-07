@@ -22,9 +22,9 @@ class _$UnityFullTearOff {
 
   _UnityFull call(
       {String? about,
-      String? instagramLink,
-      String? soundcloudLink,
-      String? bandcampLink,
+      String? instagramUsername,
+      String? soundcloudUsername,
+      String? bandcampUsername,
       required int id,
       required String name,
       required int overallFollowers,
@@ -34,9 +34,9 @@ class _$UnityFullTearOff {
       Country? country}) {
     return _UnityFull(
       about: about,
-      instagramLink: instagramLink,
-      soundcloudLink: soundcloudLink,
-      bandcampLink: bandcampLink,
+      instagramUsername: instagramUsername,
+      soundcloudUsername: soundcloudUsername,
+      bandcampUsername: bandcampUsername,
       id: id,
       name: name,
       overallFollowers: overallFollowers,
@@ -58,9 +58,9 @@ const $UnityFull = _$UnityFullTearOff();
 /// @nodoc
 mixin _$UnityFull {
   String? get about => throw _privateConstructorUsedError;
-  String? get instagramLink => throw _privateConstructorUsedError;
-  String? get soundcloudLink => throw _privateConstructorUsedError;
-  String? get bandcampLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
+  String? get soundcloudUsername => throw _privateConstructorUsedError;
+  String? get bandcampUsername => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get overallFollowers => throw _privateConstructorUsedError;
@@ -81,9 +81,9 @@ abstract class $UnityFullCopyWith<$Res> {
       _$UnityFullCopyWithImpl<$Res>;
   $Res call(
       {String? about,
-      String? instagramLink,
-      String? soundcloudLink,
-      String? bandcampLink,
+      String? instagramUsername,
+      String? soundcloudUsername,
+      String? bandcampUsername,
       int id,
       String name,
       int overallFollowers,
@@ -106,9 +106,9 @@ class _$UnityFullCopyWithImpl<$Res> implements $UnityFullCopyWith<$Res> {
   @override
   $Res call({
     Object? about = freezed,
-    Object? instagramLink = freezed,
-    Object? soundcloudLink = freezed,
-    Object? bandcampLink = freezed,
+    Object? instagramUsername = freezed,
+    Object? soundcloudUsername = freezed,
+    Object? bandcampUsername = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? overallFollowers = freezed,
@@ -122,17 +122,17 @@ class _$UnityFullCopyWithImpl<$Res> implements $UnityFullCopyWith<$Res> {
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      soundcloudLink: soundcloudLink == freezed
-          ? _value.soundcloudLink
-          : soundcloudLink // ignore: cast_nullable_to_non_nullable
+      soundcloudUsername: soundcloudUsername == freezed
+          ? _value.soundcloudUsername
+          : soundcloudUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      bandcampLink: bandcampLink == freezed
-          ? _value.bandcampLink
-          : bandcampLink // ignore: cast_nullable_to_non_nullable
+      bandcampUsername: bandcampUsername == freezed
+          ? _value.bandcampUsername
+          : bandcampUsername // ignore: cast_nullable_to_non_nullable
               as String?,
       id: id == freezed
           ? _value.id
@@ -185,9 +185,9 @@ abstract class _$UnityFullCopyWith<$Res> implements $UnityFullCopyWith<$Res> {
   @override
   $Res call(
       {String? about,
-      String? instagramLink,
-      String? soundcloudLink,
-      String? bandcampLink,
+      String? instagramUsername,
+      String? soundcloudUsername,
+      String? bandcampUsername,
       int id,
       String name,
       int overallFollowers,
@@ -212,9 +212,9 @@ class __$UnityFullCopyWithImpl<$Res> extends _$UnityFullCopyWithImpl<$Res>
   @override
   $Res call({
     Object? about = freezed,
-    Object? instagramLink = freezed,
-    Object? soundcloudLink = freezed,
-    Object? bandcampLink = freezed,
+    Object? instagramUsername = freezed,
+    Object? soundcloudUsername = freezed,
+    Object? bandcampUsername = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? overallFollowers = freezed,
@@ -228,17 +228,17 @@ class __$UnityFullCopyWithImpl<$Res> extends _$UnityFullCopyWithImpl<$Res>
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      soundcloudLink: soundcloudLink == freezed
-          ? _value.soundcloudLink
-          : soundcloudLink // ignore: cast_nullable_to_non_nullable
+      soundcloudUsername: soundcloudUsername == freezed
+          ? _value.soundcloudUsername
+          : soundcloudUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      bandcampLink: bandcampLink == freezed
-          ? _value.bandcampLink
-          : bandcampLink // ignore: cast_nullable_to_non_nullable
+      bandcampUsername: bandcampUsername == freezed
+          ? _value.bandcampUsername
+          : bandcampUsername // ignore: cast_nullable_to_non_nullable
               as String?,
       id: id == freezed
           ? _value.id
@@ -277,9 +277,9 @@ class __$UnityFullCopyWithImpl<$Res> extends _$UnityFullCopyWithImpl<$Res>
 class _$_UnityFull extends _UnityFull {
   const _$_UnityFull(
       {this.about,
-      this.instagramLink,
-      this.soundcloudLink,
-      this.bandcampLink,
+      this.instagramUsername,
+      this.soundcloudUsername,
+      this.bandcampUsername,
       required this.id,
       required this.name,
       required this.overallFollowers,
@@ -295,11 +295,11 @@ class _$_UnityFull extends _UnityFull {
   @override
   final String? about;
   @override
-  final String? instagramLink;
+  final String? instagramUsername;
   @override
-  final String? soundcloudLink;
+  final String? soundcloudUsername;
   @override
-  final String? bandcampLink;
+  final String? bandcampUsername;
   @override
   final int id;
   @override
@@ -317,7 +317,7 @@ class _$_UnityFull extends _UnityFull {
 
   @override
   String toString() {
-    return 'UnityFull(about: $about, instagramLink: $instagramLink, soundcloudLink: $soundcloudLink, bandcampLink: $bandcampLink, id: $id, name: $name, overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, isFollowed: $isFollowed, imageLink: $imageLink, country: $country)';
+    return 'UnityFull(about: $about, instagramUsername: $instagramUsername, soundcloudUsername: $soundcloudUsername, bandcampUsername: $bandcampUsername, id: $id, name: $name, overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, isFollowed: $isFollowed, imageLink: $imageLink, country: $country)';
   }
 
   @override
@@ -326,15 +326,15 @@ class _$_UnityFull extends _UnityFull {
         (other is _UnityFull &&
             (identical(other.about, about) ||
                 const DeepCollectionEquality().equals(other.about, about)) &&
-            (identical(other.instagramLink, instagramLink) ||
+            (identical(other.instagramUsername, instagramUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.instagramLink, instagramLink)) &&
-            (identical(other.soundcloudLink, soundcloudLink) ||
+                    .equals(other.instagramUsername, instagramUsername)) &&
+            (identical(other.soundcloudUsername, soundcloudUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.soundcloudLink, soundcloudLink)) &&
-            (identical(other.bandcampLink, bandcampLink) ||
+                    .equals(other.soundcloudUsername, soundcloudUsername)) &&
+            (identical(other.bandcampUsername, bandcampUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.bandcampLink, bandcampLink)) &&
+                    .equals(other.bandcampUsername, bandcampUsername)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
@@ -359,9 +359,9 @@ class _$_UnityFull extends _UnityFull {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(about) ^
-      const DeepCollectionEquality().hash(instagramLink) ^
-      const DeepCollectionEquality().hash(soundcloudLink) ^
-      const DeepCollectionEquality().hash(bandcampLink) ^
+      const DeepCollectionEquality().hash(instagramUsername) ^
+      const DeepCollectionEquality().hash(soundcloudUsername) ^
+      const DeepCollectionEquality().hash(bandcampUsername) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(overallFollowers) ^
@@ -384,9 +384,9 @@ class _$_UnityFull extends _UnityFull {
 abstract class _UnityFull extends UnityFull {
   const factory _UnityFull(
       {String? about,
-      String? instagramLink,
-      String? soundcloudLink,
-      String? bandcampLink,
+      String? instagramUsername,
+      String? soundcloudUsername,
+      String? bandcampUsername,
       required int id,
       required String name,
       required int overallFollowers,
@@ -402,11 +402,11 @@ abstract class _UnityFull extends UnityFull {
   @override
   String? get about => throw _privateConstructorUsedError;
   @override
-  String? get instagramLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
   @override
-  String? get soundcloudLink => throw _privateConstructorUsedError;
+  String? get soundcloudUsername => throw _privateConstructorUsedError;
   @override
-  String? get bandcampLink => throw _privateConstructorUsedError;
+  String? get bandcampUsername => throw _privateConstructorUsedError;
   @override
   int get id => throw _privateConstructorUsedError;
   @override

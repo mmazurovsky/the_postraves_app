@@ -133,9 +133,9 @@ class _UnityDetails extends StatelessWidget {
           SizedBox(height: 25),
           SectionDivider(needHorizontalMargin: true),
           SocialLinksList(
-            soundcloudLink: loadedUnity.soundcloudLink,
-            bandcampLink: loadedUnity.bandcampLink,
-            instagramLink: loadedUnity.instagramLink,
+            soundcloudUsername: loadedUnity.soundcloudUsername,
+            bandcampUsername: loadedUnity.bandcampUsername,
+            instagramUsername: loadedUnity.instagramUsername,
           ),
           SectionSpacer(),
           loadedUnity.about == null

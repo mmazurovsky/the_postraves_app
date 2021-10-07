@@ -28,8 +28,8 @@ class _$UserProfileTearOff {
       required int weeklyFollowers,
       String? imageLink,
       String? about,
-      String? instagramLink,
-      String? telegramLink}) {
+      String? instagramUsername,
+      String? telegramUsername}) {
     return _UserProfile(
       id: id,
       name: name,
@@ -38,8 +38,8 @@ class _$UserProfileTearOff {
       weeklyFollowers: weeklyFollowers,
       imageLink: imageLink,
       about: about,
-      instagramLink: instagramLink,
-      telegramLink: telegramLink,
+      instagramUsername: instagramUsername,
+      telegramUsername: telegramUsername,
     );
   }
 
@@ -60,8 +60,8 @@ mixin _$UserProfile {
   int get weeklyFollowers => throw _privateConstructorUsedError;
   String? get imageLink => throw _privateConstructorUsedError;
   String? get about => throw _privateConstructorUsedError;
-  String? get instagramLink => throw _privateConstructorUsedError;
-  String? get telegramLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
+  String? get telegramUsername => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -82,8 +82,8 @@ abstract class $UserProfileCopyWith<$Res> {
       int weeklyFollowers,
       String? imageLink,
       String? about,
-      String? instagramLink,
-      String? telegramLink});
+      String? instagramUsername,
+      String? telegramUsername});
 
   $CityCopyWith<$Res> get currentCity;
 }
@@ -105,8 +105,8 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
     Object? weeklyFollowers = freezed,
     Object? imageLink = freezed,
     Object? about = freezed,
-    Object? instagramLink = freezed,
-    Object? telegramLink = freezed,
+    Object? instagramUsername = freezed,
+    Object? telegramUsername = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -137,13 +137,13 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      telegramLink: telegramLink == freezed
-          ? _value.telegramLink
-          : telegramLink // ignore: cast_nullable_to_non_nullable
+      telegramUsername: telegramUsername == freezed
+          ? _value.telegramUsername
+          : telegramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -171,8 +171,8 @@ abstract class _$UserProfileCopyWith<$Res>
       int weeklyFollowers,
       String? imageLink,
       String? about,
-      String? instagramLink,
-      String? telegramLink});
+      String? instagramUsername,
+      String? telegramUsername});
 
   @override
   $CityCopyWith<$Res> get currentCity;
@@ -197,8 +197,8 @@ class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
     Object? weeklyFollowers = freezed,
     Object? imageLink = freezed,
     Object? about = freezed,
-    Object? instagramLink = freezed,
-    Object? telegramLink = freezed,
+    Object? instagramUsername = freezed,
+    Object? telegramUsername = freezed,
   }) {
     return _then(_UserProfile(
       id: id == freezed
@@ -229,13 +229,13 @@ class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      telegramLink: telegramLink == freezed
-          ? _value.telegramLink
-          : telegramLink // ignore: cast_nullable_to_non_nullable
+      telegramUsername: telegramUsername == freezed
+          ? _value.telegramUsername
+          : telegramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -252,8 +252,8 @@ class _$_UserProfile extends _UserProfile {
       required this.weeklyFollowers,
       this.imageLink,
       this.about,
-      this.instagramLink,
-      this.telegramLink})
+      this.instagramUsername,
+      this.telegramUsername})
       : super._();
 
   factory _$_UserProfile.fromJson(Map<String, dynamic> json) =>
@@ -274,13 +274,13 @@ class _$_UserProfile extends _UserProfile {
   @override
   final String? about;
   @override
-  final String? instagramLink;
+  final String? instagramUsername;
   @override
-  final String? telegramLink;
+  final String? telegramUsername;
 
   @override
   String toString() {
-    return 'UserProfile(id: $id, name: $name, currentCity: $currentCity, overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, imageLink: $imageLink, about: $about, instagramLink: $instagramLink, telegramLink: $telegramLink)';
+    return 'UserProfile(id: $id, name: $name, currentCity: $currentCity, overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, imageLink: $imageLink, about: $about, instagramUsername: $instagramUsername, telegramUsername: $telegramUsername)';
   }
 
   @override
@@ -305,12 +305,12 @@ class _$_UserProfile extends _UserProfile {
                     .equals(other.imageLink, imageLink)) &&
             (identical(other.about, about) ||
                 const DeepCollectionEquality().equals(other.about, about)) &&
-            (identical(other.instagramLink, instagramLink) ||
+            (identical(other.instagramUsername, instagramUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.instagramLink, instagramLink)) &&
-            (identical(other.telegramLink, telegramLink) ||
+                    .equals(other.instagramUsername, instagramUsername)) &&
+            (identical(other.telegramUsername, telegramUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.telegramLink, telegramLink)));
+                    .equals(other.telegramUsername, telegramUsername)));
   }
 
   @override
@@ -323,8 +323,8 @@ class _$_UserProfile extends _UserProfile {
       const DeepCollectionEquality().hash(weeklyFollowers) ^
       const DeepCollectionEquality().hash(imageLink) ^
       const DeepCollectionEquality().hash(about) ^
-      const DeepCollectionEquality().hash(instagramLink) ^
-      const DeepCollectionEquality().hash(telegramLink);
+      const DeepCollectionEquality().hash(instagramUsername) ^
+      const DeepCollectionEquality().hash(telegramUsername);
 
   @JsonKey(ignore: true)
   @override
@@ -346,8 +346,8 @@ abstract class _UserProfile extends UserProfile {
       required int weeklyFollowers,
       String? imageLink,
       String? about,
-      String? instagramLink,
-      String? telegramLink}) = _$_UserProfile;
+      String? instagramUsername,
+      String? telegramUsername}) = _$_UserProfile;
   const _UserProfile._() : super._();
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
@@ -368,9 +368,9 @@ abstract class _UserProfile extends UserProfile {
   @override
   String? get about => throw _privateConstructorUsedError;
   @override
-  String? get instagramLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
   @override
-  String? get telegramLink => throw _privateConstructorUsedError;
+  String? get telegramUsername => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserProfileCopyWith<_UserProfile> get copyWith =>

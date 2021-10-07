@@ -9,9 +9,9 @@ part of 'unity_full.dart';
 _$_UnityFull _$_$_UnityFullFromJson(Map<String, dynamic> json) {
   return _$_UnityFull(
     about: json['about'] as String?,
-    instagramLink: json['instagramLink'] as String?,
-    soundcloudLink: json['soundcloudLink'] as String?,
-    bandcampLink: json['bandcampLink'] as String?,
+    instagramUsername: json['instagramUsername'] as String?,
+    soundcloudUsername: json['soundcloudUsername'] as String?,
+    bandcampUsername: json['bandcampUsername'] as String?,
     id: json['id'] as int,
     name: json['name'] as String,
     overallFollowers: json['overallFollowers'] as int,
@@ -27,9 +27,9 @@ _$_UnityFull _$_$_UnityFullFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$_$_UnityFullToJson(_$_UnityFull instance) =>
     <String, dynamic>{
       'about': instance.about,
-      'instagramLink': instance.instagramLink,
-      'soundcloudLink': instance.soundcloudLink,
-      'bandcampLink': instance.bandcampLink,
+      'instagramUsername': instance.instagramUsername,
+      'soundcloudUsername': instance.soundcloudUsername,
+      'bandcampUsername': instance.bandcampUsername,
       'id': instance.id,
       'name': instance.name,
       'overallFollowers': instance.overallFollowers,

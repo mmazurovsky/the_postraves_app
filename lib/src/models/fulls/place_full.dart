@@ -20,8 +20,8 @@ class PlaceFull
   const PlaceFull._();
   const factory PlaceFull({
     String? about,
-    String? instagramLink,
-    String? soundcloudLink,
+    String? instagramUsername,
+    String? soundcloudUsername,
     required int id,
     required String name,
     required int overallFollowers,

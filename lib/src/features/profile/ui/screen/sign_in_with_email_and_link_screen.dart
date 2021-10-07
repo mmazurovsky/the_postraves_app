@@ -85,13 +85,16 @@ class _SignInWithEmailAndLinkScreenState
             containerOpacity: 0,
           ),
           backgroundColor: MyColors.screenBackground,
+          elevation: 0,
         ),
         body: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 120,
+              ),
               MyHorizontalMargin(
                 child: Text(
                   AppLocalizations.of(context)!.signInWithEmail,
@@ -115,6 +118,9 @@ class _SignInWithEmailAndLinkScreenState
                     isSecret: false,
                     textEditingController: _emailController,
                     validatorFunction: _emailValidator,
+                    autofillHints: const [AutofillHints.email],
+                    enableSuggestions: false,
+                    autocorrect: false,
                   ),
                   const SizedBox(height: 20),
                   MyElevatedButton(

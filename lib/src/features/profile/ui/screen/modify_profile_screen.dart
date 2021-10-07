@@ -18,6 +18,7 @@ import 'package:the_postraves_app/src/features/profile/ui/widgets/nickname_text_
 import 'package:the_postraves_app/src/features/profile/ui/widgets/profile_image_chooser.dart';
 import 'package:the_postraves_app/src/models/user/user_profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:the_postraves_app/src/models/user/user_profile_to_write.dart';
 
 class ModifyProfileScreen extends StatefulWidget {
   // final Image? _profileImage;
@@ -58,14 +59,15 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
     _userProfile =
         BlocProvider.of<AuthenticationCubit>(context).currentUserFromBackend;
     _nicknameEditingController.text = _userProfile!.name;
-    if (_userProfile?.instagramLink != null)
-      _instagramEditingController.text =
-          _userProfile!.instagramLink!; //todo cut url
-    if (_userProfile?.telegramLink != null)
-      _telegramEditingController.text =
-          _userProfile!.telegramLink!; //todo cut url
-    if (_userProfile?.about != null)
+    if (_userProfile?.instagramUsername != null) {
+      _instagramEditingController.text = _userProfile!.instagramUsername!;
+    }
+    if (_userProfile?.telegramUsername != null) {
+      _telegramEditingController.text = _userProfile!.telegramUsername!;
+    }
+    if (_userProfile?.about != null) {
       _aboutEditingController.text = _userProfile!.about!;
+    }
 
     _buttonText = 'Modify profile'; //todo
     //AppLocalizations.of(context)!.profileModificationModify;
@@ -143,6 +145,8 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
                       hintText: 'Optional', //todo
+                      enableSuggestions: false,
+                      autocorrect: false,
                     ),
                     const SizedBox(height: 20),
                     MyTextField(
@@ -154,6 +158,8 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
                       hintText: 'Optional', //todo
+                      enableSuggestions: false,
+                      autocorrect: false,
                     ),
                     const SizedBox(height: 20),
                     MyTextField(
@@ -166,22 +172,8 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       inactiveBorderColor: MyColors.main,
                       maxLines: 3,
                       hintText: 'Optional', //todo
-                      //todo restrict to certain number of symbols
-                      //todo remove autofill somewhere
+                      maxLength: 200,
                     ),
-
-                    // MyTextField(
-                    //   focusNode: _nicknameFieldFocusNode,
-                    //   title: AppLocalizations.of(context)!
-                    //       .profileCreationNickname,
-                    //   textInputType: TextInputType.text,
-                    //   isSecret: false,
-                    //   textEditingController: _nicknameEditingController,
-                    //   validatorFunction: _nicknameValidator,
-                    //   fillColor: Colors.transparent,
-                    //   activeBorderColor: MyColors.accent,
-                    //   inactiveBorderColor: MyColors.main,
-                    // ),
                     const SizedBox(height: 20),
                     MyElevatedButton(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -195,8 +187,19 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                           setState(() {
                             _buttonText = AppLocalizations.of(context)!.loading;
                           });
-                          // BlocProvider.of<ProfileCubit>(context)
-                          //     .updateWholeUserProfile();
+                          final UserProfileToWrite userProfileToWrite =
+                              UserProfileToWrite(
+                            name: _nicknameEditingController.text,
+                            currentCity: _userProfile!.currentCity.name,
+                            about: _aboutEditingController.text,
+                            imageLink: _userProfile!.imageLink,
+                            instagramUsername: _instagramEditingController.text,
+                            telegramUsername: _telegramEditingController.text,
+                          );
+                          BlocProvider.of<ProfileCubit>(context)
+                              .updateWholeUserProfile(
+                                  userProfileToWrite, _pickedImageAsFile);
+                          Navigator.of(context).pop();
                         }
                       },
                     ),

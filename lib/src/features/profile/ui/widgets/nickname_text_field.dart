@@ -98,6 +98,8 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
       fillColor: Colors.transparent,
       activeBorderColor: MyColors.accent,
       inactiveBorderColor: MyColors.main,
+      enableSuggestions: false,
+      autocorrect: false,
     );
   }
 }

@@ -15,8 +15,8 @@ _$_UserProfile _$_$_UserProfileFromJson(Map<String, dynamic> json) {
     weeklyFollowers: json['weeklyFollowers'] as int,
     imageLink: json['imageLink'] as String?,
     about: json['about'] as String?,
-    instagramLink: json['instagramLink'] as String?,
-    telegramLink: json['telegramLink'] as String?,
+    instagramUsername: json['instagramUsername'] as String?,
+    telegramUsername: json['telegramUsername'] as String?,
   );
 }
 
@@ -29,6 +29,6 @@ Map<String, dynamic> _$_$_UserProfileToJson(_$_UserProfile instance) =>
       'weeklyFollowers': instance.weeklyFollowers,
       'imageLink': instance.imageLink,
       'about': instance.about,
-      'instagramLink': instance.instagramLink,
-      'telegramLink': instance.telegramLink,
+      'instagramUsername': instance.instagramUsername,
+      'telegramUsername': instance.telegramUsername,
     };

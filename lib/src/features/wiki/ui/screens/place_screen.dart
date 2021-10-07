@@ -117,13 +117,13 @@ class _PlaceDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
                 child: MyHorizontalPadding(
                   child: WikiWideBookmarkButton(
-                    iconWidget: Icon(Ionicons.bookmark,
+                    iconWidget: const Icon(Ionicons.bookmark,
                         size: 20, color: MyColors.mainOppositeColor),
                     buttonText: AppLocalizations.of(context)!.wikiFollow,
                     // todo
@@ -133,13 +133,13 @@ class _PlaceDetails extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 25),
-          SectionDivider(needHorizontalMargin: true),
+          const SizedBox(height: 25),
+          const SectionDivider(needHorizontalMargin: true),
           SocialLinksList(
-            soundcloudLink: loadedPlace.soundcloudLink,
-            instagramLink: loadedPlace.instagramLink,
+            soundcloudUsername: loadedPlace.soundcloudUsername,
+            instagramUsername: loadedPlace.instagramUsername,
           ),
-          SectionSpacer(),
+          const SectionSpacer(),
           SectionTitle(
               sectionTitle: AppLocalizations.of(context)!.wikiPlaceCoordinates),
           SizedBox(height: 12),

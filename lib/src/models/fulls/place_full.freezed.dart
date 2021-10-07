@@ -22,8 +22,8 @@ class _$PlaceFullTearOff {
 
   _PlaceFull call(
       {String? about,
-      String? instagramLink,
-      String? soundcloudLink,
+      String? instagramUsername,
+      String? soundcloudUsername,
       required int id,
       required String name,
       required int overallFollowers,
@@ -35,8 +35,8 @@ class _$PlaceFullTearOff {
       required Coordinate coordinate}) {
     return _PlaceFull(
       about: about,
-      instagramLink: instagramLink,
-      soundcloudLink: soundcloudLink,
+      instagramUsername: instagramUsername,
+      soundcloudUsername: soundcloudUsername,
       id: id,
       name: name,
       overallFollowers: overallFollowers,
@@ -60,8 +60,8 @@ const $PlaceFull = _$PlaceFullTearOff();
 /// @nodoc
 mixin _$PlaceFull {
   String? get about => throw _privateConstructorUsedError;
-  String? get instagramLink => throw _privateConstructorUsedError;
-  String? get soundcloudLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
+  String? get soundcloudUsername => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get overallFollowers => throw _privateConstructorUsedError;
@@ -84,8 +84,8 @@ abstract class $PlaceFullCopyWith<$Res> {
       _$PlaceFullCopyWithImpl<$Res>;
   $Res call(
       {String? about,
-      String? instagramLink,
-      String? soundcloudLink,
+      String? instagramUsername,
+      String? soundcloudUsername,
       int id,
       String name,
       int overallFollowers,
@@ -111,8 +111,8 @@ class _$PlaceFullCopyWithImpl<$Res> implements $PlaceFullCopyWith<$Res> {
   @override
   $Res call({
     Object? about = freezed,
-    Object? instagramLink = freezed,
-    Object? soundcloudLink = freezed,
+    Object? instagramUsername = freezed,
+    Object? soundcloudUsername = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? overallFollowers = freezed,
@@ -128,13 +128,13 @@ class _$PlaceFullCopyWithImpl<$Res> implements $PlaceFullCopyWith<$Res> {
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      soundcloudLink: soundcloudLink == freezed
-          ? _value.soundcloudLink
-          : soundcloudLink // ignore: cast_nullable_to_non_nullable
+      soundcloudUsername: soundcloudUsername == freezed
+          ? _value.soundcloudUsername
+          : soundcloudUsername // ignore: cast_nullable_to_non_nullable
               as String?,
       id: id == freezed
           ? _value.id
@@ -198,8 +198,8 @@ abstract class _$PlaceFullCopyWith<$Res> implements $PlaceFullCopyWith<$Res> {
   @override
   $Res call(
       {String? about,
-      String? instagramLink,
-      String? soundcloudLink,
+      String? instagramUsername,
+      String? soundcloudUsername,
       int id,
       String name,
       int overallFollowers,
@@ -228,8 +228,8 @@ class __$PlaceFullCopyWithImpl<$Res> extends _$PlaceFullCopyWithImpl<$Res>
   @override
   $Res call({
     Object? about = freezed,
-    Object? instagramLink = freezed,
-    Object? soundcloudLink = freezed,
+    Object? instagramUsername = freezed,
+    Object? soundcloudUsername = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? overallFollowers = freezed,
@@ -245,13 +245,13 @@ class __$PlaceFullCopyWithImpl<$Res> extends _$PlaceFullCopyWithImpl<$Res>
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      soundcloudLink: soundcloudLink == freezed
-          ? _value.soundcloudLink
-          : soundcloudLink // ignore: cast_nullable_to_non_nullable
+      soundcloudUsername: soundcloudUsername == freezed
+          ? _value.soundcloudUsername
+          : soundcloudUsername // ignore: cast_nullable_to_non_nullable
               as String?,
       id: id == freezed
           ? _value.id
@@ -298,8 +298,8 @@ class __$PlaceFullCopyWithImpl<$Res> extends _$PlaceFullCopyWithImpl<$Res>
 class _$_PlaceFull extends _PlaceFull {
   const _$_PlaceFull(
       {this.about,
-      this.instagramLink,
-      this.soundcloudLink,
+      this.instagramUsername,
+      this.soundcloudUsername,
       required this.id,
       required this.name,
       required this.overallFollowers,
@@ -317,9 +317,9 @@ class _$_PlaceFull extends _PlaceFull {
   @override
   final String? about;
   @override
-  final String? instagramLink;
+  final String? instagramUsername;
   @override
-  final String? soundcloudLink;
+  final String? soundcloudUsername;
   @override
   final int id;
   @override
@@ -341,7 +341,7 @@ class _$_PlaceFull extends _PlaceFull {
 
   @override
   String toString() {
-    return 'PlaceFull(about: $about, instagramLink: $instagramLink, soundcloudLink: $soundcloudLink, id: $id, name: $name, overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, isFollowed: $isFollowed, imageLink: $imageLink, city: $city, streetAddress: $streetAddress, coordinate: $coordinate)';
+    return 'PlaceFull(about: $about, instagramUsername: $instagramUsername, soundcloudUsername: $soundcloudUsername, id: $id, name: $name, overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, isFollowed: $isFollowed, imageLink: $imageLink, city: $city, streetAddress: $streetAddress, coordinate: $coordinate)';
   }
 
   @override
@@ -350,12 +350,12 @@ class _$_PlaceFull extends _PlaceFull {
         (other is _PlaceFull &&
             (identical(other.about, about) ||
                 const DeepCollectionEquality().equals(other.about, about)) &&
-            (identical(other.instagramLink, instagramLink) ||
+            (identical(other.instagramUsername, instagramUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.instagramLink, instagramLink)) &&
-            (identical(other.soundcloudLink, soundcloudLink) ||
+                    .equals(other.instagramUsername, instagramUsername)) &&
+            (identical(other.soundcloudUsername, soundcloudUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.soundcloudLink, soundcloudLink)) &&
+                    .equals(other.soundcloudUsername, soundcloudUsername)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
@@ -386,8 +386,8 @@ class _$_PlaceFull extends _PlaceFull {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(about) ^
-      const DeepCollectionEquality().hash(instagramLink) ^
-      const DeepCollectionEquality().hash(soundcloudLink) ^
+      const DeepCollectionEquality().hash(instagramUsername) ^
+      const DeepCollectionEquality().hash(soundcloudUsername) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(overallFollowers) ^
@@ -412,8 +412,8 @@ class _$_PlaceFull extends _PlaceFull {
 abstract class _PlaceFull extends PlaceFull {
   const factory _PlaceFull(
       {String? about,
-      String? instagramLink,
-      String? soundcloudLink,
+      String? instagramUsername,
+      String? soundcloudUsername,
       required int id,
       required String name,
       required int overallFollowers,
@@ -431,9 +431,9 @@ abstract class _PlaceFull extends PlaceFull {
   @override
   String? get about => throw _privateConstructorUsedError;
   @override
-  String? get instagramLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
   @override
-  String? get soundcloudLink => throw _privateConstructorUsedError;
+  String? get soundcloudUsername => throw _privateConstructorUsedError;
   @override
   int get id => throw _privateConstructorUsedError;
   @override

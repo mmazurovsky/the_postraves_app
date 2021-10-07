@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:the_postraves_app/src/core/utils/social_links_helper.dart';
 import '../../../features/wiki/ui/widgets/button_with_icons.dart';
 
 import '../../service/open_link_service.dart';
@@ -9,36 +10,38 @@ import 'section_spacer.dart';
 import 'section_title.dart';
 
 class SocialLinksList extends StatelessWidget {
-  final String? instagramLink;
-  final String? soundcloudLink;
-  final String? telegramLink;
-  final String? bandcampLink;
+  final String? instagramUsername;
+  final String? soundcloudUsername;
+  final String? telegramUsername;
+  final String? bandcampUsername;
   static const double _verticalPadding = 10;
 
   const SocialLinksList({
     Key? key,
-    this.instagramLink,
-    this.bandcampLink,
-    this.soundcloudLink,
-    this.telegramLink,
+    this.instagramUsername,
+    this.bandcampUsername,
+    this.soundcloudUsername,
+    this.telegramUsername,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return instagramLink != null ||
-            bandcampLink != null ||
-            soundcloudLink != null ||
-            telegramLink != null
+    return instagramUsername != null ||
+            bandcampUsername != null ||
+            soundcloudUsername != null ||
+            telegramUsername != null
         ? Column(
             children: [
               const SectionSpacer(),
               SectionTitle(sectionTitle: AppLocalizations.of(context)!.links),
               const SizedBox(height: 8),
-              soundcloudLink != null
+              soundcloudUsername != null
                   ? ButtonWithIcons(
                       buttonText: 'Soundcloud',
-                      onButtonTap: () =>
-                          OpenLinkService.openUrl(soundcloudLink!),
+                      onButtonTap: () => OpenLinkService.openUrl(
+                        SocialLinksHelper.getSoundcloudLinkForNickname(
+                            soundcloudUsername!),
+                      ),
                       leadingIcon: Container(
                         width: 40,
                         height: 40,
@@ -55,10 +58,13 @@ class SocialLinksList extends StatelessWidget {
                       verticalPadding: _verticalPadding,
                     )
                   : Container(),
-              bandcampLink != null
+              bandcampUsername != null
                   ? ButtonWithIcons(
                       buttonText: 'Bandcamp',
-                      onButtonTap: () => OpenLinkService.openUrl(bandcampLink!),
+                      onButtonTap: () => OpenLinkService.openUrl(
+                        SocialLinksHelper.getBandcampLinkForNickname(
+                            bandcampUsername!),
+                      ),
                       leadingIcon: Container(
                         width: 40,
                         height: 40,
@@ -75,10 +81,12 @@ class SocialLinksList extends StatelessWidget {
                       verticalPadding: _verticalPadding,
                     )
                   : Container(),
-              instagramLink != null
+              instagramUsername != null
                   ? ButtonWithIcons(
                       buttonText: 'Instagram',
-                      onButtonTap: () => OpenLinkService.openUrl(instagramLink!),
+                      onButtonTap: () =>
+                          OpenLinkService.openUrl(SocialLinksHelper.getInstagramLinkForNickname(
+                            instagramUsername!)),
                       leadingIcon: Container(
                         width: 40,
                         height: 40,
@@ -95,10 +103,12 @@ class SocialLinksList extends StatelessWidget {
                       verticalPadding: _verticalPadding,
                     )
                   : Container(),
-              telegramLink != null
+              telegramUsername != null
                   ? ButtonWithIcons(
                       buttonText: 'Telegram',
-                      onButtonTap: () => OpenLinkService.openUrl(telegramLink!),
+                      onButtonTap: () =>
+                          OpenLinkService.openUrl(SocialLinksHelper.getTelegramLinkForNickname(
+                            telegramUsername!)),
                       leadingIcon: Container(
                         width: 40,
                         height: 40,

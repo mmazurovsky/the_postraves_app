@@ -30,44 +30,43 @@ class AuthenticationCanvas extends StatelessWidget {
         backgroundColor: MyColors.screenBackground,
         leading: backButtonNeeded ? const AppBarBackButton() : Container(),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: MyHorizontalMargin(
+      body: 
+      // not sure about this screen for all device screen sizes...
+      SingleChildScrollView( 
+        physics: NeverScrollableScrollPhysics(),
+        child: SizedBox(
+          height: ScreenSize.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              MyHorizontalMargin(
                 child: Text(
                   title,
                   style: MyTextStyles.authTitle,
                   textAlign: TextAlign.center,
                 ),
               ),
-            ),
-          ),
-          subTitle == null
-              ? Container()
-              : Column(
-                  children: [
-                    const SizedBox(
-                      height: 20,
+              subTitle == null
+                  ? Container()
+                  : Column(
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        MyHorizontalMargin(
+                          child: Text(
+                            subTitle!,
+                            style: MyTextStyles.authSubtitle,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
-                    MyHorizontalMargin(
-                      child: Text(
-                        subTitle!,
-                        style: MyTextStyles.authSubtitle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-          const SizedBox(
-            height: 30,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+              const SizedBox(
+                height: 30,
+              ),
               ...buttons.map(
                 (button) {
                   return Column(
@@ -80,14 +79,9 @@ class AuthenticationCanvas extends StatelessWidget {
                   );
                 },
               ),
-            ],
-          ),
-          SizedBox(
-            height: ScreenSize.height * 0.15,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+              const SizedBox(
+                height: 120,
+              ),
               bottomWidget == null
                   ? Container()
                   : MyHorizontalMargin(
@@ -96,7 +90,7 @@ class AuthenticationCanvas extends StatelessWidget {
               const SizedBox(height: 20),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

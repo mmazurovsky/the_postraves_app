@@ -142,8 +142,8 @@ class _ArtistDetails extends StatelessWidget {
           SizedBox(height: 25),
           SectionDivider(needHorizontalMargin: true),
           SocialLinksList(
-            soundcloudLink: loadedArtist.soundcloudLink,
-            instagramLink: loadedArtist.instagramLink,
+            soundcloudUsername: loadedArtist.soundcloudUsername,
+            instagramUsername: loadedArtist.soundcloudUsername,
           ),
           loadedArtist.about == null
               ? Container()

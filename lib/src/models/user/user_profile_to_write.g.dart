@@ -13,8 +13,8 @@ _$_UserProfileToWrite _$_$_UserProfileToWriteFromJson(
     currentCity: json['currentCity'] as String,
     about: json['about'] as String?,
     imageLink: json['imageLink'] as String?,
-    instagramLink: json['instagramLink'] as String?,
-    telegramLink: json['telegramLink'] as String?,
+    instagramUsername: json['instagramUsername'] as String?,
+    telegramUsername: json['telegramUsername'] as String?,
   );
 }
 
@@ -25,6 +25,6 @@ Map<String, dynamic> _$_$_UserProfileToWriteToJson(
       'currentCity': instance.currentCity,
       'about': instance.about,
       'imageLink': instance.imageLink,
-      'instagramLink': instance.instagramLink,
-      'telegramLink': instance.telegramLink,
+      'instagramUsername': instance.instagramUsername,
+      'telegramUsername': instance.telegramUsername,
     };

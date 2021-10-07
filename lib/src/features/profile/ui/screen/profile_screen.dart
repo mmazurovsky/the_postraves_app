@@ -171,19 +171,25 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           textStyle: MyTextStyles.buttonWithOppositeColor,
         ),
         const SizedBox(height: 25),
+        const SectionDivider(
+          needHorizontalMargin: true,
+        ),
         SocialLinksList(
-          instagramLink: widget.userProfile.instagramLink,
-          telegramLink: widget.userProfile.telegramLink,
+          instagramUsername: widget.userProfile.instagramUsername,
+          telegramUsername: widget.userProfile.telegramUsername,
         ),
         const SectionSpacer(),
         widget.userProfile.about == null
             ? Container()
             : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   WikiExpandableTextDescription(
                     widget.userProfile.about!,
                   ),
                   const SectionSpacer(),
+                  SectionDivider(needHorizontalMargin: true),
+                  SectionSpacer(),
                 ],
               ),
         SectionTitle(
@@ -226,7 +232,8 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           textStyle: MyTextStyles.buttonWithMainColor,
           onTap: () => showModalBottomSheet(
             context: context,
-            builder: (context) => SettingsSelector(_closeModalBottomSheetAndPushModifyProfile),
+            builder: (context) =>
+                SettingsSelector(_closeModalBottomSheetAndPushModifyProfile),
           ),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
@@ -248,18 +255,20 @@ class _SettingsButtonData {
 }
 
 class SettingsSelector extends StatelessWidget {
-  final void Function()
-      _functionToCloseModalBottomSheetAndNavigateToNewScreen;
-  const SettingsSelector(this._functionToCloseModalBottomSheetAndNavigateToNewScreen, {Key? key}) : super(key: key);
+  final void Function() _functionToCloseModalBottomSheetAndNavigateToNewScreen;
+  const SettingsSelector(
+      this._functionToCloseModalBottomSheetAndNavigateToNewScreen,
+      {Key? key})
+      : super(key: key);
 
   List<_SettingsButtonData> _getSettingsList(BuildContext context) {
     return [
       _SettingsButtonData(
-          text: AppLocalizations.of(context)!.modifyProfile,
-          leadingIcon: const Icon(Ionicons.clipboard_outline,
-              color: MyColors.main, size: 18),
-          onTap: (_) =>
-              _functionToCloseModalBottomSheetAndNavigateToNewScreen(),),
+        text: AppLocalizations.of(context)!.modifyProfile,
+        leadingIcon: const Icon(Ionicons.clipboard_outline,
+            color: MyColors.main, size: 18),
+        onTap: (_) => _functionToCloseModalBottomSheetAndNavigateToNewScreen(),
+      ),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.writeToUs,
         leadingIcon: const Icon(Ionicons.chatbox_outline,

@@ -16,8 +16,8 @@ class UserProfile with _$UserProfile {
     required int weeklyFollowers,
     String? imageLink,
     String? about,
-    String? instagramLink,
-    String? telegramLink,
+    String? instagramUsername,
+    String? telegramUsername,
   }) = _UserProfile;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
@@ -28,8 +28,8 @@ class UserProfile with _$UserProfile {
       name: name,
       about: about,
       imageLink: imageLink,
-      instagramLink: instagramLink,
-      telegramLink: telegramLink,
+      instagramUsername: instagramUsername,
+      telegramUsername: telegramUsername,
       currentCity: currentCity.name,
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../core/utils/my_constants.dart';
 import '../geo/country.dart';
 import '../interfaces/data_interfaces.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,9 +16,9 @@ class UnityFull with _$UnityFull
   const UnityFull._();
   const factory UnityFull({
     String? about,
-    String? instagramLink,
-    String? soundcloudLink,
-    String? bandcampLink,
+    String? instagramUsername,
+    String? soundcloudUsername,
+    String? bandcampUsername,
     required int id,
     required String name,
     required int overallFollowers,

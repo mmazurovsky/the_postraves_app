@@ -25,15 +25,15 @@ class _$UserProfileToWriteTearOff {
       required String currentCity,
       String? about,
       String? imageLink,
-      String? instagramLink,
-      String? telegramLink}) {
+      String? instagramUsername,
+      String? telegramUsername}) {
     return _UserProfileToWrite(
       name: name,
       currentCity: currentCity,
       about: about,
       imageLink: imageLink,
-      instagramLink: instagramLink,
-      telegramLink: telegramLink,
+      instagramUsername: instagramUsername,
+      telegramUsername: telegramUsername,
     );
   }
 
@@ -51,8 +51,8 @@ mixin _$UserProfileToWrite {
   String get currentCity => throw _privateConstructorUsedError;
   String? get about => throw _privateConstructorUsedError;
   String? get imageLink => throw _privateConstructorUsedError;
-  String? get instagramLink => throw _privateConstructorUsedError;
-  String? get telegramLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
+  String? get telegramUsername => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -70,8 +70,8 @@ abstract class $UserProfileToWriteCopyWith<$Res> {
       String currentCity,
       String? about,
       String? imageLink,
-      String? instagramLink,
-      String? telegramLink});
+      String? instagramUsername,
+      String? telegramUsername});
 }
 
 /// @nodoc
@@ -89,8 +89,8 @@ class _$UserProfileToWriteCopyWithImpl<$Res>
     Object? currentCity = freezed,
     Object? about = freezed,
     Object? imageLink = freezed,
-    Object? instagramLink = freezed,
-    Object? telegramLink = freezed,
+    Object? instagramUsername = freezed,
+    Object? telegramUsername = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -109,13 +109,13 @@ class _$UserProfileToWriteCopyWithImpl<$Res>
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      telegramLink: telegramLink == freezed
-          ? _value.telegramLink
-          : telegramLink // ignore: cast_nullable_to_non_nullable
+      telegramUsername: telegramUsername == freezed
+          ? _value.telegramUsername
+          : telegramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -133,8 +133,8 @@ abstract class _$UserProfileToWriteCopyWith<$Res>
       String currentCity,
       String? about,
       String? imageLink,
-      String? instagramLink,
-      String? telegramLink});
+      String? instagramUsername,
+      String? telegramUsername});
 }
 
 /// @nodoc
@@ -154,8 +154,8 @@ class __$UserProfileToWriteCopyWithImpl<$Res>
     Object? currentCity = freezed,
     Object? about = freezed,
     Object? imageLink = freezed,
-    Object? instagramLink = freezed,
-    Object? telegramLink = freezed,
+    Object? instagramUsername = freezed,
+    Object? telegramUsername = freezed,
   }) {
     return _then(_UserProfileToWrite(
       name: name == freezed
@@ -174,13 +174,13 @@ class __$UserProfileToWriteCopyWithImpl<$Res>
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      telegramLink: telegramLink == freezed
-          ? _value.telegramLink
-          : telegramLink // ignore: cast_nullable_to_non_nullable
+      telegramUsername: telegramUsername == freezed
+          ? _value.telegramUsername
+          : telegramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -194,8 +194,8 @@ class _$_UserProfileToWrite implements _UserProfileToWrite {
       required this.currentCity,
       this.about,
       this.imageLink,
-      this.instagramLink,
-      this.telegramLink});
+      this.instagramUsername,
+      this.telegramUsername});
 
   factory _$_UserProfileToWrite.fromJson(Map<String, dynamic> json) =>
       _$_$_UserProfileToWriteFromJson(json);
@@ -209,13 +209,13 @@ class _$_UserProfileToWrite implements _UserProfileToWrite {
   @override
   final String? imageLink;
   @override
-  final String? instagramLink;
+  final String? instagramUsername;
   @override
-  final String? telegramLink;
+  final String? telegramUsername;
 
   @override
   String toString() {
-    return 'UserProfileToWrite(name: $name, currentCity: $currentCity, about: $about, imageLink: $imageLink, instagramLink: $instagramLink, telegramLink: $telegramLink)';
+    return 'UserProfileToWrite(name: $name, currentCity: $currentCity, about: $about, imageLink: $imageLink, instagramUsername: $instagramUsername, telegramUsername: $telegramUsername)';
   }
 
   @override
@@ -232,12 +232,12 @@ class _$_UserProfileToWrite implements _UserProfileToWrite {
             (identical(other.imageLink, imageLink) ||
                 const DeepCollectionEquality()
                     .equals(other.imageLink, imageLink)) &&
-            (identical(other.instagramLink, instagramLink) ||
+            (identical(other.instagramUsername, instagramUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.instagramLink, instagramLink)) &&
-            (identical(other.telegramLink, telegramLink) ||
+                    .equals(other.instagramUsername, instagramUsername)) &&
+            (identical(other.telegramUsername, telegramUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.telegramLink, telegramLink)));
+                    .equals(other.telegramUsername, telegramUsername)));
   }
 
   @override
@@ -247,8 +247,8 @@ class _$_UserProfileToWrite implements _UserProfileToWrite {
       const DeepCollectionEquality().hash(currentCity) ^
       const DeepCollectionEquality().hash(about) ^
       const DeepCollectionEquality().hash(imageLink) ^
-      const DeepCollectionEquality().hash(instagramLink) ^
-      const DeepCollectionEquality().hash(telegramLink);
+      const DeepCollectionEquality().hash(instagramUsername) ^
+      const DeepCollectionEquality().hash(telegramUsername);
 
   @JsonKey(ignore: true)
   @override
@@ -267,8 +267,8 @@ abstract class _UserProfileToWrite implements UserProfileToWrite {
       required String currentCity,
       String? about,
       String? imageLink,
-      String? instagramLink,
-      String? telegramLink}) = _$_UserProfileToWrite;
+      String? instagramUsername,
+      String? telegramUsername}) = _$_UserProfileToWrite;
 
   factory _UserProfileToWrite.fromJson(Map<String, dynamic> json) =
       _$_UserProfileToWrite.fromJson;
@@ -282,9 +282,9 @@ abstract class _UserProfileToWrite implements UserProfileToWrite {
   @override
   String? get imageLink => throw _privateConstructorUsedError;
   @override
-  String? get instagramLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
   @override
-  String? get telegramLink => throw _privateConstructorUsedError;
+  String? get telegramUsername => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserProfileToWriteCopyWith<_UserProfileToWrite> get copyWith =>

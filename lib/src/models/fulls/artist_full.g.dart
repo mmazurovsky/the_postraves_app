@@ -18,8 +18,8 @@ _$_ArtistFull _$_$_ArtistFullFromJson(Map<String, dynamic> json) {
         ? null
         : Country.fromJson(json['country'] as Map<String, dynamic>),
     about: json['about'] as String?,
-    soundcloudLink: json['soundcloudLink'] as String?,
-    instagramLink: json['instagramLink'] as String?,
+    soundcloudUsername: json['soundcloudUsername'] as String?,
+    instagramUsername: json['instagramUsername'] as String?,
   );
 }
 
@@ -33,6 +33,6 @@ Map<String, dynamic> _$_$_ArtistFullToJson(_$_ArtistFull instance) =>
       'imageLink': instance.imageLink,
       'country': instance.country?.toJson(),
       'about': instance.about,
-      'soundcloudLink': instance.soundcloudLink,
-      'instagramLink': instance.instagramLink,
+      'soundcloudUsername': instance.soundcloudUsername,
+      'instagramUsername': instance.instagramUsername,
     };

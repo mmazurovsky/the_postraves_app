@@ -29,8 +29,8 @@ class _$ArtistFullTearOff {
       String? imageLink,
       Country? country,
       String? about,
-      String? soundcloudLink,
-      String? instagramLink}) {
+      String? soundcloudUsername,
+      String? instagramUsername}) {
     return _ArtistFull(
       id: id,
       name: name,
@@ -40,8 +40,8 @@ class _$ArtistFullTearOff {
       imageLink: imageLink,
       country: country,
       about: about,
-      soundcloudLink: soundcloudLink,
-      instagramLink: instagramLink,
+      soundcloudUsername: soundcloudUsername,
+      instagramUsername: instagramUsername,
     );
   }
 
@@ -63,8 +63,8 @@ mixin _$ArtistFull {
   String? get imageLink => throw _privateConstructorUsedError;
   Country? get country => throw _privateConstructorUsedError;
   String? get about => throw _privateConstructorUsedError;
-  String? get soundcloudLink => throw _privateConstructorUsedError;
-  String? get instagramLink => throw _privateConstructorUsedError;
+  String? get soundcloudUsername => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -86,8 +86,8 @@ abstract class $ArtistFullCopyWith<$Res> {
       String? imageLink,
       Country? country,
       String? about,
-      String? soundcloudLink,
-      String? instagramLink});
+      String? soundcloudUsername,
+      String? instagramUsername});
 
   $CountryCopyWith<$Res>? get country;
 }
@@ -110,8 +110,8 @@ class _$ArtistFullCopyWithImpl<$Res> implements $ArtistFullCopyWith<$Res> {
     Object? imageLink = freezed,
     Object? country = freezed,
     Object? about = freezed,
-    Object? soundcloudLink = freezed,
-    Object? instagramLink = freezed,
+    Object? soundcloudUsername = freezed,
+    Object? instagramUsername = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -146,13 +146,13 @@ class _$ArtistFullCopyWithImpl<$Res> implements $ArtistFullCopyWith<$Res> {
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
-      soundcloudLink: soundcloudLink == freezed
-          ? _value.soundcloudLink
-          : soundcloudLink // ignore: cast_nullable_to_non_nullable
+      soundcloudUsername: soundcloudUsername == freezed
+          ? _value.soundcloudUsername
+          : soundcloudUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -184,8 +184,8 @@ abstract class _$ArtistFullCopyWith<$Res> implements $ArtistFullCopyWith<$Res> {
       String? imageLink,
       Country? country,
       String? about,
-      String? soundcloudLink,
-      String? instagramLink});
+      String? soundcloudUsername,
+      String? instagramUsername});
 
   @override
   $CountryCopyWith<$Res>? get country;
@@ -211,8 +211,8 @@ class __$ArtistFullCopyWithImpl<$Res> extends _$ArtistFullCopyWithImpl<$Res>
     Object? imageLink = freezed,
     Object? country = freezed,
     Object? about = freezed,
-    Object? soundcloudLink = freezed,
-    Object? instagramLink = freezed,
+    Object? soundcloudUsername = freezed,
+    Object? instagramUsername = freezed,
   }) {
     return _then(_ArtistFull(
       id: id == freezed
@@ -247,13 +247,13 @@ class __$ArtistFullCopyWithImpl<$Res> extends _$ArtistFullCopyWithImpl<$Res>
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
-      soundcloudLink: soundcloudLink == freezed
-          ? _value.soundcloudLink
-          : soundcloudLink // ignore: cast_nullable_to_non_nullable
+      soundcloudUsername: soundcloudUsername == freezed
+          ? _value.soundcloudUsername
+          : soundcloudUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      instagramLink: instagramLink == freezed
-          ? _value.instagramLink
-          : instagramLink // ignore: cast_nullable_to_non_nullable
+      instagramUsername: instagramUsername == freezed
+          ? _value.instagramUsername
+          : instagramUsername // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -271,8 +271,8 @@ class _$_ArtistFull extends _ArtistFull {
       this.imageLink,
       this.country,
       this.about,
-      this.soundcloudLink,
-      this.instagramLink})
+      this.soundcloudUsername,
+      this.instagramUsername})
       : super._();
 
   factory _$_ArtistFull.fromJson(Map<String, dynamic> json) =>
@@ -295,13 +295,13 @@ class _$_ArtistFull extends _ArtistFull {
   @override
   final String? about;
   @override
-  final String? soundcloudLink;
+  final String? soundcloudUsername;
   @override
-  final String? instagramLink;
+  final String? instagramUsername;
 
   @override
   String toString() {
-    return 'ArtistFull(id: $id, name: $name, overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, isFollowed: $isFollowed, imageLink: $imageLink, country: $country, about: $about, soundcloudLink: $soundcloudLink, instagramLink: $instagramLink)';
+    return 'ArtistFull(id: $id, name: $name, overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, isFollowed: $isFollowed, imageLink: $imageLink, country: $country, about: $about, soundcloudUsername: $soundcloudUsername, instagramUsername: $instagramUsername)';
   }
 
   @override
@@ -329,12 +329,12 @@ class _$_ArtistFull extends _ArtistFull {
                     .equals(other.country, country)) &&
             (identical(other.about, about) ||
                 const DeepCollectionEquality().equals(other.about, about)) &&
-            (identical(other.soundcloudLink, soundcloudLink) ||
+            (identical(other.soundcloudUsername, soundcloudUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.soundcloudLink, soundcloudLink)) &&
-            (identical(other.instagramLink, instagramLink) ||
+                    .equals(other.soundcloudUsername, soundcloudUsername)) &&
+            (identical(other.instagramUsername, instagramUsername) ||
                 const DeepCollectionEquality()
-                    .equals(other.instagramLink, instagramLink)));
+                    .equals(other.instagramUsername, instagramUsername)));
   }
 
   @override
@@ -348,8 +348,8 @@ class _$_ArtistFull extends _ArtistFull {
       const DeepCollectionEquality().hash(imageLink) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(about) ^
-      const DeepCollectionEquality().hash(soundcloudLink) ^
-      const DeepCollectionEquality().hash(instagramLink);
+      const DeepCollectionEquality().hash(soundcloudUsername) ^
+      const DeepCollectionEquality().hash(instagramUsername);
 
   @JsonKey(ignore: true)
   @override
@@ -372,8 +372,8 @@ abstract class _ArtistFull extends ArtistFull {
       String? imageLink,
       Country? country,
       String? about,
-      String? soundcloudLink,
-      String? instagramLink}) = _$_ArtistFull;
+      String? soundcloudUsername,
+      String? instagramUsername}) = _$_ArtistFull;
   const _ArtistFull._() : super._();
 
   factory _ArtistFull.fromJson(Map<String, dynamic> json) =
@@ -396,9 +396,9 @@ abstract class _ArtistFull extends ArtistFull {
   @override
   String? get about => throw _privateConstructorUsedError;
   @override
-  String? get soundcloudLink => throw _privateConstructorUsedError;
+  String? get soundcloudUsername => throw _privateConstructorUsedError;
   @override
-  String? get instagramLink => throw _privateConstructorUsedError;
+  String? get instagramUsername => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ArtistFullCopyWith<_ArtistFull> get copyWith =>

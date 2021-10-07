@@ -25,8 +25,8 @@ class ArtistFull
     String? imageLink,
     Country? country,
     String? about,
-    String? soundcloudLink,
-    String? instagramLink,
+    String? soundcloudUsername,
+    String? instagramUsername,
   }) = _ArtistFull;
 
   factory ArtistFull.fromJson(Map<String, dynamic> json) =>

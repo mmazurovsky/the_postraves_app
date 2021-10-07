@@ -11,8 +11,8 @@ class UserProfileToWrite with _$UserProfileToWrite {
     required String currentCity,
     String? about,
     String? imageLink,
-    String? instagramLink,
-    String? telegramLink,
+    String? instagramUsername,
+    String? telegramUsername,
   }) = _UserProfileToWrite;
 
   factory UserProfileToWrite.fromJson(Map<String, dynamic> json) =>

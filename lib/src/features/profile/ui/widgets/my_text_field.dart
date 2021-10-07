@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
@@ -15,23 +16,31 @@ class MyTextField extends StatelessWidget {
   final Color inactiveBorderColor;
   final String? initialValue;
   final int? maxLines;
+  final int? maxLength;
   final String? hintText;
+  final bool? enableSuggestions;
+  final Iterable<String>? autofillHints;
+  final bool? autocorrect;
 
-  const MyTextField(
-      {Key? key,
-      required this.title,
-      required this.textInputType,
-      required this.isSecret,
-      required this.textEditingController,
-      this.validatorFunction,
-      required this.fillColor,
-      required this.activeBorderColor,
-      required this.inactiveBorderColor,
-      this.focusNode,
-      this.initialValue,
-      this.maxLines,
-      this.hintText})
-      : super(key: key);
+  const MyTextField({
+    Key? key,
+    required this.title,
+    required this.textInputType,
+    required this.isSecret,
+    required this.textEditingController,
+    this.validatorFunction,
+    required this.fillColor,
+    required this.activeBorderColor,
+    required this.inactiveBorderColor,
+    this.focusNode,
+    this.initialValue,
+    this.maxLines,
+    this.hintText,
+    this.enableSuggestions,
+    this.autofillHints,
+    this.maxLength,
+    this.autocorrect,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +81,11 @@ class MyTextField extends StatelessWidget {
         keyboardType: textInputType,
         obscureText: isSecret,
         maxLines: maxLines,
+        enableSuggestions: enableSuggestions ?? true,
+        autofillHints: autofillHints,
+        maxLength: maxLength,
+        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+        autocorrect: autocorrect ?? true,
       ),
     );
   }
