@@ -50,14 +50,6 @@ class MyTextStyles {
     color: MyColors.forInactiveStuff,
   );
 
-  static TextStyle modalBottomSheetTitle = const TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: 24,
-    fontWeight: FontWeight.w600,
-    color: MyColors.main,
-    wordSpacing: 3,
-  );
-
   static const TextStyle ratingsTitle = TextStyle(
     fontFamily: 'Roboto',
     color: MyColors.main,
@@ -119,7 +111,15 @@ class MyTextStyles {
     decoration: TextDecoration.none,
   );
 
-    static const TextStyle modalBottomSheetItem = TextStyle(
+  static const TextStyle modalBottomSheetTitle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    color: MyColors.main,
+    wordSpacing: 3,
+  );
+
+  static const TextStyle modalBottomSheetItem = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 18,
