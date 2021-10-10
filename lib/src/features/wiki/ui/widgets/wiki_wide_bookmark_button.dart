@@ -27,11 +27,13 @@ class WikiWideBookmarkButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: ButtonContent(
-          leading: Icon(
-            isFollowed ? null : Ionicons.bookmark,
-            size: 20,
-            color: isFollowed ? MyColors.main : MyColors.mainOppositeColor,
-          ),
+          leading: isFollowed
+              ? Container()
+              : const Icon(
+                  Ionicons.bookmark,
+                  size: 20,
+                  color: MyColors.mainOppositeColor,
+                ),
           distanceBetweenLeadingAndText: 5,
           text: isFollowed
               ? AppLocalizations.of(context)!.wikiUnfollow

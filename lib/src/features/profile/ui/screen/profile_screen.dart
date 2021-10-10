@@ -5,6 +5,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/buttons/button_content.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/buttons/my_outlined_button.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/modal_bottom_sheet_content.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/my_cached_network_image.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/my_horizontal_padding.dart';
 import 'package:the_postraves_app/src/core/provider/city_list_provider.dart';
 import 'package:the_postraves_app/src/core/provider/current_city_provider.dart';
@@ -84,6 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // ImageDimensions? _imageDimensions;
   late UserProfile _userProfile;
   late WikiDataDto _wikiDataDto;
+  // late ImageDimensions? _imageDimensions;
 
   @override
   void initState() {
@@ -94,7 +96,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       ///* default value is used because getting dimensions for profile
       ///* image link doesn't work for some reason here
-      imageDimensions: ImageDimensions(height: ScreenSize.width, width: ScreenSize.width),
+      imageDimensions: _userProfile.imageLink != null
+          ? ImageDimensions(height: ScreenSize.width, width: ScreenSize.width)
+          : null,
       imageLink: _userProfile.imageLink,
       name: _userProfile.name,
       type: WikiFollowableType.USER,
@@ -102,26 +106,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _profileDetails = _ProfileDetails(
       userProfile: _userProfile,
     );
-    // _myCachedNetworkImage = MyCachedNetworkImage(widget.userProfile.imageLink);
-    // _assignImageDimensions();
 
+    // final _myCachedNetworkImage = MyCachedNetworkImage(_userProfile.imageLink);
+    // ImageDimensions? _imageDimensions;
+
+    // * I DON'T FUCKING KNOW WHY THIS FUTURE NEVER GETS RESOLVED
     // Future.delayed(
-    // Duration.zero,
-    // () async =>
-    //     _imageDimensions = await ImageDimensions.getImageDimensions(_myCachedNetworkImage));
+    //   Duration.zero,
+    //   () async =>
+    //       _imageDimensions = await _myCachedNetworkImage.getImageDimensions(),
+    // );
   }
-
-  // void _assignImageDimensions() async {
-  //   final imageDimensions =
-  //       //* I DON'T FUCKING KNOW WHY THIS FUTURE NEVER GETS RESOLVED
-  //       // await ImageDimensions.getImageDimensions(_myCachedNetworkImage);
-  //       widget.userProfile.imageLink != null
-  //           ? ImageDimensions(ScreenSize.width, ScreenSize.width)
-  //           : null;
-  //   setState(() {
-  //     _imageDimensions = imageDimensions;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -159,12 +154,11 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const WikiSubtitle(
+        WikiSubtitle(
           entityType: WikiFollowableType.USER,
+          overallFollowers: widget.userProfile.overallFollowers,
         ),
-        SizedBox(height: 20),
-        WikiTitle(title: widget.userProfile.name),
-        SizedBox(height: 8),
+        const SizedBox(height: 20),
         MyElevatedButton(
           //todo
           onTap: () {},
@@ -183,11 +177,11 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
         const SectionDivider(
           needHorizontalMargin: true,
         ),
+        const SectionSpacer(),
         SocialLinksList(
           instagramUsername: widget.userProfile.instagramUsername,
           telegramUsername: widget.userProfile.telegramUsername,
         ),
-        const SectionSpacer(),
         widget.userProfile.about == null
             ? Container()
             : Column(
@@ -203,12 +197,13 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
               ),
         SectionTitle(
             sectionTitle: AppLocalizations.of(context)!.profileCurrentCity),
+        const SizedBox(height: 8),
         ButtonWithIcons(
           leadingIcon: Text(
             widget.userProfile.currentCity.country.emojiCode,
             style: const TextStyle(fontSize: 20),
           ),
-          buttonText: widget.userProfile.currentCity.localName,
+          buttonText: widget.userProfile.currentCity.localName, //todo font size
           trailingIcon: const Icon(
             Ionicons.chevron_down,
             size: 26,
@@ -226,6 +221,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           ),
           verticalPadding: 14,
         ),
+        const SizedBox(height: 15),
         const SectionDivider(needHorizontalMargin: true),
         const SectionSpacer(),
         const SectionSpacer(),
