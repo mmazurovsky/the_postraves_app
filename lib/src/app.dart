@@ -59,27 +59,6 @@ class AppState extends State<App> with WidgetsBindingObserver {
           create: (context) => serviceLocator<ShowsCubit>(),
         ),
         BlocProvider(
-          create: (context) => serviceLocator<EventCubit>(),
-        ),
-        BlocProvider(
-          create: (context) => serviceLocator<ArtistCubit>(),
-        ),
-        BlocProvider(
-          create: (context) => serviceLocator<PlaceCubit>(),
-        ),
-        BlocProvider(
-          create: (context) => serviceLocator<UnityCubit>(),
-        ),
-        BlocProvider(
-          create: (context) => serviceLocator<FollowCubit<ArtistFull>>(),
-        ),
-        BlocProvider(
-          create: (context) => serviceLocator<FollowCubit<PlaceFull>>(),
-        ),
-        BlocProvider(
-          create: (context) => serviceLocator<FollowCubit<UnityFull>>(),
-        ),
-        BlocProvider(
           create: (context) => serviceLocator<SearchCubit>(),
         ),
         BlocProvider(

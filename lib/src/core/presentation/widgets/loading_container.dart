@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'my_loading_indicator.dart';
 
-class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({Key? key}) : super(key: key);
+class LoadingContainer extends StatelessWidget {
+  const LoadingContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -15,7 +15,7 @@ import 'models/geo/country.dart';
 import 'resolved_city_initial_scaffold.dart';
 import 'package:provider/provider.dart';
 
-import 'core/presentation/widgets/loading_screen.dart';
+import 'core/presentation/widgets/loading_container.dart';
 import 'core/utils/my_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -171,7 +171,7 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                       ),
                     ],
                   )
-                : LoadingScreen(),
+                : LoadingContainer(),
           ),
         );
       },

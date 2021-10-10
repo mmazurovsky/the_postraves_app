@@ -6,7 +6,7 @@ import '../../../../core/utils/my_colors.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
 import 'rating_list_item.dart';
 
-class RatingCardWithListOfItems<T extends FollowableInterface>
+class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final String imagePath;
   final List<TextSpan> titleTextSpans;

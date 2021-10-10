@@ -11,7 +11,7 @@ import '../../../../models/related_to_search/unified_search_model.dart';
 import '../../../../models/shorts/event_short.dart';
 import '../../../../models/shorts/place_short.dart';
 import '../widgets/previous_search_results_block.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import '../../../../core/presentation/widgets/ending_of_screen.dart';
@@ -112,7 +112,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     );
                   } else if (state is LoadingPreviousSearches ||
                       state is LoadingNewSearch) {
-                    return LoadingScreen();
+                    return LoadingContainer();
                   } else if (state is LoadedNewSearch) {
                     return _SearchResultsList(
                       found: state.found,
@@ -211,7 +211,7 @@ class _SearchResultsList extends StatelessWidget {
   }
 }
 
-class _SearchResultsResolver<T extends FollowableInterface>
+class _SearchResultsResolver<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final String listName;
   final List<T> entities;

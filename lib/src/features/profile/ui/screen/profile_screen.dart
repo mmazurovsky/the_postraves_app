@@ -11,28 +11,29 @@ import 'package:the_postraves_app/src/core/provider/current_city_provider.dart';
 import 'package:the_postraves_app/src/core/service/open_link_service.dart';
 import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/current_city_selector.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_subtitle.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_title.dart';
+import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
 import 'package:the_postraves_app/src/models/geo/city.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../my_navigation.dart';
 import '../../../wiki/ui/screens/wiki_canvas.dart';
 import '../../../wiki/ui/widgets/button_with_icons.dart';
 import '../../../wiki/ui/widgets/wiki_expandable_text_description.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../models/user/user_profile.dart';
-import '../../../../core/presentation/widgets/my_cached_network_image.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/presentation/widgets/section_spacer.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 import '../../../../core/presentation/widgets/social_links_list.dart';
-import '../../../../core/utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import 'create_user_profile_screen.dart';
 import 'sign_in_methods_screen.dart';
-import '../../../wiki/dto/wiki_data_dto.dart';
 import '../../../../core/presentation/widgets/animations/my_slide_animated_switcher.dart';
 import '../../../../dependency_injection.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -49,11 +50,10 @@ class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationCubit, AuthenticationState>(
       builder: (context, state) {
-        Widget screenToReturn = const LoadingScreen();
+        Widget screenToReturn = const LoadingContainer();
         state.maybeWhen(
-            loading: () => screenToReturn = const LoadingScreen(),
-            authenticated: (userProfile) =>
-                screenToReturn = ProfileScreen(userProfile: userProfile),
+            loading: () => screenToReturn = const LoadingContainer(),
+            authenticated: (_) => screenToReturn = const ProfileScreen(),
             authenticatedWithoutAccount: () => screenToReturn =
                 CreateUserProfileScreen(
                     isPoppable: false, userProfileRepository: serviceLocator()),
@@ -68,10 +68,8 @@ class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
 }
 
 class ProfileScreen extends StatefulWidget {
-  final UserProfile userProfile;
   const ProfileScreen({
     Key? key,
-    required this.userProfile,
   }) : super(key: key);
 
   @override
@@ -83,16 +81,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       TabItem.profile.tabScrollController;
   _ProfileDetails? _profileDetails;
   // late MyCachedNetworkImage _myCachedNetworkImage;
-  ImageDimensions? _imageDimensions;
+  // ImageDimensions? _imageDimensions;
+  late UserProfile _userProfile;
+  late WikiDataDto _wikiDataDto;
 
   @override
   void initState() {
     super.initState();
+    _userProfile = context.read<AuthenticationCubit>().currentUserFromBackend!;
+    _wikiDataDto = WikiDataDto(
+      id: _userProfile.id,
+
+      ///* default value is used because getting dimensions for profile
+      ///* image link doesn't work for some reason here
+      imageDimensions: ImageDimensions(height: ScreenSize.width, width: ScreenSize.width),
+      imageLink: _userProfile.imageLink,
+      name: _userProfile.name,
+      type: WikiFollowableType.USER,
+    );
     _profileDetails = _ProfileDetails(
-      userProfile: widget.userProfile,
+      userProfile: _userProfile,
     );
     // _myCachedNetworkImage = MyCachedNetworkImage(widget.userProfile.imageLink);
-    _assignImageDimensions();
+    // _assignImageDimensions();
 
     // Future.delayed(
     // Duration.zero,
@@ -100,32 +111,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
     //     _imageDimensions = await ImageDimensions.getImageDimensions(_myCachedNetworkImage));
   }
 
-  void _assignImageDimensions() async {
-    final imageDimensions =
-        //* I DON'T FUCKING KNOW WHY THIS FUTURE NEVER GETS RESOLVED
-        // await ImageDimensions.getImageDimensions(_myCachedNetworkImage);
-        widget.userProfile.imageLink != null
-            ? ImageDimensions(ScreenSize.width, ScreenSize.width)
-            : null;
-    setState(() {
-      _imageDimensions = imageDimensions;
-    });
-  }
+  // void _assignImageDimensions() async {
+  //   final imageDimensions =
+  //       //* I DON'T FUCKING KNOW WHY THIS FUTURE NEVER GETS RESOLVED
+  //       // await ImageDimensions.getImageDimensions(_myCachedNetworkImage);
+  //       widget.userProfile.imageLink != null
+  //           ? ImageDimensions(ScreenSize.width, ScreenSize.width)
+  //           : null;
+  //   setState(() {
+  //     _imageDimensions = imageDimensions;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return WikiCanvas(
+      wikiDataDto: _wikiDataDto,
+      wikiContent: _profileDetails!,
       scrollController: _scrollController,
-      wikiDetails: _profileDetails!,
-      imageDimensions: _imageDimensions,
       isBackButtonOn: false,
-      wikiData: WikiDataDto(
-        id: widget.userProfile.id,
-        name: widget.userProfile.name,
-        imageLink: widget.userProfile.imageLink,
-        overallFollowers: widget.userProfile.overallFollowers,
-        type: WikiFollowableType.USER,
-      ),
     );
   }
 }
@@ -155,7 +159,12 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 20),
+        const WikiSubtitle(
+          entityType: WikiFollowableType.USER,
+        ),
+        SizedBox(height: 20),
+        WikiTitle(title: widget.userProfile.name),
+        SizedBox(height: 8),
         MyElevatedButton(
           //todo
           onTap: () {},
@@ -182,7 +191,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
         widget.userProfile.about == null
             ? Container()
             : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   WikiExpandableTextDescription(
                     widget.userProfile.about!,

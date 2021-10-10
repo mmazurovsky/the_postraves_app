@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/models/related_to_search/unified_search_model.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import 'followable_data.dart';
-import '../../../utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../utils/my_colors.dart';
 import '../../../utils/my_constants.dart';
 
 import '../my_cached_network_image.dart';
 import '../my_rating_entity_vertical_padding.dart';
 
-class FollowableListItem<T extends SimpleFollowableInterface> extends StatefulWidget {
-  final T followable;
+class FollowableListItem extends StatefulWidget {
+  final UnifiedSearchModel followable;
   final double horizontalPadding;
   final Function? onIconTap;
   final Function onItemTap;
@@ -35,7 +36,7 @@ class _FollowableListItemState extends State<FollowableListItem> {
   @override
   void initState() {
     super.initState();
-    _image = MyCachedNetworkImage(widget.followable.imageLink);
+    _image = MyCachedNetworkImage(widget.followable.wikiDataDto.imageLink);
   }
 
   @override
@@ -46,7 +47,7 @@ class _FollowableListItemState extends State<FollowableListItem> {
         widget.onItemTap(
           context,
           widget.followable,
-          await ImageDimensions.getImageDimensions(_image),
+          await _image.getImageDimensions(),
         );
       },
       child: Padding(
@@ -73,7 +74,7 @@ class _FollowableListItemState extends State<FollowableListItem> {
               ),
               Expanded(
                 child: FollowableData(
-                  followable: widget.followable,
+                  followable: widget.followable.wikiDataDto,
                 ),
               ),
               widget.onIconTap != null

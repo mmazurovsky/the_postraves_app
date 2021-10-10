@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import '../../dto/timetable_for_scene_dto.dart';
 import '../../../wiki/state/event_cubit/event_cubit.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/utils/formatting_utils.dart';
 import '../../../../core/utils/my_constants.dart';
@@ -116,7 +116,7 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
                 refreshController: _refreshController,
               );
             }
-            return LoadingScreen();
+            return LoadingContainer();
           },
         ),
       ),

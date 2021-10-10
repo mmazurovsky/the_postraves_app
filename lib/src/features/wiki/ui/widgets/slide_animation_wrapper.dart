@@ -20,7 +20,7 @@ class _SlideAnimationWrapperState extends State<SlideAnimationWrapper>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 350),
+      duration: const Duration(milliseconds: 250),
       vsync: this,
     )..forward();
     _offsetAnimation = Tween<Offset>(

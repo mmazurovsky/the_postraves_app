@@ -16,16 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FollowStateTearOff {
   const _$FollowStateTearOff();
 
-  UnclearFollowState unclear() {
-    return const UnclearFollowState();
-  }
-
-  FollowedFollowState followed() {
-    return const FollowedFollowState();
-  }
-
-  UnfollowedFollowState unfollowed() {
-    return const UnfollowedFollowState();
+  _FollowState call(int? followers, bool? isFollowed) {
+    return _FollowState(
+      followers,
+      isFollowed,
+    );
   }
 }
 
@@ -34,35 +29,11 @@ const $FollowState = _$FollowStateTearOff();
 
 /// @nodoc
 mixin _$FollowState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() unclear,
-    required TResult Function() followed,
-    required TResult Function() unfollowed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unclear,
-    TResult Function()? followed,
-    TResult Function()? unfollowed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UnclearFollowState value) unclear,
-    required TResult Function(FollowedFollowState value) followed,
-    required TResult Function(UnfollowedFollowState value) unfollowed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UnclearFollowState value)? unclear,
-    TResult Function(FollowedFollowState value)? followed,
-    TResult Function(UnfollowedFollowState value)? unfollowed,
-    required TResult orElse(),
-  }) =>
+  int? get followers => throw _privateConstructorUsedError;
+  bool? get isFollowed => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $FollowStateCopyWith<FollowState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -71,6 +42,7 @@ abstract class $FollowStateCopyWith<$Res> {
   factory $FollowStateCopyWith(
           FollowState value, $Res Function(FollowState) then) =
       _$FollowStateCopyWithImpl<$Res>;
+  $Res call({int? followers, bool? isFollowed});
 }
 
 /// @nodoc
@@ -80,274 +52,111 @@ class _$FollowStateCopyWithImpl<$Res> implements $FollowStateCopyWith<$Res> {
   final FollowState _value;
   // ignore: unused_field
   final $Res Function(FollowState) _then;
-}
-
-/// @nodoc
-abstract class $UnclearFollowStateCopyWith<$Res> {
-  factory $UnclearFollowStateCopyWith(
-          UnclearFollowState value, $Res Function(UnclearFollowState) then) =
-      _$UnclearFollowStateCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$UnclearFollowStateCopyWithImpl<$Res>
-    extends _$FollowStateCopyWithImpl<$Res>
-    implements $UnclearFollowStateCopyWith<$Res> {
-  _$UnclearFollowStateCopyWithImpl(
-      UnclearFollowState _value, $Res Function(UnclearFollowState) _then)
-      : super(_value, (v) => _then(v as UnclearFollowState));
 
   @override
-  UnclearFollowState get _value => super._value as UnclearFollowState;
+  $Res call({
+    Object? followers = freezed,
+    Object? isFollowed = freezed,
+  }) {
+    return _then(_value.copyWith(
+      followers: followers == freezed
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFollowed: isFollowed == freezed
+          ? _value.isFollowed
+          : isFollowed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$FollowStateCopyWith<$Res>
+    implements $FollowStateCopyWith<$Res> {
+  factory _$FollowStateCopyWith(
+          _FollowState value, $Res Function(_FollowState) then) =
+      __$FollowStateCopyWithImpl<$Res>;
+  @override
+  $Res call({int? followers, bool? isFollowed});
+}
+
+/// @nodoc
+class __$FollowStateCopyWithImpl<$Res> extends _$FollowStateCopyWithImpl<$Res>
+    implements _$FollowStateCopyWith<$Res> {
+  __$FollowStateCopyWithImpl(
+      _FollowState _value, $Res Function(_FollowState) _then)
+      : super(_value, (v) => _then(v as _FollowState));
+
+  @override
+  _FollowState get _value => super._value as _FollowState;
+
+  @override
+  $Res call({
+    Object? followers = freezed,
+    Object? isFollowed = freezed,
+  }) {
+    return _then(_FollowState(
+      followers == freezed
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFollowed == freezed
+          ? _value.isFollowed
+          : isFollowed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$UnclearFollowState implements UnclearFollowState {
-  const _$UnclearFollowState();
+class _$_FollowState implements _FollowState {
+  const _$_FollowState(this.followers, this.isFollowed);
+
+  @override
+  final int? followers;
+  @override
+  final bool? isFollowed;
 
   @override
   String toString() {
-    return 'FollowState.unclear()';
+    return 'FollowState(followers: $followers, isFollowed: $isFollowed)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is UnclearFollowState);
+    return identical(this, other) ||
+        (other is _FollowState &&
+            (identical(other.followers, followers) ||
+                const DeepCollectionEquality()
+                    .equals(other.followers, followers)) &&
+            (identical(other.isFollowed, isFollowed) ||
+                const DeepCollectionEquality()
+                    .equals(other.isFollowed, isFollowed)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(followers) ^
+      const DeepCollectionEquality().hash(isFollowed);
 
+  @JsonKey(ignore: true)
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() unclear,
-    required TResult Function() followed,
-    required TResult Function() unfollowed,
-  }) {
-    return unclear();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unclear,
-    TResult Function()? followed,
-    TResult Function()? unfollowed,
-    required TResult orElse(),
-  }) {
-    if (unclear != null) {
-      return unclear();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UnclearFollowState value) unclear,
-    required TResult Function(FollowedFollowState value) followed,
-    required TResult Function(UnfollowedFollowState value) unfollowed,
-  }) {
-    return unclear(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UnclearFollowState value)? unclear,
-    TResult Function(FollowedFollowState value)? followed,
-    TResult Function(UnfollowedFollowState value)? unfollowed,
-    required TResult orElse(),
-  }) {
-    if (unclear != null) {
-      return unclear(this);
-    }
-    return orElse();
-  }
+  _$FollowStateCopyWith<_FollowState> get copyWith =>
+      __$FollowStateCopyWithImpl<_FollowState>(this, _$identity);
 }
 
-abstract class UnclearFollowState implements FollowState {
-  const factory UnclearFollowState() = _$UnclearFollowState;
-}
-
-/// @nodoc
-abstract class $FollowedFollowStateCopyWith<$Res> {
-  factory $FollowedFollowStateCopyWith(
-          FollowedFollowState value, $Res Function(FollowedFollowState) then) =
-      _$FollowedFollowStateCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$FollowedFollowStateCopyWithImpl<$Res>
-    extends _$FollowStateCopyWithImpl<$Res>
-    implements $FollowedFollowStateCopyWith<$Res> {
-  _$FollowedFollowStateCopyWithImpl(
-      FollowedFollowState _value, $Res Function(FollowedFollowState) _then)
-      : super(_value, (v) => _then(v as FollowedFollowState));
+abstract class _FollowState implements FollowState {
+  const factory _FollowState(int? followers, bool? isFollowed) = _$_FollowState;
 
   @override
-  FollowedFollowState get _value => super._value as FollowedFollowState;
-}
-
-/// @nodoc
-
-class _$FollowedFollowState implements FollowedFollowState {
-  const _$FollowedFollowState();
-
+  int? get followers => throw _privateConstructorUsedError;
   @override
-  String toString() {
-    return 'FollowState.followed()';
-  }
-
+  bool? get isFollowed => throw _privateConstructorUsedError;
   @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is FollowedFollowState);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() unclear,
-    required TResult Function() followed,
-    required TResult Function() unfollowed,
-  }) {
-    return followed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unclear,
-    TResult Function()? followed,
-    TResult Function()? unfollowed,
-    required TResult orElse(),
-  }) {
-    if (followed != null) {
-      return followed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UnclearFollowState value) unclear,
-    required TResult Function(FollowedFollowState value) followed,
-    required TResult Function(UnfollowedFollowState value) unfollowed,
-  }) {
-    return followed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UnclearFollowState value)? unclear,
-    TResult Function(FollowedFollowState value)? followed,
-    TResult Function(UnfollowedFollowState value)? unfollowed,
-    required TResult orElse(),
-  }) {
-    if (followed != null) {
-      return followed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FollowedFollowState implements FollowState {
-  const factory FollowedFollowState() = _$FollowedFollowState;
-}
-
-/// @nodoc
-abstract class $UnfollowedFollowStateCopyWith<$Res> {
-  factory $UnfollowedFollowStateCopyWith(UnfollowedFollowState value,
-          $Res Function(UnfollowedFollowState) then) =
-      _$UnfollowedFollowStateCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$UnfollowedFollowStateCopyWithImpl<$Res>
-    extends _$FollowStateCopyWithImpl<$Res>
-    implements $UnfollowedFollowStateCopyWith<$Res> {
-  _$UnfollowedFollowStateCopyWithImpl(
-      UnfollowedFollowState _value, $Res Function(UnfollowedFollowState) _then)
-      : super(_value, (v) => _then(v as UnfollowedFollowState));
-
-  @override
-  UnfollowedFollowState get _value => super._value as UnfollowedFollowState;
-}
-
-/// @nodoc
-
-class _$UnfollowedFollowState implements UnfollowedFollowState {
-  const _$UnfollowedFollowState();
-
-  @override
-  String toString() {
-    return 'FollowState.unfollowed()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is UnfollowedFollowState);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() unclear,
-    required TResult Function() followed,
-    required TResult Function() unfollowed,
-  }) {
-    return unfollowed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unclear,
-    TResult Function()? followed,
-    TResult Function()? unfollowed,
-    required TResult orElse(),
-  }) {
-    if (unfollowed != null) {
-      return unfollowed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UnclearFollowState value) unclear,
-    required TResult Function(FollowedFollowState value) followed,
-    required TResult Function(UnfollowedFollowState value) unfollowed,
-  }) {
-    return unfollowed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UnclearFollowState value)? unclear,
-    TResult Function(FollowedFollowState value)? followed,
-    TResult Function(UnfollowedFollowState value)? unfollowed,
-    required TResult orElse(),
-  }) {
-    if (unfollowed != null) {
-      return unfollowed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UnfollowedFollowState implements FollowState {
-  const factory UnfollowedFollowState() = _$UnfollowedFollowState;
+  @JsonKey(ignore: true)
+  _$FollowStateCopyWith<_FollowState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../core/presentation/widgets/failure_container.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
 import '../../../../core/presentation/widgets/search_container.dart';
 import '../../../../core/provider/current_city_provider.dart';
@@ -59,8 +59,8 @@ class _ChartsScreenState extends State<ChartsScreen>
         body: BlocBuilder<ChartsCubit, ChartsState>(
           builder: (context, state) {
             return state.when(
-                initial: () => const LoadingScreen(),
-                loading: () => const LoadingScreen(),
+                initial: () => const LoadingContainer(),
+                loading: () => const LoadingContainer(),
                 loaded: (bestArtist, weeklyChart, overallChart) => _Charts(
                     bestArtist: bestArtist,
                     weeklyChart: weeklyChart,
@@ -99,7 +99,7 @@ class _Charts extends StatelessWidget {
   }
 }
 
-class _ChartsViewForEntity<T extends FollowableInterface>
+class _ChartsViewForEntity<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final String sectionTitle;
   final T? previousWeekWinner;

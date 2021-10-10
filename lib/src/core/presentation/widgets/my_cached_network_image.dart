@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
 
 import '../../utils/my_colors.dart';
 import 'empty_image_placeholder.dart';
@@ -14,10 +15,14 @@ class MyCachedNetworkImage extends StatelessWidget {
       : _imageCompleter = Completer<ImageInfo>(),
         super(key: ValueKey(imageLink));
 
-  Future<ImageInfo?> get imageInfo async {
-    return imageLink == null || imageLink!.length < 3
-        ? null
-        : await _imageCompleter.future;
+  Future<ImageDimensions?> getImageDimensions() async {
+    if (imageLink == null || imageLink!.length < 3) {
+      return null;
+    } else {
+      final imageInfo = await _imageCompleter.future;
+      return ImageDimensions(height: imageInfo.image.height.toDouble(),
+              width: imageInfo.image.width.toDouble());
+    }
   }
 
   @override

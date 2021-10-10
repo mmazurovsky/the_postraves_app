@@ -242,8 +242,8 @@ class MyTextStyles {
 
   static const TextStyle authSubtitle = TextStyle(
     color: MyColors.forInactiveStuff,
-    fontSize: 17,
-    fontWeight: FontWeight.w500,
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
   );
 
   static const TextStyle buttonWithArrow = TextStyle(

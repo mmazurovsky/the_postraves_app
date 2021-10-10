@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/features/wiki/state/follow_cubit/follow_cubit.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/followable_util.dart';
+import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
+import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
 import '../../state/unity_cubit/unity_cubit.dart';
-import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../models/fulls/unity_full.dart';
-import '../../../../models/geo/country.dart';
 import '../../../../models/shorts/artist_short.dart';
 import '../../../../models/shorts/event_short.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../core/presentation/widgets/social_links_list.dart';
-import '../../../../core/utils/image_dimensions.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../dto/wiki_data_dto.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../widgets/short_event_card_item.dart';
-import 'wiki_canvas.dart';
+import 'followable_screen.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../my_navigation.dart';
@@ -26,87 +25,90 @@ import '../widgets/wiki_expandable_text_description.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class UnityScreen extends StatefulWidget {
-  final int unityId;
-  final String unityName;
-  final Country country;
-  final String? unityImageLink;
-  final ImageDimensions? imageDimensions;
+class UnityScreen extends StatelessWidget {
+  final WikiDataDto _wikiDataDto;
 
-  const UnityScreen({
-    required this.unityId,
-    required this.unityName,
-    required this.country,
-    required this.unityImageLink,
-    required this.imageDimensions,
-  });
-
-  @override
-  State<StatefulWidget> createState() => _UnityScreenState();
-}
-
-class _UnityScreenState extends State<UnityScreen>
-    with SingleTickerProviderStateMixin {
-  int? _wikiRating;
-  late Widget _wikiDetails;
-  late ScrollController _scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<UnityCubit>(context).loadUnity(widget.unityId);
-    _scrollController = ScrollController();
-    _wikiDetails = LoadingScreen();
-  }
+  const UnityScreen(this._wikiDataDto, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UnityCubit, UnityState>(
-      listener: (context, state) {
-        if (state is UnityLoadedState) {
-          setState(() {
-            _wikiRating = state.unity.overallFollowers;
-            _wikiDetails = _UnityDetails(
-              loadedUnity: state.unity,
-              events: state.events,
-              artists: state.artists,
-            );
-          });
-        } else if (state is UnityLoadingState) {
-          setState(() {
-            _wikiRating = null;
-            _wikiDetails = LoadingScreen();
-          });
-        }
-      },
-      child: WikiCanvas(
-        scrollController: _scrollController,
-        wikiDetails: _wikiDetails,
-        imageDimensions: widget.imageDimensions,
-        isBackButtonOn: true,
-        wikiData: WikiDataDto(
-          name: widget.unityName,
-          imageLink: widget.unityImageLink,
-          overallFollowers: _wikiRating,
-          id: widget.unityId,
-          country: widget.country,
-          type: WikiFollowableType.UNITY,
-        ),
-      ),
+    return FollowableScreen<UnityCubit, FollowCubit<UnityFull>>(
+      _wikiDataDto,
+      _UnityStateManagement(_wikiDataDto),
     );
   }
 }
 
-class _UnityDetails extends StatelessWidget {
-  final UnityFull loadedUnity;
+class _UnityStateManagement extends StatefulWidget {
+  final WikiDataDto _wikiDataDto;
+  const _UnityStateManagement(this._wikiDataDto, {Key? key}) : super(key: key);
+
+  @override
+  State<_UnityStateManagement> createState() => _UnityStateManagementState();
+}
+
+class _UnityStateManagementState extends State<_UnityStateManagement> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<UnityCubit>(context).loadUnity(widget._wikiDataDto.id);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<UnityCubit, UnityState>(
+      listener: (context, state) {
+        if (state is UnityLoadedState) {
+          context.read<FollowCubit<UnityFull>>().defineFollowState(
+                state.unity.overallFollowers,
+                state.unity.isFollowed,
+              );
+        }
+      },
+      builder: (context, state) {
+        if (state is UnityLoadedState) {
+          return _UnityContent(
+            unity: state.unity,
+            artists: state.artists,
+            events: state.events,
+            onIsFollowedChange: FollowableUtil.onIsFollowedChange,
+          );
+        } else {
+          return LoadingContainer();
+          // todo failure state
+        }
+      },
+    );
+  }
+}
+
+class _UnityContent extends StatefulWidget {
+  final UnityFull unity;
   final List<ArtistShort> artists;
   final List<EventShort> events;
-  const _UnityDetails({
+  final void Function<T extends GeneralFollowableInterface>(BuildContext, T)
+      onIsFollowedChange;
+
+  const _UnityContent({
     Key? key,
-    required this.loadedUnity,
+    required this.unity,
     required this.artists,
     required this.events,
+    required this.onIsFollowedChange,
   }) : super(key: key);
+
+  @override
+  State<_UnityContent> createState() => _UnityContentState();
+}
+
+class _UnityContentState extends State<_UnityContent> {
+  late bool _isFollowed;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _isFollowed = context.watch<FollowCubit<UnityFull>>().state.isFollowed!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,17 +116,14 @@ class _UnityDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
           Row(
             children: [
               Expanded(
                 child: MyHorizontalPadding(
                   child: WikiWideBookmarkButton(
-                    iconWidget: Icon(Ionicons.bookmark,
-                        size: 20, color: MyColors.mainOppositeColor),
-                    buttonText: AppLocalizations.of(context)!.wikiFollow,
-                    // todo
-                    onButtonTap: () {},
+                    isFollowed: _isFollowed,
+                    onButtonTap: () =>
+                        widget.onIsFollowedChange(context, widget.unity),
                   ),
                 ),
               ),
@@ -133,25 +132,25 @@ class _UnityDetails extends StatelessWidget {
           SizedBox(height: 25),
           SectionDivider(needHorizontalMargin: true),
           SocialLinksList(
-            soundcloudUsername: loadedUnity.soundcloudUsername,
-            bandcampUsername: loadedUnity.bandcampUsername,
-            instagramUsername: loadedUnity.instagramUsername,
+            soundcloudUsername: widget.unity.soundcloudUsername,
+            bandcampUsername: widget.unity.bandcampUsername,
+            instagramUsername: widget.unity.instagramUsername,
           ),
           SectionSpacer(),
-          loadedUnity.about == null
+          widget.unity.about == null
               ? Container()
               : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     WikiExpandableTextDescription(
-                      loadedUnity.about!,
+                      widget.unity.about!,
                     ),
                     SectionSpacer(),
                     SectionDivider(needHorizontalMargin: true),
                     SectionSpacer(),
                   ],
                 ),
-          artists.isEmpty
+          widget.artists.isEmpty
               ? Container()
               : Column(
                   children: [
@@ -160,22 +159,19 @@ class _UnityDetails extends StatelessWidget {
                             .artistEntityNamePlural),
                     SizedBox(height: 8),
                     RatingEntityList<ArtistShort>(
-                      entityList: artists,
+                      entityList: widget.artists,
                       onItemTap: (context, ArtistShort entity,
                               ImageDimensions? imageDimensions) =>
-                          NavigatorFunctions.pushArtist(
+                          NavigatorFunctions.pushFollowable(
                         context: context,
-                        id: entity.id,
-                        name: entity.name,
-                        country: entity.country,
-                        imageLink: entity.imageLink,
-                        imageDimensions: imageDimensions,
+                        wikiDataDto:
+                            entity.convertToWikiDataDto(imageDimensions),
                       ),
                     ),
                     SectionSpacer(),
                   ],
                 ),
-          events.isEmpty
+          widget.events.isEmpty
               ? Container()
               : Column(
                   children: [
@@ -186,7 +182,7 @@ class _UnityDetails extends StatelessWidget {
                             AppLocalizations.of(context)!.wikiUpcomingEvents),
                     SizedBox(height: 8),
                     ColumnOfCustomCards(
-                      entities: events,
+                      entities: widget.events,
                       buildCard: (EventShort event) =>
                           ShortEventCardItem(event),
                     ),

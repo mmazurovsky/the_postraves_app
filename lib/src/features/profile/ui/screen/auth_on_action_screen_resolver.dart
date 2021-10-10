@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
 import 'sign_in_methods_screen.dart';
 import '../../../../my_navigation.dart';
 
@@ -30,11 +30,11 @@ class AuthOnActionScreenResolver extends StatelessWidget {
                   route.settings.name == MyNavigationRoutes.unity,
             );
           });
-          return const LoadingScreen();
+          return const LoadingContainer();
         },
         unauthenticated: () => const SignInMethodsScreen(
               isPoppable: true,
             ),
-        orElse: () => const LoadingScreen()); //todo
+        orElse: () => const LoadingContainer()); //todo
   }
 }

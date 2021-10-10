@@ -1,6 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:the_postraves_app/src/core/utils/date_time_converter.dart';
+import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
+import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
+import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
 import '../../core/utils/formatting_utils.dart';
 import '../../core/utils/my_constants.dart';
 import '../geo/country.dart';
@@ -18,7 +21,7 @@ part 'event_short.g.dart';
 class EventShort
     with _$EventShort
     implements
-        FollowableInterface,
+        GeneralFollowableInterface,
         EntityNamesInterface {
   const EventShort._();
   const factory EventShort({
@@ -59,4 +62,18 @@ class EventShort
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.eventEntityNamePlural;
   }
+
+    @override
+  WikiDataDto convertToWikiDataDto(ImageDimensions? imageDimensions) {
+    return WikiDataDto(
+      id: id,
+      name: name,
+      imageLink: imageLink,
+      country: country,
+      imageDimensions: imageDimensions,
+      type: WikiFollowableType.EVENT,
+    );
+  }
+
+
 }

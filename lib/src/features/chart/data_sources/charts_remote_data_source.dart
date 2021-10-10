@@ -3,7 +3,7 @@ import '../../../models/geo/city.dart';
 import '../../../models/interfaces/data_interfaces.dart';
 import '../../../core/client/remote_client.dart';
 
-abstract class ChartsRemoteDataSource<SHORTFOLLOWABLE extends FollowableInterface> {
+abstract class ChartsRemoteDataSource<SHORTFOLLOWABLE extends GeneralFollowableInterface> {
   Future<List<SHORTFOLLOWABLE>> fetchOverallChart(
       {required City city, required Map<String, String> httpHeaders});
   Future<List<SHORTFOLLOWABLE>> fetchWeeklyChart(
@@ -12,7 +12,7 @@ abstract class ChartsRemoteDataSource<SHORTFOLLOWABLE extends FollowableInterfac
       {required City city, required Map<String, String> httpHeaders});
 }
 
-class ChartsRemoteDataSourceImpl<SHORTFOLLOWABLE extends FollowableInterface>
+class ChartsRemoteDataSourceImpl<SHORTFOLLOWABLE extends GeneralFollowableInterface>
     implements ChartsRemoteDataSource<SHORTFOLLOWABLE> {
   final FollowableClientHelper<SHORTFOLLOWABLE> followableClientHelper;
 

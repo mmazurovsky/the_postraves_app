@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/models/related_to_search/unified_search_model.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import 'followable_list_item.dart';
 
-class FollowableList<T extends SimpleFollowableInterface> extends StatelessWidget {
-  final List<T> followables;
+class FollowableList extends StatelessWidget {
+  final List<UnifiedSearchModel> followables;
   final Function? onIconTap;
   final Function onItemTap;
   final Widget? startingWidgetForItems;
@@ -21,7 +22,7 @@ class FollowableList<T extends SimpleFollowableInterface> extends StatelessWidge
     return Column(
       children: followables.map((entity) {
         return FollowableListItem(
-          key: ValueKey(entity.id),
+          key: ValueKey(entity.wikiDataDto.id),
           startingWidget: startingWidgetForItems,
           followable: entity,
           onItemTap: onItemTap,

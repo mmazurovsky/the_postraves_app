@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
+import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
+import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
 import '../../core/utils/my_constants.dart';
 import '../geo/country.dart';
 import '../interfaces/data_interfaces.dart';
@@ -12,7 +15,7 @@ part 'artist_full.g.dart';
 class ArtistFull
     with _$ArtistFull
     implements
-        FollowableInterface,
+        GeneralFollowableInterface,
         EntityNamesInterface {
 
   const ArtistFull._();
@@ -40,5 +43,17 @@ class ArtistFull
   @override
   String getEntityNamePluralFormString(BuildContext context) {
     return AppLocalizations.of(context)!.artistEntityNamePlural;
+  }
+
+    @override
+  WikiDataDto convertToWikiDataDto(ImageDimensions? imageDimensions) {
+    return WikiDataDto(
+      id: id,
+      name: name,
+      imageLink: imageLink,
+      country: country,
+      imageDimensions: imageDimensions,
+      type: WikiFollowableType.ARTIST,
+    );
   }
 }

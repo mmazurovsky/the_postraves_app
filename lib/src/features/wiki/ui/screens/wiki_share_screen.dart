@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:the_postraves_app/src/core/utils/screen_size.dart';
+import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
 import '../../../../core/presentation/widgets/entity_presentation/followable_data.dart';
-import '../../../../core/utils/image_dimensions.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
@@ -12,7 +12,6 @@ import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
-import '../../dto/wiki_data_dto.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,13 +19,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class WikiShareScreen extends StatelessWidget {
   final Uri shareLink;
   final WikiDataDto wikiData;
-  final ImageDimensions? imageDimensions;
 
   const WikiShareScreen({
     Key? key,
     required this.shareLink,
     required this.wikiData,
-    required this.imageDimensions,
   }) : super(key: key);
 
   @override

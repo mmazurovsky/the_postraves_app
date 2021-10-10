@@ -4,7 +4,7 @@ import '../../../shows/ui/widgets/event_card_details.dart';
 import '../../../../models/enum/event_status.dart';
 import '../../../../models/shorts/event_short.dart';
 import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/utils/my_colors.dart';
 import 'darkened_image_in_container.dart';
 import '../../../../core/utils/my_text_styles.dart';
@@ -13,7 +13,6 @@ import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/utils/formatting_utils.dart';
 
-import '../../../../core/utils/my_assets.dart';
 import 'event_status_indicator.dart';
 
 class ShortEventCardItem extends StatelessWidget {
@@ -23,12 +22,10 @@ class ShortEventCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DarkenedImageInContainer(
-      onTap: (ImageDimensions? imageDimensions) => NavigatorFunctions.pushEvent(
+      onTap: (ImageDimensions? imageDimensions) =>
+          NavigatorFunctions.pushFollowable(
         context: context,
-        imageLink: _event.imageLink,
-        id: _event.id,
-        name: _event.name,
-        imageDimensions: imageDimensions,
+        wikiDataDto: _event.convertToWikiDataDto(imageDimensions),
       ),
       imageLink: _event.imageLink,
       child: Padding(

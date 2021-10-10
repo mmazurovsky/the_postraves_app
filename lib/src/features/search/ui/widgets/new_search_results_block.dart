@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../state/cubit/search_cubit.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
-import '../../../../core/utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/presentation/widgets/section_spacer.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 
-class NewSearchResultsBlock<T extends FollowableInterface>
+class NewSearchResultsBlock<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final String resultsName;
   final List<T> results;
@@ -32,10 +32,12 @@ class NewSearchResultsBlock<T extends FollowableInterface>
         SizedBox(height: 10),
         RatingEntityList<T>(
           entityList: results,
-          onItemTap: <T extends FollowableInterface>(context, T entity,
+          onItemTap: <T extends GeneralFollowableInterface>(context, T entity,
               ImageDimensions? imageDimensions) {
-            NavigatorFunctions.pushRatingEntity(
-                context, entity, imageDimensions);
+            NavigatorFunctions.pushFollowable(
+              context: context,
+              wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+            );
             BlocProvider.of<SearchCubit>(context).saveSearchRecord(entity);
           },
         ),

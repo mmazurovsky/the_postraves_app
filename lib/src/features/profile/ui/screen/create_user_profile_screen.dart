@@ -114,6 +114,16 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                         ),
                       ),
                       const SizedBox(
+                        height: 10,
+                      ),
+                      MyHorizontalPadding(
+                        child: Text(
+                          AppLocalizations.of(context)!.profileCreationSubtitle,
+                          style: MyTextStyles.authSubtitle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const SizedBox(
                         height: 20,
                       ),
                       ProfileImageChooser(

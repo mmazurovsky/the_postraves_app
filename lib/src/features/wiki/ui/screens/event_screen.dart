@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/features/wiki/state/follow_cubit/follow_cubit.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/followable_util.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_subtitle.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_title.dart';
+import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
+import 'package:the_postraves_app/src/models/fulls/artist_full.dart';
+import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
+import '../../../../dependency_injection.dart';
 import '../../../timetable/dto/timetable_for_scene_dto.dart';
 import '../../state/event_cubit/event_cubit.dart';
 import '../../../../models/enum/event_status.dart';
@@ -12,14 +20,14 @@ import '../../../../models/shorts/unity_short.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
 import '../../../../core/presentation/widgets/details_horizontal_scrollable_list.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button_without_padding.dart';
 import '../../../../core/service/open_link_service.dart';
-import '../../../../core/utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
-import '../../dto/wiki_data_dto.dart';
 import '../widgets/event_status_indicator.dart';
+import 'followable_screen.dart';
 import 'wiki_canvas.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
@@ -34,87 +42,95 @@ import '../widgets/wiki_squared_outlined_bookmark_button.dart';
 import '../widgets/wiki_expandable_text_description.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class EventScreen extends StatefulWidget {
-  final String? eventImageLink;
-  final int eventId;
-  final String eventName;
-  final ImageDimensions? imageDimensions;
-  const EventScreen({
-    required this.eventImageLink,
-    required this.eventId,
-    required this.eventName,
-    required this.imageDimensions,
-  });
-
-  @override
-  State<StatefulWidget> createState() => _EventScreenState();
-}
-
-class _EventScreenState extends State<EventScreen>
-    with SingleTickerProviderStateMixin {
-  late ScrollController _scrollController;
-  int? _wikiRating;
-  late Widget _wikiDetails;
-
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<EventCubit>(context).loadEvent(widget.eventId);
-    _scrollController = ScrollController();
-    _wikiDetails = LoadingScreen();
-  }
+class EventScreen extends StatelessWidget {
+  final WikiDataDto _wikiDataDto;
+  const EventScreen(
+    this._wikiDataDto, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<EventCubit, EventState>(
-      listener: (context, state) {
-        if (state is EventLoadedState) {
-          setState(() {
-            _wikiRating = state.event.overallFollowers;
-            _wikiDetails = _EventDetails(
-              loadedEvent: state.event,
-              unities: state.orgs,
-              lineup: state.lineup,
-              timetable: state.timetable,
-            );
-          });
-        } else if (state is EventLoadingState) {
-          setState(() {
-            _wikiRating = null;
-            _wikiDetails = LoadingScreen();
-          });
-        }
-      },
-      child: WikiCanvas(
-        scrollController: _scrollController,
-        wikiDetails: _wikiDetails,
-        imageDimensions: widget.imageDimensions,
-        isBackButtonOn: true,
-        wikiData: WikiDataDto(
-          id: widget.eventId,
-          name: widget.eventName,
-          imageLink: widget.eventImageLink,
-          overallFollowers: _wikiRating,
-          type: WikiFollowableType.EVENT,
-        ),
-      ),
+    return FollowableScreen<EventCubit, FollowCubit<EventFull>>(
+      _wikiDataDto,
+      _EventStateManagement(_wikiDataDto),
     );
   }
 }
 
-class _EventDetails extends StatelessWidget {
-  final EventFull loadedEvent;
+class _EventStateManagement extends StatefulWidget {
+  final WikiDataDto _wikiDataDto;
+  const _EventStateManagement(this._wikiDataDto, {Key? key}) : super(key: key);
+
+  @override
+  _EventStateManagementState createState() => _EventStateManagementState();
+}
+
+class _EventStateManagementState extends State<_EventStateManagement> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<EventCubit>(context).loadEvent(widget._wikiDataDto.id);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<EventCubit, EventState>(
+      listener: (context, state) {
+        if (state is EventLoadedState) {
+          context.read<FollowCubit<EventFull>>().defineFollowState(
+                state.event.overallFollowers,
+                state.event.isFollowed,
+              );
+        }
+      },
+      builder: (context, state) {
+        if (state is EventLoadedState) {
+          return _EventContent(
+            event: state.event,
+            unities: state.orgs,
+            lineup: state.lineup,
+            timetable: state.timetable,
+            onIsFollowedChange: FollowableUtil.onIsFollowedChange,
+          );
+        } else {
+          return LoadingContainer();
+          // todo failure state
+        }
+      },
+    );
+  }
+}
+
+class _EventContent extends StatefulWidget {
+  final EventFull event;
   final List<UnityShort> unities;
   final List<ArtistShort> lineup;
   final List<TimetableForSceneDto> timetable;
+  final void Function<T extends GeneralFollowableInterface>(BuildContext, T)
+      onIsFollowedChange;
 
-  const _EventDetails({
-    Key? key,
-    required this.loadedEvent,
+  const _EventContent({
+    required this.event,
     required this.unities,
     required this.lineup,
     required this.timetable,
+    required this.onIsFollowedChange,
+    Key? key,
   }) : super(key: key);
+
+  @override
+  State<_EventContent> createState() => _EventContentState();
+}
+
+class _EventContentState extends State<_EventContent> {
+  late bool _isFollowed;
+
+  @override
+  void didChangeDependencies() {
+    _isFollowed = context.watch<FollowCubit<EventFull>>().state.isFollowed!;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,9 +153,9 @@ class _EventDetails extends StatelessWidget {
                     buttonColor: MyColors.accent,
                     mainAxisAlignment: MainAxisAlignment.center,
                     onTap: () {
-                      loadedEvent.ticketsLink != null &&
-                              loadedEvent.ticketsLink!.length > 3
-                          ? OpenLinkService.openUrl(loadedEvent.ticketsLink!)
+                      widget.event.ticketsLink != null &&
+                              widget.event.ticketsLink!.length > 3
+                          ? OpenLinkService.openUrl(widget.event.ticketsLink!)
                           : {};
                     },
                     textStyle: MyTextStyles.buttonWithOppositeColor,
@@ -164,46 +180,46 @@ class _EventDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    loadedEvent.status.getStatusName(context),
+                    widget.event.status.getStatusName(context),
                     style: MyTextStyles.body,
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  EventStatusIndicator(loadedEvent.status),
+                  EventStatusIndicator(widget.event.status),
                 ],
               ),
               AppLocalizations.of(context)!.wikiEventPrice: Text(
                 FormattingUtils.resolveTicketsPrice(
                   context: context,
-                  priceRangeOfTickets: loadedEvent.priceRangeOfTickets,
+                  priceRangeOfTickets: widget.event.priceRangeOfTickets,
                 ),
                 style: MyTextStyles.body,
               ),
               AppLocalizations.of(context)!.wikiEventStart: Text(
                 FormattingUtils.getFormattedDateAndTime(
                   context: context,
-                  dateTime: loadedEvent.startDateTime,
+                  dateTime: widget.event.startDateTime,
                 ),
                 style: MyTextStyles.body,
               ),
               AppLocalizations.of(context)!.wikiEventEnd: Text(
                 FormattingUtils.getFormattedDateAndTime(
                   context: context,
-                  dateTime: loadedEvent.endDateTime,
+                  dateTime: widget.event.endDateTime,
                 ),
                 style: MyTextStyles.body,
               ),
             },
           ),
           SizedBox(height: 15),
-          loadedEvent.about == null
+          widget.event.about == null
               ? Container()
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     WikiExpandableTextDescription(
-                      loadedEvent.about!,
+                      widget.event.about!,
                     ),
                     SectionSpacer(),
                     SectionDivider(needHorizontalMargin: true),
@@ -215,20 +231,16 @@ class _EventDetails extends StatelessWidget {
                   AppLocalizations.of(context)!.placeEntityNameSingular),
           SizedBox(height: 8),
           RatingEntityListItem(
-            entity: loadedEvent.place,
-            onItemTap:
-                (context, PlaceShort entity, ImageDimensions? imageDimensions) =>
-                    NavigatorFunctions.pushPlace(
+            entity: widget.event.place,
+            onItemTap: (context, PlaceShort entity,
+                    ImageDimensions? imageDimensions) =>
+                NavigatorFunctions.pushFollowable(
               context: context,
-              id: entity.id,
-              name: entity.name,
-              country: entity.country,
-              imageLink: entity.imageLink,
-              imageDimensions: imageDimensions,
+              wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
             ),
           ),
           SectionSpacer(),
-          unities.isEmpty
+          widget.unities.isEmpty
               ? Container()
               : Column(
                   children: [
@@ -239,22 +251,19 @@ class _EventDetails extends StatelessWidget {
                             AppLocalizations.of(context)!.wikiEventOrganizers),
                     SizedBox(height: 8),
                     RatingEntityList<UnityShort>(
-                      entityList: unities,
+                      entityList: widget.unities,
                       onItemTap: (context, UnityShort entity,
                               ImageDimensions? imageDimensions) =>
-                          NavigatorFunctions.pushUnity(
+                          NavigatorFunctions.pushFollowable(
                         context: context,
-                        id: entity.id,
-                        name: entity.name,
-                        country: entity.country,
-                        imageLink: entity.imageLink,
-                        imageDimensions: imageDimensions,
+                        wikiDataDto:
+                            entity.convertToWikiDataDto(imageDimensions),
                       ),
                     ),
                     SectionSpacer(),
                   ],
                 ),
-          lineup.isEmpty
+          widget.lineup.isEmpty
               ? Container()
               : Column(
                   children: [
@@ -265,7 +274,7 @@ class _EventDetails extends StatelessWidget {
                           AppLocalizations.of(context)!.wikiEventLineup,
                     ),
                     SizedBox(height: 8),
-                    timetable.isEmpty
+                    widget.timetable.isEmpty
                         ? Container()
                         : ButtonWithIcons(
                             leadingIcon: Stack(
@@ -290,24 +299,21 @@ class _EventDetails extends StatelessWidget {
                                 .wikiEventOpenTimetable,
                             onButtonTap: () => NavigatorFunctions.pushTimetable(
                               context: context,
-                              eventId: loadedEvent.id,
-                              eventName: loadedEvent.name,
-                              timetableDto: timetable,
+                              eventId: widget.event.id,
+                              eventName: widget.event.name,
+                              timetableDto: widget.timetable,
                             ),
                             verticalPadding:
                                 MyConstants.ratingEntityVerticalPadding,
                           ),
                     RatingEntityList(
-                      entityList: lineup,
+                      entityList: widget.lineup,
                       onItemTap: (context, ArtistShort entity,
                               ImageDimensions? imageDimensions) =>
-                          NavigatorFunctions.pushArtist(
+                          NavigatorFunctions.pushFollowable(
                         context: context,
-                        id: entity.id,
-                        name: entity.name,
-                        country: entity.country,
-                        imageLink: entity.imageLink,
-                        imageDimensions: imageDimensions,
+                        wikiDataDto:
+                            entity.convertToWikiDataDto(imageDimensions),
                       ),
                     ),
                     SectionSpacer(),

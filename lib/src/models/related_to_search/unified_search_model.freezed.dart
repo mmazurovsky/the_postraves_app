@@ -21,19 +21,10 @@ class _$UnifiedSearchModelTearOff {
   const _$UnifiedSearchModelTearOff();
 
   _UnifiedSearchModel call(
-      {required int id,
-      required String name,
-      required String? imageLink,
-      required WikiFollowableType type,
-      required DateTime updatedDateTime,
-      Country? country = null}) {
+      {required WikiDataDto wikiDataDto, required DateTime updatedDateTime}) {
     return _UnifiedSearchModel(
-      id: id,
-      name: name,
-      imageLink: imageLink,
-      type: type,
+      wikiDataDto: wikiDataDto,
       updatedDateTime: updatedDateTime,
-      country: country,
     );
   }
 
@@ -47,12 +38,8 @@ const $UnifiedSearchModel = _$UnifiedSearchModelTearOff();
 
 /// @nodoc
 mixin _$UnifiedSearchModel {
-  int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get imageLink => throw _privateConstructorUsedError;
-  WikiFollowableType get type => throw _privateConstructorUsedError;
+  WikiDataDto get wikiDataDto => throw _privateConstructorUsedError;
   DateTime get updatedDateTime => throw _privateConstructorUsedError;
-  Country? get country => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,15 +52,9 @@ abstract class $UnifiedSearchModelCopyWith<$Res> {
   factory $UnifiedSearchModelCopyWith(
           UnifiedSearchModel value, $Res Function(UnifiedSearchModel) then) =
       _$UnifiedSearchModelCopyWithImpl<$Res>;
-  $Res call(
-      {int id,
-      String name,
-      String? imageLink,
-      WikiFollowableType type,
-      DateTime updatedDateTime,
-      Country? country});
+  $Res call({WikiDataDto wikiDataDto, DateTime updatedDateTime});
 
-  $CountryCopyWith<$Res>? get country;
+  $WikiDataDtoCopyWith<$Res> get wikiDataDto;
 }
 
 /// @nodoc
@@ -87,49 +68,25 @@ class _$UnifiedSearchModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? imageLink = freezed,
-    Object? type = freezed,
+    Object? wikiDataDto = freezed,
     Object? updatedDateTime = freezed,
-    Object? country = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageLink: imageLink == freezed
-          ? _value.imageLink
-          : imageLink // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as WikiFollowableType,
+      wikiDataDto: wikiDataDto == freezed
+          ? _value.wikiDataDto
+          : wikiDataDto // ignore: cast_nullable_to_non_nullable
+              as WikiDataDto,
       updatedDateTime: updatedDateTime == freezed
           ? _value.updatedDateTime
           : updatedDateTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      country: country == freezed
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as Country?,
     ));
   }
 
   @override
-  $CountryCopyWith<$Res>? get country {
-    if (_value.country == null) {
-      return null;
-    }
-
-    return $CountryCopyWith<$Res>(_value.country!, (value) {
-      return _then(_value.copyWith(country: value));
+  $WikiDataDtoCopyWith<$Res> get wikiDataDto {
+    return $WikiDataDtoCopyWith<$Res>(_value.wikiDataDto, (value) {
+      return _then(_value.copyWith(wikiDataDto: value));
     });
   }
 }
@@ -141,16 +98,10 @@ abstract class _$UnifiedSearchModelCopyWith<$Res>
           _UnifiedSearchModel value, $Res Function(_UnifiedSearchModel) then) =
       __$UnifiedSearchModelCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int id,
-      String name,
-      String? imageLink,
-      WikiFollowableType type,
-      DateTime updatedDateTime,
-      Country? country});
+  $Res call({WikiDataDto wikiDataDto, DateTime updatedDateTime});
 
   @override
-  $CountryCopyWith<$Res>? get country;
+  $WikiDataDtoCopyWith<$Res> get wikiDataDto;
 }
 
 /// @nodoc
@@ -166,38 +117,18 @@ class __$UnifiedSearchModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? imageLink = freezed,
-    Object? type = freezed,
+    Object? wikiDataDto = freezed,
     Object? updatedDateTime = freezed,
-    Object? country = freezed,
   }) {
     return _then(_UnifiedSearchModel(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageLink: imageLink == freezed
-          ? _value.imageLink
-          : imageLink // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as WikiFollowableType,
+      wikiDataDto: wikiDataDto == freezed
+          ? _value.wikiDataDto
+          : wikiDataDto // ignore: cast_nullable_to_non_nullable
+              as WikiDataDto,
       updatedDateTime: updatedDateTime == freezed
           ? _value.updatedDateTime
           : updatedDateTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      country: country == freezed
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as Country?,
     ));
   }
 }
@@ -206,65 +137,39 @@ class __$UnifiedSearchModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UnifiedSearchModel extends _UnifiedSearchModel {
   const _$_UnifiedSearchModel(
-      {required this.id,
-      required this.name,
-      required this.imageLink,
-      required this.type,
-      required this.updatedDateTime,
-      this.country = null})
+      {required this.wikiDataDto, required this.updatedDateTime})
       : super._();
 
   factory _$_UnifiedSearchModel.fromJson(Map<String, dynamic> json) =>
       _$_$_UnifiedSearchModelFromJson(json);
 
   @override
-  final int id;
-  @override
-  final String name;
-  @override
-  final String? imageLink;
-  @override
-  final WikiFollowableType type;
+  final WikiDataDto wikiDataDto;
   @override
   final DateTime updatedDateTime;
-  @JsonKey(defaultValue: null)
-  @override
-  final Country? country;
 
   @override
   String toString() {
-    return 'UnifiedSearchModel(id: $id, name: $name, imageLink: $imageLink, type: $type, updatedDateTime: $updatedDateTime, country: $country)';
+    return 'UnifiedSearchModel(wikiDataDto: $wikiDataDto, updatedDateTime: $updatedDateTime)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _UnifiedSearchModel &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.imageLink, imageLink) ||
+            (identical(other.wikiDataDto, wikiDataDto) ||
                 const DeepCollectionEquality()
-                    .equals(other.imageLink, imageLink)) &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
+                    .equals(other.wikiDataDto, wikiDataDto)) &&
             (identical(other.updatedDateTime, updatedDateTime) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedDateTime, updatedDateTime)) &&
-            (identical(other.country, country) ||
-                const DeepCollectionEquality().equals(other.country, country)));
+                    .equals(other.updatedDateTime, updatedDateTime)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(imageLink) ^
-      const DeepCollectionEquality().hash(type) ^
-      const DeepCollectionEquality().hash(updatedDateTime) ^
-      const DeepCollectionEquality().hash(country);
+      const DeepCollectionEquality().hash(wikiDataDto) ^
+      const DeepCollectionEquality().hash(updatedDateTime);
 
   @JsonKey(ignore: true)
   @override
@@ -279,29 +184,17 @@ class _$_UnifiedSearchModel extends _UnifiedSearchModel {
 
 abstract class _UnifiedSearchModel extends UnifiedSearchModel {
   const factory _UnifiedSearchModel(
-      {required int id,
-      required String name,
-      required String? imageLink,
-      required WikiFollowableType type,
-      required DateTime updatedDateTime,
-      Country? country}) = _$_UnifiedSearchModel;
+      {required WikiDataDto wikiDataDto,
+      required DateTime updatedDateTime}) = _$_UnifiedSearchModel;
   const _UnifiedSearchModel._() : super._();
 
   factory _UnifiedSearchModel.fromJson(Map<String, dynamic> json) =
       _$_UnifiedSearchModel.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
-  @override
-  String get name => throw _privateConstructorUsedError;
-  @override
-  String? get imageLink => throw _privateConstructorUsedError;
-  @override
-  WikiFollowableType get type => throw _privateConstructorUsedError;
+  WikiDataDto get wikiDataDto => throw _privateConstructorUsedError;
   @override
   DateTime get updatedDateTime => throw _privateConstructorUsedError;
-  @override
-  Country? get country => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UnifiedSearchModelCopyWith<_UnifiedSearchModel> get copyWith =>

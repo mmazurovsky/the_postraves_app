@@ -6,25 +6,28 @@ import '../../../../models/interfaces/data_interfaces.dart';
 part 'follow_state.dart';
 part 'follow_cubit.freezed.dart';
 
-class FollowCubit<T extends FollowableInterface> extends Cubit<FollowState> {
+class FollowCubit<T extends GeneralFollowableInterface> extends Cubit<FollowState> {
   final WikiRepository<T> _wikiRepository;
-  FollowCubit(this._wikiRepository) : super(FollowState.unclear());
+  int? _followers;
+  bool? _isFollowed;
+  FollowCubit(this._wikiRepository) : super(const FollowState(null, false));
 
-  void initFollow(bool isFollowed) {
-    if (isFollowed) {
-      emit(FollowState.followed());
-    } else {
-      emit(FollowState.unfollowed());
-    }
+  void defineFollowState(int followers, bool isFollowed) {
+    _followers = followers;
+    _isFollowed = isFollowed;
+    emit(FollowState(_followers, _isFollowed));
   }
 
   void toggleFollow(T followable) {
-    if (followable.isFollowed) {
+    if (_isFollowed!) { //todo
+      _isFollowed = false;
+      _followers = _followers! - 1;
       _wikiRepository.unfollowFollowable(followable.id);
-      emit(FollowState.unfollowed());
     } else {
+      _isFollowed = true;
+      _followers = _followers! + 1;
       _wikiRepository.followFollowable(followable.id);
-      emit(FollowState.followed());
     }
+    emit(FollowState(_followers, _isFollowed));
   }
 }

@@ -4,13 +4,13 @@ import '../../../models/interfaces/data_interfaces.dart';
 import '../../../core/client/remote_request_wrapper.dart';
 import '../data_sources/charts_remote_data_source.dart';
 
-abstract class ChartsRepository<SHORTFOLLOWABLE extends FollowableInterface> {
+abstract class ChartsRepository<SHORTFOLLOWABLE extends GeneralFollowableInterface> {
   Future<ResponseSealed<List<SHORTFOLLOWABLE>>> fetchOverallChart(City city);
   Future<ResponseSealed<List<SHORTFOLLOWABLE>>> fetchWeeklyChart(City city);
   Future<ResponseSealed<SHORTFOLLOWABLE?>> fetchWeeklyBest(City city);
 }
 
-class ChartsRepositoryImpl<SHORTFOLLOWABLE extends FollowableInterface>
+class ChartsRepositoryImpl<SHORTFOLLOWABLE extends GeneralFollowableInterface>
     implements ChartsRepository<SHORTFOLLOWABLE> {
   final ChartsRemoteDataSource<SHORTFOLLOWABLE> chartsRemoteDataSource;
   final RemoteRequestWrapper<List<SHORTFOLLOWABLE>> remoteRequestWrapperForList;

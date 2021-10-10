@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../my_navigation.dart';
 
-
 enum WikiFollowableType {
   ARTIST,
   UNITY,
@@ -13,7 +12,9 @@ enum WikiFollowableType {
 }
 
 extension TypeOfUnifiedRatingModelExtension on WikiFollowableType {
-  static _getNameSingularMapping(BuildContext context, WikiFollowableType type) => {
+  static _getNameSingularMapping(
+          BuildContext context, WikiFollowableType type) =>
+      {
         WikiFollowableType.ARTIST:
             AppLocalizations.of(context)!.artistEntityNameSingular,
         WikiFollowableType.UNITY:
@@ -22,7 +23,8 @@ extension TypeOfUnifiedRatingModelExtension on WikiFollowableType {
             AppLocalizations.of(context)!.placeEntityNameSingular,
         WikiFollowableType.EVENT:
             AppLocalizations.of(context)!.eventEntityNameSingular,
-        WikiFollowableType.USER: AppLocalizations.of(context)!.userEntityNameSingular
+        WikiFollowableType.USER:
+            AppLocalizations.of(context)!.userEntityNameSingular
       }[type];
 
   static const Map<WikiFollowableType, String> _endpoints = {
@@ -45,4 +47,14 @@ extension TypeOfUnifiedRatingModelExtension on WikiFollowableType {
       _getNameSingularMapping(context, this);
   String get endpoint => _endpoints[this]!;
   String get navigationRoute => _navigationRoutes[this]!;
+}
+
+class WikiFollowableTypeStatic {
+  static WikiFollowableType? getWikiFollowableTypeByNavigationRoute(String route) => {
+        MyNavigationRoutes.artist: WikiFollowableType.ARTIST,
+        MyNavigationRoutes.unity: WikiFollowableType.UNITY,
+        MyNavigationRoutes.place: WikiFollowableType.PLACE,
+        MyNavigationRoutes.event: WikiFollowableType.EVENT,
+        MyNavigationRoutes.user: WikiFollowableType.USER,
+      }[route];
 }

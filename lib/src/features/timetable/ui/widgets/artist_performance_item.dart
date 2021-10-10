@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/core/utils/my_assets.dart';
 import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import '../../../../models/enum/artist_performance_status.dart';
 import '../../../../models/shorts/artist_short.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
-import '../../../../core/utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
@@ -66,13 +65,9 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
                 entity: artist,
                 onItemTap: (context, ArtistShort entity,
                         ImageDimensions? imageDimensions) =>
-                    NavigatorFunctions.pushArtist(
+                    NavigatorFunctions.pushFollowable(
                   context: context,
-                  id: entity.id,
-                  name: entity.name,
-                  country: entity.country,
-                  imageLink: entity.imageLink,
-                  imageDimensions: imageDimensions,
+                  wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
                 ),
               );
               if (index + 1 != widget.artists.length) {

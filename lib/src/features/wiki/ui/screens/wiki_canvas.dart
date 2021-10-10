@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_title.dart';
+import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../core/service/dynamic_link_service.dart';
 import '../../../../core/presentation/widgets/ending_of_screen.dart';
-import '../../../../core/utils/image_dimensions.dart';
-import '../../dto/wiki_data_dto.dart';
 import '../../../../core/utils/my_colors.dart';
-import '../widgets/wiki_subtitle.dart';
 import '../widgets/wiki_sliver_app_bar.dart';
-import '../widgets/wiki_title.dart';
 
 class WikiCanvas extends StatefulWidget {
-  final WikiDataDto wikiData;
-  final ScrollController scrollController;
-  final Widget wikiDetails;
-  final ImageDimensions? imageDimensions;
+  final WikiDataDto wikiDataDto;
   final bool isBackButtonOn;
+  final Widget wikiContent;
+  final ScrollController? scrollController;
 
   const WikiCanvas({
     Key? key,
-    required this.wikiData,
-    required this.scrollController,
-    required this.wikiDetails,
-    required this.imageDimensions,
-    required this.isBackButtonOn,
+    required this.wikiDataDto,
+    required this.wikiContent,
+    this.isBackButtonOn = true,
+    this.scrollController,
   }) : super(key: key);
 
   @override
@@ -30,24 +26,28 @@ class WikiCanvas extends StatefulWidget {
 }
 
 class _WikiCanvasState extends State<WikiCanvas> {
+  late final ScrollController _scrollController;
+
   @override
   void initState() {
     super.initState();
+    _scrollController = widget.scrollController ?? ScrollController();
   }
 
   Future<Uri> _setShareLinkToPage() async {
+    final imageDimensions = widget.wikiDataDto.imageDimensions;
     String _pathToPage =
-        '${widget.wikiData.type.navigationRoute}?id=${widget.wikiData.id}&name=${widget.wikiData.name}';
-    if (widget.wikiData.imageLink != null) {
-      _pathToPage += _pathToPage + '&imageLink=${widget.wikiData.imageLink}';
+        '${widget.wikiDataDto.type.navigationRoute}?id=${widget.wikiDataDto.id}&name=${widget.wikiDataDto.name}';
+    if (widget.wikiDataDto.imageLink != null) {
+      _pathToPage += _pathToPage + '&imageLink=${widget.wikiDataDto.imageLink}';
     }
-    if (widget.wikiData.country != null) {
+    if (widget.wikiDataDto.country != null) {
       _pathToPage +=
-          '&countryName=${widget.wikiData.country!.name}&countryLocalizedName=${widget.wikiData.country!.localName}&countryEmojiCode=${widget.wikiData.country!.emojiCode}';
+          '&countryName=${widget.wikiDataDto.country!.name}&countryLocalizedName=${widget.wikiDataDto.country!.localName}&countryEmojiCode=${widget.wikiDataDto.country!.emojiCode}';
     }
-    if (widget.imageDimensions != null) {
+    if (imageDimensions != null) {
       _pathToPage +=
-          '&imageHeight=${widget.imageDimensions!.imageHeight}&imageWidth=${widget.imageDimensions!.imageWidth}';
+          '&imageHeight=${imageDimensions.height}&imageWidth=${imageDimensions.width}';
     }
     return await DynamicLinkService.createDynamicLink(_pathToPage);
   }
@@ -58,7 +58,7 @@ class _WikiCanvasState extends State<WikiCanvas> {
       backgroundColor: MyColors.screenBackground,
       body: SafeArea(
         child: CustomScrollView(
-          controller: widget.scrollController,
+          controller: _scrollController,
           //todo check on android
           physics:
               AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
@@ -67,26 +67,21 @@ class _WikiCanvasState extends State<WikiCanvas> {
               future: _setShareLinkToPage(),
               builder: (context, AsyncSnapshot<Uri> snapshot) =>
                   WikiSliverAppBar(
-                scrollController: widget.scrollController,
-                imageDimensions: widget.imageDimensions,
+                scrollController: _scrollController,
                 isBackButtonOn: widget.isBackButtonOn,
-                wikiData: widget.wikiData,
+                wikiData: widget.wikiDataDto,
                 shareLink: snapshot.data,
               ),
             ),
             SliverToBoxAdapter(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 20),
-                  WikiTitle(title: widget.wikiData.name),
-                  SizedBox(height: 8),
-                  WikiSubtitle(
-                    entityType: widget.wikiData.type.getNameSingular(context),
-                    overallFollowers: widget.wikiData.overallFollowers,
-                    country: widget.wikiData.country,
-                  ),
-                  widget.wikiDetails,
-                  EndingOfScreen(),
+                  const SizedBox(height: 20),
+                  WikiTitle(title: widget.wikiDataDto.name),
+                  const SizedBox(height: 5),
+                  widget.wikiContent,
+                  const EndingOfScreen(),
                 ],
               ),
             ),

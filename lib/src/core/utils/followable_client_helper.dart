@@ -9,7 +9,7 @@ import '../../models/shorts/event_short.dart';
 import '../../models/shorts/place_short.dart';
 import '../../models/shorts/unity_short.dart';
 
-abstract class FollowableClientHelper<FOLLOWABLE extends FollowableInterface> {
+abstract class FollowableClientHelper<FOLLOWABLE extends GeneralFollowableInterface> {
   String getEndpointForFollowable();
   FOLLOWABLE deserializeFollowable(dynamic json);
 }

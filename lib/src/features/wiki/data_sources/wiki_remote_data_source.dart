@@ -6,7 +6,7 @@ import '../../../core/client/remote_client.dart';
 import '../../../core/error/exceptions.dart';
 
 abstract class WikiRemoteDataSource<
-    FULLFOLLOWABLE extends FollowableInterface> {
+    FULLFOLLOWABLE extends GeneralFollowableInterface> {
   Future<FULLFOLLOWABLE> fetchBasicDataById({
     required int id,
     required Map<String, String> httpHeaders,
@@ -22,7 +22,7 @@ abstract class WikiRemoteDataSource<
   });
 }
 
-class WikiRemoteDataSourceImpl<FULLFOLLOWABLE extends FollowableInterface>
+class WikiRemoteDataSourceImpl<FULLFOLLOWABLE extends GeneralFollowableInterface>
     implements WikiRemoteDataSource<FULLFOLLOWABLE> {
   final FollowableClientHelper<FULLFOLLOWABLE> _followableClientHelper;
 

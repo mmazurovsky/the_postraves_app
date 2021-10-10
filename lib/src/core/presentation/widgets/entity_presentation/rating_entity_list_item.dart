@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../utils/my_colors.dart';
 import '../../../utils/my_constants.dart';
 import '../my_cached_network_image.dart';
 import '../my_rating_entity_vertical_padding.dart';
 import 'rating_entity_data.dart';
 
-class RatingEntityListItem<T extends FollowableInterface>
+class RatingEntityListItem<T extends GeneralFollowableInterface>
     extends StatefulWidget {
   final T entity;
   final double horizontalPadding;
@@ -29,7 +29,7 @@ class RatingEntityListItem<T extends FollowableInterface>
   _RatingEntityListItemState createState() => _RatingEntityListItemState();
 }
 
-class _RatingEntityListItemState<T extends FollowableInterface>
+class _RatingEntityListItemState<T extends GeneralFollowableInterface>
     extends State<RatingEntityListItem<T>> {
   late MyCachedNetworkImage _image;
 
@@ -47,7 +47,7 @@ class _RatingEntityListItemState<T extends FollowableInterface>
         widget.onItemTap(
           context,
           widget.entity,
-          await ImageDimensions.getImageDimensions(_image),
+          await _image.getImageDimensions(),
         );
       },
       child: Padding(

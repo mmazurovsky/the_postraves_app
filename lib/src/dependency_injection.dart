@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -256,14 +255,21 @@ void setupServiceLocatorInjection() async {
 
   //* Features - Wiki
 
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<void>>(() =>
+      RemoteRequestWrapperImpl<void>(serviceLocator(), serviceLocator()));
+
   //* Wiki EventFull
-  serviceLocator.registerLazySingleton(
+  serviceLocator.registerFactory(
       () => EventCubit(serviceLocator(), serviceLocator()));
+
+  serviceLocator
+      .registerFactory(() => FollowCubit<EventFull>(serviceLocator()));
 
   serviceLocator.registerLazySingleton<WikiRepository<EventFull>>(
       () => WikiRepositoryImpl<EventFull>(
             wikiRemoteDataSource: serviceLocator(),
             remoteRequestWrapper: serviceLocator(),
+            remoteRequestWrapperVoid: serviceLocator(),
           ));
 
   serviceLocator.registerLazySingleton<WikiRemoteDataSource<EventFull>>(
@@ -280,7 +286,7 @@ void setupServiceLocatorInjection() async {
       () => EventRemoteDataSourceImpl());
 
   //* Wiki ArtistFull
-  serviceLocator.registerLazySingleton(
+  serviceLocator.registerFactory(
       () => ArtistCubit(serviceLocator(), serviceLocator()));
 
   serviceLocator
@@ -290,6 +296,7 @@ void setupServiceLocatorInjection() async {
       () => WikiRepositoryImpl<ArtistFull>(
             wikiRemoteDataSource: serviceLocator(),
             remoteRequestWrapper: serviceLocator(),
+            remoteRequestWrapperVoid: serviceLocator(),
           ));
 
   serviceLocator.registerLazySingleton<ArtistRepository>(() =>
@@ -308,7 +315,7 @@ void setupServiceLocatorInjection() async {
       RemoteRequestWrapperImpl<ArtistFull>(serviceLocator(), serviceLocator()));
 
   //* Wiki PlaceFull
-  serviceLocator.registerLazySingleton(
+  serviceLocator.registerFactory(
       () => PlaceCubit(serviceLocator(), serviceLocator()));
   serviceLocator
       .registerFactory(() => FollowCubit<PlaceFull>(serviceLocator()));
@@ -317,6 +324,7 @@ void setupServiceLocatorInjection() async {
       () => WikiRepositoryImpl<PlaceFull>(
             wikiRemoteDataSource: serviceLocator(),
             remoteRequestWrapper: serviceLocator(),
+            remoteRequestWrapperVoid: serviceLocator(),
           ));
 
   serviceLocator.registerLazySingleton<PlaceRepository>(() =>
@@ -339,7 +347,7 @@ void setupServiceLocatorInjection() async {
           serviceLocator(), serviceLocator()));
 
   //* Wiki UnityFull
-  serviceLocator.registerLazySingleton(
+  serviceLocator.registerFactory(
       () => UnityCubit(serviceLocator(), serviceLocator()));
   serviceLocator
       .registerFactory(() => FollowCubit<UnityFull>(serviceLocator()));
@@ -348,6 +356,7 @@ void setupServiceLocatorInjection() async {
       () => WikiRepositoryImpl<UnityFull>(
             wikiRemoteDataSource: serviceLocator(),
             remoteRequestWrapper: serviceLocator(),
+            remoteRequestWrapperVoid: serviceLocator(),
           ));
 
   serviceLocator.registerLazySingleton<UnityRepository>(() =>

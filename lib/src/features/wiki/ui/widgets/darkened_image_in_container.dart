@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 
 class DarkenedImageInContainer extends StatefulWidget {
   final Widget child;
@@ -35,7 +35,7 @@ class _DarkenedImageInContainerState extends State<DarkenedImageInContainer> {
         margin: const EdgeInsets.symmetric(vertical: 10),
         child: InkWell(
           onTap: () async {
-            widget.onTap(await ImageDimensions.getImageDimensions(_eventImage));
+            widget.onTap(await _eventImage.getImageDimensions());
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),

@@ -30,7 +30,9 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
   @override
   void initState() {
     super.initState();
+    if (widget.textEditingController.text.isNotEmpty) {
     _initialValue = widget.textEditingController.text;
+    }
   }
 
   ///* this function can't be async, so it can't use

@@ -12,6 +12,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+WikiDataDto _$WikiDataDtoFromJson(Map<String, dynamic> json) {
+  return _WikiDataDto.fromJson(json);
+}
+
 /// @nodoc
 class _$WikiDataDtoTearOff {
   const _$WikiDataDtoTearOff();
@@ -19,18 +23,22 @@ class _$WikiDataDtoTearOff {
   _WikiDataDto call(
       {required String name,
       required String? imageLink,
-      Country? country,
-      required int? overallFollowers,
+      ImageDimensions? imageDimensions = null,
+      Country? country = null,
       required int id,
       required WikiFollowableType type}) {
     return _WikiDataDto(
       name: name,
       imageLink: imageLink,
+      imageDimensions: imageDimensions,
       country: country,
-      overallFollowers: overallFollowers,
       id: id,
       type: type,
     );
+  }
+
+  WikiDataDto fromJson(Map<String, Object> json) {
+    return WikiDataDto.fromJson(json);
   }
 }
 
@@ -41,11 +49,12 @@ const $WikiDataDto = _$WikiDataDtoTearOff();
 mixin _$WikiDataDto {
   String get name => throw _privateConstructorUsedError;
   String? get imageLink => throw _privateConstructorUsedError;
+  ImageDimensions? get imageDimensions => throw _privateConstructorUsedError;
   Country? get country => throw _privateConstructorUsedError;
-  int? get overallFollowers => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   WikiFollowableType get type => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $WikiDataDtoCopyWith<WikiDataDto> get copyWith =>
       throw _privateConstructorUsedError;
@@ -59,11 +68,12 @@ abstract class $WikiDataDtoCopyWith<$Res> {
   $Res call(
       {String name,
       String? imageLink,
+      ImageDimensions? imageDimensions,
       Country? country,
-      int? overallFollowers,
       int id,
       WikiFollowableType type});
 
+  $ImageDimensionsCopyWith<$Res>? get imageDimensions;
   $CountryCopyWith<$Res>? get country;
 }
 
@@ -79,8 +89,8 @@ class _$WikiDataDtoCopyWithImpl<$Res> implements $WikiDataDtoCopyWith<$Res> {
   $Res call({
     Object? name = freezed,
     Object? imageLink = freezed,
+    Object? imageDimensions = freezed,
     Object? country = freezed,
-    Object? overallFollowers = freezed,
     Object? id = freezed,
     Object? type = freezed,
   }) {
@@ -93,14 +103,14 @@ class _$WikiDataDtoCopyWithImpl<$Res> implements $WikiDataDtoCopyWith<$Res> {
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
               as String?,
+      imageDimensions: imageDimensions == freezed
+          ? _value.imageDimensions
+          : imageDimensions // ignore: cast_nullable_to_non_nullable
+              as ImageDimensions?,
       country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as Country?,
-      overallFollowers: overallFollowers == freezed
-          ? _value.overallFollowers
-          : overallFollowers // ignore: cast_nullable_to_non_nullable
-              as int?,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -110,6 +120,17 @@ class _$WikiDataDtoCopyWithImpl<$Res> implements $WikiDataDtoCopyWith<$Res> {
           : type // ignore: cast_nullable_to_non_nullable
               as WikiFollowableType,
     ));
+  }
+
+  @override
+  $ImageDimensionsCopyWith<$Res>? get imageDimensions {
+    if (_value.imageDimensions == null) {
+      return null;
+    }
+
+    return $ImageDimensionsCopyWith<$Res>(_value.imageDimensions!, (value) {
+      return _then(_value.copyWith(imageDimensions: value));
+    });
   }
 
   @override
@@ -134,11 +155,13 @@ abstract class _$WikiDataDtoCopyWith<$Res>
   $Res call(
       {String name,
       String? imageLink,
+      ImageDimensions? imageDimensions,
       Country? country,
-      int? overallFollowers,
       int id,
       WikiFollowableType type});
 
+  @override
+  $ImageDimensionsCopyWith<$Res>? get imageDimensions;
   @override
   $CountryCopyWith<$Res>? get country;
 }
@@ -157,8 +180,8 @@ class __$WikiDataDtoCopyWithImpl<$Res> extends _$WikiDataDtoCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? imageLink = freezed,
+    Object? imageDimensions = freezed,
     Object? country = freezed,
-    Object? overallFollowers = freezed,
     Object? id = freezed,
     Object? type = freezed,
   }) {
@@ -171,14 +194,14 @@ class __$WikiDataDtoCopyWithImpl<$Res> extends _$WikiDataDtoCopyWithImpl<$Res>
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
               as String?,
+      imageDimensions: imageDimensions == freezed
+          ? _value.imageDimensions
+          : imageDimensions // ignore: cast_nullable_to_non_nullable
+              as ImageDimensions?,
       country: country == freezed
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as Country?,
-      overallFollowers: overallFollowers == freezed
-          ? _value.overallFollowers
-          : overallFollowers // ignore: cast_nullable_to_non_nullable
-              as int?,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -192,24 +215,30 @@ class __$WikiDataDtoCopyWithImpl<$Res> extends _$WikiDataDtoCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$_WikiDataDto implements _WikiDataDto {
+@JsonSerializable()
+class _$_WikiDataDto extends _WikiDataDto {
   const _$_WikiDataDto(
       {required this.name,
       required this.imageLink,
-      this.country,
-      required this.overallFollowers,
+      this.imageDimensions = null,
+      this.country = null,
       required this.id,
-      required this.type});
+      required this.type})
+      : super._();
+
+  factory _$_WikiDataDto.fromJson(Map<String, dynamic> json) =>
+      _$_$_WikiDataDtoFromJson(json);
 
   @override
   final String name;
   @override
   final String? imageLink;
+  @JsonKey(defaultValue: null)
+  @override
+  final ImageDimensions? imageDimensions;
+  @JsonKey(defaultValue: null)
   @override
   final Country? country;
-  @override
-  final int? overallFollowers;
   @override
   final int id;
   @override
@@ -217,7 +246,7 @@ class _$_WikiDataDto implements _WikiDataDto {
 
   @override
   String toString() {
-    return 'WikiDataDto(name: $name, imageLink: $imageLink, country: $country, overallFollowers: $overallFollowers, id: $id, type: $type)';
+    return 'WikiDataDto(name: $name, imageLink: $imageLink, imageDimensions: $imageDimensions, country: $country, id: $id, type: $type)';
   }
 
   @override
@@ -229,12 +258,12 @@ class _$_WikiDataDto implements _WikiDataDto {
             (identical(other.imageLink, imageLink) ||
                 const DeepCollectionEquality()
                     .equals(other.imageLink, imageLink)) &&
+            (identical(other.imageDimensions, imageDimensions) ||
+                const DeepCollectionEquality()
+                    .equals(other.imageDimensions, imageDimensions)) &&
             (identical(other.country, country) ||
                 const DeepCollectionEquality()
                     .equals(other.country, country)) &&
-            (identical(other.overallFollowers, overallFollowers) ||
-                const DeepCollectionEquality()
-                    .equals(other.overallFollowers, overallFollowers)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.type, type) ||
@@ -246,8 +275,8 @@ class _$_WikiDataDto implements _WikiDataDto {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(imageLink) ^
+      const DeepCollectionEquality().hash(imageDimensions) ^
       const DeepCollectionEquality().hash(country) ^
-      const DeepCollectionEquality().hash(overallFollowers) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(type);
 
@@ -255,25 +284,34 @@ class _$_WikiDataDto implements _WikiDataDto {
   @override
   _$WikiDataDtoCopyWith<_WikiDataDto> get copyWith =>
       __$WikiDataDtoCopyWithImpl<_WikiDataDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_WikiDataDtoToJson(this);
+  }
 }
 
-abstract class _WikiDataDto implements WikiDataDto {
+abstract class _WikiDataDto extends WikiDataDto {
   const factory _WikiDataDto(
       {required String name,
       required String? imageLink,
+      ImageDimensions? imageDimensions,
       Country? country,
-      required int? overallFollowers,
       required int id,
       required WikiFollowableType type}) = _$_WikiDataDto;
+  const _WikiDataDto._() : super._();
+
+  factory _WikiDataDto.fromJson(Map<String, dynamic> json) =
+      _$_WikiDataDto.fromJson;
 
   @override
   String get name => throw _privateConstructorUsedError;
   @override
   String? get imageLink => throw _privateConstructorUsedError;
   @override
-  Country? get country => throw _privateConstructorUsedError;
+  ImageDimensions? get imageDimensions => throw _privateConstructorUsedError;
   @override
-  int? get overallFollowers => throw _privateConstructorUsedError;
+  Country? get country => throw _privateConstructorUsedError;
   @override
   int get id => throw _privateConstructorUsedError;
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import '../../../../models/shorts/event_short.dart';
 import 'event_card_details_concrete.dart';
-import '../../../../core/utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/presentation/widgets/empty_image_placeholder.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -44,8 +44,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
       parent: _controller,
       curve: Curves.linear,
     );
-    _widthOfCard = ScreenSize.width -
-        2 * MyConstants.horizontalPaddingOrMargin;
+    _widthOfCard = ScreenSize.width - 2 * MyConstants.horizontalPaddingOrMargin;
   }
 
   @override
@@ -57,23 +56,21 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
   Future<void> _navigateToEvent() async {
     return Future.delayed(
       const Duration(milliseconds: 170),
-      () async => NavigatorFunctions.pushEvent(
+      () async => NavigatorFunctions.pushFollowable(
         context: context,
-        imageLink: widget.loadedEvent.imageLink,
-        id: widget.loadedEvent.id,
-        name: widget.loadedEvent.name,
-        imageDimensions: await ImageDimensions.getImageDimensions(_eventImage),
+        wikiDataDto: widget.loadedEvent.convertToWikiDataDto(
+          await _eventImage.getImageDimensions(),
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return ScaleTransition(
       scale: _animation,
       child: Container(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           bottom: MyConstants.endingOfScreenOrSpaceBetweenElements,
         ),
         child: MyHorizontalMargin(
@@ -102,10 +99,10 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
                     ],
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: MyColors.forEventCard,
                     ),
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 15,
                       right: 15,
                       top: 15,

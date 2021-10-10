@@ -10,7 +10,7 @@ import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../my_navigation.dart';
 
-class RatingWeeklyWinnerCard<T extends FollowableInterface>
+class RatingWeeklyWinnerCard<T extends GeneralFollowableInterface>
     extends StatefulWidget {
   const RatingWeeklyWinnerCard({
     Key? key,
@@ -27,15 +27,15 @@ class RatingWeeklyWinnerCard<T extends FollowableInterface>
       _RatingWeeklyWinnerCardState<T>();
 }
 
-class _RatingWeeklyWinnerCardState<T extends FollowableInterface>
+class _RatingWeeklyWinnerCardState<T extends GeneralFollowableInterface>
     extends State<RatingWeeklyWinnerCard<T>> {
   static late double widthAndHeightOfImage;
 
   @override
   void initState() {
     super.initState();
-    widthAndHeightOfImage = ScreenSize.width -
-        MyConstants.horizontalPaddingOrMargin * 2;
+    widthAndHeightOfImage =
+        ScreenSize.width - MyConstants.horizontalPaddingOrMargin * 2;
   }
 
   @override
@@ -112,9 +112,11 @@ class _RatingWeeklyWinnerCardState<T extends FollowableInterface>
                 child: RatingEntityListItem<T>(
                   entity: widget.entity,
                   startingWidget: null,
-                  onItemTap: (context, entity, imageDimensions) =>
-                      NavigatorFunctions.pushRatingEntity<T>(
-                          context, entity, imageDimensions),
+                  onItemTap: (context, T entity, imageDimensions) =>
+                      NavigatorFunctions.pushFollowable(
+                    context: context,
+                    wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+                  ),
                 ),
               ),
             ],

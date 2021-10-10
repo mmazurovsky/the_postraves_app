@@ -9,7 +9,7 @@ import '../../../../models/geo/city.dart';
 import '../../../../core/provider/current_city_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
-import '../../../../core/presentation/widgets/loading_screen.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/presentation/widgets/animations/my_slide_animated_switcher.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -143,7 +143,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
                         : Container(),
               );
             } else {
-              return LoadingScreen();
+              return LoadingContainer();
             }
           },
         ),

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
 import '../../../../models/geo/country.dart';
 import '../../../../core/presentation/widgets/row_of_widgets.dart';
 import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import '../../../../core/presentation/widgets/animations/blink_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/utils/my_assets.dart';
 
 class WikiSubtitle extends StatelessWidget {
   const WikiSubtitle({
     Key? key,
     required this.entityType,
-    required this.overallFollowers,
-    required this.country,
+    this.country,
+    this.overallFollowers,
   }) : super(key: key);
-  final String entityType;
-  final int? overallFollowers;
+  final WikiFollowableType entityType;
   final Country? country;
+  final int? overallFollowers;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class WikiSubtitle extends StatelessWidget {
       child: RowOfWidgets(
         children: [
           Text(
-            entityType,
+            entityType.getNameSingular(context),
             style: MyTextStyles.sectionTitle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../state/cubit/search_cubit.dart';
 import '../../../../models/related_to_search/unified_search_model.dart';
 import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
-import '../../../../core/utils/image_dimensions.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/presentation/widgets/section_spacer.dart';
@@ -33,10 +33,13 @@ class PreviousSearchResultsBlock extends StatelessWidget {
         const SizedBox(height: 10),
         FollowableList(
           followables: results,
-          onItemTap:
-              (context, UnifiedSearchModel entity, ImageDimensions? imageDimensions) {
-            NavigatorFunctions.pushSearchEntity(
-                context, entity, imageDimensions);
+          onItemTap: (context, UnifiedSearchModel entity,
+              ImageDimensions? imageDimensions) {
+            NavigatorFunctions.pushFollowable(
+              context: context,
+              wikiDataDto:
+                  entity.wikiDataDto.copyWith(imageDimensions: imageDimensions),
+            );
             BlocProvider.of<SearchCubit>(context).updateSearchRecord(entity);
           },
           onIconTap: deleteFunction,

@@ -5,10 +5,6 @@ import '../../../core/error/failures.dart';
 import '../../../models/interfaces/data_interfaces.dart';
 import '../../../models/related_to_search/aggregated_search_model.dart';
 import '../../../models/related_to_search/unified_search_model.dart';
-import '../../../models/shorts/artist_short.dart';
-import '../../../models/shorts/event_short.dart';
-import '../../../models/shorts/place_short.dart';
-import '../../../models/shorts/unity_short.dart';
 import '../data_sources/search_local_data_source.dart';
 import '../data_sources/search_remote_data_source.dart';
 
@@ -17,7 +13,8 @@ abstract class AggregatedSearchRepository {
       String searchValue);
   Future<ResponseSealed<List<UnifiedSearchModel>>> findPreviousSearches();
   Future<ResponseSealed<void>>
-      saveOrUpdateSearchRecordInHistory<T extends FollowableInterface>(T entity);
+      saveOrUpdateSearchRecordInHistory<T extends GeneralFollowableInterface>(
+          T entity);
   Future<ResponseSealed<void>> updateTimeOfPreviousSearchRecord(
       UnifiedSearchModel entity);
   Future<ResponseSealed<void>> deleteSearchRecordFromHistory(
@@ -45,7 +42,8 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
   }
 
   @override
-  Future<ResponseSealed<List<UnifiedSearchModel>>> findPreviousSearches() async {
+  Future<ResponseSealed<List<UnifiedSearchModel>>>
+      findPreviousSearches() async {
     try {
       List<UnifiedSearchModel> foundInCache =
           await searchLocalDataSource.getSearchHistory();
@@ -57,29 +55,22 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
 
   @override
   Future<ResponseSealed<void>>
-      saveOrUpdateSearchRecordInHistory<T extends FollowableInterface>(
+      saveOrUpdateSearchRecordInHistory<T extends GeneralFollowableInterface>(
           T entity) async {
-    UnifiedSearchModel entityToSaveOrUpdate;
-    if (entity is ArtistShort) {
-      entityToSaveOrUpdate =
-          UnifiedSearchModel.fromShortArtist(entity, DateTime.now());
-    } else if (entity is UnityShort) {
-      entityToSaveOrUpdate =
-          UnifiedSearchModel.fromShortUnity(entity, DateTime.now());
-    } else if (entity is PlaceShort) {
-      entityToSaveOrUpdate =
-          UnifiedSearchModel.fromShortPlace(entity, DateTime.now());
-    } else {
-      entityToSaveOrUpdate =
-          UnifiedSearchModel.fromShortEvent(entity as EventShort, DateTime.now());
-    }
+    // todo maybe better to save image dimensions, but it is possible not to do that
+    final wikiDataDto = entity.convertToWikiDataDto(null);
+
+    final entityToSaveOrUpdate = UnifiedSearchModel(
+        wikiDataDto: wikiDataDto, updatedDateTime: DateTime.now());
     final previousSearches = await searchLocalDataSource.getSearchHistory();
     final setOfIds =
         previousSearches.map((persistedEntity) => persistedEntity.id).toSet();
     try {
-      setOfIds.contains(entityToSaveOrUpdate.id) 
-      ? await searchLocalDataSource.updateSearchRecordInHistory(entityToSaveOrUpdate.copyWith(updatedDateTime: DateTime.now())) 
-      : searchLocalDataSource.saveSearchRecordToHistory(entityToSaveOrUpdate);
+      setOfIds.contains(entityToSaveOrUpdate.id)
+          ? await searchLocalDataSource.updateSearchRecordInHistory(
+              entityToSaveOrUpdate.copyWith(updatedDateTime: DateTime.now()))
+          : searchLocalDataSource
+              .saveSearchRecordToHistory(entityToSaveOrUpdate);
       return const ResponseSealed.success(null);
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
@@ -112,7 +103,8 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
   @override
   Future<ResponseSealed<void>> deleteAllSearchRecords() async {
     try {
-      return ResponseSealed.success(await searchLocalDataSource.deleteAllSearchRecords());
+      return ResponseSealed.success(
+          await searchLocalDataSource.deleteAllSearchRecords());
     } on CacheException {
       return ResponseSealed.failure(CacheFailure());
     }

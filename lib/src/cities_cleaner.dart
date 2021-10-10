@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/authentication/state/cubit/authentication_cubit.dart';
-import 'core/presentation/widgets/loading_screen.dart';
+import 'core/presentation/widgets/loading_container.dart';
 import 'core/repository/city_repository.dart';
 
 class CitiesCleaner extends StatefulWidget {
@@ -43,7 +43,7 @@ class _CitiesCleanerState extends State<CitiesCleaner> {
               if (snapshot.hasData) {
                 return widget.child;
               } else {
-                return const LoadingScreen();
+                return const LoadingContainer();
               }
             })
         : widget.child;

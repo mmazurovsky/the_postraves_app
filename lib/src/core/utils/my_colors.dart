@@ -6,7 +6,7 @@ class MyColors {
   static const Color accent = Color.fromRGBO(217, 155, 240, 1);
   static const Color main = Colors.white;
   static const Color mainOppositeColor = Colors.black;
-  static const Color forDarkContainers = Color.fromRGBO(35, 37, 42, 1);
+  static const Color forDarkButtons = Color.fromRGBO(35, 37, 42, 1);
   static const Color forEventCard = Color.fromRGBO(28, 30, 34, 1);
   static Color forEventCardBadge = const Color.fromRGBO(28, 30, 34, 1).withOpacity(0.6);
   static const Color forInactiveStuff = Color.fromRGBO(166, 168, 169, 1);

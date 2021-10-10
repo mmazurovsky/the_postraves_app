@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import 'rating_entity_list_item.dart';
 
-class RatingEntityList<T extends FollowableInterface> extends StatelessWidget {
+class RatingEntityList<T extends GeneralFollowableInterface> extends StatelessWidget {
   final List<T> entityList;
   final Function? onIconTap;
   final Function onItemTap;

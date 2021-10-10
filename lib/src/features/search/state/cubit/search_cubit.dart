@@ -30,7 +30,7 @@ class SearchCubit extends Cubit<SearchState> {
         failure: (failure, failureMessage) {}); //todo
   }
 
-  void saveSearchRecord<T extends FollowableInterface>(
+  void saveSearchRecord<T extends GeneralFollowableInterface>(
       T followableToSave) async {
     await _aggregatedSearchRepository
         .saveOrUpdateSearchRecordInHistory(followableToSave);
