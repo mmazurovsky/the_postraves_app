@@ -128,5 +128,6 @@
     "modifyProfile": "Modify profile",
     "writeToUs": "Write to us",
     "signOut": "Sign out",
-    "deleteProfile": "Delete profile"
+    "deleteProfile": "Delete profile",
+    "wikiDescriptionEmpty": "Description has not been added yet"
 }

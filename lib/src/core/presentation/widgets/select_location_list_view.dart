@@ -38,7 +38,6 @@ class SelectLocationListView<LOCATION extends LocationInterface> extends Statele
           child: MyHorizontalPadding(
             child: ButtonContent(
               leading: Container(
-                
                 height: 30,
                 width: 30,
                 alignment: Alignment.center,
@@ -57,7 +56,7 @@ class SelectLocationListView<LOCATION extends LocationInterface> extends Statele
                   : null,
               distanceBetweenLeadingAndText: 13,
               text: location.localName,
-              textStyle: location == activeLocation
+              textStyle: location.name == activeLocation?.name
                   ? MyTextStyles.modalBottomSheetItemAccent
                   : MyTextStyles.modalBottomSheetItem,
               mainAxisAlignment: MainAxisAlignment.start,

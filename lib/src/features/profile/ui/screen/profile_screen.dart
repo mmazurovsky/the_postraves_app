@@ -186,7 +186,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
               const MyMediumPlusSpacer(),
         SectionTitle(
             sectionTitle: AppLocalizations.of(context)!.profileCurrentCity),
-        const MySmallSpacer(),
+        const MySmallestSpacer(),
         ButtonWithIcons(
           leadingIcon: Text(
             widget.userProfile.currentCity.country.emojiCode,

@@ -16,6 +16,7 @@ abstract class LocationInterface {
   String get countryEmoji;
   Country get country;
   String get localName;
+  String get name;
 }
 
 abstract class EntityNamesInterface {
@@ -31,7 +32,11 @@ abstract class FollowableInterfaceWithType
 }
 
 abstract class GeneralFollowableInterface
-    implements BaseIdInterface, BaseNameInterface, EntityNamesInterface, ConvertableToWikiDataDtoInterface {
+    implements
+        BaseIdInterface,
+        BaseNameInterface,
+        EntityNamesInterface,
+        ConvertableToWikiDataDtoInterface {
   String? get imageLink;
   Country? get country;
   int get overallFollowers;

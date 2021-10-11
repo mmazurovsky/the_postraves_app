@@ -128,5 +128,6 @@
     "modifyProfile": "Изменить профиль",
     "writeToUs": "Написать нам",
     "signOut": "Выйти из профиля",
-    "deleteProfile": "Удалить профиль"
+    "deleteProfile": "Удалить профиль",
+    "wikiDescriptionEmpty": "Описание пока отсутствует"
 }

@@ -92,7 +92,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
               actions: [
                 AppBarButton(
                   containerOpacity: 0,
-                  iconWidget: Icon(
+                  iconWidget: const Icon(
                     Ionicons.swap_vertical_outline,
                     color: MyColors.main,
                     size: 25,
@@ -117,7 +117,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
               MyFlushbar.showMyFlushbar(
                   //todo localization
                   flushbarMessage: 'Отсутствует подключение к интернету', //todo
-                  flushbarIcon: Icon(
+                  flushbarIcon: const Icon(
                     Ionicons.alert_circle_outline,
                     color: Colors.red,
                   ),

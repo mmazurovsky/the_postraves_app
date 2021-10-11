@@ -182,6 +182,20 @@ class MyTextStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle smallerBodyWithMainColor = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.main,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle smallerBodyWithAccentColor = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.accent,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle bodyWithAccentColor = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.accent,

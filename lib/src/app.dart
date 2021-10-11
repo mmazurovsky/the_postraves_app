@@ -27,9 +27,6 @@ import 'core/provider/current_tab_provider.dart';
 import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 
 import 'dependency_injection.dart';
-import 'models/fulls/artist_full.dart';
-import 'models/fulls/place_full.dart';
-import 'models/fulls/unity_full.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);

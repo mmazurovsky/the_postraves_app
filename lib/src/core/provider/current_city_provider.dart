@@ -15,7 +15,7 @@ class CurrentCityProvider extends ChangeNotifier {
   );
 
   void changeCurrentCity(City city) async {
-    if (_myCurrentCity != city) {
+    if (_myCurrentCity?.name != city.name) {
       final previousCity = _myCurrentCity;
       _myCurrentCity = city;
       await _cityRepository.saveCurrentCityToLocalAndDeletePrevious(_myCurrentCity!);

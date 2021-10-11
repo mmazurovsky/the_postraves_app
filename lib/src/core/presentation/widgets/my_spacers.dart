@@ -39,3 +39,11 @@ class MySmallSpacer extends StatelessWidget {
     return const SizedBox(height: 8);
   }
 }
+
+class MySmallestSpacer extends StatelessWidget {
+  const MySmallestSpacer({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(height: 3);
+  }
+}

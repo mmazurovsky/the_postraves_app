@@ -191,10 +191,18 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                               UserProfileToWrite(
                             name: _nicknameEditingController.text,
                             currentCity: _userProfile!.currentCity.name,
-                            about: _aboutEditingController.text,
+                            about: _aboutEditingController.text.isEmpty
+                                ? null
+                                : _aboutEditingController.text,
                             imageLink: _userProfile!.imageLink,
-                            instagramUsername: _instagramEditingController.text,
-                            telegramUsername: _telegramEditingController.text,
+                            instagramUsername:
+                                _instagramEditingController.text.isEmpty
+                                    ? null
+                                    : _instagramEditingController.text,
+                            telegramUsername:
+                                _telegramEditingController.text.isEmpty
+                                    ? null
+                                    : _telegramEditingController.text,
                           );
                           BlocProvider.of<ProfileCubit>(context)
                               .updateWholeUserProfile(

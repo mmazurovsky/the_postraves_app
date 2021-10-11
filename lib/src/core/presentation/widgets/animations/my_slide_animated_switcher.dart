@@ -8,7 +8,7 @@ class MySlideAnimatedSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 300),
       switchInCurve: Curves.ease,
       switchOutCurve: Curves.ease,
       transitionBuilder: (child, animation) {

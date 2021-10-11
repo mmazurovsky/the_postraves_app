@@ -178,7 +178,7 @@ class _EventContentState extends State<_EventContent> {
             ),
           ),
           DetailsHorizontalScrollableList(
-            verticalPadding: 15,
+            verticalPadding: 23,
             titleBodyMap: {
               AppLocalizations.of(context)!.wikiEventStatus: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

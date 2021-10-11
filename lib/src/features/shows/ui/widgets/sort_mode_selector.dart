@@ -18,7 +18,7 @@ class SortModeSelector extends StatelessWidget {
     return BlocBuilder<ViewSwitcherCubit, ViewSwitcherState>(
         builder: (context, state) {
       return ModalBottomSheetContent(
-        height: ScreenSize.height * 0.35,
+        height: ScreenSize.height * 0.38,
         iconData: Ionicons.swap_vertical_outline,
         title: AppLocalizations.of(context)!.sortModeSelectorTitle,
         content: Padding(
@@ -73,8 +73,7 @@ class SortMode extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10),
         padding: EdgeInsets.all(15),
-        width: ScreenSize.width / 2 -
-            MyConstants.horizontalPaddingOrMargin * 2,
+        width: ScreenSize.width / 2 - MyConstants.horizontalPaddingOrMargin * 2,
         decoration: BoxDecoration(
           color: isSelected ? MyColors.forEventCard : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
@@ -96,8 +95,10 @@ class SortMode extends StatelessWidget {
             ),
             Text(
               viewMode.getButtonTitle(context),
-              style: isSelected ? MyTextStyles.bodyWithAccentColor : MyTextStyles.body,
-              maxLines: 2,
+              style: isSelected
+                  ? MyTextStyles.smallerBodyWithAccentColor
+                  : MyTextStyles.smallerBodyWithMainColor,
+              maxLines: 3,
               textAlign: TextAlign.center,
             ),
             SizedBox(
