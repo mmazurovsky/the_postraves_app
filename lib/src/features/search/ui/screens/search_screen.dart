@@ -17,7 +17,7 @@ import '../../../../core/utils/my_text_styles.dart';
 import '../../../../core/presentation/widgets/ending_of_screen.dart';
 import '../../../../core/presentation/widgets/failure_container.dart';
 import '../../../../core/presentation/widgets/search_container.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 import '../widgets/new_search_results_block.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -42,8 +42,10 @@ class _SearchScreenState extends State<SearchScreen> {
     _textEditingController = TextEditingController();
     _toTriggerPreviousSearchesEvent = false;
     _textEditingController?.addListener(_textEditingControllerListener);
-    _searchTabFocusNode = FocusNode()..requestFocus();
+    _searchTabFocusNode = FocusNode();
     BlocProvider.of<SearchCubit>(context).showPreviousSearches();
+    Future.delayed(
+        const Duration(milliseconds: 200), () => _searchTabFocusNode!.requestFocus());
   }
 
   void _textEditingControllerListener() {
@@ -139,7 +141,7 @@ class _PreviousSearchesList extends StatelessWidget {
     return previousSearchRecords == null || previousSearchRecords!.isEmpty
         ? Column(
             children: [
-              SectionSpacer(),
+              MyBigSpacer(),
               SectionTitle(
                   sectionTitle:
                       AppLocalizations.of(context)!.searchHistoryIsEmpty)
@@ -198,7 +200,7 @@ class _SearchResultsList extends StatelessWidget {
                 found.foundEvents.isEmpty
             ? Column(
                 children: [
-                  SectionSpacer(),
+                  MyBigSpacer(),
                   SectionTitle(
                       sectionTitle:
                           AppLocalizations.of(context)!.searchNotFound),
@@ -270,7 +272,10 @@ class _SearchBar extends SliverPersistentHeaderDelegate {
                     children: [
                       SizedBox(width: 10),
                       Visibility(
-                        visible: state is LoadingNewSearch || state is LoadedNewSearch ? true : false,
+                        visible: state is LoadingNewSearch ||
+                                state is LoadedNewSearch
+                            ? true
+                            : false,
                         child: InkWell(
                           onTap: () => textEditingController.clear(),
                           child: Icon(

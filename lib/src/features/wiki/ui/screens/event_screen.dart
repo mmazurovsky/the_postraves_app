@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/features/wiki/state/follow_cubit/follow_cubit.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/about_section.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/followable_list_section.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/followable_util.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_subtitle.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_title.dart';
@@ -33,7 +35,7 @@ import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/utils/formatting_utils.dart';
@@ -138,13 +140,13 @@ class _EventContentState extends State<_EventContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
+          const MyBigSpacer(),
           MyHorizontalPadding(
             child: Row(
               children: [
                 Expanded(
                   child: MyElevatedButtonWithoutPadding(
-                    leadingIcon: Icon(
+                    leadingIcon: const Icon(
                       Ionicons.ticket,
                       size: 21,
                       color: MyColors.mainOppositeColor,
@@ -162,19 +164,21 @@ class _EventContentState extends State<_EventContent> {
                     distanceBetweenLeadingAndText: 5,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
-                WikiSquaredOutlinedBookmarkButton(Icon(
-                  Ionicons.bookmark,
-                  size: 24,
-                  color: MyColors.accent,
-                )),
+                const WikiSquaredOutlinedBookmarkButton(
+                  Icon(
+                    Ionicons.bookmark,
+                    size: 24,
+                    color: MyColors.accent,
+                  ),
+                ),
               ],
             ),
           ),
-          SizedBox(height: 20),
           DetailsHorizontalScrollableList(
+            verticalPadding: 15,
             titleBodyMap: {
               AppLocalizations.of(context)!.wikiEventStatus: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -183,7 +187,7 @@ class _EventContentState extends State<_EventContent> {
                     widget.event.status.getStatusName(context),
                     style: MyTextStyles.body,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   EventStatusIndicator(widget.event.status),
@@ -212,113 +216,50 @@ class _EventContentState extends State<_EventContent> {
               ),
             },
           ),
-          SizedBox(height: 15),
-          widget.event.about == null
-              ? Container()
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WikiExpandableTextDescription(
-                      widget.event.about!,
-                    ),
-                    SectionSpacer(),
-                    SectionDivider(needHorizontalMargin: true),
-                    SectionSpacer(),
-                  ],
-                ),
-          SectionTitle(
-              sectionTitle:
-                  AppLocalizations.of(context)!.placeEntityNameSingular),
-          SizedBox(height: 8),
-          RatingEntityListItem(
-            entity: widget.event.place,
-            onItemTap: (context, PlaceShort entity,
-                    ImageDimensions? imageDimensions) =>
-                NavigatorFunctions.pushFollowable(
-              context: context,
-              wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
-            ),
+          AboutSection(widget.event.about, areSpacerAndDividerNeeded: false),
+          FollowableListSection(
+            AppLocalizations.of(context)!.placeEntityNameSingular,
+            [widget.event.place],
           ),
-          SectionSpacer(),
-          widget.unities.isEmpty
-              ? Container()
-              : Column(
-                  children: [
-                    SectionDivider(needHorizontalMargin: true),
-                    SectionSpacer(),
-                    SectionTitle(
-                        sectionTitle:
-                            AppLocalizations.of(context)!.wikiEventOrganizers),
-                    SizedBox(height: 8),
-                    RatingEntityList<UnityShort>(
-                      entityList: widget.unities,
-                      onItemTap: (context, UnityShort entity,
-                              ImageDimensions? imageDimensions) =>
-                          NavigatorFunctions.pushFollowable(
-                        context: context,
-                        wikiDataDto:
-                            entity.convertToWikiDataDto(imageDimensions),
-                      ),
-                    ),
-                    SectionSpacer(),
-                  ],
-                ),
-          widget.lineup.isEmpty
-              ? Container()
-              : Column(
-                  children: [
-                    SectionDivider(needHorizontalMargin: true),
-                    SectionSpacer(),
-                    SectionTitle(
-                      sectionTitle:
-                          AppLocalizations.of(context)!.wikiEventLineup,
-                    ),
-                    SizedBox(height: 8),
-                    widget.timetable.isEmpty
-                        ? Container()
-                        : ButtonWithIcons(
-                            leadingIcon: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                    color: MyColors.forVeryDarkStuff,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                Icon(
-                                  Ionicons.reader_outline,
-                                  size: 30,
-                                  color: MyColors.accent,
-                                ),
-                              ],
-                            ),
-                            buttonText: AppLocalizations.of(context)!
-                                .wikiEventOpenTimetable,
-                            onButtonTap: () => NavigatorFunctions.pushTimetable(
-                              context: context,
-                              eventId: widget.event.id,
-                              eventName: widget.event.name,
-                              timetableDto: widget.timetable,
-                            ),
-                            verticalPadding:
-                                MyConstants.ratingEntityVerticalPadding,
+          FollowableListSection(
+            AppLocalizations.of(context)!.wikiEventOrganizers,
+            widget.unities,
+          ),
+          FollowableListSection(
+            AppLocalizations.of(context)!.wikiEventLineup,
+            widget.lineup,
+            leadingWidget: widget.timetable.isEmpty
+                ? Container()
+                : ButtonWithIcons(
+                    leadingIcon: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color: MyColors.forVeryDarkStuff,
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                    RatingEntityList(
-                      entityList: widget.lineup,
-                      onItemTap: (context, ArtistShort entity,
-                              ImageDimensions? imageDimensions) =>
-                          NavigatorFunctions.pushFollowable(
-                        context: context,
-                        wikiDataDto:
-                            entity.convertToWikiDataDto(imageDimensions),
-                      ),
+                        ),
+                        const Icon(
+                          Ionicons.reader_outline,
+                          size: 30,
+                          color: MyColors.accent,
+                        ),
+                      ],
                     ),
-                    SectionSpacer(),
-                  ],
-                ),
+                    buttonText:
+                        AppLocalizations.of(context)!.wikiEventOpenTimetable,
+                    onButtonTap: () => NavigatorFunctions.pushTimetable(
+                      context: context,
+                      eventId: widget.event.id,
+                      eventName: widget.event.name,
+                      timetableDto: widget.timetable,
+                    ),
+                    verticalPadding: MyConstants.ratingEntityVerticalPadding,
+                  ),
+          ),
         ],
       ),
     );

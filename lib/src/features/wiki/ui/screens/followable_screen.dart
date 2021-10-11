@@ -13,7 +13,7 @@ import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 import '../../../../core/presentation/widgets/social_links_list.dart';
 import '../../../../models/dto/image_dimensions.dart';
@@ -53,13 +53,15 @@ class FollowableScreen<FollowableCubitGeneric extends Cubit,
       ],
       child: WikiCanvas(
         wikiDataDto: _wikiDataDto,
-        wikiContent: _FollowableScreenContents<FollowCubitGeneric>(_wikiDataDto, _contents),
+        wikiContent: _FollowableScreenContents<FollowCubitGeneric>(
+            _wikiDataDto, _contents),
       ),
     );
   }
 }
 
-class _FollowableScreenContents<FollowCubitGeneric extends Cubit> extends StatefulWidget {
+class _FollowableScreenContents<FollowCubitGeneric extends Cubit>
+    extends StatefulWidget {
   final WikiDataDto _wikiDataDto;
   final Widget _contents;
   const _FollowableScreenContents(this._wikiDataDto, this._contents, {Key? key})
@@ -70,7 +72,8 @@ class _FollowableScreenContents<FollowCubitGeneric extends Cubit> extends Statef
       _FollowableScreenContentsState<FollowCubitGeneric>();
 }
 
-class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit> extends State<_FollowableScreenContents<FollowCubitGeneric>> {
+class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
+    extends State<_FollowableScreenContents<FollowCubitGeneric>> {
   late int? _followers;
 
   @override
@@ -84,12 +87,12 @@ class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit> extends S
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 5),
         WikiSubtitle(
           entityType: widget._wikiDataDto.type,
           country: widget._wikiDataDto.country,
           overallFollowers: _followers,
         ),
-        const SizedBox(height: 20),
         widget._contents,
       ],
     );

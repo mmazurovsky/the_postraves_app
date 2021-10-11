@@ -6,7 +6,7 @@ import '../../../../core/presentation/widgets/entity_presentation/followable_lis
 import '../../../../models/dto/image_dimensions.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 
 class PreviousSearchResultsBlock extends StatelessWidget {
@@ -26,7 +26,7 @@ class PreviousSearchResultsBlock extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionSpacer(),
+        MyBigSpacer(),
         SectionTitle(
           sectionTitle: resultsName,
         ),
@@ -44,7 +44,7 @@ class PreviousSearchResultsBlock extends StatelessWidget {
           },
           onIconTap: deleteFunction,
         ),
-        SectionSpacer(),
+        MyBigSpacer(),
       ],
     );
   }

@@ -4,7 +4,10 @@ import 'package:google_static_maps_controller/google_static_maps_controller.dart
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/core/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_app/src/features/wiki/state/follow_cubit/follow_cubit.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/about_section.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/coordinates_section.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/followable_util.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/upcoming_events_section.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_subtitle.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_title.dart';
 import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
@@ -32,7 +35,7 @@ import 'wiki_canvas.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../widgets/wiki_expandable_text_description.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -113,7 +116,7 @@ class _PlaceContent extends StatefulWidget {
 }
 
 class _PlaceContentState extends State<_PlaceContent> {
-late bool _isFollowed;
+  late bool _isFollowed;
 
   @override
   void didChangeDependencies() {
@@ -127,120 +130,27 @@ late bool _isFollowed;
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
+          const MyBigSpacer(),
           Row(
             children: [
               Expanded(
                 child: MyHorizontalPadding(
                   child: WikiWideBookmarkButton(
                     isFollowed: _isFollowed,
-                    onButtonTap: () => widget.onIsFollowedChange(context, widget.place),
+                    onButtonTap: () =>
+                        widget.onIsFollowedChange(context, widget.place),
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 25),
-          const SectionDivider(needHorizontalMargin: true),
           SocialLinksList(
             soundcloudUsername: widget.place.soundcloudUsername,
             instagramUsername: widget.place.instagramUsername,
           ),
-          const SectionSpacer(),
-          SectionTitle(
-              sectionTitle: AppLocalizations.of(context)!.wikiPlaceCoordinates),
-          SizedBox(height: 12),
-          InkWell(
-            onTap: () => showModalBottomSheet(
-              context: context,
-              builder: (context) => MapSelector(
-                coordinate: widget.place.coordinate,
-                placeName: widget.place.name,
-              ),
-            ),
-            child: MyHorizontalMargin(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: ClipRect(
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    heightFactor: 0.88,
-                    child: StaticMap(
-                      googleApiKey: MyConstants.googleApiKey,
-                      language: 'english',
-                      height: 190,
-                      mapId: MyConstants.googleMapId,
-                      zoom: 14,
-                      markers: [
-                        Marker(
-                          color: MyColors.accent,
-                          label: 'A',
-                          locations: [
-                            Location(
-                              widget.place.coordinate.latitude,
-                              widget.place.coordinate.longitude,
-                            ),
-                          ],
-                        ),
-                        //todo
-                        //         Marker.custom(
-                        //   anchor: MarkerAnchor.bottom,
-                        //   icon: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/round-pushpin_1f4cd.png",
-                        //   locations: [
-                        //     Location(
-                        //               loadedPlace.coordinate.latitude,
-                        //               loadedPlace.coordinate.longitude,
-                        //             ),
-                        //   ],
-                        // )
-                      ],
-                      center: Location(
-                        widget.place.coordinate.latitude,
-                        widget.place.coordinate.longitude,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 15),
-          AddressSection(
-            cityName: widget.place.city.localName,
-            streetAddress: widget.place.streetAddress,
-          ),
-          SectionSpacer(),
-          SectionDivider(needHorizontalMargin: true),
-          SectionSpacer(),
-          widget.place.about == null
-              ? Container()
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WikiExpandableTextDescription(
-                      widget.place.about!,
-                    ),
-                    SectionSpacer(),
-                    SectionDivider(needHorizontalMargin: true),
-                    SectionSpacer(),
-                  ],
-                ),
-          widget.events.isEmpty
-              ? Container()
-              : Column(
-                  children: [
-                    SectionTitle(
-                        sectionTitle:
-                            AppLocalizations.of(context)!.wikiUpcomingEvents),
-                    SizedBox(height: 8),
-                    ColumnOfCustomCards<EventShort>(
-                      entities: widget.events,
-                      buildCard: (EventShort event) =>
-                          ShortEventCardItem(event),
-                    ),
-                    SectionSpacer(),
-                  ],
-                ),
+          CoordinatesSection(widget.place),
+          AboutSection(widget.place.about),
+          UpcomingEventsSection(widget.events),
         ],
       ),
     );

@@ -6,7 +6,7 @@ import '../../../features/wiki/ui/widgets/button_with_icons.dart';
 import '../../service/open_link_service.dart';
 import '../../utils/my_assets.dart';
 import 'section_divider.dart';
-import 'section_spacer.dart';
+import 'my_spacers.dart';
 import 'section_title.dart';
 
 class SocialLinksList extends StatelessWidget {
@@ -32,9 +32,11 @@ class SocialLinksList extends StatelessWidget {
             telegramUsername != null
         ? Column(
             children: [
-              const SectionSpacer(),
+              const MyBiggestSpacer(),
+              const SectionDivider(needHorizontalMargin: true),
+              const MyMediumPlusSpacer(),
               SectionTitle(sectionTitle: AppLocalizations.of(context)!.links),
-              const SizedBox(height: 8),
+              const MyMediumSpacer(),
               soundcloudUsername != null
                   ? ButtonWithIcons(
                       buttonText: 'Soundcloud',
@@ -125,8 +127,6 @@ class SocialLinksList extends StatelessWidget {
                       verticalPadding: _verticalPadding,
                     )
                   : Container(),
-              const SizedBox(height: 15),
-              const SectionDivider(needHorizontalMargin: true),
             ],
           )
         : Container();

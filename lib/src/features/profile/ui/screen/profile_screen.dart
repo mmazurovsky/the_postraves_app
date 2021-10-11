@@ -12,6 +12,7 @@ import 'package:the_postraves_app/src/core/provider/current_city_provider.dart';
 import 'package:the_postraves_app/src/core/service/open_link_service.dart';
 import 'package:the_postraves_app/src/core/utils/screen_size.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/current_city_selector.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/about_section.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_subtitle.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_title.dart';
 import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
@@ -27,7 +28,7 @@ import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../models/user/user_profile.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 import '../../../../core/presentation/widgets/social_links_list.dart';
 import '../../../../models/dto/image_dimensions.dart';
@@ -141,11 +142,13 @@ class _ProfileDetails extends StatefulWidget {
 }
 
 class _ProfileDetailsState extends State<_ProfileDetails> {
-  void _closeModalBottomSheetAndPushModifyProfile() {
+  void _closeModalBottomSheetAndPushModifyProfile(
+      void Function(BuildContext) function) {
     Navigator.of(context).pop();
     Future.delayed(
       const Duration(milliseconds: 300),
-      () => NavigatorFunctions.pushModifyUser(context),
+      () => function(context),
+      // NavigatorFunctions.pushModifyUser(context),
     );
   }
 
@@ -158,7 +161,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           entityType: WikiFollowableType.USER,
           overallFollowers: widget.userProfile.overallFollowers,
         ),
-        const SizedBox(height: 20),
+        const MyBigSpacer(),
         MyElevatedButton(
           //todo
           onTap: () {},
@@ -173,31 +176,17 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           text: AppLocalizations.of(context)!.profileShowMyFollows,
           textStyle: MyTextStyles.buttonWithOppositeColor,
         ),
-        const SizedBox(height: 25),
-        const SectionDivider(
-          needHorizontalMargin: true,
-        ),
-        const SectionSpacer(),
         SocialLinksList(
           instagramUsername: widget.userProfile.instagramUsername,
           telegramUsername: widget.userProfile.telegramUsername,
         ),
-        widget.userProfile.about == null
-            ? Container()
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  WikiExpandableTextDescription(
-                    widget.userProfile.about!,
-                  ),
-                  const SectionSpacer(),
-                  SectionDivider(needHorizontalMargin: true),
-                  SectionSpacer(),
-                ],
-              ),
+        AboutSection(widget.userProfile.about),
+        const MyBigSpacer(),
+        const SectionDivider(needHorizontalMargin: true),
+              const MyMediumPlusSpacer(),
         SectionTitle(
             sectionTitle: AppLocalizations.of(context)!.profileCurrentCity),
-        const SizedBox(height: 8),
+        const MySmallSpacer(),
         ButtonWithIcons(
           leadingIcon: Text(
             widget.userProfile.currentCity.country.emojiCode,
@@ -221,10 +210,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           ),
           verticalPadding: 14,
         ),
-        const SizedBox(height: 15),
-        const SectionDivider(needHorizontalMargin: true),
-        const SectionSpacer(),
-        const SectionSpacer(),
+        const MyBigSpacer(),
         MyOutlinedButton(
           leadingIcon: const Icon(
             Ionicons.cog_outline,
@@ -260,9 +246,9 @@ class _SettingsButtonData {
 }
 
 class SettingsSelector extends StatelessWidget {
-  final void Function() _functionToCloseModalBottomSheetAndNavigateToNewScreen;
-  const SettingsSelector(
-      this._functionToCloseModalBottomSheetAndNavigateToNewScreen,
+  final void Function(void Function(BuildContext) argFunction)
+      _functionToCloseModalBottomSheetAndDoSomething;
+  const SettingsSelector(this._functionToCloseModalBottomSheetAndDoSomething,
       {Key? key})
       : super(key: key);
 
@@ -272,29 +258,36 @@ class SettingsSelector extends StatelessWidget {
         text: AppLocalizations.of(context)!.modifyProfile,
         leadingIcon: const Icon(Ionicons.clipboard_outline,
             color: MyColors.main, size: 18),
-        onTap: (_) => _functionToCloseModalBottomSheetAndNavigateToNewScreen(),
+        onTap: (_) => _functionToCloseModalBottomSheetAndDoSomething(
+            (BuildContext ctx) => NavigatorFunctions.pushModifyUser(ctx)),
       ),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.writeToUs,
         leadingIcon: const Icon(Ionicons.chatbox_outline,
             color: MyColors.main, size: 18),
-        onTap: (_) =>
-            OpenLinkService.openUrl("https://t.me/mmazurovsky"), //todo
+        onTap: (_) => _functionToCloseModalBottomSheetAndDoSomething(
+          (BuildContext _) =>
+              OpenLinkService.openUrl("https://t.me/mmazurovsky"), //todo
+        ),
       ),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.signOut,
         leadingIcon: const Icon(Ionicons.log_out_outline,
             color: MyColors.main, size: 18),
-        onTap: (BuildContext context) =>
-            BlocProvider.of<AuthenticationCubit>(context).signOut(),
+        onTap: (_) => _functionToCloseModalBottomSheetAndDoSomething(
+          (BuildContext ctx) =>
+              BlocProvider.of<AuthenticationCubit>(ctx).signOut(),
+        ),
       ),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.deleteProfile,
         leadingIcon: const Icon(Ionicons.close_circle_outline,
             color: MyColors.main, size: 18),
-        onTap: (BuildContext context) =>
-            BlocProvider.of<AuthenticationCubit>(context)
-                .deleteMyProfile(), //todo check working
+        onTap: (BuildContext _) =>
+            _functionToCloseModalBottomSheetAndDoSomething(
+          (BuildContext ctx) =>
+              BlocProvider.of<AuthenticationCubit>(ctx).deleteMyProfile(),
+        ), //todo check working
       ),
     ];
   }

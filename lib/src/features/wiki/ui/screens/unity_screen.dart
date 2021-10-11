@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_postraves_app/src/features/wiki/state/follow_cubit/follow_cubit.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/about_section.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/followable_list_section.dart';
 import 'package:the_postraves_app/src/features/wiki/ui/widgets/followable_util.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/upcoming_events_section.dart';
 import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
 import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
 import '../../state/unity_cubit/unity_cubit.dart';
@@ -18,7 +21,7 @@ import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 import '../widgets/column_of_custom_cards.dart';
 import '../widgets/wiki_expandable_text_description.dart';
@@ -116,6 +119,7 @@ class _UnityContentState extends State<_UnityContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const MyBigSpacer(),
           Row(
             children: [
               Expanded(
@@ -129,66 +133,17 @@ class _UnityContentState extends State<_UnityContent> {
               ),
             ],
           ),
-          SizedBox(height: 25),
-          SectionDivider(needHorizontalMargin: true),
           SocialLinksList(
             soundcloudUsername: widget.unity.soundcloudUsername,
             bandcampUsername: widget.unity.bandcampUsername,
             instagramUsername: widget.unity.instagramUsername,
           ),
-          SectionSpacer(),
-          widget.unity.about == null
-              ? Container()
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WikiExpandableTextDescription(
-                      widget.unity.about!,
-                    ),
-                    SectionSpacer(),
-                    SectionDivider(needHorizontalMargin: true),
-                    SectionSpacer(),
-                  ],
-                ),
-          widget.artists.isEmpty
-              ? Container()
-              : Column(
-                  children: [
-                    SectionTitle(
-                        sectionTitle: AppLocalizations.of(context)!
-                            .artistEntityNamePlural),
-                    SizedBox(height: 8),
-                    RatingEntityList<ArtistShort>(
-                      entityList: widget.artists,
-                      onItemTap: (context, ArtistShort entity,
-                              ImageDimensions? imageDimensions) =>
-                          NavigatorFunctions.pushFollowable(
-                        context: context,
-                        wikiDataDto:
-                            entity.convertToWikiDataDto(imageDimensions),
-                      ),
-                    ),
-                    SectionSpacer(),
-                  ],
-                ),
-          widget.events.isEmpty
-              ? Container()
-              : Column(
-                  children: [
-                    SectionDivider(needHorizontalMargin: true),
-                    SectionSpacer(),
-                    SectionTitle(
-                        sectionTitle:
-                            AppLocalizations.of(context)!.wikiUpcomingEvents),
-                    SizedBox(height: 8),
-                    ColumnOfCustomCards(
-                      entities: widget.events,
-                      buildCard: (EventShort event) =>
-                          ShortEventCardItem(event),
-                    ),
-                    SectionSpacer(),
-                  ],
-                ),
+          AboutSection(widget.unity.about),
+          FollowableListSection(
+            AppLocalizations.of(context)!.artistEntityNamePlural,
+            widget.artists,
+          ),
+          UpcomingEventsSection(widget.events),
         ],
       ),
     );

@@ -6,7 +6,7 @@ import '../../../../core/presentation/widgets/entity_presentation/rating_entity_
 import '../../../../models/dto/image_dimensions.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_spacer.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
 
 class NewSearchResultsBlock<T extends GeneralFollowableInterface>
@@ -25,7 +25,7 @@ class NewSearchResultsBlock<T extends GeneralFollowableInterface>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionSpacer(),
+        MyBigSpacer(),
         SectionTitle(
           sectionTitle: resultsName,
         ),
@@ -41,7 +41,7 @@ class NewSearchResultsBlock<T extends GeneralFollowableInterface>
             BlocProvider.of<SearchCubit>(context).saveSearchRecord(entity);
           },
         ),
-        SectionSpacer(),
+        MyBigSpacer(),
         SectionDivider(needHorizontalMargin: true),
       ],
     );

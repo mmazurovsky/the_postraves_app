@@ -79,7 +79,6 @@ class _WikiCanvasState extends State<WikiCanvas> {
                 children: [
                   const SizedBox(height: 20),
                   WikiTitle(title: widget.wikiDataDto.name),
-                  const SizedBox(height: 5),
                   widget.wikiContent,
                   const EndingOfScreen(),
                 ],
