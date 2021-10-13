@@ -9,6 +9,7 @@ import 'features/search/ui/screens/search_screen.dart';
 import 'features/shows/ui/screens/shows_screen.dart';
 import 'features/timetable/dto/timetable_for_scene_dto.dart';
 import 'features/timetable/ui/screens/event_timetable_screen.dart';
+import 'features/wiki/state/event_cubit/event_cubit.dart';
 import 'models/dto/image_dimensions.dart';
 import 'features/wiki/ui/screens/artist_screen.dart';
 import 'features/wiki/ui/screens/event_screen.dart';
@@ -99,6 +100,7 @@ class RouteGenerator {
                 eventId: args!['eventId'],
                 eventName: args['eventName'],
                 timetable: args['timetableDto'],
+                eventBlocProvider: args['eventBlocProvider'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.artist) {
       return MaterialPageRoute(
@@ -241,12 +243,15 @@ class NavigatorFunctions {
       {required BuildContext context,
       required int eventId,
       required String eventName,
-      required List<TimetableForSceneDto> timetableDto}) {
+      required List<TimetableForSceneDto> timetableDto,
+      required EventCubit eventBlocProvider,
+      }) {
     Navigator.of(context)
         .pushNamed(MyNavigationRoutes.eventTimetable, arguments: {
       'eventId': eventId,
       'eventName': eventName,
       'timetableDto': timetableDto,
+      'eventBlocProvider': eventBlocProvider,
     });
   }
 

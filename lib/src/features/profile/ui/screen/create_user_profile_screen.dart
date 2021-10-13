@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/buttons/app_bar_button.dart';
 import 'package:the_postraves_app/src/features/profile/ui/widgets/nickname_text_field.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/current_city_selector.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
@@ -92,7 +94,19 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
       child: Scaffold(
         appBar: MySimpleAppBar(
-          leading: widget.isPoppable ? const AppBarBackButton() : null,
+          leading: widget.isPoppable
+              ? const AppBarBackButton()
+              : AppBarButton(
+                  onTap: () {
+                    _unfocusTextFields();
+                    context.read<AuthenticationCubit>().signOut();
+                  },
+                  iconWidget: const Icon(
+                    Ionicons.close_outline,
+                    color: Colors.white,
+                  ),
+                  containerOpacity: 0,
+                ),
         ),
         body: SafeArea(
           child: Container(
@@ -132,10 +146,10 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                       ),
                       const SizedBox(height: 20),
                       NicknameTextField(
-                        focusNode: _nicknameFieldFocusNode, 
-                        textEditingController: _nicknameEditingController, 
+                        focusNode: _nicknameFieldFocusNode,
+                        textEditingController: _nicknameEditingController,
                         triggerValidation: () => _triggerFormValidation(),
-                        ),
+                      ),
 
                       // MyTextField(
                       //   focusNode: _nicknameFieldFocusNode,

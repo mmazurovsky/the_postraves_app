@@ -114,7 +114,7 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
                                             .inMinutes /
                                         widget.endingDateTime
                                             .difference(widget.startingDateTime)
-                                            .inMinutes)
+                                            .inMinutes) //todo widget overflow on the right
                                 : lineWidth,
                             height: 2.5,
                             decoration: BoxDecoration(

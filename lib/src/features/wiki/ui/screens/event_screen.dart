@@ -69,10 +69,13 @@ class _EventStateManagement extends StatefulWidget {
 }
 
 class _EventStateManagementState extends State<_EventStateManagement> {
+  late final EventCubit _eventBlocProvider;
+
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<EventCubit>(context).loadEvent(widget._wikiDataDto.id);
+    _eventBlocProvider = BlocProvider.of<EventCubit>(context);
+    _eventBlocProvider.loadEvent(widget._wikiDataDto.id);
   }
 
   @override
@@ -93,6 +96,7 @@ class _EventStateManagementState extends State<_EventStateManagement> {
             unities: state.orgs,
             lineup: state.lineup,
             timetable: state.timetable,
+            eventBlocProvider: _eventBlocProvider,
             onIsFollowedChange: FollowableUtil.onIsFollowedChange,
           );
         } else {
@@ -109,6 +113,7 @@ class _EventContent extends StatefulWidget {
   final List<UnityShort> unities;
   final List<ArtistShort> lineup;
   final List<TimetableForSceneDto> timetable;
+  final EventCubit eventBlocProvider;
   final void Function<T extends GeneralFollowableInterface>(BuildContext, T)
       onIsFollowedChange;
 
@@ -118,6 +123,7 @@ class _EventContent extends StatefulWidget {
     required this.lineup,
     required this.timetable,
     required this.onIsFollowedChange,
+    required this.eventBlocProvider,
     Key? key,
   }) : super(key: key);
 
@@ -256,6 +262,7 @@ class _EventContentState extends State<_EventContent> {
                       eventId: widget.event.id,
                       eventName: widget.event.name,
                       timetableDto: widget.timetable,
+                      eventBlocProvider: widget.eventBlocProvider
                     ),
                     verticalPadding: MyConstants.ratingEntityVerticalPadding,
                   ),
