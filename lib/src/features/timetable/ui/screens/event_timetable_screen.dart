@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/features/timetable/timetable_cubit/timetable_cubit.dart';
 import '../../dto/timetable_for_scene_dto.dart';
 import '../../../wiki/state/event_cubit/event_cubit.dart';
 import '../../../../core/presentation/widgets/loading_container.dart';
@@ -19,14 +20,14 @@ class EventTimetableScreen extends StatefulWidget {
     Key? key,
     required this.eventId,
     required this.eventName,
-    required this.timetable,
+    required this.initialTimetable,
     required this.eventBlocProvider,
   }) : super(key: key);
 
   final int eventId;
   final String eventName;
-  final List<TimetableForSceneDto> timetable;
-  final EventCubit eventBlocProvider;
+  final List<TimetableForSceneDto> initialTimetable;
+  final EventCubit eventBlocProvider; //todo remove
 
   @override
   _EventTimetableScreenState createState() => _EventTimetableScreenState();
@@ -40,96 +41,112 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<TimetableCubit>(context)
+        .initTimetable(widget.initialTimetable);
     _tabController = TabController(
-        vsync: this, length: widget.timetable.length, initialIndex: 0);
+        vsync: this, length: widget.initialTimetable.length, initialIndex: 0);
     _refreshControllers =
-        List.generate(widget.timetable.length, (i) => RefreshController());
+        List.generate(widget.initialTimetable.length, (i) => RefreshController());
   }
 
   void _onRefresh() {
-    widget.eventBlocProvider.refreshEvent(widget.eventId);
+    BlocProvider.of<TimetableCubit>(context).refreshTimetable(widget.eventId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: widget.eventBlocProvider,
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: MyColors.screenBackground,
+      appBar: AppBar(
         backgroundColor: MyColors.screenBackground,
-        appBar: AppBar(
-          backgroundColor: MyColors.screenBackground,
-          leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            padding: const EdgeInsets.all(8),
-            visualDensity: VisualDensity.standard,
-            alignment: Alignment.center,
-            icon: const Icon(
-              Ionicons.chevron_back_outline,
-              color: Colors.white,
-            ),
-          ),
-          centerTitle: true,
-          title: SizedBox(
-            width: MyConstants.appBarTitleWidth(context),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  widget.eventName,
-                  style: MyTextStyles.appBarTitle,
-                  overflow: TextOverflow.fade,
-                ),
-                Text(
-                  AppLocalizations.of(context)!.timetableTitle,
-                  style: MyTextStyles.appBarSubtitle,
-                  overflow: TextOverflow.fade,
-                ),
-              ],
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size(double.infinity, 5),
-            child: TabBar(
-              indicatorColor: MyColors.accent,
-              controller: _tabController,
-              tabs: widget.timetable.map((scene) => Container()).toList(),
-            ),
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          padding: const EdgeInsets.all(8),
+          visualDensity: VisualDensity.standard,
+          alignment: Alignment.center,
+          icon: const Icon(
+            Ionicons.chevron_back_outline,
+            color: Colors.white,
           ),
         ),
-        body: SafeArea(
-          child: BlocConsumer<EventCubit, EventState>(
+        centerTitle: true,
+        title: SizedBox(
+          width: MyConstants.appBarTitleWidth(context),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                widget.eventName,
+                style: MyTextStyles.appBarTitle,
+                overflow: TextOverflow.fade,
+              ),
+              Text(
+                AppLocalizations.of(context)!.timetableTitle,
+                style: MyTextStyles.appBarSubtitle,
+                overflow: TextOverflow.fade,
+              ),
+            ],
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size(double.infinity, 5),
+          child: BlocListener<TimetableCubit, TimetableState>(
             listener: (context, state) {
-              if (state is EventLoadingState) {
-                print('loading state');
-              } else if (state is EventLoadedState) {
-                print('loaded state');
+              if (state is TimetableLoadedState) {
+                //* this is not tested
+                if (widget.initialTimetable.length != state.timetable.length) {
+                  _tabController = TabController(
+                      vsync: this,
+                      length: state.timetable.length,
+                      initialIndex: 0);
+                  _refreshControllers = List.generate(
+                      state.timetable.length, (i) => RefreshController());
+                }
                 for (var element in _refreshControllers) {
                   element.refreshCompleted();
                 }
               }
             },
-            buildWhen: (previousState, currentState) =>
-                currentState is! EventRefreshingState,
-            builder: (context, state) {
-              if (state is EventLoadedState) {
-                return TabBarView(
-                  controller: _tabController,
-                  children: state.timetable.asMap().entries.map((entry) {
-                    final indexOfScene = entry.key;
-                    final timetableForScene = entry.value;
-                    return TimetableForScene(
-                      timetableForSceneDto: state.timetable[indexOfScene],
-                      tabController: _tabController,
-                      onRefresh: _onRefresh,
-                      refreshController: _refreshControllers[indexOfScene],
-                    );
-                  }).toList(),
-                );
-              } else {
-                return const LoadingContainer();
-              }
-            },
+            child: TabBar(
+              indicatorColor: MyColors.accent,
+              controller: _tabController,
+              tabs:
+                  widget.initialTimetable.map((scene) => Container()).toList(),
+            ),
           ),
+        ),
+      ),
+      body: SafeArea(
+        child: BlocConsumer<TimetableCubit, TimetableState>(
+          listener: (context, state) {
+            if (state is TimetableRefreshingState) {
+            } else if (state is TimetableLoadedState) {
+              for (var element in _refreshControllers) {
+                element.refreshCompleted();
+              }
+            }
+          },
+          buildWhen: (previousState, currentState) =>
+              currentState is! TimetableRefreshingState,
+          builder: (context, state) {
+            if (state is TimetableLoadedState) {
+              return TabBarView(
+                controller: _tabController,
+                children: state.timetable.asMap().entries.map((entry) {
+                  final indexOfScene = entry.key;
+                  final timetableForScene = entry.value;
+                  return PerformancesForScene(
+                    timetableForSceneDto: timetableForScene,
+                    tabController: _tabController,
+                    onRefresh: _onRefresh,
+                    refreshController: _refreshControllers[indexOfScene],
+                  );
+                }).toList(),
+              );
+            } else {
+              return const LoadingContainer();
+            }
+          },
         ),
       ),
     );
@@ -137,12 +154,12 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
 }
 
 //* can't be stateless because of keep alive mixin on state class
-class TimetableForScene extends StatefulWidget {
+class PerformancesForScene extends StatefulWidget {
   final TimetableForSceneDto timetableForSceneDto;
   final TabController tabController;
   final Function onRefresh;
   final RefreshController refreshController;
-  const TimetableForScene({
+  const PerformancesForScene({
     Key? key,
     required this.timetableForSceneDto,
     required this.tabController,
@@ -151,10 +168,10 @@ class TimetableForScene extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<TimetableForScene> createState() => _TimetableForSceneState();
+  State<PerformancesForScene> createState() => _PerformancesForSceneState();
 }
 
-class _TimetableForSceneState extends State<TimetableForScene>
+class _PerformancesForSceneState extends State<PerformancesForScene>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {

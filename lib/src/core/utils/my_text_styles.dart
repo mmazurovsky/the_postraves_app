@@ -239,14 +239,28 @@ class MyTextStyles {
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle shortEntityRating = TextStyle(
+  static const TextStyle shortEntityOverallRating = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle shortEntityDetails = shortEntityRating;
+  static const TextStyle shortEntityPositiveWeeklyRating = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.forPositiveWeeklyRating,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle shortEntityNegativeWeeklyRating = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.forNegativeWeeklyRating,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle shortEntityDetails = shortEntityOverallRating;
 
   static const TextStyle authTitle = TextStyle(
     color: MyColors.main,

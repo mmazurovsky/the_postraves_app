@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/features/timetable/timetable_cubit/timetable_cubit.dart';
 import 'core/provider/country_list_provider.dart';
 import 'cities_cleaner.dart';
 import 'core/authentication/state/cubit/authentication_cubit.dart';
@@ -66,6 +67,9 @@ class AppState extends State<App> with WidgetsBindingObserver {
         ),
         BlocProvider(
           create: (context) => serviceLocator<ProfileCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<TimetableCubit>(),
         ),
       ],
       child: MultiProvider(

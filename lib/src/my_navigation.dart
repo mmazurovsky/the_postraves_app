@@ -99,7 +99,7 @@ class RouteGenerator {
           builder: (_) => EventTimetableScreen(
                 eventId: args!['eventId'],
                 eventName: args['eventName'],
-                timetable: args['timetableDto'],
+                initialTimetable: args['timetableDto'],
                 eventBlocProvider: args['eventBlocProvider'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.artist) {

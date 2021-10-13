@@ -7,12 +7,17 @@ import '../../../utils/my_assets.dart';
 import '../../../utils/my_constants.dart';
 import '../../../utils/my_text_styles.dart';
 
-class RatingEntityData<T extends GeneralFollowableInterface> extends StatelessWidget {
+class RatingEntityData<T extends GeneralFollowableInterface>
+    extends StatelessWidget {
   final T entity;
+  final bool showWeeklyFollowers;
+  final String? hintText;
 
   const RatingEntityData({
     Key? key,
     required this.entity,
+    this.showWeeklyFollowers = false,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -64,8 +69,18 @@ class RatingEntityData<T extends GeneralFollowableInterface> extends StatelessWi
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  entity.overallFollowers.toString(),
-                  style: MyTextStyles.shortEntityRating,
+                  showWeeklyFollowers
+                      ? entity.weeklyFollowers > 0
+                          ? '+${entity.weeklyFollowers}'
+                          : entity.weeklyFollowers.toString()
+                      : entity.overallFollowers.toString(),
+                  style: showWeeklyFollowers
+                      ? entity.weeklyFollowers > 0
+                          ? MyTextStyles.shortEntityPositiveWeeklyRating
+                          : entity.weeklyFollowers < 0
+                              ? MyTextStyles.shortEntityNegativeWeeklyRating
+                              : MyTextStyles.shortEntityOverallRating
+                      : MyTextStyles.shortEntityOverallRating,
                 ),
               ],
             ),

@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
+import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import 'rating_list_item.dart';
+import '../../../../my_navigation.dart';
 
 class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final String imagePath;
   final List<TextSpan> titleTextSpans;
   final List<T> entities;
+  final bool showWeeklyFollowers;
   const RatingCardWithListOfItems({
     Key? key,
     required this.imagePath,
     required this.titleTextSpans,
     required this.entities,
+    this.showWeeklyFollowers = false,
   }) : super(key: key);
 
   @override
@@ -68,9 +72,17 @@ class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
                   ...entities.take(5).map(
                     (entity) {
                       modelCount += 1;
-                      return RatingListItem<T>(
+                      return RatingEntityListItem<T>(
                         entity: entity,
-                        chartIndex: modelCount,
+                        horizontalPadding: 0,
+                        showWeeklyFollowers: showWeeklyFollowers,
+                        onItemTap: (context, T entity,
+                                ImageDimensions? imageDimensions) =>
+                            NavigatorFunctions.pushFollowable(
+                          context: context,
+                          wikiDataDto:
+                              entity.convertToWikiDataDto(imageDimensions),
+                        ),
                       );
                     },
                   ),

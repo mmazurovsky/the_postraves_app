@@ -39,7 +39,7 @@ class FollowableData<T extends FollowableInterfaceWithType> extends StatelessWid
         Flexible(
           child: Text(
             followable.type.getNameSingular(context),
-            style: MyTextStyles.shortEntityRating,
+            style: MyTextStyles.shortEntityOverallRating,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),

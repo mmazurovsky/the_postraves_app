@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:the_postraves_app/src/features/timetable/timetable_cubit/timetable_cubit.dart';
 import 'features/wiki/data_sources/artist_remote_data_source.dart';
 import 'features/wiki/data_sources/event_remote_data_source.dart';
 import 'features/wiki/data_sources/place_remote_data_source.dart';
@@ -130,8 +131,8 @@ void setupServiceLocatorInjection() async {
   serviceLocator
       .registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
-  serviceLocator.registerLazySingleton<FirebaseStorage>(
-      () => FirebaseStorage.instance);
+  serviceLocator
+      .registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
 
   serviceLocator.registerLazySingleton<FirebaseFirestore>(
       () => FirebaseFirestore.instance);
@@ -255,12 +256,12 @@ void setupServiceLocatorInjection() async {
 
   //* Features - Wiki
 
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<void>>(() =>
-      RemoteRequestWrapperImpl<void>(serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<void>>(
+      () => RemoteRequestWrapperImpl<void>(serviceLocator(), serviceLocator()));
 
   //* Wiki EventFull
-  serviceLocator.registerFactory(
-      () => EventCubit(serviceLocator(), serviceLocator()));
+  serviceLocator
+      .registerFactory(() => EventCubit(serviceLocator(), serviceLocator()));
 
   serviceLocator
       .registerFactory(() => FollowCubit<EventFull>(serviceLocator()));
@@ -286,8 +287,8 @@ void setupServiceLocatorInjection() async {
       () => EventRemoteDataSourceImpl());
 
   //* Wiki ArtistFull
-  serviceLocator.registerFactory(
-      () => ArtistCubit(serviceLocator(), serviceLocator()));
+  serviceLocator
+      .registerFactory(() => ArtistCubit(serviceLocator(), serviceLocator()));
 
   serviceLocator
       .registerFactory(() => FollowCubit<ArtistFull>(serviceLocator()));
@@ -315,8 +316,8 @@ void setupServiceLocatorInjection() async {
       RemoteRequestWrapperImpl<ArtistFull>(serviceLocator(), serviceLocator()));
 
   //* Wiki PlaceFull
-  serviceLocator.registerFactory(
-      () => PlaceCubit(serviceLocator(), serviceLocator()));
+  serviceLocator
+      .registerFactory(() => PlaceCubit(serviceLocator(), serviceLocator()));
   serviceLocator
       .registerFactory(() => FollowCubit<PlaceFull>(serviceLocator()));
 
@@ -347,8 +348,8 @@ void setupServiceLocatorInjection() async {
           serviceLocator(), serviceLocator()));
 
   //* Wiki UnityFull
-  serviceLocator.registerFactory(
-      () => UnityCubit(serviceLocator(), serviceLocator()));
+  serviceLocator
+      .registerFactory(() => UnityCubit(serviceLocator(), serviceLocator()));
   serviceLocator
       .registerFactory(() => FollowCubit<UnityFull>(serviceLocator()));
 
@@ -380,4 +381,7 @@ void setupServiceLocatorInjection() async {
       .registerLazySingleton<RemoteRequestWrapper<List<TimetableForScene>>>(
           () => RemoteRequestWrapperImpl<List<TimetableForScene>>(
               serviceLocator(), serviceLocator()));
+
+  serviceLocator
+      .registerFactory(() => TimetableCubit(serviceLocator()));
 }

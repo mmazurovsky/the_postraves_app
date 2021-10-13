@@ -145,6 +145,7 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
               : Container(),
           weeklyChart != null
               ? RatingCardWithListOfItems<T>(
+                  showWeeklyFollowers: true,
                   imagePath: MyEmoji.fire,
                   titleTextSpans: [
                     TextSpan(

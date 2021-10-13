@@ -15,6 +15,8 @@ class RatingEntityListItem<T extends GeneralFollowableInterface>
   final Function? onIconTap;
   final Function onItemTap;
   final Widget? startingWidget;
+  final bool showWeeklyFollowers;
+  final String? hintText;
 
   const RatingEntityListItem({
     Key? key,
@@ -23,6 +25,8 @@ class RatingEntityListItem<T extends GeneralFollowableInterface>
     required this.onItemTap,
     this.onIconTap,
     this.horizontalPadding = MyConstants.horizontalPaddingOrMargin,
+    this.showWeeklyFollowers = false,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -74,6 +78,8 @@ class _RatingEntityListItemState<T extends GeneralFollowableInterface>
               Expanded(
                 child: RatingEntityData(
                   entity: widget.entity,
+                  showWeeklyFollowers: widget.showWeeklyFollowers,
+                  hintText: widget.hintText,
                 ),
               ),
               widget.onIconTap != null

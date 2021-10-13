@@ -110,6 +110,7 @@ class _RatingWeeklyWinnerCardState<T extends GeneralFollowableInterface>
                   color: MyColors.forEventCard,
                 ),
                 child: RatingEntityListItem<T>(
+                  showWeeklyFollowers: true,
                   entity: widget.entity,
                   startingWidget: null,
                   onItemTap: (context, T entity, imageDimensions) =>

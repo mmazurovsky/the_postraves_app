@@ -10,6 +10,8 @@ class MyColors {
   static const Color forEventCard = Color.fromRGBO(28, 30, 34, 1);
   static Color forEventCardBadge = const Color.fromRGBO(28, 30, 34, 1).withOpacity(0.6);
   static const Color forInactiveStuff = Color.fromRGBO(166, 168, 169, 1);
+  static const Color forPositiveWeeklyRating = Colors.green;
+  static const Color forNegativeWeeklyRating = Colors.red;
   static const Color forDividers = Color.fromRGBO(198, 199, 200, 1);
   static const forInactiveBottomBarIcons = main;
   static const forActiveBottomBarIcons = accent;
