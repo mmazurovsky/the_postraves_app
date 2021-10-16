@@ -1,7 +1,7 @@
 import 'package:provider/src/provider.dart';
-import 'package:the_postraves_app/src/core/authentication/state/cubit/authentication_cubit.dart';
-import 'package:the_postraves_app/src/features/wiki/state/follow_cubit/follow_cubit.dart';
-import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
+import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
+import '../../state/follow_cubit/follow_cubit.dart';
+import '../../../../models/interfaces/data_interfaces.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../../my_navigation.dart';

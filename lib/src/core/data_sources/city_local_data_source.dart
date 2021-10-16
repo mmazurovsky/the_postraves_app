@@ -1,7 +1,7 @@
-import '../../models/geo/city.dart';
-
-import '../data/data_storage/app_database.dart';
 import 'package:sembast/sembast.dart';
+
+import '../../models/geo/city.dart';
+import '../data/data_storage/app_database.dart';
 
 abstract class CityLocalDataSource {
   Future<List<City>> fetchCities();

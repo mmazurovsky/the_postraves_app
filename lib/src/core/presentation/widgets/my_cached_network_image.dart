@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
+import '../../../models/dto/image_dimensions.dart';
 
 import '../../utils/my_colors.dart';
 import 'empty_image_placeholder.dart';

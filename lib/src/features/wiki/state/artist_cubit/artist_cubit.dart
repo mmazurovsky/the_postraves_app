@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_app/src/features/wiki/state/follow_cubit/follow_cubit.dart';
+import '../follow_cubit/follow_cubit.dart';
 
 import '../../../../core/client/data_sealed/response_sealed.dart';
 import '../../../../models/fulls/artist_full.dart';

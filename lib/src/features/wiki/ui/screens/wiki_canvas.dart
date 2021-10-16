@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_title.dart';
-import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
+import '../widgets/wiki_title.dart';
+import '../../../../models/dto/wiki_data_dto.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../core/service/dynamic_link_service.dart';
 import '../../../../core/presentation/widgets/ending_of_screen.dart';

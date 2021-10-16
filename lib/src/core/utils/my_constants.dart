@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/core/utils/screen_size.dart';
+import 'screen_size.dart';
 
 class MyConstants {
   static const double endingOfScreenOrSpaceBetweenElements = 20;

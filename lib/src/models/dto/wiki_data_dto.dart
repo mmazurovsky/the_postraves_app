@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
-import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
-import 'package:the_postraves_app/src/models/geo/country.dart';
-import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
+import 'image_dimensions.dart';
+import '../enum/wiki_rating_type.dart';
+import '../geo/country.dart';
+import '../interfaces/data_interfaces.dart';
 
 part 'wiki_data_dto.freezed.dart';
 part 'wiki_data_dto.g.dart';

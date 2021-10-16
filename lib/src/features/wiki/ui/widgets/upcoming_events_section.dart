@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/my_spacers.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/section_divider.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/section_title.dart';
-import 'package:the_postraves_app/src/features/wiki/ui/widgets/short_event_card_item.dart';
-import 'package:the_postraves_app/src/models/shorts/event_short.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
+import '../../../../core/presentation/widgets/section_divider.dart';
+import '../../../../core/presentation/widgets/section_title.dart';
+import 'short_event_card_item.dart';
+import '../../../../models/shorts/event_short.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'column_of_custom_cards.dart';

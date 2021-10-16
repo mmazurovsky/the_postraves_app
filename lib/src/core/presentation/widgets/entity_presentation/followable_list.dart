@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/models/related_to_search/unified_search_model.dart';
+import '../../../../models/related_to_search/unified_search_model.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import 'followable_list_item.dart';
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/my_horizontal_margin.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/section_divider.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/my_spacers.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/section_title.dart';
+import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
+import '../../../../core/presentation/widgets/section_divider.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
+import '../../../../core/presentation/widgets/section_title.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:the_postraves_app/src/core/utils/my_colors.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
-import 'package:the_postraves_app/src/models/fulls/place_full.dart';
+import '../../../../core/utils/my_colors.dart';
+import '../../../../core/utils/my_constants.dart';
+import '../../../../models/fulls/place_full.dart';
 
 import 'address_section.dart';
 import 'map_selector.dart';

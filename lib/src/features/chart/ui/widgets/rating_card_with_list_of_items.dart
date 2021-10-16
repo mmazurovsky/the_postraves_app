@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
-import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
+import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
+import '../../../../models/dto/image_dimensions.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_colors.dart';

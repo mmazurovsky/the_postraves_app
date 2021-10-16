@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:map_launcher/map_launcher.dart';
-import 'package:the_postraves_app/src/core/utils/screen_size.dart';
+import '../../../../core/utils/screen_size.dart';
 import '../../../../models/geo/coordinate.dart';
 import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
 import '../../../../core/utils/my_text_styles.dart';

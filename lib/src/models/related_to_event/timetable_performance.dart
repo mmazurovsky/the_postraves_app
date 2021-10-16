@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_app/src/core/utils/date_time_converter.dart';
-import '../enum/artist_performance_status.dart';
+import '../../core/utils/date_time_converter.dart';
 import '../shorts/artist_short.dart';
 
 part 'timetable_performance.freezed.dart';

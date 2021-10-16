@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
-import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
+import '../dto/image_dimensions.dart';
+import '../dto/wiki_data_dto.dart';
 import '../enum/wiki_rating_type.dart';
 import '../geo/country.dart';
 

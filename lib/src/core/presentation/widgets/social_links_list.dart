@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:the_postraves_app/src/core/utils/social_links_helper.dart';
+import '../../utils/social_links_helper.dart';
 import '../../../features/wiki/ui/widgets/button_with_icons.dart';
 
 import '../../service/open_link_service.dart';

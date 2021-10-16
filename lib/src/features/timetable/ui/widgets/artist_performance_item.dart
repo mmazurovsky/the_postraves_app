@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/core/utils/my_assets.dart';
-import 'package:the_postraves_app/src/core/utils/screen_size.dart';
-import '../../../../models/enum/artist_performance_status.dart';
+import '../../../../core/utils/my_assets.dart';
+import '../../../../core/utils/screen_size.dart';
 import '../../../../models/shorts/artist_short.dart';
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
 import '../../../../models/dto/image_dimensions.dart';

@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import '../presentation/widgets/my_loading_indicator.dart';
 import '../utils/my_colors.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MyRefreshConfiguration extends StatelessWidget {
   static const double heightOfRefresh = 60;

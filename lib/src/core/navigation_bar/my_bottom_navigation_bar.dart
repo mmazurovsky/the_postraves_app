@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../provider/current_tab_provider.dart';
-import '../presentation/widgets/animations/scale_animation_wrapper.dart';
-import '../utils/my_colors.dart';
 import 'package:provider/provider.dart';
 
+import '../presentation/widgets/animations/scale_animation_wrapper.dart';
+import '../provider/current_tab_provider.dart';
+import '../utils/my_colors.dart';
 import 'bottom_navigation_tab_item.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {

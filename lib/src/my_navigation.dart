@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/features/profile/ui/screen/modify_profile_screen.dart';
+import 'features/profile/ui/screen/modify_profile_screen.dart';
 import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 import 'features/chart/ui/screens/charts_screen.dart';
 import 'features/profile/ui/screen/auth_on_action_screen_resolver.dart';

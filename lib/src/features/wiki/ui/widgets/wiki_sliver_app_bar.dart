@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
-import 'package:the_postraves_app/src/core/utils/screen_size.dart';
-import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
+import '../../../../models/dto/image_dimensions.dart';
+import '../../../../core/utils/screen_size.dart';
+import '../../../../models/dto/wiki_data_dto.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
 import '../../../../core/utils/my_constants.dart';

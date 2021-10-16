@@ -1,14 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/loading_container.dart';
-import 'package:the_postraves_app/src/features/wiki/state/follow_cubit/follow_cubit.dart';
-import 'package:the_postraves_app/src/features/wiki/ui/widgets/followable_util.dart';
-import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_subtitle.dart';
-import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_title.dart';
-import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
-import 'package:the_postraves_app/src/models/fulls/artist_full.dart';
-import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
+import '../../../../core/presentation/widgets/loading_container.dart';
+import '../../state/follow_cubit/follow_cubit.dart';
+import '../widgets/followable_util.dart';
+import '../widgets/wiki_subtitle.dart';
+import '../widgets/wiki_title.dart';
+import '../../../../models/dto/wiki_data_dto.dart';
+import '../../../../models/fulls/artist_full.dart';
+import '../../../../models/interfaces/data_interfaces.dart';
 
 import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';

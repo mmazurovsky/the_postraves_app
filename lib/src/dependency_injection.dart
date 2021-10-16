@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:the_postraves_app/src/features/timetable/timetable_cubit/timetable_cubit.dart';
+import 'features/timetable/timetable_cubit/timetable_cubit.dart';
 import 'features/wiki/data_sources/artist_remote_data_source.dart';
 import 'features/wiki/data_sources/event_remote_data_source.dart';
 import 'features/wiki/data_sources/place_remote_data_source.dart';

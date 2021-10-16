@@ -1,4 +1,4 @@
-import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
+import '../../../models/enum/wiki_rating_type.dart';
 
 import '../../../models/user/user_profile.dart';
 import '../../../models/user/user_profile_to_write.dart';

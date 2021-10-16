@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/core/utils/screen_size.dart';
+import '../../../../core/utils/screen_size.dart';
 import '../../../../models/shorts/event_short.dart';
 import 'event_card_details_concrete.dart';
 import '../../../../models/dto/image_dimensions.dart';

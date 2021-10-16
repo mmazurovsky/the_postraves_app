@@ -1,5 +1,5 @@
-import '../repository/country_repository.dart';
 import '../../models/geo/country.dart';
+import '../repository/country_repository.dart';
 
 class CountryListProvider {
   final CountryRepository _countryRepository;

@@ -6,7 +6,7 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
+import '../../utils/my_constants.dart';
 import '../../client/data_sealed/response_sealed.dart';
 import '../../error/failures.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/utils/screen_size.dart';
+import '../../utils/screen_size.dart';
 
 import 'modal_bottom_sheet_content.dart';
 import 'select_location_list_view.dart';

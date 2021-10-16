@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/models/related_to_search/unified_search_model.dart';
+import '../../../../models/related_to_search/unified_search_model.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../utils/my_text_styles.dart';

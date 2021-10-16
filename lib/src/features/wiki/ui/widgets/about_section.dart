@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/my_spacers.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/section_divider.dart';
-import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_expandable_text_description.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
+import '../../../../core/presentation/widgets/section_divider.dart';
+import 'wiki_expandable_text_description.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutSection extends StatelessWidget {

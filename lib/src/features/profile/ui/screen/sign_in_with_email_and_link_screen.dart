@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/buttons/my_elevated_button.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/section_divider.dart';
+import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
+import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../widgets/my_text_field.dart';
 import '../../../../core/utils/my_colors.dart';

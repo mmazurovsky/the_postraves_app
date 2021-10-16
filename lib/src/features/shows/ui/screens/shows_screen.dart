@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/provider/city_list_provider.dart';
+import '../../../../core/provider/city_list_provider.dart';
 import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
 import '../../state/shows_cubit/shows_cubit.dart';
 import '../../../../core/presentation/widgets/current_city_selector.dart';

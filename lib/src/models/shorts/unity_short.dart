@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:the_postraves_app/src/models/dto/image_dimensions.dart';
-import 'package:the_postraves_app/src/models/dto/wiki_data_dto.dart';
-import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
+import '../dto/image_dimensions.dart';
+import '../dto/wiki_data_dto.dart';
+import '../enum/wiki_rating_type.dart';
 import '../../core/utils/my_constants.dart';
 import '../geo/country.dart';
 import '../interfaces/data_interfaces.dart';
