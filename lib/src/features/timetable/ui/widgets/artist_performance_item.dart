@@ -29,31 +29,38 @@ class ArtistPerformanceItem extends StatefulWidget {
 }
 
 class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
-  late double lineWidth;
-  late ArtistPerformanceStatus performanceStatus;
+  late double _maxLineWidthForScreenSize;
+  static const double
+      _paddingFromRightForLineWidthWhenItIsCloseToRightCornerOfScreen = 8;
 
   @override
   void initState() {
     super.initState();
-    lineWidth = ScreenSize.width - MyConstants.horizontalPaddingOrMargin * 2;
-    performanceStatus = _resolvePerformanceStatus();
+    _maxLineWidthForScreenSize =
+        ScreenSize.width - MyConstants.horizontalPaddingOrMargin * 2;
   }
 
-  ArtistPerformanceStatus _resolvePerformanceStatus() {
-    if (DateTime.now().isAfter(widget.endingDateTime)) {
-      return ArtistPerformanceStatus.PERF_PAST;
-    } else if (DateTime.now().isBefore(widget.startingDateTime)) {
-      return ArtistPerformanceStatus.PERF_UPCOMING;
+  double _calculateLineWidthForLiveEvent() {
+    if (DateTime.now().isBefore(widget.endingDateTime)) {
+      final calculatedLineWidth = _maxLineWidthForScreenSize *
+              (DateTime.now().difference(widget.startingDateTime).inMinutes /
+                  widget.endingDateTime
+                      .difference(widget.startingDateTime)
+                      .inMinutes);
+      if (calculatedLineWidth > _maxLineWidthForScreenSize - _paddingFromRightForLineWidthWhenItIsCloseToRightCornerOfScreen) {
+        return calculatedLineWidth - _paddingFromRightForLineWidthWhenItIsCloseToRightCornerOfScreen;
+      } else {
+        return calculatedLineWidth;
+      }
     } else {
-      return ArtistPerformanceStatus.PERF_LIVE;
+      return _maxLineWidthForScreenSize;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity:
-          performanceStatus == ArtistPerformanceStatus.PERF_PAST ? 0.35 : 1,
+      opacity: DateTime.now().isAfter(widget.endingDateTime) ? 0.35 : 1,
       child: Column(
         children: [
           ...widget.artists.asMap().entries.map(
@@ -95,7 +102,7 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
               alignment: Alignment.centerLeft,
               children: [
                 Container(
-                  width: lineWidth,
+                  width: _maxLineWidthForScreenSize,
                   height: 0.7,
                   decoration: BoxDecoration(
                     color: MyColors.forDividers,
@@ -106,16 +113,7 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
                     ? Row(
                         children: [
                           Container(
-                            width: DateTime.now()
-                                    .isBefore(widget.endingDateTime)
-                                ? lineWidth *
-                                    (DateTime.now()
-                                            .difference(widget.startingDateTime)
-                                            .inMinutes /
-                                        widget.endingDateTime
-                                            .difference(widget.startingDateTime)
-                                            .inMinutes) //todo widget overflow on the right
-                                : lineWidth,
+                            width: _calculateLineWidthForLiveEvent(),
                             height: 2.5,
                             decoration: BoxDecoration(
                               color: MyColors.accent,

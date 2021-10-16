@@ -88,7 +88,7 @@
     "wikiEventStatusToday": "Сегодня",
     "wikiEventStatusLive": "Идет сейчас",
     "wikiEventStatusPast": "Прошло",
-    "loading": "Loading...",
+    "loading": "Загрузка...",
     "authSignInTitle": "Вход / Регистрация",
     "authSignInSubtitle": "Войдите, чтобы разблокировать все возможности\nЕсли у вас еще нет профиля, он будет создан",
     "authSignInWithSms": "Войти с СМС",
