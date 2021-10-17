@@ -6,9 +6,9 @@ import '../../../utils/my_colors.dart';
 import '../../../utils/my_constants.dart';
 import '../my_cached_network_image.dart';
 import '../my_rating_entity_vertical_padding.dart';
-import 'rating_entity_data.dart';
+import 'followable_item_data.dart';
 
-class RatingEntityListItem<T extends GeneralFollowableInterface>
+class FollowableItem<T extends GeneralFollowableInterface>
     extends StatefulWidget {
   final T entity;
   final double horizontalPadding;
@@ -18,7 +18,7 @@ class RatingEntityListItem<T extends GeneralFollowableInterface>
   final bool showWeeklyFollowers;
   final String? hintText;
 
-  const RatingEntityListItem({
+  const FollowableItem({
     Key? key,
     required this.entity,
     this.startingWidget,
@@ -30,11 +30,11 @@ class RatingEntityListItem<T extends GeneralFollowableInterface>
   }) : super(key: key);
 
   @override
-  _RatingEntityListItemState createState() => _RatingEntityListItemState();
+  _FollowableItemState createState() => _FollowableItemState();
 }
 
-class _RatingEntityListItemState<T extends GeneralFollowableInterface>
-    extends State<RatingEntityListItem<T>> {
+class _FollowableItemState<T extends GeneralFollowableInterface>
+    extends State<FollowableItem<T>> {
   late MyCachedNetworkImage _image;
 
   @override
@@ -76,7 +76,7 @@ class _RatingEntityListItemState<T extends GeneralFollowableInterface>
                 width: 18,
               ),
               Expanded(
-                child: RatingEntityData(
+                child: FollowableItemData(
                   entity: widget.entity,
                   showWeeklyFollowers: widget.showWeeklyFollowers,
                   hintText: widget.hintText,

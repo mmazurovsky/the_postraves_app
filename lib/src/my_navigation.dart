@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/features/chart/ui/screens/extended_chart_screen.dart';
+import 'package:the_postraves_app/src/features/profile/ui/screen/following_screen.dart';
 import 'features/profile/ui/screen/modify_profile_screen.dart';
 import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 import 'features/chart/ui/screens/charts_screen.dart';
@@ -9,7 +11,6 @@ import 'features/search/ui/screens/search_screen.dart';
 import 'features/shows/ui/screens/shows_screen.dart';
 import 'features/timetable/dto/timetable_for_scene_dto.dart';
 import 'features/timetable/ui/screens/event_timetable_screen.dart';
-import 'features/wiki/state/event_cubit/event_cubit.dart';
 import 'models/dto/image_dimensions.dart';
 import 'features/wiki/ui/screens/artist_screen.dart';
 import 'features/wiki/ui/screens/event_screen.dart';
@@ -19,6 +20,7 @@ import 'features/wiki/ui/screens/wiki_share_screen.dart';
 import 'models/dto/wiki_data_dto.dart';
 import 'models/enum/wiki_rating_type.dart';
 import 'models/geo/country.dart';
+import 'models/interfaces/data_interfaces.dart';
 
 class MyNavigationRoutes {
   static const String shows = 'shows';
@@ -38,8 +40,8 @@ class MyNavigationRoutes {
   static const String user = '/user';
   static const String modifyUser = '/modifyUser';
   static const String signInWithEmailLink = '/sign-in-with-email-link';
-  // static const String signInWithSms = '/sign-in-with-sms';
-  // static const String signInEnterSmsCode = '/sign-in-enter-sms-code';
+  static const String userFollowing = '/userFollowing';
+  static const String extendedChart = '/extendedChart';
 }
 
 class MyNavigator extends StatelessWidget {
@@ -100,7 +102,6 @@ class RouteGenerator {
                 eventId: args!['eventId'],
                 eventName: args['eventName'],
                 initialTimetable: args['timetableDto'],
-                eventBlocProvider: args['eventBlocProvider'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.artist) {
       return MaterialPageRoute(
@@ -144,6 +145,19 @@ class RouteGenerator {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => ModifyProfileScreen(),
+      );
+    } else if (routeSettings.name == MyNavigationRoutes.userFollowing) {
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const FollowingScreen(),
+      );
+    } else if (routeSettings.name == MyNavigationRoutes.extendedChart) {
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => ExtendedChartScreen(
+          chartTitle: args!['chartTitle'],
+          entities: args['entities'],
+        ),
       );
     } else {
       return _errorRoute();
@@ -239,19 +253,17 @@ class NavigatorFunctions {
     });
   }
 
-  static void pushTimetable(
-      {required BuildContext context,
-      required int eventId,
-      required String eventName,
-      required List<TimetableForSceneDto> timetableDto,
-      required EventCubit eventBlocProvider,
-      }) {
+  static void pushTimetable({
+    required BuildContext context,
+    required int eventId,
+    required String eventName,
+    required List<TimetableForSceneDto> timetableDto,
+  }) {
     Navigator.of(context)
         .pushNamed(MyNavigationRoutes.eventTimetable, arguments: {
       'eventId': eventId,
       'eventName': eventName,
       'timetableDto': timetableDto,
-      'eventBlocProvider': eventBlocProvider,
     });
   }
 
@@ -259,5 +271,18 @@ class NavigatorFunctions {
     BuildContext context,
   ) {
     Navigator.of(context).pushNamed(MyNavigationRoutes.modifyUser);
+  }
+
+  static void pushExtendedChart<T extends GeneralFollowableInterface>(
+      BuildContext context, String chartTitle, List<T> entities) {
+    Navigator.of(context)
+        .pushNamed(MyNavigationRoutes.extendedChart, arguments: {
+      'chartTitle': chartTitle,
+      'entities': entities,
+    });
+  }
+
+  static void pushBookmarks(BuildContext context) {
+    Navigator.of(context).pushNamed(MyNavigationRoutes.userFollowing);
   }
 }

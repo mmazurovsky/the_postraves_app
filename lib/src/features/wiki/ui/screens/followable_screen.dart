@@ -10,7 +10,7 @@ import '../../../../models/dto/wiki_data_dto.dart';
 import '../../../../models/fulls/artist_full.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
+import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/presentation/widgets/my_spacers.dart';
@@ -24,7 +24,7 @@ import '../../../../models/shorts/unity_short.dart';
 import '../../../../my_navigation.dart';
 import '../../state/artist_cubit/artist_cubit.dart';
 import '../widgets/column_of_custom_cards.dart';
-import '../widgets/short_event_card_item.dart';
+import '../../../../core/presentation/widgets/short_event_card_item.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../widgets/wiki_expandable_text_description.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';

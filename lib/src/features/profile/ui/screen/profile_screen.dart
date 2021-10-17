@@ -163,8 +163,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
         ),
         const MyBigSpacer(),
         MyElevatedButton(
-          //todo
-          onTap: () {},
+          onTap: () => NavigatorFunctions.pushBookmarks(context),
           leadingIcon: const Icon(
             Ionicons.bookmark,
             size: 18,
@@ -173,7 +172,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           distanceBetweenLeadingAndText: 7,
           buttonColor: MyColors.accent,
           mainAxisAlignment: MainAxisAlignment.center,
-          text: AppLocalizations.of(context)!.profileShowMyFollows,
+          text: AppLocalizations.of(context)!.profileShowMyFollowing,
           textStyle: MyTextStyles.buttonWithOppositeColor,
         ),
         SocialLinksList(

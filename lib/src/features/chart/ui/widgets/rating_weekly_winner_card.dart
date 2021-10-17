@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/utils/screen_size.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
+import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
@@ -109,7 +109,7 @@ class _RatingWeeklyWinnerCardState<T extends GeneralFollowableInterface>
                 decoration: const BoxDecoration(
                   color: MyColors.forEventCard,
                 ),
-                child: RatingEntityListItem<T>(
+                child: FollowableItem<T>(
                   showWeeklyFollowers: true,
                   entity: widget.entity,
                   startingWidget: null,

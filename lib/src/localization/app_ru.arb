@@ -68,10 +68,10 @@
     "wikiPlaceCoordinates": "Координаты",
     "wikiPlaceChooseMapToOpen": "Выберите карту",
     "wikiPlaceAddressCopied": "Адрес скопирован",
-    "profileShowMyFollows": "Показать мои закладки",
+    "profileShowMyFollowing": "Показать мои закладки",
     "profileCurrentCity": "Текущий город",
     "profileSignOut": "Выйти",
-    "profileStatisticsFollowsCount": "Закладок сохранено",
+    "profileStatisticsFollowingCount": "Закладок сохранено",
     "profileStatisticsEventsAttended": "Событий посещено",
     "profileStatisticsLocationsOpened": "Локаций открыто",
     "profileStatisticsDonations": "Донатов сделано",
@@ -129,5 +129,7 @@
     "writeToUs": "Написать нам",
     "signOut": "Выйти из профиля",
     "deleteProfile": "Удалить профиль",
-    "wikiDescriptionEmpty": "Описание пока отсутствует"
+    "wikiDescriptionEmpty": "Описание пока отсутствует",
+    "profileModification": "Изменить профиль",
+    "yourFollowing": "Ваши закладки"
 }

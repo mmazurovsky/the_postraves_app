@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
+import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
 import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
@@ -30,8 +30,8 @@ class FollowableListSection<T extends GeneralFollowableInterface>
               SectionTitle(sectionTitle: _title),
               const MySmallSpacer(),
               leadingWidget ?? Container(),
-              RatingEntityList(
-                entityList: _followables,
+              FollowableList(
+                followables: _followables,
                 onItemTap: (BuildContext context, T entity,
                         ImageDimensions? imageDimensions) =>
                     NavigatorFunctions.pushFollowable(

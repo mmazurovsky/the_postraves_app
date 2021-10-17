@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/my_assets.dart';
 import '../../../../core/utils/screen_size.dart';
 import '../../../../models/shorts/artist_short.dart';
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
+import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
 import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/utils/my_constants.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -66,7 +66,7 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
             (entry) {
               final index = entry.key;
               final artist = entry.value;
-              final artistWidget = RatingEntityListItem(
+              final artistWidget = FollowableItem(
                 horizontalPadding: MyConstants.horizontalPaddingOrMargin,
                 entity: artist,
                 onItemTap: (context, ArtistShort entity,

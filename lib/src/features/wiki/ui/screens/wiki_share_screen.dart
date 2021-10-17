@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:screen_brightness/screen_brightness.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/app_bar_title.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/entity_presentation/unified_followable_with_type_data.dart';
 import '../../../../core/utils/screen_size.dart';
 import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_data.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
@@ -30,10 +31,9 @@ class WikiShareScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MySimpleAppBar(
-        leading: AppBarBackButton(),
-        title: Text(
-          AppLocalizations.of(context)!.share,
-          style: MyTextStyles.appBarTitle,
+        leading: const AppBarBackButton(),
+        title: AppBarTitle(
+          title: AppLocalizations.of(context)!.share,
         ),
       ),
       backgroundColor: MyColors.screenBackground,
@@ -62,7 +62,7 @@ class WikiShareScreen extends StatelessWidget {
                       width: 18,
                     ),
                     Flexible(
-                      child: FollowableData(
+                      child: UnifiedFollowableWithTypeData(
                         followable: wikiData,
                       ),
                     ),

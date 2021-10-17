@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../state/cubit/search_cubit.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
+import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
 import '../../../../models/dto/image_dimensions.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
@@ -30,8 +30,8 @@ class NewSearchResultsBlock<T extends GeneralFollowableInterface>
           sectionTitle: resultsName,
         ),
         SizedBox(height: 10),
-        RatingEntityList<T>(
-          entityList: results,
+        FollowableList<T>(
+          followables: results,
           onItemTap: <T extends GeneralFollowableInterface>(context, T entity,
               ImageDimensions? imageDimensions) {
             NavigatorFunctions.pushFollowable(

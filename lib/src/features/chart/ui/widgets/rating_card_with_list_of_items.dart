@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
+import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
 import '../../../../models/dto/image_dimensions.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../core/utils/my_constants.dart';
@@ -72,7 +72,7 @@ class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
                   ...entities.take(5).map(
                     (entity) {
                       modelCount += 1;
-                      return RatingEntityListItem<T>(
+                      return FollowableItem<T>(
                         entity: entity,
                         horizontalPadding: 0,
                         showWeeklyFollowers: showWeeklyFollowers,

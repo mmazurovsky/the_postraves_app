@@ -68,10 +68,10 @@
     "wikiPlaceCoordinates": "Coordinates",
     "wikiPlaceChooseMapToOpen": "Choose map",
     "wikiPlaceAddressCopied": "Address copied",
-    "profileShowMyFollows": "Show my follows",
+    "profileShowMyFollowing": "Show my following",
     "profileCurrentCity": "Current city",
     "profileSignOut": "Sign out",
-    "profileStatisticsFollowsCount": "Followed",
+    "profileStatisticsFollowingCount": "Followed",
     "profileStatisticsEventsAttended": "Events attended",
     "profileStatisticsLocationsOpened": "Locations opened",
     "profileStatisticsDonations": "Donations made",
@@ -129,5 +129,7 @@
     "writeToUs": "Write to us",
     "signOut": "Sign out",
     "deleteProfile": "Delete profile",
-    "wikiDescriptionEmpty": "Description has not been added yet"
+    "wikiDescriptionEmpty": "Description has not been added yet",
+    "profileModification": "Profile modification",
+    "yourFollowing": "Your following"
 }

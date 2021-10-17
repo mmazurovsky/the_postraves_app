@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/presentation/widgets/section_title.dart';
-import 'short_event_card_item.dart';
+import '../../../../core/presentation/widgets/short_event_card_item.dart';
 import '../../../../models/shorts/event_short.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

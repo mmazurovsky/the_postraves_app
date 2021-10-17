@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../shows/ui/widgets/event_card_details.dart';
-import '../../../../models/enum/event_status.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../../core/utils/my_colors.dart';
-import 'darkened_image_in_container.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/widget_text_row.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../my_navigation.dart';
-import '../../../../core/utils/formatting_utils.dart';
+import '../../../features/shows/ui/widgets/event_card_details.dart';
+import '../../../models/enum/event_status.dart';
+import '../../../models/shorts/event_short.dart';
+import '../../utils/my_constants.dart';
+import '../../../models/dto/image_dimensions.dart';
+import '../../utils/my_colors.dart';
+import '../../../features/wiki/ui/widgets/darkened_image_in_container.dart';
+import '../../utils/my_text_styles.dart';
+import 'widget_text_row.dart';
+import 'section_divider.dart';
+import '../../../my_navigation.dart';
+import '../../utils/formatting_utils.dart';
 
-import 'event_status_indicator.dart';
+import '../../../features/wiki/ui/widgets/event_status_indicator.dart';
 
 class ShortEventCardItem extends StatelessWidget {
   const ShortEventCardItem(this._event, [Key? key]) : super(key: key);

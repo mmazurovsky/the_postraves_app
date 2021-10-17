@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/app_bar_title.dart';
+import 'package:the_postraves_app/src/features/profile/state/profile_cubit/profile_cubit.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
@@ -12,13 +14,13 @@ import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
 import '../../../../core/utils/my_assets.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
-import '../../state/cubit/profile_cubit.dart';
 import '../widgets/my_text_field.dart';
 import '../widgets/nickname_text_field.dart';
 import '../widgets/profile_image_chooser.dart';
 import '../../../../models/user/user_profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../models/user/user_profile_to_write.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ModifyProfileScreen extends StatefulWidget {
   // final Image? _profileImage;
@@ -103,12 +105,10 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.screenBackground,
-      appBar: const MySimpleAppBar(
-        leading: AppBarBackButton(),
-        title: Text(
-          'Profile modification', //todo
-          style: MyTextStyles.appBarTitle,
-          overflow: TextOverflow.fade,
+      appBar: MySimpleAppBar(
+        leading: const AppBarBackButton(),
+        title: AppBarTitle(
+          title: AppLocalizations.of(context)!.profileModification,
         ),
       ),
       body: SafeArea(

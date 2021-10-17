@@ -29,7 +29,7 @@ import '../../../../core/utils/my_constants.dart';
 import '../widgets/address_section.dart';
 import '../widgets/map_selector.dart';
 import '../widgets/column_of_custom_cards.dart';
-import '../widgets/short_event_card_item.dart';
+import '../../../../core/presentation/widgets/short_event_card_item.dart';
 import 'followable_screen.dart';
 import 'wiki_canvas.dart';
 import '../widgets/slide_animation_wrapper.dart';

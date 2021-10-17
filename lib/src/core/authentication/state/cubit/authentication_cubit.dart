@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../repository/firebase_auth_repository.dart';
-import '../../../../features/profile/repository/user_profile_repository_impl.dart';
+import '../../../../features/profile/repository/user_profile_repository.dart';
 import '../../../../models/user/user_profile.dart';
 
 part 'authentication_state.dart';

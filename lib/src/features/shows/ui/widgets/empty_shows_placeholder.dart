@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/placeholder_container.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/provider/current_city_provider.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -21,52 +22,39 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _currentCity = Provider.of<CurrentCityProvider>(context).currentCity!; // todo risky !
+    _currentCity =
+        Provider.of<CurrentCityProvider>(context).currentCity!; // todo risky !
   }
 
   @override
   Widget build(BuildContext context) {
-    return MyHorizontalPadding(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: MyConstants.spaceFromTop),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: MyColors.forEventCard,
+    return PlaceholderContainer(
+      child: RichText(
+        textAlign: TextAlign.start,
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text:
+                  '${AppLocalizations.of(context)!.emptyShowsStartText} ${_currentCity.localName}.\n\n${AppLocalizations.of(context)!.emptyShowsEndText}',
+              style: MyTextStyles.body,
             ),
-            alignment: Alignment.center,
-            child: RichText(
-              textAlign: TextAlign.start,
-              text: TextSpan(
-                children: [
-                  TextSpan(
+            WidgetSpan(
+              baseline: TextBaseline.alphabetic,
+              alignment: PlaceholderAlignment.baseline,
+              child: InkWell(
+                //todo
+                onTap: () {},
+                child: RichText(
+                  text: TextSpan(
                     text:
-                        '${AppLocalizations.of(context)!.emptyShowsStartText} ${_currentCity.localName}.\n\n${AppLocalizations.of(context)!.emptyShowsEndText}',
-                    style: MyTextStyles.body,
+                        ' ${AppLocalizations.of(context)!.emptyShowsLinkText}',
+                    style: MyTextStyles.bodyWithAccentColor,
                   ),
-                  WidgetSpan(
-                    baseline: TextBaseline.alphabetic,
-                    alignment: PlaceholderAlignment.baseline,
-                    child: InkWell(
-                      //todo
-                      onTap: () {},
-                      child: RichText(
-                        text: TextSpan(
-                          text:
-                              ' ${AppLocalizations.of(context)!.emptyShowsLinkText}',
-                          style: MyTextStyles.bodyWithAccentColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

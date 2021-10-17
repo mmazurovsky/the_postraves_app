@@ -3,17 +3,16 @@ import 'package:ionicons/ionicons.dart';
 import '../../../utils/my_colors.dart';
 
 import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../utils/my_assets.dart';
 import '../../../utils/my_constants.dart';
 import '../../../utils/my_text_styles.dart';
 
-class RatingEntityData<T extends GeneralFollowableInterface>
+class FollowableItemData<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final T entity;
   final bool showWeeklyFollowers;
   final String? hintText;
 
-  const RatingEntityData({
+  const FollowableItemData({
     Key? key,
     required this.entity,
     this.showWeeklyFollowers = false,

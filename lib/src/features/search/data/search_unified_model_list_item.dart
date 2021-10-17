@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../models/related_to_search/unified_search_model.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import 'followable_data.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../utils/my_colors.dart';
-import '../../../utils/my_constants.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/my_cached_network_image.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/my_rating_entity_vertical_padding.dart';
+import 'package:the_postraves_app/src/core/utils/my_colors.dart';
+import 'package:the_postraves_app/src/core/utils/my_constants.dart';
+import 'package:the_postraves_app/src/models/related_to_search/unified_search_model.dart';
+import '../../../core/presentation/widgets/entity_presentation/unified_followable_with_type_data.dart';
 
-import '../my_cached_network_image.dart';
-import '../my_rating_entity_vertical_padding.dart';
-
-class FollowableListItem extends StatefulWidget {
+class SearchUnifiedModelListItem extends StatefulWidget {
   final UnifiedSearchModel followable;
   final double horizontalPadding;
   final Function? onIconTap;
   final Function onItemTap;
   final Widget? startingWidget;
 
-  const FollowableListItem({
+  const SearchUnifiedModelListItem({
     Key? key,
     required this.followable,
     this.startingWidget,
@@ -27,10 +24,10 @@ class FollowableListItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _FollowableListItemState createState() => _FollowableListItemState();
+  _SearchUnifiedModelListItemState createState() => _SearchUnifiedModelListItemState();
 }
 
-class _FollowableListItemState extends State<FollowableListItem> {
+class _SearchUnifiedModelListItemState extends State<SearchUnifiedModelListItem> {
   late MyCachedNetworkImage _image;
 
   @override
@@ -73,7 +70,7 @@ class _FollowableListItemState extends State<FollowableListItem> {
                 width: 18,
               ),
               Expanded(
-                child: FollowableData(
+                child: UnifiedFollowableWithTypeData(
                   followable: widget.followable.wikiDataDto,
                 ),
               ),

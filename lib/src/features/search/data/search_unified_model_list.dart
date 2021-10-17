@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/models/related_to_search/unified_search_model.dart';
+import 'search_unified_model_list_item.dart';
 
-import '../../../../models/interfaces/data_interfaces.dart';
-import 'rating_entity_list_item.dart';
-
-class RatingEntityList<T extends GeneralFollowableInterface> extends StatelessWidget {
-  final List<T> entityList;
+class SearchUnifiedModelList extends StatelessWidget {
+  final List<UnifiedSearchModel> followables;
   final Function? onIconTap;
   final Function onItemTap;
   final Widget? startingWidgetForItems;
 
-  const RatingEntityList({
+  const SearchUnifiedModelList({
     Key? key,
     this.startingWidgetForItems,
-    required this.entityList,
+    required this.followables,
     required this.onItemTap,
     this.onIconTap,
   }) : super(key: key);
@@ -20,11 +19,11 @@ class RatingEntityList<T extends GeneralFollowableInterface> extends StatelessWi
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: entityList.map((entity) {
-        return RatingEntityListItem<T>(
-          key: ValueKey(entity.id),
+      children: followables.map((entity) {
+        return SearchUnifiedModelListItem(
+          key: ValueKey(entity.wikiDataDto.id),
           startingWidget: startingWidgetForItems,
-          entity: entity,
+          followable: entity,
           onItemTap: onItemTap,
           onIconTap: onIconTap,
         );

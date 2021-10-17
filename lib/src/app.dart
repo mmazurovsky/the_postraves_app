@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/features/profile/state/following_cubit/following_cubit.dart';
+import 'features/profile/state/profile_cubit/profile_cubit.dart';
 import 'features/timetable/timetable_cubit/timetable_cubit.dart';
 import 'core/provider/country_list_provider.dart';
 import 'cities_cleaner.dart';
@@ -10,15 +12,9 @@ import 'core/provider/current_city_provider.dart';
 import 'core/repository/country_repository.dart';
 import 'core/utils/screen_size.dart';
 import 'features/chart/state/cubit/charts_cubit.dart';
-import 'features/profile/state/cubit/profile_cubit.dart';
 import 'features/search/state/cubit/search_cubit.dart';
 import 'features/shows/state/shows_cubit/shows_cubit.dart';
 import 'features/shows/state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
-import 'features/wiki/state/artist_cubit/artist_cubit.dart';
-import 'features/wiki/state/event_cubit/event_cubit.dart';
-import 'features/wiki/state/follow_cubit/follow_cubit.dart';
-import 'features/wiki/state/place_cubit/place_cubit.dart';
-import 'features/wiki/state/unity_cubit/unity_cubit.dart';
 import 'initial_scaffold_resolver.dart';
 import 'package:provider/provider.dart';
 import 'core/configs/my_refresh_configuration.dart';
@@ -70,6 +66,9 @@ class AppState extends State<App> with WidgetsBindingObserver {
         ),
         BlocProvider(
           create: (context) => serviceLocator<TimetableCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<FollowingCubit>(),
         ),
       ],
       child: MultiProvider(

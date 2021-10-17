@@ -5,43 +5,30 @@ import '../../state/follow_cubit/follow_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
-import '../widgets/wiki_subtitle.dart';
-import '../widgets/wiki_title.dart';
 import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../models/fulls/artist_full.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../dependency_injection.dart';
 import '../../../timetable/dto/timetable_for_scene_dto.dart';
 import '../../state/event_cubit/event_cubit.dart';
 import '../../../../models/enum/event_status.dart';
-import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../models/fulls/event_full.dart';
 import '../../../../models/shorts/artist_short.dart';
-import '../../../../models/shorts/place_short.dart';
 import '../../../../models/shorts/unity_short.dart';
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list.dart';
-import '../../../../core/presentation/widgets/entity_presentation/rating_entity_list_item.dart';
 import '../../../../core/presentation/widgets/details_horizontal_scrollable_list.dart';
 import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button_without_padding.dart';
 import '../../../../core/service/open_link_service.dart';
-import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import '../widgets/event_status_indicator.dart';
 import 'followable_screen.dart';
-import 'wiki_canvas.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/utils/my_constants.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
 import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/utils/formatting_utils.dart';
 import '../widgets/button_with_icons.dart';
 import '../widgets/wiki_squared_outlined_bookmark_button.dart';
-import '../widgets/wiki_expandable_text_description.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventScreen extends StatelessWidget {
@@ -262,7 +249,6 @@ class _EventContentState extends State<_EventContent> {
                       eventId: widget.event.id,
                       eventName: widget.event.name,
                       timetableDto: widget.timetable,
-                      eventBlocProvider: widget.eventBlocProvider
                     ),
                     verticalPadding: MyConstants.ratingEntityVerticalPadding,
                   ),

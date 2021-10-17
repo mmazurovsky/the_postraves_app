@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
+import 'package:the_postraves_app/src/features/profile/state/profile_cubit/profile_cubit.dart';
 import '../../../../core/utils/my_colors.dart';
-import '../../state/cubit/profile_cubit.dart';
 
 import 'my_text_field.dart';
 

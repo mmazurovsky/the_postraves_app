@@ -3,7 +3,7 @@ import 'screen_size.dart';
 
 class MyConstants {
   static const double endingOfScreenOrSpaceBetweenElements = 20;
-  static const double spaceFromTop = 10;
+  static const double spaceFromTop = 20;
   static const double horizontalPaddingOrMargin = 15;
   static const double ratingEntityVerticalPadding = 8;
   static const double diamondWidth = 17;

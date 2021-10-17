@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../repository/firebase_image_repository_impl.dart';
-import '../../repository/user_profile_repository_impl.dart';
+import '../../repository/user_profile_repository.dart';
 import '../../../../models/geo/city.dart';
 import '../../../../models/user/user_profile_to_write.dart';
 

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/app_bar_title.dart';
 import '../../timetable_cubit/timetable_cubit.dart';
 import '../../dto/timetable_for_scene_dto.dart';
-import '../../../wiki/state/event_cubit/event_cubit.dart';
 import '../../../../core/presentation/widgets/loading_container.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/utils/formatting_utils.dart';
-import '../../../../core/utils/my_constants.dart';
 import '../widgets/scene_card_for_timetable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -21,13 +20,11 @@ class EventTimetableScreen extends StatefulWidget {
     required this.eventId,
     required this.eventName,
     required this.initialTimetable,
-    required this.eventBlocProvider,
   }) : super(key: key);
 
   final int eventId;
   final String eventName;
   final List<TimetableForSceneDto> initialTimetable;
-  final EventCubit eventBlocProvider; //todo remove
 
   @override
   _EventTimetableScreenState createState() => _EventTimetableScreenState();
@@ -45,8 +42,8 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
         .initTimetable(widget.initialTimetable);
     _tabController = TabController(
         vsync: this, length: widget.initialTimetable.length, initialIndex: 0);
-    _refreshControllers =
-        List.generate(widget.initialTimetable.length, (i) => RefreshController());
+    _refreshControllers = List.generate(
+        widget.initialTimetable.length, (i) => RefreshController());
   }
 
   void _onRefresh() {
@@ -70,26 +67,12 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
           ),
         ),
         centerTitle: true,
-        title: SizedBox(
-          width: MyConstants.appBarTitleWidth(context),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                widget.eventName,
-                style: MyTextStyles.appBarTitle,
-                overflow: TextOverflow.fade,
-              ),
-              Text(
-                AppLocalizations.of(context)!.timetableTitle,
-                style: MyTextStyles.appBarSubtitle,
-                overflow: TextOverflow.fade,
-              ),
-            ],
-          ),
+        title: AppBarTitle(
+          title: widget.eventName,
+          subtitle: AppLocalizations.of(context)!.timetableTitle,
         ),
         bottom: PreferredSize(
-          preferredSize: Size(double.infinity, 5),
+          preferredSize: const Size(double.infinity, 5),
           child: BlocListener<TimetableCubit, TimetableState>(
             listener: (context, state) {
               if (state is TimetableLoadedState) {

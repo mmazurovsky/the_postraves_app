@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../../models/related_to_search/unified_search_model.dart';
-import '../../../../models/enum/wiki_rating_type.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../utils/my_text_styles.dart';
+import 'package:the_postraves_app/src/core/utils/my_text_styles.dart';
+import 'package:the_postraves_app/src/models/enum/wiki_rating_type.dart';
+import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
 
-class FollowableData<T extends FollowableInterfaceWithType> extends StatelessWidget {
+class UnifiedFollowableWithTypeData<T extends FollowableInterfaceWithType> extends StatelessWidget {
   final T followable;
 
-  const FollowableData({
+  const UnifiedFollowableWithTypeData({
     Key? key,
     required this.followable,
   }) : super(key: key);

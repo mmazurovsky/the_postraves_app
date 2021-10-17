@@ -3,6 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:the_postraves_app/src/features/profile/data_sources/user_following_data_source.dart';
+import 'package:the_postraves_app/src/features/profile/state/following_cubit/following_cubit.dart';
+import 'features/profile/repository/user_following_repository.dart';
+import 'features/profile/state/profile_cubit/profile_cubit.dart';
 import 'features/timetable/timetable_cubit/timetable_cubit.dart';
 import 'features/wiki/data_sources/artist_remote_data_source.dart';
 import 'features/wiki/data_sources/event_remote_data_source.dart';
@@ -19,7 +23,6 @@ import 'core/data_sources/country_remote_data_source.dart';
 import 'core/repository/country_repository.dart';
 import 'core/utils/followable_client_helper.dart';
 import 'features/chart/state/cubit/charts_cubit.dart';
-import 'features/profile/state/cubit/profile_cubit.dart';
 import 'features/search/state/cubit/search_cubit.dart';
 import 'features/shows/state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
 import 'features/wiki/state/artist_cubit/artist_cubit.dart';
@@ -39,7 +42,7 @@ import 'features/chart/data_sources/charts_remote_data_source.dart';
 import 'features/chart/repository/charts_repository.dart';
 import 'features/profile/data_sources/user_profile_data_source.dart';
 import 'features/profile/repository/firebase_image_repository_impl.dart';
-import 'features/profile/repository/user_profile_repository_impl.dart';
+import 'features/profile/repository/user_profile_repository.dart';
 import 'features/search/data_sources/search_local_data_source.dart';
 import 'features/search/data_sources/search_remote_data_source.dart';
 import 'features/search/repository/aggregated_search_repository_impl.dart';
@@ -67,7 +70,6 @@ final serviceLocator = GetIt.instance;
 
 void setupServiceLocatorInjection() async {
   //* Core
-
   serviceLocator.registerLazySingleton<CityRepository>(() => CityRepositoryImpl(
         cityRemoteDataSource: serviceLocator(),
         cityLocalDataSource: serviceLocator(),
@@ -127,7 +129,6 @@ void setupServiceLocatorInjection() async {
           serviceLocator(), serviceLocator()));
 
   //* Firebase
-
   serviceLocator
       .registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
@@ -167,6 +168,67 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerLazySingleton<FirebaseImageRepository>(
       () => FirebaseImageRepositoryImpl());
+
+  serviceLocator.registerLazySingleton(
+    () => FollowingCubit(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingRepository<EventShort>>(
+    () => UserFollowingRepositoryImpl<EventShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingRepository<ArtistShort>>(
+    () => UserFollowingRepositoryImpl<ArtistShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingRepository<PlaceShort>>(
+    () => UserFollowingRepositoryImpl<PlaceShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingRepository<UnityShort>>(
+    () => UserFollowingRepositoryImpl<UnityShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingDataSource<EventShort>>(
+    () => UserFollowingDataSourceImpl<EventShort>(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingDataSource<ArtistShort>>(
+    () => UserFollowingDataSourceImpl<ArtistShort>(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingDataSource<PlaceShort>>(
+    () => UserFollowingDataSourceImpl<PlaceShort>(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingDataSource<UnityShort>>(
+    () => UserFollowingDataSourceImpl<UnityShort>(
+      serviceLocator(),
+    ),
+  );
 
   //* Features - Shows
   serviceLocator.registerLazySingleton(() => ShowsCubit(
@@ -255,7 +317,6 @@ void setupServiceLocatorInjection() async {
           serviceLocator(), serviceLocator()));
 
   //* Features - Wiki
-
   serviceLocator.registerLazySingleton<RemoteRequestWrapper<void>>(
       () => RemoteRequestWrapperImpl<void>(serviceLocator(), serviceLocator()));
 
@@ -376,12 +437,10 @@ void setupServiceLocatorInjection() async {
       RemoteRequestWrapperImpl<UnityFull>(serviceLocator(), serviceLocator()));
 
   //* Features - Timetable
-
   serviceLocator
       .registerLazySingleton<RemoteRequestWrapper<List<TimetableForScene>>>(
           () => RemoteRequestWrapperImpl<List<TimetableForScene>>(
               serviceLocator(), serviceLocator()));
 
-  serviceLocator
-      .registerFactory(() => TimetableCubit(serviceLocator()));
+  serviceLocator.registerFactory(() => TimetableCubit(serviceLocator()));
 }
