@@ -15,7 +15,7 @@ class EventStatusIndicator extends StatelessWidget {
       indicator = Container(
         height: size,
         width: size,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: MyColors.main,
           shape: BoxShape.circle,
         ),

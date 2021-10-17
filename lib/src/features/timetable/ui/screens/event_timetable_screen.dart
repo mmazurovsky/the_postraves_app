@@ -100,15 +100,15 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
         ),
       ),
       body: SafeArea(
-        child: BlocConsumer<TimetableCubit, TimetableState>(
-          listener: (context, state) {
-            if (state is TimetableRefreshingState) {
-            } else if (state is TimetableLoadedState) {
-              for (var element in _refreshControllers) {
-                element.refreshCompleted();
-              }
-            }
-          },
+        child: BlocBuilder<TimetableCubit, TimetableState>(
+          // listener: (context, state) {
+          //   if (state is TimetableRefreshingState) {
+          //   } else if (state is TimetableLoadedState) {
+              // for (var element in _refreshControllers) {
+              //   element.refreshCompleted();
+              // }
+          //   }
+          // },
           buildWhen: (previousState, currentState) =>
               currentState is! TimetableRefreshingState,
           builder: (context, state) {

@@ -16,25 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ChartsStateTearOff {
   const _$ChartsStateTearOff();
 
-  _Initial initial() {
-    return _Initial();
+  ChartsStateLoading loading() {
+    return const ChartsStateLoading();
   }
 
-  _Loading loading() {
-    return const _Loading();
+  ChartsStateRefreshing refreshing() {
+    return const ChartsStateRefreshing();
   }
 
-  _Loaded loaded(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
-      List<ArtistShort>? overallArtists) {
-    return _Loaded(
+  ChartsStateLoaded loaded(ArtistShort? bestArtist,
+      List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists) {
+    return ChartsStateLoaded(
       bestArtist,
       weeklyArtists,
       overallArtists,
     );
   }
 
-  _Error error(String error) {
-    return _Error(
+  ChartsStateError error(String error) {
+    return ChartsStateError(
       error,
     );
   }
@@ -47,8 +47,8 @@ const $ChartsState = _$ChartsStateTearOff();
 mixin _$ChartsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
             List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
         loaded,
@@ -57,8 +57,8 @@ mixin _$ChartsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? refreshing,
     TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
             List<ArtistShort>? overallArtists)?
         loaded,
@@ -68,18 +68,18 @@ mixin _$ChartsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(ChartsStateLoading value) loading,
+    required TResult Function(ChartsStateRefreshing value) refreshing,
+    required TResult Function(ChartsStateLoaded value) loaded,
+    required TResult Function(ChartsStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(ChartsStateLoading value)? loading,
+    TResult Function(ChartsStateRefreshing value)? refreshing,
+    TResult Function(ChartsStateLoaded value)? loaded,
+    TResult Function(ChartsStateError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -102,120 +102,28 @@ class _$ChartsStateCopyWithImpl<$Res> implements $ChartsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
+abstract class $ChartsStateLoadingCopyWith<$Res> {
+  factory $ChartsStateLoadingCopyWith(
+          ChartsStateLoading value, $Res Function(ChartsStateLoading) then) =
+      _$ChartsStateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$ChartsStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
+class _$ChartsStateLoadingCopyWithImpl<$Res>
+    extends _$ChartsStateCopyWithImpl<$Res>
+    implements $ChartsStateLoadingCopyWith<$Res> {
+  _$ChartsStateLoadingCopyWithImpl(
+      ChartsStateLoading _value, $Res Function(ChartsStateLoading) _then)
+      : super(_value, (v) => _then(v as ChartsStateLoading));
 
   @override
-  _Initial get _value => super._value as _Initial;
-}
-
-/// @nodoc
-
-class _$_Initial implements _Initial {
-  _$_Initial();
-
-  @override
-  String toString() {
-    return 'ChartsState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(ArtistShort? bestArtist,
-            List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
-        loaded,
-    required TResult Function(String error) error,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
-            List<ArtistShort>? overallArtists)?
-        loaded,
-    TResult Function(String error)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements ChartsState {
-  factory _Initial() = _$_Initial;
-}
-
-/// @nodoc
-abstract class _$LoadingCopyWith<$Res> {
-  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
-      __$LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$ChartsStateCopyWithImpl<$Res>
-    implements _$LoadingCopyWith<$Res> {
-  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
-      : super(_value, (v) => _then(v as _Loading));
-
-  @override
-  _Loading get _value => super._value as _Loading;
+  ChartsStateLoading get _value => super._value as ChartsStateLoading;
 }
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$ChartsStateLoading implements ChartsStateLoading {
+  const _$ChartsStateLoading();
 
   @override
   String toString() {
@@ -224,7 +132,7 @@ class _$_Loading implements _Loading {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Loading);
+    return identical(this, other) || (other is ChartsStateLoading);
   }
 
   @override
@@ -233,8 +141,8 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
             List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
         loaded,
@@ -246,8 +154,8 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? refreshing,
     TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
             List<ArtistShort>? overallArtists)?
         loaded,
@@ -263,10 +171,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(ChartsStateLoading value) loading,
+    required TResult Function(ChartsStateRefreshing value) refreshing,
+    required TResult Function(ChartsStateLoaded value) loaded,
+    required TResult Function(ChartsStateError value) error,
   }) {
     return loading(this);
   }
@@ -274,10 +182,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(ChartsStateLoading value)? loading,
+    TResult Function(ChartsStateRefreshing value)? refreshing,
+    TResult Function(ChartsStateLoaded value)? loaded,
+    TResult Function(ChartsStateError value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -287,14 +195,113 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements ChartsState {
-  const factory _Loading() = _$_Loading;
+abstract class ChartsStateLoading implements ChartsState {
+  const factory ChartsStateLoading() = _$ChartsStateLoading;
 }
 
 /// @nodoc
-abstract class _$LoadedCopyWith<$Res> {
-  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
-      __$LoadedCopyWithImpl<$Res>;
+abstract class $ChartsStateRefreshingCopyWith<$Res> {
+  factory $ChartsStateRefreshingCopyWith(ChartsStateRefreshing value,
+          $Res Function(ChartsStateRefreshing) then) =
+      _$ChartsStateRefreshingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ChartsStateRefreshingCopyWithImpl<$Res>
+    extends _$ChartsStateCopyWithImpl<$Res>
+    implements $ChartsStateRefreshingCopyWith<$Res> {
+  _$ChartsStateRefreshingCopyWithImpl(
+      ChartsStateRefreshing _value, $Res Function(ChartsStateRefreshing) _then)
+      : super(_value, (v) => _then(v as ChartsStateRefreshing));
+
+  @override
+  ChartsStateRefreshing get _value => super._value as ChartsStateRefreshing;
+}
+
+/// @nodoc
+
+class _$ChartsStateRefreshing implements ChartsStateRefreshing {
+  const _$ChartsStateRefreshing();
+
+  @override
+  String toString() {
+    return 'ChartsState.refreshing()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is ChartsStateRefreshing);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() refreshing,
+    required TResult Function(ArtistShort? bestArtist,
+            List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
+        loaded,
+    required TResult Function(String error) error,
+  }) {
+    return refreshing();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? refreshing,
+    TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
+            List<ArtistShort>? overallArtists)?
+        loaded,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (refreshing != null) {
+      return refreshing();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ChartsStateLoading value) loading,
+    required TResult Function(ChartsStateRefreshing value) refreshing,
+    required TResult Function(ChartsStateLoaded value) loaded,
+    required TResult Function(ChartsStateError value) error,
+  }) {
+    return refreshing(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ChartsStateLoading value)? loading,
+    TResult Function(ChartsStateRefreshing value)? refreshing,
+    TResult Function(ChartsStateLoaded value)? loaded,
+    TResult Function(ChartsStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (refreshing != null) {
+      return refreshing(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChartsStateRefreshing implements ChartsState {
+  const factory ChartsStateRefreshing() = _$ChartsStateRefreshing;
+}
+
+/// @nodoc
+abstract class $ChartsStateLoadedCopyWith<$Res> {
+  factory $ChartsStateLoadedCopyWith(
+          ChartsStateLoaded value, $Res Function(ChartsStateLoaded) then) =
+      _$ChartsStateLoadedCopyWithImpl<$Res>;
   $Res call(
       {ArtistShort? bestArtist,
       List<ArtistShort>? weeklyArtists,
@@ -304,13 +311,15 @@ abstract class _$LoadedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$ChartsStateCopyWithImpl<$Res>
-    implements _$LoadedCopyWith<$Res> {
-  __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
-      : super(_value, (v) => _then(v as _Loaded));
+class _$ChartsStateLoadedCopyWithImpl<$Res>
+    extends _$ChartsStateCopyWithImpl<$Res>
+    implements $ChartsStateLoadedCopyWith<$Res> {
+  _$ChartsStateLoadedCopyWithImpl(
+      ChartsStateLoaded _value, $Res Function(ChartsStateLoaded) _then)
+      : super(_value, (v) => _then(v as ChartsStateLoaded));
 
   @override
-  _Loaded get _value => super._value as _Loaded;
+  ChartsStateLoaded get _value => super._value as ChartsStateLoaded;
 
   @override
   $Res call({
@@ -318,7 +327,7 @@ class __$LoadedCopyWithImpl<$Res> extends _$ChartsStateCopyWithImpl<$Res>
     Object? weeklyArtists = freezed,
     Object? overallArtists = freezed,
   }) {
-    return _then(_Loaded(
+    return _then(ChartsStateLoaded(
       bestArtist == freezed
           ? _value.bestArtist
           : bestArtist // ignore: cast_nullable_to_non_nullable
@@ -348,8 +357,9 @@ class __$LoadedCopyWithImpl<$Res> extends _$ChartsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.bestArtist, this.weeklyArtists, this.overallArtists);
+class _$ChartsStateLoaded implements ChartsStateLoaded {
+  const _$ChartsStateLoaded(
+      this.bestArtist, this.weeklyArtists, this.overallArtists);
 
   @override
   final ArtistShort? bestArtist;
@@ -366,7 +376,7 @@ class _$_Loaded implements _Loaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Loaded &&
+        (other is ChartsStateLoaded &&
             (identical(other.bestArtist, bestArtist) ||
                 const DeepCollectionEquality()
                     .equals(other.bestArtist, bestArtist)) &&
@@ -387,14 +397,14 @@ class _$_Loaded implements _Loaded {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadedCopyWith<_Loaded> get copyWith =>
-      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+  $ChartsStateLoadedCopyWith<ChartsStateLoaded> get copyWith =>
+      _$ChartsStateLoadedCopyWithImpl<ChartsStateLoaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
             List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
         loaded,
@@ -406,8 +416,8 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? refreshing,
     TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
             List<ArtistShort>? overallArtists)?
         loaded,
@@ -423,10 +433,10 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(ChartsStateLoading value) loading,
+    required TResult Function(ChartsStateRefreshing value) refreshing,
+    required TResult Function(ChartsStateLoaded value) loaded,
+    required TResult Function(ChartsStateError value) error,
   }) {
     return loaded(this);
   }
@@ -434,10 +444,10 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(ChartsStateLoading value)? loading,
+    TResult Function(ChartsStateRefreshing value)? refreshing,
+    TResult Function(ChartsStateLoaded value)? loaded,
+    TResult Function(ChartsStateError value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -447,40 +457,44 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements ChartsState {
-  const factory _Loaded(
+abstract class ChartsStateLoaded implements ChartsState {
+  const factory ChartsStateLoaded(
       ArtistShort? bestArtist,
       List<ArtistShort>? weeklyArtists,
-      List<ArtistShort>? overallArtists) = _$_Loaded;
+      List<ArtistShort>? overallArtists) = _$ChartsStateLoaded;
 
   ArtistShort? get bestArtist => throw _privateConstructorUsedError;
   List<ArtistShort>? get weeklyArtists => throw _privateConstructorUsedError;
   List<ArtistShort>? get overallArtists => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+  $ChartsStateLoadedCopyWith<ChartsStateLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ErrorCopyWith<$Res> {
-  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
-      __$ErrorCopyWithImpl<$Res>;
+abstract class $ChartsStateErrorCopyWith<$Res> {
+  factory $ChartsStateErrorCopyWith(
+          ChartsStateError value, $Res Function(ChartsStateError) then) =
+      _$ChartsStateErrorCopyWithImpl<$Res>;
   $Res call({String error});
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$ChartsStateCopyWithImpl<$Res>
-    implements _$ErrorCopyWith<$Res> {
-  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
-      : super(_value, (v) => _then(v as _Error));
+class _$ChartsStateErrorCopyWithImpl<$Res>
+    extends _$ChartsStateCopyWithImpl<$Res>
+    implements $ChartsStateErrorCopyWith<$Res> {
+  _$ChartsStateErrorCopyWithImpl(
+      ChartsStateError _value, $Res Function(ChartsStateError) _then)
+      : super(_value, (v) => _then(v as ChartsStateError));
 
   @override
-  _Error get _value => super._value as _Error;
+  ChartsStateError get _value => super._value as ChartsStateError;
 
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_Error(
+    return _then(ChartsStateError(
       error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -491,8 +505,8 @@ class __$ErrorCopyWithImpl<$Res> extends _$ChartsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error(this.error);
+class _$ChartsStateError implements ChartsStateError {
+  const _$ChartsStateError(this.error);
 
   @override
   final String error;
@@ -505,7 +519,7 @@ class _$_Error implements _Error {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Error &&
+        (other is ChartsStateError &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
@@ -516,14 +530,14 @@ class _$_Error implements _Error {
 
   @JsonKey(ignore: true)
   @override
-  _$ErrorCopyWith<_Error> get copyWith =>
-      __$ErrorCopyWithImpl<_Error>(this, _$identity);
+  $ChartsStateErrorCopyWith<ChartsStateError> get copyWith =>
+      _$ChartsStateErrorCopyWithImpl<ChartsStateError>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
             List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
         loaded,
@@ -535,8 +549,8 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? refreshing,
     TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
             List<ArtistShort>? overallArtists)?
         loaded,
@@ -552,10 +566,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(ChartsStateLoading value) loading,
+    required TResult Function(ChartsStateRefreshing value) refreshing,
+    required TResult Function(ChartsStateLoaded value) loaded,
+    required TResult Function(ChartsStateError value) error,
   }) {
     return error(this);
   }
@@ -563,10 +577,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(ChartsStateLoading value)? loading,
+    TResult Function(ChartsStateRefreshing value)? refreshing,
+    TResult Function(ChartsStateLoaded value)? loaded,
+    TResult Function(ChartsStateError value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -576,10 +590,11 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements ChartsState {
-  const factory _Error(String error) = _$_Error;
+abstract class ChartsStateError implements ChartsState {
+  const factory ChartsStateError(String error) = _$ChartsStateError;
 
   String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
+  $ChartsStateErrorCopyWith<ChartsStateError> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -2,8 +2,12 @@ part of 'charts_cubit.dart';
 
 @freezed
 class ChartsState with _$ChartsState {
-  factory ChartsState.initial() = _Initial;
-  const factory ChartsState.loading() = _Loading;
-  const factory ChartsState.loaded(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists, ) = _Loaded;
-  const factory ChartsState.error(String error) = _Error;
+  const factory ChartsState.loading() = ChartsStateLoading;
+  const factory ChartsState.refreshing() = ChartsStateRefreshing;
+  const factory ChartsState.loaded(
+    ArtistShort? bestArtist,
+    List<ArtistShort>? weeklyArtists,
+    List<ArtistShort>? overallArtists,
+  ) = ChartsStateLoaded;
+  const factory ChartsState.error(String error) = ChartsStateError;
 }

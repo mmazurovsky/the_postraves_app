@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/screen_size.dart';
 import '../../../../models/shorts/event_short.dart';
 import 'event_card_details_concrete.dart';
-import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/presentation/widgets/empty_image_placeholder.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -118,11 +117,11 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
                           maxLines: 2,
                           overflow: TextOverflow.fade,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             border: Border(
                               top: BorderSide(
                                 width: MyConstants.dividerThickness,
@@ -131,7 +130,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         EventCardDetailsConcrete(widget.loadedEvent),
                       ],
                     ),

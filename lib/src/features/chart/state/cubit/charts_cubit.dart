@@ -10,10 +10,21 @@ part 'charts_cubit.freezed.dart';
 class ChartsCubit extends Cubit<ChartsState> {
   final ChartsRepository<ArtistShort> artistChartsRepository;
 
-  ChartsCubit(this.artistChartsRepository) : super(ChartsState.initial());
+  ChartsCubit(this.artistChartsRepository) : super(const ChartsState.loading());
+
+  void refreshCharts(City currentCity) async {
+    emit(const ChartsState.refreshing());
+    _loadCharts(currentCity);
+  }
 
   void showCharts(City currentCity) async {
     emit(const ChartsState.loading());
+    _loadCharts(currentCity);
+    // todo also emit state of no internet connection
+    // todo also log if there are server exceptions
+  }
+
+  void _loadCharts(City currentCity) async {
     final overallArtists =
         artistChartsRepository.fetchOverallChart(currentCity);
     final weeklyArtists = artistChartsRepository.fetchWeeklyChart(currentCity);
@@ -41,7 +52,5 @@ class ChartsCubit extends Cubit<ChartsState> {
 
     emit(ChartsState.loaded(
         stateBestArtist, stateWeeklyArtists, stateOverallArtists));
-    // todo also emit state of no internet connection 
-    // todo also log if there are server exceptions
   }
 }
