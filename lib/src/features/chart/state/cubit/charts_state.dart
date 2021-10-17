@@ -6,8 +6,8 @@ class ChartsState with _$ChartsState {
   const factory ChartsState.refreshing() = ChartsStateRefreshing;
   const factory ChartsState.loaded(
     ArtistShort? bestArtist,
-    List<ArtistShort>? weeklyArtists,
-    List<ArtistShort>? overallArtists,
+    List<ArtistShort> weeklyArtists,
+    List<ArtistShort> overallArtists,
   ) = ChartsStateLoaded;
   const factory ChartsState.error(String error) = ChartsStateError;
 }

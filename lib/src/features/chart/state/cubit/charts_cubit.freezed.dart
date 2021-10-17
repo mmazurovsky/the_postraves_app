@@ -25,7 +25,7 @@ class _$ChartsStateTearOff {
   }
 
   ChartsStateLoaded loaded(ArtistShort? bestArtist,
-      List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists) {
+      List<ArtistShort> weeklyArtists, List<ArtistShort> overallArtists) {
     return ChartsStateLoaded(
       bestArtist,
       weeklyArtists,
@@ -50,7 +50,7 @@ mixin _$ChartsState {
     required TResult Function() loading,
     required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
-            List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
+            List<ArtistShort> weeklyArtists, List<ArtistShort> overallArtists)
         loaded,
     required TResult Function(String error) error,
   }) =>
@@ -59,8 +59,8 @@ mixin _$ChartsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
-            List<ArtistShort>? overallArtists)?
+    TResult Function(ArtistShort? bestArtist, List<ArtistShort> weeklyArtists,
+            List<ArtistShort> overallArtists)?
         loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -144,7 +144,7 @@ class _$ChartsStateLoading implements ChartsStateLoading {
     required TResult Function() loading,
     required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
-            List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
+            List<ArtistShort> weeklyArtists, List<ArtistShort> overallArtists)
         loaded,
     required TResult Function(String error) error,
   }) {
@@ -156,8 +156,8 @@ class _$ChartsStateLoading implements ChartsStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
-            List<ArtistShort>? overallArtists)?
+    TResult Function(ArtistShort? bestArtist, List<ArtistShort> weeklyArtists,
+            List<ArtistShort> overallArtists)?
         loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -242,7 +242,7 @@ class _$ChartsStateRefreshing implements ChartsStateRefreshing {
     required TResult Function() loading,
     required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
-            List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
+            List<ArtistShort> weeklyArtists, List<ArtistShort> overallArtists)
         loaded,
     required TResult Function(String error) error,
   }) {
@@ -254,8 +254,8 @@ class _$ChartsStateRefreshing implements ChartsStateRefreshing {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
-            List<ArtistShort>? overallArtists)?
+    TResult Function(ArtistShort? bestArtist, List<ArtistShort> weeklyArtists,
+            List<ArtistShort> overallArtists)?
         loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -304,8 +304,8 @@ abstract class $ChartsStateLoadedCopyWith<$Res> {
       _$ChartsStateLoadedCopyWithImpl<$Res>;
   $Res call(
       {ArtistShort? bestArtist,
-      List<ArtistShort>? weeklyArtists,
-      List<ArtistShort>? overallArtists});
+      List<ArtistShort> weeklyArtists,
+      List<ArtistShort> overallArtists});
 
   $ArtistShortCopyWith<$Res>? get bestArtist;
 }
@@ -335,11 +335,11 @@ class _$ChartsStateLoadedCopyWithImpl<$Res>
       weeklyArtists == freezed
           ? _value.weeklyArtists
           : weeklyArtists // ignore: cast_nullable_to_non_nullable
-              as List<ArtistShort>?,
+              as List<ArtistShort>,
       overallArtists == freezed
           ? _value.overallArtists
           : overallArtists // ignore: cast_nullable_to_non_nullable
-              as List<ArtistShort>?,
+              as List<ArtistShort>,
     ));
   }
 
@@ -364,9 +364,9 @@ class _$ChartsStateLoaded implements ChartsStateLoaded {
   @override
   final ArtistShort? bestArtist;
   @override
-  final List<ArtistShort>? weeklyArtists;
+  final List<ArtistShort> weeklyArtists;
   @override
-  final List<ArtistShort>? overallArtists;
+  final List<ArtistShort> overallArtists;
 
   @override
   String toString() {
@@ -406,7 +406,7 @@ class _$ChartsStateLoaded implements ChartsStateLoaded {
     required TResult Function() loading,
     required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
-            List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
+            List<ArtistShort> weeklyArtists, List<ArtistShort> overallArtists)
         loaded,
     required TResult Function(String error) error,
   }) {
@@ -418,8 +418,8 @@ class _$ChartsStateLoaded implements ChartsStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
-            List<ArtistShort>? overallArtists)?
+    TResult Function(ArtistShort? bestArtist, List<ArtistShort> weeklyArtists,
+            List<ArtistShort> overallArtists)?
         loaded,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -460,12 +460,12 @@ class _$ChartsStateLoaded implements ChartsStateLoaded {
 abstract class ChartsStateLoaded implements ChartsState {
   const factory ChartsStateLoaded(
       ArtistShort? bestArtist,
-      List<ArtistShort>? weeklyArtists,
-      List<ArtistShort>? overallArtists) = _$ChartsStateLoaded;
+      List<ArtistShort> weeklyArtists,
+      List<ArtistShort> overallArtists) = _$ChartsStateLoaded;
 
   ArtistShort? get bestArtist => throw _privateConstructorUsedError;
-  List<ArtistShort>? get weeklyArtists => throw _privateConstructorUsedError;
-  List<ArtistShort>? get overallArtists => throw _privateConstructorUsedError;
+  List<ArtistShort> get weeklyArtists => throw _privateConstructorUsedError;
+  List<ArtistShort> get overallArtists => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ChartsStateLoadedCopyWith<ChartsStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -539,7 +539,7 @@ class _$ChartsStateError implements ChartsStateError {
     required TResult Function() loading,
     required TResult Function() refreshing,
     required TResult Function(ArtistShort? bestArtist,
-            List<ArtistShort>? weeklyArtists, List<ArtistShort>? overallArtists)
+            List<ArtistShort> weeklyArtists, List<ArtistShort> overallArtists)
         loaded,
     required TResult Function(String error) error,
   }) {
@@ -551,8 +551,8 @@ class _$ChartsStateError implements ChartsStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(ArtistShort? bestArtist, List<ArtistShort>? weeklyArtists,
-            List<ArtistShort>? overallArtists)?
+    TResult Function(ArtistShort? bestArtist, List<ArtistShort> weeklyArtists,
+            List<ArtistShort> overallArtists)?
         loaded,
     TResult Function(String error)? error,
     required TResult orElse(),

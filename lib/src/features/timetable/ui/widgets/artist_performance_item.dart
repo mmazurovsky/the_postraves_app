@@ -67,6 +67,7 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
               final index = entry.key;
               final artist = entry.value;
               final artistWidget = FollowableItem(
+                key: ValueKey(artist.id),
                 horizontalPadding: MyConstants.horizontalPaddingOrMargin,
                 entity: artist,
                 onItemTap: (context, ArtistShort entity,

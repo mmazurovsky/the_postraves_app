@@ -97,6 +97,7 @@ class _FollowingScreenState extends State<FollowingScreen>
                   AppLocalizations.of(context)!.artistEntityNamePlural,
                   state.artists,
                   (ArtistShort artist) => FollowableItem(
+                    key: ValueKey(artist.id),
                     entity: artist,
                     onItemTap: (context, ArtistShort entity,
                             ImageDimensions? imageDimensions) =>
@@ -110,6 +111,7 @@ class _FollowingScreenState extends State<FollowingScreen>
                   AppLocalizations.of(context)!.placeEntityNamePlural,
                   state.places,
                   (PlaceShort place) => FollowableItem(
+                    key: ValueKey(place.id),
                     entity: place,
                     onItemTap: (context, PlaceShort entity,
                             ImageDimensions? imageDimensions) =>
@@ -123,6 +125,7 @@ class _FollowingScreenState extends State<FollowingScreen>
                   AppLocalizations.of(context)!.unityEntityNamePlural,
                   state.unities,
                   (UnityShort unity) => FollowableItem(
+                    key: ValueKey(unity.id),
                     entity: unity,
                     onItemTap: (context, UnityShort entity,
                             ImageDimensions? imageDimensions) =>

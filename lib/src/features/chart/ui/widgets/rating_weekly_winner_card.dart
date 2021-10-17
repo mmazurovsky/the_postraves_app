@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/my_spacers.dart';
 import '../../../../core/utils/screen_size.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
@@ -88,6 +89,7 @@ class _RatingWeeklyWinnerCardState<T extends GeneralFollowableInterface>
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
+                            const MySmallestSpacer(),
                             Text(
                               widget.nomination,
                               style: MyTextStyles.ratingsWeeklyWinnerTitle,
@@ -103,13 +105,14 @@ class _RatingWeeklyWinnerCardState<T extends GeneralFollowableInterface>
               ),
               Container(
                 padding: const EdgeInsets.only(
-                  top: 15,
+                  top: 10,
                   bottom: 20,
                 ),
                 decoration: const BoxDecoration(
                   color: MyColors.forEventCard,
                 ),
                 child: FollowableItem<T>(
+                  key: ValueKey(widget.entity.id),
                   showWeeklyFollowers: true,
                   entity: widget.entity,
                   startingWidget: null,

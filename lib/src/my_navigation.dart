@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_postraves_app/src/features/chart/ui/screens/extended_chart_screen.dart';
 import 'package:the_postraves_app/src/features/profile/ui/screen/following_screen.dart';
+import 'features/chart/data/chart_type.dart';
 import 'features/profile/ui/screen/modify_profile_screen.dart';
 import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 import 'features/chart/ui/screens/charts_screen.dart';
@@ -155,8 +156,8 @@ class RouteGenerator {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => ExtendedChartScreen(
-          chartTitle: args!['chartTitle'],
-          entities: args['entities'],
+          chartType: args!['chartType'],
+          initialFollowables: args['followables'],
         ),
       );
     } else {
@@ -274,11 +275,11 @@ class NavigatorFunctions {
   }
 
   static void pushExtendedChart<T extends GeneralFollowableInterface>(
-      BuildContext context, String chartTitle, List<T> entities) {
+      BuildContext context, ChartType chartType, List<T> entities) {
     Navigator.of(context)
         .pushNamed(MyNavigationRoutes.extendedChart, arguments: {
-      'chartTitle': chartTitle,
-      'entities': entities,
+      'chartType': chartType,
+      'followables': entities,
     });
   }
 

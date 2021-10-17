@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/my_spacers.dart';
+import 'package:the_postraves_app/src/features/chart/data/chart_type.dart';
 
 import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../core/presentation/widgets/failure_container.dart';
@@ -124,8 +125,8 @@ class _Charts extends StatelessWidget {
           _ChartsViewForEntity(
             sectionTitle: AppLocalizations.of(context)!.featuredTitle,
             previousWeekWinner: bestArtist,
-            weeklyChart: weeklyChart?.take(5).toList(),
-            overallChart: overallChart?.take(5).toList(),
+            weeklyChart: weeklyChart,
+            overallChart: overallChart,
           ),
         ],
       ),
@@ -171,7 +172,7 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   nominationDescription:
                       AppLocalizations.of(context)!.featuredUsersChoice,
                   nomination:
-                      '${previousWeekWinner!.getEntityNameSingularFormString(context)} ${AppLocalizations.of(context)!.ofTheWeek}'
+                      '${previousWeekWinner!.getEntityNameSingularFormString(context)}\n${AppLocalizations.of(context)!.ofTheWeek}'
                           .toUpperCase(),
                 )
               : Container(),
@@ -184,7 +185,12 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                         text: AppLocalizations.of(context)!.chartOfTheWeekTitle,
                         style: MyTextStyles.ratingsListTitle),
                   ],
-                  entities: weeklyChart!,
+                  topFollowables: weeklyChart!.take(5).toList(),
+                  onTapDetails: () => NavigatorFunctions.pushExtendedChart(
+                    context,
+                    ChartType.weekly,
+                    weeklyChart!,
+                  ),
                 )
               : Container(),
           overallChart != null
@@ -195,7 +201,12 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                         text: AppLocalizations.of(context)!.chartOverallTitle,
                         style: MyTextStyles.ratingsListTitle),
                   ],
-                  entities: overallChart!,
+                  topFollowables: overallChart!.take(5).toList(),
+                  onTapDetails: () => NavigatorFunctions.pushExtendedChart(
+                    context,
+                    ChartType.overall,
+                    overallChart!,
+                  ),
                 )
               : Container(),
           const SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/entity_presentation/followable_list.dart';
 import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
 import '../../../../models/dto/image_dimensions.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
@@ -12,20 +13,20 @@ class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final String imagePath;
   final List<TextSpan> titleTextSpans;
-  final List<T> entities;
+  final List<T> topFollowables;
   final bool showWeeklyFollowers;
+  final void Function() onTapDetails;
   const RatingCardWithListOfItems({
     Key? key,
     required this.imagePath,
     required this.titleTextSpans,
-    required this.entities,
+    required this.topFollowables,
+    required this.onTapDetails,
     this.showWeeklyFollowers = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int modelCount = 0;
-
     return MyHorizontalMargin(
       child: Container(
         margin: const EdgeInsets.only(
@@ -67,26 +68,16 @@ class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
               const SizedBox(
                 height: 15,
               ),
-              Column(
-                children: [
-                  ...entities.take(5).map(
-                    (entity) {
-                      modelCount += 1;
-                      return FollowableItem<T>(
-                        entity: entity,
-                        horizontalPadding: 0,
-                        showWeeklyFollowers: showWeeklyFollowers,
-                        onItemTap: (context, T entity,
-                                ImageDimensions? imageDimensions) =>
-                            NavigatorFunctions.pushFollowable(
-                          context: context,
-                          wikiDataDto:
-                              entity.convertToWikiDataDto(imageDimensions),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+              FollowableList(
+                horizontalPaddingOfItems: 0,
+                showWeeklyFollowers: showWeeklyFollowers,
+                followables: topFollowables.take(5).toList(),
+                onItemTap:
+                    (context, T entity, ImageDimensions? imageDimensions) =>
+                        NavigatorFunctions.pushFollowable(
+                  context: context,
+                  wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+                ),
               ),
               const SizedBox(
                 height: 14,
@@ -94,8 +85,7 @@ class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
               Align(
                 alignment: Alignment.center,
                 child: InkWell(
-                  // todo
-                  onTap: () {},
+                  onTap: () => onTapDetails(),
                   child: const Icon(
                     Ionicons.chevron_down,
                     color: MyColors.accent,

@@ -34,21 +34,21 @@ class ChartsCubit extends Cubit<ChartsState> {
     final resolvedWeeklyArtists = await weeklyArtists;
     final resolvedBestArtist = await bestArtist;
 
-    List<ArtistShort>? stateOverallArtists;
-    List<ArtistShort>? stateWeeklyArtists;
+    List<ArtistShort> stateOverallArtists = [];
+    List<ArtistShort> stateWeeklyArtists = [];
     ArtistShort? stateBestArtist;
 
     resolvedOverallArtists.when(
         success: (data) => stateOverallArtists = data,
-        failure: (failure, data) => stateOverallArtists = null);
+        failure: (failure, data) => {}); //todo
 
     resolvedWeeklyArtists.when(
         success: (data) => stateWeeklyArtists = data,
-        failure: (failure, data) => stateWeeklyArtists = null);
+        failure: (failure, data) => {}); //todo
 
     resolvedBestArtist.when(
         success: (data) => stateBestArtist = data,
-        failure: (failure, data) => stateBestArtist = null);
+        failure: (failure, data) => {}); //todo
 
     emit(ChartsState.loaded(
         stateBestArtist, stateWeeklyArtists, stateOverallArtists));

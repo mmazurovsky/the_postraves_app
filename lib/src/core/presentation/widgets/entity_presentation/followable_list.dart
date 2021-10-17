@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/core/utils/my_constants.dart';
 
 import '../../../../models/interfaces/data_interfaces.dart';
 import 'followable_item.dart';
 
-class FollowableList<T extends GeneralFollowableInterface> extends StatelessWidget {
+class FollowableList<T extends GeneralFollowableInterface>
+    extends StatelessWidget {
   final List<T> followables;
   final Function? onIconTap;
   final Function onItemTap;
   final Widget? startingWidgetForItems;
+  final bool showWeeklyFollowers;
+  final double? horizontalPaddingOfItems;
 
-  const FollowableList({
-    Key? key,
-    this.startingWidgetForItems,
-    required this.followables,
-    required this.onItemTap,
-    this.onIconTap,
-  }) : super(key: key);
+  const FollowableList(
+      {Key? key,
+      this.startingWidgetForItems,
+      required this.followables,
+      required this.onItemTap,
+      this.onIconTap,
+      this.showWeeklyFollowers = false,
+      this.horizontalPaddingOfItems})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +33,9 @@ class FollowableList<T extends GeneralFollowableInterface> extends StatelessWidg
           entity: entity,
           onItemTap: onItemTap,
           onIconTap: onIconTap,
+          showWeeklyFollowers: showWeeklyFollowers,
+          horizontalPadding:
+              horizontalPaddingOfItems ?? MyConstants.horizontalPaddingOrMargin,
         );
       }).toList(),
     );
