@@ -11,34 +11,7 @@ class EventStatusIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget indicator;
-    if (status == EventStatus.UPCOMING || status == EventStatus.PRESALE) {
-      indicator = Container(
-        height: size,
-        width: size,
-        decoration: const BoxDecoration(
-          color: MyColors.main,
-          shape: BoxShape.circle,
-        ),
-      );
-    } else if (status == EventStatus.TODAY || status == EventStatus.TOMORROW) {
-      indicator = Container(
-        height: size,
-        width: size,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          shape: BoxShape.circle,
-        ),
-      );
-    } else if (status == EventStatus.PAST) {
-      indicator = Container(
-        height: size,
-        width: size,
-        decoration: BoxDecoration(
-          color: MyColors.forInactiveStuff,
-          shape: BoxShape.circle,
-        ),
-      );
-    } else {
+    if (status == EventStatus.LIVE) {
       indicator = BlinkAnimationWrapper(
         startColor: MyColors.forLiveEventIndicator,
         endColor: Colors.transparent,
@@ -51,6 +24,8 @@ class EventStatusIndicator extends StatelessWidget {
           ),
         ),
       );
+    } else {
+      indicator = Container();
     }
     return indicator;
   }
