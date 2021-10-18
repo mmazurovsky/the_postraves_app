@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:the_postraves_app/src/core/utils/my_constants.dart';
 import '../../utils/social_links_helper.dart';
 import '../../../features/wiki/ui/widgets/button_with_icons.dart';
 
@@ -39,7 +40,7 @@ class SocialLinksList extends StatelessWidget {
               const MyMediumSpacer(),
               soundcloudUsername != null
                   ? ButtonWithIcons(
-                      buttonText: 'Soundcloud',
+                      buttonText: MyConstants.soundcloudName,
                       onButtonTap: () => OpenLinkService.openUrl(
                         SocialLinksHelper.getSoundcloudLinkForNickname(
                             soundcloudUsername!),
@@ -62,7 +63,7 @@ class SocialLinksList extends StatelessWidget {
                   : Container(),
               bandcampUsername != null
                   ? ButtonWithIcons(
-                      buttonText: 'Bandcamp',
+                      buttonText: MyConstants.bandcampName,
                       onButtonTap: () => OpenLinkService.openUrl(
                         SocialLinksHelper.getBandcampLinkForNickname(
                             bandcampUsername!),
@@ -85,7 +86,7 @@ class SocialLinksList extends StatelessWidget {
                   : Container(),
               instagramUsername != null
                   ? ButtonWithIcons(
-                      buttonText: 'Instagram',
+                      buttonText: MyConstants.instagramName,
                       onButtonTap: () =>
                           OpenLinkService.openUrl(SocialLinksHelper.getInstagramLinkForNickname(
                             instagramUsername!)),
@@ -107,7 +108,7 @@ class SocialLinksList extends StatelessWidget {
                   : Container(),
               telegramUsername != null
                   ? ButtonWithIcons(
-                      buttonText: 'Telegram',
+                      buttonText: MyConstants.telegramName,
                       onButtonTap: () =>
                           OpenLinkService.openUrl(SocialLinksHelper.getTelegramLinkForNickname(
                             telegramUsername!)),

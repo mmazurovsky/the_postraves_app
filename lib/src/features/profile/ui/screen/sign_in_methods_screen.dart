@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/service/open_link_service.dart';
+import 'package:the_postraves_app/src/core/utils/my_constants.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
@@ -98,8 +100,7 @@ class SignInMethodsScreen extends StatelessWidget {
                   baseline: TextBaseline.alphabetic,
                   alignment: PlaceholderAlignment.baseline,
                   child: InkWell(
-                    //todo
-                    onTap: () {},
+                    onTap: () => OpenLinkService.openUrl(MyConstants.termsAndConditionsLink),
                     child: RichText(
                       text: TextSpan(
                         text: AppLocalizations.of(context)!.authDocsTerms,
@@ -116,8 +117,7 @@ class SignInMethodsScreen extends StatelessWidget {
                   baseline: TextBaseline.alphabetic,
                   alignment: PlaceholderAlignment.baseline,
                   child: InkWell(
-                    //todo
-                    onTap: () {},
+                    onTap: () => OpenLinkService.openUrl(MyConstants.privacyPolicyLink),
                     child: RichText(
                       text: TextSpan(
                         text: AppLocalizations.of(context)!.authDocsPolicy,

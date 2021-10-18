@@ -26,4 +26,10 @@ class MyConstants {
   static const String androidPackageName = 'com.mmazurovsky.postraves_android';
   static const String dynamicLinkUrlPrefix =
       'https://thepostravesapp.page.link';
+  static const String instagramName = 'Instagram';
+  static const String soundcloudName = 'Soundcloud';
+  static const String bandcampName = 'Bandcamp';
+  static const String telegramName = 'Telegram';
+  static const String termsAndConditionsLink = 'https://postraves.flycricket.io/terms.html';
+  static const String privacyPolicyLink = 'https://postraves.flycricket.io/privacy.html';
 }
