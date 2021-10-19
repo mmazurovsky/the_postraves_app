@@ -131,18 +131,12 @@ class _PlaceContentState extends State<_PlaceContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const MyBigSpacer(),
-          Row(
-            children: [
-              Expanded(
-                child: MyHorizontalPadding(
-                  child: WikiWideBookmarkButton(
-                    isFollowed: _isFollowed,
-                    onButtonTap: () =>
-                        widget.onIsFollowedChange(context, widget.place),
-                  ),
-                ),
-              ),
-            ],
+          MyHorizontalPadding(
+            child: WikiWideBookmarkButton(
+              isFollowed: _isFollowed,
+              onIsFollowedChange: () =>
+                  widget.onIsFollowedChange(context, widget.place),
+            ),
           ),
           SocialLinksList(
             soundcloudUsername: widget.place.soundcloudUsername,

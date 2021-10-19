@@ -314,6 +314,13 @@ class MyTextStyles {
     color: MyColors.mainOppositeColor,
   );
 
+  static TextStyle buttonWithInactiveStuffColor = const TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    fontWeight: FontWeight.w800,
+    color: MyColors.forInactiveStuff,
+  );
+
   static TextStyle buttonForSms = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 18,

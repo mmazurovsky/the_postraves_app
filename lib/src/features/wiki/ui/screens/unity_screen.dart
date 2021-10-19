@@ -120,18 +120,12 @@ class _UnityContentState extends State<_UnityContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const MyBigSpacer(),
-          Row(
-            children: [
-              Expanded(
-                child: MyHorizontalPadding(
-                  child: WikiWideBookmarkButton(
-                    isFollowed: _isFollowed,
-                    onButtonTap: () =>
-                        widget.onIsFollowedChange(context, widget.unity),
-                  ),
-                ),
-              ),
-            ],
+          MyHorizontalPadding(
+            child: WikiWideBookmarkButton(
+              isFollowed: _isFollowed,
+              onIsFollowedChange: () =>
+                  widget.onIsFollowedChange(context, widget.unity),
+            ),
           ),
           SocialLinksList(
             soundcloudUsername: widget.unity.soundcloudUsername,

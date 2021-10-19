@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_constants.dart';
 
 class WikiSquaredOutlinedBookmarkButton extends StatelessWidget {
-  const WikiSquaredOutlinedBookmarkButton(this._iconWidget, {Key? key}) : super(key: key);
-  final Widget _iconWidget;
+  final void Function() onIsFollowedChange;
+  final bool isFollowed;
+
+  const WikiSquaredOutlinedBookmarkButton(
+      {required this.isFollowed,
+      required this.onIsFollowedChange,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => print('outlined tapped'),
+      onTap: onIsFollowedChange,
       child: Container(
         height: MyConstants.heightOfContainers,
         width: MyConstants.heightOfContainers,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          border: Border.all(color: MyColors.accent, width: 1.5),
+          border: Border.all(
+              color: isFollowed ? MyColors.forInactiveStuff2 : MyColors.accent,
+              width: 1.5),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: _iconWidget,
+        child: Icon(
+          Ionicons.bookmark,
+          size: 24,
+          color: isFollowed ? MyColors.forInactiveStuff2 : MyColors.accent,
+        ),
       ),
     );
   }

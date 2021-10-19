@@ -46,13 +46,13 @@ class FollowingCubit extends Cubit<FollowingState> {
         success: (data) => artistsFollowed = data,
         failure: (failure, data) => {}); //todo
 
-    // placesFollowedResolved.when(
-    //     success: (data) => placesFollowed = data,
-    //     failure: (failure, data) => {}); //todo
+    placesFollowedResolved.when(
+        success: (data) => placesFollowed = data,
+        failure: (failure, data) => {}); //todo
 
-    // unitiesFollowedResolved.when(
-    //     success: (data) => unitiesFollowed = data,
-    //     failure: (failure, data) => {}); //todo
+    unitiesFollowedResolved.when(
+        success: (data) => unitiesFollowed = data,
+        failure: (failure, data) => {}); //todo
 
     emit(FollowingState.loaded(
       events: eventsFollowed,

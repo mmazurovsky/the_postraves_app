@@ -69,7 +69,6 @@ class _ArtistStateManagementState extends State<_ArtistStateManagement> {
             artist: state.artist,
             unities: state.unities,
             events: state.events,
-            onIsFollowedChange: FollowableUtil.onIsFollowedChange,
           );
         } else {
           return LoadingContainer();
@@ -84,13 +83,10 @@ class _ArtistContent extends StatefulWidget {
   final ArtistFull artist;
   final List<UnityShort> unities;
   final List<EventShort> events;
-  final void Function<T extends GeneralFollowableInterface>(BuildContext, T)
-      onIsFollowedChange;
   const _ArtistContent({
     required this.artist,
     required this.unities,
     required this.events,
-    required this.onIsFollowedChange,
     Key? key,
   }) : super(key: key);
 
@@ -114,18 +110,12 @@ class _ArtistContentState extends State<_ArtistContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const MyBigSpacer(),
-          Row(
-            children: [
-              Expanded(
-                child: MyHorizontalPadding(
-                  child: WikiWideBookmarkButton(
-                    isFollowed: _isFollowed,
-                    onButtonTap: () =>
-                        widget.onIsFollowedChange(context, widget.artist),
-                  ),
-                ),
-              ),
-            ],
+          MyHorizontalPadding(
+            child: WikiWideBookmarkButton(
+              isFollowed: _isFollowed,
+              onIsFollowedChange: () =>
+                  FollowableUtil.onIsFollowedChange(context, widget.artist), //todo check
+            ),
           ),
           SocialLinksList(
             soundcloudUsername: widget.artist.soundcloudUsername,

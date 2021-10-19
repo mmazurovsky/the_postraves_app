@@ -29,7 +29,7 @@ class ArtistShortClientHelper implements FollowableClientHelper<ArtistShort> {
 
   @override
   String getEndpointAndPathForUserFollowing() {
-    return '${WikiFollowableType.USER.endpoint}/myFollows/${WikiFollowableType.ARTIST.endpoint}';
+    return '${WikiFollowableType.USER.endpoint}/myFollowing/${WikiFollowableType.ARTIST.endpoint}';
   }
 }
 
@@ -46,7 +46,7 @@ class ArtistFullClientHelper implements FollowableClientHelper<ArtistFull> {
 
   @override
   String getEndpointAndPathForUserFollowing() {
-    return '${WikiFollowableType.USER.endpoint}/myFollows/${WikiFollowableType.ARTIST.endpoint}';
+    return '${WikiFollowableType.USER.endpoint}/myFollowing/${WikiFollowableType.ARTIST.endpoint}';
   }
 }
 
@@ -63,7 +63,7 @@ class EventShortClientHelper implements FollowableClientHelper<EventShort> {
 
   @override
   String getEndpointAndPathForUserFollowing() {
-    return '${WikiFollowableType.USER.endpoint}/myFollows/${WikiFollowableType.EVENT.endpoint}';
+    return '${WikiFollowableType.USER.endpoint}/myFollowing/${WikiFollowableType.EVENT.endpoint}';
   }
 }
 
@@ -80,7 +80,7 @@ class EventFullClientHelper implements FollowableClientHelper<EventFull> {
 
   @override
   String getEndpointAndPathForUserFollowing() {
-    return '${WikiFollowableType.USER.endpoint}/myFollows/${WikiFollowableType.EVENT.endpoint}';
+    return '${WikiFollowableType.USER.endpoint}/myFollowing/${WikiFollowableType.EVENT.endpoint}';
   }
 }
 
@@ -97,7 +97,7 @@ class UnityShortClientHelper implements FollowableClientHelper<UnityShort> {
 
   @override
   String getEndpointAndPathForUserFollowing() {
-    return '${WikiFollowableType.USER.endpoint}/myFollows/${WikiFollowableType.UNITY.endpoint}';
+    return '${WikiFollowableType.USER.endpoint}/myFollowing/${WikiFollowableType.UNITY.endpoint}';
   }
 }
 
@@ -114,7 +114,7 @@ class UnityFullClientHelper implements FollowableClientHelper<UnityFull> {
 
   @override
   String getEndpointAndPathForUserFollowing() {
-    return '${WikiFollowableType.USER.endpoint}/myFollows/${WikiFollowableType.UNITY.endpoint}';
+    return '${WikiFollowableType.USER.endpoint}/myFollowing/${WikiFollowableType.UNITY.endpoint}';
   }
 }
 
@@ -131,7 +131,7 @@ class PlaceShortClientHelper implements FollowableClientHelper<PlaceShort> {
 
   @override
   String getEndpointAndPathForUserFollowing() {
-    return '${WikiFollowableType.USER.endpoint}/myFollows/${WikiFollowableType.PLACE.endpoint}';
+    return '${WikiFollowableType.USER.endpoint}/myFollowing/${WikiFollowableType.PLACE.endpoint}';
   }
 }
 
@@ -148,6 +148,6 @@ class PlaceFullClientHelper implements FollowableClientHelper<PlaceFull> {
 
   @override
   String getEndpointAndPathForUserFollowing() {
-    return '${WikiFollowableType.USER.endpoint}/myFollows/${WikiFollowableType.PLACE.endpoint}';
+    return '${WikiFollowableType.USER.endpoint}/myFollowing/${WikiFollowableType.PLACE.endpoint}';
   }
 }

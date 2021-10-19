@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/event_main_button.dart';
 import '../../state/follow_cubit/follow_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
@@ -15,8 +16,6 @@ import '../../../../models/shorts/artist_short.dart';
 import '../../../../models/shorts/unity_short.dart';
 import '../../../../core/presentation/widgets/details_horizontal_scrollable_list.dart';
 import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/presentation/widgets/buttons/my_elevated_button_without_padding.dart';
-import '../../../../core/service/open_link_service.dart';
 import '../../../../core/utils/my_colors.dart';
 import '../../../../core/utils/my_text_styles.dart';
 import '../widgets/event_status_indicator.dart';
@@ -28,7 +27,6 @@ import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../my_navigation.dart';
 import '../../../../core/utils/formatting_utils.dart';
 import '../widgets/button_with_icons.dart';
-import '../widgets/wiki_squared_outlined_bookmark_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventScreen extends StatelessWidget {
@@ -135,39 +133,12 @@ class _EventContentState extends State<_EventContent> {
         children: [
           const MyBigSpacer(),
           MyHorizontalPadding(
-            child: Row(
-              children: [
-                Expanded(
-                  child: MyElevatedButtonWithoutPadding(
-                    leadingIcon: const Icon(
-                      Ionicons.ticket,
-                      size: 21,
-                      color: MyColors.mainOppositeColor,
-                    ),
-                    text: AppLocalizations.of(context)!.wikiEventBuyTicket,
-                    buttonColor: MyColors.accent,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    onTap: () {
-                      widget.event.ticketsLink != null &&
-                              widget.event.ticketsLink!.length > 3
-                          ? OpenLinkService.openUrl(widget.event.ticketsLink!)
-                          : {};
-                    },
-                    textStyle: MyTextStyles.buttonWithOppositeColor,
-                    distanceBetweenLeadingAndText: 5,
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const WikiSquaredOutlinedBookmarkButton(
-                  Icon(
-                    Ionicons.bookmark,
-                    size: 24,
-                    color: MyColors.accent,
-                  ),
-                ),
-              ],
+            child: EventMainButton(
+              status: widget.event.status,
+              ticketsLink: widget.event.ticketsLink,
+              isFollowed: _isFollowed,
+              onIsFollowedChange: () =>
+                  FollowableUtil.onIsFollowedChange(context, widget.event),
             ),
           ),
           DetailsHorizontalScrollableList(

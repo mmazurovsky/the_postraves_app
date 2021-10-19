@@ -22,7 +22,8 @@ abstract class WikiRemoteDataSource<
   });
 }
 
-class WikiRemoteDataSourceImpl<FULLFOLLOWABLE extends GeneralFollowableInterface>
+class WikiRemoteDataSourceImpl<
+        FULLFOLLOWABLE extends GeneralFollowableInterface>
     implements WikiRemoteDataSource<FULLFOLLOWABLE> {
   final FollowableClientHelper<FULLFOLLOWABLE> _followableClientHelper;
 
@@ -53,19 +54,20 @@ class WikiRemoteDataSourceImpl<FULLFOLLOWABLE extends GeneralFollowableInterface
     required Map<String, String> httpHeaders,
   }) async {
     await RemoteClient.makePostRequestAndReturnResponse(
-        endpointWithPath: 'user/myFollows/' +
-            _followableClientHelper.getEndpointForFollowable() +
-            '/$id',
+        endpointWithPath:
+            _followableClientHelper.getEndpointAndPathForUserFollowing() +
+                '/$id',
         httpHeaders: httpHeaders);
     return; //todo ensure is ok
   }
 
   @override
-  Future<void> unfollowFollowable({required int id, required Map<String, String> httpHeaders}) async {
+  Future<void> unfollowFollowable(
+      {required int id, required Map<String, String> httpHeaders}) async {
     await RemoteClient.makeDeleteRequestAndReturnResponse(
-        endpointWithPath: 'user/myFollows/' +
-            _followableClientHelper.getEndpointForFollowable() +
-            '/$id',
+        endpointWithPath:
+            _followableClientHelper.getEndpointAndPathForUserFollowing() +
+                '/$id',
         httpHeaders: httpHeaders);
     return; //todo ensure is ok
   }

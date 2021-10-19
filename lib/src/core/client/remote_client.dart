@@ -111,7 +111,6 @@ class RemoteClient {
       required Map<String, String> httpHeaders,
       Map<String, dynamic>? queryParameters,
       Map<String, dynamic>? body}) async {
-
     final httpRequest = _MyHttpRequest(
       httpMethod: HttpMethod.delete,
       endpointWithPath: endpointWithPath,
@@ -174,6 +173,7 @@ class _MyHttpRequest {
 
   void _logRequest() {
     log('${httpMethod.methodName} ${uri.toString()}');
+    log(httpHeaders[HttpHeaders.authorizationHeader].toString());
   }
 
   Future<http_client.Response> _makeRequest() {
