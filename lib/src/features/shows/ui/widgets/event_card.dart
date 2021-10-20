@@ -113,7 +113,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
                       children: [
                         Text(
                           widget.loadedEvent.name,
-                          style: MyTextStyles.cardEventTitle,
+                          style: MyTextStyles.fullEventCardTitle,
                           maxLines: 2,
                           overflow: TextOverflow.fade,
                         ),

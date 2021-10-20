@@ -1,33 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../state/follow_cubit/follow_cubit.dart';
-import '../widgets/followable_util.dart';
 import '../widgets/wiki_subtitle.dart';
-import '../widgets/wiki_title.dart';
 import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../models/fulls/artist_full.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
 
-import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
-import '../../../../core/presentation/widgets/social_links_list.dart';
-import '../../../../models/dto/image_dimensions.dart';
 import '../../../../dependency_injection.dart';
-import '../../../../models/enum/wiki_rating_type.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../models/shorts/unity_short.dart';
-import '../../../../my_navigation.dart';
-import '../../state/artist_cubit/artist_cubit.dart';
-import '../widgets/column_of_custom_cards.dart';
-import '../../../../core/presentation/widgets/short_event_card_item.dart';
-import '../widgets/slide_animation_wrapper.dart';
-import '../widgets/wiki_expandable_text_description.dart';
-import '../widgets/wiki_wide_bookmark_button.dart';
 import 'wiki_canvas.dart';
 
 class FollowableScreen<FollowableCubitGeneric extends Cubit,
@@ -75,10 +51,12 @@ class _FollowableScreenContents<FollowCubitGeneric extends Cubit>
 class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
     extends State<_FollowableScreenContents<FollowCubitGeneric>> {
   late int? _followers;
+  late bool? _isFollowed;
 
   @override
   void didChangeDependencies() {
     _followers = context.watch<FollowCubitGeneric>().state.followers;
+    _isFollowed = context.watch<FollowCubitGeneric>().state.isFollowed;
     super.didChangeDependencies();
   }
 
@@ -92,6 +70,7 @@ class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
           entityType: widget._wikiDataDto.type,
           country: widget._wikiDataDto.country,
           overallFollowers: _followers,
+          isFollowed: _isFollowed,
         ),
         widget._contents,
       ],

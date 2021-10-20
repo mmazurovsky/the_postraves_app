@@ -165,8 +165,8 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
         MyElevatedButton(
           onTap: () => NavigatorFunctions.pushBookmarks(context),
           leadingIcon: const Icon(
-            Ionicons.bookmark,
-            size: 18,
+            Ionicons.heart,
+            size: 22,
             color: MyColors.mainOppositeColor,
           ),
           distanceBetweenLeadingAndText: 7,

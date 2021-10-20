@@ -19,6 +19,24 @@ class FollowableItemData<T extends GeneralFollowableInterface>
     this.hintText,
   }) : super(key: key);
 
+  TextStyle _resolveFollowersTextStyle() {
+    if (showWeeklyFollowers) {
+      if (entity.weeklyFollowers > 0) {
+        return MyTextStyles.shortEntityPositiveWeeklyRating;
+      } else if (entity.weeklyFollowers < 0) {
+        return MyTextStyles.shortEntityNegativeWeeklyRating;
+      } else {
+        return MyTextStyles.shortEntityOverallRating;
+      }
+    } else {
+      if (entity.isFollowed) {
+        return MyTextStyles.shortEntityRatingAccent;
+      } else {
+        return MyTextStyles.shortEntityOverallRating;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,9 +52,9 @@ class FollowableItemData<T extends GeneralFollowableInterface>
                 ? Row(
                     children: [
                       Text(
-                        entity.country!.countryEmoji,
+                        entity.country!.emojiCode,
                         style:
-                            const TextStyle(fontSize: MyConstants.diamondWidth),
+                            MyTextStyles.countryFlag,
                       ),
                       const SizedBox(width: 8),
                     ],
@@ -61,8 +79,8 @@ class FollowableItemData<T extends GeneralFollowableInterface>
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(
-                  Ionicons.people_circle_outline,
+                Icon(
+                  entity.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
                   size: 19,
                   color: MyColors.accent,
                 ),
@@ -73,13 +91,7 @@ class FollowableItemData<T extends GeneralFollowableInterface>
                           ? '+${entity.weeklyFollowers}'
                           : entity.weeklyFollowers.toString()
                       : entity.overallFollowers.toString(),
-                  style: showWeeklyFollowers
-                      ? entity.weeklyFollowers > 0
-                          ? MyTextStyles.shortEntityPositiveWeeklyRating
-                          : entity.weeklyFollowers < 0
-                              ? MyTextStyles.shortEntityNegativeWeeklyRating
-                              : MyTextStyles.shortEntityOverallRating
-                      : MyTextStyles.shortEntityOverallRating,
+                  style: _resolveFollowersTextStyle(),
                 ),
               ],
             ),

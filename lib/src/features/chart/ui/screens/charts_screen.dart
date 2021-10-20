@@ -183,7 +183,7 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   titleTextSpans: [
                     TextSpan(
                         text: AppLocalizations.of(context)!.chartOfTheWeekTitle,
-                        style: MyTextStyles.ratingsListTitle),
+                        style: MyTextStyles.chartTitle),
                   ],
                   topFollowables: weeklyChart!.take(5).toList(),
                   onTapDetails: () => NavigatorFunctions.pushExtendedChart(
@@ -199,7 +199,7 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   titleTextSpans: [
                     TextSpan(
                         text: AppLocalizations.of(context)!.chartOverallTitle,
-                        style: MyTextStyles.ratingsListTitle),
+                        style: MyTextStyles.chartTitle),
                   ],
                   topFollowables: overallChart!.take(5).toList(),
                   onTapDetails: () => NavigatorFunctions.pushExtendedChart(

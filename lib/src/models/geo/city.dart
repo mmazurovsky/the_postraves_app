@@ -17,5 +17,5 @@ class City with _$City implements LocationInterface {
   factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);
 
   @override
-  String get countryEmoji => country.countryEmoji;
+  String get emojiCode => country.emojiCode;
 }

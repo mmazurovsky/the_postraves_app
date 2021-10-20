@@ -3,31 +3,34 @@ import 'package:flutter/material.dart';
 import 'my_colors.dart';
 
 class MyTextStyles {
-  static const TextStyle cardEventTitle = TextStyle(
-    fontFamily: 'RobotoMono',
+  static const TextStyle fullEventCardTitle = TextStyle(
+    fontFamily: 'Roboto',
     fontSize: 27,
     fontWeight: FontWeight.w600,
     color: MyColors.main,
-    wordSpacing: -8,
+    wordSpacing: 1.2,
+    letterSpacing: 1.2,
   );
 
+  static const TextStyle countryFlag = TextStyle(fontSize: 19.1);
+
   static const TextStyle cardSceneTitle = TextStyle(
-    fontFamily: 'RobotoMono',
+    fontFamily: 'IBMPlexMono',
     fontSize: 28,
     fontWeight: FontWeight.w600,
     color: MyColors.main,
-    wordSpacing: -8,
+    wordSpacing: -6,
   );
 
   static const TextStyle cardSceneSubtitle = TextStyle(
-    fontFamily: 'RobotoMono',
+    fontFamily: 'IBMPlexMono',
     fontSize: 15,
     fontWeight: FontWeight.w600,
     color: MyColors.forInactiveStuff,
-    wordSpacing: -8,
+    wordSpacing: -6,
   );
 
-  static const TextStyle wikiTitle = cardEventTitle;
+  static const TextStyle wikiTitle = fullEventCardTitle;
 
   static const TextStyle cardEventDetails = TextStyle(
     fontFamily: 'IBMPlexMono',
@@ -35,6 +38,9 @@ class MyTextStyles {
     fontWeight: FontWeight.w500,
     color: MyColors.main,
   );
+
+  static TextStyle cardEventDetailsAccent =
+      cardEventDetails.copyWith(color: MyColors.accent);
 
   static const TextStyle cardEventBadge = TextStyle(
     fontFamily: 'IBMPlexMono',
@@ -62,8 +68,8 @@ class MyTextStyles {
     color: MyColors.accent,
     fontSize: 17,
     fontWeight: FontWeight.w600,
-    wordSpacing: -4.5,
-    letterSpacing: -0.6,
+    wordSpacing: -4,
+    letterSpacing: -0.5,
   );
 
   static const TextStyle ratingsWeeklyWinnerTitle = TextStyle(
@@ -73,20 +79,13 @@ class MyTextStyles {
     fontWeight: FontWeight.w600,
   );
 
-  static const TextStyle ratingsListTitle = TextStyle(
-    fontFamily: 'RobotoMono',
+  static const TextStyle chartTitle = TextStyle(
+    fontFamily: 'Roboto',
     color: MyColors.main,
     fontSize: 23,
     fontWeight: FontWeight.w600,
-    wordSpacing: -4,
-  );
-
-  static const TextStyle ratingsListTitleAccent = TextStyle(
-    fontFamily: 'RobotoMono',
-    color: MyColors.accent,
-    fontSize: 23,
-    fontWeight: FontWeight.w600,
-    wordSpacing: -4,
+    wordSpacing: 1.2,
+    letterSpacing: 1.2,
   );
 
   static const TextStyle searchTextPlaceholder = TextStyle(
@@ -211,6 +210,9 @@ class MyTextStyles {
     wordSpacing: -4,
   );
 
+  static TextStyle sectionTitleAccent =
+      sectionTitle.copyWith(color: MyColors.accent);
+
   static const TextStyle longTextThinSmallAccentColor = TextStyle(
     fontFamily: 'Roboto',
     color: MyColors.accent,
@@ -233,8 +235,8 @@ class MyTextStyles {
   );
 
   static const TextStyle shortEntityName = TextStyle(
-    fontFamily: 'RobotoMono',
-    color: Colors.white,
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.main,
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
@@ -245,6 +247,9 @@ class MyTextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
+
+  static TextStyle shortEntityRatingAccent =
+      shortEntityOverallRating.copyWith(color: MyColors.accent);
 
   static const TextStyle shortEntityPositiveWeeklyRating = TextStyle(
     fontFamily: 'IBMPlexMono',
@@ -301,24 +306,25 @@ class MyTextStyles {
     color: MyColors.main,
   );
 
-  static TextStyle buttonWithInactiveColor = const TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: 18,
-      fontWeight: FontWeight.w600,
-      color: MyColors.forInactiveStuff);
-
   static TextStyle buttonWithOppositeColor = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 18,
-    fontWeight: FontWeight.w800,
+    fontWeight: FontWeight.w600,
     color: MyColors.mainOppositeColor,
   );
 
   static TextStyle buttonWithInactiveStuffColor = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 18,
-    fontWeight: FontWeight.w800,
+    fontWeight: FontWeight.w600,
     color: MyColors.forInactiveStuff,
+  );
+
+  static TextStyle buttonWithInactiveStuffDarkerColor = const TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: MyColors.forInactiveStuffDarker,
   );
 
   static TextStyle buttonForSms = const TextStyle(
@@ -394,7 +400,7 @@ class MyTextStyles {
   );
 
   static const TextStyle shortEventName = TextStyle(
-    fontFamily: 'RobotoMono',
+    fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 21,
     fontWeight: FontWeight.w500,

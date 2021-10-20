@@ -33,7 +33,7 @@ class SortModeSelector extends StatelessWidget {
                   isSelected: state is ByDateViewState,
                 ),
                 SortMode(
-                  icon: Ionicons.people_circle_outline,
+                  icon: Ionicons.heart_outline,
                   viewMode: ViewMode.SORT_BY_RATING,
                   isSelected: state is ByRatingViewState,
                 ),

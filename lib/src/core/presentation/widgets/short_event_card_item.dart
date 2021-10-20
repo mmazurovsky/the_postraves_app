@@ -46,7 +46,7 @@ class ShortEventCardItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Icon(
+                const Icon(
                   Ionicons.chevron_forward_outline,
                   size: 22,
                   color: MyColors.accent,
@@ -66,7 +66,7 @@ class ShortEventCardItem extends StatelessWidget {
                   width: 20,
                   alignment: Alignment.center,
                   child: Text(_event.place.city.country.emojiCode,
-                      style: TextStyle(fontSize: MyConstants.diamondWidth)),
+                      style: MyTextStyles.countryFlag),
                 ),
                 text: _event.place.city.localName,
               ),
@@ -82,14 +82,15 @@ class ShortEventCardItem extends StatelessWidget {
                 text: _event.place.name,
               ),
               topRightWidget: WidgetTextRow(
-                widget: const SizedBox(
+                widget: SizedBox(
                   width: 20,
                   child: Icon(
-                    Ionicons.people_circle_outline,
+                    _event.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
                     size: 19,
                     color: MyColors.accent,
                   ),
                 ),
+                isTextAccentColor: _event.isFollowed, 
                 text: _event.overallFollowers.toString(),
               ),
               bottomRightWidget: WidgetTextRow(

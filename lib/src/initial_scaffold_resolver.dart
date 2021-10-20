@@ -150,7 +150,7 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                         child: Text(
                           AppLocalizations.of(context)!
                               .selectCityTitle,
-                          style: MyTextStyles.cardEventTitle,
+                          style: MyTextStyles.fullEventCardTitle,
                         ),
                       ),
                       SizedBox(

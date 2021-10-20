@@ -13,7 +13,7 @@ abstract class BaseNameInterface {
 }
 
 abstract class LocationInterface {
-  String get countryEmoji;
+  String get emojiCode;
   Country get country;
   String get localName;
   String get name;

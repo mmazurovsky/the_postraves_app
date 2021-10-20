@@ -22,5 +22,5 @@ class Country with _$Country implements LocationInterface {
   Country get country => this;
 
   @override
-  String get countryEmoji => emojiCode;
+  String get emojiCode => emojiCode;
 }

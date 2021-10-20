@@ -44,21 +44,22 @@ class EventCardDetailsConcrete extends StatelessWidget {
               ),
       ),
       topRightWidget: WidgetTextRow(
-        widget: const SizedBox(
+        widget: SizedBox(
           width: 20,
           child: Icon(
-            Ionicons.people_circle_outline,
+            _event.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
             size: 19,
             color: MyColors.accent,
           ),
         ),
+        isTextAccentColor: _event.isFollowed,
         text: _event.overallFollowers.toString(),
       ),
       bottomRightWidget: WidgetTextRow(
         widget: const SizedBox(
           width: 20,
           child: Icon(
-            Ionicons.ticket_outline,
+            Ionicons.pricetag_outline,
             size: 19,
             color: MyColors.accent,
           ),

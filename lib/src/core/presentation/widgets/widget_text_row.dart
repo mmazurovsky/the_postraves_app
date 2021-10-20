@@ -5,8 +5,13 @@ import '../../utils/my_text_styles.dart';
 class WidgetTextRow extends StatelessWidget {
   final String text;
   final Widget widget;
+  final bool isTextAccentColor;
 
-  const WidgetTextRow({Key? key, required this.widget, required this.text})
+  const WidgetTextRow(
+      {Key? key,
+      required this.widget,
+      required this.text,
+      this.isTextAccentColor = false})
       : super(key: key);
 
   @override
@@ -24,7 +29,9 @@ class WidgetTextRow extends StatelessWidget {
           Flexible(
             child: Text(text,
                 overflow: TextOverflow.ellipsis,
-                style: MyTextStyles.cardEventDetails),
+                style: isTextAccentColor
+                    ? MyTextStyles.cardEventDetailsAccent
+                    : MyTextStyles.cardEventDetails),
           ),
         ],
       ),

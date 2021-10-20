@@ -23,14 +23,14 @@ class WikiSquaredOutlinedBookmarkButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           border: Border.all(
-              color: isFollowed ? MyColors.forInactiveStuff2 : MyColors.accent,
+              color: isFollowed ? MyColors.forInactiveStuffDarker : MyColors.accent,
               width: 1.5),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Icon(
-          Ionicons.bookmark,
+          isFollowed ? Ionicons.heart : Ionicons.heart_outline,
           size: 24,
-          color: isFollowed ? MyColors.forInactiveStuff2 : MyColors.accent,
+          color: isFollowed ? MyColors.forInactiveStuffDarker : MyColors.accent,
         ),
       ),
     );

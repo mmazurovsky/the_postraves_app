@@ -42,7 +42,7 @@ class SelectLocationListView<LOCATION extends LocationInterface> extends Statele
                 width: 30,
                 alignment: Alignment.center,
                 child: Text(
-                  location.countryEmoji,
+                  location.emojiCode,
                   style: const TextStyle(fontSize: 21),
                 ),
               ),

@@ -184,7 +184,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                           width: 30,
                           alignment: Alignment.center,
                           child: Text(
-                            _userCity.country.countryEmoji,
+                            _userCity.country.emojiCode,
                             style: const TextStyle(fontSize: 20),
                           ),
                         ),

@@ -9,17 +9,18 @@ import '../../../../core/presentation/widgets/animations/blink_animation_wrapper
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class WikiSubtitle extends StatelessWidget {
+  final WikiFollowableType entityType;
+  final Country? country;
+  final int? overallFollowers;
+  final bool? isFollowed;
   const WikiSubtitle({
     Key? key,
     required this.entityType,
     this.country,
     this.overallFollowers,
+    this.isFollowed,
   }) : super(key: key);
-  final WikiFollowableType entityType;
-  final Country? country;
-  final int? overallFollowers;
 
   @override
   Widget build(BuildContext context) {
@@ -32,31 +33,35 @@ class WikiSubtitle extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          country != null
+          entityType != WikiFollowableType.EVENT && country != null
               ? Text(
                   country!.emojiCode,
-                  style: TextStyle(fontSize: 20),
+                  style: MyTextStyles.countryFlag,
                 )
               : null,
-          country != null
+          entityType != WikiFollowableType.EVENT && country != null
               ? Text(
                   country!.localName,
                   style: MyTextStyles.sectionTitle,
                 )
               : null,
-          // Image.asset(
-          //   MyImages.diamond,
-          //   width: MyConstants.diamondWidth,
-          // ),
-          const Icon(
-            Ionicons.people_circle_outline,
+          Icon(
+            isFollowed == null
+                ? Ionicons.heart_outline
+                : isFollowed!
+                    ? Ionicons.heart
+                    : Ionicons.heart_outline,
             size: 19,
             color: MyColors.accent,
           ),
           overallFollowers != null
               ? Text(
                   overallFollowers.toString(),
-                  style: MyTextStyles.sectionTitle,
+                  style: isFollowed == null
+                      ? MyTextStyles.sectionTitle
+                      : isFollowed!
+                          ? MyTextStyles.sectionTitleAccent
+                          : MyTextStyles.sectionTitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 )
