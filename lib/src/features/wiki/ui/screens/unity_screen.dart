@@ -63,8 +63,9 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
       listener: (context, state) {
         if (state is UnityLoadedState) {
           context.read<FollowCubit<UnityFull>>().defineFollowState(
-                state.unity.overallFollowers,
-                state.unity.isFollowed,
+                weeklyFollowers: state.unity.weeklyFollowers,
+                overallFollowers: state.unity.overallFollowers,
+                isFollowed: state.unity.isFollowed,
               );
         }
       },

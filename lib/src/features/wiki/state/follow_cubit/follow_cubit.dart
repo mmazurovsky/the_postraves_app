@@ -6,28 +6,43 @@ import '../../../../models/interfaces/data_interfaces.dart';
 part 'follow_state.dart';
 part 'follow_cubit.freezed.dart';
 
-class FollowCubit<T extends GeneralFollowableInterface> extends Cubit<FollowState> {
+class FollowCubit<T extends GeneralFollowableInterface>
+    extends Cubit<FollowState> {
   final WikiRepository<T> _wikiRepository;
-  int? _followers;
+  int? _weeklyFollowers;
+  int? _overallFollowers;
   bool? _isFollowed;
-  FollowCubit(this._wikiRepository) : super(const FollowState(null, false));
+  FollowCubit(this._wikiRepository)
+      : super(const FollowState(
+            overallFollowers: null, weeklyFollowers: null, isFollowed: false));
 
-  void defineFollowState(int followers, bool isFollowed) {
-    _followers = followers;
+  void defineFollowState(
+      {required int overallFollowers, required int weeklyFollowers, required bool isFollowed}) {
+    _overallFollowers = overallFollowers;
+    _weeklyFollowers = weeklyFollowers;
     _isFollowed = isFollowed;
-    emit(FollowState(_followers, _isFollowed));
+    emit(FollowState(
+        overallFollowers: _overallFollowers,
+        weeklyFollowers: _weeklyFollowers,
+        isFollowed: _isFollowed));
   }
 
   void toggleFollow(T followable) {
-    if (_isFollowed!) { //todo
+    if (_isFollowed!) {
+      //todo
       _isFollowed = false;
-      _followers = _followers! - 1;
+      _overallFollowers = _overallFollowers! - 1;
+      _weeklyFollowers = _weeklyFollowers! - 1;
       _wikiRepository.unfollowFollowable(followable.id);
     } else {
       _isFollowed = true;
-      _followers = _followers! + 1;
+      _overallFollowers = _overallFollowers! + 1;
+      _weeklyFollowers = _weeklyFollowers! + 1;
       _wikiRepository.followFollowable(followable.id);
     }
-    emit(FollowState(_followers, _isFollowed));
+    emit(FollowState(
+        overallFollowers: _overallFollowers,
+        weeklyFollowers: _weeklyFollowers,
+        isFollowed: _isFollowed));
   }
 }

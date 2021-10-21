@@ -173,7 +173,7 @@ class _MyHttpRequest {
 
   void _logRequest() {
     log('${httpMethod.methodName} ${uri.toString()}');
-    log(httpHeaders[HttpHeaders.authorizationHeader].toString());
+    // log(httpHeaders[HttpHeaders.authorizationHeader].toString());
   }
 
   Future<http_client.Response> _makeRequest() {

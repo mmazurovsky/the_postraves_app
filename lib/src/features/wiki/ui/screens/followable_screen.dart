@@ -50,12 +50,14 @@ class _FollowableScreenContents<FollowCubitGeneric extends Cubit>
 
 class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
     extends State<_FollowableScreenContents<FollowCubitGeneric>> {
-  late int? _followers;
+  late int? _overallFollowers;
+  late int? _weeklyFollowers;
   late bool? _isFollowed;
 
   @override
   void didChangeDependencies() {
-    _followers = context.watch<FollowCubitGeneric>().state.followers;
+    _overallFollowers = context.watch<FollowCubitGeneric>().state.overallFollowers;
+    _weeklyFollowers = context.watch<FollowCubitGeneric>().state.weeklyFollowers;
     _isFollowed = context.watch<FollowCubitGeneric>().state.isFollowed;
     super.didChangeDependencies();
   }
@@ -69,7 +71,8 @@ class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
         WikiSubtitle(
           entityType: widget._wikiDataDto.type,
           country: widget._wikiDataDto.country,
-          overallFollowers: _followers,
+          overallFollowers: _overallFollowers,
+          weeklyFollowers: _weeklyFollowers,
           isFollowed: _isFollowed,
         ),
         widget._contents,

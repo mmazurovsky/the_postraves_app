@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/formatting_utils.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
 import '../../../../models/geo/country.dart';
 import '../../../../core/presentation/widgets/row_of_widgets.dart';
@@ -13,12 +14,14 @@ class WikiSubtitle extends StatelessWidget {
   final WikiFollowableType entityType;
   final Country? country;
   final int? overallFollowers;
+  final int? weeklyFollowers;
   final bool? isFollowed;
   const WikiSubtitle({
     Key? key,
     required this.entityType,
     this.country,
     this.overallFollowers,
+    this.weeklyFollowers,
     this.isFollowed,
   }) : super(key: key);
 
@@ -75,6 +78,13 @@ class WikiSubtitle extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
+          weeklyFollowers != null
+              ? Text(
+                  '(${FormattingUtils.resolveTextForWeeklyFollowers(weeklyFollowers!)})',
+                  style: FormattingUtils.resolveTextStyleForWeeklyFollowers(
+                      weeklyFollowers!),
+                )
+              : null,
         ],
       ),
     );

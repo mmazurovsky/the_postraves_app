@@ -58,8 +58,9 @@ class _ArtistStateManagementState extends State<_ArtistStateManagement> {
       listener: (context, state) {
         if (state is ArtistLoadedState) {
           context.read<FollowCubit<ArtistFull>>().defineFollowState(
-                state.artist.overallFollowers,
-                state.artist.isFollowed,
+                weeklyFollowers: state.artist.weeklyFollowers,
+                overallFollowers: state.artist.overallFollowers,
+                isFollowed: state.artist.isFollowed,
               );
         }
       },

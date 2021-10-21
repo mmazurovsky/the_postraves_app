@@ -78,8 +78,9 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
       listener: (context, state) {
         if (state is PlaceLoadedState) {
           context.read<FollowCubit<PlaceFull>>().defineFollowState(
-                state.place.overallFollowers,
-                state.place.isFollowed,
+                weeklyFollowers: state.place.weeklyFollowers,
+                overallFollowers: state.place.overallFollowers,
+                isFollowed: state.place.isFollowed,
               );
         }
       },

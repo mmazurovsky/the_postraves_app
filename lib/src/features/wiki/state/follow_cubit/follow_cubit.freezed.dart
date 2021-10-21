@@ -16,10 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FollowStateTearOff {
   const _$FollowStateTearOff();
 
-  _FollowState call(int? followers, bool? isFollowed) {
+  _FollowState call(
+      {int? overallFollowers, int? weeklyFollowers, bool? isFollowed}) {
     return _FollowState(
-      followers,
-      isFollowed,
+      overallFollowers: overallFollowers,
+      weeklyFollowers: weeklyFollowers,
+      isFollowed: isFollowed,
     );
   }
 }
@@ -29,7 +31,8 @@ const $FollowState = _$FollowStateTearOff();
 
 /// @nodoc
 mixin _$FollowState {
-  int? get followers => throw _privateConstructorUsedError;
+  int? get overallFollowers => throw _privateConstructorUsedError;
+  int? get weeklyFollowers => throw _privateConstructorUsedError;
   bool? get isFollowed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,7 +45,7 @@ abstract class $FollowStateCopyWith<$Res> {
   factory $FollowStateCopyWith(
           FollowState value, $Res Function(FollowState) then) =
       _$FollowStateCopyWithImpl<$Res>;
-  $Res call({int? followers, bool? isFollowed});
+  $Res call({int? overallFollowers, int? weeklyFollowers, bool? isFollowed});
 }
 
 /// @nodoc
@@ -55,13 +58,18 @@ class _$FollowStateCopyWithImpl<$Res> implements $FollowStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? followers = freezed,
+    Object? overallFollowers = freezed,
+    Object? weeklyFollowers = freezed,
     Object? isFollowed = freezed,
   }) {
     return _then(_value.copyWith(
-      followers: followers == freezed
-          ? _value.followers
-          : followers // ignore: cast_nullable_to_non_nullable
+      overallFollowers: overallFollowers == freezed
+          ? _value.overallFollowers
+          : overallFollowers // ignore: cast_nullable_to_non_nullable
+              as int?,
+      weeklyFollowers: weeklyFollowers == freezed
+          ? _value.weeklyFollowers
+          : weeklyFollowers // ignore: cast_nullable_to_non_nullable
               as int?,
       isFollowed: isFollowed == freezed
           ? _value.isFollowed
@@ -78,7 +86,7 @@ abstract class _$FollowStateCopyWith<$Res>
           _FollowState value, $Res Function(_FollowState) then) =
       __$FollowStateCopyWithImpl<$Res>;
   @override
-  $Res call({int? followers, bool? isFollowed});
+  $Res call({int? overallFollowers, int? weeklyFollowers, bool? isFollowed});
 }
 
 /// @nodoc
@@ -93,15 +101,20 @@ class __$FollowStateCopyWithImpl<$Res> extends _$FollowStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? followers = freezed,
+    Object? overallFollowers = freezed,
+    Object? weeklyFollowers = freezed,
     Object? isFollowed = freezed,
   }) {
     return _then(_FollowState(
-      followers == freezed
-          ? _value.followers
-          : followers // ignore: cast_nullable_to_non_nullable
+      overallFollowers: overallFollowers == freezed
+          ? _value.overallFollowers
+          : overallFollowers // ignore: cast_nullable_to_non_nullable
               as int?,
-      isFollowed == freezed
+      weeklyFollowers: weeklyFollowers == freezed
+          ? _value.weeklyFollowers
+          : weeklyFollowers // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFollowed: isFollowed == freezed
           ? _value.isFollowed
           : isFollowed // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -112,25 +125,31 @@ class __$FollowStateCopyWithImpl<$Res> extends _$FollowStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FollowState implements _FollowState {
-  const _$_FollowState(this.followers, this.isFollowed);
+  const _$_FollowState(
+      {this.overallFollowers, this.weeklyFollowers, this.isFollowed});
 
   @override
-  final int? followers;
+  final int? overallFollowers;
+  @override
+  final int? weeklyFollowers;
   @override
   final bool? isFollowed;
 
   @override
   String toString() {
-    return 'FollowState(followers: $followers, isFollowed: $isFollowed)';
+    return 'FollowState(overallFollowers: $overallFollowers, weeklyFollowers: $weeklyFollowers, isFollowed: $isFollowed)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _FollowState &&
-            (identical(other.followers, followers) ||
+            (identical(other.overallFollowers, overallFollowers) ||
                 const DeepCollectionEquality()
-                    .equals(other.followers, followers)) &&
+                    .equals(other.overallFollowers, overallFollowers)) &&
+            (identical(other.weeklyFollowers, weeklyFollowers) ||
+                const DeepCollectionEquality()
+                    .equals(other.weeklyFollowers, weeklyFollowers)) &&
             (identical(other.isFollowed, isFollowed) ||
                 const DeepCollectionEquality()
                     .equals(other.isFollowed, isFollowed)));
@@ -139,7 +158,8 @@ class _$_FollowState implements _FollowState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(followers) ^
+      const DeepCollectionEquality().hash(overallFollowers) ^
+      const DeepCollectionEquality().hash(weeklyFollowers) ^
       const DeepCollectionEquality().hash(isFollowed);
 
   @JsonKey(ignore: true)
@@ -149,10 +169,15 @@ class _$_FollowState implements _FollowState {
 }
 
 abstract class _FollowState implements FollowState {
-  const factory _FollowState(int? followers, bool? isFollowed) = _$_FollowState;
+  const factory _FollowState(
+      {int? overallFollowers,
+      int? weeklyFollowers,
+      bool? isFollowed}) = _$_FollowState;
 
   @override
-  int? get followers => throw _privateConstructorUsedError;
+  int? get overallFollowers => throw _privateConstructorUsedError;
+  @override
+  int? get weeklyFollowers => throw _privateConstructorUsedError;
   @override
   bool? get isFollowed => throw _privateConstructorUsedError;
   @override

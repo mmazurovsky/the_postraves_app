@@ -69,8 +69,9 @@ class _EventStateManagementState extends State<_EventStateManagement> {
       listener: (context, state) {
         if (state is EventLoadedState) {
           context.read<FollowCubit<EventFull>>().defineFollowState(
-                state.event.overallFollowers,
-                state.event.isFollowed,
+                weeklyFollowers: state.event.weeklyFollowers,
+                overallFollowers: state.event.overallFollowers,
+                isFollowed: state.event.isFollowed,
               );
         }
       },

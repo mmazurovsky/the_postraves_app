@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/widgets.dart';
+import 'package:the_postraves_app/src/core/utils/my_text_styles.dart';
 import '../../models/enum/money_currency.dart';
 import '../../models/related_to_event/ticket_price.dart';
 import '../../models/related_to_event/ticket_price_range.dart';
@@ -10,8 +11,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class FormattingUtils {
   FormattingUtils();
 
+    static String resolveTextForWeeklyFollowers(int weeklyFollowers) {
+    return weeklyFollowers > 0
+                          ? '+$weeklyFollowers'
+                          : weeklyFollowers.toString();
+  }
+
+  static TextStyle resolveTextStyleForWeeklyFollowers(int weeklyFollowers) {
+    if (weeklyFollowers > 0) {
+      return MyTextStyles.shortEntityPositiveWeeklyRating;
+    } else if (weeklyFollowers < 0) {
+      return MyTextStyles.shortEntityNegativeWeeklyRating;
+    } else {
+      return MyTextStyles.shortEntityOverallRating;
+    }
+  }
+
   static String getWeekdayName(
-      {required BuildContext context, required int weekdayNumber, required bool isShortened}) {
+      {required BuildContext context,
+      required int weekdayNumber,
+      required bool isShortened}) {
     if (weekdayNumber < 1 || weekdayNumber > 7) {
       // TODO Exception
       return '';
@@ -61,7 +80,8 @@ class FormattingUtils {
     }
   }
 
-  static String getMonthName({required BuildContext context, required int month}) {
+  static String getMonthName(
+      {required BuildContext context, required int month}) {
     if (month < 1 || month > 12) {
       return ''; // TODO Exception
     }
@@ -92,7 +112,7 @@ class FormattingUtils {
     }
   }
 
-  // todo check without 
+  // todo check without
   static TicketPriceRange getTicketPriceRangeForTickets(
       List<TicketPrice> tickets) {
     assert(tickets.isNotEmpty);
@@ -112,7 +132,7 @@ class FormattingUtils {
       TicketPriceRange ticketPriceRange = TicketPriceRange(
         minPrice: tickets.first.price,
         maxPrice: null,
-        currency: tickets.first.currency, 
+        currency: tickets.first.currency,
       );
       return ticketPriceRange;
     }

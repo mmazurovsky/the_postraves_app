@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/formatting_utils.dart';
 import '../../../utils/my_colors.dart';
 
 import '../../../../models/interfaces/data_interfaces.dart';
@@ -21,13 +22,8 @@ class FollowableItemData<T extends GeneralFollowableInterface>
 
   TextStyle _resolveFollowersTextStyle() {
     if (showWeeklyFollowers) {
-      if (entity.weeklyFollowers > 0) {
-        return MyTextStyles.shortEntityPositiveWeeklyRating;
-      } else if (entity.weeklyFollowers < 0) {
-        return MyTextStyles.shortEntityNegativeWeeklyRating;
-      } else {
-        return MyTextStyles.shortEntityOverallRating;
-      }
+      return FormattingUtils.resolveTextStyleForWeeklyFollowers(
+          entity.weeklyFollowers);
     } else {
       if (entity.isFollowed) {
         return MyTextStyles.shortEntityRatingAccent;
@@ -53,8 +49,7 @@ class FollowableItemData<T extends GeneralFollowableInterface>
                     children: [
                       Text(
                         entity.country!.emojiCode,
-                        style:
-                            MyTextStyles.countryFlag,
+                        style: MyTextStyles.countryFlag,
                       ),
                       const SizedBox(width: 8),
                     ],
@@ -87,9 +82,8 @@ class FollowableItemData<T extends GeneralFollowableInterface>
                 const SizedBox(width: 8),
                 Text(
                   showWeeklyFollowers
-                      ? entity.weeklyFollowers > 0
-                          ? '+${entity.weeklyFollowers}'
-                          : entity.weeklyFollowers.toString()
+                      ? FormattingUtils.resolveTextForWeeklyFollowers(
+                          entity.weeklyFollowers)
                       : entity.overallFollowers.toString(),
                   style: _resolveFollowersTextStyle(),
                 ),
