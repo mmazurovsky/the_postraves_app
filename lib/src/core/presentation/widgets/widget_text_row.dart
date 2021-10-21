@@ -19,8 +19,6 @@ class WidgetTextRow extends StatelessWidget {
     return SizedBox(
       height: 25,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           widget,
           const SizedBox(
@@ -31,7 +29,7 @@ class WidgetTextRow extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: isTextAccentColor
                     ? MyTextStyles.cardEventDetailsAccent
-                    : MyTextStyles.cardEventDetails),
+                    : MyTextStyles.cardEventDetailsInActive),
           ),
         ],
       ),

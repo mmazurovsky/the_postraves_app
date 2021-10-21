@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/my_text_styles.dart';
 import '../../../../core/provider/city_list_provider.dart';
 import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
 import '../../state/shows_cubit/shows_cubit.dart';
@@ -70,10 +71,13 @@ class _ShowsScreenState extends State<ShowsScreen> {
           return [
             SliverAppBar(
               floating: true,
-              leading: AppBarButton(
+              title: const Text('POSTRAVES', style: MyTextStyles.appTitle),
+              centerTitle: false,
+              actions: [
+                AppBarButton(
                 containerOpacity: 0,
                 iconWidget: const Icon(
-                  Ionicons.location_outline,
+                  Ionicons.compass_outline,
                   color: MyColors.main,
                   size: 25,
                 ),
@@ -88,12 +92,10 @@ class _ShowsScreenState extends State<ShowsScreen> {
                   ),
                 ),
               ),
-              title: Image.asset(MyImages.diamond, width: 23),
-              actions: [
                 AppBarButton(
                   containerOpacity: 0,
                   iconWidget: const Icon(
-                    Ionicons.swap_vertical_outline,
+                    Ionicons.easel_outline,
                     color: MyColors.main,
                     size: 25,
                   ),

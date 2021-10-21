@@ -18,7 +18,7 @@ class EventCardRow extends StatelessWidget {
         leftWidget,
         Text(
           rightText,
-          style: MyTextStyles.cardEventDetails,
+          style: MyTextStyles.cardEventDetailsInActive,
         ),
       ],
     );

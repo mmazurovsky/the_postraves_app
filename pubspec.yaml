@@ -61,7 +61,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.1.2
   json_serializable: ^4.1.4
-  flutter_native_splash: ^1.1.8+4
+  flutter_native_splash: ^1.2.4
   freezed: ^0.14.2
   flutter_lints: ^1.0.4
 
@@ -73,31 +73,13 @@ flutter:
 
   assets:
     # emojis
-    - assets/images/emojis/gem_emoji.png
     - assets/images/emojis/heart_emoji.png
-    - assets/images/emojis/calendar_emoji.png
-    - assets/images/emojis/money_emoji.png
-    - assets/images/emojis/pin_emoji.png
-    - assets/images/emojis/crown_emoji.png
-    - assets/images/emojis/ticket_emoji.png
-    - assets/images/emojis/star_emoji.png
     - assets/images/emojis/fire_emoji.png
     - assets/images/emojis/finish_emoji.png
     - assets/images/emojis/link_emoji.png
     - assets/images/emojis/dizzy_emoji.png
-    # emojis country
-    - assets/images/emojis/country/belarus_emoji.png
-    - assets/images/emojis/country/belgium_emoji.png
-    - assets/images/emojis/country/france_emoji.png
-    - assets/images/emojis/country/germany_emoji.png
-    - assets/images/emojis/country/netherlands_emoji.png
-    - assets/images/emojis/country/russia_emoji.png
-    - assets/images/emojis/country/ukraine_emoji.png
     # images
-    - assets/images/diamond.png
     - assets/images/map_pin.png
-    - assets/images/entity_placeholder.png
-    - assets/images/event_card_placeholder.png
     - assets/images/soundcloud_logo.png
     - assets/images/instagram_logo.png
     - assets/images/telegram_logo.png

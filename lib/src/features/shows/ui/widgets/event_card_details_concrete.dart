@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/my_text_styles.dart';
 import '../../../wiki/ui/widgets/event_status_indicator.dart';
 import '../../../../models/enum/event_status.dart';
 import '../../../../models/shorts/event_short.dart';
@@ -11,7 +12,9 @@ import 'event_card_details.dart';
 
 class EventCardDetailsConcrete extends StatelessWidget {
   final EventShort _event;
-  const EventCardDetailsConcrete(this._event, {Key? key}) : super(key: key);
+  const EventCardDetailsConcrete(this._event,
+      {Key? key,})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +23,14 @@ class EventCardDetailsConcrete extends StatelessWidget {
         widget: SizedBox(
           width: 20,
           child: Icon(
-            Ionicons.location_outline,
+            _event.place.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
             size: 19,
-            color: MyColors.accent,
+            color: _event.place.isFollowed
+                ? MyColors.accent
+                : MyColors.forInactiveStuff,
           ),
         ),
+        isTextAccentColor: _event.place.isFollowed,
         text: _event.place.name,
       ),
       bottomLeftWidget: WidgetTextRow(
@@ -32,7 +38,7 @@ class EventCardDetailsConcrete extends StatelessWidget {
           width: 20,
           child: _event.status != EventStatus.LIVE
               ? Icon(Ionicons.calendar_clear_outline,
-                  size: 19, color: MyColors.accent)
+                  size: 19, color: MyColors.forInactiveStuff)
               : EventStatusIndicator(_event.status),
         ),
         text: _event.status != EventStatus.UPCOMING &&
@@ -49,24 +55,26 @@ class EventCardDetailsConcrete extends StatelessWidget {
           child: Icon(
             _event.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
             size: 19,
-            color: MyColors.accent,
+            color:
+                _event.isFollowed ? MyColors.accent : MyColors.forInactiveStuff,
           ),
         ),
         isTextAccentColor: _event.isFollowed,
         text: _event.overallFollowers.toString(),
       ),
       bottomRightWidget: WidgetTextRow(
-        widget: const SizedBox(
-          width: 20,
-          child: Icon(
-            Ionicons.pricetag_outline,
-            size: 19,
-            color: MyColors.accent,
-          ),
-        ),
-        text: FormattingUtils.resolveTicketsPrice(
-            context: context, priceRangeOfTickets: _event.priceRangeOfTickets),
-      ),
+              widget: const SizedBox(
+                width: 20,
+                child: Icon(
+                  Ionicons.pricetag_outline,
+                  size: 19,
+                  color: MyColors.forInactiveStuff,
+                ),
+              ),
+              text: FormattingUtils.resolveTicketsPrice(
+                  context: context,
+                  priceRangeOfTickets: _event.priceRangeOfTickets),
+            ),
       verticalPaddingOfContent: 20,
     );
   }

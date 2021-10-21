@@ -84,12 +84,6 @@ class RouteGenerator {
           settings: routeSettings,
           builder: (_) => SignInWithEmailAndLinkScreen());
     }
-
-    // else if (routeSettings.name == MyNavigationRoutes.profile) {
-    //   return MaterialPageRoute(
-    //       settings: routeSettings,
-    //       builder: (_) => ProfileScreen());
-    // }
     else if (routeSettings.name == MyNavigationRoutes.event) {
       return MaterialPageRoute(
           settings: routeSettings,
@@ -123,14 +117,6 @@ class RouteGenerator {
                 args!['wikiDataDto'],
               ));
     }
-    // else if (routeSettings.name == MyNavigationRoutes.signInMethods) {
-    //   return MaterialPageRoute(
-    //       settings: routeSettings, builder: (_) => SignInMethodsScreen());
-    // } else if (routeSettings.name == MyNavigationRoutes.signInWithEmail) {
-    //   return MaterialPageRoute(
-    //       settings: routeSettings,
-    //       builder: (_) => SignInWithEmailAndPasswordScreen());
-    // }
     else if (routeSettings.name == MyNavigationRoutes.wikiShare) {
       return MaterialPageRoute(
           settings: routeSettings,

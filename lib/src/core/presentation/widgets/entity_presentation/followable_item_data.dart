@@ -77,7 +77,7 @@ class FollowableItemData<T extends GeneralFollowableInterface>
                 Icon(
                   entity.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
                   size: 19,
-                  color: MyColors.accent,
+                  color: entity.isFollowed ? MyColors.accent : MyColors.forInactiveStuff,
                 ),
                 const SizedBox(width: 8),
                 Text(

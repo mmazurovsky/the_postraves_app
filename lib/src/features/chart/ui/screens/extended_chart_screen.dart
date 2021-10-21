@@ -62,7 +62,7 @@ class _ExtendedChartScreenState<T extends GeneralFollowableInterface>
         elevation: 3,
         leading: const AppBarBackButton(),
         title: AppBarTitle(
-          title: widget.chartType.getChartTitle(context),
+          title: widget.chartType.getChartTitle(context).toUpperCase(),
         ),
       ),
       body: BlocConsumer<ChartsCubit, ChartsState>(listener: (context, state) {

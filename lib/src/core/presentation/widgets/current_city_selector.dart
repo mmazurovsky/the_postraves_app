@@ -35,7 +35,7 @@ class _CurrentCitySelectorState extends State<CurrentCitySelector> {
   Widget build(BuildContext context) {
     return ModalBottomSheetContent(
       height: ScreenSize.height * 0.33,
-      iconData: Ionicons.location_outline,
+      iconData: Ionicons.compass_outline,
       title: AppLocalizations.of(context)!.selectCityTitle,
       content: SelectLocationListView<City>(
         locations: widget.cities,

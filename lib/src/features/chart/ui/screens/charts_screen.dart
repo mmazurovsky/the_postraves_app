@@ -182,7 +182,7 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   imagePath: MyEmoji.fire,
                   titleTextSpans: [
                     TextSpan(
-                        text: AppLocalizations.of(context)!.chartOfTheWeekTitle,
+                        text: AppLocalizations.of(context)!.chartOfTheWeekTitle.toUpperCase(),
                         style: MyTextStyles.chartTitle),
                   ],
                   topFollowables: weeklyChart!.take(5).toList(),
@@ -198,7 +198,7 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   imagePath: MyEmoji.dizzy,
                   titleTextSpans: [
                     TextSpan(
-                        text: AppLocalizations.of(context)!.chartOverallTitle,
+                        text: AppLocalizations.of(context)!.chartOverallTitle.toUpperCase(),
                         style: MyTextStyles.chartTitle),
                   ],
                   topFollowables: overallChart!.take(5).toList(),

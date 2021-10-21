@@ -19,7 +19,7 @@ class SortModeSelector extends StatelessWidget {
         builder: (context, state) {
       return ModalBottomSheetContent(
         height: ScreenSize.height * 0.38,
-        iconData: Ionicons.swap_vertical_outline,
+        iconData: Ionicons.easel_outline,
         title: AppLocalizations.of(context)!.sortModeSelectorTitle,
         content: Padding(
           padding: const EdgeInsets.only(top: 8),

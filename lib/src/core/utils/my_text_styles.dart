@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 import 'my_colors.dart';
 
 class MyTextStyles {
+
+  static const TextStyle appTitle = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.main,
+    fontSize: 23,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle fullEventCardTitle = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 27,
@@ -32,15 +40,15 @@ class MyTextStyles {
 
   static const TextStyle wikiTitle = fullEventCardTitle;
 
-  static const TextStyle cardEventDetails = TextStyle(
+  static const TextStyle cardEventDetailsInActive = TextStyle(
     fontFamily: 'IBMPlexMono',
     fontSize: 17,
     fontWeight: FontWeight.w500,
-    color: MyColors.main,
+    color: MyColors.forInactiveStuff
   );
 
   static TextStyle cardEventDetailsAccent =
-      cardEventDetails.copyWith(color: MyColors.accent);
+      cardEventDetailsInActive.copyWith(color: MyColors.accent);
 
   static const TextStyle cardEventBadge = TextStyle(
     fontFamily: 'IBMPlexMono',
@@ -65,7 +73,7 @@ class MyTextStyles {
 
   static const TextStyle ratingsWeeklyWinnerSubtitle = TextStyle(
     fontFamily: 'IBMPlexMono',
-    color: MyColors.accent,
+    color: MyColors.forInactiveStuff,
     fontSize: 17,
     fontWeight: FontWeight.w600,
     wordSpacing: -4,
@@ -371,13 +379,6 @@ class MyTextStyles {
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 16,
-    fontWeight: FontWeight.w500,
-  );
-
-  static const TextStyle appTitle = TextStyle(
-    fontFamily: 'IBMPlexMono',
-    color: MyColors.main,
-    fontSize: 20,
     fontWeight: FontWeight.w500,
   );
 

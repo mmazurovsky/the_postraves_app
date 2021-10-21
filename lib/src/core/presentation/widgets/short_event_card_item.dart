@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/features/shows/ui/widgets/event_card_details_concrete.dart';
 import '../../../features/shows/ui/widgets/event_card_details.dart';
 import '../../../models/enum/event_status.dart';
 import '../../../models/shorts/event_short.dart';
@@ -60,55 +61,8 @@ class ShortEventCardItem extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            EventCardDetails(
-              topLeftWidget: WidgetTextRow(
-                widget: Container(
-                  width: 20,
-                  alignment: Alignment.center,
-                  child: Text(_event.place.city.country.emojiCode,
-                      style: MyTextStyles.countryFlag),
-                ),
-                text: _event.place.city.localName,
-              ),
-              bottomLeftWidget: WidgetTextRow(
-                widget: SizedBox(
-                  width: 20,
-                  child: Icon(
-                    Ionicons.location_outline,
-                    size: 19,
-                    color: MyColors.accent,
-                  ),
-                ),
-                text: _event.place.name,
-              ),
-              topRightWidget: WidgetTextRow(
-                widget: SizedBox(
-                  width: 20,
-                  child: Icon(
-                    _event.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
-                    size: 19,
-                    color: MyColors.accent,
-                  ),
-                ),
-                isTextAccentColor: _event.isFollowed, 
-                text: _event.overallFollowers.toString(),
-              ),
-              bottomRightWidget: WidgetTextRow(
-                widget: SizedBox(
-                  width: 20,
-                  child: _event.status != EventStatus.LIVE
-                      ? Icon(Ionicons.calendar_clear_outline,
-                          size: 19, color: MyColors.accent)
-                      : EventStatusIndicator(_event.status),
-                ),
-                text: _event.status != EventStatus.UPCOMING
-                    ? _event.status.getStatusName(context)
-                    : FormattingUtils.getFormattedDateShort(
-                        context: context,
-                        dateTime: _event.startDateTime,
-                      ),
-              ),
-              verticalPaddingOfContent: 8,
+            EventCardDetailsConcrete(
+              _event,
             ),
           ],
         ),

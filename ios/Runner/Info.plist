@@ -4,6 +4,8 @@
 	<dict>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
+		<key>CFBundleDisplayName</key>
+		<string>postraves</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -23,67 +25,14 @@
 			<dict>
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
-				<key>CFBundleURLName</key>
-				<string>Bundle ID</string>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>com.mmazurovsky.thePostravesApp</string>
+					<string>com.googleusercontent.apps.531202770861-vqurdupgpfv9c0peekp218kcug7ljjso</string>
 				</array>
 			</dict>
 		</array>
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
-		<key>LSRequiresIPhoneOS</key>
-		<true/>
-		<key>NSAppTransportSecurity</key>
-		<dict>
-			<key>NSAllowsLocalNetworking</key>
-			<true/>
-		</dict>
-		<key>UILaunchStoryboardName</key>
-		<string>LaunchScreen</string>
-		<key>UIMainStoryboardFile</key>
-		<string>Main</string>
-		<key>UISupportedInterfaceOrientations</key>
-		<array>
-			<string>UIInterfaceOrientationPortrait</string>
-			<string>UIInterfaceOrientationLandscapeLeft</string>
-			<string>UIInterfaceOrientationLandscapeRight</string>
-		</array>
-		<key>UISupportedInterfaceOrientations~ipad</key>
-		<array>
-			<string>UIInterfaceOrientationPortrait</string>
-			<string>UIInterfaceOrientationPortraitUpsideDown</string>
-			<string>UIInterfaceOrientationLandscapeLeft</string>
-			<string>UIInterfaceOrientationLandscapeRight</string>
-		</array>
-		<key>UIViewControllerBasedStatusBarAppearance</key>
-		<false/>
-		<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
-		<!-- Google Sign-in Section -->
-		<key>CFBundleURLTypes</key>
-		<array>
-			<dict>
-				<key>CFBundleTypeRole</key>
-				<string>Editor</string>
-				<key>CFBundleURLSchemes</key>
-				<array>
-					<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-					<string>com.googleusercontent.apps.531202770861-vqurdupgpfv9c0peekp218kcug7ljjso</string>
-				</array>
-			</dict>
-		</array>
-		<!-- End of the Google Sign-in Section -->
-		<key>NSPhotoLibraryUsageDescription</key>
-		<!-- Describe why your app needs permission for the photo library. This is called Privacy - Photo Library Usage Description in the visual editor -->
-		<string>This app requires access to the photo library to make avatar</string>
-		<key>NSCameraUsageDescription</key>
-		<!-- Describe why your app needs access to the camera. This is called Privacy - Camera Usage Description in the visual editor -->
-		<string>This app requires access to the camera to make avatar</string>
-		<key>NSMicrophoneUsageDescription</key>
-		<!-- Describe why your app needs access to the microphone, if you intend to record videos. This is called Privacy - Microphone Usage Description in the visual editor -->
-		<string>This app requires access to the microphone to record your audio</string>
-		<!-- Configuration for map launcher package -->
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
 			<string>comgooglemaps</string>
@@ -99,5 +48,37 @@
 			<string>qqmap</string>
 			<string>here-location</string>
 		</array>
+		<key>LSRequiresIPhoneOS</key>
+		<true/>
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsLocalNetworking</key>
+			<true/>
+		</dict>
+		<key>NSCameraUsageDescription</key>
+		<string>This app requires access to the camera to make avatar</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>This app requires access to the microphone to record your audio</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>This app requires access to the photo library to make avatar</string>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen</string>
+		<key>UIMainStoryboardFile</key>
+		<string>Main</string>
+		<key>UISupportedInterfaceOrientations</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+		</array>
+		<key>UISupportedInterfaceOrientations~ipad</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+		</array>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false/>
+		<key>UIStatusBarHidden</key>
+		<false/>
 	</dict>
 </plist>

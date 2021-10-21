@@ -28,18 +28,12 @@ class DateForEventsList extends StatelessWidget {
         ),
       ),
       alignment: Alignment.centerLeft,
-      child: Row(
-        children: [
-          const Icon(Ionicons.calendar_clear_outline, size: 18, color: MyColors.forInactiveStuff),
-          const SizedBox(width: 10,),
-          Text(
-            FormattingUtils.getFormattedDateLong(
-              context: context,
-              dateTime: _dateTime,
-            ),
-            style: MyTextStyles.showsByDateDate,
-          ),
-        ],
+      child: Text(
+        FormattingUtils.getFormattedDateLong(
+          context: context,
+          dateTime: _dateTime,
+        ),
+        style: MyTextStyles.showsByDateDate,
       ),
     );
   }

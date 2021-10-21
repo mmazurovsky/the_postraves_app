@@ -170,7 +170,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
             color: MyColors.mainOppositeColor,
           ),
           distanceBetweenLeadingAndText: 7,
-          buttonColor: MyColors.accent,
+          buttonColor: MyColors.main,
           mainAxisAlignment: MainAxisAlignment.center,
           text: AppLocalizations.of(context)!.profileShowMyFollowing,
           textStyle: MyTextStyles.buttonWithOppositeColor,
@@ -182,7 +182,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
         AboutSection(widget.userProfile.about),
         const MyBigSpacer(),
         const SectionDivider(needHorizontalMargin: true),
-              const MyMediumPlusSpacer(),
+        const MyMediumPlusSpacer(),
         SectionTitle(
             sectionTitle: AppLocalizations.of(context)!.profileCurrentCity),
         const MySmallestSpacer(),
@@ -212,7 +212,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
         const MyBigSpacer(),
         MyOutlinedButton(
           leadingIcon: const Icon(
-            Ionicons.cog_outline,
+            Ionicons.settings_outline,
             size: 20,
             color: MyColors.main,
           ),
@@ -296,7 +296,7 @@ class SettingsSelector extends StatelessWidget {
     final settingsList = _getSettingsList(context);
     return ModalBottomSheetContent(
       height: ScreenSize.height * 0.4,
-      iconData: Ionicons.cog_outline,
+      iconData: Ionicons.settings_outline,
       title: AppLocalizations.of(context)!.settings, //todo
       content: ListView.separated(
         padding: const EdgeInsets.only(top: 10),
