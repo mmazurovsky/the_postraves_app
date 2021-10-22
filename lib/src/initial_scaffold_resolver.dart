@@ -47,7 +47,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
           authenticated: (userProfile) => context
               .read<CurrentCityProvider>()
               .changeCurrentCity(userProfile.currentCity),
-          orElse: () {}); //todo check it is working
+          orElse: () {}); //TODO: check it is working
     });
 
     CurrentCityProvider currentCityProvider =
@@ -61,7 +61,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
               currentCityProvider.changeCurrentCity(currentCityFromLocal);
             }
           },
-          failure: (failure, failureMessage) => {}); //todo failure processing
+          failure: (failure, failureMessage) => {}); //TODO: failure processing
     });
 
     CityListProvider cityListProvider = context.read<CityListProvider>();
@@ -148,8 +148,7 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                     children: [
                       MyHorizontalPadding(
                         child: Text(
-                          AppLocalizations.of(context)!
-                              .selectCityTitle,
+                          AppLocalizations.of(context)!.selectCityTitle,
                           style: MyTextStyles.fullEventCardTitle,
                         ),
                       ),

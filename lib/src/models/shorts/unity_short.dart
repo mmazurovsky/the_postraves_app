@@ -23,7 +23,7 @@ class UnityShort
     required int weeklyFollowers,
     required bool isFollowed,
     String? imageLink,
-    @Default(null) Country? country, //todo delete default
+    @Default(null) Country? country, //TODO: delete default
   }) = _UnityShort;
 
   factory UnityShort.fromJson(Map<String, dynamic> json) =>

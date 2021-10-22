@@ -39,7 +39,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     createdUserAccount.when(
       success: (data) => _authenticationBloc.updateAuthStatus(),
-      failure: (failure, failureMessage) {}, //todo
+      failure: (failure, failureMessage) {}, //TODO:
     );
   }
 
@@ -58,7 +58,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     updatedUserProfile.when(
         success: (data) => _authenticationBloc.updateAuthStatus(),
-        failure: (failure, failureMessage) {}); //todo
+        failure: (failure, failureMessage) {}); //TODO:
   }
 
   void updateOnlyCityInUserProfile(City newCity) async {
@@ -73,7 +73,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       updatedUserProfile.when(
           success: (data) => _authenticationBloc.updateAuthStatus(),
-          failure: (failure, failureMessage) {}); //todo
+          failure: (failure, failureMessage) {}); //TODO:
     }
   }
 
@@ -87,7 +87,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         isFree = responseIsNicknameFree;
       },
       failure: (failure, failureMessage) {
-        isFree = false; //todo failure processing
+        isFree = false; //TODO: failure processing
       },
     );
     return isFree;

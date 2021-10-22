@@ -59,7 +59,7 @@ class _WikiCanvasState extends State<WikiCanvas> {
       body: SafeArea(
         child: CustomScrollView(
           controller: _scrollController,
-          //todo check on android
+          //TODO: check on android
           physics:
               AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           slivers: [

@@ -45,7 +45,7 @@ class DynamicLinkService {
         }
       }
     }, onError: (OnLinkErrorException e) async {
-      //todo
+      //TODO:
     });
 
     final PendingDynamicLinkData? data =
@@ -59,15 +59,15 @@ class DynamicLinkService {
 
   static Future<Uri> createDynamicLink(String pathToPage) async {
     final dynamicLinkParams = DynamicLinkParameters(
-      uriPrefix:
-          MyConstants.dynamicLinkUrlPrefix, //todo change after removing old ios project from firebase
+      uriPrefix: MyConstants
+          .dynamicLinkUrlPrefix, //TODO: change after removing old ios project from firebase
       link: Uri.parse('https://postraves.com$pathToPage'),
       iosParameters: IosParameters(
         appStoreId: '1301190736',
         bundleId: MyConstants.iosBundleId,
       ),
       androidParameters: AndroidParameters(
-        packageName: MyConstants.androidPackageName, //todo change
+        packageName: MyConstants.androidPackageName, //TODO: change
         fallbackUrl: Uri.parse(
             'https://apps.apple.com/us/app/fitness-lab-bodybuilding/id1301190736'),
       ),

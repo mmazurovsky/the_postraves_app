@@ -21,8 +21,7 @@ class UnityCubit extends Cubit<UnityState> {
     final responseBasicRequest = _wikiRepository.fetchBasicDataById(id);
     final responseArtistsRequest =
         _unityRepository.fetchArtistsForUnityById(id);
-    final responseEventsRequest =
-        _unityRepository.fetchEventsForArtistById(id);
+    final responseEventsRequest = _unityRepository.fetchEventsForArtistById(id);
 
     final responseBasic = await responseBasicRequest;
     final responseArtists = await responseArtistsRequest;
@@ -44,6 +43,6 @@ class UnityCubit extends Cubit<UnityState> {
 
       emit(UnityState.loaded(
           responseBasicData, responseUnitiesData, responseEventsData));
-    } else {} //todo
+    } else {} //TODO:
   }
 }

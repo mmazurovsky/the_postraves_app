@@ -11,10 +11,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class FormattingUtils {
   FormattingUtils();
 
-    static String resolveTextForWeeklyFollowers(int weeklyFollowers) {
+  static String resolveTextForWeeklyFollowers(int weeklyFollowers) {
     return weeklyFollowers > 0
-                          ? '+$weeklyFollowers'
-                          : weeklyFollowers.toString();
+        ? '+$weeklyFollowers'
+        : weeklyFollowers.toString();
   }
 
   static TextStyle resolveTextStyleForWeeklyFollowers(int weeklyFollowers) {
@@ -112,7 +112,7 @@ class FormattingUtils {
     }
   }
 
-  // todo check without
+  // TODO: check without
   static TicketPriceRange getTicketPriceRangeForTickets(
       List<TicketPrice> tickets) {
     assert(tickets.isNotEmpty);

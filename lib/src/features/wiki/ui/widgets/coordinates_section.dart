@@ -50,27 +50,27 @@ class CoordinatesSection extends StatelessWidget {
                     mapId: MyConstants.googleMapId,
                     zoom: 14,
                     markers: [
-                      Marker(
-                        color: MyColors.accent,
-                        label: 'A',
+                      // Marker(
+                      //   color: MyColors.accent,
+                      //   label: 'A',
+                      //   locations: [
+                      //     Location(
+                      //       _place.coordinate.latitude,
+                      //       _place.coordinate.longitude,
+                      //     ),
+                      //   ],
+                      // ),
+                      Marker.custom(
+                        anchor: MarkerAnchor.bottom,
+                        // TODO: upload to own filestore
+                        icon: "https://i.ibb.co/b5htDrv/pin.png",
                         locations: [
                           Location(
                             _place.coordinate.latitude,
                             _place.coordinate.longitude,
                           ),
                         ],
-                      ),
-                      //todo
-                      //         Marker.custom(
-                      //   anchor: MarkerAnchor.bottom,
-                      //   icon: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/round-pushpin_1f4cd.png",
-                      //   locations: [
-                      //     Location(
-                      //               loadedPlace.coordinate.latitude,
-                      //               loadedPlace.coordinate.longitude,
-                      //             ),
-                      //   ],
-                      // )
+                      )
                     ],
                     center: Location(
                       _place.coordinate.latitude,

@@ -51,7 +51,7 @@ class _ChartsScreenState extends State<ChartsScreen>
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
       _currentCity = context
           .read<CurrentCityProvider>()
-          .currentCity!; //todo check it is ok to ! here
+          .currentCity!; //TODO: check it is ok to ! here
       BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity!);
     }
   }
@@ -182,7 +182,9 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   imagePath: MyEmoji.fire,
                   titleTextSpans: [
                     TextSpan(
-                        text: AppLocalizations.of(context)!.chartOfTheWeekTitle.toUpperCase(),
+                        text: AppLocalizations.of(context)!
+                            .chartOfTheWeekTitle
+                            .toUpperCase(),
                         style: MyTextStyles.chartTitle),
                   ],
                   topFollowables: weeklyChart!.take(5).toList(),
@@ -198,7 +200,9 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   imagePath: MyEmoji.dizzy,
                   titleTextSpans: [
                     TextSpan(
-                        text: AppLocalizations.of(context)!.chartOverallTitle.toUpperCase(),
+                        text: AppLocalizations.of(context)!
+                            .chartOverallTitle
+                            .toUpperCase(),
                         style: MyTextStyles.chartTitle),
                   ],
                   topFollowables: overallChart!.take(5).toList(),
@@ -239,16 +243,13 @@ class _InactiveSearchBar extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  // TODO: implement maxExtent
   double get maxExtent => 56;
 
   @override
-  // TODO: implement minExtent
   double get minExtent => 56;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    // TODO: implement shouldRebuild
     return false;
   }
 }

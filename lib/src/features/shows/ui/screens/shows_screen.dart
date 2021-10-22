@@ -47,9 +47,9 @@ class _ShowsScreenState extends State<ShowsScreen> {
     super.didChangeDependencies();
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
       _currentCity =
-          context.read<CurrentCityProvider>().currentCity!; //todo risky !
+          context.read<CurrentCityProvider>().currentCity!; //TODO: risky !
       BlocProvider.of<ShowsCubit>(context)
-          .fullyLoadShows(_currentCity!); //todo risky !
+          .fullyLoadShows(_currentCity!); //TODO: risky !
     }
 
     _cities = context.watch<CityListProvider>().cityList;
@@ -65,7 +65,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
       child: NestedScrollView(
         controller: TabItem.shows.tabScrollController,
         physics: BouncingScrollPhysics(),
-        // todo wtf it so glithy
+        // TODO: wtf it so glithy
         // floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
@@ -75,23 +75,23 @@ class _ShowsScreenState extends State<ShowsScreen> {
               centerTitle: false,
               actions: [
                 AppBarButton(
-                containerOpacity: 0,
-                iconWidget: const Icon(
-                  Ionicons.compass_outline,
-                  color: MyColors.main,
-                  size: 25,
-                ),
-                onTap: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => CurrentCitySelector(
-                    currentCity: _currentCity!,
-                    cities: _cities!,
-                    onSelected: (City newCurrentCity) => context
-                        .read<CurrentCityProvider>()
-                        .changeCurrentCity(newCurrentCity),
+                  containerOpacity: 0,
+                  iconWidget: const Icon(
+                    Ionicons.compass_outline,
+                    color: MyColors.main,
+                    size: 25,
+                  ),
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => CurrentCitySelector(
+                      currentCity: _currentCity!,
+                      cities: _cities!,
+                      onSelected: (City newCurrentCity) => context
+                          .read<CurrentCityProvider>()
+                          .changeCurrentCity(newCurrentCity),
+                    ),
                   ),
                 ),
-              ),
                 AppBarButton(
                   containerOpacity: 0,
                   iconWidget: const Icon(
@@ -117,8 +117,9 @@ class _ShowsScreenState extends State<ShowsScreen> {
               _refreshController2.refreshCompleted();
             } else if (state is ShowsFailureState) {
               MyFlushbar.showMyFlushbar(
-                  //todo localization
-                  flushbarMessage: 'Отсутствует подключение к интернету', //todo
+                  //TODO: localization
+                  flushbarMessage:
+                      'Отсутствует подключение к интернету', //TODO:
                   flushbarIcon: const Icon(
                     Ionicons.alert_circle_outline,
                     color: Colors.red,

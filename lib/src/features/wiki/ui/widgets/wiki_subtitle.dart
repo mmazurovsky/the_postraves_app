@@ -56,7 +56,7 @@ class WikiSubtitle extends StatelessWidget {
                     : Ionicons.heart_outline,
             size: 19,
             color: isFollowed == null
-                ? MyColors.main
+                ? MyColors.forInactiveStuff
                 : isFollowed!
                     ? MyColors.accent
                     : MyColors.forInactiveStuff,

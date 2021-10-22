@@ -17,7 +17,9 @@ class FollowCubit<T extends GeneralFollowableInterface>
             overallFollowers: null, weeklyFollowers: null, isFollowed: false));
 
   void defineFollowState(
-      {required int overallFollowers, required int weeklyFollowers, required bool isFollowed}) {
+      {required int overallFollowers,
+      required int weeklyFollowers,
+      required bool isFollowed}) {
     _overallFollowers = overallFollowers;
     _weeklyFollowers = weeklyFollowers;
     _isFollowed = isFollowed;
@@ -29,7 +31,7 @@ class FollowCubit<T extends GeneralFollowableInterface>
 
   void toggleFollow(T followable) {
     if (_isFollowed!) {
-      //todo
+      //TODO:
       _isFollowed = false;
       _overallFollowers = _overallFollowers! - 1;
       _weeklyFollowers = _weeklyFollowers! - 1;

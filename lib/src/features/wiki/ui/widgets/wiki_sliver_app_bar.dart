@@ -110,7 +110,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
             )
           : null,
       actions: [
-        // todo dirty
+        // TODO: dirty
         widget.wikiData.type != WikiFollowableType.USER
             ? AppBarButton(
                 containerOpacity: _backArrowOpacity,
@@ -120,7 +120,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
                 ),
                 onTap: () => NavigatorFunctions.pushShareWiki(
                   context: context,
-                  shareLink: widget.shareLink!, //todo risky
+                  shareLink: widget.shareLink!, //TODO: risky
                   wikiData: widget.wikiData,
                 ),
               )
@@ -132,7 +132,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
         duration: Duration(milliseconds: 200),
         opacity: _showAppBarTitle ? 1.0 : 0.0,
         child: SizedBox(
-          //todo dont know how to calculate for different devices
+          //TODO: dont know how to calculate for different devices
           width: MyConstants.appBarTitleWidth(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

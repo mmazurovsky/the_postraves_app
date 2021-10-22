@@ -23,7 +23,7 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _currentCity =
-        Provider.of<CurrentCityProvider>(context).currentCity!; // todo risky !
+        Provider.of<CurrentCityProvider>(context).currentCity!; // TODO: risky !
   }
 
   @override
@@ -42,7 +42,7 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
               baseline: TextBaseline.alphabetic,
               alignment: PlaceholderAlignment.baseline,
               child: InkWell(
-                //todo
+                //TODO:
                 onTap: () {},
                 child: RichText(
                   text: TextSpan(

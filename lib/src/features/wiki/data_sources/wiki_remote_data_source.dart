@@ -58,7 +58,7 @@ class WikiRemoteDataSourceImpl<
             _followableClientHelper.getEndpointAndPathForUserFollowing() +
                 '/$id',
         httpHeaders: httpHeaders);
-    return; //todo ensure is ok
+    return; //TODO: ensure is ok
   }
 
   @override
@@ -69,6 +69,6 @@ class WikiRemoteDataSourceImpl<
             _followableClientHelper.getEndpointAndPathForUserFollowing() +
                 '/$id',
         httpHeaders: httpHeaders);
-    return; //todo ensure is ok
+    return; //TODO: ensure is ok
   }
 }

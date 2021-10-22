@@ -20,9 +20,7 @@ class RemoteRequestWrapperImpl<T> implements RemoteRequestWrapper<T> {
   );
 
   @override
-  Future<ResponseSealed<T>> call(
-    Function argumentFunction
-  ) async {
+  Future<ResponseSealed<T>> call(Function argumentFunction) async {
     if (await _networkInfo.isConnectedToNetwork) {
       try {
         // INFO: argumentFunction is code from remote data sources
@@ -40,7 +38,8 @@ class RemoteRequestWrapperImpl<T> implements RemoteRequestWrapper<T> {
         final T result = await argumentFunction(httpHeaders);
         return ResponseSealed.success(result);
       } on Exception catch (e) {
-        return ResponseSealed.failure(ServerFailure(), e.toString()); // todo don't know about toString on e
+        return ResponseSealed.failure(ServerFailure(),
+            e.toString()); // TODO: don't know about toString on e
       }
     } else {
       return ResponseSealed.failure(DeviceNetworkFailure());

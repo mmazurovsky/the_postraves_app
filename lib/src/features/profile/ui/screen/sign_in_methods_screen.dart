@@ -67,7 +67,7 @@ class SignInMethodsScreen extends StatelessWidget {
                   text: AppLocalizations.of(context)!.authSignInWithApple,
                   buttonColor: MyColors.forEventCard,
                   textStyle: MyTextStyles.buttonWithMainColor,
-                  // todo
+                  // TODO:
 
                   onTap: () => BlocProvider.of<AuthenticationCubit>(context)
                       .signInWithApple(),
@@ -100,7 +100,8 @@ class SignInMethodsScreen extends StatelessWidget {
                   baseline: TextBaseline.alphabetic,
                   alignment: PlaceholderAlignment.baseline,
                   child: InkWell(
-                    onTap: () => OpenLinkService.openUrl(MyConstants.termsAndConditionsLink),
+                    onTap: () => OpenLinkService.openUrl(
+                        MyConstants.termsAndConditionsLink),
                     child: RichText(
                       text: TextSpan(
                         text: AppLocalizations.of(context)!.authDocsTerms,
@@ -117,7 +118,8 @@ class SignInMethodsScreen extends StatelessWidget {
                   baseline: TextBaseline.alphabetic,
                   alignment: PlaceholderAlignment.baseline,
                   child: InkWell(
-                    onTap: () => OpenLinkService.openUrl(MyConstants.privacyPolicyLink),
+                    onTap: () =>
+                        OpenLinkService.openUrl(MyConstants.privacyPolicyLink),
                     child: RichText(
                       text: TextSpan(
                         text: AppLocalizations.of(context)!.authDocsPolicy,

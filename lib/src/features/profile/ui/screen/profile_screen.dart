@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/buttons/my_outlined_button_without_padding.dart';
+import 'package:the_postraves_app/src/core/utils/my_constants.dart';
+import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_squared_outlined_bookmark_button.dart';
 import '../../../../core/presentation/widgets/buttons/button_content.dart';
 import '../../../../core/presentation/widgets/buttons/my_outlined_button.dart';
 import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
@@ -157,23 +160,51 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 5),
         WikiSubtitle(
           entityType: WikiFollowableType.USER,
           overallFollowers: widget.userProfile.overallFollowers,
         ),
         const MyBigSpacer(),
-        MyElevatedButton(
-          onTap: () => NavigatorFunctions.pushBookmarks(context),
-          leadingIcon: const Icon(
-            Ionicons.heart,
-            size: 22,
-            color: MyColors.mainOppositeColor,
+        MyHorizontalPadding(
+          child: Row(
+            children: [
+              Expanded(
+                child: MyOutlinedButtonWithoutPadding(
+                  text: AppLocalizations.of(context)!.openSettings,
+                  borderColor: MyColors.main,
+                  // buttonColor: MyColors.forEventCard,
+                  textStyle: MyTextStyles.buttonWithMainColor,
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => SettingsSelector(
+                        _closeModalBottomSheetAndPushModifyProfile),
+                  ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              InkWell(
+                onTap: () => NavigatorFunctions.pushBookmarks(context),
+                child: Container(
+                  height: MyConstants.heightOfContainers,
+                  width: MyConstants.heightOfContainers,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: MyColors.accent, width: 1.5),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Ionicons.heart,
+                    size: 24,
+                    color: MyColors.accent,
+                  ),
+                ),
+              ),
+            ],
           ),
-          distanceBetweenLeadingAndText: 7,
-          buttonColor: MyColors.main,
-          mainAxisAlignment: MainAxisAlignment.center,
-          text: AppLocalizations.of(context)!.profileShowMyFollowing,
-          textStyle: MyTextStyles.buttonWithOppositeColor,
         ),
         SocialLinksList(
           instagramUsername: widget.userProfile.instagramUsername,
@@ -191,7 +222,8 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
             widget.userProfile.currentCity.country.emojiCode,
             style: const TextStyle(fontSize: 20),
           ),
-          buttonText: widget.userProfile.currentCity.localName, //todo font size
+          buttonText:
+              widget.userProfile.currentCity.localName, //TODO: font size
           trailingIcon: const Icon(
             Ionicons.chevron_down,
             size: 26,
@@ -208,24 +240,6 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
             ),
           ),
           verticalPadding: 14,
-        ),
-        const MyBigSpacer(),
-        MyOutlinedButton(
-          leadingIcon: const Icon(
-            Ionicons.settings_outline,
-            size: 20,
-            color: MyColors.main,
-          ),
-          text: AppLocalizations.of(context)!.openSettings,
-          borderColor: MyColors.main,
-          // buttonColor: MyColors.forEventCard,
-          textStyle: MyTextStyles.buttonWithMainColor,
-          onTap: () => showModalBottomSheet(
-            context: context,
-            builder: (context) =>
-                SettingsSelector(_closeModalBottomSheetAndPushModifyProfile),
-          ),
-          mainAxisAlignment: MainAxisAlignment.center,
         ),
       ],
     );
@@ -266,7 +280,7 @@ class SettingsSelector extends StatelessWidget {
             color: MyColors.main, size: 18),
         onTap: (_) => _functionToCloseModalBottomSheetAndDoSomething(
           (BuildContext _) =>
-              OpenLinkService.openUrl("https://t.me/mmazurovsky"), //todo
+              OpenLinkService.openUrl("https://t.me/mmazurovsky"), //TODO:
         ),
       ),
       _SettingsButtonData(
@@ -286,7 +300,7 @@ class SettingsSelector extends StatelessWidget {
             _functionToCloseModalBottomSheetAndDoSomething(
           (BuildContext ctx) =>
               BlocProvider.of<AuthenticationCubit>(ctx).deleteMyProfile(),
-        ), //todo check working
+        ), //TODO: check working
       ),
     ];
   }
@@ -297,7 +311,7 @@ class SettingsSelector extends StatelessWidget {
     return ModalBottomSheetContent(
       height: ScreenSize.height * 0.4,
       iconData: Ionicons.settings_outline,
-      title: AppLocalizations.of(context)!.settings, //todo
+      title: AppLocalizations.of(context)!.settings, //TODO:
       content: ListView.separated(
         padding: const EdgeInsets.only(top: 10),
         physics: const NeverScrollableScrollPhysics(),

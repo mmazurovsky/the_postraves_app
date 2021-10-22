@@ -13,7 +13,10 @@ part 'artist_short.g.dart';
 @freezed
 class ArtistShort
     with _$ArtistShort
-    implements GeneralFollowableInterface, BaseNameInterface, EntityNamesInterface {
+    implements
+        GeneralFollowableInterface,
+        BaseNameInterface,
+        EntityNamesInterface {
   const ArtistShort._();
   const factory ArtistShort({
     required int id,
@@ -22,7 +25,7 @@ class ArtistShort
     required int weeklyFollowers,
     required bool isFollowed,
     String? imageLink,
-    @Default(null) Country? country, //todo delete default
+    @Default(null) Country? country, //TODO: delete default
   }) = _ArtistShort;
 
   factory ArtistShort.fromJson(Map<String, dynamic> json) =>

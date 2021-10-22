@@ -11,7 +11,8 @@ part 'search_cubit.freezed.dart';
 
 class SearchCubit extends Cubit<SearchState> {
   final AggregatedSearchRepository _aggregatedSearchRepository;
-  SearchCubit(this._aggregatedSearchRepository) : super(const SearchState.initial());
+  SearchCubit(this._aggregatedSearchRepository)
+      : super(const SearchState.initial());
 
   void showPreviousSearches() {
     emit(const SearchState.loadingPreviousSearches());
@@ -27,7 +28,7 @@ class SearchCubit extends Cubit<SearchState> {
           final searchResults = data as AggregatedSearchModel;
           emit(SearchState.loadedNewSearch(searchResults));
         },
-        failure: (failure, failureMessage) {}); //todo
+        failure: (failure, failureMessage) {}); //TODO:
   }
 
   void saveSearchRecord<T extends GeneralFollowableInterface>(
@@ -46,7 +47,7 @@ class SearchCubit extends Cubit<SearchState> {
     final removeResult = await _aggregatedSearchRepository
         .deleteSearchRecordFromHistory(unifiedToRemove);
     removeResult.maybeWhen(
-        failure: (failure, failureMessage) {}, //todo
+        failure: (failure, failureMessage) {}, //TODO:
         orElse: () {});
     _triggerShowingPreviousSearches();
   }
@@ -65,6 +66,6 @@ class SearchCubit extends Cubit<SearchState> {
           final previousSearches = data as List<UnifiedSearchModel>?;
           emit(SearchState.loadedPreviousSearches(previousSearches));
         },
-        failure: (failure, failureMessage) {}); //todo
+        failure: (failure, failureMessage) {}); //TODO:
   }
 }

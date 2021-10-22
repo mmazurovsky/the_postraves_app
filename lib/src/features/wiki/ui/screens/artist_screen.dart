@@ -73,7 +73,7 @@ class _ArtistStateManagementState extends State<_ArtistStateManagement> {
           );
         } else {
           return LoadingContainer();
-          // todo failure state
+          // TODO: failure state
         }
       },
     );
@@ -114,8 +114,8 @@ class _ArtistContentState extends State<_ArtistContent> {
           MyHorizontalPadding(
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
-              onIsFollowedChange: () =>
-                  FollowableUtil.onIsFollowedChange(context, widget.artist), //todo check
+              onIsFollowedChange: () => FollowableUtil.onIsFollowedChange(
+                  context, widget.artist), //TODO: check
             ),
           ),
           SocialLinksList(

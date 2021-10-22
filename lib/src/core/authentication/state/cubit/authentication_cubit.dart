@@ -15,7 +15,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     this._firebaseRepository,
     this._userAccountRepository,
   ) : super(const AuthenticationState.loading()) {
-    updateAuthStatus(); //todo test is ok
+    updateAuthStatus(); 
   }
 
   UserProfile? _currentUserFromBackend;
@@ -40,7 +40,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
             }
           },
           failure: (failure, message) =>
-              emit(const AuthenticationState.error())); //todo specific error
+              emit(const AuthenticationState.error())); //TODO: specific error
     }
   }
 
@@ -55,7 +55,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     result.when(
         success: (data) => updateAuthStatus(),
         failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error())); //todo specific error
+            emit(const AuthenticationState.error())); //TODO: specific error
   }
 
   void signInWithGoogle() async {
@@ -64,7 +64,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     result.when(
         success: (data) => updateAuthStatus(),
         failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error()) //todo specific error
+            emit(const AuthenticationState.error()) //TODO: specific error
         );
   }
 
@@ -74,7 +74,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     result.when(
         success: (data) => updateAuthStatus(),
         failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error()) //todo specific error
+            emit(const AuthenticationState.error()) //TODO: specific error
         );
   }
 
@@ -85,7 +85,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void deleteMyProfile() async {
     await _firebaseRepository.deleteMyProfile();
-    //todo also delete from backend
+    //TODO: also delete from backend
     updateAuthStatus();
   }
 }

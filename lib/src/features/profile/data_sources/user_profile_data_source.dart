@@ -24,10 +24,12 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   Future<UserProfile?> getUserAccount(
       {required Map<String, String> httpHeaders}) async {
     final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
-        endpointWithPath: WikiFollowableType.USER.endpoint + '/public/myProfile',
-        httpHeaders: httpHeaders,
-      );
-    return decodedResponse == null ? null : UserProfile.fromJson(decodedResponse); //todo check response for null
+      endpointWithPath: WikiFollowableType.USER.endpoint + '/public/myProfile',
+      httpHeaders: httpHeaders,
+    );
+    return decodedResponse == null
+        ? null
+        : UserProfile.fromJson(decodedResponse); //TODO: check response for null
   }
 
   @override
@@ -36,7 +38,8 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
       required UserProfileToWrite userAccountToCreate}) async {
     try {
       final response = await RemoteClient.makePostRequestAndReturnResponse(
-        endpointWithPath: WikiFollowableType.USER.endpoint + '/public/myProfile',
+        endpointWithPath:
+            WikiFollowableType.USER.endpoint + '/public/myProfile',
         httpHeaders: httpHeaders,
         body: userAccountToCreate.toJson(),
       );
@@ -54,8 +57,8 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
 
     try {
       decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
-        endpointWithPath:
-            WikiFollowableType.USER.endpoint + '/public/nicknameCheck/$nickname',
+        endpointWithPath: WikiFollowableType.USER.endpoint +
+            '/public/nicknameCheck/$nickname',
         httpHeaders: httpHeaders,
       );
     } on Exception {

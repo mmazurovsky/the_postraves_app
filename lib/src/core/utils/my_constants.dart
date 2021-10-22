@@ -12,7 +12,7 @@ class MyConstants {
   // static const String host = '10.0.2.2:8443';
   static const double heightOfContainers = 57;
   static const double dividerThickness = 0.1;
-  //todo how to calculate properly???
+  //TODO: how to calculate properly???
   static double appBarTitleWidth(BuildContext context) =>
       ScreenSize.width * 0.6;
   static const String googleApiKey = "AIzaSyA4px3CRR7ntosKlBA8RitMcoU6nUdMgGk";
@@ -30,6 +30,8 @@ class MyConstants {
   static const String soundcloudName = 'Soundcloud';
   static const String bandcampName = 'Bandcamp';
   static const String telegramName = 'Telegram';
-  static const String termsAndConditionsLink = 'https://postraves.flycricket.io/terms.html';
-  static const String privacyPolicyLink = 'https://postraves.flycricket.io/privacy.html';
+  static const String termsAndConditionsLink =
+      'https://postraves.flycricket.io/terms.html';
+  static const String privacyPolicyLink =
+      'https://postraves.flycricket.io/privacy.html';
 }

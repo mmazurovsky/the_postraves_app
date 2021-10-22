@@ -93,7 +93,7 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
           );
         } else {
           return LoadingContainer();
-          // todo failure state
+          // TODO: failure state
         }
       },
     );

@@ -90,6 +90,6 @@ class EventCubit extends Cubit<EventState> {
           orgs: organizersData,
           lineup: lineupData,
           timetable: timetableDataDtoList));
-    } else {} //todo
+    } else {} //TODO:
   }
 }

@@ -71,7 +71,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
       _aboutEditingController.text = _userProfile!.about!;
     }
 
-    _buttonText = 'Modify profile'; //todo
+    _buttonText = 'Modify profile'; //TODO:
     //AppLocalizations.of(context)!.profileModificationModify;
     if (_userProfile?.imageLink != null) {
       _assignInitialProfileImage(_userProfile!.imageLink!);
@@ -144,7 +144,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       fillColor: Colors.transparent,
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
-                      hintText: 'Optional', //todo
+                      hintText: 'Optional', //TODO:
                       enableSuggestions: false,
                       autocorrect: false,
                     ),
@@ -157,7 +157,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       fillColor: Colors.transparent,
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
-                      hintText: 'Optional', //todo
+                      hintText: 'Optional', //TODO:
                       enableSuggestions: false,
                       autocorrect: false,
                     ),
@@ -171,7 +171,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
                       maxLines: 3,
-                      hintText: 'Optional', //todo
+                      hintText: 'Optional', //TODO:
                       maxLength: 200,
                     ),
                     const SizedBox(height: 20),

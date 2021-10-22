@@ -7,14 +7,14 @@ part 'shows_by_date.g.dart';
 
 @freezed
 class ShowsByDate with _$ShowsByDate {
-
   const ShowsByDate._();
   const factory ShowsByDate({
     required DateTime date,
     required List<EventShort> events,
   }) = _EventsByDate;
 
-  String get weekdayAsString { //todo!!!
+  String get weekdayAsString {
+    //TODO:!!!
     if (date.weekday == 1) {
       return 'Пн';
     } else if (date.weekday == 2) {

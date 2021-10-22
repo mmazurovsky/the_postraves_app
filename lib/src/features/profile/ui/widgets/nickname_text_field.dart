@@ -31,7 +31,7 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
   void initState() {
     super.initState();
     if (widget.textEditingController.text.isNotEmpty) {
-    _initialValue = widget.textEditingController.text;
+      _initialValue = widget.textEditingController.text;
     }
   }
 
@@ -60,7 +60,7 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
             .profileCreationNicknameWarningLength;
       }
       if (!RegExp(r"^[a-zA-Zа-яА-Я0-9]*$").hasMatch(nickname)) {
-        // todo add german and french
+        // TODO: add german and french
         return AppLocalizations.of(context)!
             .profileCreationNicknameWarningSymbols;
       }
@@ -78,7 +78,7 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
               .checkNicknameIsFree(nickname);
       if (_isNicknameFree != isNicknameFreeResponse) {
         setState(() {
-          //todo set state really needed here?
+          //TODO: set state really needed here?
           _isNicknameFree = isNicknameFreeResponse!;
         });
         //* this will trigget nickname validator to run again

@@ -23,7 +23,7 @@ class EventCardDetailsConcrete extends StatelessWidget {
         widget: SizedBox(
           width: 20,
           child: Icon(
-            _event.place.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
+            _event.place.isFollowed ? Ionicons.heart : Ionicons.compass_outline,
             size: 19,
             color: _event.place.isFollowed
                 ? MyColors.accent
@@ -37,7 +37,7 @@ class EventCardDetailsConcrete extends StatelessWidget {
         widget: SizedBox(
           width: 20,
           child: _event.status != EventStatus.LIVE
-              ? Icon(Ionicons.calendar_clear_outline,
+              ? const Icon(Ionicons.calendar_clear_outline,
                   size: 19, color: MyColors.forInactiveStuff)
               : EventStatusIndicator(_event.status),
         ),

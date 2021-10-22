@@ -83,8 +83,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => SignInWithEmailAndLinkScreen());
-    }
-    else if (routeSettings.name == MyNavigationRoutes.event) {
+    } else if (routeSettings.name == MyNavigationRoutes.event) {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => EventScreen(
@@ -116,8 +115,7 @@ class RouteGenerator {
           builder: (_) => UnityScreen(
                 args!['wikiDataDto'],
               ));
-    }
-    else if (routeSettings.name == MyNavigationRoutes.wikiShare) {
+    } else if (routeSettings.name == MyNavigationRoutes.wikiShare) {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => WikiShareScreen(
@@ -204,7 +202,7 @@ class NavigatorFunctions {
     final navigationRouteOfLink = deepLink.path;
     final followableType =
         WikiFollowableTypeStatic.getWikiFollowableTypeByNavigationRoute(
-            navigationRouteOfLink)!; //todo exception handling when null
+            navigationRouteOfLink)!; //TODO: exception handling when null
 
     final wikiDataDto = WikiDataDto(
         name: name,

@@ -19,10 +19,8 @@ class PlaceCubit extends Cubit<PlaceState> {
   void loadPlace(int id) async {
     emit(PlaceState.loading());
     final responseBasicRequest = _wikiRepository.fetchBasicDataById(id);
-    final responseScenesRequest =
-        _placeRepository.fetchScenesForPlaceById(id);
-    final responseEventsRequest =
-        _placeRepository.fetchEventsForPlaceById(id);
+    final responseScenesRequest = _placeRepository.fetchScenesForPlaceById(id);
+    final responseEventsRequest = _placeRepository.fetchEventsForPlaceById(id);
 
     final responseBasic = await responseBasicRequest;
     final responseScenes = await responseScenesRequest;
@@ -35,8 +33,7 @@ class PlaceCubit extends Cubit<PlaceState> {
       final responseBasicData = responseBasicResolved.data as PlaceFull;
 
       final responseScenesResolved = responseScenes as SuccessResponse;
-      final responseScenesData =
-          responseScenesResolved.data as List<Scene>;
+      final responseScenesData = responseScenesResolved.data as List<Scene>;
 
       final responseEventsResolved = responseEvents as SuccessResponse;
       final responseEventsData =
@@ -44,6 +41,6 @@ class PlaceCubit extends Cubit<PlaceState> {
 
       emit(PlaceState.loaded(
           responseBasicData, responseScenesData, responseEventsData));
-    } else {} //todo
+    } else {} //TODO:
   }
 }

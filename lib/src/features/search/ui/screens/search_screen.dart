@@ -44,18 +44,18 @@ class _SearchScreenState extends State<SearchScreen> {
     _textEditingController?.addListener(_textEditingControllerListener);
     _searchTabFocusNode = FocusNode();
     BlocProvider.of<SearchCubit>(context).showPreviousSearches();
-    Future.delayed(
-        const Duration(milliseconds: 200), () => _searchTabFocusNode!.requestFocus());
+    Future.delayed(const Duration(milliseconds: 200),
+        () => _searchTabFocusNode!.requestFocus());
   }
 
   void _textEditingControllerListener() {
     if (_searchFieldTimer != null) {
       _searchFieldTimer!.cancel();
     }
-    if (_textEditingController!.text.isNotEmpty) {
+    if (_textEditingController!.text.length > 1) {
       _toTriggerPreviousSearchesEvent = true;
       if (_textEditingController!.text != _previousSearchValue) {
-        _searchFieldTimer = Timer(const Duration(milliseconds: 500), () {
+        _searchFieldTimer = Timer(const Duration(milliseconds: 1000), () {
           _previousSearchValue = _textEditingController!.text;
           BlocProvider.of<SearchCubit>(context)
               .startSearch(_textEditingController!.text);
@@ -120,7 +120,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       found: state.found,
                     );
                   } else {
-                    return FailureContainer("chto"); //todo
+                    return FailureContainer("chto"); //TODO:
                   }
                 },
               ),
@@ -310,16 +310,13 @@ class _SearchBar extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  // TODO: implement maxExtent
   double get maxExtent => 56;
 
   @override
-  // TODO: implement minExtent
   double get minExtent => 56;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    // TODO: implement shouldRebuild
     return false;
   }
 }

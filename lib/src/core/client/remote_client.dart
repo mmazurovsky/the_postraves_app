@@ -196,7 +196,7 @@ class _MyHttpRequest {
       final exceptionMessage =
           'Status code is: ${response.statusCode}, body: ${response.body}';
       log(exceptionMessage);
-      throw ServerException(); //todo
+      throw ServerException(); //TODO:
     }
   }
 }
