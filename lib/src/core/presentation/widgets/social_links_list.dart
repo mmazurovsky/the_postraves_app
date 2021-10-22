@@ -41,9 +41,8 @@ class SocialLinksList extends StatelessWidget {
               soundcloudUsername != null
                   ? ButtonWithIcons(
                       buttonText: MyConstants.soundcloudName,
-                      onButtonTap: () => OpenLinkService.openUrl(
-                        SocialLinksHelper.getSoundcloudLinkForNickname(
-                            soundcloudUsername!),
+                      onButtonTap: () => OpenLinkService.openSoundcloud(
+                        soundcloudUsername!,
                       ),
                       leadingIcon: Container(
                         width: 40,
@@ -88,8 +87,7 @@ class SocialLinksList extends StatelessWidget {
                   ? ButtonWithIcons(
                       buttonText: MyConstants.instagramName,
                       onButtonTap: () =>
-                          OpenLinkService.openUrl(SocialLinksHelper.getInstagramLinkForNickname(
-                            instagramUsername!)),
+                          OpenLinkService.openInstagram(instagramUsername!),
                       leadingIcon: Container(
                         width: 40,
                         height: 40,
@@ -109,9 +107,9 @@ class SocialLinksList extends StatelessWidget {
               telegramUsername != null
                   ? ButtonWithIcons(
                       buttonText: MyConstants.telegramName,
-                      onButtonTap: () =>
-                          OpenLinkService.openUrl(SocialLinksHelper.getTelegramLinkForNickname(
-                            telegramUsername!)),
+                      onButtonTap: () => OpenLinkService.openUrl(
+                          SocialLinksHelper.getTelegramLinkForNickname(
+                              telegramUsername!)),
                       leadingIcon: Container(
                         width: 40,
                         height: 40,

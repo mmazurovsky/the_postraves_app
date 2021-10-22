@@ -279,9 +279,9 @@ class SettingsSelector extends StatelessWidget {
         leadingIcon: const Icon(Ionicons.chatbox_outline,
             color: MyColors.main, size: 18),
         onTap: (_) => _functionToCloseModalBottomSheetAndDoSomething(
-          (BuildContext _) =>
-              OpenLinkService.openUrl("https://t.me/mmazurovsky"), //TODO:
-        ),
+            (BuildContext _) =>
+                OpenLinkService.openTelegram('mmazurovsky')
+            ),
       ),
       _SettingsButtonData(
         text: AppLocalizations.of(context)!.signOut,
