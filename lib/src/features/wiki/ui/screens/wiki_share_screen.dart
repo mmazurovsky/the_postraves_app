@@ -4,6 +4,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/app_bar_title.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/entity_presentation/unified_followable_with_type_data.dart';
+import 'package:the_postraves_app/src/core/presentation/widgets/my_spacers.dart';
 import '../../../../core/utils/screen_size.dart';
 import '../../../../models/dto/wiki_data_dto.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
@@ -37,85 +38,80 @@ class WikiShareScreen extends StatelessWidget {
         ),
       ),
       backgroundColor: MyColors.screenBackground,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Column(
-            children: [
-              SizedBox(height: 30),
-              MyHorizontalPadding(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: MyCachedNetworkImage(
-                          wikiData.imageLink,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 18,
-                    ),
-                    Flexible(
-                      child: UnifiedFollowableWithTypeData(
-                        followable: wikiData,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          MyHorizontalPadding(
-            child: Container(
-              decoration: BoxDecoration(
-                color: MyColors.forEventCard,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: EdgeInsets.all(30),
-              child: Column(
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const MySmallSpacer(),
+            MyHorizontalPadding(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  QrImage(
-                    data: shareLink.toString(),
-                    version: QrVersions.auto,
-                    foregroundColor: MyColors.main,
-                    size: ScreenSize.width - 95,
-                    padding: EdgeInsets.all(0),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: MyCachedNetworkImage(
+                        wikiData.imageLink,
+                      ),
+                    ),
                   ),
-                  SizedBox(height: 15),
-                  BrightnessSwitcher(),
+                  SizedBox(width: 10),
+                  Flexible(
+                    child: UnifiedFollowableWithTypeData(
+                      followable: wikiData,
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-          Column(
-            children: [
-              MyElevatedButton(
-                mainAxisAlignment: MainAxisAlignment.center,
-                leadingIcon: Container(
-                  width: 18,
-                  height: 20,
-                  alignment: Alignment.topCenter,
-                  child: Icon(
-                    Ionicons.share_outline,
-                    color: MyColors.main,
-                    size: 18,
-                  ),
+            const MyMediumPlusSpacer(),
+            MyHorizontalPadding(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: MyColors.forEventCard,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                text: AppLocalizations.of(context)!.shareLink,
-                buttonColor: MyColors.forEventCard,
-                textStyle: MyTextStyles.buttonWithMainColorThinner,
-                onTap: () async => await Share.share(shareLink.toString()),
+                padding: EdgeInsets.all(18),
+                child: Column(
+                  children: [
+                    QrImage(
+                      data: shareLink.toString(),
+                      version: QrVersions.auto,
+                      foregroundColor: MyColors.main,
+                      size: ScreenSize.width - 95,
+                      padding: EdgeInsets.all(0),
+                    ),
+                    SizedBox(height: 15),
+                    BrightnessSwitcher(),
+                  ],
+                ),
               ),
-              SizedBox(height: 30),
-            ],
-          ),
-        ],
+            ),
+            const MyMediumPlusSpacer(),
+            MyElevatedButton(
+              mainAxisAlignment: MainAxisAlignment.center,
+              leadingIcon: Container(
+                width: 18,
+                height: 20,
+                alignment: Alignment.topCenter,
+                child: Icon(
+                  Ionicons.share_outline,
+                  color: MyColors.main,
+                  size: 18,
+                ),
+              ),
+              text: AppLocalizations.of(context)!.shareLink,
+              buttonColor: MyColors.forEventCard,
+              textStyle: MyTextStyles.buttonWithMainColorThinner,
+              onTap: () async => await Share.share(shareLink.toString()),
+            ),
+            const MyMediumPlusSpacer(),
+          ],
+        ),
       ),
     );
   }

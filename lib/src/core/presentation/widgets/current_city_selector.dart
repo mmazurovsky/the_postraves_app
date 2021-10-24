@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/core/utils/my_constants.dart';
 import '../../utils/screen_size.dart';
 
 import 'modal_bottom_sheet_content.dart';
@@ -34,7 +35,7 @@ class _CurrentCitySelectorState extends State<CurrentCitySelector> {
   @override
   Widget build(BuildContext context) {
     return ModalBottomSheetContent(
-      height: ScreenSize.height * 0.33,
+      height: MyConstants.heightOfCitySelectorModalBottomSheet,
       iconData: Ionicons.compass_outline,
       title: AppLocalizations.of(context)!.selectCityTitle,
       content: SelectLocationListView<City>(

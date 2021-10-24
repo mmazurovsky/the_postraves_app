@@ -18,7 +18,7 @@ class SortModeSelector extends StatelessWidget {
     return BlocBuilder<ViewSwitcherCubit, ViewSwitcherState>(
         builder: (context, state) {
       return ModalBottomSheetContent(
-        height: ScreenSize.height * 0.38,
+        height: MyConstants.heightOfSortModeSelectorModalBottomSheet,
         iconData: Ionicons.easel_outline,
         title: AppLocalizations.of(context)!.sortModeSelectorTitle,
         content: Padding(

@@ -34,4 +34,6 @@ class MyConstants {
       'https://postraves.flycricket.io/terms.html';
   static const String privacyPolicyLink =
       'https://postraves.flycricket.io/privacy.html';
+  static const double heightOfCitySelectorModalBottomSheet = 270;
+  static const double heightOfSortModeSelectorModalBottomSheet = 310;
 }
