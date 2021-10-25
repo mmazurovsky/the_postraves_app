@@ -41,6 +41,6 @@ class PlaceCubit extends Cubit<PlaceState> {
 
       emit(PlaceState.loaded(
           responseBasicData, responseScenesData, responseEventsData));
-    } else {} //TODO:
+    } else {} //TODO Exception:
   }
 }

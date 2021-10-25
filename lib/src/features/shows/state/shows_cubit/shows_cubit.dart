@@ -88,7 +88,7 @@ class ShowsCubit extends Cubit<ShowsState> {
           final showsByDate = data as List<ShowsByDate>;
           stateShowsByDate = showsByDate;
         },
-        failure: (failure, failureMessage) {}); //TODO:
+        failure: (failure, failureMessage) {}); //TODO Exception:
 
     List<EventShort> stateShowsByRating = [];
     resolvedByRating.when(
@@ -96,7 +96,7 @@ class ShowsCubit extends Cubit<ShowsState> {
           final showsByRating = data as List<EventShort>;
           stateShowsByRating = showsByRating;
         },
-        failure: (failure, failureMessage) {}); // TODO:
+        failure: (failure, failureMessage) {}); // TODO Exception:
 
     _eventsByDate = stateShowsByDate;
     _eventsByRating = stateShowsByRating;

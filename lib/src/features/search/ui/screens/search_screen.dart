@@ -120,7 +120,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       found: state.found,
                     );
                   } else {
-                    return FailureContainer("chto"); //TODO:
+                    return LoadingContainer(); //TODO Exception:
                   }
                 },
               ),

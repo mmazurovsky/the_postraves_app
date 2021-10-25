@@ -44,7 +44,7 @@ class _ProfileImageChooserState extends State<ProfileImageChooser> {
           aspectRatioPresets: [
             CropAspectRatioPreset.square,
           ],
-          //TODO: check on android
+          //TODO! Android: check on android
           androidUiSettings: const AndroidUiSettings(
               toolbarTitle: 'Cropper',
               toolbarColor: Colors.deepOrange,

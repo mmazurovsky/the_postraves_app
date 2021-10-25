@@ -35,6 +35,6 @@ class AuthOnActionScreenResolver extends StatelessWidget {
         unauthenticated: () => const SignInMethodsScreen(
               isPoppable: true,
             ),
-        orElse: () => const LoadingContainer()); //TODO:
+        orElse: () => const LoadingContainer()); //TODO Exception:
   }
 }

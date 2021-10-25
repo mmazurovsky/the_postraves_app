@@ -48,7 +48,7 @@ class EventFull
       _$EventFullFromJson(json);
 
   TicketPriceRange? get priceRangeOfTickets {
-    return ticketPrices == null ? null : FormattingUtils.getTicketPriceRangeForTickets(ticketPrices!);
+    return ticketPrices?.isEmpty == null || ticketPrices?.isEmpty == true ? null : FormattingUtils.getTicketPriceRangeForTickets(ticketPrices!);
   }
 
   // List<TimetableForSceneDto> getTimetableForSceneDtoList() {

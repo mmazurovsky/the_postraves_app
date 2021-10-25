@@ -162,7 +162,7 @@ class LinkSentDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       insetPadding:
-          EdgeInsets.symmetric(horizontal: 15.0, vertical: 24.0), //TODO: 15
+          EdgeInsets.symmetric(horizontal: 15.0, vertical: 24.0), 
       backgroundColor: MyColors.bottomNavBar,
       elevation: 2,
       child: Padding(

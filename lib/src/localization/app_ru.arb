@@ -88,6 +88,7 @@
     "wikiEventStatusToday": "Сегодня",
     "wikiEventStatusLive": "Идет сейчас",
     "wikiEventStatusPast": "Прошло",
+    "wikiEventStatusCancelled": "Отменено",
     "loading": "Загрузка...",
     "authSignInTitle": "Вход / Регистрация",
     "authSignInSubtitle": "Войдите, чтобы разблокировать все возможности\nЕсли у вас еще нет профиля, он будет создан",
@@ -130,6 +131,10 @@
     "signOut": "Выйти из профиля",
     "deleteProfile": "Удалить профиль",
     "wikiDescriptionEmpty": "Описание пока отсутствует",
-    "profileModification": "Изменить профиль",
-    "yourFollowing": "Ваши закладки"
+    "profileEdit": "Изменить профиль",
+    "done": "Готово",
+    "optional": "Необязательно",
+    "yourFollowing": "Ваши закладки",
+    "noInternet": "Нет интернета",
+    "aboutYou": "О тебе"
 }

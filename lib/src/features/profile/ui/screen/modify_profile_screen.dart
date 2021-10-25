@@ -9,7 +9,6 @@ import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/presentation/widgets/app_bar_back_button.dart';
 import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
 import '../../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
 import '../../../../core/utils/my_assets.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -20,7 +19,6 @@ import '../widgets/profile_image_chooser.dart';
 import '../../../../models/user/user_profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../models/user/user_profile_to_write.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ModifyProfileScreen extends StatefulWidget {
   // final Image? _profileImage;
@@ -71,8 +69,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
       _aboutEditingController.text = _userProfile!.about!;
     }
 
-    _buttonText = 'Modify profile'; //TODO:
-    //AppLocalizations.of(context)!.profileModificationModify;
+    _buttonText = AppLocalizations.of(context)!.done;
     if (_userProfile?.imageLink != null) {
       _assignInitialProfileImage(_userProfile!.imageLink!);
     }
@@ -108,7 +105,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
       appBar: MySimpleAppBar(
         leading: const AppBarBackButton(),
         title: AppBarTitle(
-          title: AppLocalizations.of(context)!.profileModification,
+          title: AppLocalizations.of(context)!.profileEdit,
         ),
       ),
       body: SafeArea(
@@ -144,7 +141,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       fillColor: Colors.transparent,
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
-                      hintText: 'Optional', //TODO:
+                      hintText: AppLocalizations.of(context)!.optional,
                       enableSuggestions: false,
                       autocorrect: false,
                     ),
@@ -157,13 +154,13 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       fillColor: Colors.transparent,
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
-                      hintText: 'Optional', //TODO:
+                      hintText: AppLocalizations.of(context)!.optional,
                       enableSuggestions: false,
                       autocorrect: false,
                     ),
                     const SizedBox(height: 20),
                     MyTextField(
-                      title: 'About you',
+                      title: AppLocalizations.of(context)!.aboutYou,
                       textInputType: TextInputType.multiline,
                       isSecret: false,
                       textEditingController: _aboutEditingController,
@@ -171,7 +168,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
                       maxLines: 3,
-                      hintText: 'Optional', //TODO:
+                      hintText: AppLocalizations.of(context)!.optional,
                       maxLength: 200,
                     ),
                     const SizedBox(height: 20),

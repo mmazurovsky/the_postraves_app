@@ -88,6 +88,7 @@
     "wikiEventStatusToday": "Today",
     "wikiEventStatusLive": "Live",
     "wikiEventStatusPast": "Past",    
+    "wikiEventStatusCancelled": "Cancelled",
     "loading": "Loading...",
     "authSignInTitle": "Sign In / Sign Up",
     "authSignInSubtitle": "Sign in to unlock all functions\nIf you don't have a profile, it will be created",
@@ -130,6 +131,10 @@
     "signOut": "Sign out",
     "deleteProfile": "Delete profile",
     "wikiDescriptionEmpty": "Description has not been added yet",
-    "profileModification": "Profile modification",
-    "yourFollowing": "Your following"
+    "profileEdit": "Edit profile",
+    "done": "Done",
+    "optional": "Optional",
+    "yourFollowing": "Your following",
+    "noInternet": "No internet",
+    "aboutYou": "About you"
 }

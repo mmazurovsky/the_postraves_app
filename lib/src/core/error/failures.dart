@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-//TODO:
+//TODO: convert to freezed
 abstract class Failure extends Equatable {
   Failure([this.properties = const <dynamic>[]]);
   List properties;

@@ -28,7 +28,7 @@ class SearchCubit extends Cubit<SearchState> {
           final searchResults = data as AggregatedSearchModel;
           emit(SearchState.loadedNewSearch(searchResults));
         },
-        failure: (failure, failureMessage) {}); //TODO:
+        failure: (failure, failureMessage) {}); //TODO Exception:
   }
 
   void saveSearchRecord<T extends GeneralFollowableInterface>(
@@ -47,7 +47,7 @@ class SearchCubit extends Cubit<SearchState> {
     final removeResult = await _aggregatedSearchRepository
         .deleteSearchRecordFromHistory(unifiedToRemove);
     removeResult.maybeWhen(
-        failure: (failure, failureMessage) {}, //TODO:
+        failure: (failure, failureMessage) {}, //TODO Exception:
         orElse: () {});
     _triggerShowingPreviousSearches();
   }
@@ -66,6 +66,6 @@ class SearchCubit extends Cubit<SearchState> {
           final previousSearches = data as List<UnifiedSearchModel>?;
           emit(SearchState.loadedPreviousSearches(previousSearches));
         },
-        failure: (failure, failureMessage) {}); //TODO:
+        failure: (failure, failureMessage) {}); //TODO Exception:
   }
 }

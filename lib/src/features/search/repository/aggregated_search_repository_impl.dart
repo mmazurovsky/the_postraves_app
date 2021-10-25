@@ -57,7 +57,7 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
   Future<ResponseSealed<void>>
       saveOrUpdateSearchRecordInHistory<T extends GeneralFollowableInterface>(
           T entity) async {
-    // TODO: maybe better to save image dimensions, but it is possible not to do that
+    // maybe better to save image dimensions, but it is possible not to do that
     final wikiDataDto = entity.convertToWikiDataDto(null);
 
     final entityToSaveOrUpdate = UnifiedSearchModel(

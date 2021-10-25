@@ -15,14 +15,14 @@ abstract class ArtistRemoteDataSource {
 }
 
 class ArtistRemoteDataSourceImpl implements ArtistRemoteDataSource {
-
   @override
   Future<List<EventShort>> fetchEventsForArtistById(
       {required int id, required Map<String, String> httpHeaders}) async {
     final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'artist/public/$id/events',
-        httpHeaders: httpHeaders) as List<dynamic>;
-    return decodedResponse.map((json) => EventShort.fromJson(json)).toList();
+        httpHeaders: httpHeaders) as List<dynamic>?;
+    return decodedResponse?.map((json) => EventShort.fromJson(json)).toList() ??
+        [];
   }
 
   @override
@@ -30,7 +30,8 @@ class ArtistRemoteDataSourceImpl implements ArtistRemoteDataSource {
       {required int id, required Map<String, String> httpHeaders}) async {
     final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'artist/public/$id/unities',
-        httpHeaders: httpHeaders) as List<dynamic>;
-    return decodedResponse.map((json) => UnityShort.fromJson(json)).toList();
+        httpHeaders: httpHeaders) as List<dynamic>?;
+    return decodedResponse?.map((json) => UnityShort.fromJson(json)).toList() ??
+        [];
   }
 }

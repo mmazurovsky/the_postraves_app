@@ -61,7 +61,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
     super.didChangeDependencies();
     _buttonText = AppLocalizations.of(context)!.profileCreationCreate;
     _userCity =
-        context.read<CurrentCityProvider>().currentCity!; //TODO: ! is risky
+        context.read<CurrentCityProvider>().currentCity!;
   }
 
   @override

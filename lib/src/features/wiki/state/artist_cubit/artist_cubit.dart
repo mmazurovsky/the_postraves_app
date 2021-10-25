@@ -46,6 +46,6 @@ class ArtistCubit extends Cubit<ArtistState> {
 
       emit(ArtistState.loaded(
           responseBasicData, responseUnitiesData, responseEventsData));
-    } else {} //TODO:
+    } else {} //TODO Exception:
   }
 }

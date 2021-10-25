@@ -11,7 +11,7 @@ class AuthenticationCanvas extends StatelessWidget {
   final String? subTitle;
   final Widget? bottomWidget;
   final bool backButtonNeeded;
-  final List<Widget> buttons;
+  final List<Widget?> buttons;
   const AuthenticationCanvas({
     Key? key,
     required this.backButtonNeeded,
@@ -30,9 +30,9 @@ class AuthenticationCanvas extends StatelessWidget {
         backgroundColor: MyColors.screenBackground,
         leading: backButtonNeeded ? const AppBarBackButton() : Container(),
       ),
-      body: 
-      // not sure about this screen for all device screen sizes...
-      SingleChildScrollView( 
+      body:
+          // not sure about this screen for all device screen sizes...
+          SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: SizedBox(
           height: ScreenSize.height,
@@ -69,14 +69,16 @@ class AuthenticationCanvas extends StatelessWidget {
               ),
               ...buttons.map(
                 (button) {
-                  return Column(
-                    children: [
-                      button,
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  );
+                  return button != null
+                      ? Column(
+                          children: [
+                            button,
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        )
+                      : Container();
                 },
               ),
               const SizedBox(

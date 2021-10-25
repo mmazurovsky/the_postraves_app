@@ -112,7 +112,6 @@ class FormattingUtils {
     }
   }
 
-  // TODO: check without
   static TicketPriceRange getTicketPriceRangeForTickets(
       List<TicketPrice> tickets) {
     assert(tickets.isNotEmpty);

@@ -29,7 +29,7 @@ class _$EventShortTearOff {
       required EventStatus status,
       @DateTimeConverter() required DateTime startDateTime,
       required PlaceShort place,
-      required List<TicketPrice> ticketPrices,
+      required List<TicketPrice>? ticketPrices,
       String? imageLink}) {
     return _EventShort(
       id: id,
@@ -64,7 +64,7 @@ mixin _$EventShort {
   @DateTimeConverter()
   DateTime get startDateTime => throw _privateConstructorUsedError;
   PlaceShort get place => throw _privateConstructorUsedError;
-  List<TicketPrice> get ticketPrices => throw _privateConstructorUsedError;
+  List<TicketPrice>? get ticketPrices => throw _privateConstructorUsedError;
   String? get imageLink => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -87,7 +87,7 @@ abstract class $EventShortCopyWith<$Res> {
       EventStatus status,
       @DateTimeConverter() DateTime startDateTime,
       PlaceShort place,
-      List<TicketPrice> ticketPrices,
+      List<TicketPrice>? ticketPrices,
       String? imageLink});
 
   $PlaceShortCopyWith<$Res> get place;
@@ -150,7 +150,7 @@ class _$EventShortCopyWithImpl<$Res> implements $EventShortCopyWith<$Res> {
       ticketPrices: ticketPrices == freezed
           ? _value.ticketPrices
           : ticketPrices // ignore: cast_nullable_to_non_nullable
-              as List<TicketPrice>,
+              as List<TicketPrice>?,
       imageLink: imageLink == freezed
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
@@ -181,7 +181,7 @@ abstract class _$EventShortCopyWith<$Res> implements $EventShortCopyWith<$Res> {
       EventStatus status,
       @DateTimeConverter() DateTime startDateTime,
       PlaceShort place,
-      List<TicketPrice> ticketPrices,
+      List<TicketPrice>? ticketPrices,
       String? imageLink});
 
   @override
@@ -247,7 +247,7 @@ class __$EventShortCopyWithImpl<$Res> extends _$EventShortCopyWithImpl<$Res>
       ticketPrices: ticketPrices == freezed
           ? _value.ticketPrices
           : ticketPrices // ignore: cast_nullable_to_non_nullable
-              as List<TicketPrice>,
+              as List<TicketPrice>?,
       imageLink: imageLink == freezed
           ? _value.imageLink
           : imageLink // ignore: cast_nullable_to_non_nullable
@@ -293,7 +293,7 @@ class _$_EventShort extends _EventShort {
   @override
   final PlaceShort place;
   @override
-  final List<TicketPrice> ticketPrices;
+  final List<TicketPrice>? ticketPrices;
   @override
   final String? imageLink;
 
@@ -369,7 +369,7 @@ abstract class _EventShort extends EventShort {
       required EventStatus status,
       @DateTimeConverter() required DateTime startDateTime,
       required PlaceShort place,
-      required List<TicketPrice> ticketPrices,
+      required List<TicketPrice>? ticketPrices,
       String? imageLink}) = _$_EventShort;
   const _EventShort._() : super._();
 
@@ -394,7 +394,7 @@ abstract class _EventShort extends EventShort {
   @override
   PlaceShort get place => throw _privateConstructorUsedError;
   @override
-  List<TicketPrice> get ticketPrices => throw _privateConstructorUsedError;
+  List<TicketPrice>? get ticketPrices => throw _privateConstructorUsedError;
   @override
   String? get imageLink => throw _privateConstructorUsedError;
   @override

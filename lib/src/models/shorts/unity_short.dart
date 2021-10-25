@@ -23,7 +23,7 @@ class UnityShort
     required int weeklyFollowers,
     required bool isFollowed,
     String? imageLink,
-    @Default(null) Country? country, //TODO: delete default
+    @Default(null) Country? country, //BUG!: bug in freeezed package
   }) = _UnityShort;
 
   factory UnityShort.fromJson(Map<String, dynamic> json) =>

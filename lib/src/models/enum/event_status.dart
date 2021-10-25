@@ -15,8 +15,7 @@ extension EventStatusExtension on EventStatus {
         EventStatus.TODAY: AppLocalizations.of(context)!.wikiEventStatusToday,
         EventStatus.LIVE: AppLocalizations.of(context)!.wikiEventStatusLive,
         EventStatus.PAST: AppLocalizations.of(context)!.wikiEventStatusPast,
-        // TODO:
-        EventStatus.CANCELLED: "TODO",
+        EventStatus.CANCELLED: AppLocalizations.of(context)!.wikiEventStatusCancelled,
       }[status];
 
   String getStatusName(BuildContext context) =>

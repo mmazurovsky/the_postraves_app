@@ -20,7 +20,7 @@ class FirebaseImageRepositoryImpl implements FirebaseImageRepository {
       await uploadTask
           .whenComplete(() async => imageLink = await refr.getDownloadURL());
     } on FirebaseException catch (e) {
-      // TODO:
+      // TODO Exception:
     }
 
     return imageLink;

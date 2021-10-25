@@ -19,6 +19,7 @@ import '../widgets/sort_mode_selector.dart';
 import '../widgets/events_by_date_list.dart';
 import '../widgets/events_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/my_assets.dart';
 
@@ -46,10 +47,8 @@ class _ShowsScreenState extends State<ShowsScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
-      _currentCity =
-          context.read<CurrentCityProvider>().currentCity!; //TODO: risky !
-      BlocProvider.of<ShowsCubit>(context)
-          .fullyLoadShows(_currentCity!); //TODO: risky !
+      _currentCity = context.read<CurrentCityProvider>().currentCity!;
+      BlocProvider.of<ShowsCubit>(context).fullyLoadShows(_currentCity!);
     }
 
     _cities = context.watch<CityListProvider>().cityList;
@@ -65,7 +64,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
       child: NestedScrollView(
         controller: TabItem.shows.tabScrollController,
         physics: BouncingScrollPhysics(),
-        // TODO: wtf it so glithy
+        // BUG! wtf it is so glithy
         // floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
@@ -112,9 +111,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
               _refreshController2.refreshCompleted();
             } else if (state is ShowsFailureState) {
               MyFlushbar.showMyFlushbar(
-                  //TODO: localization
-                  flushbarMessage:
-                      'Отсутствует подключение к интернету', //TODO:
+                  flushbarMessage: AppLocalizations.of(context)!.noInternet,
                   flushbarIcon: const Icon(
                     Ionicons.alert_circle_outline,
                     color: Colors.red,

@@ -42,7 +42,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     try {
       user = _firebaseAuth.currentUser;
     } on FirebaseAuthException catch (e) {
-      //TODO:
+      //TODO Exception:
       signOut();
     }
     return user;
@@ -59,8 +59,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
           .createUserWithEmailAndPassword(email: email, password: password);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      //TODO:
-      // TODO: map error codes to failures
+      // TODO Exception: map error codes to failures
       return ResponseSealed.failure(UserNotFoundFailure());
     }
   }
@@ -73,8 +72,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
           email: email, password: password);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      //TODO:
-      // TODO: map error codes to failures
+      // TODO Exception: map error codes to failures
       return ResponseSealed.failure(UserNotFoundFailure());
     }
   }
@@ -95,7 +93,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
       await _firebaseAuth.sendSignInLinkToEmail(
           email: email, actionCodeSettings: actionCodeSettings);
     } on Exception catch (e) {
-      //TODO:
+      //TODO Exception:
     }
 
     _storedEmailForLinkVerification = email;
@@ -112,8 +110,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
             emailLink: link.toString());
         return ResponseSealed.success(userCredentials);
       } on FirebaseAuthException catch (e) {
-        //TODO:
-        // TODO: map error codes to failures
+        // TODO Exception: map error codes to failures
         return ResponseSealed.failure(UserNotFoundFailure());
       }
     } else {
@@ -151,7 +148,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
           await _firebaseAuth.signInWithCredential(credential);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      // TODO: map error codes to failures
+      // TODO Exception: map error codes to failures
       return ResponseSealed.failure(UserNotFoundFailure());
     }
   }
@@ -203,7 +200,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
       final user = await _firebaseAuth.signInWithCredential(oauthCredential);
       return ResponseSealed.success(user);
     } on FirebaseAuthException catch (e) {
-      //TODO:
+      //TODO Exception:
       return ResponseSealed.failure(UserNotFoundFailure());
     }
   }
@@ -213,7 +210,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     try {
       return ResponseSealed.success(await _firebaseAuth.signOut());
     } on FirebaseAuthException catch (e) {
-      // TODO:
+      // TODO Exception:
       return ResponseSealed.failure(UserNotFoundFailure());
     }
   }
@@ -223,7 +220,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     try {
       return ResponseSealed.success(await currentUser?.delete());
     } on FirebaseAuthException catch (e) {
-      // TODO:
+      // TODO Exception:
       return ResponseSealed.failure(UserNotFoundFailure());
     }
   }

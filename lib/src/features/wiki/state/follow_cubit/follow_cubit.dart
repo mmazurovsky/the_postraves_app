@@ -31,7 +31,6 @@ class FollowCubit<T extends GeneralFollowableInterface>
 
   void toggleFollow(T followable) {
     if (_isFollowed!) {
-      //TODO:
       _isFollowed = false;
       _overallFollowers = _overallFollowers! - 1;
       _weeklyFollowers = _weeklyFollowers! - 1;

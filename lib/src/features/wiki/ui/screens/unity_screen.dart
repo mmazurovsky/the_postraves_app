@@ -79,7 +79,7 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
           );
         } else {
           return LoadingContainer();
-          // TODO: failure state
+          // TODO Exception
         }
       },
     );

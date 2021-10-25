@@ -51,7 +51,7 @@ class _ChartsScreenState extends State<ChartsScreen>
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
       _currentCity = context
           .read<CurrentCityProvider>()
-          .currentCity!; //TODO: check it is ok to ! here
+          .currentCity!; 
       BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity!);
     }
   }

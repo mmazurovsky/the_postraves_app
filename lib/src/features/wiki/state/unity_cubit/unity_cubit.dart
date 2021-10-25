@@ -43,6 +43,6 @@ class UnityCubit extends Cubit<UnityState> {
 
       emit(UnityState.loaded(
           responseBasicData, responseUnitiesData, responseEventsData));
-    } else {} //TODO:
+    } else {} //TODO Exception:
   }
 }

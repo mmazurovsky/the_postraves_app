@@ -59,8 +59,7 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
         return AppLocalizations.of(context)!
             .profileCreationNicknameWarningLength;
       }
-      if (!RegExp(r"^[a-zA-Zа-яА-Я0-9]*$").hasMatch(nickname)) {
-        // TODO: add german and french
+      if (!RegExp(r"^[a-zA-Z0-9]*$").hasMatch(nickname)) {
         return AppLocalizations.of(context)!
             .profileCreationNicknameWarningSymbols;
       }
@@ -78,7 +77,7 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
               .checkNicknameIsFree(nickname);
       if (_isNicknameFree != isNicknameFreeResponse) {
         setState(() {
-          //TODO: set state really needed here?
+          // set state really needed here? Dunno
           _isNicknameFree = isNicknameFreeResponse!;
         });
         //* this will trigget nickname validator to run again

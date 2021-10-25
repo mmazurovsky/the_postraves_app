@@ -87,7 +87,7 @@ class _EventStateManagementState extends State<_EventStateManagement> {
           );
         } else {
           return LoadingContainer();
-          // TODO: failure state
+          // TODO Exception
         }
       },
     );

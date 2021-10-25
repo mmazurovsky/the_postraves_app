@@ -40,7 +40,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
             }
           },
           failure: (failure, message) =>
-              emit(const AuthenticationState.error())); //TODO: specific error
+              emit(const AuthenticationState.error())); //TODO Exception: specific error
     }
   }
 
@@ -55,7 +55,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     result.when(
         success: (data) => updateAuthStatus(),
         failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error())); //TODO: specific error
+            emit(const AuthenticationState.error())); //TODO Exception: specific error
   }
 
   void signInWithGoogle() async {
@@ -64,7 +64,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     result.when(
         success: (data) => updateAuthStatus(),
         failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error()) //TODO: specific error
+            emit(const AuthenticationState.error()) //TODO Exception: specific error
         );
   }
 
@@ -74,7 +74,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     result.when(
         success: (data) => updateAuthStatus(),
         failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error()) //TODO: specific error
+            emit(const AuthenticationState.error()) //TODO Exception: specific error
         );
   }
 
@@ -85,7 +85,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void deleteMyProfile() async {
     await _firebaseRepository.deleteMyProfile();
-    //TODO: also delete from backend
+    // Could also delete from backend
     updateAuthStatus();
   }
 }

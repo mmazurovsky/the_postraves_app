@@ -39,7 +39,7 @@ class RemoteRequestWrapperImpl<T> implements RemoteRequestWrapper<T> {
         return ResponseSealed.success(result);
       } on Exception catch (e) {
         return ResponseSealed.failure(ServerFailure(),
-            e.toString()); // TODO: don't know about toString on e
+            e.toString()); // TODO Exception: don't know about toString on e
       }
     } else {
       return ResponseSealed.failure(DeviceNetworkFailure());

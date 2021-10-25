@@ -20,9 +20,7 @@ part 'event_short.g.dart';
 @freezed
 class EventShort
     with _$EventShort
-    implements
-        GeneralFollowableInterface,
-        EntityNamesInterface {
+    implements GeneralFollowableInterface, EntityNamesInterface {
   const EventShort._();
   const factory EventShort({
     required int id,
@@ -31,10 +29,9 @@ class EventShort
     required int weeklyFollowers,
     required bool isFollowed,
     required EventStatus status,
-    @DateTimeConverter()
-    required DateTime startDateTime,
+    @DateTimeConverter() required DateTime startDateTime,
     required PlaceShort place,
-    required List<TicketPrice> ticketPrices,
+    required List<TicketPrice>? ticketPrices,
     String? imageLink,
   }) = _EventShort;
 
@@ -49,8 +46,10 @@ class EventShort
     return place.city.country;
   }
 
-  TicketPriceRange get priceRangeOfTickets {
-    return FormattingUtils.getTicketPriceRangeForTickets(ticketPrices);
+  TicketPriceRange? get priceRangeOfTickets {
+    return ticketPrices?.isEmpty == null || ticketPrices?.isEmpty == true
+        ? null
+        : FormattingUtils.getTicketPriceRangeForTickets(ticketPrices!);
   }
 
   @override
@@ -63,7 +62,7 @@ class EventShort
     return AppLocalizations.of(context)!.eventEntityNamePlural;
   }
 
-    @override
+  @override
   WikiDataDto convertToWikiDataDto(ImageDimensions? imageDimensions) {
     return WikiDataDto(
       id: id,
@@ -74,6 +73,4 @@ class EventShort
       type: WikiFollowableType.EVENT,
     );
   }
-
-
 }

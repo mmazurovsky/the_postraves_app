@@ -29,7 +29,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
     );
     return decodedResponse == null
         ? null
-        : UserProfile.fromJson(decodedResponse); //TODO: check response for null
+        : UserProfile.fromJson(decodedResponse); 
   }
 
   @override

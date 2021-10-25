@@ -73,7 +73,7 @@ class _ArtistStateManagementState extends State<_ArtistStateManagement> {
           );
         } else {
           return LoadingContainer();
-          // TODO: failure state
+          // TODO Exception
         }
       },
     );
@@ -115,7 +115,7 @@ class _ArtistContentState extends State<_ArtistContent> {
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
               onIsFollowedChange: () => FollowableUtil.onIsFollowedChange(
-                  context, widget.artist), //TODO: check
+                  context, widget.artist),
             ),
           ),
           SocialLinksList(

@@ -223,7 +223,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
             style: const TextStyle(fontSize: 20),
           ),
           buttonText:
-              widget.userProfile.currentCity.localName, //TODO: font size
+              widget.userProfile.currentCity.localName,
           trailingIcon: const Icon(
             Ionicons.chevron_down,
             size: 26,
@@ -280,7 +280,7 @@ class SettingsSelector extends StatelessWidget {
             color: MyColors.main, size: 18),
         onTap: (_) => _functionToCloseModalBottomSheetAndDoSomething(
             (BuildContext _) =>
-                OpenLinkService.openTelegram('mmazurovsky')
+                OpenLinkService.openTelegram(MyConstants.telegramSupportAccount)
             ),
       ),
       _SettingsButtonData(
@@ -300,7 +300,7 @@ class SettingsSelector extends StatelessWidget {
             _functionToCloseModalBottomSheetAndDoSomething(
           (BuildContext ctx) =>
               BlocProvider.of<AuthenticationCubit>(ctx).deleteMyProfile(),
-        ), //TODO: check working
+        ), 
       ),
     ];
   }
@@ -311,7 +311,7 @@ class SettingsSelector extends StatelessWidget {
     return ModalBottomSheetContent(
       height: ScreenSize.height * 0.4,
       iconData: Ionicons.settings_outline,
-      title: AppLocalizations.of(context)!.settings, //TODO:
+      title: AppLocalizations.of(context)!.settings,
       content: ListView.separated(
         padding: const EdgeInsets.only(top: 10),
         physics: const NeverScrollableScrollPhysics(),

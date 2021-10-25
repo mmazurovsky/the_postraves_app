@@ -17,8 +17,8 @@ _$_EventShort _$_$_EventShortFromJson(Map<String, dynamic> json) {
     startDateTime:
         const DateTimeConverter().fromJson(json['startDateTime'] as String),
     place: PlaceShort.fromJson(json['place'] as Map<String, dynamic>),
-    ticketPrices: (json['ticketPrices'] as List<dynamic>)
-        .map((e) => TicketPrice.fromJson(e as Map<String, dynamic>))
+    ticketPrices: (json['ticketPrices'] as List<dynamic>?)
+        ?.map((e) => TicketPrice.fromJson(e as Map<String, dynamic>))
         .toList(),
     imageLink: json['imageLink'] as String?,
   );
@@ -34,7 +34,7 @@ Map<String, dynamic> _$_$_EventShortToJson(_$_EventShort instance) =>
       'status': _$EventStatusEnumMap[instance.status],
       'startDateTime': const DateTimeConverter().toJson(instance.startDateTime),
       'place': instance.place.toJson(),
-      'ticketPrices': instance.ticketPrices.map((e) => e.toJson()).toList(),
+      'ticketPrices': instance.ticketPrices?.map((e) => e.toJson()).toList(),
       'imageLink': instance.imageLink,
     };
 

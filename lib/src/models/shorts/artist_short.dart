@@ -25,7 +25,7 @@ class ArtistShort
     required int weeklyFollowers,
     required bool isFollowed,
     String? imageLink,
-    @Default(null) Country? country, //TODO: delete default
+    @Default(null) Country? country, //BUG!: in freezed package
   }) = _ArtistShort;
 
   factory ArtistShort.fromJson(Map<String, dynamic> json) =>

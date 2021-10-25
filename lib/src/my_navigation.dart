@@ -202,7 +202,12 @@ class NavigatorFunctions {
     final navigationRouteOfLink = deepLink.path;
     final followableType =
         WikiFollowableTypeStatic.getWikiFollowableTypeByNavigationRoute(
-            navigationRouteOfLink)!; //TODO: exception handling when null
+            navigationRouteOfLink);
+
+    // when null should not push, it is not tested
+    if (followableType == null) {
+      return;
+    }
 
     final wikiDataDto = WikiDataDto(
         name: name,

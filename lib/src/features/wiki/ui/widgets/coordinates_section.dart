@@ -62,8 +62,7 @@ class CoordinatesSection extends StatelessWidget {
                       // ),
                       Marker.custom(
                         anchor: MarkerAnchor.bottom,
-                        // TODO: upload to own filestore
-                        icon: "https://i.ibb.co/b5htDrv/pin.png",
+                        icon: "https://firebasestorage.googleapis.com/v0/b/postraves.appspot.com/o/system%2Fimages%2Fpin.png?alt=media&token=3d485ff1-8642-4fd5-8b57-477300edbc1a",
                         locations: [
                           Location(
                             _place.coordinate.latitude,

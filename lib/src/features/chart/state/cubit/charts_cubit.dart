@@ -20,8 +20,6 @@ class ChartsCubit extends Cubit<ChartsState> {
   void showCharts(City currentCity) async {
     emit(const ChartsState.loading());
     _loadCharts(currentCity);
-    // TODO: also emit state of no internet connection
-    // TODO: also log if there are server exceptions
   }
 
   void _loadCharts(City currentCity) async {
@@ -40,15 +38,15 @@ class ChartsCubit extends Cubit<ChartsState> {
 
     resolvedOverallArtists.when(
         success: (data) => stateOverallArtists = data,
-        failure: (failure, data) => {}); //TODO:
+        failure: (failure, data) => {}); //TODO Exception:
 
     resolvedWeeklyArtists.when(
         success: (data) => stateWeeklyArtists = data,
-        failure: (failure, data) => {}); //TODO:
+        failure: (failure, data) => {}); //TODO Exception:
 
     resolvedBestArtist.when(
         success: (data) => stateBestArtist = data,
-        failure: (failure, data) => {}); //TODO:
+        failure: (failure, data) => {}); //TODO Exception:
 
     emit(ChartsState.loaded(
         stateBestArtist, stateWeeklyArtists, stateOverallArtists));

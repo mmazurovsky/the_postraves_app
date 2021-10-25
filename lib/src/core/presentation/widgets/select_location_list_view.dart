@@ -24,7 +24,6 @@ class SelectLocationListView<LOCATION extends LocationInterface>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: scroll bar
     return ListView.separated(
       padding: const EdgeInsets.symmetric(vertical: 10),
       physics:

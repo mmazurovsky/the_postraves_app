@@ -67,12 +67,10 @@ class SignInMethodsScreen extends StatelessWidget {
                   text: AppLocalizations.of(context)!.authSignInWithApple,
                   buttonColor: MyColors.forEventCard,
                   textStyle: MyTextStyles.buttonWithMainColor,
-                  // TODO:
-
                   onTap: () => BlocProvider.of<AuthenticationCubit>(context)
                       .signInWithApple(),
                 )
-              : Container(),
+              : null,
           MyElevatedButton(
             mainAxisAlignment: MainAxisAlignment.center,
             leadingIcon: const Icon(

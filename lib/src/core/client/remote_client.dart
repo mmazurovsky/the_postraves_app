@@ -26,22 +26,6 @@ class RemoteClient {
     );
 
     return httpRequest();
-
-    // Uri uri = RemoteClient._createUri(endpointWithPath,
-    //     queryParameters: queryParametersWithLanguageCode);
-
-    // log('GET ${uri.toString()}');
-    // log('GET ${httpHeaders.toString()}');
-
-    // final response = await http_client.get(
-    //   uri,
-    //   headers: httpHeaders,
-    // );
-
-    // _checkResponse(response);
-
-    // final responseAsJsonDecoded = _decodeResponseToJson(response);
-    // return responseAsJsonDecoded;
   }
 
   static Future<dynamic> makePostRequestAndReturnResponse(
@@ -58,21 +42,6 @@ class RemoteClient {
     );
 
     return httpRequest();
-    // Uri uri = RemoteClient._createUri(endpointWithPath,
-    //     queryParameters: queryParameters);
-
-    // log('POST ${uri.toString()}');
-
-    // final response = await http_client.post(
-    //   uri,
-    //   headers: httpHeaders,
-    //   body: jsonEncode(body),
-    // );
-
-    // _checkResponse(response);
-
-    // final responseAsJsonDecoded = _decodeResponseToJson(response);
-    // return responseAsJsonDecoded;
   }
 
   static Future<dynamic> makePutRequestAndReturnResponse(
@@ -89,21 +58,6 @@ class RemoteClient {
     );
 
     return httpRequest();
-    // Uri uri = RemoteClient._createUri(endpointWithPath,
-    //     queryParameters: queryParameters);
-
-    // log('PUT ${uri.toString()}');
-
-    // final response = await http_client.put(
-    //   uri,
-    //   headers: httpHeaders,
-    //   body: jsonEncode(body),
-    // );
-
-    // _checkResponse(response);
-
-    // final responseAsJsonDecoded = _decodeResponseToJson(response);
-    // return responseAsJsonDecoded;
   }
 
   static Future<dynamic> makeDeleteRequestAndReturnResponse(
@@ -120,21 +74,6 @@ class RemoteClient {
     );
 
     return httpRequest();
-    // Uri uri = RemoteClient._createUri(endpointWithPath,
-    //     queryParameters: queryParameters);
-
-    // log('DELETE ${uri.toString()}');
-
-    // final response = await http_client.delete(
-    //   uri,
-    //   headers: httpHeaders,
-    //   body: jsonEncode(body),
-    // );
-
-    // _checkResponse(response);
-
-    // final responseAsJsonDecoded = _decodeResponseToJson(response);
-    // return responseAsJsonDecoded;
   }
 }
 
@@ -168,7 +107,7 @@ class _MyHttpRequest {
   }
 
   Uri _createUri() {
-    return Uri.https(MyConstants.host, endpointWithPath, queryParameters);
+    return Uri.https(MyConstants.apiHost, '${MyConstants.apiPath}$endpointWithPath', queryParameters);
   }
 
   void _logRequest() {
@@ -196,7 +135,7 @@ class _MyHttpRequest {
       final exceptionMessage =
           'Status code is: ${response.statusCode}, body: ${response.body}';
       log(exceptionMessage);
-      throw ServerException(); //TODO:
+      throw ServerException(); //TODO Exception
     }
   }
 }

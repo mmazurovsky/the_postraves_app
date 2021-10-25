@@ -26,9 +26,10 @@ class EventRemoteDataSourceImpl implements EventRemoteDataSource {
       {required int id, required Map<String, String> httpHeaders}) async {
     final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'event/public/$id/lineup',
-        httpHeaders: httpHeaders) as List<dynamic>;
+        httpHeaders: httpHeaders) as List<dynamic>?;
     final list =
-        decodedResponse.map((json) => ArtistShort.fromJson(json)).toList();
+        decodedResponse?.map((json) => ArtistShort.fromJson(json)).toList() ??
+            [];
     return list;
   }
 
@@ -37,9 +38,10 @@ class EventRemoteDataSourceImpl implements EventRemoteDataSource {
       {required int id, required Map<String, String> httpHeaders}) async {
     final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'event/public/$id/organizers',
-        httpHeaders: httpHeaders) as List<dynamic>;
+        httpHeaders: httpHeaders) as List<dynamic>?;
     final list =
-        decodedResponse.map((json) => UnityShort.fromJson(json)).toList();
+        decodedResponse?.map((json) => UnityShort.fromJson(json)).toList() ??
+            [];
     return list;
   }
 
@@ -48,10 +50,11 @@ class EventRemoteDataSourceImpl implements EventRemoteDataSource {
       {required int id, required Map<String, String> httpHeaders}) async {
     final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
         endpointWithPath: 'event/public/$id/timetable',
-        httpHeaders: httpHeaders) as List<dynamic>;
+        httpHeaders: httpHeaders) as List<dynamic>?;
     final list = decodedResponse
-        .map((json) => TimetableForScene.fromJson(json))
-        .toList();
+            ?.map((json) => TimetableForScene.fromJson(json))
+            .toList() ??
+        [];
     return list;
   }
 }

@@ -31,26 +31,6 @@ class EventCubit extends Cubit<EventState> {
     _loadEventAllInfo(eventId);
   }
 
-  // void _emitStateBasedOnStatus(
-  //     {required EventFull event,
-  //     required List<UnityShort> orgs,
-  //     required List<ArtistShort> lineup,
-  //     required List<TimetableForSceneDto> timetable}) {
-  //   if (event.status == EventStatus.PRESALE) {
-  //     emit(EventState.loadedPresale(
-  //         event: event, orgs: orgs, lineup: lineup, timetable: timetable));
-  //   } else if (event.status == EventStatus.LIVE) {
-  //     emit(EventState.loadedLive(
-  //         event: event, orgs: orgs, lineup: lineup, timetable: timetable));
-  //   } else if (event.status == EventStatus.PAST) {
-  //     emit(EventState.loadedPast(
-  //         event: event, orgs: orgs, lineup: lineup, timetable: timetable));
-  //   } else {
-  //     emit(EventState.loadedUpcoming(
-  //         event: event, orgs: orgs, lineup: lineup, timetable: timetable));
-  //   }
-  // }
-
   void _loadEventAllInfo(int eventId) async {
     final eventBasicInfoRequest = _wikiRepository.fetchBasicDataById(eventId);
     final eventOrganizersRequest =
@@ -90,6 +70,6 @@ class EventCubit extends Cubit<EventState> {
           orgs: organizersData,
           lineup: lineupData,
           timetable: timetableDataDtoList));
-    } else {} //TODO:
+    } else {} //TODO Exception:
   }
 }

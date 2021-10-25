@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_postraves_app/src/core/presentation/widgets/placeholder_container.dart';
+import 'package:the_postraves_app/src/core/service/open_link_service.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/provider/current_city_provider.dart';
 import '../../../../core/utils/my_colors.dart';
@@ -22,8 +23,7 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _currentCity =
-        Provider.of<CurrentCityProvider>(context).currentCity!; // TODO: risky !
+    _currentCity = Provider.of<CurrentCityProvider>(context).currentCity!;
   }
 
   @override
@@ -42,8 +42,8 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
               baseline: TextBaseline.alphabetic,
               alignment: PlaceholderAlignment.baseline,
               child: InkWell(
-                //TODO:
-                onTap: () {},
+                onTap: () => OpenLinkService.openTelegram(
+                    MyConstants.telegramSupportAccount),
                 child: RichText(
                   text: TextSpan(
                     text:

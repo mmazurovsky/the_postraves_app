@@ -47,7 +47,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
           authenticated: (userProfile) => context
               .read<CurrentCityProvider>()
               .changeCurrentCity(userProfile.currentCity),
-          orElse: () {}); //TODO: check it is working
+          orElse: () {}); //TODO Exception
     });
 
     CurrentCityProvider currentCityProvider =
@@ -61,7 +61,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
               currentCityProvider.changeCurrentCity(currentCityFromLocal);
             }
           },
-          failure: (failure, failureMessage) => {}); //TODO: failure processing
+          failure: (failure, failureMessage) => {}); //TODO Exception
     });
 
     CityListProvider cityListProvider = context.read<CityListProvider>();
