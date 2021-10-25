@@ -71,27 +71,22 @@ class _ShowsScreenState extends State<ShowsScreen> {
           return [
             SliverAppBar(
               floating: true,
-              title: const Text('POSTRAVES', style: MyTextStyles.appTitle),
-              centerTitle: false,
-              actions: [
-                AppBarButton(
-                  containerOpacity: 0,
-                  iconWidget: const Icon(
-                    Ionicons.compass_outline,
-                    color: MyColors.main,
-                    size: 25,
-                  ),
-                  onTap: () => showModalBottomSheet(
-                    context: context,
-                    builder: (context) => CurrentCitySelector(
-                      currentCity: _currentCity!,
-                      cities: _cities!,
-                      onSelected: (City newCurrentCity) => context
-                          .read<CurrentCityProvider>()
-                          .changeCurrentCity(newCurrentCity),
-                    ),
+              title: InkWell(
+                onTap: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => CurrentCitySelector(
+                    currentCity: _currentCity!,
+                    cities: _cities!,
+                    onSelected: (City newCurrentCity) => context
+                        .read<CurrentCityProvider>()
+                        .changeCurrentCity(newCurrentCity),
                   ),
                 ),
+                child:
+                    Text(_currentCity!.localName, style: MyTextStyles.appTitle),
+              ),
+              centerTitle: false,
+              actions: [
                 AppBarButton(
                   containerOpacity: 0,
                   iconWidget: const Icon(

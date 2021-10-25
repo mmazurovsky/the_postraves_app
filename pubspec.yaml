@@ -84,6 +84,7 @@ flutter:
     - assets/images/instagram_logo.png
     - assets/images/telegram_logo.png
     - assets/images/bandcamp_logo.png
+    - assets/images/logo_word.png
     # other assets
     - assets/configs/lunar_landscape_google_map_style.json
     - assets/configs/dark_default_google_map_style.json

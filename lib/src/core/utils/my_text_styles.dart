@@ -6,9 +6,9 @@ class MyTextStyles {
 
   static const TextStyle appTitle = TextStyle(
     fontFamily: 'IBMPlexMono',
-    color: MyColors.main,
-    fontSize: 23,
-    fontWeight: FontWeight.w500,
+    color: MyColors.accent,
+    fontSize: 26,
+    fontWeight: FontWeight.w700,
   );
 
   static const TextStyle fullEventCardTitle = TextStyle(
