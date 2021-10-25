@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../models/dto/image_dimensions.dart';
 import '../../../../core/utils/screen_size.dart';
 import '../../../../models/dto/wiki_data_dto.dart';
 import '../../../../models/enum/wiki_rating_type.dart';
@@ -102,7 +101,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
       leading: widget.isBackButtonOn
           ? AppBarButton(
               containerOpacity: _backArrowOpacity,
-              iconWidget: Icon(
+              iconWidget: const Icon(
                 Ionicons.chevron_back_outline,
                 color: MyColors.main,
               ),

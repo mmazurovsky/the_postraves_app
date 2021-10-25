@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/core/utils/my_colors.dart';
 
 import '../../../utils/my_constants.dart';
 

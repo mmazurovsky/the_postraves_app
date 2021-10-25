@@ -7,7 +7,7 @@ class MyTextStyles {
   static const TextStyle appTitle = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.accent,
-    fontSize: 26,
+    fontSize: 23,
     fontWeight: FontWeight.w700,
   );
 
