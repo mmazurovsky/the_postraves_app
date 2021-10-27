@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/features/chart/ui/screens/extended_chart_screen.dart';
-import 'package:the_postraves_app/src/features/profile/ui/screen/following_screen.dart';
+import 'features/chart/ui/screens/extended_chart_screen.dart';
+import 'features/profile/ui/screen/following_screen.dart';
 import 'features/chart/data/chart_type.dart';
 import 'features/profile/ui/screen/modify_profile_screen.dart';
 import 'core/navigation_bar/bottom_navigation_tab_item.dart';

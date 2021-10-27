@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/placeholder_container.dart';
-import 'package:the_postraves_app/src/core/service/open_link_service.dart';
+import '../../../../core/presentation/widgets/placeholder_container.dart';
+import '../../../../core/service/open_link_service.dart';
 import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
 import '../../../../core/provider/current_city_provider.dart';
 import '../../../../core/utils/my_colors.dart';

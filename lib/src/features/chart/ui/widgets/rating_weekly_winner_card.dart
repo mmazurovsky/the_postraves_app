@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/my_spacers.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
 import '../../../../core/utils/screen_size.dart';
 import '../../../../models/interfaces/data_interfaces.dart';
 import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +16,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocatorInjection();
   await Firebase.initializeApp();
-  // if (kDebugMode) {
-  //   // Force disable Crashlytics collection while doing every day development.
-  //   // Temporarily toggle this to true if you want to test crash reporting in your app.
-  //   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  // }
   HttpOverrides.global = MyHttpOverrides();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
@@ -38,15 +33,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      // localeResolutionCallback: (userLocale, supportedLocales) {
-      //   supportedLocales.forEach((supportedLocale) {
-      //     if (userLocale != null &&
-      //         supportedLocale.languageCode == userLocale.languageCode) {
-      //       return supportedLocale;
-      //     }
-      //   });
-      //   return supportedLocales.first;
-      // },
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         splashColor: Colors.transparent,

@@ -1,4 +1,4 @@
-import 'package:the_postraves_app/src/core/utils/social_links_helper.dart';
+import '../utils/social_links_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OpenLinkService {

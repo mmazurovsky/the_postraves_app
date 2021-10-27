@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/my_cached_network_image.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/my_rating_entity_vertical_padding.dart';
-import 'package:the_postraves_app/src/core/utils/my_colors.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
-import 'package:the_postraves_app/src/models/related_to_search/unified_search_model.dart';
+import '../../../core/presentation/widgets/my_cached_network_image.dart';
+import '../../../core/presentation/widgets/my_rating_entity_vertical_padding.dart';
+import '../../../core/utils/my_colors.dart';
+import '../../../core/utils/my_constants.dart';
+import '../../../models/related_to_search/unified_search_model.dart';
 import '../../../core/presentation/widgets/entity_presentation/unified_followable_with_type_data.dart';
 
 class SearchUnifiedModelListItem extends StatefulWidget {

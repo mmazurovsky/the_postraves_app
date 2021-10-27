@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:the_postraves_app/src/core/utils/my_colors.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
+import '../../utils/my_colors.dart';
+import '../../utils/my_constants.dart';
 
 import 'my_horizontal_padding.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/buttons/my_outlined_button_without_padding.dart';
+import 'my_outlined_button_without_padding.dart';
 import 'button_content.dart';
 import '../../../utils/my_colors.dart';
 import '../../../utils/my_constants.dart';

@@ -1,5 +1,5 @@
-import 'package:the_postraves_app/src/features/profile/data_sources/user_following_data_source.dart';
-import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
+import '../data_sources/user_following_data_source.dart';
+import '../../../models/interfaces/data_interfaces.dart';
 import '../../../core/client/data_sealed/response_sealed.dart';
 import '../../../core/client/remote_request_wrapper.dart';
 

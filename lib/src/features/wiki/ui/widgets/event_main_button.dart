@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/buttons/my_elevated_button_without_padding.dart';
-import 'package:the_postraves_app/src/core/service/open_link_service.dart';
-import 'package:the_postraves_app/src/core/utils/my_colors.dart';
+import '../../../../core/presentation/widgets/buttons/my_elevated_button_without_padding.dart';
+import '../../../../core/service/open_link_service.dart';
+import '../../../../core/utils/my_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:the_postraves_app/src/core/utils/my_text_styles.dart';
-import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_squared_outlined_bookmark_button.dart';
-import 'package:the_postraves_app/src/features/wiki/ui/widgets/wiki_wide_bookmark_button.dart';
-import 'package:the_postraves_app/src/models/enum/event_status.dart';
+import '../../../../core/utils/my_text_styles.dart';
+import 'wiki_squared_outlined_bookmark_button.dart';
+import 'wiki_wide_bookmark_button.dart';
+import '../../../../models/enum/event_status.dart';
 
 class EventMainButton extends StatelessWidget {
   final EventStatus status;
