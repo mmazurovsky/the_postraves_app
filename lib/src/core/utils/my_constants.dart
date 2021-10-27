@@ -29,6 +29,6 @@ class MyConstants {
   static const String privacyPolicyLink =
       'https://postraves.flycricket.io/privacy.html';
   static const double heightOfCitySelectorModalBottomSheet = 270;
-  static const double heightOfSortModeSelectorModalBottomSheet = 310;
+  static const double heightOfSortModeSelectorModalBottomSheet = 340;
   static const String telegramSupportAccount = "mmazurovsky";
 }

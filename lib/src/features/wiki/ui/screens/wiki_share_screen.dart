@@ -59,7 +59,7 @@ class WikiShareScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 20),
                   Flexible(
                     child: UnifiedFollowableWithTypeData(
                       followable: wikiData,
