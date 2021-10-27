@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:the_postraves_app/src/features/profile/state/profile_cubit/profile_cubit.dart';
+import '../../features/profile/state/profile_cubit/profile_cubit.dart';
 import '../../models/geo/city.dart';
 import '../repository/city_repository.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/widgets.dart';
-import 'package:the_postraves_app/src/core/utils/my_text_styles.dart';
+import 'my_text_styles.dart';
 import '../../models/enum/money_currency.dart';
 import '../../models/related_to_event/ticket_price.dart';
 import '../../models/related_to_event/ticket_price_range.dart';

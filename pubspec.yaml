@@ -36,7 +36,7 @@ dependencies:
   firebase_storage: ^10.0.3
   cloud_firestore: ^2.5.3
   firebase_messaging: ^10.0.7
-  # firebase_crashlytics: ^2.0.7
+  firebase_crashlytics: ^2.0.7
   firebase_dynamic_links: ^2.0.9
   google_sign_in: ^5.0.2
   logging: ^1.0.1

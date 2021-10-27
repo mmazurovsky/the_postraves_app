@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/features/profile/state/profile_cubit/profile_cubit.dart';
+import '../../state/profile_cubit/profile_cubit.dart';
 import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
 import '../widgets/nickname_text_field.dart';

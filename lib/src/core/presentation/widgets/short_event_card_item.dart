@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/features/shows/ui/widgets/event_card_details_concrete.dart';
+import '../../../features/shows/ui/widgets/event_card_details_concrete.dart';
 import '../../../features/shows/ui/widgets/event_card_details.dart';
 import '../../../models/enum/event_status.dart';
 import '../../../models/shorts/event_short.dart';

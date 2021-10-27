@@ -1,5 +1,5 @@
-import 'package:the_postraves_app/src/core/utils/followable_client_helper.dart';
-import 'package:the_postraves_app/src/models/interfaces/data_interfaces.dart';
+import '../../../core/utils/followable_client_helper.dart';
+import '../../../models/interfaces/data_interfaces.dart';
 import '../../../core/client/remote_client.dart';
 
 abstract class UserFollowingDataSource<

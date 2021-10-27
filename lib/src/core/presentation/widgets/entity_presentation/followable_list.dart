@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
+import '../../../utils/my_constants.dart';
 
 import '../../../../models/interfaces/data_interfaces.dart';
 import 'followable_item.dart';

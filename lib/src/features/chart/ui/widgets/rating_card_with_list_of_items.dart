@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/entity_presentation/followable_list.dart';
+import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
 import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
 import '../../../../models/dto/image_dimensions.dart';
 import '../../../../models/interfaces/data_interfaces.dart';

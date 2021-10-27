@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/app_bar_title.dart';
+import '../../../../core/presentation/widgets/app_bar_title.dart';
 import '../../timetable_cubit/timetable_cubit.dart';
 import '../../dto/timetable_for_scene_dto.dart';
 import '../../../../core/presentation/widgets/loading_container.dart';

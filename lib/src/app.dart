@@ -1,8 +1,7 @@
-// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_postraves_app/src/features/profile/state/following_cubit/following_cubit.dart';
+import 'features/profile/state/following_cubit/following_cubit.dart';
 import 'features/profile/state/profile_cubit/profile_cubit.dart';
 import 'features/timetable/timetable_cubit/timetable_cubit.dart';
 import 'core/provider/country_list_provider.dart';
@@ -40,7 +39,6 @@ class AppState extends State<App> with WidgetsBindingObserver {
       MediaQuery.of(context).size.height,
       MediaQuery.of(context).size.width,
     );
-    // FirebaseCrashlytics.instance.crash();
     super.didChangeDependencies();
   }
 

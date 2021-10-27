@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:the_postraves_app/src/core/utils/my_constants.dart';
-import 'package:the_postraves_app/src/core/utils/my_text_styles.dart';
+import '../../utils/my_constants.dart';
+import '../../utils/my_text_styles.dart';
 
 class AppBarTitle extends StatelessWidget {
   final String title;

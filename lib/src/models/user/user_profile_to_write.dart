@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'user_profile_to_write.freezed.dart';
 part 'user_profile_to_write.g.dart';
 

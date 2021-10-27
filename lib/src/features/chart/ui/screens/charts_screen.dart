@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:the_postraves_app/src/core/presentation/widgets/my_spacers.dart';
-import 'package:the_postraves_app/src/features/chart/data/chart_type.dart';
+import '../../../../core/presentation/widgets/my_spacers.dart';
+import '../../data/chart_type.dart';
 
 import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../core/presentation/widgets/failure_container.dart';

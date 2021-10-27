@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/core/utils/formatting_utils.dart';
+import '../../../utils/formatting_utils.dart';
 import '../../../utils/my_colors.dart';
 
 import '../../../../models/interfaces/data_interfaces.dart';
