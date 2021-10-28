@@ -80,16 +80,11 @@ flutter:
     - assets/images/emojis/link_emoji.png
     - assets/images/emojis/dizzy_emoji.png
     # images
-    - assets/images/map_pin.png
     - assets/images/soundcloud_logo.png
     - assets/images/instagram_logo.png
     - assets/images/telegram_logo.png
     - assets/images/bandcamp_logo.png
     - assets/images/logo_word.png
-    # other assets
-    - assets/configs/lunar_landscape_google_map_style.json
-    - assets/configs/dark_default_google_map_style.json
-    - assets/configs/custom_google_map_style.json
 
   fonts:
     - family: IBMPlexMono

@@ -8,13 +8,7 @@ class MyEmoji {
 
 class MyImages {
   static const String instagramLogo = 'assets/images/instagram_logo.png';
-  static const String mapPin = 'assets/images/map_pin.png';
   static const String soundcloudLogo = 'assets/images/soundcloud_logo.png';
   static const String telegramLogo = 'assets/images/telegram_logo.png';
   static const String bandcampLogo = 'assets/images/bandcamp_logo.png';
-}
-
-class MyOtherAssets {
-  static const String mapStyle =
-      'assets/configs/custom_google_map_style.json';
 }
