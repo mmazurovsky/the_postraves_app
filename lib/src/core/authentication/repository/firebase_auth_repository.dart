@@ -81,8 +81,7 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
   Future<ResponseSealed<void>> startSigningWithEmailAndLink(
       {required String email}) async {
     ActionCodeSettings actionCodeSettings = ActionCodeSettings(
-      url: 'https://thepostravesapp.page.link',
-      // 'https://postraves.com',
+      url: MyConstants.dynamicLinkUrlPrefix,
       androidPackageName: MyConstants.androidPackageName,
       iOSBundleId: MyConstants.iosBundleId,
       handleCodeInApp: true,

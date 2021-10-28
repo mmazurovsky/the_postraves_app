@@ -109,7 +109,7 @@
     "selectCityTitle": "Select city",
     "profileCreationCreate": "Create profile",
     "profileCreationNicknameWarningLength": "May be 3 to 15 symbols in length",
-    "profileCreationNicknameWarningSymbols": "May contain only Latin, Cyrillic and numbers",
+    "profileCreationNicknameWarningSymbols": "May contain only Latin and numbers",
     "profileCreationNicknameWarningTaken": "This nickname is taken",
     "share": "Share",
     "showQrCode": "Show QR code",

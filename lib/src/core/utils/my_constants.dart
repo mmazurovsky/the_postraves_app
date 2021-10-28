@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screen_size.dart';
 
 class MyConstants {
@@ -12,7 +13,7 @@ class MyConstants {
   static const double dividerThickness = 0.1;
   static double appBarTitleWidth(BuildContext context) =>
       ScreenSize.width - 2 * horizontalPaddingOrMargin - 2 * heightOfContainers;
-  static const String googleApiKey = String.fromEnvironment('GOOGLE_MAP_API_KEY');
+  static String googleApiKey = dotenv.env['GOOGLE_MAP_API_KEY'] ?? 'undefined';
   static const String googleMapId = '40e862bd8e6365a7';
   static const String iosBundleId = 'com.mmazurovsky.thePostravesApp';
   //TODO! Android: change

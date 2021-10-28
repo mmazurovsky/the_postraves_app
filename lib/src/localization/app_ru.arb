@@ -109,7 +109,7 @@
     "selectCityTitle": "Выберите город",
     "profileCreationCreate": "Создать профиль",
     "profileCreationNicknameWarningLength": "Может быть от 3 до 15 символов в длину",
-    "profileCreationNicknameWarningSymbols": "Может содержать только латиницу, кириллицу и цифры",
+    "profileCreationNicknameWarningSymbols": "Может содержать только латиницу и цифры",
     "profileCreationNicknameWarningTaken": "Этот никнейм занят",
     "share": "Поделиться",
     "showQrCode": "Показать QR-код",

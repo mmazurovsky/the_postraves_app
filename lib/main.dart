@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'src/app.dart';
 import 'src/core/utils/my_colors.dart';
@@ -20,6 +21,7 @@ void main() async {
       .then((_) {
     runApp(const MyApp());
   });
+  await dotenv.load(fileName: ".env");
 }
 
 class MyApp extends StatelessWidget {
