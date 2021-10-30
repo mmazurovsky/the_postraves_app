@@ -1,7 +1,3 @@
-/* 
-  InfoPlist.strings
-  Runner
-
-  Created by Mikhail Mazurovskiy on 30.10.2021.
-  
-*/
+NSCameraUsageDescription = "Предоставьте доступ к камере, чтобы сделать аватар";
+NSMicrophoneUsageDescription = "Предоставьте доступ к микрофону, чтобы записывать аудио при видеосъемке";
+NSPhotoLibraryUsageDescription = "Предоставьте доступ к галерее, чтобы выбрать аватар";
