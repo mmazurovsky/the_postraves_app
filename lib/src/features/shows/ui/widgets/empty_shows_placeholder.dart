@@ -33,7 +33,7 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'emptyShowsText'.tr(args: [_currentCity.localName]),
+              text: 'emptyShowsText'.tr(args: [_currentCity.localName]) + ' ',
               style: MyTextStyles.body,
             ),
             WidgetSpan(

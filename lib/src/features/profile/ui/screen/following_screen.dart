@@ -179,8 +179,7 @@ class _FollowableTabBarView<T extends GeneralFollowableInterface>
                   children: [
                     TextSpan(
                       text:
-                          "You don't follow ${_entityName.toLowerCase()} yet.\nStart following ${_entityName.toLowerCase()} and they will appear here.",
-                      //TODO!!!
+                          'notFollowingEntity'.tr(args: [_entityName]),
                       style: MyTextStyles.body,
                     ),
                   ],
