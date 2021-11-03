@@ -21,12 +21,12 @@ import '../../../../common/widgets/image/my_cached_network_image.dart';
 
 class WikiShareScreen extends StatelessWidget {
   final Uri shareLink;
-  final FollowableData wikiData;
+  final FollowableData followableData;
 
   const WikiShareScreen({
     Key? key,
     required this.shareLink,
-    required this.wikiData,
+    required this.followableData,
   }) : super(key: key);
 
   @override
@@ -56,14 +56,14 @@ class WikiShareScreen extends StatelessWidget {
                       width: 50,
                       height: 50,
                       child: MyCachedNetworkImage(
-                        wikiData.imageLink,
+                        followableData.imageLink,
                       ),
                     ),
                   ),
                   SizedBox(width: 20),
                   Flexible(
                     child: UnifiedFollowableWithTypeData(
-                      followable: wikiData,
+                      followable: followableData,
                     ),
                   ),
                 ],

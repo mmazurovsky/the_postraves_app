@@ -121,7 +121,7 @@ class RouteGenerator {
           settings: routeSettings,
           builder: (_) => WikiShareScreen(
                 shareLink: args!['shareLink'],
-                wikiData: args['wikiData'],
+                followableData: args['followableData'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.actionResolver) {
       return MaterialPageRoute(
@@ -186,17 +186,17 @@ class NavigatorFunctions {
             emojiCode: countryEmojiCodeInLink)
         : null;
     final imageLink = deepLink.queryParameters['imageLink'];
-    final int? imageHeight = deepLink.queryParameters['imageHeight'] != null
-        ? int.tryParse(deepLink.queryParameters['imageHeight']!)
+    final double? imageHeight = deepLink.queryParameters['imageHeight'] != null
+        ? double.tryParse(deepLink.queryParameters['imageHeight']!)
         : null;
-    final int? imageWidth = deepLink.queryParameters['imageWidth'] != null
-        ? int.tryParse(deepLink.queryParameters['imageWidth']!)
+    final double? imageWidth = deepLink.queryParameters['imageWidth'] != null
+        ? double.tryParse(deepLink.queryParameters['imageWidth']!)
         : null;
     final ImageDimensions? imageDimensions =
         imageHeight != null && imageWidth != null
             ? ImageDimensions(
-                height: imageHeight.toDouble(),
-                width: imageWidth.toDouble(),
+                height: imageHeight,
+                width: imageWidth,
               )
             : null;
 
@@ -244,7 +244,8 @@ class NavigatorFunctions {
     } else if (type == FollowableType.PLACE) {
       return MyNavigationRoutes.place;
     } else if (type == FollowableType.USER) {
-      return MyNavigationRoutes.user; //TODO
+      return MyNavigationRoutes
+          .user; //TODO my user profile and other user profiles problem
     } else {
       throw Exception(); //TODO exception
     }
@@ -253,11 +254,11 @@ class NavigatorFunctions {
   static void pushShareWiki({
     required BuildContext context,
     required Uri shareLink,
-    required FollowableData wikiData,
+    required FollowableData followableData,
   }) {
     Navigator.of(context).pushNamed(MyNavigationRoutes.wikiShare, arguments: {
       'shareLink': shareLink,
-      'wikiData': wikiData,
+      'followableData': followableData,
     });
   }
 

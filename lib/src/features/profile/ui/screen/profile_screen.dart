@@ -96,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           : null,
       imageLink: _userProfile.imageLink,
       name: _userProfile.name,
-      type: FollowableType.USER,
+      type: FollowableType.USER, //TODO: me user and other users distinction
     );
     _profileDetails = _ProfileDetails(
       userProfile: _userProfile,
@@ -120,6 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       wikiContent: _profileDetails!,
       scrollController: _scrollController,
       isBackButtonOn: false,
+      isShareButtonOn: false,
     );
   }
 }

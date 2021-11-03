@@ -16,13 +16,15 @@ class WikiSliverAppBar extends StatefulWidget {
     Key? key,
     required this.scrollController,
     required this.isBackButtonOn,
-    required this.wikiData,
+    required this.isShareButtonOn,
+    required this.followableData,
     required this.shareLink,
   }) : super(key: key);
 
   final ScrollController scrollController;
   final bool isBackButtonOn;
-  final FollowableData wikiData;
+  final bool isShareButtonOn;
+  final FollowableData followableData;
   final Uri? shareLink;
 
   @override
@@ -41,13 +43,13 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
   void initState() {
     super.initState();
     widget.scrollController.addListener(_scrollListener);
-    _flexibleSpaceImage = MyCachedNetworkImage(widget.wikiData.imageLink);
+    _flexibleSpaceImage = MyCachedNetworkImage(widget.followableData.imageLink);
     _showAppBarTitle = false;
-    flexibleSpaceHeight = widget.wikiData.imageDimensions == null
+    flexibleSpaceHeight = widget.followableData.imageDimensions == null
         ? ScreenSize.width / 2.5
-        : (widget.wikiData.imageDimensions!.height *
+        : (widget.followableData.imageDimensions!.height *
             ScreenSize.width /
-            widget.wikiData.imageDimensions!.width);
+            widget.followableData.imageDimensions!.width);
     _scrollOffsetFromWhichAppBarDarkeningEnds = flexibleSpaceHeight - 55;
     _scrollOffsetFromWhichAppBarDarkeningStarts =
         _scrollOffsetFromWhichAppBarDarkeningEnds - 40;
@@ -109,10 +111,9 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
               onTap: Navigator.of(context).pop,
             )
           : null,
-      actions: [
-        // TODO: dirty
-        widget.wikiData.type != FollowableType.USER
-            ? AppBarButton(
+      actions: widget.isShareButtonOn
+          ? [
+              AppBarButton(
                 containerOpacity: _backArrowOpacity,
                 iconWidget: const Icon(
                   Ionicons.share_outline,
@@ -122,16 +123,16 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
                     ? NavigatorFunctions.pushShareWiki(
                         context: context,
                         shareLink: widget.shareLink!,
-                        wikiData: widget.wikiData,
+                        followableData: widget.followableData,
                       )
                     : {},
               )
-            : Container()
-      ],
+            ]
+          : null,
 
       centerTitle: true,
       title: AnimatedOpacity(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         opacity: _showAppBarTitle ? 1.0 : 0.0,
         child: SizedBox(
           width: MyConstants.appBarTitleWidth(context),
@@ -139,12 +140,13 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                widget.wikiData.name,
+                widget.followableData.name,
                 style: MyTextStyles.appBarTitle,
                 overflow: TextOverflow.fade,
               ),
               Text(
-                FollowableTypeUtils.getTranslationSingularForType(widget.wikiData.type),
+                FollowableTypeUtils.getTranslationSingularForType(
+                    widget.followableData.type),
                 style: MyTextStyles.appBarSubtitle,
                 overflow: TextOverflow.ellipsis,
               ),

@@ -9,8 +9,7 @@ import '../../dependency_injection.dart';
 import '../navigation/my_navigation.dart';
 import '../constants/my_constants.dart';
 
-
-class DynamicLinksConfigurer extends StatelessWidget {
+class DynamicLinksConfigurer extends StatefulWidget {
   final Widget child;
   const DynamicLinksConfigurer({
     Key? key,
@@ -18,10 +17,21 @@ class DynamicLinksConfigurer extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<DynamicLinksConfigurer> createState() => _DynamicLinksConfigurerState();
+}
+
+class _DynamicLinksConfigurerState extends State<DynamicLinksConfigurer> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     DynamicLinkService.initDynamicLinks(serviceLocator(), context,
         context.watch<CurrentTabProvider>().currentTab);
-    return child;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
   }
 }
 
@@ -48,6 +58,7 @@ class DynamicLinkService {
       //TODO Exception
     });
 
+    // TODO i dont know how the rest of bloc works
     final PendingDynamicLinkData? data =
         await FirebaseDynamicLinks.instance.getInitialLink();
     final Uri? deepLink = data?.link;
@@ -59,11 +70,10 @@ class DynamicLinkService {
 
   static Future<Uri> createDynamicLink(String pathToPage) async {
     final dynamicLinkParams = DynamicLinkParameters(
-      uriPrefix: MyConstants
-          .dynamicLinkUrlPrefix,
+      uriPrefix: MyConstants.dynamicLinkUrlPrefix,
       link: Uri.parse('https://postraves.com$pathToPage'),
       iosParameters: IosParameters(
-        appStoreId: MyConstants.iosAppStoreId, 
+        appStoreId: MyConstants.iosAppStoreId,
         bundleId: MyConstants.iosBundleId,
       ),
       androidParameters: AndroidParameters(

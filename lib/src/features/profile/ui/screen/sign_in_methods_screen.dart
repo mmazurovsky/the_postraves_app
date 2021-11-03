@@ -102,14 +102,14 @@ class SignInMethodsScreen extends StatelessWidget {
                         MyConstants.termsAndConditionsLink),
                     child: RichText(
                       text: TextSpan(
-                        text: 'authDocsTerms'.tr(),
+                        text: 'authDocsTerms'.tr() + ' ',
                         style: MyTextStyles.termsActive,
                       ),
                     ),
                   ),
                 ),
                 TextSpan(
-                  text: 'and'.tr(),
+                  text: 'and'.tr() + ' ',
                   style: MyTextStyles.termsInactive,
                 ),
                 WidgetSpan(

@@ -2,6 +2,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/my_slide_animated_switcher.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
@@ -81,68 +82,67 @@ class _FollowingScreenState extends State<FollowingScreen>
         ),
       ),
       body: BlocBuilder<FollowingCubit, FollowingState>(
-        builder: (context, state) {
-          if (state is FollowingLoadedState) {
-            return TabBarView(
-              controller: _tabController,
-              children: [
-                _FollowableTabBarView<EventShort>(
-                  'eventEntityNamePlural'.tr(),
-                  state.events,
-                  (EventShort event) => ShortEventCardItem(event),
-                ),
-                _FollowableTabBarView<ArtistShort>(
-                  'artistEntityNamePlural'.tr(),
-                  state.artists,
-                  (ArtistShort artist) => FollowableItem(
-                    key: ValueKey(artist.id),
-                    entity: artist,
-                    onItemTap: (context, ArtistShort entity,
-                            ImageDimensions? imageDimensions) =>
-                        NavigatorFunctions.pushFollowable(
-                      context: context,
-                      followableData:
-                          entity.convertToFollowableData(imageDimensions),
+          builder: (context, state) {
+        return MySlideAnimatedSwitcher(
+          child: state is FollowingLoadedState
+              ? TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _FollowableTabBarView<EventShort>(
+                      'eventEntityNamePlural'.tr(),
+                      state.events,
+                      (EventShort event) => ShortEventCardItem(event),
                     ),
-                  ),
-                ),
-                _FollowableTabBarView<PlaceShort>(
-                  'placeEntityNamePlural'.tr(),
-                  state.places,
-                  (PlaceShort place) => FollowableItem(
-                    key: ValueKey(place.id),
-                    entity: place,
-                    onItemTap: (context, PlaceShort entity,
-                            ImageDimensions? imageDimensions) =>
-                        NavigatorFunctions.pushFollowable(
-                      context: context,
-                      followableData:
-                          entity.convertToFollowableData(imageDimensions),
+                    _FollowableTabBarView<ArtistShort>(
+                      'artistEntityNamePlural'.tr(),
+                      state.artists,
+                      (ArtistShort artist) => FollowableItem(
+                        key: ValueKey(artist.id),
+                        entity: artist,
+                        onItemTap: (context, ArtistShort entity,
+                                ImageDimensions? imageDimensions) =>
+                            NavigatorFunctions.pushFollowable(
+                          context: context,
+                          followableData:
+                              entity.convertToFollowableData(imageDimensions),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                _FollowableTabBarView<UnityShort>(
-                  'unityEntityNamePlural'.tr(),
-                  state.unities,
-                  (UnityShort unity) => FollowableItem(
-                    key: ValueKey(unity.id),
-                    entity: unity,
-                    onItemTap: (context, UnityShort entity,
-                            ImageDimensions? imageDimensions) =>
-                        NavigatorFunctions.pushFollowable(
-                      context: context,
-                      followableData:
-                          entity.convertToFollowableData(imageDimensions),
+                    _FollowableTabBarView<PlaceShort>(
+                      'placeEntityNamePlural'.tr(),
+                      state.places,
+                      (PlaceShort place) => FollowableItem(
+                        key: ValueKey(place.id),
+                        entity: place,
+                        onItemTap: (context, PlaceShort entity,
+                                ImageDimensions? imageDimensions) =>
+                            NavigatorFunctions.pushFollowable(
+                          context: context,
+                          followableData:
+                              entity.convertToFollowableData(imageDimensions),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const LoadingContainer();
-          }
-        },
-      ),
+                    _FollowableTabBarView<UnityShort>(
+                      'unityEntityNamePlural'.tr(),
+                      state.unities,
+                      (UnityShort unity) => FollowableItem(
+                        key: ValueKey(unity.id),
+                        entity: unity,
+                        onItemTap: (context, UnityShort entity,
+                                ImageDimensions? imageDimensions) =>
+                            NavigatorFunctions.pushFollowable(
+                          context: context,
+                          followableData:
+                              entity.convertToFollowableData(imageDimensions),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : const LoadingContainer(),
+        );
+      }),
     );
   }
 }
@@ -180,7 +180,7 @@ class _FollowableTabBarView<T extends GeneralFollowableInterface>
                     TextSpan(
                       text:
                           "You don't follow ${_entityName.toLowerCase()} yet.\nStart following ${_entityName.toLowerCase()} and they will appear here.",
-                          //TODO!!!
+                      //TODO!!!
                       style: MyTextStyles.body,
                     ),
                   ],

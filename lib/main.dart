@@ -17,19 +17,18 @@ void main() async {
   setupServiceLocatorInjection();
   await Firebase.initializeApp();
   HttpOverrides.global = MyHttpOverrides();
+  await dotenv.load(fileName: ".env");
+  await EasyLocalization.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(const MyApp());
+    runApp(
+      EasyLocalization(
+          supportedLocales: const [Locale('en'), Locale('ru')],
+          path: 'assets/translations',
+          fallbackLocale: const Locale('en'),
+          child: const MyApp()),
+    );
   });
-  await dotenv.load(fileName: ".env");
-  runApp(
-    EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ru')],
-        path:
-            'assets/translations',
-        fallbackLocale: const Locale('en'),
-        child: const MyApp()),
-  );
 }
 
 class MyApp extends StatelessWidget {

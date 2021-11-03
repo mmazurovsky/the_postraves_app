@@ -11,6 +11,7 @@ import '../widgets/wiki_title.dart';
 class WikiCanvas extends StatefulWidget {
   final FollowableData followableData;
   final bool isBackButtonOn;
+  final bool isShareButtonOn;
   final Widget wikiContent;
   final ScrollController? scrollController;
 
@@ -19,6 +20,7 @@ class WikiCanvas extends StatefulWidget {
     required this.followableData,
     required this.wikiContent,
     this.isBackButtonOn = true,
+    this.isShareButtonOn = true,
     this.scrollController,
   }) : super(key: key);
 
@@ -71,7 +73,8 @@ class _WikiCanvasState extends State<WikiCanvas> {
                   WikiSliverAppBar(
                 scrollController: _scrollController,
                 isBackButtonOn: widget.isBackButtonOn,
-                wikiData: widget.followableData,
+                isShareButtonOn: widget.isShareButtonOn,
+                followableData: widget.followableData,
                 shareLink: snapshot.data,
               ),
             ),
