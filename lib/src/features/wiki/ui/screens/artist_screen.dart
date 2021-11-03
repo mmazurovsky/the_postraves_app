@@ -21,24 +21,24 @@ import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';
 
 class ArtistScreen extends StatelessWidget {
-  final FollowableData _FollowableData;
+  final FollowableData _followableData;
   const ArtistScreen(
-    this._FollowableData, {
+    this._followableData, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FollowableScreen<ArtistCubit, FollowCubit<ArtistFull>>(
-      _FollowableData,
-      _ArtistStateManagement(_FollowableData),
+      _followableData,
+      _ArtistStateManagement(_followableData),
     );
   }
 }
 
 class _ArtistStateManagement extends StatefulWidget {
-  final FollowableData _FollowableData;
-  const _ArtistStateManagement(this._FollowableData, {Key? key})
+  final FollowableData _followableData;
+  const _ArtistStateManagement(this._followableData, {Key? key})
       : super(key: key);
 
   @override
@@ -49,7 +49,7 @@ class _ArtistStateManagementState extends State<_ArtistStateManagement> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ArtistCubit>(context).loadArtist(widget._FollowableData.id);
+    BlocProvider.of<ArtistCubit>(context).loadArtist(widget._followableData.id);
   }
 
   @override

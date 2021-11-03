@@ -7,10 +7,10 @@ import 'wiki_canvas.dart';
 
 class FollowableScreen<FollowableCubitGeneric extends Cubit,
     FollowCubitGeneric extends Cubit> extends StatelessWidget {
-  final FollowableData _FollowableData;
+  final FollowableData _followableData;
   final Widget _contents;
   const FollowableScreen(
-    this._FollowableData,
+    this._followableData,
     this._contents, {
     Key? key,
   }) : super(key: key);
@@ -27,9 +27,9 @@ class FollowableScreen<FollowableCubitGeneric extends Cubit,
         ),
       ],
       child: WikiCanvas(
-        followableData: _FollowableData,
+        followableData: _followableData,
         wikiContent: _FollowableScreenContents<FollowCubitGeneric>(
-            _FollowableData, _contents),
+            _followableData, _contents),
       ),
     );
   }
@@ -37,9 +37,9 @@ class FollowableScreen<FollowableCubitGeneric extends Cubit,
 
 class _FollowableScreenContents<FollowCubitGeneric extends Cubit>
     extends StatefulWidget {
-  final FollowableData _FollowableData;
+  final FollowableData _followableData;
   final Widget _contents;
-  const _FollowableScreenContents(this._FollowableData, this._contents,
+  const _FollowableScreenContents(this._followableData, this._contents,
       {Key? key})
       : super(key: key);
 
@@ -71,8 +71,8 @@ class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
       children: [
         const SizedBox(height: 5),
         WikiSubtitle(
-          entityType: widget._FollowableData.type,
-          country: widget._FollowableData.country,
+          entityType: widget._followableData.type,
+          country: widget._followableData.country,
           overallFollowers: _overallFollowers,
           weeklyFollowers: _weeklyFollowers,
           isFollowed: _isFollowed,

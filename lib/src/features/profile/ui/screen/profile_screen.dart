@@ -82,14 +82,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // late MyCachedNetworkImage _myCachedNetworkImage;
   // ImageDimensions? _imageDimensions;
   late UserProfile _userProfile;
-  late FollowableData _FollowableData;
+  late FollowableData _followableData;
   // late ImageDimensions? _imageDimensions;
 
   @override
   void initState() {
     super.initState();
     _userProfile = context.read<AuthenticationCubit>().currentUserFromBackend!;
-    _FollowableData = FollowableData(
+    _followableData = FollowableData(
       id: _userProfile.id,
 
       ///* default value is used because getting dimensions for profile
@@ -119,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return WikiCanvas(
-      followableData: _FollowableData,
+      followableData: _followableData,
       wikiContent: _profileDetails!,
       scrollController: _scrollController,
       isBackButtonOn: false,

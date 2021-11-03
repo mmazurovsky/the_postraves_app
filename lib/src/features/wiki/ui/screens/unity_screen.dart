@@ -22,22 +22,22 @@ import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';
 
 class UnityScreen extends StatelessWidget {
-  final FollowableData _FollowableData;
+  final FollowableData _followableData;
 
-  const UnityScreen(this._FollowableData, {Key? key}) : super(key: key);
+  const UnityScreen(this._followableData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FollowableScreen<UnityCubit, FollowCubit<UnityFull>>(
-      _FollowableData,
-      _UnityStateManagement(_FollowableData),
+      _followableData,
+      _UnityStateManagement(_followableData),
     );
   }
 }
 
 class _UnityStateManagement extends StatefulWidget {
-  final FollowableData _FollowableData;
-  const _UnityStateManagement(this._FollowableData, {Key? key})
+  final FollowableData _followableData;
+  const _UnityStateManagement(this._followableData, {Key? key})
       : super(key: key);
 
   @override
@@ -48,7 +48,7 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<UnityCubit>(context).loadUnity(widget._FollowableData.id);
+    BlocProvider.of<UnityCubit>(context).loadUnity(widget._followableData.id);
   }
 
   @override

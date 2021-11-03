@@ -36,24 +36,24 @@ import 'followable_screen.dart';
 import 'wiki_canvas.dart';
 
 class PlaceScreen extends StatelessWidget {
-  final FollowableData _FollowableData;
+  final FollowableData _followableData;
 
   const PlaceScreen(
-    this._FollowableData, {
+    this._followableData, {
     Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return FollowableScreen<PlaceCubit, FollowCubit<PlaceFull>>(
-      _FollowableData,
-      _PlaceStateManagement(_FollowableData),
+      _followableData,
+      _PlaceStateManagement(_followableData),
     );
   }
 }
 
 class _PlaceStateManagement extends StatefulWidget {
-  final FollowableData _FollowableData;
-  const _PlaceStateManagement(this._FollowableData, {Key? key})
+  final FollowableData _followableData;
+  const _PlaceStateManagement(this._followableData, {Key? key})
       : super(key: key);
 
   @override
@@ -65,7 +65,7 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<PlaceCubit>(context).loadPlace(widget._FollowableData.id);
+    BlocProvider.of<PlaceCubit>(context).loadPlace(widget._followableData.id);
   }
 
   @override

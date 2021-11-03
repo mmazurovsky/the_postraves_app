@@ -30,24 +30,24 @@ import '../widgets/slide_animation_wrapper.dart';
 import 'followable_screen.dart';
 
 class EventScreen extends StatelessWidget {
-  final FollowableData _FollowableData;
+  final FollowableData _followableData;
   const EventScreen(
-    this._FollowableData, {
+    this._followableData, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FollowableScreen<EventCubit, FollowCubit<EventFull>>(
-      _FollowableData,
-      _EventStateManagement(_FollowableData),
+      _followableData,
+      _EventStateManagement(_followableData),
     );
   }
 }
 
 class _EventStateManagement extends StatefulWidget {
-  final FollowableData _FollowableData;
-  const _EventStateManagement(this._FollowableData, {Key? key})
+  final FollowableData _followableData;
+  const _EventStateManagement(this._followableData, {Key? key})
       : super(key: key);
 
   @override
@@ -61,7 +61,7 @@ class _EventStateManagementState extends State<_EventStateManagement> {
   void initState() {
     super.initState();
     _eventBlocProvider = BlocProvider.of<EventCubit>(context);
-    _eventBlocProvider.loadEvent(widget._FollowableData.id);
+    _eventBlocProvider.loadEvent(widget._followableData.id);
   }
 
   @override
@@ -150,7 +150,8 @@ class _EventContentState extends State<_EventContent> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    FormattingUtils.getEventStatusNameTranslation(widget.event.status),
+                    FormattingUtils.getEventStatusNameTranslation(
+                        widget.event.status),
                     style: MyTextStyles.body,
                   ),
                   const SizedBox(
