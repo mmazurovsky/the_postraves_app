@@ -19,7 +19,7 @@ import '../../../../common/widgets/other/placeholder_container.dart';
 import '../../../../common/widgets/other/short_event_card_item.dart';
 import '../../../../common/widgets/spacers/ending_of_screen.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../../wiki/ui/widgets/column_of_custom_cards.dart';
 import '../../state/following_cubit/following_cubit.dart';
 

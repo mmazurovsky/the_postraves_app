@@ -12,7 +12,7 @@ import '../../../../common/widgets/app_bar/app_bar_title.dart';
 import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
 import '../../../../common/widgets/entity_presentation/followable_list.dart';
 import '../../../../common/widgets/other/loading_container.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../data/chart_type.dart';
 import '../../state/cubit/charts_cubit.dart';
 

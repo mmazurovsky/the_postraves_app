@@ -6,7 +6,7 @@ import 'package:the_postraves_app/src/common/authentication/state/cubit/authenti
 import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../geo_provider/current_tab_provider.dart';
 import '../../dependency_injection.dart';
-import '../../my_navigation.dart';
+import '../navigation/my_navigation.dart';
 import '../constants/my_constants.dart';
 
 

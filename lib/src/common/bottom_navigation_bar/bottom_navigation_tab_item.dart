@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../my_navigation.dart';
+import '../navigation/my_navigation.dart';
 
 enum TabItem { shows, search, profile }
 

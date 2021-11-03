@@ -7,7 +7,7 @@ import '../../../../common/utils/screen_size.dart';
 import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../../../common/widgets/image/empty_image_placeholder.dart';
 import '../../../../common/widgets/image/my_cached_network_image.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import 'event_card_details_concrete.dart';
 
 class EventCard extends StatefulWidget {

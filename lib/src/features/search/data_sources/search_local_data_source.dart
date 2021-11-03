@@ -1,6 +1,6 @@
 
 import 'package:sembast/sembast.dart';
-import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_app/src/common/data/unified_search_model.dart';
 import '../../../common/configs/app_database.dart';
 
 

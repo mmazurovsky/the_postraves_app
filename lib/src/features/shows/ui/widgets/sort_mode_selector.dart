@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/data/enum/view_mode.dart';
+import 'package:the_postraves_app/src/common/data/view_mode.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';

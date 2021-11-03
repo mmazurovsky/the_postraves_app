@@ -10,7 +10,7 @@ import '../../../../common/widgets/buttons/my_elevated_button.dart';
 import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../../../common/widgets/spacers/section_divider.dart';
 import '../../../../common/widgets/inputs/my_text_field.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 
 class SignInWithEmailAndLinkScreen extends StatefulWidget {
   const SignInWithEmailAndLinkScreen({Key? key}) : super(key: key);

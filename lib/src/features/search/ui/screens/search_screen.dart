@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
-import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_app/src/common/data/unified_search_model.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/related_to_search/aggregated_search_model.dart';

@@ -16,7 +16,7 @@ import '../../../../common/widgets/other/details_horizontal_scrollable_list.dart
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../../timetable/dto/timetable_for_scene_dto.dart';
 import '../../state/event_cubit/event_cubit.dart';
 import '../../state/follow_cubit/follow_cubit.dart';

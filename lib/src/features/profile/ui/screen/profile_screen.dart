@@ -29,7 +29,7 @@ import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/spacers/section_divider.dart';
 import '../../../../dependency_injection.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../../wiki/ui/screens/wiki_canvas.dart';
 import '../../../wiki/ui/widgets/about_section.dart';
 import '../../../wiki/ui/widgets/button_with_icons.dart';

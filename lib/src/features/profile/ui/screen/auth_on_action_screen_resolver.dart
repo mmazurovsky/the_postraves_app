@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../dependency_injection.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import 'create_user_profile_screen.dart';
 import 'sign_in_methods_screen.dart';
 

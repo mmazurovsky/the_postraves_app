@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_app/src/common/data/unified_search_model.dart';
 import 'search_unified_model_list_item.dart';
 
 class SearchUnifiedModelList extends StatelessWidget {

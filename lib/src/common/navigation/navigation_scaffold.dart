@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
-import 'common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
-import 'common/bottom_navigation_bar/my_bottom_navigation_bar.dart';
-import 'common/geo_provider/current_tab_provider.dart';
+import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
+import '../bottom_navigation_bar/my_bottom_navigation_bar.dart';
+import '../geo_provider/current_tab_provider.dart';
 import 'my_navigation.dart';
 
 

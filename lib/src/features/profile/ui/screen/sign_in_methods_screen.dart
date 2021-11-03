@@ -11,7 +11,7 @@ import '../../../../common/constants/my_text_styles.dart';
 import '../../../../common/widgets/buttons/my_elevated_button.dart';
 import '../../../../common/widgets/other/my_flushbar.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import 'authentication_canvas.dart';
 
 

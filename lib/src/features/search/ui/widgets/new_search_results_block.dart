@@ -6,7 +6,7 @@ import '../../../../common/widgets/entity_presentation/followable_list.dart';
 import '../../../../common/widgets/other/section_title.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/spacers/section_divider.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../state/cubit/search_cubit.dart';
 
 class NewSearchResultsBlock<T extends GeneralFollowableInterface>

@@ -19,7 +19,7 @@ import 'common/widgets/other/loading_container.dart';
 import 'common/widgets/other/select_location_list_view.dart';
 import 'common/widgets/spacers/my_horizontal_padding.dart';
 import 'common/widgets/spacers/my_spacers.dart';
-import 'navigation_scaffold.dart';
+import 'common/navigation/navigation_scaffold.dart';
 
 class InitialScaffoldResolver extends StatefulWidget {
   final CityRepository cityRepository;

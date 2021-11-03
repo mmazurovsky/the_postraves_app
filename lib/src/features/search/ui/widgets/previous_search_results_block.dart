@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_app/src/common/data/unified_search_model.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/other/section_title.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../data/search_unified_model_list.dart';
 import '../../state/cubit/search_cubit.dart';
 

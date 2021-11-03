@@ -17,7 +17,7 @@ import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/search_container.dart';
 import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../data/chart_type.dart';
 import '../../state/cubit/charts_cubit.dart';
 import '../widgets/rating_card_with_list_of_items.dart';

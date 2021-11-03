@@ -9,7 +9,7 @@ import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/image/my_cached_network_image.dart';
-import '../../../../my_navigation.dart';
+import '../../../../common/navigation/my_navigation.dart';
 
 class RatingWeeklyWinnerCard<T extends GeneralFollowableInterface>
     extends StatefulWidget {
