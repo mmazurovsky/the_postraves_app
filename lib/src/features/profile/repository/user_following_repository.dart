@@ -1,7 +1,8 @@
+import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+
 import '../data_sources/user_following_data_source.dart';
-import '../../../models/interfaces/data_interfaces.dart';
-import '../../../core/client/data_sealed/response_sealed.dart';
-import '../../../core/client/remote_request_wrapper.dart';
 
 abstract class UserFollowingRepository<
     SHORTFOLLOWABLE extends GeneralFollowableInterface> {

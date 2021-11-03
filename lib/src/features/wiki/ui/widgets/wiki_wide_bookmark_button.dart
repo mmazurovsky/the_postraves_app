@@ -1,10 +1,11 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/buttons/button_content.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/buttons/button_content.dart';
 
 class WikiWideBookmarkButton extends StatelessWidget {
   final Function() onIsFollowedChange;
@@ -26,7 +27,9 @@ class WikiWideBookmarkButton extends StatelessWidget {
           color: isFollowed ? Colors.transparent : MyColors.accent,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-              color: isFollowed ? MyColors.forInactiveStuffDarker : Colors.transparent,
+              color: isFollowed
+                  ? MyColors.forInactiveStuffDarker
+                  : Colors.transparent,
               width: 1.5),
         ),
         child: ButtonContent(
@@ -38,9 +41,7 @@ class WikiWideBookmarkButton extends StatelessWidget {
                 : MyColors.mainOppositeColor,
           ),
           distanceBetweenLeadingAndText: 5,
-          text: isFollowed
-              ? AppLocalizations.of(context)!.wikiUnfollow
-              : AppLocalizations.of(context)!.wikiFollow,
+          text: isFollowed ? 'wikiUnfollow'.tr() : 'wikiFollow'.tr(),
           textStyle: isFollowed
               ? MyTextStyles.buttonWithInactiveStuffDarkerColor
               : MyTextStyles.buttonWithOppositeColor,

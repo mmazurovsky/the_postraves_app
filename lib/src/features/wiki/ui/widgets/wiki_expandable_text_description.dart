@@ -1,11 +1,9 @@
 import 'dart:math';
-
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/utils/my_text_styles.dart';
-
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 
 class WikiExpandableTextDescription extends StatefulWidget {
   final String text;
@@ -51,9 +49,8 @@ class _WikiExpandableTextDescriptionState
                       onTap: () => setState(() => _isExpanded = !_isExpanded),
                       child: RichText(
                         text: TextSpan(
-                          text: ' ' + (_isExpanded
-                              ? AppLocalizations.of(context)!.showLess
-                              : AppLocalizations.of(context)!.showMore),
+                          text: ' ' +
+                              (_isExpanded ? 'showLess'.tr() : 'showMore'.tr()),
                           style: MyTextStyles.longTextThinSmallAccentColor,
                         ),
                       ),

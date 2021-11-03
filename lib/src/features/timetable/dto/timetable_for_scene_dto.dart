@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../models/related_to_event/timetable_for_scene.dart';
-import '../../../models/related_to_place/scene.dart';
+import 'package:the_postraves_package/models/related_to_event/timetable_for_scene.dart';
+import 'package:the_postraves_package/models/related_to_place/scene.dart';
 import 'timetable_day_performances_dto.dart';
 
 part 'timetable_for_scene_dto.freezed.dart';

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import '../widgets/wiki_title.dart';
-import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../models/enum/wiki_rating_type.dart';
-import '../../../../core/service/dynamic_link_service.dart';
-import '../../../../core/presentation/widgets/ending_of_screen.dart';
-import '../../../../core/utils/my_colors.dart';
+import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/followable_data.dart';
+
+import '../../../../common/configs/dynamic_link_configurer.dart';
+import '../../../../common/widgets/spacers/ending_of_screen.dart';
 import '../widgets/wiki_sliver_app_bar.dart';
+import '../widgets/wiki_title.dart';
 
 class WikiCanvas extends StatefulWidget {
-  final WikiDataDto wikiDataDto;
+  final FollowableData followableData;
   final bool isBackButtonOn;
   final Widget wikiContent;
   final ScrollController? scrollController;
 
   const WikiCanvas({
     Key? key,
-    required this.wikiDataDto,
+    required this.followableData,
     required this.wikiContent,
     this.isBackButtonOn = true,
     this.scrollController,
@@ -35,15 +36,16 @@ class _WikiCanvasState extends State<WikiCanvas> {
   }
 
   Future<Uri> _setShareLinkToPage() async {
-    final imageDimensions = widget.wikiDataDto.imageDimensions;
+    final imageDimensions = widget.followableData.imageDimensions;
     String _pathToPage =
-        '${widget.wikiDataDto.type.navigationRoute}?id=${widget.wikiDataDto.id}&name=${widget.wikiDataDto.name}';
-    if (widget.wikiDataDto.imageLink != null) {
-      _pathToPage += _pathToPage + '&imageLink=${widget.wikiDataDto.imageLink}';
-    }
-    if (widget.wikiDataDto.country != null) {
+        '${FollowableTypeUtils.getNavigationRouteForType(widget.followableData.type)}?id=${widget.followableData.id}&name=${widget.followableData.name}';
+    if (widget.followableData.imageLink != null) {
       _pathToPage +=
-          '&countryName=${widget.wikiDataDto.country!.name}&countryLocalizedName=${widget.wikiDataDto.country!.localName}&countryEmojiCode=${widget.wikiDataDto.country!.emojiCode}';
+          _pathToPage + '&imageLink=${widget.followableData.imageLink}';
+    }
+    if (widget.followableData.country != null) {
+      _pathToPage +=
+          '&countryName=${widget.followableData.country!.name}&countryLocalizedName=${widget.followableData.country!.localName}&countryEmojiCode=${widget.followableData.country!.emojiCode}';
     }
     if (imageDimensions != null) {
       _pathToPage +=
@@ -69,7 +71,7 @@ class _WikiCanvasState extends State<WikiCanvas> {
                   WikiSliverAppBar(
                 scrollController: _scrollController,
                 isBackButtonOn: widget.isBackButtonOn,
-                wikiData: widget.wikiDataDto,
+                wikiData: widget.followableData,
                 shareLink: snapshot.data,
               ),
             ),
@@ -78,7 +80,7 @@ class _WikiCanvasState extends State<WikiCanvas> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 20),
-                  WikiTitle(title: widget.wikiDataDto.name),
+                  WikiTitle(title: widget.followableData.name),
                   widget.wikiContent,
                   const EndingOfScreen(),
                 ],

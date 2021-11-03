@@ -1,25 +1,26 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/provider/city_list_provider.dart';
-import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
-import '../../state/shows_cubit/shows_cubit.dart';
-import '../../../../core/presentation/widgets/current_city_selector.dart';
-import '../../../../models/geo/city.dart';
-import '../../../../core/provider/current_city_provider.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/presentation/widgets/animations/my_slide_animated_switcher.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../../core/presentation/widgets/my_flushbar.dart';
-import '../widgets/sort_mode_selector.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/geo_provider/city_list_provider.dart';
+import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/widgets/animations/my_slide_animated_switcher.dart';
+import '../../../../common/widgets/app_bar/app_bar_button.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/other/my_flushbar.dart';
+import '../../../../common/widgets/selectors/current_city_selector.dart';
+import '../../state/shows_cubit/shows_cubit.dart';
 import '../widgets/events_by_date_list.dart';
 import '../widgets/events_list.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../widgets/sort_mode_selector.dart';
 
 class ShowsScreen extends StatefulWidget {
   const ShowsScreen([Key? key]) : super(key: key);
@@ -109,7 +110,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
               _refreshController2.refreshCompleted();
             } else if (state is ShowsFailureState) {
               MyFlushbar.showMyFlushbar(
-                  flushbarMessage: AppLocalizations.of(context)!.noInternet,
+                  flushbarMessage: 'noInternet'.tr(),
                   flushbarIcon: const Icon(
                     Ionicons.alert_circle_outline,
                     color: Colors.red,

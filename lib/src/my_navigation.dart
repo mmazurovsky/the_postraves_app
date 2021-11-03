@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'features/chart/ui/screens/extended_chart_screen.dart';
-import 'features/profile/ui/screen/following_screen.dart';
+import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/dto/followable_type.dart';
+import 'package:the_postraves_package/dto/image_dimensions.dart';
+import 'package:the_postraves_package/models/geo/country.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import 'features/chart/data/chart_type.dart';
-import 'features/profile/ui/screen/modify_profile_screen.dart';
-import 'core/navigation_bar/bottom_navigation_tab_item.dart';
 import 'features/chart/ui/screens/charts_screen.dart';
+import 'features/chart/ui/screens/extended_chart_screen.dart';
 import 'features/profile/ui/screen/auth_on_action_screen_resolver.dart';
+import 'features/profile/ui/screen/following_screen.dart';
+import 'features/profile/ui/screen/modify_profile_screen.dart';
 import 'features/profile/ui/screen/profile_screen.dart';
 import 'features/profile/ui/screen/sign_in_with_email_and_link_screen.dart';
 import 'features/search/ui/screens/search_screen.dart';
 import 'features/shows/ui/screens/shows_screen.dart';
 import 'features/timetable/dto/timetable_for_scene_dto.dart';
 import 'features/timetable/ui/screens/event_timetable_screen.dart';
-import 'models/dto/image_dimensions.dart';
 import 'features/wiki/ui/screens/artist_screen.dart';
 import 'features/wiki/ui/screens/event_screen.dart';
 import 'features/wiki/ui/screens/place_screen.dart';
 import 'features/wiki/ui/screens/unity_screen.dart';
 import 'features/wiki/ui/screens/wiki_share_screen.dart';
-import 'models/dto/wiki_data_dto.dart';
-import 'models/enum/wiki_rating_type.dart';
-import 'models/geo/country.dart';
-import 'models/interfaces/data_interfaces.dart';
 
 class MyNavigationRoutes {
   static const String shows = 'shows';
@@ -87,7 +88,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => EventScreen(
-                args!['wikiDataDto'],
+                args!['FollowableData'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.eventTimetable) {
       return MaterialPageRoute(
@@ -101,19 +102,19 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => ArtistScreen(
-                args!['wikiDataDto'],
+                args!['FollowableData'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.place) {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => PlaceScreen(
-                args!['wikiDataDto'],
+                args!['FollowableData'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.unity) {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => UnityScreen(
-                args!['wikiDataDto'],
+                args!['FollowableData'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.wikiShare) {
       return MaterialPageRoute(
@@ -125,7 +126,7 @@ class RouteGenerator {
     } else if (routeSettings.name == MyNavigationRoutes.actionResolver) {
       return MaterialPageRoute(
           settings: routeSettings,
-          builder: (_) => AuthOnActionScreenResolver());
+          builder: (_) => const AuthOnActionScreenResolver());
     } else if (routeSettings.name == MyNavigationRoutes.modifyUser) {
       return MaterialPageRoute(
         settings: routeSettings,
@@ -156,7 +157,7 @@ class RouteGenerator {
           appBar: AppBar(),
           body: Center(
             child: Container(
-              child: Text('Navigation error'),
+              child: Text('Navigation error'), // TODO exception
             ),
           ),
         );
@@ -201,7 +202,7 @@ class NavigatorFunctions {
 
     final navigationRouteOfLink = deepLink.path;
     final followableType =
-        WikiFollowableTypeStatic.getWikiFollowableTypeByNavigationRoute(
+        FollowableTypeUtils.getFollowableTypeByNavigationRoute(
             navigationRouteOfLink);
 
     // when null should not push, it is not tested
@@ -209,7 +210,7 @@ class NavigatorFunctions {
       return;
     }
 
-    final wikiDataDto = WikiDataDto(
+    final followableData = FollowableData(
         name: name,
         imageLink: imageLink,
         imageDimensions: imageDimensions,
@@ -219,23 +220,40 @@ class NavigatorFunctions {
 
     final currentContext = currentTab.tabNavigatorKey.currentContext!;
 
-    pushFollowable(context: currentContext, wikiDataDto: wikiDataDto);
+    pushFollowable(context: currentContext, followableData: followableData);
   }
 
   static void pushFollowable({
     required BuildContext context,
-    required WikiDataDto wikiDataDto,
+    required FollowableData followableData,
   }) {
-    Navigator.of(context)
-        .pushNamed(wikiDataDto.type.navigationRoute, arguments: {
-      'wikiDataDto': wikiDataDto,
-    });
+    Navigator.of(context).pushNamed(
+        _getNavigationRouteForFollowableType(followableData.type),
+        arguments: {
+          'FollowableData': followableData,
+        });
+  }
+
+  static _getNavigationRouteForFollowableType(FollowableType type) {
+    if (type == FollowableType.ARTIST) {
+      return MyNavigationRoutes.artist;
+    } else if (type == FollowableType.EVENT) {
+      return MyNavigationRoutes.event;
+    } else if (type == FollowableType.UNITY) {
+      return MyNavigationRoutes.unity;
+    } else if (type == FollowableType.PLACE) {
+      return MyNavigationRoutes.place;
+    } else if (type == FollowableType.UNITY) {
+      return MyNavigationRoutes.user; //TODO
+    } else {
+      throw Exception(); //TODO exception
+    }
   }
 
   static void pushShareWiki({
     required BuildContext context,
     required Uri shareLink,
-    required WikiDataDto wikiData,
+    required FollowableData wikiData,
   }) {
     Navigator.of(context).pushNamed(MyNavigationRoutes.wikiShare, arguments: {
       'shareLink': shareLink,

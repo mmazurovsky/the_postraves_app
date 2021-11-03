@@ -1,8 +1,9 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/widgets.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
+
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../../../common/widgets/spacers/section_divider.dart';
 import 'wiki_expandable_text_description.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutSection extends StatelessWidget {
   final String? _about;
@@ -26,9 +27,7 @@ class AboutSection extends StatelessWidget {
               )
             : Container(),
         WikiExpandableTextDescription(
-          _about != null
-              ? _about!
-              : AppLocalizations.of(context)!.wikiDescriptionEmpty,
+          _about != null ? _about! : 'wikiDescriptionEmpty'.tr(),
         ),
       ],
     );

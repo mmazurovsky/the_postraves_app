@@ -1,7 +1,8 @@
-import '../../../core/client/data_sealed/response_sealed.dart';
-import '../../../models/geo/city.dart';
-import '../../../models/interfaces/data_interfaces.dart';
-import '../../../core/client/remote_request_wrapper.dart';
+import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+
 import '../data_sources/charts_remote_data_source.dart';
 
 abstract class ChartsRepository<SHORTFOLLOWABLE extends GeneralFollowableInterface> {

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/utils/screen_size.dart';
-import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../models/enum/wiki_rating_type.dart';
-import '../../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
+import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/dto/followable_type.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/screen_size.dart';
+import '../../../../common/widgets/app_bar/app_bar_button.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
 import '../../../../my_navigation.dart';
 
 class WikiSliverAppBar extends StatefulWidget {
@@ -21,7 +22,7 @@ class WikiSliverAppBar extends StatefulWidget {
 
   final ScrollController scrollController;
   final bool isBackButtonOn;
-  final WikiDataDto wikiData;
+  final FollowableData wikiData;
   final Uri? shareLink;
 
   @override
@@ -110,18 +111,20 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
           : null,
       actions: [
         // TODO: dirty
-        widget.wikiData.type != WikiFollowableType.USER
+        widget.wikiData.type != FollowableType.USER
             ? AppBarButton(
                 containerOpacity: _backArrowOpacity,
                 iconWidget: const Icon(
                   Ionicons.share_outline,
                   color: MyColors.main,
                 ),
-                onTap: () => widget.shareLink != null ? NavigatorFunctions.pushShareWiki(
-                  context: context,
-                  shareLink: widget.shareLink!, 
-                  wikiData: widget.wikiData,
-                ) : {},
+                onTap: () => widget.shareLink != null
+                    ? NavigatorFunctions.pushShareWiki(
+                        context: context,
+                        shareLink: widget.shareLink!,
+                        wikiData: widget.wikiData,
+                      )
+                    : {},
               )
             : Container()
       ],
@@ -141,7 +144,7 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
                 overflow: TextOverflow.fade,
               ),
               Text(
-                widget.wikiData.type.getNameSingular(context),
+                FollowableTypeUtils.getTranslationSingularForType(widget.wikiData.type),
                 style: MyTextStyles.appBarSubtitle,
                 overflow: TextOverflow.ellipsis,
               ),

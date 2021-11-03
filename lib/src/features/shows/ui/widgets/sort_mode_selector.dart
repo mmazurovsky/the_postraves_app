@@ -1,15 +1,15 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:ionicons/ionicons.dart';
-import '../../../../core/utils/screen_size.dart';
 
-import '../../../../core/presentation/widgets/modal_bottom_sheet_content.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../models/enum/view_mode.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/data/enum/view_mode.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/screen_size.dart';
+import '../../../../common/widgets/selectors/modal_bottom_sheet_content.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
 
 class SortModeSelector extends StatelessWidget {
@@ -20,7 +20,7 @@ class SortModeSelector extends StatelessWidget {
       return ModalBottomSheetContent(
         height: MyConstants.heightOfSortModeSelectorModalBottomSheet,
         iconData: Ionicons.easel_outline,
-        title: AppLocalizations.of(context)!.sortModeSelectorTitle,
+        title: 'sortModeSelectorTitle'.tr(),
         content: Padding(
           padding: const EdgeInsets.only(top: 8),
           child: MyHorizontalMargin(
@@ -94,7 +94,7 @@ class SortMode extends StatelessWidget {
               height: 12,
             ),
             Text(
-              viewMode.getButtonTitle(context),
+              viewMode.buttonTitle,
               style: isSelected
                   ? MyTextStyles.smallerBodyWithAccentColor
                   : MyTextStyles.smallerBodyWithMainColor,

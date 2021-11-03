@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import '../../repository/wiki_repository.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
 
 part 'follow_state.dart';
 part 'follow_cubit.freezed.dart';

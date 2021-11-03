@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../state/cubit/search_cubit.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
-import '../../../../models/dto/image_dimensions.dart';
+import 'package:the_postraves_package/dto/image_dimensions.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import '../../../../common/widgets/entity_presentation/followable_list.dart';
+import '../../../../common/widgets/other/section_title.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../../../common/widgets/spacers/section_divider.dart';
 import '../../../../my_navigation.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
+import '../../state/cubit/search_cubit.dart';
 
 class NewSearchResultsBlock<T extends GeneralFollowableInterface>
     extends StatelessWidget {
@@ -36,7 +36,7 @@ class NewSearchResultsBlock<T extends GeneralFollowableInterface>
               ImageDimensions? imageDimensions) {
             NavigatorFunctions.pushFollowable(
               context: context,
-              wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+              followableData: entity.convertToFollowableData(imageDimensions),
             );
             BlocProvider.of<SearchCubit>(context).saveSearchRecord(entity);
           },

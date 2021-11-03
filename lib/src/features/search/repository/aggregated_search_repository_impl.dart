@@ -1,10 +1,11 @@
-import '../../../core/client/data_sealed/response_sealed.dart';
-import '../../../core/client/remote_request_wrapper.dart';
-import '../../../core/error/exceptions.dart';
-import '../../../core/error/failures.dart';
-import '../../../models/interfaces/data_interfaces.dart';
-import '../../../models/related_to_search/aggregated_search_model.dart';
-import '../../../models/related_to_search/unified_search_model.dart';
+import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/errors/exceptions.dart';
+import 'package:the_postraves_package/errors/failures.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/related_to_search/aggregated_search_model.dart';
+
 import '../data_sources/search_local_data_source.dart';
 import '../data_sources/search_remote_data_source.dart';
 
@@ -48,8 +49,8 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
       List<UnifiedSearchModel> foundInCache =
           await searchLocalDataSource.getSearchHistory();
       return ResponseSealed.success(foundInCache);
-    } on CacheException {
-      return ResponseSealed.failure(CacheFailure());
+    } on MyCacheException {
+      return ResponseSealed.failure(CacheFailure('Cache exception on trying to find previous searches'));
     }
   }
 
@@ -58,10 +59,10 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
       saveOrUpdateSearchRecordInHistory<T extends GeneralFollowableInterface>(
           T entity) async {
     // maybe better to save image dimensions, but it is possible not to do that
-    final wikiDataDto = entity.convertToWikiDataDto(null);
+    final FollowableData = entity.convertToFollowableData(null);
 
     final entityToSaveOrUpdate = UnifiedSearchModel(
-        wikiDataDto: wikiDataDto, updatedDateTime: DateTime.now());
+        followableData: FollowableData, updatedDateTime: DateTime.now());
     final previousSearches = await searchLocalDataSource.getSearchHistory();
     final setOfIds =
         previousSearches.map((persistedEntity) => persistedEntity.id).toSet();
@@ -72,8 +73,8 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
           : searchLocalDataSource
               .saveSearchRecordToHistory(entityToSaveOrUpdate);
       return const ResponseSealed.success(null);
-    } on CacheException {
-      return ResponseSealed.failure(CacheFailure());
+    } on MyCacheException {
+      return ResponseSealed.failure(CacheFailure('Cache exception on trying to save or update search record in history'));
     }
   }
 
@@ -84,8 +85,8 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
     try {
       await searchLocalDataSource.updateSearchRecordInHistory(updatedEntity);
       return const ResponseSealed.success(null);
-    } on CacheException {
-      return ResponseSealed.failure(CacheFailure());
+    } on MyCacheException {
+      return ResponseSealed.failure(CacheFailure('Cache exception on update time of search record'));
     }
   }
 
@@ -95,8 +96,8 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
     try {
       return ResponseSealed.success(
           await searchLocalDataSource.deleteSearchRecordFromHistory(entity));
-    } on CacheException {
-      return ResponseSealed.failure(CacheFailure());
+    } on MyCacheException {
+      return ResponseSealed.failure(CacheFailure('Cache exception on trying to delete search record from history'));
     }
   }
 
@@ -105,8 +106,8 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
     try {
       return ResponseSealed.success(
           await searchLocalDataSource.deleteAllSearchRecords());
-    } on CacheException {
-      return ResponseSealed.failure(CacheFailure());
+    } on MyCacheException {
+      return ResponseSealed.failure(CacheFailure('Cache exception on trying to delete all search records'));
     }
   }
 }

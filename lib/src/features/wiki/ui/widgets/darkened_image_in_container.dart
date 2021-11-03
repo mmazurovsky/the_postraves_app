@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../models/dto/image_dimensions.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
 
 class DarkenedImageInContainer extends StatefulWidget {
   final Widget child;

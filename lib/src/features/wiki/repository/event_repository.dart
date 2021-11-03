@@ -1,9 +1,10 @@
-import '../../../core/client/data_sealed/response_sealed.dart';
-import '../../../core/client/remote_request_wrapper.dart';
+import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/related_to_event/timetable_for_scene.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
+
 import '../data_sources/event_remote_data_source.dart';
-import '../../../models/related_to_event/timetable_for_scene.dart';
-import '../../../models/shorts/artist_short.dart';
-import '../../../models/shorts/unity_short.dart';
 
 abstract class EventRepository {
   Future<ResponseSealed<List<UnityShort>>> fetchOrganizersForEventById(int id);

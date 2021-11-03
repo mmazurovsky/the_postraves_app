@@ -1,25 +1,25 @@
 import 'dart:async';
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'core/authentication/state/cubit/authentication_cubit.dart';
-import 'core/provider/country_list_provider.dart';
-import 'core/presentation/widgets/select_location_list_view.dart';
-import 'core/presentation/widgets/my_horizontal_padding.dart';
-import 'core/provider/city_list_provider.dart';
-import 'core/repository/city_repository.dart';
-import 'core/provider/current_city_provider.dart';
-import 'core/repository/country_repository.dart';
-import 'models/geo/city.dart';
-import 'models/geo/country.dart';
-import 'resolved_city_initial_scaffold.dart';
 import 'package:provider/provider.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import 'package:the_postraves_package/models/geo/country.dart';
 
-import 'core/presentation/widgets/loading_container.dart';
-import 'core/utils/my_colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'core/utils/my_text_styles.dart';
+import 'common/authentication/state/cubit/authentication_cubit.dart';
+import 'common/constants/my_text_styles.dart';
+import 'common/geo_provider/city_list_provider.dart';
+import 'common/geo_provider/country_list_provider.dart';
+import 'common/geo_provider/current_city_provider.dart';
+import 'common/geo_repository/city_repository.dart';
+import 'common/geo_repository/country_repository.dart';
+import 'common/widgets/other/loading_container.dart';
+import 'common/widgets/other/select_location_list_view.dart';
+import 'common/widgets/spacers/my_horizontal_padding.dart';
+import 'common/widgets/spacers/my_spacers.dart';
+import 'navigation_scaffold.dart';
 
 class InitialScaffoldResolver extends StatefulWidget {
   final CityRepository cityRepository;
@@ -118,7 +118,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     City? currentCity = context.watch<CurrentCityProvider>().currentCity;
     return currentCity == null
         ? CityPickerScaffold()
-        : ResolvedCityInitialScaffold();
+        : NavigationScaffold();
   }
 }
 
@@ -147,14 +147,12 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MyHorizontalPadding(
-                        child: Text(
-                          AppLocalizations.of(context)!.selectCityTitle,
+                        child: const Text(
+                          'selectCityTitle',
                           style: MyTextStyles.fullEventCardTitle,
-                        ),
+                        ).tr(),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      const MyMediumSpacer(),
                       SelectLocationListView<City>(
                         isShrinkWrap: true,
                         locations: context.read<CityListProvider>().cityList,
@@ -170,7 +168,7 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                       ),
                     ],
                   )
-                : LoadingContainer(),
+                : const LoadingContainer(),
           ),
         );
       },

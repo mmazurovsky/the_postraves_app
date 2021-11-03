@@ -1,14 +1,13 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/presentation/widgets/placeholder_container.dart';
-import '../../../../core/service/open_link_service.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/provider/current_city_provider.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../models/geo/city.dart';
+
 import 'package:provider/provider.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import 'package:the_postraves_package/service/open_link_service.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/widgets/other/placeholder_container.dart';
 
 class EmptyShowsPlaceholder extends StatefulWidget {
   const EmptyShowsPlaceholder({Key? key}) : super(key: key);
@@ -34,8 +33,7 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
         text: TextSpan(
           children: [
             TextSpan(
-              text:
-                  '${AppLocalizations.of(context)!.emptyShowsStartText} ${_currentCity.localName}.\n\n${AppLocalizations.of(context)!.emptyShowsEndText}',
+              text: 'emptyShowsText'.tr(args: [_currentCity.localName]),
               style: MyTextStyles.body,
             ),
             WidgetSpan(
@@ -46,8 +44,7 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
                     MyConstants.telegramSupportAccount),
                 child: RichText(
                   text: TextSpan(
-                    text:
-                        ' ${AppLocalizations.of(context)!.emptyShowsLinkText}',
+                    text: 'emptyShowsLinkText'.tr(),
                     style: MyTextStyles.bodyWithAccentColor,
                   ),
                 ),

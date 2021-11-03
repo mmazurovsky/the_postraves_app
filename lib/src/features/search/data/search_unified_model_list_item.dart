@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../core/presentation/widgets/my_rating_entity_vertical_padding.dart';
-import '../../../core/utils/my_colors.dart';
-import '../../../core/utils/my_constants.dart';
-import '../../../models/related_to_search/unified_search_model.dart';
-import '../../../core/presentation/widgets/entity_presentation/unified_followable_with_type_data.dart';
+import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../common/constants/my_constants.dart';
+import '../../../common/widgets/entity_presentation/unified_followable_with_type_data.dart';
+import '../../../common/widgets/spacers/my_rating_entity_vertical_padding.dart';
+import '../../../common/widgets/image/my_cached_network_image.dart';
 
 class SearchUnifiedModelListItem extends StatefulWidget {
   final UnifiedSearchModel followable;
@@ -24,16 +24,18 @@ class SearchUnifiedModelListItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SearchUnifiedModelListItemState createState() => _SearchUnifiedModelListItemState();
+  _SearchUnifiedModelListItemState createState() =>
+      _SearchUnifiedModelListItemState();
 }
 
-class _SearchUnifiedModelListItemState extends State<SearchUnifiedModelListItem> {
+class _SearchUnifiedModelListItemState
+    extends State<SearchUnifiedModelListItem> {
   late MyCachedNetworkImage _image;
 
   @override
   void initState() {
     super.initState();
-    _image = MyCachedNetworkImage(widget.followable.wikiDataDto.imageLink);
+    _image = MyCachedNetworkImage(widget.followable.followableData.imageLink);
   }
 
   @override
@@ -48,8 +50,7 @@ class _SearchUnifiedModelListItemState extends State<SearchUnifiedModelListItem>
         );
       },
       child: Padding(
-        padding: 
-            EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
+        padding: EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
         child: MyRatingEntityVerticalPadding(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -71,7 +72,7 @@ class _SearchUnifiedModelListItemState extends State<SearchUnifiedModelListItem>
               ),
               Expanded(
                 child: UnifiedFollowableWithTypeData(
-                  followable: widget.followable.wikiDataDto,
+                  followable: widget.followable.followableData,
                 ),
               ),
               widget.onIconTap != null

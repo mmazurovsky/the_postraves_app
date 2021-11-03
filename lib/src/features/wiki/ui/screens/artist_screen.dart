@@ -1,45 +1,45 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
+
+import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/models/fulls/artist_full.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/other/social_links_list.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../state/artist_cubit/artist_cubit.dart';
 import '../../state/follow_cubit/follow_cubit.dart';
-import 'followable_screen.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
-import '../widgets/upcoming_events_section.dart';
-import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../models/fulls/artist_full.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/social_links_list.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../models/shorts/unity_short.dart';
-import '../../state/artist_cubit/artist_cubit.dart';
 import '../widgets/slide_animation_wrapper.dart';
+import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
+import 'followable_screen.dart';
 
 class ArtistScreen extends StatelessWidget {
-  final WikiDataDto _wikiDataDto;
+  final FollowableData _FollowableData;
   const ArtistScreen(
-    this._wikiDataDto, {
+    this._FollowableData, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FollowableScreen<ArtistCubit, FollowCubit<ArtistFull>>(
-      _wikiDataDto,
-      _ArtistStateManagement(_wikiDataDto),
+      _FollowableData,
+      _ArtistStateManagement(_FollowableData),
     );
   }
 }
 
 class _ArtistStateManagement extends StatefulWidget {
-  final WikiDataDto _wikiDataDto;
-  const _ArtistStateManagement(this._wikiDataDto, {Key? key}) : super(key: key);
+  final FollowableData _FollowableData;
+  const _ArtistStateManagement(this._FollowableData, {Key? key})
+      : super(key: key);
 
   @override
   State<_ArtistStateManagement> createState() => _ArtistStateManagementState();
@@ -49,7 +49,7 @@ class _ArtistStateManagementState extends State<_ArtistStateManagement> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ArtistCubit>(context).loadArtist(widget._wikiDataDto.id);
+    BlocProvider.of<ArtistCubit>(context).loadArtist(widget._FollowableData.id);
   }
 
   @override
@@ -114,8 +114,8 @@ class _ArtistContentState extends State<_ArtistContent> {
           MyHorizontalPadding(
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
-              onIsFollowedChange: () => FollowableUtil.onIsFollowedChange(
-                  context, widget.artist),
+              onIsFollowedChange: () =>
+                  FollowableUtil.onIsFollowedChange(context, widget.artist),
             ),
           ),
           SocialLinksList(
@@ -124,7 +124,7 @@ class _ArtistContentState extends State<_ArtistContent> {
           ),
           AboutSection(widget.artist.about),
           FollowableListSection(
-            AppLocalizations.of(context)!.unityEntityNamePlural,
+            'unityEntityNamePlural'.tr(),
             widget.unities,
           ),
           UpcomingEventsSection(widget.events),

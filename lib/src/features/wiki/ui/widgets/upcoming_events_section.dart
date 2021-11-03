@@ -1,11 +1,11 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/widgets.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
-import '../../../../core/presentation/widgets/short_event_card_item.dart';
-import '../../../../models/shorts/event_short.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../../../common/widgets/spacers/section_divider.dart';
+import '../../../../common/widgets/other/section_title.dart';
+import '../../../../common/widgets/other/short_event_card_item.dart';
 import 'column_of_custom_cards.dart';
 
 class UpcomingEventsSection extends StatelessWidget {
@@ -21,9 +21,7 @@ class UpcomingEventsSection extends StatelessWidget {
               const MyBigSpacer(),
               const SectionDivider(needHorizontalMargin: true),
               const MyBigSpacer(),
-              SectionTitle(
-                  sectionTitle:
-                      AppLocalizations.of(context)!.wikiUpcomingEvents),
+              SectionTitle(sectionTitle: 'wikiUpcomingEvents'.tr()),
               const MySmallSpacer(),
               ColumnOfCustomCards<EventShort>(
                 entities: _events,

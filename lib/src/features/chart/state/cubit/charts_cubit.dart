@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import '../../repository/charts_repository.dart';
-import '../../../../models/geo/city.dart';
-import '../../../../models/shorts/artist_short.dart';
 
 part 'charts_state.dart';
 part 'charts_cubit.freezed.dart';

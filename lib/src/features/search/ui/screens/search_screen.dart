@@ -1,26 +1,24 @@
 import 'dart:async';
-
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/related_to_search/aggregated_search_model.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/other/search_container.dart';
+import '../../../../common/widgets/other/section_title.dart';
+import '../../../../common/widgets/spacers/ending_of_screen.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../state/cubit/search_cubit.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../models/related_to_search/aggregated_search_model.dart';
-import '../../../../models/related_to_search/unified_search_model.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../models/shorts/place_short.dart';
-import '../widgets/previous_search_results_block.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/ending_of_screen.dart';
-import '../../../../core/presentation/widgets/failure_container.dart';
-import '../../../../core/presentation/widgets/search_container.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
 import '../widgets/new_search_results_block.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../widgets/previous_search_results_block.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -141,14 +139,12 @@ class _PreviousSearchesList extends StatelessWidget {
     return previousSearchRecords == null || previousSearchRecords!.isEmpty
         ? Column(
             children: [
-              MyBigSpacer(),
-              SectionTitle(
-                  sectionTitle:
-                      AppLocalizations.of(context)!.searchHistoryIsEmpty)
+              const MyBigSpacer(),
+              SectionTitle(sectionTitle: 'searchHistoryIsEmpty'.tr())
             ],
           )
         : PreviousSearchResultsBlock(
-            resultsName: AppLocalizations.of(context)!.searchHistory,
+            resultsName: 'searchHistory'.tr(),
             results: previousSearchRecords!,
             deleteFunction: (UnifiedSearchModel entity) =>
                 BlocProvider.of<SearchCubit>(context)
@@ -168,29 +164,29 @@ class _SearchResultsList extends StatelessWidget {
       children: [
         found.foundArtists.isNotEmpty
             ? _SearchResultsResolver(
-                listName: found.foundArtists.first
-                    .getEntityNamePluralFormString(context),
+                listName: FollowableTypeUtils.getTranslationPluralForType(
+                    found.foundArtists.first.type),
                 entities: found.foundArtists,
               )
             : Container(),
         found.foundUnities.isNotEmpty
             ? _SearchResultsResolver(
-                listName: found.foundUnities.first
-                    .getEntityNamePluralFormString(context),
+                listName: FollowableTypeUtils.getTranslationPluralForType(
+                    found.foundUnities.first.type),
                 entities: found.foundUnities,
               )
             : Container(),
         found.foundPlaces.isNotEmpty
-            ? _SearchResultsResolver<PlaceShort>(
-                listName: found.foundPlaces.first
-                    .getEntityNamePluralFormString(context),
+            ? _SearchResultsResolver(
+                listName: FollowableTypeUtils.getTranslationPluralForType(
+                    found.foundPlaces.first.type),
                 entities: found.foundPlaces,
               )
             : Container(),
         found.foundEvents.isNotEmpty
-            ? _SearchResultsResolver<EventShort>(
-                listName: found.foundEvents.first
-                    .getEntityNamePluralFormString(context),
+            ? _SearchResultsResolver(
+                listName: FollowableTypeUtils.getTranslationPluralForType(
+                    found.foundEvents.first.type),
                 entities: found.foundEvents,
               )
             : Container(),
@@ -201,9 +197,7 @@ class _SearchResultsList extends StatelessWidget {
             ? Column(
                 children: [
                   MyBigSpacer(),
-                  SectionTitle(
-                      sectionTitle:
-                          AppLocalizations.of(context)!.searchNotFound),
+                  SectionTitle(sectionTitle: 'searchNotFound'.tr()),
                 ],
               )
             : Container(),
@@ -263,14 +257,14 @@ class _SearchBar extends SliverPersistentHeaderDelegate {
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: AppLocalizations.of(context)!.searchTitle,
+                      hintText: 'searchTitle'.tr(),
                       hintStyle: MyTextStyles.searchTextPlaceholder,
                     ),
                     style: MyTextStyles.searchValue,
                   ),
                   leftContainerPart: Row(
                     children: [
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Visibility(
                         visible: state is LoadingNewSearch ||
                                 state is LoadedNewSearch
@@ -278,7 +272,7 @@ class _SearchBar extends SliverPersistentHeaderDelegate {
                             : false,
                         child: InkWell(
                           onTap: () => textEditingController.clear(),
-                          child: Icon(
+                          child: const Icon(
                             Ionicons.close,
                             size: 22,
                             color: Colors.grey,
@@ -296,7 +290,7 @@ class _SearchBar extends SliverPersistentHeaderDelegate {
                   child: InkWell(
                     onTap: () => onCancelSearch(),
                     child: Text(
-                      AppLocalizations.of(context)!.cancel,
+                      'cancel'.tr(),
                       style: MyTextStyles.searchCancel,
                     ),
                   ),

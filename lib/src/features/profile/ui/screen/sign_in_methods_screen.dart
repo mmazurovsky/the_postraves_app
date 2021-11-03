@@ -1,19 +1,19 @@
 import 'dart:io';
-
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/service/open_link_service.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/service/open_link_service.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/buttons/my_elevated_button.dart';
+import '../../../../common/widgets/other/my_flushbar.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../my_navigation.dart';
-import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/my_flushbar.dart';
 import 'authentication_canvas.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SignInMethodsScreen extends StatelessWidget {
   final bool isPoppable;
@@ -34,13 +34,13 @@ class SignInMethodsScreen extends StatelessWidget {
                 Ionicons.information_circle_outline,
                 color: Colors.white,
               ),
-              flushbarMessage: AppLocalizations.of(context)!.errorSigningIn,
+              flushbarMessage: 'errorSigningIn'.tr(),
               incomingContext: context);
         }
       },
       child: AuthenticationCanvas(
-        title: AppLocalizations.of(context)!.authSignInTitle,
-        subTitle: AppLocalizations.of(context)!.authSignInSubtitle,
+        title: 'authSignInTitle'.tr(),
+        subTitle: 'authSignInSubtitle'.tr(),
         backButtonNeeded: isPoppable,
         buttons: [
           MyElevatedButton(
@@ -50,7 +50,7 @@ class SignInMethodsScreen extends StatelessWidget {
               size: 18,
               color: Colors.red,
             ),
-            text: AppLocalizations.of(context)!.authSignInWithGoogle,
+            text: 'authSignInWithGoogle'.tr(),
             buttonColor: MyColors.forEventCard,
             textStyle: MyTextStyles.buttonForGmail,
             onTap: () => BlocProvider.of<AuthenticationCubit>(context)
@@ -64,7 +64,7 @@ class SignInMethodsScreen extends StatelessWidget {
                     size: 19,
                     color: Colors.white,
                   ),
-                  text: AppLocalizations.of(context)!.authSignInWithApple,
+                  text: 'authSignInWithApple'.tr(),
                   buttonColor: MyColors.forEventCard,
                   textStyle: MyTextStyles.buttonWithMainColor,
                   onTap: () => BlocProvider.of<AuthenticationCubit>(context)
@@ -78,7 +78,7 @@ class SignInMethodsScreen extends StatelessWidget {
               size: 20,
               color: Colors.blue,
             ),
-            text: AppLocalizations.of(context)!.authSignInWithEmail,
+            text: 'authSignInWithEmail'.tr(),
             buttonColor: MyColors.forEventCard,
             textStyle: MyTextStyles.buttonForEmail,
             onTap: () => Navigator.of(context)
@@ -91,7 +91,7 @@ class SignInMethodsScreen extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: '${AppLocalizations.of(context)!.authDocsStart}\n',
+                  text: '${'authDocsStart'.tr()}\n',
                   style: MyTextStyles.termsInactive,
                 ),
                 WidgetSpan(
@@ -102,14 +102,14 @@ class SignInMethodsScreen extends StatelessWidget {
                         MyConstants.termsAndConditionsLink),
                     child: RichText(
                       text: TextSpan(
-                        text: AppLocalizations.of(context)!.authDocsTerms,
+                        text: 'authDocsTerms'.tr(),
                         style: MyTextStyles.termsActive,
                       ),
                     ),
                   ),
                 ),
                 TextSpan(
-                  text: ' ${AppLocalizations.of(context)!.and} ',
+                  text: 'and'.tr(),
                   style: MyTextStyles.termsInactive,
                 ),
                 WidgetSpan(
@@ -120,7 +120,7 @@ class SignInMethodsScreen extends StatelessWidget {
                         OpenLinkService.openUrl(MyConstants.privacyPolicyLink),
                     child: RichText(
                       text: TextSpan(
-                        text: AppLocalizations.of(context)!.authDocsPolicy,
+                        text: 'authDocsPolicy'.tr(),
                         style: MyTextStyles.termsActive,
                       ),
                     ),

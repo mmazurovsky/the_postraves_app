@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../../core/utils/my_constants.dart';
+import '../../../../common/constants/my_constants.dart';
 
 import 'empty_shows_placeholder.dart';
 import 'event_card.dart';

@@ -1,13 +1,13 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 enum ChartType { weekly, overall }
 
 extension ChartTypeExtension on ChartType {
   static _chartTypeTitleMapping(BuildContext context, ChartType thisType) => {
-        ChartType.weekly: AppLocalizations.of(context)!.chartOfTheWeekTitle,
-        ChartType.overall: AppLocalizations.of(context)!.chartOverallTitle,
+        ChartType.weekly: 'chartOfTheWeekTitle'.tr(),
+        ChartType.overall: 'chartOverallTitle'.tr(),
       }[thisType];
 
   static _chartTypeShowWeeklyFollowersMapping(ChartType thisType) => {

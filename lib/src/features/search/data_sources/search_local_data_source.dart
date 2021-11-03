@@ -1,8 +1,8 @@
 
-import '../../../models/related_to_search/unified_search_model.dart';
-
-import '../../../core/data/data_storage/app_database.dart';
 import 'package:sembast/sembast.dart';
+import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import '../../../common/configs/app_database.dart';
+
 
 abstract class SearchLocalDataSource {
   Future<List<UnifiedSearchModel>> getSearchHistory();

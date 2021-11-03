@@ -1,29 +1,27 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/presentation/widgets/app_bar_back_button.dart';
-import '../../../../core/presentation/widgets/app_bar_title.dart';
-import '../../../../core/presentation/widgets/ending_of_screen.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
-import '../../../../core/presentation/widgets/event_tab.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/placeholder_container.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../state/following_cubit/following_cubit.dart';
-import '../../../wiki/ui/widgets/column_of_custom_cards.dart';
-import '../../../../core/presentation/widgets/short_event_card_item.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../models/shorts/artist_short.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../models/shorts/place_short.dart';
-import '../../../../models/shorts/unity_short.dart';
-
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/image_dimensions.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/place_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
+import '../../../../common/widgets/app_bar/app_bar_title.dart';
+import '../../../../common/widgets/entity_presentation/followable_item.dart';
+import '../../../../common/widgets/other/event_tab.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/other/placeholder_container.dart';
+import '../../../../common/widgets/other/short_event_card_item.dart';
+import '../../../../common/widgets/spacers/ending_of_screen.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../my_navigation.dart';
+import '../../../wiki/ui/widgets/column_of_custom_cards.dart';
+import '../../state/following_cubit/following_cubit.dart';
 
 class FollowingScreen extends StatefulWidget {
   const FollowingScreen({Key? key}) : super(key: key);
@@ -47,10 +45,10 @@ class _FollowingScreenState extends State<FollowingScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     _tabNames = [
-      AppLocalizations.of(context)!.eventEntityNamePlural,
-      AppLocalizations.of(context)!.artistEntityNamePlural,
-      AppLocalizations.of(context)!.placeEntityNamePlural,
-      AppLocalizations.of(context)!.unityEntityNamePlural,
+      'eventEntityNamePlural'.tr(),
+      'artistEntityNamePlural'.tr(),
+      'placeEntityNamePlural'.tr(),
+      'unityEntityNamePlural'.tr(),
     ];
     _tabController =
         TabController(length: _tabNames.length, initialIndex: 0, vsync: this);
@@ -64,7 +62,7 @@ class _FollowingScreenState extends State<FollowingScreen>
         backgroundColor: MyColors.screenBackground,
         leading: const AppBarBackButton(),
         title: AppBarTitle(
-          title: AppLocalizations.of(context)!.yourFollowing,
+          title: 'yourFollowing'.tr(),
         ),
         bottom: TabBar(
           isScrollable: true,
@@ -89,12 +87,12 @@ class _FollowingScreenState extends State<FollowingScreen>
               controller: _tabController,
               children: [
                 _FollowableTabBarView<EventShort>(
-                  AppLocalizations.of(context)!.eventEntityNamePlural,
+                  'eventEntityNamePlural'.tr(),
                   state.events,
                   (EventShort event) => ShortEventCardItem(event),
                 ),
                 _FollowableTabBarView<ArtistShort>(
-                  AppLocalizations.of(context)!.artistEntityNamePlural,
+                  'artistEntityNamePlural'.tr(),
                   state.artists,
                   (ArtistShort artist) => FollowableItem(
                     key: ValueKey(artist.id),
@@ -103,12 +101,13 @@ class _FollowingScreenState extends State<FollowingScreen>
                             ImageDimensions? imageDimensions) =>
                         NavigatorFunctions.pushFollowable(
                       context: context,
-                      wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+                      followableData:
+                          entity.convertToFollowableData(imageDimensions),
                     ),
                   ),
                 ),
                 _FollowableTabBarView<PlaceShort>(
-                  AppLocalizations.of(context)!.placeEntityNamePlural,
+                  'placeEntityNamePlural'.tr(),
                   state.places,
                   (PlaceShort place) => FollowableItem(
                     key: ValueKey(place.id),
@@ -117,12 +116,13 @@ class _FollowingScreenState extends State<FollowingScreen>
                             ImageDimensions? imageDimensions) =>
                         NavigatorFunctions.pushFollowable(
                       context: context,
-                      wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+                      followableData:
+                          entity.convertToFollowableData(imageDimensions),
                     ),
                   ),
                 ),
                 _FollowableTabBarView<UnityShort>(
-                  AppLocalizations.of(context)!.unityEntityNamePlural,
+                  'unityEntityNamePlural'.tr(),
                   state.unities,
                   (UnityShort unity) => FollowableItem(
                     key: ValueKey(unity.id),
@@ -131,7 +131,8 @@ class _FollowingScreenState extends State<FollowingScreen>
                             ImageDimensions? imageDimensions) =>
                         NavigatorFunctions.pushFollowable(
                       context: context,
-                      wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+                      followableData:
+                          entity.convertToFollowableData(imageDimensions),
                     ),
                   ),
                 ),
@@ -179,6 +180,7 @@ class _FollowableTabBarView<T extends GeneralFollowableInterface>
                     TextSpan(
                       text:
                           "You don't follow ${_entityName.toLowerCase()} yet.\nStart following ${_entityName.toLowerCase()} and they will appear here.",
+                          //TODO!!!
                       style: MyTextStyles.body,
                     ),
                   ],

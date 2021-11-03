@@ -1,12 +1,10 @@
 import 'package:flutter/widgets.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-
+import 'package:the_postraves_package/dto/image_dimensions.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import '../../../../common/widgets/entity_presentation/followable_list.dart';
+import '../../../../common/widgets/other/section_title.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../../../common/widgets/spacers/section_divider.dart';
 import '../../../../my_navigation.dart';
 
 class FollowableListSection<T extends GeneralFollowableInterface>
@@ -36,7 +34,8 @@ class FollowableListSection<T extends GeneralFollowableInterface>
                         ImageDimensions? imageDimensions) =>
                     NavigatorFunctions.pushFollowable(
                   context: context,
-                  wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+                  followableData:
+                      entity.convertToFollowableData(imageDimensions),
                 ),
               ),
             ],

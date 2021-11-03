@@ -1,9 +1,8 @@
-import '../../../core/utils/followable_client_helper.dart';
-import '../../../models/interfaces/data_interfaces.dart';
-
-import '../../../core/client/remote_client.dart';
-
-import '../../../core/error/exceptions.dart';
+import 'package:the_postraves_app/src/common/utils/followable_client_helper.dart';
+import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
+import 'package:the_postraves_package/client/remote_client.dart';
+import 'package:the_postraves_package/constants/server_constants.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 
 abstract class WikiRemoteDataSource<
     FULLFOLLOWABLE extends GeneralFollowableInterface> {
@@ -34,17 +33,12 @@ class WikiRemoteDataSourceImpl<
     required int id,
     required Map<String, String> httpHeaders,
   }) async {
-    var decodedResponse;
-
-    try {
-      decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
-        endpointWithPath:
-            _followableClientHelper.getEndpointForFollowable() + '/public/$id',
-        httpHeaders: httpHeaders,
-      );
-    } on Exception {
-      throw ServerException();
-    }
+    final decodedResponse =
+        await LocalizedGetRequest.makeGetRequestAndReturnResponse(
+      endpointWithPath:
+          _followableClientHelper.getEndpointForFollowable() + '/public/$id',
+      httpHeaders: httpHeaders,
+    );
     return _followableClientHelper.deserializeFollowable(decodedResponse);
   }
 
@@ -54,6 +48,8 @@ class WikiRemoteDataSourceImpl<
     required Map<String, String> httpHeaders,
   }) async {
     await RemoteClient.makePostRequestAndReturnResponse(
+        host: ServerConstants.apiHost,
+        hostPath: ServerConstants.apiPath,
         endpointWithPath:
             _followableClientHelper.getEndpointAndPathForUserFollowing() +
                 '/$id',
@@ -65,6 +61,8 @@ class WikiRemoteDataSourceImpl<
   Future<void> unfollowFollowable(
       {required int id, required Map<String, String> httpHeaders}) async {
     await RemoteClient.makeDeleteRequestAndReturnResponse(
+        host: ServerConstants.apiHost,
+        hostPath: ServerConstants.apiPath,
         endpointWithPath:
             _followableClientHelper.getEndpointAndPathForUserFollowing() +
                 '/$id',

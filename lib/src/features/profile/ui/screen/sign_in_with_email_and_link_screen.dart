@@ -1,16 +1,16 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
-import '../widgets/my_text_field.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
+import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/app_bar/app_bar_button.dart';
+import '../../../../common/widgets/buttons/my_elevated_button.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
+import '../../../../common/widgets/spacers/section_divider.dart';
+import '../../../../common/widgets/inputs/my_text_field.dart';
 import '../../../../my_navigation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInWithEmailAndLinkScreen extends StatefulWidget {
   const SignInWithEmailAndLinkScreen({Key? key}) : super(key: key);
@@ -47,7 +47,7 @@ class _SignInWithEmailAndLinkScreenState
         .hasMatch(emailValue)) {
       return null;
     } else {
-      return AppLocalizations.of(context)!.emailIsNotCorrect;
+      return 'emailIsNotCorrect'.tr();
     }
   }
 
@@ -92,12 +92,12 @@ class _SignInWithEmailAndLinkScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 120,
               ),
               MyHorizontalMargin(
                 child: Text(
-                  AppLocalizations.of(context)!.signInWithEmail,
+                  'signInWithEmail'.tr(),
                   style: MyTextStyles.authTitle,
                 ),
               ),
@@ -125,7 +125,7 @@ class _SignInWithEmailAndLinkScreenState
                   const SizedBox(height: 20),
                   MyElevatedButton(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    text: AppLocalizations.of(context)!.getLinkToSignIn,
+                    text: 'getLinkToSignIn'.tr(),
                     buttonColor: MyColors.accent,
                     textStyle: MyTextStyles.buttonWithOppositeColor,
                     onTap: () {
@@ -172,15 +172,15 @@ class LinkSentDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              AppLocalizations.of(context)!.linkHasBeenSent,
+              'linkHasBeenSent'.tr(),
               style: MyTextStyles.bodyFat,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            SectionDivider(needHorizontalMargin: false),
-            SizedBox(
+            const SectionDivider(needHorizontalMargin: false),
+            const SizedBox(
               height: 15,
             ),
             InkWell(
@@ -190,7 +190,7 @@ class LinkSentDialog extends StatelessWidget {
                 height: 30,
                 alignment: Alignment.center,
                 child: Text(
-                  'OK',
+                  'ok'.tr(), 
                   style: MyTextStyles.bodyWithAccentColor,
                 ),
               ),

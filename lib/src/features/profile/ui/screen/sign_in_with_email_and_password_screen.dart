@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
-import '../widgets/my_text_field.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/app_bar/app_bar_button.dart';
+import '../../../../common/widgets/buttons/my_elevated_button.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
+import '../../../../common/widgets/inputs/my_text_field.dart';
 
-import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
 
 class SignInWithEmailAndPasswordScreen extends StatefulWidget {
   const SignInWithEmailAndPasswordScreen({Key? key}) : super(key: key);

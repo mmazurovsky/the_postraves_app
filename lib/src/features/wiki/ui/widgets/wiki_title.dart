@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 
 class WikiTitle extends StatelessWidget {
   const WikiTitle({

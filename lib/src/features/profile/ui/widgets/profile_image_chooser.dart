@@ -1,16 +1,15 @@
 import 'dart:io';
-
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/buttons/button_content.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/buttons/button_content.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
 
 class ProfileImageChooser extends StatefulWidget {
   final void Function(File) pickImage;
@@ -108,9 +107,9 @@ class _ProfileImageChooserState extends State<ProfileImageChooser> {
               distanceBetweenLeadingAndText: 13,
               text: _pickedImage == null
                   ? widget.initialImage == null
-                      ? AppLocalizations.of(context)!.profileCreationAddAvatar
-                      : AppLocalizations.of(context)!.profileCreationEditAvatar
-                  : AppLocalizations.of(context)!.profileCreationEditAvatar,
+                      ? 'profileCreationAddAvatar'.tr()
+                      : 'profileCreationEditAvatar'.tr()
+                  : 'profileCreationEditAvatar'.tr(),
               trailing: const Icon(Ionicons.chevron_forward_outline,
                   color: MyColors.accent, size: 26),
               textStyle: MyTextStyles.body,

@@ -1,30 +1,30 @@
 import 'dart:io';
-
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../state/profile_cubit/profile_cubit.dart';
-import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
-import '../../../../core/presentation/widgets/buttons/app_bar_button.dart';
-import '../widgets/nickname_text_field.dart';
-import '../../../../core/presentation/widgets/current_city_selector.dart';
-import '../../../../core/presentation/widgets/app_bar_back_button.dart';
-import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
-import '../../repository/user_profile_repository.dart';
-import '../../../../models/geo/city.dart';
-import '../../../../core/provider/city_list_provider.dart';
-import '../../../../core/provider/current_city_provider.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/presentation/widgets/buttons/my_outlined_button.dart';
-import '../../../../core/utils/my_assets.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/my_text_styles.dart';
+import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import '../../../../common/constants/my_assets.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/geo_provider/city_list_provider.dart';
+import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
+import '../../../../common/widgets/app_bar/app_bar_button.dart';
+import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
+import '../../../../common/widgets/buttons/my_elevated_button.dart';
+import '../../../../common/widgets/buttons/my_outlined_button.dart';
+import '../../../../common/widgets/selectors/current_city_selector.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
+import '../../repository/user_profile_repository.dart';
+import '../../state/profile_cubit/profile_cubit.dart';
+import '../widgets/nickname_text_field.dart';
 import '../widgets/profile_image_chooser.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CreateUserProfileScreen extends StatefulWidget {
   final bool isPoppable;
@@ -59,7 +59,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _buttonText = AppLocalizations.of(context)!.profileCreationCreate;
+    _buttonText = 'profileCreationCreate'.tr();
     _userCity =
         context.read<CurrentCityProvider>().currentCity!;
   }
@@ -122,7 +122,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                     children: [
                       MyHorizontalPadding(
                         child: Text(
-                          AppLocalizations.of(context)!.profileCreationTitle,
+                          'profileCreationTitle'.tr(),
                           style: MyTextStyles.authTitle,
                           textAlign: TextAlign.center,
                         ),
@@ -132,7 +132,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                       ),
                       MyHorizontalPadding(
                         child: Text(
-                          AppLocalizations.of(context)!.profileCreationSubtitle,
+                          'profileCreationSubtitle'.tr(),
                           style: MyTextStyles.authSubtitle,
                           textAlign: TextAlign.center,
                         ),
@@ -150,19 +150,6 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                         textEditingController: _nicknameEditingController,
                         triggerValidation: () => _triggerFormValidation(),
                       ),
-
-                      // MyTextField(
-                      //   focusNode: _nicknameFieldFocusNode,
-                      //   title: AppLocalizations.of(context)!
-                      //       .profileCreationNickname,
-                      //   textInputType: TextInputType.text,
-                      //   isSecret: false,
-                      //   textEditingController: _nicknameEditingController,
-                      //   validatorFunction: _nicknameValidator,
-                      //   fillColor: Colors.transparent,
-                      //   activeBorderColor: MyColors.accent,
-                      //   inactiveBorderColor: MyColors.main,
-                      // ),
                       const SizedBox(height: 20),
                       MyOutlinedButton(
                         onTap: () {
@@ -209,7 +196,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
                               _buttonText =
-                                  AppLocalizations.of(context)!.loading;
+                                  'loading'.tr();
                             });
                             BlocProvider.of<ProfileCubit>(context)
                                 .createUserProfile(_pickedImageAsFile,

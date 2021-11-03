@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/place_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import '../../repository/user_following_repository.dart';
-import '../../../../models/shorts/artist_short.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../models/shorts/place_short.dart';
-import '../../../../models/shorts/unity_short.dart';
 
 part 'following_state.dart';
 part 'following_cubit.freezed.dart';

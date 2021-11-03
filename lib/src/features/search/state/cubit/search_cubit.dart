@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../core/client/data_sealed/response_sealed.dart';
+import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/related_to_search/aggregated_search_model.dart';
 import '../../repository/aggregated_search_repository_impl.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../models/related_to_search/aggregated_search_model.dart';
-import '../../../../models/related_to_search/unified_search_model.dart';
 
 part 'search_state.dart';
 part 'search_cubit.freezed.dart';

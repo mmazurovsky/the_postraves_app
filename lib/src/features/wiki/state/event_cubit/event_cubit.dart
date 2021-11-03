@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../../core/client/data_sealed/response_sealed.dart';
-import '../../../../models/fulls/event_full.dart';
-import '../../../../models/related_to_event/timetable_for_scene.dart';
-import '../../../../models/shorts/artist_short.dart';
-import '../../../../models/shorts/unity_short.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/fulls/event_full.dart';
+import 'package:the_postraves_package/models/related_to_event/timetable_for_scene.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import '../../../timetable/dto/timetable_for_scene_dto.dart';
 import '../../repository/event_repository.dart';
 import '../../repository/wiki_repository.dart';
+
 
 part 'event_cubit.freezed.dart';
 part 'event_state.dart';

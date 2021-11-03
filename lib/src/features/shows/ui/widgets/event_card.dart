@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/screen_size.dart';
-import '../../../../models/shorts/event_short.dart';
-import 'event_card_details_concrete.dart';
-import '../../../../core/presentation/widgets/empty_image_placeholder.dart';
-import '../../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/screen_size.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
+import '../../../../common/widgets/image/empty_image_placeholder.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
 import '../../../../my_navigation.dart';
+import 'event_card_details_concrete.dart';
 
 class EventCard extends StatefulWidget {
-  final Key key;
   final EventShort loadedEvent;
 
-  const EventCard({required this.loadedEvent, required this.key})
+  const EventCard({required this.loadedEvent, required Key key})
       : super(key: key);
 
   @override
@@ -57,7 +56,7 @@ class _EventCardState extends State<EventCard> with TickerProviderStateMixin {
       const Duration(milliseconds: 170),
       () async => NavigatorFunctions.pushFollowable(
         context: context,
-        wikiDataDto: widget.loadedEvent.convertToWikiDataDto(
+        followableData: widget.loadedEvent.convertToFollowableData(
           await _eventImage.getImageDimensions(),
         ),
       ),

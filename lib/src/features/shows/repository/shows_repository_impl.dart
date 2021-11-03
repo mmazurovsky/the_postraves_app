@@ -1,10 +1,11 @@
-import '../../../core/client/data_sealed/response_sealed.dart';
-import '../data_sources/shows_remote_data_source.dart';
-import '../../../models/geo/city.dart';
-import '../../../models/shorts/event_short.dart';
-import '../../../core/client/remote_request_wrapper.dart';
+import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import 'package:the_postraves_package/models/related_to_event/shows_by_date.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
 
-import '../../../models/related_to_event/shows_by_date.dart';
+import '../data_sources/shows_remote_data_source.dart';
+
 
 abstract class ShowsRepository {
   Future<ResponseSealed<List<EventShort>>> fetchEventsByRatingFromRemote(City city);

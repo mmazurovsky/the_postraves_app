@@ -1,24 +1,24 @@
 import 'dart:io';
-
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/presentation/widgets/app_bar_title.dart';
+import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/user/user_profile.dart';
+import 'package:the_postraves_package/models/user/user_profile_to_write.dart';
+import '../../../../common/constants/my_assets.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
+import '../../../../common/widgets/app_bar/app_bar_title.dart';
+import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
+import '../../../../common/widgets/buttons/my_elevated_button.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
+import '../../../../common/widgets/inputs/my_text_field.dart';
 import '../../state/profile_cubit/profile_cubit.dart';
-import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
-import '../../../../core/presentation/widgets/app_bar_back_button.dart';
-import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
-import '../../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
-import '../../../../core/utils/my_assets.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../widgets/my_text_field.dart';
 import '../widgets/nickname_text_field.dart';
 import '../widgets/profile_image_chooser.dart';
-import '../../../../models/user/user_profile.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../models/user/user_profile_to_write.dart';
+
 
 class ModifyProfileScreen extends StatefulWidget {
   // final Image? _profileImage;
@@ -69,7 +69,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
       _aboutEditingController.text = _userProfile!.about!;
     }
 
-    _buttonText = AppLocalizations.of(context)!.done;
+    _buttonText = 'done'.tr();
     if (_userProfile?.imageLink != null) {
       _assignInitialProfileImage(_userProfile!.imageLink!);
     }
@@ -105,7 +105,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
       appBar: MySimpleAppBar(
         leading: const AppBarBackButton(),
         title: AppBarTitle(
-          title: AppLocalizations.of(context)!.profileEdit,
+          title: 'profileEdit'.tr(),
         ),
       ),
       body: SafeArea(
@@ -141,7 +141,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       fillColor: Colors.transparent,
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
-                      hintText: AppLocalizations.of(context)!.optional,
+                      hintText: 'optional'.tr(),
                       enableSuggestions: false,
                       autocorrect: false,
                     ),
@@ -154,13 +154,13 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       fillColor: Colors.transparent,
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
-                      hintText: AppLocalizations.of(context)!.optional,
+                      hintText: 'optional'.tr(),
                       enableSuggestions: false,
                       autocorrect: false,
                     ),
                     const SizedBox(height: 20),
                     MyTextField(
-                      title: AppLocalizations.of(context)!.aboutYou,
+                      title: 'aboutYou'.tr(),
                       textInputType: TextInputType.multiline,
                       isSecret: false,
                       textEditingController: _aboutEditingController,
@@ -168,7 +168,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                       activeBorderColor: MyColors.accent,
                       inactiveBorderColor: MyColors.main,
                       maxLines: 3,
-                      hintText: AppLocalizations.of(context)!.optional,
+                      hintText: 'optional'.tr(),
                       maxLength: 200,
                     ),
                     const SizedBox(height: 20),
@@ -182,7 +182,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
                         _unfocusTextFields();
                         if (_formKey.currentState!.validate()) {
                           setState(() {
-                            _buttonText = AppLocalizations.of(context)!.loading;
+                            _buttonText = 'loading'.tr();
                           });
                           final UserProfileToWrite userProfileToWrite =
                               UserProfileToWrite(

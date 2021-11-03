@@ -1,15 +1,15 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
 
 import 'src/app.dart';
-import 'src/core/utils/my_colors.dart';
 import 'src/dependency_injection.dart';
 
 void main() async {
@@ -22,6 +22,14 @@ void main() async {
     runApp(const MyApp());
   });
   await dotenv.load(fileName: ".env");
+  runApp(
+    EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ru')],
+        path:
+            'assets/translations',
+        fallbackLocale: const Locale('en'),
+        child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,8 +40,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Postraves',
       debugShowCheckedModeBanner: false,
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         splashColor: Colors.transparent,

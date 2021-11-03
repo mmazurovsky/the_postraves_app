@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/image_dimensions.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/widgets/entity_presentation/followable_list.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../../../my_navigation.dart';
 
 class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
@@ -76,7 +75,8 @@ class RatingCardWithListOfItems<T extends GeneralFollowableInterface>
                     (context, T entity, ImageDimensions? imageDimensions) =>
                         NavigatorFunctions.pushFollowable(
                   context: context,
-                  wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+                  followableData:
+                      entity.convertToFollowableData(imageDimensions),
                 ),
               ),
               const SizedBox(

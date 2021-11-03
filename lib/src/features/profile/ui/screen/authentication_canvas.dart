@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/screen_size.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/screen_size.dart';
+import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 
-import '../../../../core/presentation/widgets/app_bar_back_button.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
 
 class AuthenticationCanvas extends StatelessWidget {
   final String title;

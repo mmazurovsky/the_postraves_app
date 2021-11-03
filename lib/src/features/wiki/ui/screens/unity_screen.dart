@@ -1,50 +1,44 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/models/fulls/unity_full.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/other/social_links_list.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../state/follow_cubit/follow_cubit.dart';
+import '../../state/unity_cubit/unity_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
-import '../widgets/upcoming_events_section.dart';
-import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../state/unity_cubit/unity_cubit.dart';
-import '../../../../models/fulls/unity_full.dart';
-import '../../../../models/shorts/artist_short.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/presentation/widgets/social_links_list.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../../core/presentation/widgets/short_event_card_item.dart';
-import 'followable_screen.dart';
 import '../widgets/slide_animation_wrapper.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../my_navigation.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
-import '../widgets/column_of_custom_cards.dart';
-import '../widgets/wiki_expandable_text_description.dart';
+import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'followable_screen.dart';
 
 class UnityScreen extends StatelessWidget {
-  final WikiDataDto _wikiDataDto;
+  final FollowableData _FollowableData;
 
-  const UnityScreen(this._wikiDataDto, {Key? key}) : super(key: key);
+  const UnityScreen(this._FollowableData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FollowableScreen<UnityCubit, FollowCubit<UnityFull>>(
-      _wikiDataDto,
-      _UnityStateManagement(_wikiDataDto),
+      _FollowableData,
+      _UnityStateManagement(_FollowableData),
     );
   }
 }
 
 class _UnityStateManagement extends StatefulWidget {
-  final WikiDataDto _wikiDataDto;
-  const _UnityStateManagement(this._wikiDataDto, {Key? key}) : super(key: key);
+  final FollowableData _FollowableData;
+  const _UnityStateManagement(this._FollowableData, {Key? key})
+      : super(key: key);
 
   @override
   State<_UnityStateManagement> createState() => _UnityStateManagementState();
@@ -54,7 +48,7 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<UnityCubit>(context).loadUnity(widget._wikiDataDto.id);
+    BlocProvider.of<UnityCubit>(context).loadUnity(widget._FollowableData.id);
   }
 
   @override
@@ -135,7 +129,7 @@ class _UnityContentState extends State<_UnityContent> {
           ),
           AboutSection(widget.unity.about),
           FollowableListSection(
-            AppLocalizations.of(context)!.artistEntityNamePlural,
+            'artistEntityNamePlural'.tr(),
             widget.artists,
           ),
           UpcomingEventsSection(widget.events),

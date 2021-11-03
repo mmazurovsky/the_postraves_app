@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../models/enum/event_status.dart';
-import '../../../../core/presentation/widgets/animations/blink_animation_wrapper.dart';
-import '../../../../core/utils/my_colors.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/related_to_event/event_status.dart';
+import '../../../../common/widgets/animations/blink_animation_wrapper.dart';
 
 class EventStatusIndicator extends StatelessWidget {
   final EventStatus status;

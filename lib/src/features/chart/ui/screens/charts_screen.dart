@@ -1,24 +1,24 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../data/chart_type.dart';
-
-import '../../../../core/navigation_bar/bottom_navigation_tab_item.dart';
-import '../../../../core/presentation/widgets/failure_container.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/presentation/widgets/search_container.dart';
-import '../../../../core/provider/current_city_provider.dart';
-import '../../../../core/utils/my_assets.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../models/geo/city.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../models/shorts/artist_short.dart';
+import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
+import '../../../../common/constants/my_assets.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/widgets/other/failure_container.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/other/search_container.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../my_navigation.dart';
+import '../../data/chart_type.dart';
 import '../../state/cubit/charts_cubit.dart';
 import '../widgets/rating_card_with_list_of_items.dart';
 import '../widgets/rating_weekly_winner_card.dart';
@@ -49,9 +49,7 @@ class _ChartsScreenState extends State<ChartsScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
-      _currentCity = context
-          .read<CurrentCityProvider>()
-          .currentCity!; 
+      _currentCity = context.read<CurrentCityProvider>().currentCity!;
       BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity!);
     }
   }
@@ -123,7 +121,7 @@ class _Charts extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           _ChartsViewForEntity(
-            sectionTitle: AppLocalizations.of(context)!.featuredTitle,
+            sectionTitle: 'featuredTitle'.tr(),
             previousWeekWinner: bestArtist,
             weeklyChart: weeklyChart,
             overallChart: overallChart,
@@ -169,11 +167,11 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
           previousWeekWinner != null
               ? RatingWeeklyWinnerCard<T>(
                   entity: previousWeekWinner!,
-                  nominationDescription:
-                      AppLocalizations.of(context)!.featuredUsersChoice,
-                  nomination:
-                      '${previousWeekWinner!.getEntityNameSingularFormString(context)}\n${AppLocalizations.of(context)!.ofTheWeek}'
-                          .toUpperCase(),
+                  nominationDescription: 'featuredUsersChoice'.tr(),
+                  nomination: 'ofTheWeek'.tr(args: [
+                    FollowableTypeUtils.getTranslationSingularForType(
+                        previousWeekWinner!.type)
+                  ]).toUpperCase(),
                 )
               : Container(),
           weeklyChart != null
@@ -182,9 +180,7 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   imagePath: MyEmoji.fire,
                   titleTextSpans: [
                     TextSpan(
-                        text: AppLocalizations.of(context)!
-                            .chartOfTheWeekTitle
-                            .toUpperCase(),
+                        text: 'chartOfTheWeekTitle'.tr().toUpperCase(),
                         style: MyTextStyles.chartTitle),
                   ],
                   topFollowables: weeklyChart!.take(5).toList(),
@@ -200,9 +196,7 @@ class _ChartsViewForEntity<T extends GeneralFollowableInterface>
                   imagePath: MyEmoji.dizzy,
                   titleTextSpans: [
                     TextSpan(
-                        text: AppLocalizations.of(context)!
-                            .chartOverallTitle
-                            .toUpperCase(),
+                        text: 'chartOverallTitle'.tr().toUpperCase(),
                         style: MyTextStyles.chartTitle),
                   ],
                   topFollowables: overallChart!.take(5).toList(),
@@ -233,7 +227,7 @@ class _InactiveSearchBar extends SliverPersistentHeaderDelegate {
         child: SearchContainer(
           containerColor: Colors.grey.withOpacity(0.2),
           rightContainerPart: Text(
-            AppLocalizations.of(context)!.searchTitle,
+            'searchTitle'.tr(),
             style: MyTextStyles.searchTextPlaceholder,
           ),
           leftContainerPart: Container(),

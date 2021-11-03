@@ -1,17 +1,16 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../widgets/wiki_subtitle.dart';
-import '../../../../models/dto/wiki_data_dto.dart';
-
+import 'package:the_postraves_package/dto/followable_data.dart';
 import '../../../../dependency_injection.dart';
+import '../widgets/wiki_subtitle.dart';
 import 'wiki_canvas.dart';
 
 class FollowableScreen<FollowableCubitGeneric extends Cubit,
     FollowCubitGeneric extends Cubit> extends StatelessWidget {
-  final WikiDataDto _wikiDataDto;
+  final FollowableData _FollowableData;
   final Widget _contents;
   const FollowableScreen(
-    this._wikiDataDto,
+    this._FollowableData,
     this._contents, {
     Key? key,
   }) : super(key: key);
@@ -28,9 +27,9 @@ class FollowableScreen<FollowableCubitGeneric extends Cubit,
         ),
       ],
       child: WikiCanvas(
-        wikiDataDto: _wikiDataDto,
+        followableData: _FollowableData,
         wikiContent: _FollowableScreenContents<FollowCubitGeneric>(
-            _wikiDataDto, _contents),
+            _FollowableData, _contents),
       ),
     );
   }
@@ -38,9 +37,10 @@ class FollowableScreen<FollowableCubitGeneric extends Cubit,
 
 class _FollowableScreenContents<FollowCubitGeneric extends Cubit>
     extends StatefulWidget {
-  final WikiDataDto _wikiDataDto;
+  final FollowableData _FollowableData;
   final Widget _contents;
-  const _FollowableScreenContents(this._wikiDataDto, this._contents, {Key? key})
+  const _FollowableScreenContents(this._FollowableData, this._contents,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -56,8 +56,10 @@ class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
 
   @override
   void didChangeDependencies() {
-    _overallFollowers = context.watch<FollowCubitGeneric>().state.overallFollowers;
-    _weeklyFollowers = context.watch<FollowCubitGeneric>().state.weeklyFollowers;
+    _overallFollowers =
+        context.watch<FollowCubitGeneric>().state.overallFollowers;
+    _weeklyFollowers =
+        context.watch<FollowCubitGeneric>().state.weeklyFollowers;
     _isFollowed = context.watch<FollowCubitGeneric>().state.isFollowed;
     super.didChangeDependencies();
   }
@@ -69,8 +71,8 @@ class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
       children: [
         const SizedBox(height: 5),
         WikiSubtitle(
-          entityType: widget._wikiDataDto.type,
-          country: widget._wikiDataDto.country,
+          entityType: widget._FollowableData.type,
+          country: widget._FollowableData.country,
           overallFollowers: _overallFollowers,
           weeklyFollowers: _weeklyFollowers,
           isFollowed: _isFollowed,

@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../core/client/data_sealed/response_sealed.dart';
-import '../dto/timetable_for_scene_dto.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/related_to_event/timetable_for_scene.dart';
 import '../../wiki/repository/event_repository.dart';
-import '../../../models/related_to_event/timetable_for_scene.dart';
+import '../dto/timetable_for_scene_dto.dart';
 
 part 'timetable_cubit.freezed.dart';
 part 'timetable_state.dart';

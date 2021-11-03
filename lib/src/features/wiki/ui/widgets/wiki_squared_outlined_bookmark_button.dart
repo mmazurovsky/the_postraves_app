@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_constants.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/constants/my_constants.dart';
 
 class WikiSquaredOutlinedBookmarkButton extends StatelessWidget {
   final void Function() onIsFollowedChange;

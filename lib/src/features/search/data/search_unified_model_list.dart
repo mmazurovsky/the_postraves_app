@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/related_to_search/unified_search_model.dart';
+import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
 import 'search_unified_model_list_item.dart';
 
 class SearchUnifiedModelList extends StatelessWidget {
@@ -21,7 +21,7 @@ class SearchUnifiedModelList extends StatelessWidget {
     return Column(
       children: followables.map((entity) {
         return SearchUnifiedModelListItem(
-          key: ValueKey(entity.wikiDataDto.id),
+          key: ValueKey(entity.followableData.id),
           startingWidget: startingWidgetForItems,
           followable: entity,
           onItemTap: onItemTap,

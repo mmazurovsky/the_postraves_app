@@ -1,53 +1,54 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ionicons/ionicons.dart';
-import '../widgets/event_main_button.dart';
-import '../../state/follow_cubit/follow_cubit.dart';
-import '../widgets/about_section.dart';
-import '../widgets/followable_list_section.dart';
-import '../widgets/followable_util.dart';
-import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/models/fulls/event_full.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/widgets/other/details_horizontal_scrollable_list.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../../../my_navigation.dart';
 import '../../../timetable/dto/timetable_for_scene_dto.dart';
 import '../../state/event_cubit/event_cubit.dart';
-import '../../../../models/enum/event_status.dart';
-import '../../../../models/fulls/event_full.dart';
-import '../../../../models/shorts/artist_short.dart';
-import '../../../../models/shorts/unity_short.dart';
-import '../../../../core/presentation/widgets/details_horizontal_scrollable_list.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../widgets/event_status_indicator.dart';
-import 'followable_screen.dart';
-import '../widgets/slide_animation_wrapper.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../my_navigation.dart';
-import '../../../../core/utils/formatting_utils.dart';
+import '../../state/follow_cubit/follow_cubit.dart';
+import '../widgets/about_section.dart';
 import '../widgets/button_with_icons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../widgets/event_main_button.dart';
+import '../widgets/event_status_indicator.dart';
+import '../widgets/followable_list_section.dart';
+import '../widgets/followable_util.dart';
+import '../widgets/slide_animation_wrapper.dart';
+import 'followable_screen.dart';
 
 class EventScreen extends StatelessWidget {
-  final WikiDataDto _wikiDataDto;
+  final FollowableData _FollowableData;
   const EventScreen(
-    this._wikiDataDto, {
+    this._FollowableData, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FollowableScreen<EventCubit, FollowCubit<EventFull>>(
-      _wikiDataDto,
-      _EventStateManagement(_wikiDataDto),
+      _FollowableData,
+      _EventStateManagement(_FollowableData),
     );
   }
 }
 
 class _EventStateManagement extends StatefulWidget {
-  final WikiDataDto _wikiDataDto;
-  const _EventStateManagement(this._wikiDataDto, {Key? key}) : super(key: key);
+  final FollowableData _FollowableData;
+  const _EventStateManagement(this._FollowableData, {Key? key})
+      : super(key: key);
 
   @override
   _EventStateManagementState createState() => _EventStateManagementState();
@@ -60,7 +61,7 @@ class _EventStateManagementState extends State<_EventStateManagement> {
   void initState() {
     super.initState();
     _eventBlocProvider = BlocProvider.of<EventCubit>(context);
-    _eventBlocProvider.loadEvent(widget._wikiDataDto.id);
+    _eventBlocProvider.loadEvent(widget._FollowableData.id);
   }
 
   @override
@@ -145,11 +146,11 @@ class _EventContentState extends State<_EventContent> {
           DetailsHorizontalScrollableList(
             verticalPadding: 23,
             titleBodyMap: {
-              AppLocalizations.of(context)!.wikiEventStatus: Row(
+              'wikiEventStatus'.tr(): Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    widget.event.status.getStatusName(context),
+                    FormattingUtils.getEventStatusNameTranslation(widget.event.status),
                     style: MyTextStyles.body,
                   ),
                   const SizedBox(
@@ -158,23 +159,20 @@ class _EventContentState extends State<_EventContent> {
                   EventStatusIndicator(widget.event.status),
                 ],
               ),
-              AppLocalizations.of(context)!.wikiEventPrice: Text(
+              'wikiEventPrice'.tr(): Text(
                 FormattingUtils.resolveTicketsPrice(
-                  context: context,
-                  priceRangeOfTickets: widget.event.priceRangeOfTickets,
+                  widget.event.ticketPrices,
                 ),
                 style: MyTextStyles.body,
               ),
-              AppLocalizations.of(context)!.wikiEventStart: Text(
+              'wikiEventStart'.tr(): Text(
                 FormattingUtils.getFormattedDateAndTime(
-                  context: context,
                   dateTime: widget.event.startDateTime,
                 ),
                 style: MyTextStyles.body,
               ),
-              AppLocalizations.of(context)!.wikiEventEnd: Text(
+              'wikiEventEnd'.tr(): Text(
                 FormattingUtils.getFormattedDateAndTime(
-                  context: context,
                   dateTime: widget.event.endDateTime,
                 ),
                 style: MyTextStyles.body,
@@ -183,15 +181,15 @@ class _EventContentState extends State<_EventContent> {
           ),
           AboutSection(widget.event.about, areSpacerAndDividerNeeded: false),
           FollowableListSection(
-            AppLocalizations.of(context)!.placeEntityNameSingular,
+            'placeEntityNameSingular'.tr(),
             [widget.event.place],
           ),
           FollowableListSection(
-            AppLocalizations.of(context)!.wikiEventOrganizers,
+            'wikiEventOrganizers'.tr(),
             widget.unities,
           ),
           FollowableListSection(
-            AppLocalizations.of(context)!.wikiEventLineup,
+            'wikiEventLineup'.tr(),
             widget.lineup,
             leadingWidget: widget.timetable.isEmpty
                 ? Container()
@@ -214,8 +212,7 @@ class _EventContentState extends State<_EventContent> {
                         ),
                       ],
                     ),
-                    buttonText:
-                        AppLocalizations.of(context)!.wikiEventOpenTimetable,
+                    buttonText: 'wikiEventOpenTimetable'.tr(),
                     onButtonTap: () => NavigatorFunctions.pushTimetable(
                       context: context,
                       eventId: widget.event.id,

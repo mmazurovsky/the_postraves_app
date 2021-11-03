@@ -1,9 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:ionicons/ionicons.dart';
-import '../../../../core/utils/formatting_utils.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/my_text_styles.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
 
 class DateForEventsList extends StatelessWidget {
   final DateTime _dateTime;
@@ -30,7 +29,6 @@ class DateForEventsList extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         FormattingUtils.getFormattedDateLong(
-          context: context,
           dateTime: _dateTime,
         ),
         style: MyTextStyles.showsByDateDate,

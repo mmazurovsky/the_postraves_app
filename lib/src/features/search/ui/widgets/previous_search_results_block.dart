@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/data/model/unified_search_model.dart';
+import 'package:the_postraves_package/dto/image_dimensions.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../../../common/widgets/other/section_title.dart';
+import '../../../../my_navigation.dart';
 import '../../data/search_unified_model_list.dart';
 import '../../state/cubit/search_cubit.dart';
-import '../../../../models/related_to_search/unified_search_model.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../../my_navigation.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
 
 class PreviousSearchResultsBlock extends StatelessWidget {
   final String resultsName;
@@ -36,8 +36,8 @@ class PreviousSearchResultsBlock extends StatelessWidget {
               ImageDimensions? imageDimensions) {
             NavigatorFunctions.pushFollowable(
               context: context,
-              wikiDataDto:
-                  entity.wikiDataDto.copyWith(imageDimensions: imageDimensions),
+              followableData: entity.followableData.copyWith(
+                  imageDimensions: imageDimensions),
             );
             BlocProvider.of<SearchCubit>(context).updateSearchRecord(entity);
           },

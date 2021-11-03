@@ -1,11 +1,10 @@
-import '../../../models/enum/wiki_rating_type.dart';
-import '../../../models/related_to_search/aggregated_search_model.dart';
-import '../../../models/shorts/artist_short.dart';
-import '../../../models/shorts/event_short.dart';
-import '../../../models/shorts/place_short.dart';
-import '../../../models/shorts/unity_short.dart';
-
-import '../../../core/client/remote_client.dart';
+import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
+import 'package:the_postraves_package/dto/followable_type.dart';
+import 'package:the_postraves_package/models/related_to_search/aggregated_search_model.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/place_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
 
 abstract class SearchRemoteDataSource {
   Future<AggregatedSearchModel> searchByAllFollowables(
@@ -17,27 +16,27 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
   Future<AggregatedSearchModel> searchByAllFollowables(
       {required String searchValue,
       required Map<String, String> httpHeaders}) async {
-    final requestEvents = RemoteClient.makeGetRequestAndReturnResponse(
+    final requestEvents = LocalizedGetRequest.makeGetRequestAndReturnResponse(
       endpointWithPath:
-          '${WikiFollowableType.EVENT.endpoint}/public/search/$searchValue',
+          '${FollowableType.EVENT.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final requestArtists = RemoteClient.makeGetRequestAndReturnResponse(
+    final requestArtists = LocalizedGetRequest.makeGetRequestAndReturnResponse(
       endpointWithPath:
-          '${WikiFollowableType.ARTIST.endpoint}/public/search/$searchValue',
+          '${FollowableType.ARTIST.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final requestUnities = RemoteClient.makeGetRequestAndReturnResponse(
+    final requestUnities = LocalizedGetRequest.makeGetRequestAndReturnResponse(
       endpointWithPath:
-          '${WikiFollowableType.UNITY.endpoint}/public/search/$searchValue',
+          '${FollowableType.UNITY.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final requestPlaces = RemoteClient.makeGetRequestAndReturnResponse(
+    final requestPlaces = LocalizedGetRequest.makeGetRequestAndReturnResponse(
       endpointWithPath:
-          '${WikiFollowableType.PLACE.endpoint}/public/search/$searchValue',
+          '${FollowableType.PLACE.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 

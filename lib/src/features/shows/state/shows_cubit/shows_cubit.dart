@@ -1,14 +1,14 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../core/client/data_sealed/response_sealed.dart';
+import 'package:the_postraves_app/src/data/enum/view_mode.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import 'package:the_postraves_package/models/related_to_event/shows_by_date.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
 import '../../repository/shows_repository_impl.dart';
 import '../view_switcher_cubit/view_switcher_cubit_cubit.dart';
-import '../../../../models/enum/view_mode.dart';
-import '../../../../models/geo/city.dart';
-import '../../../../models/related_to_event/shows_by_date.dart';
-import '../../../../models/shorts/event_short.dart';
+
 
 part 'shows_state.dart';
 part 'shows_cubit.freezed.dart';

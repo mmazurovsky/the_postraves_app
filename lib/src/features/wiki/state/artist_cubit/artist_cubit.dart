@@ -1,13 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../follow_cubit/follow_cubit.dart';
-
-import '../../../../core/client/data_sealed/response_sealed.dart';
-import '../../../../models/fulls/artist_full.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../models/shorts/unity_short.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/fulls/artist_full.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import '../../repository/artist_repository.dart';
 import '../../repository/wiki_repository.dart';
+
 
 part 'artist_cubit.freezed.dart';
 part 'artist_state.dart';

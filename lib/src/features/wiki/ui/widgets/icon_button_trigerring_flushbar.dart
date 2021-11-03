@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/presentation/widgets/my_flushbar.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/widgets/other/my_flushbar.dart';
 
 class IconButtonTriggeringFlushbar extends StatelessWidget {
   const IconButtonTriggeringFlushbar({

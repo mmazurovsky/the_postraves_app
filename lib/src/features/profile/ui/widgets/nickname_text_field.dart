@@ -1,11 +1,11 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/widgets.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
 import '../../state/profile_cubit/profile_cubit.dart';
-import '../../../../core/utils/my_colors.dart';
 
-import 'my_text_field.dart';
+import '../../../../common/widgets/inputs/my_text_field.dart';
 
 class NicknameTextField extends StatefulWidget {
   final FocusNode focusNode;
@@ -47,7 +47,7 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
     if (nicknameErrorMessage != null) return nicknameErrorMessage;
     _checkNicknameIsFreeThenWaitForResponseThenTriggerValidationAgain(nickname);
     if (!_isNicknameFree) {
-      return AppLocalizations.of(context)!.profileCreationNicknameWarningTaken;
+      return 'profileCreationNicknameWarningTaken'.tr();
     } else {
       return null;
     }
@@ -56,12 +56,10 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
   String? _basicCheckNickname(String nickname) {
     if (_previouslyCheckedNickname != nickname) {
       if (nickname.length < 3 || nickname.length > 15) {
-        return AppLocalizations.of(context)!
-            .profileCreationNicknameWarningLength;
+        return 'profileCreationNicknameWarningLength'.tr();
       }
       if (!RegExp(r"^[a-zA-Z0-9]*$").hasMatch(nickname)) {
-        return AppLocalizations.of(context)!
-            .profileCreationNicknameWarningSymbols;
+        return 'profileCreationNicknameWarningSymbols'.tr();
       }
     }
     return null;
@@ -91,7 +89,7 @@ class _NicknameTextFieldState extends State<NicknameTextField> {
   Widget build(BuildContext context) {
     return MyTextField(
       focusNode: widget.focusNode,
-      title: AppLocalizations.of(context)!.profileCreationNickname,
+      title: 'profileCreationNickname'.tr(),
       textInputType: TextInputType.text,
       isSecret: false,
       textEditingController: widget.textEditingController,

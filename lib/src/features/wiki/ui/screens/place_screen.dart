@@ -1,64 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:google_static_maps_controller/google_static_maps_controller.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/models/fulls/place_full.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/other/section_title.dart';
+import '../../../../common/widgets/other/short_event_card_item.dart';
+import '../../../../common/widgets/other/social_links_list.dart';
+import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../../../common/widgets/spacers/section_divider.dart';
+import '../../../../my_navigation.dart';
 import '../../state/follow_cubit/follow_cubit.dart';
+import '../../state/place_cubit/place_cubit.dart';
 import '../widgets/about_section.dart';
+import '../widgets/address_section.dart';
+import '../widgets/column_of_custom_cards.dart';
 import '../widgets/coordinates_section.dart';
 import '../widgets/followable_util.dart';
+import '../widgets/map_selector.dart';
+import '../widgets/slide_animation_wrapper.dart';
 import '../widgets/upcoming_events_section.dart';
+import '../widgets/wiki_expandable_text_description.dart';
 import '../widgets/wiki_subtitle.dart';
 import '../widgets/wiki_title.dart';
-import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../models/fulls/artist_full.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-import '../../../../my_navigation.dart';
-import '../../state/place_cubit/place_cubit.dart';
-import '../../../../models/enum/wiki_rating_type.dart';
-import '../../../../models/fulls/place_full.dart';
-import '../../../../models/geo/country.dart';
-import '../../../../models/related_to_place/scene.dart';
-import '../../../../models/shorts/event_short.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/presentation/widgets/my_horizontal_margin.dart';
-import '../../../../core/presentation/widgets/section_title.dart';
-import '../../../../core/presentation/widgets/social_links_list.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../widgets/address_section.dart';
-import '../widgets/map_selector.dart';
-import '../widgets/column_of_custom_cards.dart';
-import '../../../../core/presentation/widgets/short_event_card_item.dart';
+import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';
 import 'wiki_canvas.dart';
-import '../widgets/slide_animation_wrapper.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/presentation/widgets/section_divider.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../widgets/wiki_expandable_text_description.dart';
-import '../widgets/wiki_wide_bookmark_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PlaceScreen extends StatelessWidget {
-  final WikiDataDto _wikiDataDto;
+  final FollowableData _FollowableData;
 
   const PlaceScreen(
-    this._wikiDataDto, {
+    this._FollowableData, {
     Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return FollowableScreen<PlaceCubit, FollowCubit<PlaceFull>>(
-      _wikiDataDto,
-      _PlaceStateManagement(_wikiDataDto),
+      _FollowableData,
+      _PlaceStateManagement(_FollowableData),
     );
   }
 }
 
 class _PlaceStateManagement extends StatefulWidget {
-  final WikiDataDto _wikiDataDto;
-  const _PlaceStateManagement(this._wikiDataDto, {Key? key}) : super(key: key);
+  final FollowableData _FollowableData;
+  const _PlaceStateManagement(this._FollowableData, {Key? key})
+      : super(key: key);
 
   @override
   State<_PlaceStateManagement> createState() => _PlaceStateManagementState();
@@ -69,7 +65,7 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<PlaceCubit>(context).loadPlace(widget._wikiDataDto.id);
+    BlocProvider.of<PlaceCubit>(context).loadPlace(widget._FollowableData.id);
   }
 
   @override

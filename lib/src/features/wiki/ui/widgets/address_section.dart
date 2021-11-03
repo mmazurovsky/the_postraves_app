@@ -1,13 +1,12 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/my_flushbar.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'icon_button_trigerring_flushbar.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/other/my_flushbar.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 
 class AddressSection extends StatelessWidget {
   const AddressSection({
@@ -29,8 +28,7 @@ class AddressSection extends StatelessWidget {
             incomingContext: context,
             flushbarIcon:
                 const Icon(Ionicons.copy_outline, color: MyColors.main),
-            flushbarMessage:
-                AppLocalizations.of(context)!.wikiPlaceAddressCopied,
+            flushbarMessage: 'wikiPlaceAddressCopied'.tr(),
           ),
         },
         child: Column(

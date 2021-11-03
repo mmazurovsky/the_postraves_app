@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/my_assets.dart';
-import '../../../../core/utils/screen_size.dart';
-import '../../../../models/shorts/artist_short.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_item.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../../core/utils/my_constants.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/image_dimensions.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import '../../../../common/widgets/entity_presentation/followable_item.dart';
+import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/constants/my_assets.dart';
+import '../../../../common/constants/my_constants.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/screen_size.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../my_navigation.dart';
-import '../../../../core/utils/formatting_utils.dart';
 
 class ArtistPerformanceItem extends StatefulWidget {
   final List<ArtistShort> artists;
@@ -42,12 +42,15 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
   double _calculateLineWidthForLiveEvent() {
     if (DateTime.now().isBefore(widget.endingDateTime)) {
       final calculatedLineWidth = _maxLineWidthForScreenSize *
-              (DateTime.now().difference(widget.startingDateTime).inMinutes /
-                  widget.endingDateTime
-                      .difference(widget.startingDateTime)
-                      .inMinutes);
-      if (calculatedLineWidth > _maxLineWidthForScreenSize - _paddingFromRightForLineWidthWhenItIsCloseToRightCornerOfScreen) {
-        return calculatedLineWidth - _paddingFromRightForLineWidthWhenItIsCloseToRightCornerOfScreen;
+          (DateTime.now().difference(widget.startingDateTime).inMinutes /
+              widget.endingDateTime
+                  .difference(widget.startingDateTime)
+                  .inMinutes);
+      if (calculatedLineWidth >
+          _maxLineWidthForScreenSize -
+              _paddingFromRightForLineWidthWhenItIsCloseToRightCornerOfScreen) {
+        return calculatedLineWidth -
+            _paddingFromRightForLineWidthWhenItIsCloseToRightCornerOfScreen;
       } else {
         return calculatedLineWidth;
       }
@@ -74,7 +77,8 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
                         ImageDimensions? imageDimensions) =>
                     NavigatorFunctions.pushFollowable(
                   context: context,
-                  wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+                  followableData:
+                      entity.convertToFollowableData(imageDimensions),
                 ),
               );
               if (index + 1 != widget.artists.length) {

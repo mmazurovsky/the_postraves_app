@@ -1,13 +1,14 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/buttons/my_elevated_button_without_padding.dart';
-import '../../../../core/service/open_link_service.dart';
-import '../../../../core/utils/my_colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/utils/my_text_styles.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/models/related_to_event/event_status.dart';
+import 'package:the_postraves_package/service/open_link_service.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/buttons/my_elevated_button_without_padding.dart';
 import 'wiki_squared_outlined_bookmark_button.dart';
 import 'wiki_wide_bookmark_button.dart';
-import '../../../../models/enum/event_status.dart';
 
 class EventMainButton extends StatelessWidget {
   final EventStatus status;
@@ -36,7 +37,7 @@ class EventMainButton extends StatelessWidget {
                     size: 21,
                     color: MyColors.mainOppositeColor,
                   ),
-                  text: AppLocalizations.of(context)!.wikiEventBuyTicket,
+                  text: 'wikiEventBuyTicket'.tr(),
                   buttonColor: MyColors.accent,
                   mainAxisAlignment: MainAxisAlignment.center,
                   onTap: () => OpenLinkService.openUrl(ticketsLink!),

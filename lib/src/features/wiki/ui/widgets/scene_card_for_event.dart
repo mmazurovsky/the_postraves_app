@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../models/related_to_place/scene.dart';
-import '../../../../core/utils/my_text_styles.dart';
+import 'package:the_postraves_package/models/related_to_place/scene.dart';
+import '../../../../common/constants/my_text_styles.dart';
 import 'darkened_image_in_container.dart';
 
 class SceneCardForEvent extends StatelessWidget {

@@ -1,6 +1,6 @@
-import '../../../models/shorts/artist_short.dart';
-import '../../../models/shorts/event_short.dart';
-import '../../../core/client/remote_client.dart';
+import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
 
 abstract class UnityRemoteDataSource {
   Future<List<ArtistShort>> fetchArtistsForUnityById({
@@ -18,9 +18,10 @@ class UnityRemoteDataSourceImpl implements UnityRemoteDataSource {
   @override
   Future<List<EventShort>> fetchEventsForUnityById(
       {required int id, required Map<String, String> httpHeaders}) async {
-    final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
-        endpointWithPath: 'unity/public/$id/events',
-        httpHeaders: httpHeaders) as List<dynamic>?;
+    final decodedResponse =
+        await LocalizedGetRequest.makeGetRequestAndReturnResponse(
+            endpointWithPath: 'unity/public/$id/events',
+            httpHeaders: httpHeaders) as List<dynamic>?;
     return decodedResponse?.map((json) => EventShort.fromJson(json)).toList() ??
         [];
   }
@@ -28,9 +29,10 @@ class UnityRemoteDataSourceImpl implements UnityRemoteDataSource {
   @override
   Future<List<ArtistShort>> fetchArtistsForUnityById(
       {required int id, required Map<String, String> httpHeaders}) async {
-    final decodedResponse = await RemoteClient.makeGetRequestAndReturnResponse(
-        endpointWithPath: 'unity/public/$id/artists',
-        httpHeaders: httpHeaders) as List<dynamic>?;
+    final decodedResponse =
+        await LocalizedGetRequest.makeGetRequestAndReturnResponse(
+            endpointWithPath: 'unity/public/$id/artists',
+            httpHeaders: httpHeaders) as List<dynamic>?;
     return decodedResponse
             ?.map((json) => ArtistShort.fromJson(json))
             .toList() ??

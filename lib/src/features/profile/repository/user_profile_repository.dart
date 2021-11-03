@@ -1,9 +1,10 @@
-import '../../../core/client/data_sealed/response_sealed.dart';
-import '../../../models/user/user_profile.dart';
-import '../../../models/user/user_profile_to_write.dart';
+import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/user/user_profile.dart';
+import 'package:the_postraves_package/models/user/user_profile_to_write.dart';
 
-import '../../../core/client/remote_request_wrapper.dart';
 import '../data_sources/user_profile_data_source.dart';
+
 
 abstract class UserProfileRepository {
   Future<ResponseSealed<UserProfile?>> getUserAccount();

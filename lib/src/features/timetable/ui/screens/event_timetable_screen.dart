@@ -1,18 +1,19 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/presentation/widgets/app_bar_title.dart';
-import '../../timetable_cubit/timetable_cubit.dart';
-import '../../dto/timetable_for_scene_dto.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/utils/formatting_utils.dart';
-import '../widgets/scene_card_for_timetable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/app_bar/app_bar_title.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
+import '../../dto/timetable_for_scene_dto.dart';
+import '../../timetable_cubit/timetable_cubit.dart';
 import '../widgets/artist_performances_list.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../widgets/scene_card_for_timetable.dart';
 
 class EventTimetableScreen extends StatefulWidget {
   const EventTimetableScreen({
@@ -69,7 +70,7 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
         centerTitle: true,
         title: AppBarTitle(
           title: widget.eventName,
-          subtitle: AppLocalizations.of(context)!.timetableTitle,
+          subtitle: 'timetableTitle'.tr(),
         ),
         bottom: PreferredSize(
           preferredSize: const Size(double.infinity, 5),
@@ -101,14 +102,6 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
       ),
       body: SafeArea(
         child: BlocBuilder<TimetableCubit, TimetableState>(
-          // listener: (context, state) {
-          //   if (state is TimetableRefreshingState) {
-          //   } else if (state is TimetableLoadedState) {
-              // for (var element in _refreshControllers) {
-              //   element.refreshCompleted();
-              // }
-          //   }
-          // },
           buildWhen: (previousState, currentState) =>
               currentState is! TimetableRefreshingState,
           builder: (context, state) {
@@ -176,7 +169,6 @@ class _PerformancesForSceneState extends State<PerformancesForScene>
                       MyHorizontalPadding(
                         child: Text(
                           FormattingUtils.getFormattedDateLong(
-                            context: context,
                             dateTime: dayPerformances.date,
                           ),
                           style: MyTextStyles.sectionTitle,

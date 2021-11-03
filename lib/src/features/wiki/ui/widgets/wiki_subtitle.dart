@@ -1,17 +1,19 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+
 import 'package:ionicons/ionicons.dart';
-import '../../../../core/utils/formatting_utils.dart';
-import '../../../../models/enum/wiki_rating_type.dart';
-import '../../../../models/geo/country.dart';
-import '../../../../core/presentation/widgets/row_of_widgets.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import '../../../../core/presentation/widgets/animations/blink_animation_wrapper.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/followable_type.dart';
+import 'package:the_postraves_package/models/geo/country.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/widgets/animations/blink_animation_wrapper.dart';
+import '../../../../common/widgets/other/row_of_widgets.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 
 class WikiSubtitle extends StatelessWidget {
-  final WikiFollowableType entityType;
+  final FollowableType entityType;
   final Country? country;
   final int? overallFollowers;
   final int? weeklyFollowers;
@@ -31,18 +33,18 @@ class WikiSubtitle extends StatelessWidget {
       child: RowOfWidgets(
         children: [
           Text(
-            entityType.getNameSingular(context),
+            FollowableTypeUtils.getTranslationSingularForType(entityType),
             style: MyTextStyles.sectionTitle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          entityType != WikiFollowableType.EVENT && country != null
+          entityType != FollowableType.EVENT && country != null
               ? Text(
                   country!.emojiCode,
                   style: MyTextStyles.countryFlag,
                 )
               : null,
-          entityType != WikiFollowableType.EVENT && country != null
+          entityType != FollowableType.EVENT && country != null
               ? Text(
                   country!.localName,
                   style: MyTextStyles.sectionTitle,
@@ -76,7 +78,7 @@ class WikiSubtitle extends StatelessWidget {
                   startColor: MyColors.forInactiveStuff,
                   endColor: Colors.transparent,
                   widgetBuilder: (Color color) => Text(
-                    AppLocalizations.of(context)!.loading,
+                    'loading'.tr(),
                     style: MyTextStyles.wikiLoading(color),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../../../core/presentation/widgets/app_bar_back_button.dart';
-import '../../../../core/presentation/widgets/app_bar_title.dart';
-import '../../../../core/presentation/widgets/entity_presentation/followable_list.dart';
-import '../../../../core/presentation/widgets/loading_container.dart';
-import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
-import '../../../../core/provider/current_city_provider.dart';
-import '../../../../core/utils/my_colors.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/image_dimensions.dart';
+import 'package:the_postraves_package/models/geo/city.dart';
+import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
+import '../../../../common/widgets/app_bar/app_bar_title.dart';
+import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
+import '../../../../common/widgets/entity_presentation/followable_list.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../my_navigation.dart';
 import '../../data/chart_type.dart';
 import '../../state/cubit/charts_cubit.dart';
-import '../../../../models/dto/image_dimensions.dart';
-import '../../../../models/geo/city.dart';
-import '../../../../models/interfaces/data_interfaces.dart';
-
-import '../../../../my_navigation.dart';
 
 class ExtendedChartScreen<T extends GeneralFollowableInterface>
     extends StatefulWidget {
@@ -119,7 +118,7 @@ class _ExtendedChartBody<T extends GeneralFollowableInterface>
                   ImageDimensions? imageDimensions) =>
               NavigatorFunctions.pushFollowable(
             context: context,
-            wikiDataDto: entity.convertToWikiDataDto(imageDimensions),
+            followableData: entity.convertToFollowableData(imageDimensions),
           ),
         ),
       ),

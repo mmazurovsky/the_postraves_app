@@ -1,26 +1,27 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:ionicons/ionicons.dart';
-import 'package:screen_brightness/screen_brightness.dart';
-import '../../../../core/presentation/widgets/app_bar_title.dart';
-import '../../../../core/presentation/widgets/entity_presentation/unified_followable_with_type_data.dart';
-import '../../../../core/presentation/widgets/my_spacers.dart';
-import '../../../../core/utils/screen_size.dart';
-import '../../../../models/dto/wiki_data_dto.dart';
-import '../../../../core/presentation/widgets/app_bar_back_button.dart';
-import '../../../../core/presentation/widgets/buttons/my_elevated_button.dart';
-import '../../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../../core/presentation/widgets/my_horizontal_padding.dart';
-import '../../../../core/presentation/widgets/my_simple_app_bar.dart';
-import '../../../../core/utils/my_colors.dart';
-import '../../../../core/utils/my_text_styles.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/followable_data.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/screen_size.dart';
+import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
+import '../../../../common/widgets/app_bar/app_bar_title.dart';
+import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
+import '../../../../common/widgets/buttons/my_elevated_button.dart';
+import '../../../../common/widgets/entity_presentation/unified_followable_with_type_data.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
+import '../../../../common/widgets/spacers/my_spacers.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
 
 class WikiShareScreen extends StatelessWidget {
   final Uri shareLink;
-  final WikiDataDto wikiData;
+  final FollowableData wikiData;
 
   const WikiShareScreen({
     Key? key,
@@ -34,7 +35,7 @@ class WikiShareScreen extends StatelessWidget {
       appBar: MySimpleAppBar(
         leading: const AppBarBackButton(),
         title: AppBarTitle(
-          title: AppLocalizations.of(context)!.share,
+          title: 'share'.tr(),
         ),
       ),
       backgroundColor: MyColors.screenBackground,
@@ -104,7 +105,7 @@ class WikiShareScreen extends StatelessWidget {
                   size: 18,
                 ),
               ),
-              text: AppLocalizations.of(context)!.shareLink,
+              text: 'shareLink'.tr(),
               buttonColor: MyColors.forEventCard,
               textStyle: MyTextStyles.buttonWithMainColorThinner,
               onTap: () async => await Share.share(shareLink.toString()),
@@ -145,7 +146,7 @@ class _BrightnessSwitcherState extends State<BrightnessSwitcher> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          AppLocalizations.of(context)!.maxBrightness,
+          'maxBrightness'.tr(),
           style: MyTextStyles.buttonWithMainColor,
           overflow: TextOverflow.ellipsis,
         ),

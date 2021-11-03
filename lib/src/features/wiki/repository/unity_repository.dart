@@ -1,8 +1,9 @@
-import '../../../core/client/data_sealed/response_sealed.dart';
-import '../../../core/client/remote_request_wrapper.dart';
+import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
+
 import '../data_sources/unity_remote_data_source.dart';
-import '../../../models/shorts/artist_short.dart';
-import '../../../models/shorts/event_short.dart';
 
 abstract class UnityRepository {
   Future<ResponseSealed<List<ArtistShort>>> fetchArtistsForUnityById(int id);

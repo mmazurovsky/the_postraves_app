@@ -1,8 +1,9 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import '../../../../models/related_to_place/scene.dart';
-import '../../../../core/presentation/widgets/my_cached_network_image.dart';
-import '../../../../core/utils/my_text_styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:the_postraves_package/models/related_to_place/scene.dart';
+import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
 
 class SceneCardForTimetable extends StatelessWidget {
   final Scene scene;
@@ -28,8 +29,7 @@ class SceneCardForTimetable extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppLocalizations.of(context)!.scene,
-                    style: MyTextStyles.cardSceneSubtitle),
+                Text('scene'.tr(), style: MyTextStyles.cardSceneSubtitle),
                 SizedBox(height: 3),
                 Text(scene.name.toUpperCase(),
                     style: MyTextStyles.cardSceneTitle),
