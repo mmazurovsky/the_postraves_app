@@ -24,7 +24,8 @@ class MyConstants {
   static const String privacyPolicyLink =
       'https://postraves.flycricket.io/privacy.html';
   static const String telegramSupportAccount = "mmazurovsky";
-    static const String iosBundleId = 'com.mmazurovsky.thePostravesApp';
+  static const String iosBundleId = 'com.mmazurovsky.thePostravesApp';
+  static const String iosAppStoreId = '1592361916';
   //TODO! Android: change
   static const String androidPackageName = 'com.mmazurovsky.postraves_android';
   static const String dynamicLinkUrlPrefix =

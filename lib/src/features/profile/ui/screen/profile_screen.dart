@@ -79,11 +79,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final ScrollController _scrollController =
       TabItem.profile.tabScrollController;
   _ProfileDetails? _profileDetails;
-  // late MyCachedNetworkImage _myCachedNetworkImage;
-  // ImageDimensions? _imageDimensions;
   late UserProfile _userProfile;
   late FollowableData _followableData;
-  // late ImageDimensions? _imageDimensions;
 
   @override
   void initState() {

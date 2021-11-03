@@ -63,7 +63,7 @@ class DynamicLinkService {
           .dynamicLinkUrlPrefix,
       link: Uri.parse('https://postraves.com$pathToPage'),
       iosParameters: IosParameters(
-        appStoreId: '1301190736', //TODO !!!
+        appStoreId: MyConstants.iosAppStoreId, 
         bundleId: MyConstants.iosBundleId,
       ),
       androidParameters: AndroidParameters(

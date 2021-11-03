@@ -243,7 +243,7 @@ class NavigatorFunctions {
       return MyNavigationRoutes.unity;
     } else if (type == FollowableType.PLACE) {
       return MyNavigationRoutes.place;
-    } else if (type == FollowableType.UNITY) {
+    } else if (type == FollowableType.USER) {
       return MyNavigationRoutes.user; //TODO
     } else {
       throw Exception(); //TODO exception
