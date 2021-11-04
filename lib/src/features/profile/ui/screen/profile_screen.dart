@@ -17,10 +17,8 @@ import '../../../../common/constants/my_text_styles.dart';
 import '../../../../common/geo_provider/city_list_provider.dart';
 import '../../../../common/geo_provider/current_city_provider.dart';
 import '../../../../common/utils/screen_size.dart';
-import '../../../../common/widgets/animations/my_slide_animated_switcher.dart';
 import '../../../../common/widgets/buttons/button_content.dart';
 import '../../../../common/widgets/buttons/my_outlined_button_without_padding.dart';
-import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/section_title.dart';
 import '../../../../common/widgets/other/social_links_list.dart';
 import '../../../../common/widgets/selectors/current_city_selector.dart';
@@ -28,43 +26,11 @@ import '../../../../common/widgets/selectors/modal_bottom_sheet_content.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/spacers/section_divider.dart';
-import '../../../../dependency_injection.dart';
 import '../../../../common/navigation/my_navigation.dart';
 import '../../../wiki/ui/screens/wiki_canvas.dart';
 import '../../../wiki/ui/widgets/about_section.dart';
 import '../../../wiki/ui/widgets/button_with_icons.dart';
 import '../../../wiki/ui/widgets/wiki_subtitle.dart';
-import 'create_user_profile_screen.dart';
-import 'sign_in_methods_screen.dart';
-
-class ProfileScreenResolver extends StatefulWidget {
-  const ProfileScreenResolver({Key? key}) : super(key: key);
-
-  @override
-  _ProfileScreenResolverState createState() => _ProfileScreenResolverState();
-}
-
-class _ProfileScreenResolverState extends State<ProfileScreenResolver> {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AuthenticationCubit, AuthenticationState>(
-      builder: (context, state) {
-        Widget screenToReturn = const LoadingContainer();
-        state.maybeWhen(
-            loading: () => screenToReturn = const LoadingContainer(),
-            authenticated: (_) => screenToReturn = const ProfileScreen(),
-            authenticatedWithoutAccount: () => screenToReturn =
-                CreateUserProfileScreen(
-                    isPoppable: false, userProfileRepository: serviceLocator()),
-            unauthenticated: () => screenToReturn = const SignInMethodsScreen(
-                  isPoppable: false,
-                ),
-            orElse: () {});
-        return MySlideAnimatedSwitcher(child: screenToReturn);
-      },
-    );
-  }
-}
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({

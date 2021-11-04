@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import 'package:the_postraves_app/src/features/profile/ui/screen/profile_resolver.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';

@@ -57,7 +57,6 @@ dependencies:
       url: https://github.com/mmazurovsky/the_postraves_package
   freezed_annotation:
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
