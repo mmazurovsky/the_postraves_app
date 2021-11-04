@@ -229,27 +229,10 @@ class NavigatorFunctions {
     required FollowableData followableData,
   }) {
     Navigator.of(context).pushNamed(
-        _getNavigationRouteForFollowableType(followableData.type),
+      FollowableTypeUtils.getNavigationRouteForType(followableData.type),
         arguments: {
           'FollowableData': followableData,
         });
-  }
-
-  static _getNavigationRouteForFollowableType(FollowableType type) {
-    if (type == FollowableType.ARTIST) {
-      return MyNavigationRoutes.artist;
-    } else if (type == FollowableType.EVENT) {
-      return MyNavigationRoutes.event;
-    } else if (type == FollowableType.UNITY) {
-      return MyNavigationRoutes.unity;
-    } else if (type == FollowableType.PLACE) {
-      return MyNavigationRoutes.place;
-    } else if (type == FollowableType.USER) {
-      return MyNavigationRoutes
-          .user; //TODO my user profile and other user profiles problem
-    } else {
-      throw Exception(); //TODO exception
-    }
   }
 
   static void pushShareWiki({
