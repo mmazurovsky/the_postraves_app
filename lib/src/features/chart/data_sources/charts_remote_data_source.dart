@@ -1,5 +1,5 @@
-import 'package:the_postraves_app/src/common/utils/followable_client_helper.dart';
 import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
+import 'package:the_postraves_package/client/followable_client_helper.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 

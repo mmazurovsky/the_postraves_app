@@ -1,5 +1,4 @@
 import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/widgets.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
 
 import '../navigation/my_navigation.dart';
