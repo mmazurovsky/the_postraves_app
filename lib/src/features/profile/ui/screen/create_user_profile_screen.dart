@@ -61,7 +61,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
     super.didChangeDependencies();
     _buttonText = 'profileCreationCreate'.tr();
     _userCity =
-        context.read<CurrentCityProvider>().currentCity!;
+        context.watch<CurrentCityProvider>().currentCity!;
   }
 
   @override
