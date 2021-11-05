@@ -1,23 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/followable/repository/event_repository.dart';
+import 'package:the_postraves_package/followable/repository/wiki_repository.dart';
 import 'package:the_postraves_package/models/fulls/event_full.dart';
 import 'package:the_postraves_package/models/related_to_event/timetable_for_scene.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import '../../../timetable/dto/timetable_for_scene_dto.dart';
-import '../../repository/event_repository.dart';
-import '../../repository/wiki_repository.dart';
-
 
 part 'event_cubit.freezed.dart';
 part 'event_state.dart';
 
 class EventCubit extends Cubit<EventState> {
-  final WikiRepository<EventFull> _wikiRepository;
+  final FollowableRepository<EventFull> _followableRepository;
   final EventRepository _eventRepository;
   EventCubit(
-    this._wikiRepository,
+    this._followableRepository,
     this._eventRepository,
   ) : super(EventState.loading());
 
@@ -32,7 +31,7 @@ class EventCubit extends Cubit<EventState> {
   }
 
   void _loadEventAllInfo(int eventId) async {
-    final eventBasicInfoRequest = _wikiRepository.fetchBasicDataById(eventId);
+    final eventBasicInfoRequest = _followableRepository.fetchBasicDataById(eventId);
     final eventOrganizersRequest =
         _eventRepository.fetchOrganizersForEventById(eventId);
     final eventLineupRequest =

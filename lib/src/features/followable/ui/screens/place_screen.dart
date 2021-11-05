@@ -22,7 +22,7 @@ import '../../state/follow_cubit/follow_cubit.dart';
 import '../../state/place_cubit/place_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/address_section.dart';
-import '../widgets/column_of_custom_cards.dart';
+import '../../../../common/widgets/other/column_of_custom_cards.dart';
 import '../widgets/coordinates_section.dart';
 import '../widgets/followable_util.dart';
 import '../widgets/map_selector.dart';

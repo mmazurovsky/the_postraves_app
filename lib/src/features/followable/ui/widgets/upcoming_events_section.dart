@@ -6,7 +6,7 @@ import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/spacers/section_divider.dart';
 import '../../../../common/widgets/other/section_title.dart';
 import '../../../../common/widgets/other/short_event_card_item.dart';
-import 'column_of_custom_cards.dart';
+import '../../../../common/widgets/other/column_of_custom_cards.dart';
 
 class UpcomingEventsSection extends StatelessWidget {
   final List<EventShort> _events;

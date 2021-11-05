@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_app/src/features/followable/ui/screens/wiki_canvas.dart';
+import 'package:the_postraves_app/src/features/followable/ui/widgets/about_section.dart';
+import 'package:the_postraves_app/src/features/followable/ui/widgets/button_with_icons.dart';
+import 'package:the_postraves_app/src/features/followable/ui/widgets/wiki_subtitle.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
@@ -27,10 +31,6 @@ import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/spacers/section_divider.dart';
 import '../../../../common/navigation/my_navigation.dart';
-import '../../../wiki/ui/screens/wiki_canvas.dart';
-import '../../../wiki/ui/widgets/about_section.dart';
-import '../../../wiki/ui/widgets/button_with_icons.dart';
-import '../../../wiki/ui/widgets/wiki_subtitle.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({

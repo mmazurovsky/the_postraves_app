@@ -1,4 +1,4 @@
-import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_package/client/request_wrapper.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/models/user/user_profile.dart';
 import 'package:the_postraves_package/models/user/user_profile_to_write.dart';
@@ -17,10 +17,12 @@ abstract class UserProfileRepository {
 
 class UserProfileRepositoryImpl implements UserProfileRepository {
   final RemoteRequestWrapper<UserProfile?> remoteRequestWrapperUserAccount;
+  final RemoteRequestWrapper<void> remoteRequestWrapperUserVoid;
   final RemoteRequestWrapper<bool> remoteRequestWrapperNicknameChecking;
   final UserProfileDataSource userAccountDataSource;
 
   UserProfileRepositoryImpl(
+    this.remoteRequestWrapperUserVoid,
     this.remoteRequestWrapperUserAccount,
     this.remoteRequestWrapperNicknameChecking,
     this.userAccountDataSource,
@@ -44,7 +46,7 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
   @override
   Future<ResponseSealed<void>> createUserAccount(
       UserProfileToWrite userAccountToCreate) async {
-    return await remoteRequestWrapperUserAccount(
+    return await remoteRequestWrapperUserVoid(
         (httpHeaders) => userAccountDataSource.createUserProfile(
               httpHeaders: httpHeaders,
               userAccountToCreate: userAccountToCreate,
@@ -54,7 +56,7 @@ class UserProfileRepositoryImpl implements UserProfileRepository {
   @override
   Future<ResponseSealed<void>> updateUserAccount(
       UserProfileToWrite updatedUserAccount) async {
-    return await remoteRequestWrapperUserAccount(
+    return await remoteRequestWrapperUserVoid(
         (httpHeaders) => userAccountDataSource.updateUserProfile(
               httpHeaders: httpHeaders,
               updatedUserProfile: updatedUserAccount,

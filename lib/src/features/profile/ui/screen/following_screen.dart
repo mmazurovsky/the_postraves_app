@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_postraves_app/src/common/widgets/animations/my_slide_animated_switcher.dart';
+import 'package:the_postraves_app/src/common/widgets/other/column_of_custom_cards.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
@@ -21,7 +22,6 @@ import '../../../../common/widgets/other/short_event_card_item.dart';
 import '../../../../common/widgets/spacers/ending_of_screen.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/navigation/my_navigation.dart';
-import '../../../wiki/ui/widgets/column_of_custom_cards.dart';
 import '../../state/following_cubit/following_cubit.dart';
 
 class FollowingScreen extends StatefulWidget {

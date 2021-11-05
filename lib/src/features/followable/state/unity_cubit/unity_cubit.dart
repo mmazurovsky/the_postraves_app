@@ -1,24 +1,24 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/followable/repository/unity_repository.dart';
+import 'package:the_postraves_package/followable/repository/wiki_repository.dart';
 import 'package:the_postraves_package/models/fulls/unity_full.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
-import '../../repository/unity_repository.dart';
-import '../../repository/wiki_repository.dart';
 
 part 'unity_state.dart';
 part 'unity_cubit.freezed.dart';
 
 class UnityCubit extends Cubit<UnityState> {
-  final WikiRepository<UnityFull> _wikiRepository;
+  final FollowableRepository<UnityFull> _followableRepository;
   final UnityRepository _unityRepository;
-  UnityCubit(this._wikiRepository, this._unityRepository)
+  UnityCubit(this._followableRepository, this._unityRepository)
       : super(UnityState.loading());
 
   void loadUnity(int id) async {
     emit(UnityState.loading());
-    final responseBasicRequest = _wikiRepository.fetchBasicDataById(id);
+    final responseBasicRequest = _followableRepository.fetchBasicDataById(id);
     final responseArtistsRequest =
         _unityRepository.fetchArtistsForUnityById(id);
     final responseEventsRequest = _unityRepository.fetchEventsForArtistById(id);

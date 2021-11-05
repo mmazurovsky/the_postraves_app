@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import 'package:the_postraves_app/src/features/followable/ui/screens/artist_screen.dart';
+import 'package:the_postraves_app/src/features/followable/ui/screens/event_screen.dart';
+import 'package:the_postraves_app/src/features/followable/ui/screens/place_screen.dart';
+import 'package:the_postraves_app/src/features/followable/ui/screens/unity_screen.dart';
+import 'package:the_postraves_app/src/features/followable/ui/screens/wiki_share_screen.dart';
 import 'package:the_postraves_app/src/features/profile/ui/screen/profile_resolver.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
@@ -19,11 +24,6 @@ import '../../features/search/ui/screens/search_screen.dart';
 import '../../features/shows/ui/screens/shows_screen.dart';
 import '../../features/timetable/dto/timetable_for_scene_dto.dart';
 import '../../features/timetable/ui/screens/event_timetable_screen.dart';
-import '../../features/wiki/ui/screens/artist_screen.dart';
-import '../../features/wiki/ui/screens/event_screen.dart';
-import '../../features/wiki/ui/screens/place_screen.dart';
-import '../../features/wiki/ui/screens/unity_screen.dart';
-import '../../features/wiki/ui/screens/wiki_share_screen.dart';
 
 class MyNavigationRoutes {
   static const String shows = 'shows';

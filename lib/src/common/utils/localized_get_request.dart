@@ -1,10 +1,17 @@
 import 'dart:io';
 
-import 'package:the_postraves_package/client/remote_client.dart';
+import 'package:the_postraves_package/client/http_method_enum.dart';
+import 'package:the_postraves_package/client/localized_request.dart';
+import 'package:the_postraves_package/client/remote_request.dart';
 import 'package:the_postraves_package/constants/server_constants.dart';
 
-class LocalizedGetRequest {
-  static Future<dynamic> makeGetRequestAndReturnResponse(
+class LocalizedGetRequestImpl implements LocalizedGetRequest {
+  final RemoteRequest _remoteRequest;
+
+  LocalizedGetRequestImpl(this._remoteRequest);
+  
+  @override
+  Future<dynamic> call(
       {required String endpointWithPath,
       required Map<String, String> httpHeaders,
       Map<String, dynamic>? queryParameters}) async {
@@ -13,7 +20,8 @@ class LocalizedGetRequest {
       "lang": languageCode
     };
     queryParametersWithLanguageCode.addAll(queryParameters ?? {});
-    return RemoteClient.makeGetRequestAndReturnResponse(
+    return _remoteRequest(
+      httpMethod: HttpMethod.get,
       host: ServerConstants.apiHost,
       hostPath: ServerConstants.apiPath,
       endpointWithPath: endpointWithPath,

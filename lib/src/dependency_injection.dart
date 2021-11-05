@@ -4,7 +4,21 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
 import 'package:the_postraves_package/client/followable_client_helper.dart';
+import 'package:the_postraves_package/client/localized_request.dart';
+import 'package:the_postraves_package/client/remote_request.dart';
+import 'package:the_postraves_package/client/request_wrapper.dart';
+import 'package:the_postraves_package/followable/data_sources/artist_remote_data_source.dart';
+import 'package:the_postraves_package/followable/data_sources/event_remote_data_source.dart';
+import 'package:the_postraves_package/followable/data_sources/place_remote_data_source.dart';
+import 'package:the_postraves_package/followable/data_sources/unity_remote_data_source.dart';
+import 'package:the_postraves_package/followable/data_sources/wiki_remote_data_source.dart';
+import 'package:the_postraves_package/followable/repository/artist_repository.dart';
+import 'package:the_postraves_package/followable/repository/event_repository.dart';
+import 'package:the_postraves_package/followable/repository/place_repository.dart';
+import 'package:the_postraves_package/followable/repository/unity_repository.dart';
+import 'package:the_postraves_package/followable/repository/wiki_repository.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
 import 'package:the_postraves_package/models/fulls/event_full.dart';
 import 'package:the_postraves_package/models/fulls/place_full.dart';
@@ -34,6 +48,11 @@ import 'common/utils/remote_request_wrapper.dart';
 import 'features/chart/data_sources/charts_remote_data_source.dart';
 import 'features/chart/repository/charts_repository.dart';
 import 'features/chart/state/cubit/charts_cubit.dart';
+import 'features/followable/state/artist_cubit/artist_cubit.dart';
+import 'features/followable/state/event_cubit/event_cubit.dart';
+import 'features/followable/state/follow_cubit/follow_cubit.dart';
+import 'features/followable/state/place_cubit/place_cubit.dart';
+import 'features/followable/state/unity_cubit/unity_cubit.dart';
 import 'features/profile/data_sources/user_following_data_source.dart';
 import 'features/profile/data_sources/user_profile_data_source.dart';
 import 'features/profile/repository/firebase_image_repository_impl.dart';
@@ -50,85 +69,24 @@ import 'features/shows/repository/shows_repository_impl.dart';
 import 'features/shows/state/shows_cubit/shows_cubit.dart';
 import 'features/shows/state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
 import 'features/timetable/timetable_cubit/timetable_cubit.dart';
-import 'features/wiki/data_sources/artist_remote_data_source.dart';
-import 'features/wiki/data_sources/event_remote_data_source.dart';
-import 'features/wiki/data_sources/place_remote_data_source.dart';
-import 'features/wiki/data_sources/unity_remote_data_source.dart';
-import 'features/wiki/data_sources/wiki_remote_data_source.dart';
-import 'features/wiki/repository/artist_repository.dart';
-import 'features/wiki/repository/event_repository.dart';
-import 'features/wiki/repository/place_repository.dart';
-import 'features/wiki/repository/unity_repository.dart';
-import 'features/wiki/repository/wiki_repository.dart';
-import 'features/wiki/state/artist_cubit/artist_cubit.dart';
-import 'features/wiki/state/event_cubit/event_cubit.dart';
-import 'features/wiki/state/follow_cubit/follow_cubit.dart';
-import 'features/wiki/state/place_cubit/place_cubit.dart';
-import 'features/wiki/state/unity_cubit/unity_cubit.dart';
 
 final serviceLocator = GetIt.instance;
 
 void setupServiceLocatorInjection() async {
-  //* Core
-  serviceLocator.registerLazySingleton<CityRepository>(() => CityRepositoryImpl(
-        cityRemoteDataSource: serviceLocator(),
-        cityLocalDataSource: serviceLocator(),
-        remoteRequestWrapperListCity: serviceLocator(),
-      ));
+  // Services
 
-  serviceLocator
-      .registerLazySingleton<CountryRepository>(() => CountryRepositoryImpl(
-            countryRemoteDataSource: serviceLocator(),
-            countryLocalDataSource: serviceLocator(),
-            remoteRequestWrapperListCountry: serviceLocator(),
-          ));
-
-  serviceLocator.registerLazySingleton<CityRemoteDataSource>(
-      () => CityRemoteDataSourceImpl());
-
-  serviceLocator.registerLazySingleton<CountryRemoteDataSource>(
-      () => CountryRemoteDataSourceImpl());
-
-  serviceLocator.registerLazySingleton<CityLocalDataSource>(
-      () => CityLocalDataSourceImpl());
-
-  serviceLocator.registerLazySingleton<CountryLocalDataSource>(
-      () => CountryLocalDataSourceImpl());
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<City>>>(() =>
-      RemoteRequestWrapperImpl<List<City>>(serviceLocator(), serviceLocator()));
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<Country>>>(
-      () => RemoteRequestWrapperImpl<List<Country>>(
-          serviceLocator(), serviceLocator()));
-
-  serviceLocator
-      .registerLazySingleton<DynamicLinkService>(() => DynamicLinkService());
+  serviceLocator.registerLazySingleton<DynamicLinkService>(
+    () => DynamicLinkService(),
+  );
 
   serviceLocator.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImpl(InternetConnectionChecker()));
+    () => NetworkInfoImpl(
+      InternetConnectionChecker(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<ShowsByDate>>>(
-      () => RemoteRequestWrapperImpl<List<ShowsByDate>>(
-          serviceLocator(), serviceLocator()));
+  // Firebase
 
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<EventFull>>>(
-      () => RemoteRequestWrapperImpl<List<EventFull>>(
-          serviceLocator(), serviceLocator()));
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<ArtistShort>>>(
-      () => RemoteRequestWrapperImpl<List<ArtistShort>>(
-          serviceLocator(), serviceLocator()));
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<UnityShort>>>(
-      () => RemoteRequestWrapperImpl<List<UnityShort>>(
-          serviceLocator(), serviceLocator()));
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<PlaceShort>>>(
-      () => RemoteRequestWrapperImpl<List<PlaceShort>>(
-          serviceLocator(), serviceLocator()));
-
-  //* Firebase
   serviceLocator
       .registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
@@ -141,41 +99,360 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton<FirebaseMessaging>(
       () => FirebaseMessaging.instance);
 
-  //* Auth
-  serviceLocator.registerLazySingleton<AuthenticationCubit>(
-      () => AuthenticationCubit(serviceLocator(), serviceLocator()));
+  // Request
 
-  serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
-      () => FirebaseAuthRepositioryImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton<LocalizedGetRequest>(
+    () => LocalizedGetRequestImpl(
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<UserProfileRepository>(() =>
-      UserProfileRepositoryImpl(
-          serviceLocator(), serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton<RemoteRequest>(
+    () => RemoteRequestImpl(),
+  );
+
+  serviceLocator.registerLazySingleton<FollowableClientHelper<ArtistShort>>(
+    () => ArtistShortClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<FollowableClientHelper<ArtistFull>>(
+    () => ArtistFullClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<FollowableClientHelper<UnityShort>>(
+    () => UnityShortClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<FollowableClientHelper<UnityFull>>(
+    () => UnityFullClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<FollowableClientHelper<PlaceShort>>(
+    () => PlaceShortClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<FollowableClientHelper<PlaceFull>>(
+    () => PlaceFullClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<FollowableClientHelper<EventFull>>(
+    () => EventFullClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<FollowableClientHelper<EventShort>>(
+    () => EventShortClientHelper(),
+  );
+
+  // Request Wrapper
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<City>>>(
+    () => RemoteRequestWrapperImpl<List<City>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<Country>>>(
+    () => RemoteRequestWrapperImpl<List<Country>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<ShowsByDate>>>(
+    () => RemoteRequestWrapperImpl<List<ShowsByDate>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<EventFull>>>(
+    () => RemoteRequestWrapperImpl<List<EventFull>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<ArtistShort>>>(
+    () => RemoteRequestWrapperImpl<List<ArtistShort>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<UnityShort>>>(
+    () => RemoteRequestWrapperImpl<List<UnityShort>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<PlaceShort>>>(
+    () => RemoteRequestWrapperImpl<List<PlaceShort>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
   serviceLocator.registerLazySingleton<RemoteRequestWrapper<bool>>(
-      () => RemoteRequestWrapperImpl<bool>(serviceLocator(), serviceLocator()));
+    () => RemoteRequestWrapperImpl<bool>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<UserProfile?>>(
+    () => RemoteRequestWrapperImpl<UserProfile?>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<EventShort>>>(
+    () => RemoteRequestWrapperImpl<List<EventShort>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator
+      .registerLazySingleton<RemoteRequestWrapper<AggregatedSearchModel>>(
+    () => RemoteRequestWrapperImpl<AggregatedSearchModel>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<ArtistShort>>(
+    () => RemoteRequestWrapperImpl<ArtistShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<ArtistShort?>>(
+    () => RemoteRequestWrapperImpl<ArtistShort?>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<void>>(
+    () => RemoteRequestWrapperImpl<void>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<EventFull>>(
+    () => RemoteRequestWrapperImpl<EventFull>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<ArtistFull>>(
+    () => RemoteRequestWrapperImpl<ArtistFull>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<PlaceFull>>(
+    () => RemoteRequestWrapperImpl<PlaceFull>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<Scene>>>(
+    () => RemoteRequestWrapperImpl<List<Scene>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<UnityFull>>(
+    () => RemoteRequestWrapperImpl<UnityFull>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator
+      .registerLazySingleton<RemoteRequestWrapper<List<TimetableForScene>>>(
+    () => RemoteRequestWrapperImpl<List<TimetableForScene>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  // Local Data Source
+
+  serviceLocator.registerLazySingleton<SearchLocalDataSource>(
+    () => SearchLocalDataSourceImpl(),
+  );
+
+  serviceLocator.registerLazySingleton<CityLocalDataSource>(
+    () => CityLocalDataSourceImpl(),
+  );
+
+  serviceLocator.registerLazySingleton<CountryLocalDataSource>(
+    () => CountryLocalDataSourceImpl(),
+  );
+
+  // Remote Data Source
+
+  serviceLocator.registerLazySingleton<CityRemoteDataSource>(
+    () => CityRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<CountryRemoteDataSource>(
+    () => CountryRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
 
   serviceLocator.registerLazySingleton<UserProfileDataSource>(
-      () => UserProfileDataSourceImpl());
+    () => UserProfileDataSourceImpl(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<UserProfile?>>(() =>
-      RemoteRequestWrapperImpl<UserProfile?>(
-          serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton<ShowsRemoteDataSource>(
+    () => ShowsRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
 
-  //* Features - Profile
-  serviceLocator.registerLazySingleton(
-      () => ProfileCubit(serviceLocator(), serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton<SearchRemoteDataSource>(
+    () => SearchRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<FirebaseImageRepository>(
-      () => FirebaseImageRepositoryImpl());
+  serviceLocator.registerLazySingleton<ChartsRemoteDataSource<ArtistShort>>(
+    () => ChartsRemoteDataSourceImpl<ArtistShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton(
-    () => FollowingCubit(
+  serviceLocator.registerLazySingleton<WikiRemoteDataSource<EventFull>>(
+    () => WikiRemoteDataSourceImpl<EventFull>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<EventRemoteDataSource>(
+    () => EventRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingDataSource<EventShort>>(
+    () => UserFollowingDataSourceImpl<EventShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingDataSource<ArtistShort>>(
+    () => UserFollowingDataSourceImpl<ArtistShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingDataSource<PlaceShort>>(
+    () => UserFollowingDataSourceImpl<PlaceShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserFollowingDataSource<UnityShort>>(
+    () => UserFollowingDataSourceImpl<UnityShort>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<WikiRemoteDataSource<ArtistFull>>(
+    () => WikiRemoteDataSourceImpl<ArtistFull>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<ArtistRemoteDataSource>(
+    () => ArtistRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<WikiRemoteDataSource<PlaceFull>>(
+    () => WikiRemoteDataSourceImpl<PlaceFull>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<PlaceRemoteDataSource>(
+    () => PlaceRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<WikiRemoteDataSource<UnityFull>>(
+    () => WikiRemoteDataSourceImpl<UnityFull>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UnityRemoteDataSource>(
+    () => UnityRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+
+  // Repository
+
+  serviceLocator.registerLazySingleton<CityRepository>(
+    () => CityRepositoryImpl(
+      cityRemoteDataSource: serviceLocator(),
+      cityLocalDataSource: serviceLocator(),
+      remoteRequestWrapperListCity: serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<CountryRepository>(
+    () => CountryRepositoryImpl(
+      countryRemoteDataSource: serviceLocator(),
+      countryLocalDataSource: serviceLocator(),
+      remoteRequestWrapperListCountry: serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
+    () => FirebaseAuthRepositioryImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<UserProfileRepository>(
+    () => UserProfileRepositoryImpl(
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
+  );
+
+  serviceLocator.registerLazySingleton<FirebaseImageRepository>(
+    () => FirebaseImageRepositoryImpl(),
   );
 
   serviceLocator.registerLazySingleton<UserFollowingRepository<EventShort>>(
@@ -206,241 +483,198 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
-  serviceLocator.registerLazySingleton<UserFollowingDataSource<EventShort>>(
-    () => UserFollowingDataSourceImpl<EventShort>(
-      serviceLocator(),
+  serviceLocator.registerLazySingleton<ShowsRepository>(
+    () => ShowsRepositoryImpl(
+      showsRemoteDataSource: serviceLocator(),
+      remoteRequestWrapperByDate: serviceLocator(),
+      remoteRequestWrapperByRating: serviceLocator(),
     ),
   );
-
-  serviceLocator.registerLazySingleton<UserFollowingDataSource<ArtistShort>>(
-    () => UserFollowingDataSourceImpl<ArtistShort>(
-      serviceLocator(),
-    ),
-  );
-
-  serviceLocator.registerLazySingleton<UserFollowingDataSource<PlaceShort>>(
-    () => UserFollowingDataSourceImpl<PlaceShort>(
-      serviceLocator(),
-    ),
-  );
-
-  serviceLocator.registerLazySingleton<UserFollowingDataSource<UnityShort>>(
-    () => UserFollowingDataSourceImpl<UnityShort>(
-      serviceLocator(),
-    ),
-  );
-
-  //* Features - Shows
-  serviceLocator.registerLazySingleton(() => ShowsCubit(
-        showsRepository: serviceLocator(),
-        viewSwitcherBloc: serviceLocator(),
-      ));
-
-  serviceLocator.registerLazySingleton(() => ViewSwitcherCubit());
-
-  serviceLocator
-      .registerLazySingleton<ShowsRepository>(() => ShowsRepositoryImpl(
-            showsRemoteDataSource: serviceLocator(),
-            remoteRequestWrapperByDate: serviceLocator(),
-            remoteRequestWrapperByRating: serviceLocator(),
-          ));
-
-  serviceLocator.registerLazySingleton<ShowsRemoteDataSource>(
-      () => ShowsRemoteDataSourceImpl());
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<EventShort>>>(
-      () => RemoteRequestWrapperImpl<List<EventShort>>(
-          serviceLocator(), serviceLocator()));
-
-  //* Features - Search
-  serviceLocator.registerLazySingleton(() => SearchCubit(
-        serviceLocator(),
-      ));
 
   serviceLocator.registerLazySingleton<AggregatedSearchRepository>(
-      () => AggregatedSearchRepositoryImpl(
-            searchLocalDataSource: serviceLocator(),
-            searchRemoteDataSource: serviceLocator(),
-            remoteRequestWrapper: serviceLocator(),
-          ));
+    () => AggregatedSearchRepositoryImpl(
+      searchLocalDataSource: serviceLocator(),
+      searchRemoteDataSource: serviceLocator(),
+      remoteRequestWrapper: serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<SearchRemoteDataSource>(
-      () => SearchRemoteDataSourceImpl());
-
-  serviceLocator.registerLazySingleton<SearchLocalDataSource>(
-      () => SearchLocalDataSourceImpl());
-
-  serviceLocator
-      .registerLazySingleton<RemoteRequestWrapper<AggregatedSearchModel>>(() =>
-          RemoteRequestWrapperImpl<AggregatedSearchModel>(
-              serviceLocator(), serviceLocator()));
-
-  //* Features - Charts
-  serviceLocator.registerLazySingleton(() => ChartsCubit(
-        serviceLocator(),
-      ));
-
-  //* Rating ArtistFull
   serviceLocator.registerLazySingleton<ChartsRepository<ArtistShort>>(
-      () => ChartsRepositoryImpl<ArtistShort>(
-            chartsRemoteDataSource: serviceLocator(),
-            remoteRequestWrapperForList: serviceLocator(),
-            remoteRequestWrapperForSingle: serviceLocator(),
-          ));
+    () => ChartsRepositoryImpl<ArtistShort>(
+      chartsRemoteDataSource: serviceLocator(),
+      remoteRequestWrapperForList: serviceLocator(),
+      remoteRequestWrapperForSingle: serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<FollowableClientHelper<ArtistShort>>(
-      () => ArtistShortClientHelper());
-  serviceLocator.registerLazySingleton<FollowableClientHelper<ArtistFull>>(
-      () => ArtistFullClientHelper());
-  serviceLocator.registerLazySingleton<FollowableClientHelper<UnityShort>>(
-      () => UnityShortClientHelper());
-  serviceLocator.registerLazySingleton<FollowableClientHelper<UnityFull>>(
-      () => UnityFullClientHelper());
-  serviceLocator.registerLazySingleton<FollowableClientHelper<PlaceShort>>(
-      () => PlaceShortClientHelper());
-  serviceLocator.registerLazySingleton<FollowableClientHelper<PlaceFull>>(
-      () => PlaceFullClientHelper());
-  serviceLocator.registerLazySingleton<FollowableClientHelper<EventFull>>(
-      () => EventFullClientHelper());
-  serviceLocator.registerLazySingleton<FollowableClientHelper<EventShort>>(
-      () => EventShortClientHelper());
+  serviceLocator.registerLazySingleton<FollowableRepository<EventFull>>(
+    () => FollowableRepositoryImpl<EventFull>(
+      wikiRemoteDataSource: serviceLocator(),
+      remoteRequestWrapper: serviceLocator(),
+      remoteRequestWrapperVoid: serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<ChartsRemoteDataSource<ArtistShort>>(
-      () => ChartsRemoteDataSourceImpl<ArtistShort>(serviceLocator()));
+  serviceLocator.registerLazySingleton<EventRepository>(
+    () => EventRepositoryImpl(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<ArtistShort>>(() =>
-      RemoteRequestWrapperImpl<ArtistShort>(
-          serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton<FollowableRepository<ArtistFull>>(
+    () => FollowableRepositoryImpl<ArtistFull>(
+      wikiRemoteDataSource: serviceLocator(),
+      remoteRequestWrapper: serviceLocator(),
+      remoteRequestWrapperVoid: serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<ArtistShort?>>(() =>
-      RemoteRequestWrapperImpl<ArtistShort?>(
-          serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton<ArtistRepository>(
+    () => ArtistRepositoryImpl(
+      artistRemoteDataSource: serviceLocator(),
+      remoteRequestWrapperEvents: serviceLocator(),
+      remoteRequestWrapperUnities: serviceLocator(),
+    ),
+  );
 
-  //* Features - Wiki
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<void>>(
-      () => RemoteRequestWrapperImpl<void>(serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton<FollowableRepository<PlaceFull>>(
+    () => FollowableRepositoryImpl<PlaceFull>(
+      wikiRemoteDataSource: serviceLocator(),
+      remoteRequestWrapper: serviceLocator(),
+      remoteRequestWrapperVoid: serviceLocator(),
+    ),
+  );
 
-  //* Wiki EventFull
-  serviceLocator
-      .registerFactory(() => EventCubit(serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton<PlaceRepository>(
+    () => PlaceRepositoryImpl(
+      placeRemoteDataSource: serviceLocator(),
+      remoteRequestWrapperEvents: serviceLocator(),
+      remoteRequestWrapperScenes: serviceLocator(),
+    ),
+  );
 
-  serviceLocator
-      .registerFactory(() => FollowCubit<EventFull>(serviceLocator()));
+  serviceLocator.registerLazySingleton<FollowableRepository<UnityFull>>(
+    () => FollowableRepositoryImpl<UnityFull>(
+      wikiRemoteDataSource: serviceLocator(),
+      remoteRequestWrapper: serviceLocator(),
+      remoteRequestWrapperVoid: serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<WikiRepository<EventFull>>(
-      () => WikiRepositoryImpl<EventFull>(
-            wikiRemoteDataSource: serviceLocator(),
-            remoteRequestWrapper: serviceLocator(),
-            remoteRequestWrapperVoid: serviceLocator(),
-          ));
+  serviceLocator.registerLazySingleton<UnityRepository>(
+    () => UnityRepositoryImpl(
+      unityRemoteDataSource: serviceLocator(),
+      remoteRequestWrapperEvents: serviceLocator(),
+      remoteRequestWrapperArtists: serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<WikiRemoteDataSource<EventFull>>(
-      () => WikiRemoteDataSourceImpl<EventFull>(serviceLocator()));
+  // State
 
-  serviceLocator.registerLazySingleton<EventRepository>(() =>
-      EventRepositoryImpl(serviceLocator(), serviceLocator(), serviceLocator(),
-          serviceLocator()));
+  serviceLocator.registerLazySingleton<AuthenticationCubit>(
+    () => AuthenticationCubit(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<EventFull>>(() =>
-      RemoteRequestWrapperImpl<EventFull>(serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton(
+    () => ProfileCubit(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<EventRemoteDataSource>(
-      () => EventRemoteDataSourceImpl());
+  serviceLocator.registerLazySingleton(
+    () => FollowingCubit(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  //* Wiki ArtistFull
-  serviceLocator
-      .registerFactory(() => ArtistCubit(serviceLocator(), serviceLocator()));
+  serviceLocator.registerLazySingleton(
+    () => ShowsCubit(
+      showsRepository: serviceLocator(),
+      viewSwitcherBloc: serviceLocator(),
+    ),
+  );
 
-  serviceLocator
-      .registerFactory(() => FollowCubit<ArtistFull>(serviceLocator()));
+  serviceLocator.registerLazySingleton(
+    () => ViewSwitcherCubit(),
+  );
 
-  serviceLocator.registerLazySingleton<WikiRepository<ArtistFull>>(
-      () => WikiRepositoryImpl<ArtistFull>(
-            wikiRemoteDataSource: serviceLocator(),
-            remoteRequestWrapper: serviceLocator(),
-            remoteRequestWrapperVoid: serviceLocator(),
-          ));
+  serviceLocator.registerLazySingleton(
+    () => SearchCubit(
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<ArtistRepository>(() =>
-      ArtistRepositoryImpl(
-          artistRemoteDataSource: serviceLocator(),
-          remoteRequestWrapperEvents: serviceLocator(),
-          remoteRequestWrapperUnities: serviceLocator()));
+  serviceLocator.registerLazySingleton(
+    () => ChartsCubit(
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<WikiRemoteDataSource<ArtistFull>>(
-      () => WikiRemoteDataSourceImpl<ArtistFull>(serviceLocator()));
+  serviceLocator.registerFactory(
+    () => EventCubit(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<ArtistRemoteDataSource>(
-      () => ArtistRemoteDataSourceImpl());
+  serviceLocator.registerFactory(
+    () => FollowCubit<EventFull>(
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<ArtistFull>>(() =>
-      RemoteRequestWrapperImpl<ArtistFull>(serviceLocator(), serviceLocator()));
+  serviceLocator.registerFactory(
+    () => ArtistCubit(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  //* Wiki PlaceFull
-  serviceLocator
-      .registerFactory(() => PlaceCubit(serviceLocator(), serviceLocator()));
-  serviceLocator
-      .registerFactory(() => FollowCubit<PlaceFull>(serviceLocator()));
+  serviceLocator.registerFactory(
+    () => FollowCubit<ArtistFull>(
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<WikiRepository<PlaceFull>>(
-      () => WikiRepositoryImpl<PlaceFull>(
-            wikiRemoteDataSource: serviceLocator(),
-            remoteRequestWrapper: serviceLocator(),
-            remoteRequestWrapperVoid: serviceLocator(),
-          ));
+  serviceLocator.registerFactory(
+    () => PlaceCubit(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<PlaceRepository>(() =>
-      PlaceRepositoryImpl(
-          placeRemoteDataSource: serviceLocator(),
-          remoteRequestWrapperEvents: serviceLocator(),
-          remoteRequestWrapperScenes: serviceLocator()));
+  serviceLocator.registerFactory(
+    () => FollowCubit<PlaceFull>(
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<WikiRemoteDataSource<PlaceFull>>(
-      () => WikiRemoteDataSourceImpl<PlaceFull>(serviceLocator()));
+  serviceLocator.registerFactory(
+    () => TimetableCubit(
+      serviceLocator(),
+    ),
+  );
 
-  serviceLocator.registerLazySingleton<PlaceRemoteDataSource>(
-      () => PlaceRemoteDataSourceImpl());
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<PlaceFull>>(() =>
-      RemoteRequestWrapperImpl<PlaceFull>(serviceLocator(), serviceLocator()));
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<Scene>>>(() =>
-      RemoteRequestWrapperImpl<List<Scene>>(
-          serviceLocator(), serviceLocator()));
-
-  //* Wiki UnityFull
-  serviceLocator
-      .registerFactory(() => UnityCubit(serviceLocator(), serviceLocator()));
-  serviceLocator
-      .registerFactory(() => FollowCubit<UnityFull>(serviceLocator()));
-
-  serviceLocator.registerLazySingleton<WikiRepository<UnityFull>>(
-      () => WikiRepositoryImpl<UnityFull>(
-            wikiRemoteDataSource: serviceLocator(),
-            remoteRequestWrapper: serviceLocator(),
-            remoteRequestWrapperVoid: serviceLocator(),
-          ));
-
-  serviceLocator.registerLazySingleton<UnityRepository>(() =>
-      UnityRepositoryImpl(
-          unityRemoteDataSource: serviceLocator(),
-          remoteRequestWrapperEvents: serviceLocator(),
-          remoteRequestWrapperArtists: serviceLocator()));
-
-  serviceLocator.registerLazySingleton<WikiRemoteDataSource<UnityFull>>(
-      () => WikiRemoteDataSourceImpl<UnityFull>(serviceLocator()));
-
-  serviceLocator.registerLazySingleton<UnityRemoteDataSource>(
-      () => UnityRemoteDataSourceImpl());
-
-  serviceLocator.registerLazySingleton<RemoteRequestWrapper<UnityFull>>(() =>
-      RemoteRequestWrapperImpl<UnityFull>(serviceLocator(), serviceLocator()));
-
-  //* Features - Timetable
-  serviceLocator
-      .registerLazySingleton<RemoteRequestWrapper<List<TimetableForScene>>>(
-          () => RemoteRequestWrapperImpl<List<TimetableForScene>>(
-              serviceLocator(), serviceLocator()));
-
-  serviceLocator.registerFactory(() => TimetableCubit(serviceLocator()));
+  serviceLocator.registerFactory(
+    () => UnityCubit(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => FollowCubit<UnityFull>(
+      serviceLocator(),
+    ),
+  );
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/common/widgets/other/darkened_image_in_container.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import '../../../features/shows/ui/widgets/event_card_details_concrete.dart';
-import '../../../features/wiki/ui/widgets/darkened_image_in_container.dart';
 import '../../navigation/my_navigation.dart';
 import '../../constants/my_text_styles.dart';
 import '../spacers/section_divider.dart';

@@ -1,8 +1,8 @@
-import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
-import 'package:the_postraves_package/client/remote_client.dart';
+import 'package:the_postraves_package/client/http_method_enum.dart';
+import 'package:the_postraves_package/client/localized_request.dart';
+import 'package:the_postraves_package/client/remote_request.dart';
 import 'package:the_postraves_package/constants/server_constants.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
-import 'package:the_postraves_package/errors/exceptions.dart';
 import 'package:the_postraves_package/models/user/user_profile.dart';
 import 'package:the_postraves_package/models/user/user_profile_to_write.dart';
 
@@ -20,11 +20,15 @@ abstract class UserProfileDataSource {
 }
 
 class UserProfileDataSourceImpl implements UserProfileDataSource {
+  final RemoteRequest _remoteRequest;
+  final LocalizedGetRequest _localizedGetRequest;
+
+  UserProfileDataSourceImpl(this._remoteRequest, this._localizedGetRequest);
+
   @override
   Future<UserProfile?> getUserAccount(
       {required Map<String, String> httpHeaders}) async {
-    final decodedResponse =
-        await LocalizedGetRequest.makeGetRequestAndReturnResponse(
+    final decodedResponse = await _localizedGetRequest(
       endpointWithPath: FollowableType.USER.endpoint + '/public/myProfile',
       httpHeaders: httpHeaders,
     );
@@ -37,7 +41,8 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   Future<void> createUserProfile(
       {required Map<String, String> httpHeaders,
       required UserProfileToWrite userAccountToCreate}) async {
-    await RemoteClient.makePostRequestAndReturnResponse(
+    await _remoteRequest(
+      httpMethod: HttpMethod.post,
       host: ServerConstants.apiHost,
       hostPath: ServerConstants.apiPath,
       endpointWithPath: FollowableType.USER.endpoint + '/public/myProfile',
@@ -52,7 +57,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
       {required Map<String, String> httpHeaders,
       required String nickname}) async {
     dynamic decodedResponse =
-        await LocalizedGetRequest.makeGetRequestAndReturnResponse(
+        await _localizedGetRequest(
       endpointWithPath:
           FollowableType.USER.endpoint + '/public/nicknameCheck/$nickname',
       httpHeaders: httpHeaders,
@@ -65,7 +70,8 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
     required Map<String, String> httpHeaders,
     required UserProfileToWrite updatedUserProfile,
   }) async {
-    await RemoteClient.makePutRequestAndReturnResponse(
+    await _remoteRequest(
+      httpMethod: HttpMethod.put,
       host: ServerConstants.apiHost,
       hostPath: ServerConstants.apiPath,
       endpointWithPath: FollowableType.USER.endpoint + '/myProfile',

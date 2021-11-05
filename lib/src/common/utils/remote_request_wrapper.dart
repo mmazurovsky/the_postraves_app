@@ -1,15 +1,12 @@
 import 'dart:io';
 import 'package:easy_localization/src/public_ext.dart';
+import 'package:the_postraves_package/client/request_wrapper.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/errors/exceptions.dart';
 import 'package:the_postraves_package/errors/failures.dart';
 
 import '../authentication/repository/firebase_auth_repository.dart';
 import 'network_info.dart';
-
-abstract class RemoteRequestWrapper<T> {
-  Future<ResponseSealed<T>> call(Function argumentFunction);
-}
 
 class RemoteRequestWrapperImpl<T> implements RemoteRequestWrapper<T> {
   final NetworkInfo _networkInfo;
@@ -21,7 +18,7 @@ class RemoteRequestWrapperImpl<T> implements RemoteRequestWrapper<T> {
   );
 
   @override
-  Future<ResponseSealed<T>> call(Function argumentFunction) async {
+  Future<ResponseSealed<T>> call(Future<T> Function(Map<String, String>) request) async {
     if (await _networkInfo.isConnectedToNetwork) {
       try {
         // INFO: argumentFunction is code from remote data sources
@@ -36,7 +33,7 @@ class RemoteRequestWrapperImpl<T> implements RemoteRequestWrapper<T> {
             : {
                 HttpHeaders.contentTypeHeader: 'application/json',
               };
-        final T result = await argumentFunction(httpHeaders);
+        final T result = await request(httpHeaders);
         return ResponseSealed.success(result);
       } on MyServerException catch (e) {
         return ResponseSealed.failure(

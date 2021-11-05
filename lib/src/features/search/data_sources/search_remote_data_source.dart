@@ -1,4 +1,5 @@
 import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
+import 'package:the_postraves_package/client/localized_request.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
 import 'package:the_postraves_package/models/related_to_search/aggregated_search_model.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
@@ -12,29 +13,33 @@ abstract class SearchRemoteDataSource {
 }
 
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
+  final LocalizedGetRequest _localizedGetRequest;
+
+  SearchRemoteDataSourceImpl(this._localizedGetRequest);
+
   @override
   Future<AggregatedSearchModel> searchByAllFollowables(
       {required String searchValue,
       required Map<String, String> httpHeaders}) async {
-    final requestEvents = LocalizedGetRequest.makeGetRequestAndReturnResponse(
+    final requestEvents = _localizedGetRequest(
       endpointWithPath:
           '${FollowableType.EVENT.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final requestArtists = LocalizedGetRequest.makeGetRequestAndReturnResponse(
+    final requestArtists = _localizedGetRequest(
       endpointWithPath:
           '${FollowableType.ARTIST.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final requestUnities = LocalizedGetRequest.makeGetRequestAndReturnResponse(
+    final requestUnities = _localizedGetRequest(
       endpointWithPath:
           '${FollowableType.UNITY.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,
     );
 
-    final requestPlaces = LocalizedGetRequest.makeGetRequestAndReturnResponse(
+    final requestPlaces = _localizedGetRequest(
       endpointWithPath:
           '${FollowableType.PLACE.endpoint}/public/search/$searchValue',
       httpHeaders: httpHeaders,

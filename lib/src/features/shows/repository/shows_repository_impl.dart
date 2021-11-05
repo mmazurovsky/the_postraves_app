@@ -1,4 +1,4 @@
-import 'package:the_postraves_app/src/common/utils/remote_request_wrapper.dart';
+import 'package:the_postraves_package/client/request_wrapper.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/related_to_event/shows_by_date.dart';
