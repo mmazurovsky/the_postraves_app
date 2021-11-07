@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
+import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import 'package:the_postraves_package/followable/repository/event_repository.dart';
 import 'package:the_postraves_package/models/related_to_event/timetable_for_scene.dart';
-import '../dto/timetable_for_scene_dto.dart';
 
 part 'timetable_cubit.freezed.dart';
 part 'timetable_state.dart';
@@ -14,7 +14,7 @@ class TimetableCubit extends Cubit<TimetableState> {
     this._eventRepository,
   ) : super(const TimetableState.initial());
 
-  void initTimetable(List<TimetableForSceneDto> timetable) {
+  void initTimetable(List<TimetableForSceneByDay> timetable) {
     emit(TimetableState.loaded(timetable: timetable));
   }
 
@@ -27,7 +27,7 @@ class TimetableCubit extends Cubit<TimetableState> {
       final timetable = timetableResponse as SuccessResponse;
       final timetableData = timetable.data as List<TimetableForScene>;
       final timetableDataDtoList = timetableData
-          .map((model) => TimetableForSceneDto.fromModel(model))
+          .map((model) => TimetableForSceneByDay.fromModel(model))
           .toList();
       emit(TimetableState.loaded(timetable: timetableDataDtoList));
     }

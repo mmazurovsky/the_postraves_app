@@ -41,8 +41,13 @@ class CountryRepositoryImpl implements CountryRepository {
       List<Country> foundInCache =
           await countryLocalDataSource.fetchCountries();
       return ResponseSealed.success(foundInCache);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -53,8 +58,13 @@ class CountryRepositoryImpl implements CountryRepository {
       await countryLocalDataSource.deleteCountries();
       await countryLocalDataSource.saveCountries(countries);
       return const ResponseSealed.success(null);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -63,8 +73,13 @@ class CountryRepositoryImpl implements CountryRepository {
     try {
       await countryLocalDataSource.deleteCountries();
       return const ResponseSealed.success(null);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 }

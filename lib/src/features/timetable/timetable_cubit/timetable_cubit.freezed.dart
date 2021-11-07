@@ -24,7 +24,8 @@ class _$TimetableStateTearOff {
     return const TimetableRefreshingState();
   }
 
-  TimetableLoadedState loaded({required List<TimetableForSceneDto> timetable}) {
+  TimetableLoadedState loaded(
+      {required List<TimetableForSceneByDay> timetable}) {
     return TimetableLoadedState(
       timetable: timetable,
     );
@@ -40,14 +41,14 @@ mixin _$TimetableState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() refreshing,
-    required TResult Function(List<TimetableForSceneDto> timetable) loaded,
+    required TResult Function(List<TimetableForSceneByDay> timetable) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? refreshing,
-    TResult Function(List<TimetableForSceneDto> timetable)? loaded,
+    TResult Function(List<TimetableForSceneByDay> timetable)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +128,7 @@ class _$TimetableInitialState implements TimetableInitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() refreshing,
-    required TResult Function(List<TimetableForSceneDto> timetable) loaded,
+    required TResult Function(List<TimetableForSceneByDay> timetable) loaded,
   }) {
     return initial();
   }
@@ -137,7 +138,7 @@ class _$TimetableInitialState implements TimetableInitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? refreshing,
-    TResult Function(List<TimetableForSceneDto> timetable)? loaded,
+    TResult Function(List<TimetableForSceneByDay> timetable)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -218,7 +219,7 @@ class _$TimetableRefreshingState implements TimetableRefreshingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() refreshing,
-    required TResult Function(List<TimetableForSceneDto> timetable) loaded,
+    required TResult Function(List<TimetableForSceneByDay> timetable) loaded,
   }) {
     return refreshing();
   }
@@ -228,7 +229,7 @@ class _$TimetableRefreshingState implements TimetableRefreshingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? refreshing,
-    TResult Function(List<TimetableForSceneDto> timetable)? loaded,
+    TResult Function(List<TimetableForSceneByDay> timetable)? loaded,
     required TResult orElse(),
   }) {
     if (refreshing != null) {
@@ -271,7 +272,7 @@ abstract class $TimetableLoadedStateCopyWith<$Res> {
   factory $TimetableLoadedStateCopyWith(TimetableLoadedState value,
           $Res Function(TimetableLoadedState) then) =
       _$TimetableLoadedStateCopyWithImpl<$Res>;
-  $Res call({List<TimetableForSceneDto> timetable});
+  $Res call({List<TimetableForSceneByDay> timetable});
 }
 
 /// @nodoc
@@ -293,7 +294,7 @@ class _$TimetableLoadedStateCopyWithImpl<$Res>
       timetable: timetable == freezed
           ? _value.timetable
           : timetable // ignore: cast_nullable_to_non_nullable
-              as List<TimetableForSceneDto>,
+              as List<TimetableForSceneByDay>,
     ));
   }
 }
@@ -304,7 +305,7 @@ class _$TimetableLoadedState implements TimetableLoadedState {
   const _$TimetableLoadedState({required this.timetable});
 
   @override
-  final List<TimetableForSceneDto> timetable;
+  final List<TimetableForSceneByDay> timetable;
 
   @override
   String toString() {
@@ -335,7 +336,7 @@ class _$TimetableLoadedState implements TimetableLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() refreshing,
-    required TResult Function(List<TimetableForSceneDto> timetable) loaded,
+    required TResult Function(List<TimetableForSceneByDay> timetable) loaded,
   }) {
     return loaded(timetable);
   }
@@ -345,7 +346,7 @@ class _$TimetableLoadedState implements TimetableLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? refreshing,
-    TResult Function(List<TimetableForSceneDto> timetable)? loaded,
+    TResult Function(List<TimetableForSceneByDay> timetable)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -381,9 +382,10 @@ class _$TimetableLoadedState implements TimetableLoadedState {
 
 abstract class TimetableLoadedState implements TimetableState {
   const factory TimetableLoadedState(
-      {required List<TimetableForSceneDto> timetable}) = _$TimetableLoadedState;
+          {required List<TimetableForSceneByDay> timetable}) =
+      _$TimetableLoadedState;
 
-  List<TimetableForSceneDto> get timetable =>
+  List<TimetableForSceneByDay> get timetable =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TimetableLoadedStateCopyWith<TimetableLoadedState> get copyWith =>

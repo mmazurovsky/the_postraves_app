@@ -32,7 +32,7 @@ class _$EventStateTearOff {
       {required EventFull event,
       required List<UnityShort> orgs,
       required List<ArtistShort> lineup,
-      required List<TimetableForSceneDto> timetable}) {
+      required List<TimetableForSceneByDay> timetable}) {
     return EventLoadedState(
       event: event,
       orgs: orgs,
@@ -53,7 +53,7 @@ mixin _$EventState {
     required TResult Function() refreshing,
     required TResult Function() failure,
     required TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ mixin _$EventState {
     TResult Function()? refreshing,
     TResult Function()? failure,
     TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)?
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -147,7 +147,7 @@ class _$EventLoadingState implements EventLoadingState {
     required TResult Function() refreshing,
     required TResult Function() failure,
     required TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)
         loaded,
   }) {
     return loading();
@@ -160,7 +160,7 @@ class _$EventLoadingState implements EventLoadingState {
     TResult Function()? refreshing,
     TResult Function()? failure,
     TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)?
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)?
         loaded,
     required TResult orElse(),
   }) {
@@ -245,7 +245,7 @@ class _$EventRefreshingState implements EventRefreshingState {
     required TResult Function() refreshing,
     required TResult Function() failure,
     required TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)
         loaded,
   }) {
     return refreshing();
@@ -258,7 +258,7 @@ class _$EventRefreshingState implements EventRefreshingState {
     TResult Function()? refreshing,
     TResult Function()? failure,
     TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)?
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)?
         loaded,
     required TResult orElse(),
   }) {
@@ -343,7 +343,7 @@ class _$EventFailureState implements EventFailureState {
     required TResult Function() refreshing,
     required TResult Function() failure,
     required TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)
         loaded,
   }) {
     return failure();
@@ -356,7 +356,7 @@ class _$EventFailureState implements EventFailureState {
     TResult Function()? refreshing,
     TResult Function()? failure,
     TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)?
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)?
         loaded,
     required TResult orElse(),
   }) {
@@ -406,7 +406,7 @@ abstract class $EventLoadedStateCopyWith<$Res> {
       {EventFull event,
       List<UnityShort> orgs,
       List<ArtistShort> lineup,
-      List<TimetableForSceneDto> timetable});
+      List<TimetableForSceneByDay> timetable});
 
   $EventFullCopyWith<$Res> get event;
 }
@@ -445,7 +445,7 @@ class _$EventLoadedStateCopyWithImpl<$Res>
       timetable: timetable == freezed
           ? _value.timetable
           : timetable // ignore: cast_nullable_to_non_nullable
-              as List<TimetableForSceneDto>,
+              as List<TimetableForSceneByDay>,
     ));
   }
 
@@ -473,7 +473,7 @@ class _$EventLoadedState implements EventLoadedState {
   @override
   final List<ArtistShort> lineup;
   @override
-  final List<TimetableForSceneDto> timetable;
+  final List<TimetableForSceneByDay> timetable;
 
   @override
   String toString() {
@@ -515,7 +515,7 @@ class _$EventLoadedState implements EventLoadedState {
     required TResult Function() refreshing,
     required TResult Function() failure,
     required TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)
         loaded,
   }) {
     return loaded(event, orgs, lineup, timetable);
@@ -528,7 +528,7 @@ class _$EventLoadedState implements EventLoadedState {
     TResult Function()? refreshing,
     TResult Function()? failure,
     TResult Function(EventFull event, List<UnityShort> orgs,
-            List<ArtistShort> lineup, List<TimetableForSceneDto> timetable)?
+            List<ArtistShort> lineup, List<TimetableForSceneByDay> timetable)?
         loaded,
     required TResult orElse(),
   }) {
@@ -570,12 +570,12 @@ abstract class EventLoadedState implements EventState {
       {required EventFull event,
       required List<UnityShort> orgs,
       required List<ArtistShort> lineup,
-      required List<TimetableForSceneDto> timetable}) = _$EventLoadedState;
+      required List<TimetableForSceneByDay> timetable}) = _$EventLoadedState;
 
   EventFull get event => throw _privateConstructorUsedError;
   List<UnityShort> get orgs => throw _privateConstructorUsedError;
   List<ArtistShort> get lineup => throw _privateConstructorUsedError;
-  List<TimetableForSceneDto> get timetable =>
+  List<TimetableForSceneByDay> get timetable =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $EventLoadedStateCopyWith<EventLoadedState> get copyWith =>

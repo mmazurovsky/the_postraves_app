@@ -50,8 +50,10 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
       List<UnifiedSearchModel> foundInCache =
           await searchLocalDataSource.getSearchHistory();
       return ResponseSealed.success(foundInCache);
-    } on MyCacheException {
-      return ResponseSealed.failure(CacheFailure('Cache exception on trying to find previous searches'));
+      // TODO Exception too general
+    } on Exception {
+      return const ResponseSealed.failure(Failure(FailureType.cacheFailure,
+          'Cache exception on trying to find previous searches'));
     }
   }
 
@@ -74,8 +76,9 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
           : searchLocalDataSource
               .saveSearchRecordToHistory(entityToSaveOrUpdate);
       return const ResponseSealed.success(null);
-    } on MyCacheException {
-      return ResponseSealed.failure(CacheFailure('Cache exception on trying to save or update search record in history'));
+    } on Exception {
+      return const ResponseSealed.failure(Failure(FailureType.cacheFailure,
+          'Cache exception on trying to save or update search record in history'));
     }
   }
 
@@ -86,8 +89,9 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
     try {
       await searchLocalDataSource.updateSearchRecordInHistory(updatedEntity);
       return const ResponseSealed.success(null);
-    } on MyCacheException {
-      return ResponseSealed.failure(CacheFailure('Cache exception on update time of search record'));
+    } on Exception {
+      return const ResponseSealed.failure(Failure(FailureType.cacheFailure,
+          'Cache exception on update time of search record'));
     }
   }
 
@@ -97,8 +101,9 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
     try {
       return ResponseSealed.success(
           await searchLocalDataSource.deleteSearchRecordFromHistory(entity));
-    } on MyCacheException {
-      return ResponseSealed.failure(CacheFailure('Cache exception on trying to delete search record from history'));
+    } on Exception {
+      return const ResponseSealed.failure(Failure(FailureType.cacheFailure,
+          'Cache exception on trying to delete search record from history'));
     }
   }
 
@@ -107,8 +112,9 @@ class AggregatedSearchRepositoryImpl implements AggregatedSearchRepository {
     try {
       return ResponseSealed.success(
           await searchLocalDataSource.deleteAllSearchRecords());
-    } on MyCacheException {
-      return ResponseSealed.failure(CacheFailure('Cache exception on trying to delete all search records'));
+    } on Exception {
+      return const ResponseSealed.failure(Failure(FailureType.cacheFailure,
+          'Cache exception on trying to delete all search records'));
     }
   }
 }

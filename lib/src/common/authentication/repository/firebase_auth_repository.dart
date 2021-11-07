@@ -58,7 +58,12 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
           .createUserWithEmailAndPassword(email: email, password: password);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      return ResponseSealed.failure(AuthenticationFailure(e.message));
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.authFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -70,7 +75,12 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
           email: email, password: password);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      return ResponseSealed.failure(AuthenticationFailure(e.message));
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.authFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -89,7 +99,12 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
       await _firebaseAuth.sendSignInLinkToEmail(
           email: email, actionCodeSettings: actionCodeSettings);
     } on FirebaseAuthException catch (e) {
-      return ResponseSealed.failure(AuthenticationFailure(e.message));
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.authFailure,
+          e.message,
+        ),
+      );
     }
 
     _storedEmailForLinkVerification = email;
@@ -106,11 +121,16 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
             emailLink: link.toString());
         return ResponseSealed.success(userCredentials);
       } on FirebaseAuthException catch (e) {
-        // TODO Exception: map error codes to failures
-        return ResponseSealed.failure(AuthenticationFailure(e.message));
+        return ResponseSealed.failure(
+          Failure(
+            FailureType.authFailure,
+            e.message,
+          ),
+        );
       }
     } else {
-      return ResponseSealed.failure(AuthenticationFailure(null, "Failure while ending signing with email and link"));
+      return const ResponseSealed.failure(Failure(FailureType.authFailure,
+          "Failure while ending signing with email and link"));
     }
   }
 
@@ -128,8 +148,14 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     try {
       googleAuth = await googleUser!.authentication;
     } on FirebaseAuthException catch (e) {
-      dev.log('Google sign in has been cancelled: ${e.toString()}'); //TODO report crashlytics
-      return ResponseSealed.failure(AuthenticationFailure(e.message));
+      dev.log(
+          'Google sign in has been cancelled: ${e.toString()}'); //TODO report crashlytics
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.authFailure,
+          e.message,
+        ),
+      );
     }
 
     // Create a new credential
@@ -144,7 +170,12 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
           await _firebaseAuth.signInWithCredential(credential);
       return ResponseSealed.success(userCredentials);
     } on FirebaseAuthException catch (e) {
-      return ResponseSealed.failure(AuthenticationFailure(e.message));
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.authFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -195,7 +226,12 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
       final user = await _firebaseAuth.signInWithCredential(oauthCredential);
       return ResponseSealed.success(user);
     } on FirebaseAuthException catch (e) {
-      return ResponseSealed.failure(AuthenticationFailure(e.message));
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.authFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -204,7 +240,12 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     try {
       return ResponseSealed.success(await _firebaseAuth.signOut());
     } on FirebaseAuthException catch (e) {
-      return ResponseSealed.failure(AuthenticationFailure(e.message));
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.authFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -213,7 +254,12 @@ class FirebaseAuthRepositioryImpl implements FirebaseAuthRepository {
     try {
       return ResponseSealed.success(await currentUser?.delete());
     } on FirebaseAuthException catch (e) {
-      return ResponseSealed.failure(AuthenticationFailure(e.message));
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.authFailure,
+          e.message,
+        ),
+      );
     }
   }
 }

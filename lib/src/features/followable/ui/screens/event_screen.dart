@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import 'package:the_postraves_package/models/fulls/event_full.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
@@ -17,7 +18,6 @@ import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/navigation/my_navigation.dart';
-import '../../../timetable/dto/timetable_for_scene_dto.dart';
 import '../../state/event_cubit/event_cubit.dart';
 import '../../state/follow_cubit/follow_cubit.dart';
 import '../widgets/about_section.dart';
@@ -99,7 +99,7 @@ class _EventContent extends StatefulWidget {
   final EventFull event;
   final List<UnityShort> unities;
   final List<ArtistShort> lineup;
-  final List<TimetableForSceneDto> timetable;
+  final List<TimetableForSceneByDay> timetable;
   final EventCubit eventBlocProvider;
   final void Function<T extends GeneralFollowableInterface>(BuildContext, T)
       onIsFollowedChange;

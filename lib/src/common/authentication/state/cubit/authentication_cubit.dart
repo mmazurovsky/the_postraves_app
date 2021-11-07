@@ -15,7 +15,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     this._firebaseRepository,
     this._userAccountRepository,
   ) : super(const AuthenticationState.loading()) {
-    updateAuthStatus(); 
+    updateAuthStatus();
   }
 
   UserProfile? _currentUserFromBackend;
@@ -39,8 +39,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
               emit(AuthenticationState.authenticated(userProfile));
             }
           },
-          failure: (failure, message) =>
-              emit(const AuthenticationState.error())); //TODO Exception: specific error
+          failure: (failure) => emit(const AuthenticationState
+              .error())); //TODO Exception: specific error
     }
   }
 
@@ -54,8 +54,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
     result.when(
         success: (data) => updateAuthStatus(),
-        failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error())); //TODO Exception: specific error
+        failure: (failure) => emit(const AuthenticationState
+            .error())); //TODO Exception: specific error
   }
 
   void signInWithGoogle() async {
@@ -63,8 +63,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
     result.when(
         success: (data) => updateAuthStatus(),
-        failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error()) //TODO Exception: specific error
+        failure: (failure) => emit(
+            const AuthenticationState.error()) //TODO Exception: specific error
         );
   }
 
@@ -73,8 +73,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
     result.when(
         success: (data) => updateAuthStatus(),
-        failure: (failure, errorMessage) =>
-            emit(const AuthenticationState.error()) //TODO Exception: specific error
+        failure: (failure) => emit(
+            const AuthenticationState.error()) //TODO Exception: specific error
         );
   }
 

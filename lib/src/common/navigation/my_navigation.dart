@@ -7,8 +7,8 @@ import 'package:the_postraves_app/src/features/followable/ui/screens/unity_scree
 import 'package:the_postraves_app/src/features/followable/ui/screens/wiki_share_screen.dart';
 import 'package:the_postraves_app/src/features/profile/ui/screen/profile_resolver.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
-import 'package:the_postraves_package/dto/followable_type.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
+import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import 'package:the_postraves_package/models/geo/country.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
@@ -18,11 +18,9 @@ import '../../features/chart/ui/screens/extended_chart_screen.dart';
 import '../../features/profile/ui/screen/auth_on_action_screen_resolver.dart';
 import '../../features/profile/ui/screen/following_screen.dart';
 import '../../features/profile/ui/screen/modify_profile_screen.dart';
-import '../../features/profile/ui/screen/profile_screen.dart';
 import '../../features/profile/ui/screen/sign_in_with_email_and_link_screen.dart';
 import '../../features/search/ui/screens/search_screen.dart';
 import '../../features/shows/ui/screens/shows_screen.dart';
-import '../../features/timetable/dto/timetable_for_scene_dto.dart';
 import '../../features/timetable/ui/screens/event_timetable_screen.dart';
 
 class MyNavigationRoutes {
@@ -250,7 +248,7 @@ class NavigatorFunctions {
     required BuildContext context,
     required int eventId,
     required String eventName,
-    required List<TimetableForSceneDto> timetableDto,
+    required List<TimetableForSceneByDay> timetableDto,
   }) {
     Navigator.of(context)
         .pushNamed(MyNavigationRoutes.eventTimetable, arguments: {

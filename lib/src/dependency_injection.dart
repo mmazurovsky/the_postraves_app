@@ -9,6 +9,7 @@ import 'package:the_postraves_package/client/followable_client_helper.dart';
 import 'package:the_postraves_package/client/localized_request.dart';
 import 'package:the_postraves_package/client/remote_request.dart';
 import 'package:the_postraves_package/client/request_wrapper.dart';
+import 'package:the_postraves_package/followable/cubit_related/complete_entities_loader.dart';
 import 'package:the_postraves_package/followable/data_sources/artist_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/event_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/place_remote_data_source.dart';
@@ -572,6 +573,21 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
+  // Complete Entity Loader
+
+  serviceLocator.registerLazySingleton<CompleteEntitiesLoader>(
+    () => CompleteEntitiesLoaderImpl(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
   // State
 
   serviceLocator.registerLazySingleton<AuthenticationCubit>(
@@ -624,7 +640,6 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerFactory(
     () => EventCubit(
       serviceLocator(),
-      serviceLocator(),
     ),
   );
 
@@ -637,7 +652,6 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerFactory(
     () => ArtistCubit(
       serviceLocator(),
-      serviceLocator(),
     ),
   );
 
@@ -649,7 +663,6 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerFactory(
     () => PlaceCubit(
-      serviceLocator(),
       serviceLocator(),
     ),
   );
@@ -668,7 +681,6 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerFactory(
     () => UnityCubit(
-      serviceLocator(),
       serviceLocator(),
     ),
   );

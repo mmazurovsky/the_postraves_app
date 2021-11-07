@@ -44,8 +44,13 @@ class CityRepositoryImpl implements CityRepository {
     try {
       List<City> foundInCache = await cityLocalDataSource.fetchCities();
       return ResponseSealed.success(foundInCache);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -54,8 +59,13 @@ class CityRepositoryImpl implements CityRepository {
     try {
       City? foundInCache = await cityLocalDataSource.fetchCurrentCity();
       return ResponseSealed.success(foundInCache);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -66,8 +76,13 @@ class CityRepositoryImpl implements CityRepository {
       await cityLocalDataSource.deleteCities();
       await cityLocalDataSource.saveCities(cities);
       return const ResponseSealed.success(null);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -78,8 +93,13 @@ class CityRepositoryImpl implements CityRepository {
       await cityLocalDataSource.deleteCurrentCity();
       await cityLocalDataSource.saveCurrentCity(city);
       return const ResponseSealed.success(null);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -88,8 +108,13 @@ class CityRepositoryImpl implements CityRepository {
     try {
       await cityLocalDataSource.deleteCities();
       return const ResponseSealed.success(null);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 
@@ -98,8 +123,13 @@ class CityRepositoryImpl implements CityRepository {
     try {
       await cityLocalDataSource.deleteCurrentCity();
       return const ResponseSealed.success(null);
-    } on MyCacheException catch (e) {
-      return ResponseSealed.failure(CacheFailure(e.message));
+    } on Exception catch (e) {
+      return ResponseSealed.failure(
+        Failure(
+          FailureType.cacheFailure,
+          e.message,
+        ),
+      );
     }
   }
 }

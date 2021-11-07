@@ -18,7 +18,8 @@ class RemoteRequestWrapperImpl<T> implements RemoteRequestWrapper<T> {
   );
 
   @override
-  Future<ResponseSealed<T>> call(Future<T> Function(Map<String, String>) request) async {
+  Future<ResponseSealed<T>> call(
+      Future<T> Function(Map<String, String>) request) async {
     if (await _networkInfo.isConnectedToNetwork) {
       try {
         // INFO: argumentFunction is code from remote data sources
@@ -37,11 +38,12 @@ class RemoteRequestWrapperImpl<T> implements RemoteRequestWrapper<T> {
         return ResponseSealed.success(result);
       } on MyServerException catch (e) {
         return ResponseSealed.failure(
-          ServerFailure(e.message),
+          Failure(FailureType.serverFailure, e.message),
         );
       }
     } else {
-      return ResponseSealed.failure(DeviceNetworkFailure('noInternet'.tr()));
+      return ResponseSealed.failure(
+          Failure(FailureType.deviceNetworkFailure, 'noInternet'.tr()));
     }
   }
 }

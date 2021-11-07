@@ -9,6 +9,6 @@ abstract class EventState with _$EventState {
           {required EventFull event,
           required List<UnityShort> orgs,
           required List<ArtistShort> lineup,
-          required List<TimetableForSceneDto> timetable}) =
+          required List<TimetableForSceneByDay> timetable}) =
       EventLoadedState;
 }

@@ -38,15 +38,15 @@ class ChartsCubit extends Cubit<ChartsState> {
 
     resolvedOverallArtists.when(
         success: (data) => stateOverallArtists = data,
-        failure: (failure, data) => {}); //TODO Exception:
+        failure: (failure) => {}); //TODO Exception:
 
     resolvedWeeklyArtists.when(
         success: (data) => stateWeeklyArtists = data,
-        failure: (failure, data) => {}); //TODO Exception:
+        failure: (failure) => {}); //TODO Exception:
 
     resolvedBestArtist.when(
         success: (data) => stateBestArtist = data,
-        failure: (failure, data) => {}); //TODO Exception:
+        failure: (failure) => {}); //TODO Exception:
 
     emit(ChartsState.loaded(
         stateBestArtist, stateWeeklyArtists, stateOverallArtists));

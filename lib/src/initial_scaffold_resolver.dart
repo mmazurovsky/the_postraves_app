@@ -61,7 +61,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
               currentCityProvider.changeCurrentCity(currentCityFromLocal);
             }
           },
-          failure: (failure, failureMessage) => {}); //TODO Exception
+          failure: (failure) => {}); //TODO Exception
     });
 
     CityListProvider cityListProvider = context.read<CityListProvider>();
@@ -78,7 +78,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
               }
             }
           },
-          failure: (failure, failureMessage) {});
+          failure: (failure) {});
     });
 
     widget.cityRepository.fetchCitiesFromRemote().then((value) {
@@ -93,7 +93,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
               }
             }
           },
-          failure: (failure, failureMessage) {});
+          failure: (failure) {});
     });
 
     CountryListProvider countryListProvider =
@@ -107,7 +107,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
               countryListProvider.changeCountryList(countriesFromRemote, true);
             }
           },
-          failure: (failure, failureMessage) {});
+          failure: (failure) {});
     });
   }
 

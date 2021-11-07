@@ -40,19 +40,19 @@ class FollowingCubit extends Cubit<FollowingState> {
 
     eventsFollowedResolved.when(
         success: (data) => eventsFollowed = data,
-        failure: (failure, data) => {}); //TODO Exception:
+        failure: (failure) => {}); //TODO Exception:
 
     artistsFollowedResolved.when(
         success: (data) => artistsFollowed = data,
-        failure: (failure, data) => {}); //TODO Exception:
+        failure: (failure) => {}); //TODO Exception:
 
     placesFollowedResolved.when(
         success: (data) => placesFollowed = data,
-        failure: (failure, data) => {}); //TODO Exception:
+        failure: (failure) => {}); //TODO Exception:
 
     unitiesFollowedResolved.when(
         success: (data) => unitiesFollowed = data,
-        failure: (failure, data) => {}); //TODO Exception:
+        failure: (failure) => {}); //TODO Exception:
 
     emit(FollowingState.loaded(
       events: eventsFollowed,

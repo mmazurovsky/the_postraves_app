@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import '../../../../common/utils/formatting_utils.dart';
 import '../../../../common/constants/my_text_styles.dart';
 import '../../../../common/widgets/app_bar/app_bar_title.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
-import '../../dto/timetable_for_scene_dto.dart';
 import '../../timetable_cubit/timetable_cubit.dart';
 import '../widgets/artist_performances_list.dart';
 import '../widgets/scene_card_for_timetable.dart';
@@ -25,7 +25,7 @@ class EventTimetableScreen extends StatefulWidget {
 
   final int eventId;
   final String eventName;
-  final List<TimetableForSceneDto> initialTimetable;
+  final List<TimetableForSceneByDay> initialTimetable;
 
   @override
   _EventTimetableScreenState createState() => _EventTimetableScreenState();
@@ -131,7 +131,7 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
 
 //* can't be stateless because of keep alive mixin on state class
 class PerformancesForScene extends StatefulWidget {
-  final TimetableForSceneDto timetableForSceneDto;
+  final TimetableForSceneByDay timetableForSceneDto;
   final TabController tabController;
   final Function onRefresh;
   final RefreshController refreshController;
