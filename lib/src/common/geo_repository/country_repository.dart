@@ -45,7 +45,7 @@ class CountryRepositoryImpl implements CountryRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }
@@ -62,7 +62,7 @@ class CountryRepositoryImpl implements CountryRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }
@@ -77,7 +77,7 @@ class CountryRepositoryImpl implements CountryRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }

@@ -325,6 +325,9 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton<SearchRemoteDataSource>(
     () => SearchRemoteDataSourceImpl(
       serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -522,6 +525,7 @@ void setupServiceLocatorInjection() async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -535,9 +539,10 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerLazySingleton<ArtistRepository>(
     () => ArtistRepositoryImpl(
-      artistRemoteDataSource: serviceLocator(),
-      remoteRequestWrapperEvents: serviceLocator(),
-      remoteRequestWrapperUnities: serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -551,9 +556,10 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerLazySingleton<PlaceRepository>(
     () => PlaceRepositoryImpl(
-      placeRemoteDataSource: serviceLocator(),
-      remoteRequestWrapperEvents: serviceLocator(),
-      remoteRequestWrapperScenes: serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -567,9 +573,10 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerLazySingleton<UnityRepository>(
     () => UnityRepositoryImpl(
-      unityRemoteDataSource: serviceLocator(),
-      remoteRequestWrapperEvents: serviceLocator(),
-      remoteRequestWrapperArtists: serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 

@@ -48,7 +48,7 @@ class CityRepositoryImpl implements CityRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }
@@ -63,7 +63,7 @@ class CityRepositoryImpl implements CityRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }
@@ -80,7 +80,7 @@ class CityRepositoryImpl implements CityRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }
@@ -97,7 +97,7 @@ class CityRepositoryImpl implements CityRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }
@@ -112,7 +112,7 @@ class CityRepositoryImpl implements CityRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }
@@ -127,7 +127,7 @@ class CityRepositoryImpl implements CityRepository {
       return ResponseSealed.failure(
         Failure(
           FailureType.cacheFailure,
-          e.message,
+          e.toString(),
         ),
       );
     }
