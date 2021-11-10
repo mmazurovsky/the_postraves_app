@@ -35,6 +35,7 @@ import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/place_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import 'package:the_postraves_package/models/user/user_profile.dart';
+import 'package:the_postraves_package/service/firebase_image_repository_impl.dart';
 import 'common/authentication/repository/firebase_auth_repository.dart';
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'common/configs/dynamic_link_configurer.dart';
@@ -56,7 +57,6 @@ import 'features/followable/state/place_cubit/place_cubit.dart';
 import 'features/followable/state/unity_cubit/unity_cubit.dart';
 import 'features/profile/data_sources/user_following_data_source.dart';
 import 'features/profile/data_sources/user_profile_data_source.dart';
-import 'features/profile/repository/firebase_image_repository_impl.dart';
 import 'features/profile/repository/user_following_repository.dart';
 import 'features/profile/repository/user_profile_repository.dart';
 import 'features/profile/state/following_cubit/following_cubit.dart';
@@ -456,7 +456,7 @@ void setupServiceLocatorInjection() async {
   );
 
   serviceLocator.registerLazySingleton<FirebaseImageRepository>(
-    () => FirebaseImageRepositoryImpl(),
+    () => FirebaseImageRepositoryImpl(serviceLocator()),
   );
 
   serviceLocator.registerLazySingleton<UserFollowingRepository<EventShort>>(

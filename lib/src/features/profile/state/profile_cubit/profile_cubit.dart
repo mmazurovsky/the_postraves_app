@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_package/errors/failures.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/user/user_profile_to_write.dart';
-import '../../repository/firebase_image_repository_impl.dart';
+import 'package:the_postraves_package/service/firebase_image_repository_impl.dart';
 import '../../repository/user_profile_repository.dart';
-
 
 part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
@@ -25,10 +25,18 @@ class ProfileCubit extends Cubit<ProfileState> {
   void createUserProfile(
       File? imageFile, String nickname, City currentCity) async {
     String? imageLink;
+    Failure? imageFailure;
     if (imageFile != null) {
-      final response = await _firebaseImageRepository.uploadImage(imageFile);
-      imageLink = response;
+      final response =
+          await _firebaseImageRepository.uploadUserImageFile(imageFile);
+      response.when(
+          success: (data) => imageLink = data,
+          failure: (incFailure) => imageFailure = incFailure);
+      if (imageFailure != null) {
+        // TODO exception handling
+      }
     }
+
     final userAccountToCreate = UserProfileToWrite(
       imageLink: imageLink,
       name: nickname,
@@ -45,14 +53,31 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void updateWholeUserProfile(UserProfileToWrite userProfileToUpdate,
       [File? imageFile]) async {
-    String imageLink;
     UserProfileToWrite updateProfileWithImageLink = userProfileToUpdate;
+    // if (imageFile != null) {
+    //   final response =
+    //       await _firebaseImageRepository.uploadUserImageFile(imageFile);
+    //   imageLink = response;
+
+    // }
+
+    String? imageLink;
+    Failure? imageFailure;
     if (imageFile != null) {
-      final response = await _firebaseImageRepository.uploadImage(imageFile);
-      imageLink = response;
-      updateProfileWithImageLink =
-          userProfileToUpdate.copyWith(imageLink: imageLink);
+      final response =
+          await _firebaseImageRepository.uploadUserImageFile(imageFile);
+      response.when(
+        success: (data) => imageLink = data,
+        failure: (incFailure) => imageFailure = incFailure,
+      );
+      if (imageFailure != null) {
+        // TODO exception handling
+      } else {
+        updateProfileWithImageLink =
+            userProfileToUpdate.copyWith(imageLink: imageLink);
+      }
     }
+
     final updatedUserProfile = await _userProfileRepository
         .updateUserAccount(updateProfileWithImageLink);
 
