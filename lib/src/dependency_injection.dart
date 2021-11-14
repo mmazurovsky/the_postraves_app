@@ -68,7 +68,7 @@ import 'features/search/state/cubit/search_cubit.dart';
 import 'features/shows/data_sources/shows_remote_data_source.dart';
 import 'features/shows/repository/shows_repository_impl.dart';
 import 'features/shows/state/shows_cubit/shows_cubit.dart';
-import 'features/shows/state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
+import 'features/shows/state/view_switcher_cubit/view_switcher_cubit.dart';
 import 'features/timetable/timetable_cubit/timetable_cubit.dart';
 
 final serviceLocator = GetIt.instance;

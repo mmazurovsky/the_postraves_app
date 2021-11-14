@@ -7,8 +7,7 @@ import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/related_to_event/shows_by_date.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import '../../repository/shows_repository_impl.dart';
-import '../view_switcher_cubit/view_switcher_cubit_cubit.dart';
-
+import '../view_switcher_cubit/view_switcher_cubit.dart';
 
 part 'shows_state.dart';
 part 'shows_cubit.freezed.dart';
@@ -82,24 +81,17 @@ class ShowsCubit extends Cubit<ShowsState> {
 
     // if (resolvedByDate is SuccessResponse && resolvedByRating is SuccessResponse) {
 
-    List<ShowsByDate> stateShowsByDate = [];
     resolvedByDate.when(
         success: (data) {
-          final showsByDate = data as List<ShowsByDate>;
-          stateShowsByDate = showsByDate;
+          _eventsByDate = data;
         },
         failure: (failure) {}); //TODO Exception:
 
-    List<EventShort> stateShowsByRating = [];
     resolvedByRating.when(
         success: (data) {
-          final showsByRating = data as List<EventShort>;
-          stateShowsByRating = showsByRating;
+          _eventsByRating = data;
         },
         failure: (failure) {}); // TODO Exception:
-
-    _eventsByDate = stateShowsByDate;
-    _eventsByRating = stateShowsByRating;
 
     return;
   }

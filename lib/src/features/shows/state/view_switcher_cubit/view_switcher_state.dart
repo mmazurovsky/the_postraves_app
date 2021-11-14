@@ -1,4 +1,4 @@
-part of 'view_switcher_cubit_cubit.dart';
+part of 'view_switcher_cubit.dart';
 
 @freezed
 abstract class ViewSwitcherState with _$ViewSwitcherState {

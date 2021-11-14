@@ -33,11 +33,12 @@ class ChartsRemoteDataSourceImpl<
           '/public/weeklyRating',
       queryParameters: {'cityName': city.name, 'maxQuantity': 50.toString()},
       httpHeaders: httpHeaders,
-    ) as List<dynamic>;
+    ) as List<dynamic>?;
 
     return response
-        .map((json) => _followableClientHelper.deserializeFollowable(json))
-        .toList();
+            ?.map((json) => _followableClientHelper.deserializeFollowable(json))
+            .toList() ??
+        [];
   }
 
   @override
@@ -48,11 +49,11 @@ class ChartsRemoteDataSourceImpl<
           '/public/overallRating',
       queryParameters: {'cityName': city.name, 'maxQuantity': 50.toString()},
       httpHeaders: httpHeaders,
-    ) as List<dynamic>;
+    ) as List<dynamic>?;
 
     return response
-        .map((json) => _followableClientHelper.deserializeFollowable(json))
-        .toList();
+        ?.map((json) => _followableClientHelper.deserializeFollowable(json))
+        .toList() ?? [];
   }
 
   @override

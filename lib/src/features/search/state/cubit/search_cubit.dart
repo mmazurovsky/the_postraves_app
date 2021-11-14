@@ -25,8 +25,7 @@ class SearchCubit extends Cubit<SearchState> {
         await _aggregatedSearchRepository.searchByAllRatingModels(searchValue);
     searchResults.when(
         success: (data) {
-          final searchResults = data as AggregatedSearchModel;
-          emit(SearchState.loadedNewSearch(searchResults));
+          emit(SearchState.loadedNewSearch(data));
         },
         failure: (failure) {}); //TODO Exception:
   }
@@ -63,8 +62,7 @@ class SearchCubit extends Cubit<SearchState> {
 
     searchHistoryRecords.when(
         success: (data) {
-          final previousSearches = data as List<UnifiedSearchModel>?;
-          emit(SearchState.loadedPreviousSearches(previousSearches));
+          emit(SearchState.loadedPreviousSearches(data));
         },
         failure: (failure) {}); //TODO Exception:
   }

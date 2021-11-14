@@ -196,7 +196,7 @@ class FormattingUtils {
       ).toUpperCase(),
     ]);
   }
-
+  
   static String getFormattedTime(DateTime dateTime) {
     return sprintf('%02i:%02i', [
       dateTime.hour,

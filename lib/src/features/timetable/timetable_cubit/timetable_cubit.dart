@@ -23,13 +23,13 @@ class TimetableCubit extends Cubit<TimetableState> {
     final eventTimetableRequest =
         _eventRepository.fetchTimetableForEventById(eventId);
     final timetableResponse = await eventTimetableRequest;
-    if (timetableResponse is SuccessResponse) {
-      final timetable = timetableResponse as SuccessResponse;
-      final timetableData = timetable.data as List<TimetableForScene>;
-      final timetableDataDtoList = timetableData
-          .map((model) => TimetableForSceneByDay.fromModel(model))
-          .toList();
-      emit(TimetableState.loaded(timetable: timetableDataDtoList));
-    }
+    timetableResponse.when(
+        success: (data) {
+          final timetableDataDtoList = data
+              .map((model) => TimetableForSceneByDay.fromModel(model))
+              .toList();
+          emit(TimetableState.loaded(timetable: timetableDataDtoList));
+        },
+        failure: (failure) {}); //TODO exception
   }
 }

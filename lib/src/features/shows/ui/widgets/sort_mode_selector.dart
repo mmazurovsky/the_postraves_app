@@ -10,7 +10,7 @@ import '../../../../common/constants/my_text_styles.dart';
 import '../../../../common/utils/screen_size.dart';
 import '../../../../common/widgets/selectors/modal_bottom_sheet_content.dart';
 import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
-import '../../state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
+import '../../state/view_switcher_cubit/view_switcher_cubit.dart';
 
 class SortModeSelector extends StatelessWidget {
   @override

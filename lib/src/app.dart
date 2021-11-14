@@ -20,7 +20,7 @@ import 'features/profile/state/following_cubit/following_cubit.dart';
 import 'features/profile/state/profile_cubit/profile_cubit.dart';
 import 'features/search/state/cubit/search_cubit.dart';
 import 'features/shows/state/shows_cubit/shows_cubit.dart';
-import 'features/shows/state/view_switcher_cubit/view_switcher_cubit_cubit.dart';
+import 'features/shows/state/view_switcher_cubit/view_switcher_cubit.dart';
 import 'features/timetable/timetable_cubit/timetable_cubit.dart';
 import 'initial_scaffold_resolver.dart';
 

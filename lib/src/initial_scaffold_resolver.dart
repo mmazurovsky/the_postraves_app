@@ -56,7 +56,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     widget.cityRepository.fetchCurrentCityFromLocal().then((value) {
       value.when(
           success: (data) {
-            final currentCityFromLocal = data as City?;
+            final currentCityFromLocal = data;
             if (currentCityFromLocal != null) {
               currentCityProvider.changeCurrentCity(currentCityFromLocal);
             }
@@ -69,8 +69,8 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     widget.cityRepository.fetchCitiesFromLocal().then((value) {
       value.when(
           success: (data) {
-            final citiesFromLocal = data as List<City>?;
-            if (citiesFromLocal != null && citiesFromLocal.isNotEmpty) {
+            final citiesFromLocal = data;
+            if (citiesFromLocal.isNotEmpty) {
               cityListProvider.changeCityList(citiesFromLocal, false);
               if (!cityListProvider.citiesFutureCompleter.isCompleted) {
                 cityListProvider.citiesFutureCompleter
@@ -84,8 +84,8 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     widget.cityRepository.fetchCitiesFromRemote().then((value) {
       value.when(
           success: (data) {
-            final citiesFromRemote = data as List<City>?;
-            if (citiesFromRemote != null && citiesFromRemote.isNotEmpty) {
+            final citiesFromRemote = data;
+            if (citiesFromRemote.isNotEmpty) {
               cityListProvider.changeCityList(citiesFromRemote, true);
               if (!cityListProvider.citiesFutureCompleter.isCompleted) {
                 cityListProvider.citiesFutureCompleter
@@ -102,9 +102,8 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     widget.countryRepository.fetchCountriesFromRemote().then((value) {
       value.when(
           success: (data) {
-            final countriesFromRemote = data as List<Country>?;
-            if (countriesFromRemote != null && countriesFromRemote.isNotEmpty) {
-              countryListProvider.changeCountryList(countriesFromRemote, true);
+            if (data.isNotEmpty) {
+              countryListProvider.changeCountryList(data, true);
             }
           },
           failure: (failure) {});

@@ -58,7 +58,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     //   final response =
     //       await _firebaseImageRepository.uploadUserImageFile(imageFile);
     //   imageLink = response;
-
     // }
 
     String? imageLink;
@@ -108,8 +107,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     bool? isFree;
     response.when(
       success: (data) {
-        final responseIsNicknameFree = data as bool;
-        isFree = responseIsNicknameFree;
+        isFree = data;
       },
       failure: (failure) {
         isFree = false; //TODO Exception: failure processing

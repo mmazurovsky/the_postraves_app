@@ -23,17 +23,15 @@ class UserFollowingDataSourceImpl<
   @override
   Future<List<SHORTFOLLOWABLE>> getFollowing(
       {required Map<String, String> httpHeaders}) async {
-    final decodedResponse =
-        await _localizedGetRequest(
+    final decodedResponse = await _localizedGetRequest(
       endpointWithPath:
           followableClientHelper.getEndpointAndPathForUserFollowing(),
       httpHeaders: httpHeaders,
     ) as List<dynamic>?;
 
-    return decodedResponse == null
-        ? []
-        : decodedResponse
-            .map((json) => followableClientHelper.deserializeFollowable(json))
-            .toList();
+    return decodedResponse
+            ?.map((json) => followableClientHelper.deserializeFollowable(json))
+            .toList() ??
+        [];
   }
 }
