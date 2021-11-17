@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:google_static_maps_controller/google_static_maps_controller.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/models/fulls/place_full.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/place_short.dart';
 
-import '../../../../common/constants/my_constants.dart';
 import '../../../../common/widgets/other/loading_container.dart';
-import '../../../../common/widgets/other/section_title.dart';
-import '../../../../common/widgets/other/short_event_card_item.dart';
 import '../../../../common/widgets/other/social_links_list.dart';
 import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
@@ -28,9 +24,6 @@ import '../widgets/followable_util.dart';
 import '../widgets/map_selector.dart';
 import '../widgets/slide_animation_wrapper.dart';
 import '../widgets/upcoming_events_section.dart';
-import '../widgets/wiki_expandable_text_description.dart';
-import '../widgets/wiki_subtitle.dart';
-import '../widgets/wiki_title.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';
 import 'wiki_canvas.dart';
@@ -44,7 +37,7 @@ class PlaceScreen extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return FollowableScreen<PlaceCubit, FollowCubit<PlaceFull>>(
+    return FollowableScreen<PlaceCubit, FollowCubit<PlaceFull, PlaceShort>>(
       _followableData,
       _PlaceStateManagement(_followableData),
     );
@@ -73,7 +66,7 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
     return BlocConsumer<PlaceCubit, PlaceState>(
       listener: (context, state) {
         if (state is PlaceLoadedState) {
-          context.read<FollowCubit<PlaceFull>>().defineFollowState(
+          context.read<FollowCubit<PlaceFull, PlaceShort>>().defineFollowState(
                 weeklyFollowers: state.place.weeklyFollowers,
                 overallFollowers: state.place.overallFollowers,
                 isFollowed: state.place.isFollowed,
@@ -99,7 +92,7 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
 class _PlaceContent extends StatefulWidget {
   final PlaceFull place;
   final List<EventShort> events;
-  final void Function<T extends GeneralFollowableInterface>(BuildContext, T)
+  final void Function<T extends GeneralFollowableInterface, S extends GeneralFollowableInterface>(BuildContext, T)
       onIsFollowedChange;
   const _PlaceContent({
     required this.place,
@@ -117,7 +110,7 @@ class _PlaceContentState extends State<_PlaceContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context.watch<FollowCubit<PlaceFull>>().state.isFollowed!;
+    _isFollowed = context.watch<FollowCubit<PlaceFull, PlaceShort>>().state.isFollowed!;
     super.didChangeDependencies();
   }
 

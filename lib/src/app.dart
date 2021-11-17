@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import 'package:the_postraves_package/followable/repository/locations_repository.dart';
 import 'common/configs/cities_cleaner.dart';
 import 'common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import 'common/configs/my_refresh_configuration.dart';
@@ -108,6 +109,7 @@ class AppState extends State<App> with WidgetsBindingObserver {
                   countryRepository: serviceLocator<CountryRepository>(),
                   cityRepository: serviceLocator<CityRepository>(),
                   authenticationBloc: serviceLocator<AuthenticationCubit>(),
+                  locationsRepository: serviceLocator<LocationsRepository>(),
                 ),
               ),
             ),

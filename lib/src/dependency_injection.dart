@@ -12,14 +12,16 @@ import 'package:the_postraves_package/client/request_wrapper.dart';
 import 'package:the_postraves_package/followable/cubit_related/complete_entities_loader.dart';
 import 'package:the_postraves_package/followable/data_sources/artist_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/event_remote_data_source.dart';
+import 'package:the_postraves_package/followable/data_sources/followable_remote_data_source.dart';
+import 'package:the_postraves_package/followable/data_sources/locations_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/place_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/unity_remote_data_source.dart';
-import 'package:the_postraves_package/followable/data_sources/wiki_remote_data_source.dart';
 import 'package:the_postraves_package/followable/repository/artist_repository.dart';
 import 'package:the_postraves_package/followable/repository/event_repository.dart';
+import 'package:the_postraves_package/followable/repository/followable_repository.dart';
+import 'package:the_postraves_package/followable/repository/locations_repository.dart';
 import 'package:the_postraves_package/followable/repository/place_repository.dart';
 import 'package:the_postraves_package/followable/repository/unity_repository.dart';
-import 'package:the_postraves_package/followable/repository/wiki_repository.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
 import 'package:the_postraves_package/models/fulls/event_full.dart';
 import 'package:the_postraves_package/models/fulls/place_full.dart';
@@ -42,9 +44,7 @@ import 'common/configs/dynamic_link_configurer.dart';
 import 'common/geo_repository/city_repository.dart';
 import 'common/geo_repository/country_repository.dart';
 import 'common/local_data_sources/city_local_data_source.dart';
-import 'common/local_data_sources/city_remote_data_source.dart';
 import 'common/local_data_sources/country_local_data_source.dart';
-import 'common/local_data_sources/country_remote_data_source.dart';
 import 'common/utils/network_info.dart';
 import 'common/utils/remote_request_wrapper.dart';
 import 'features/chart/data_sources/charts_remote_data_source.dart';
@@ -297,14 +297,8 @@ void setupServiceLocatorInjection() async {
 
   // Remote Data Source
 
-  serviceLocator.registerLazySingleton<CityRemoteDataSource>(
-    () => CityRemoteDataSourceImpl(
-      serviceLocator(),
-    ),
-  );
-
-  serviceLocator.registerLazySingleton<CountryRemoteDataSource>(
-    () => CountryRemoteDataSourceImpl(
+  serviceLocator.registerLazySingleton<LocationsRemoteDataSource>(
+    () => LocationsRemoteDataSourceImpl(
       serviceLocator(),
     ),
   );
@@ -338,8 +332,10 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
-  serviceLocator.registerLazySingleton<WikiRemoteDataSource<EventFull>>(
-    () => WikiRemoteDataSourceImpl<EventFull>(
+  serviceLocator
+      .registerLazySingleton<FollowableRemoteDataSource<EventFull, EventShort>>(
+    () => FollowableRemoteDataSourceImpl<EventFull, EventShort>(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
@@ -348,6 +344,7 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerLazySingleton<EventRemoteDataSource>(
     () => EventRemoteDataSourceImpl(
+      serviceLocator(),
       serviceLocator(),
     ),
   );
@@ -380,8 +377,10 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
-  serviceLocator.registerLazySingleton<WikiRemoteDataSource<ArtistFull>>(
-    () => WikiRemoteDataSourceImpl<ArtistFull>(
+  serviceLocator.registerLazySingleton<
+      FollowableRemoteDataSource<ArtistFull, ArtistShort>>(
+    () => FollowableRemoteDataSourceImpl<ArtistFull, ArtistShort>(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
@@ -394,8 +393,10 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
-  serviceLocator.registerLazySingleton<WikiRemoteDataSource<PlaceFull>>(
-    () => WikiRemoteDataSourceImpl<PlaceFull>(
+  serviceLocator
+      .registerLazySingleton<FollowableRemoteDataSource<PlaceFull, PlaceShort>>(
+    () => FollowableRemoteDataSourceImpl<PlaceFull, PlaceShort>(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
@@ -405,11 +406,14 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton<PlaceRemoteDataSource>(
     () => PlaceRemoteDataSourceImpl(
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
-  serviceLocator.registerLazySingleton<WikiRemoteDataSource<UnityFull>>(
-    () => WikiRemoteDataSourceImpl<UnityFull>(
+  serviceLocator
+      .registerLazySingleton<FollowableRemoteDataSource<UnityFull, UnityShort>>(
+    () => FollowableRemoteDataSourceImpl<UnityFull, UnityShort>(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
@@ -419,24 +423,35 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton<UnityRemoteDataSource>(
     () => UnityRemoteDataSourceImpl(
       serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<LocationsRemoteDataSource>(
+    () => LocationsRemoteDataSourceImpl(
+      serviceLocator(),
     ),
   );
 
   // Repository
 
+  serviceLocator.registerLazySingleton<LocationsRepository>(
+    () => LocationsRepositoryImpl(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
   serviceLocator.registerLazySingleton<CityRepository>(
     () => CityRepositoryImpl(
-      cityRemoteDataSource: serviceLocator(),
-      cityLocalDataSource: serviceLocator(),
-      remoteRequestWrapperListCity: serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<CountryRepository>(
     () => CountryRepositoryImpl(
-      countryRemoteDataSource: serviceLocator(),
-      countryLocalDataSource: serviceLocator(),
-      remoteRequestWrapperListCountry: serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -511,11 +526,13 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
-  serviceLocator.registerLazySingleton<FollowableRepository<EventFull>>(
-    () => FollowableRepositoryImpl<EventFull>(
-      wikiRemoteDataSource: serviceLocator(),
-      remoteRequestWrapper: serviceLocator(),
-      remoteRequestWrapperVoid: serviceLocator(),
+  serviceLocator
+      .registerLazySingleton<FollowableRepository<EventFull, EventShort>>(
+    () => FollowableRepositoryImpl<EventFull, EventShort>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -526,14 +543,17 @@ void setupServiceLocatorInjection() async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
-  serviceLocator.registerLazySingleton<FollowableRepository<ArtistFull>>(
-    () => FollowableRepositoryImpl<ArtistFull>(
-      wikiRemoteDataSource: serviceLocator(),
-      remoteRequestWrapper: serviceLocator(),
-      remoteRequestWrapperVoid: serviceLocator(),
+  serviceLocator
+      .registerLazySingleton<FollowableRepository<ArtistFull, ArtistShort>>(
+    () => FollowableRepositoryImpl<ArtistFull, ArtistShort>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -546,11 +566,13 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
-  serviceLocator.registerLazySingleton<FollowableRepository<PlaceFull>>(
-    () => FollowableRepositoryImpl<PlaceFull>(
-      wikiRemoteDataSource: serviceLocator(),
-      remoteRequestWrapper: serviceLocator(),
-      remoteRequestWrapperVoid: serviceLocator(),
+  serviceLocator
+      .registerLazySingleton<FollowableRepository<PlaceFull, PlaceShort>>(
+    () => FollowableRepositoryImpl<PlaceFull, PlaceShort>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -560,19 +582,23 @@ void setupServiceLocatorInjection() async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
-  serviceLocator.registerLazySingleton<FollowableRepository<UnityFull>>(
-    () => FollowableRepositoryImpl<UnityFull>(
-      wikiRemoteDataSource: serviceLocator(),
-      remoteRequestWrapper: serviceLocator(),
-      remoteRequestWrapperVoid: serviceLocator(),
+  serviceLocator
+      .registerLazySingleton<FollowableRepository<UnityFull, UnityShort>>(
+    () => FollowableRepositoryImpl<UnityFull, UnityShort>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<UnityRepository>(
     () => UnityRepositoryImpl(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
@@ -651,7 +677,7 @@ void setupServiceLocatorInjection() async {
   );
 
   serviceLocator.registerFactory(
-    () => FollowCubit<EventFull>(
+    () => FollowCubit<EventFull, EventShort>(
       serviceLocator(),
     ),
   );
@@ -663,7 +689,7 @@ void setupServiceLocatorInjection() async {
   );
 
   serviceLocator.registerFactory(
-    () => FollowCubit<ArtistFull>(
+    () => FollowCubit<ArtistFull, ArtistShort>(
       serviceLocator(),
     ),
   );
@@ -675,7 +701,7 @@ void setupServiceLocatorInjection() async {
   );
 
   serviceLocator.registerFactory(
-    () => FollowCubit<PlaceFull>(
+    () => FollowCubit<PlaceFull, PlaceShort>(
       serviceLocator(),
     ),
   );
@@ -692,7 +718,7 @@ void setupServiceLocatorInjection() async {
     ),
   );
   serviceLocator.registerFactory(
-    () => FollowCubit<UnityFull>(
+    () => FollowCubit<UnityFull, UnityShort>(
       serviceLocator(),
     ),
   );

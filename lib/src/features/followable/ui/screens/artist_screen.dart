@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
+import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import '../../../../common/widgets/other/loading_container.dart';
@@ -29,7 +30,7 @@ class ArtistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FollowableScreen<ArtistCubit, FollowCubit<ArtistFull>>(
+    return FollowableScreen<ArtistCubit, FollowCubit<ArtistFull, ArtistShort>>(
       _followableData,
       _ArtistStateManagement(_followableData),
     );
@@ -57,7 +58,7 @@ class _ArtistStateManagementState extends State<_ArtistStateManagement> {
     return BlocConsumer<ArtistCubit, ArtistState>(
       listener: (context, state) {
         if (state is ArtistLoadedState) {
-          context.read<FollowCubit<ArtistFull>>().defineFollowState(
+          context.read<FollowCubit<ArtistFull, ArtistShort>>().defineFollowState(
                 weeklyFollowers: state.artist.weeklyFollowers,
                 overallFollowers: state.artist.overallFollowers,
                 isFollowed: state.artist.isFollowed,
@@ -100,7 +101,7 @@ class _ArtistContentState extends State<_ArtistContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context.watch<FollowCubit<ArtistFull>>().state.isFollowed!;
+    _isFollowed = context.watch<FollowCubit<ArtistFull, ArtistShort>>().state.isFollowed!;
     super.didChangeDependencies();
   }
 

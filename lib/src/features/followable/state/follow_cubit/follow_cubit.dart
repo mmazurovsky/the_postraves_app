@@ -1,14 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_package/followable/repository/wiki_repository.dart';
+import 'package:the_postraves_package/followable/repository/followable_repository.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 
 part 'follow_state.dart';
 part 'follow_cubit.freezed.dart';
 
-class FollowCubit<T extends GeneralFollowableInterface>
+class FollowCubit<FULLFOLLOWABLE extends GeneralFollowableInterface,
+        SHORTFOLLOWABLE extends GeneralFollowableInterface>
     extends Cubit<FollowState> {
-  final FollowableRepository<T> _followableRepository;
+  final FollowableRepository<FULLFOLLOWABLE, SHORTFOLLOWABLE> _followableRepository;
   int? _weeklyFollowers;
   int? _overallFollowers;
   bool? _isFollowed;
@@ -29,7 +30,7 @@ class FollowCubit<T extends GeneralFollowableInterface>
         isFollowed: _isFollowed));
   }
 
-  void toggleFollow(T followable) {
+  void toggleFollow(FULLFOLLOWABLE followable) {
     if (_isFollowed!) {
       _isFollowed = false;
       _overallFollowers = _overallFollowers! - 1;

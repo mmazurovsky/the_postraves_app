@@ -36,7 +36,7 @@ class EventsList extends StatelessWidget {
                   loadedEvent: eventsByRating[i]),
               itemCount: eventsByRating.length,
             )
-          : EmptyShowsPlaceholder(),
+          : const SingleChildScrollView(child: EmptyShowsPlaceholder()),
     );
   }
 }

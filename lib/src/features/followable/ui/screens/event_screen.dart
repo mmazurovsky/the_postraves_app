@@ -9,6 +9,7 @@ import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import 'package:the_postraves_package/models/fulls/event_full.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
+import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
@@ -38,7 +39,7 @@ class EventScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FollowableScreen<EventCubit, FollowCubit<EventFull>>(
+    return FollowableScreen<EventCubit, FollowCubit<EventFull, EventShort>>(
       _followableData,
       _EventStateManagement(_followableData),
     );
@@ -69,7 +70,7 @@ class _EventStateManagementState extends State<_EventStateManagement> {
     return BlocConsumer<EventCubit, EventState>(
       listener: (context, state) {
         if (state is EventLoadedState) {
-          context.read<FollowCubit<EventFull>>().defineFollowState(
+          context.read<FollowCubit<EventFull, EventShort>>().defineFollowState(
                 weeklyFollowers: state.event.weeklyFollowers,
                 overallFollowers: state.event.overallFollowers,
                 isFollowed: state.event.isFollowed,
@@ -101,7 +102,7 @@ class _EventContent extends StatefulWidget {
   final List<ArtistShort> lineup;
   final List<TimetableForSceneByDay> timetable;
   final EventCubit eventBlocProvider;
-  final void Function<T extends GeneralFollowableInterface>(BuildContext, T)
+  final void Function<T extends GeneralFollowableInterface, S extends GeneralFollowableInterface>(BuildContext, T)
       onIsFollowedChange;
 
   const _EventContent({
@@ -123,7 +124,7 @@ class _EventContentState extends State<_EventContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context.watch<FollowCubit<EventFull>>().state.isFollowed!;
+    _isFollowed = context.watch<FollowCubit<EventFull, EventShort>>().state.isFollowed!;
     super.didChangeDependencies();
   }
 

@@ -1,10 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/followable/cubit_related/complete_entities_loader.dart';
 import 'package:the_postraves_package/followable/cubit_related/complete_full_entities.dart';
-import 'package:the_postraves_package/followable/repository/artist_repository.dart';
-import 'package:the_postraves_package/followable/repository/wiki_repository.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';

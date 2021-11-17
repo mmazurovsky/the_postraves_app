@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/followable/repository/locations_repository.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
-import 'package:the_postraves_package/models/geo/country.dart';
 
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'common/constants/my_text_styles.dart';
@@ -24,6 +24,7 @@ import 'common/navigation/navigation_scaffold.dart';
 class InitialScaffoldResolver extends StatefulWidget {
   final CityRepository cityRepository;
   final CountryRepository countryRepository;
+  final LocationsRepository locationsRepository;
   final AuthenticationCubit authenticationBloc;
 
   const InitialScaffoldResolver({
@@ -31,6 +32,7 @@ class InitialScaffoldResolver extends StatefulWidget {
     required this.cityRepository,
     required this.countryRepository,
     required this.authenticationBloc,
+    required this.locationsRepository,
   }) : super(key: key);
 
   @override
@@ -81,7 +83,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
           failure: (failure) {});
     });
 
-    widget.cityRepository.fetchCitiesFromRemote().then((value) {
+    widget.locationsRepository.fetchCitiesFromRemote().then((value) {
       value.when(
           success: (data) {
             final citiesFromRemote = data;
@@ -99,7 +101,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     CountryListProvider countryListProvider =
         context.read<CountryListProvider>();
 
-    widget.countryRepository.fetchCountriesFromRemote().then((value) {
+    widget.locationsRepository.fetchCountriesFromRemote().then((value) {
       value.when(
           success: (data) {
             if (data.isNotEmpty) {
@@ -115,9 +117,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     // check if there is current city in local storage or user is authenticated
     // and it has been assigned to current city
     City? currentCity = context.watch<CurrentCityProvider>().currentCity;
-    return currentCity == null
-        ? CityPickerScaffold()
-        : NavigationScaffold();
+    return currentCity == null ? CityPickerScaffold() : NavigationScaffold();
   }
 }
 

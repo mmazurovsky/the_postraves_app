@@ -121,24 +121,19 @@ class _ShowsScreenState extends State<ShowsScreen> {
           buildWhen: (previousState, currentState) =>
               currentState is! ShowsRefreshingState,
           builder: (context, state) {
-            if (state is ShowsLoadedByRatingState ||
-                state is ShowsLoadedByDateState) {
-              return MySlideAnimatedSwitcher(
-                child: state is ShowsLoadedByRatingState
-                    ? EventsList(
-                        eventsByRating: state.showsByRating,
-                        onRefresh: _onRefresh,
-                        refreshController: _refreshController1)
-                    : state is ShowsLoadedByDateState
-                        ? EventsByDateList(
-                            eventsByDate: state.showsByDate,
-                            onRefresh: _onRefresh,
-                            refreshController: _refreshController2)
-                        : Container(),
-              );
-            } else {
-              return LoadingContainer();
-            }
+            return MySlideAnimatedSwitcher(
+              child: state is ShowsLoadedByRatingState
+                  ? EventsList(
+                      eventsByRating: state.showsByRating,
+                      onRefresh: _onRefresh,
+                      refreshController: _refreshController1)
+                  : state is ShowsLoadedByDateState
+                      ? EventsByDateList(
+                          eventsByDate: state.showsByDate,
+                          onRefresh: _onRefresh,
+                          refreshController: _refreshController2)
+                      : LoadingContainer(),
+            );
           },
         ),
       ),

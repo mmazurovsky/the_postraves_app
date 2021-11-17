@@ -7,6 +7,7 @@ import 'package:the_postraves_package/models/fulls/unity_full.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/social_links_list.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
@@ -28,7 +29,7 @@ class UnityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FollowableScreen<UnityCubit, FollowCubit<UnityFull>>(
+    return FollowableScreen<UnityCubit, FollowCubit<UnityFull, UnityShort>>(
       _followableData,
       _UnityStateManagement(_followableData),
     );
@@ -56,7 +57,7 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
     return BlocConsumer<UnityCubit, UnityState>(
       listener: (context, state) {
         if (state is UnityLoadedState) {
-          context.read<FollowCubit<UnityFull>>().defineFollowState(
+          context.read<FollowCubit<UnityFull, UnityShort>>().defineFollowState(
                 weeklyFollowers: state.unity.weeklyFollowers,
                 overallFollowers: state.unity.overallFollowers,
                 isFollowed: state.unity.isFollowed,
@@ -84,7 +85,7 @@ class _UnityContent extends StatefulWidget {
   final UnityFull unity;
   final List<ArtistShort> artists;
   final List<EventShort> events;
-  final void Function<T extends GeneralFollowableInterface>(BuildContext, T)
+  final void Function<T extends GeneralFollowableInterface, S extends GeneralFollowableInterface>(BuildContext, T)
       onIsFollowedChange;
 
   const _UnityContent({
@@ -105,7 +106,7 @@ class _UnityContentState extends State<_UnityContent> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _isFollowed = context.watch<FollowCubit<UnityFull>>().state.isFollowed!;
+    _isFollowed = context.watch<FollowCubit<UnityFull, UnityShort>>().state.isFollowed!;
   }
 
   @override
