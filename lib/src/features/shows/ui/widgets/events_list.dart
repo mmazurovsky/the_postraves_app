@@ -26,15 +26,16 @@ class EventsList extends StatelessWidget {
       controller: refreshController,
       onRefresh: () => onRefresh(),
       child: eventsByRating.isNotEmpty
-          ? ListView.builder(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.only(
-                  top: 10,
-                  bottom: MyConstants.endingOfScreenOrSpaceBetweenElements),
-              itemBuilder: (context, i) => EventCard(
-                  key: ValueKey(eventsByRating[i].id),
-                  loadedEvent: eventsByRating[i]),
+          ? ListView.separated(
+              padding: const EdgeInsets.only(top: 15),
               itemCount: eventsByRating.length,
+              itemBuilder: (context, i) => EventCard(
+                key: ValueKey(eventsByRating[i].id),
+                loadedEvent: eventsByRating[i],
+              ),
+              separatorBuilder: (context, i) => const SizedBox(
+                height: MyConstants.endingOfScreenOrSpaceBetweenElements,
+              ),
             )
           : const SingleChildScrollView(child: EmptyShowsPlaceholder()),
     );

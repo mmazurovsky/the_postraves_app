@@ -22,7 +22,7 @@ import '../../../../common/widgets/other/column_of_custom_cards.dart';
 import '../widgets/coordinates_section.dart';
 import '../widgets/followable_util.dart';
 import '../widgets/map_selector.dart';
-import '../widgets/slide_animation_wrapper.dart';
+import '../../../../common/widgets/animations/slide_animation_wrapper.dart';
 import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';

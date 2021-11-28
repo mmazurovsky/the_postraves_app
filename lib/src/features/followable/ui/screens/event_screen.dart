@@ -27,7 +27,7 @@ import '../widgets/event_main_button.dart';
 import '../widgets/event_status_indicator.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
-import '../widgets/slide_animation_wrapper.dart';
+import '../../../../common/widgets/animations/slide_animation_wrapper.dart';
 import 'followable_screen.dart';
 
 class EventScreen extends StatelessWidget {

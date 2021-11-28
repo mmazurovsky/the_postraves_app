@@ -16,7 +16,7 @@ import '../../state/follow_cubit/follow_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
-import '../widgets/slide_animation_wrapper.dart';
+import '../../../../common/widgets/animations/slide_animation_wrapper.dart';
 import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';

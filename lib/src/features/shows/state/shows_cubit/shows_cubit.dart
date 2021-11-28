@@ -24,16 +24,16 @@ class ShowsCubit extends Cubit<ShowsState> {
     required this.showsRepository,
     required this.viewSwitcherBloc,
   }) : super(ShowsState.loading()) {
-    _viewSwitcherBlocSubscription =
-        viewSwitcherBloc.stream.listen((viewSwitcherState) {
-      if (viewSwitcherState is ByDateViewState) {
-        _currentView = ViewMode.SORT_BY_DATE;
-        showByDateView();
-      } else if (viewSwitcherState is ByRatingViewState) {
-        _currentView = ViewMode.SORT_BY_RATING;
-        showByRatingView();
-      }
-    });
+    // _viewSwitcherBlocSubscription =
+    //     viewSwitcherBloc.stream.listen((viewSwitcherState) {
+    //   if (viewSwitcherState is ByDateViewState) {
+    //     _currentView = ViewMode.SORT_BY_DATE;
+    //     showByDateView();
+    //   } else if (viewSwitcherState is ByRatingViewState) {
+    //     _currentView = ViewMode.SORT_BY_RATING;
+    //     showByRatingView();
+    //   }
+    // });
   }
 
   @override
@@ -43,30 +43,26 @@ class ShowsCubit extends Cubit<ShowsState> {
   }
 
   void fullyLoadShows(City currentCity) {
-    emit(ShowsState.loading());
+    emit(const ShowsState.loading());
     _loadShowsAndResolveView(currentCity);
   }
 
   void refreshShows(City currentCity) {
-    emit(ShowsState.refreshing());
+    emit(const ShowsState.refreshing());
     _loadShowsAndResolveView(currentCity);
   }
 
-  void showByDateView() {
-    emit(ShowsState.loadedByDate(_eventsByDate!));
-  }
+  // void showByDateView() {
+  //   emit(ShowsState.loadedByDate(_eventsByDate!));
+  // }
 
-  void showByRatingView() {
-    emit(ShowsState.loadedByRating(_eventsByRating!));
-  }
+  // void showByRatingView() {
+  //   emit(ShowsState.loaded(_eventsByRating!));
+  // }
 
   void _loadShowsAndResolveView(City currentCity) async {
     await _loadShowsFromRemote(currentCity);
-    if (_currentView == null || _currentView == ViewMode.SORT_BY_DATE) {
-      showByDateView();
-    } else {
-      showByRatingView();
-    }
+    emit(ShowsState.loaded(_eventsByRating!));
   }
 
   Future<void> _loadShowsFromRemote(City currentCity) async {

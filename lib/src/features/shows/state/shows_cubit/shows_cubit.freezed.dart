@@ -24,13 +24,7 @@ class _$ShowsStateTearOff {
     return const ShowsRefreshingState();
   }
 
-  ShowsLoadedByDateState loadedByDate(List<ShowsByDate> showsByDate) {
-    return ShowsLoadedByDateState(
-      showsByDate,
-    );
-  }
-
-  ShowsLoadedByRatingState loadedByRating(List<EventShort> showsByRating) {
+  ShowsLoadedByRatingState loaded(List<EventShort> showsByRating) {
     return ShowsLoadedByRatingState(
       showsByRating,
     );
@@ -50,8 +44,7 @@ mixin _$ShowsState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<ShowsByDate> showsByDate) loadedByDate,
-    required TResult Function(List<EventShort> showsByRating) loadedByRating,
+    required TResult Function(List<EventShort> showsByRating) loaded,
     required TResult Function() failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,8 +52,7 @@ mixin _$ShowsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<ShowsByDate> showsByDate)? loadedByDate,
-    TResult Function(List<EventShort> showsByRating)? loadedByRating,
+    TResult Function(List<EventShort> showsByRating)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) =>
@@ -69,8 +61,7 @@ mixin _$ShowsState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByDateState value) loadedByDate,
-    required TResult Function(ShowsLoadedByRatingState value) loadedByRating,
+    required TResult Function(ShowsLoadedByRatingState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -78,8 +69,7 @@ mixin _$ShowsState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByDateState value)? loadedByDate,
-    TResult Function(ShowsLoadedByRatingState value)? loadedByRating,
+    TResult Function(ShowsLoadedByRatingState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) =>
@@ -144,8 +134,7 @@ class _$ShowsLoadingState implements ShowsLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<ShowsByDate> showsByDate) loadedByDate,
-    required TResult Function(List<EventShort> showsByRating) loadedByRating,
+    required TResult Function(List<EventShort> showsByRating) loaded,
     required TResult Function() failure,
   }) {
     return loading();
@@ -156,8 +145,7 @@ class _$ShowsLoadingState implements ShowsLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<ShowsByDate> showsByDate)? loadedByDate,
-    TResult Function(List<EventShort> showsByRating)? loadedByRating,
+    TResult Function(List<EventShort> showsByRating)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -172,8 +160,7 @@ class _$ShowsLoadingState implements ShowsLoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByDateState value) loadedByDate,
-    required TResult Function(ShowsLoadedByRatingState value) loadedByRating,
+    required TResult Function(ShowsLoadedByRatingState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) {
     return loading(this);
@@ -184,8 +171,7 @@ class _$ShowsLoadingState implements ShowsLoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByDateState value)? loadedByDate,
-    TResult Function(ShowsLoadedByRatingState value)? loadedByRating,
+    TResult Function(ShowsLoadedByRatingState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) {
@@ -242,8 +228,7 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<ShowsByDate> showsByDate) loadedByDate,
-    required TResult Function(List<EventShort> showsByRating) loadedByRating,
+    required TResult Function(List<EventShort> showsByRating) loaded,
     required TResult Function() failure,
   }) {
     return refreshing();
@@ -254,8 +239,7 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<ShowsByDate> showsByDate)? loadedByDate,
-    TResult Function(List<EventShort> showsByRating)? loadedByRating,
+    TResult Function(List<EventShort> showsByRating)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -270,8 +254,7 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByDateState value) loadedByDate,
-    required TResult Function(ShowsLoadedByRatingState value) loadedByRating,
+    required TResult Function(ShowsLoadedByRatingState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) {
     return refreshing(this);
@@ -282,8 +265,7 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByDateState value)? loadedByDate,
-    TResult Function(ShowsLoadedByRatingState value)? loadedByRating,
+    TResult Function(ShowsLoadedByRatingState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) {
@@ -296,137 +278,6 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
 
 abstract class ShowsRefreshingState implements ShowsState {
   const factory ShowsRefreshingState() = _$ShowsRefreshingState;
-}
-
-/// @nodoc
-abstract class $ShowsLoadedByDateStateCopyWith<$Res> {
-  factory $ShowsLoadedByDateStateCopyWith(ShowsLoadedByDateState value,
-          $Res Function(ShowsLoadedByDateState) then) =
-      _$ShowsLoadedByDateStateCopyWithImpl<$Res>;
-  $Res call({List<ShowsByDate> showsByDate});
-}
-
-/// @nodoc
-class _$ShowsLoadedByDateStateCopyWithImpl<$Res>
-    extends _$ShowsStateCopyWithImpl<$Res>
-    implements $ShowsLoadedByDateStateCopyWith<$Res> {
-  _$ShowsLoadedByDateStateCopyWithImpl(ShowsLoadedByDateState _value,
-      $Res Function(ShowsLoadedByDateState) _then)
-      : super(_value, (v) => _then(v as ShowsLoadedByDateState));
-
-  @override
-  ShowsLoadedByDateState get _value => super._value as ShowsLoadedByDateState;
-
-  @override
-  $Res call({
-    Object? showsByDate = freezed,
-  }) {
-    return _then(ShowsLoadedByDateState(
-      showsByDate == freezed
-          ? _value.showsByDate
-          : showsByDate // ignore: cast_nullable_to_non_nullable
-              as List<ShowsByDate>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ShowsLoadedByDateState implements ShowsLoadedByDateState {
-  const _$ShowsLoadedByDateState(this.showsByDate);
-
-  @override
-  final List<ShowsByDate> showsByDate;
-
-  @override
-  String toString() {
-    return 'ShowsState.loadedByDate(showsByDate: $showsByDate)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ShowsLoadedByDateState &&
-            (identical(other.showsByDate, showsByDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.showsByDate, showsByDate)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(showsByDate);
-
-  @JsonKey(ignore: true)
-  @override
-  $ShowsLoadedByDateStateCopyWith<ShowsLoadedByDateState> get copyWith =>
-      _$ShowsLoadedByDateStateCopyWithImpl<ShowsLoadedByDateState>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() refreshing,
-    required TResult Function(List<ShowsByDate> showsByDate) loadedByDate,
-    required TResult Function(List<EventShort> showsByRating) loadedByRating,
-    required TResult Function() failure,
-  }) {
-    return loadedByDate(showsByDate);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? refreshing,
-    TResult Function(List<ShowsByDate> showsByDate)? loadedByDate,
-    TResult Function(List<EventShort> showsByRating)? loadedByRating,
-    TResult Function()? failure,
-    required TResult orElse(),
-  }) {
-    if (loadedByDate != null) {
-      return loadedByDate(showsByDate);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ShowsLoadingState value) loading,
-    required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByDateState value) loadedByDate,
-    required TResult Function(ShowsLoadedByRatingState value) loadedByRating,
-    required TResult Function(ShowsFailureState value) failure,
-  }) {
-    return loadedByDate(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ShowsLoadingState value)? loading,
-    TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByDateState value)? loadedByDate,
-    TResult Function(ShowsLoadedByRatingState value)? loadedByRating,
-    TResult Function(ShowsFailureState value)? failure,
-    required TResult orElse(),
-  }) {
-    if (loadedByDate != null) {
-      return loadedByDate(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ShowsLoadedByDateState implements ShowsState {
-  const factory ShowsLoadedByDateState(List<ShowsByDate> showsByDate) =
-      _$ShowsLoadedByDateState;
-
-  List<ShowsByDate> get showsByDate => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ShowsLoadedByDateStateCopyWith<ShowsLoadedByDateState> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -472,7 +323,7 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
 
   @override
   String toString() {
-    return 'ShowsState.loadedByRating(showsByRating: $showsByRating)';
+    return 'ShowsState.loaded(showsByRating: $showsByRating)';
   }
 
   @override
@@ -499,11 +350,10 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<ShowsByDate> showsByDate) loadedByDate,
-    required TResult Function(List<EventShort> showsByRating) loadedByRating,
+    required TResult Function(List<EventShort> showsByRating) loaded,
     required TResult Function() failure,
   }) {
-    return loadedByRating(showsByRating);
+    return loaded(showsByRating);
   }
 
   @override
@@ -511,13 +361,12 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<ShowsByDate> showsByDate)? loadedByDate,
-    TResult Function(List<EventShort> showsByRating)? loadedByRating,
+    TResult Function(List<EventShort> showsByRating)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
-    if (loadedByRating != null) {
-      return loadedByRating(showsByRating);
+    if (loaded != null) {
+      return loaded(showsByRating);
     }
     return orElse();
   }
@@ -527,11 +376,10 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByDateState value) loadedByDate,
-    required TResult Function(ShowsLoadedByRatingState value) loadedByRating,
+    required TResult Function(ShowsLoadedByRatingState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) {
-    return loadedByRating(this);
+    return loaded(this);
   }
 
   @override
@@ -539,13 +387,12 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByDateState value)? loadedByDate,
-    TResult Function(ShowsLoadedByRatingState value)? loadedByRating,
+    TResult Function(ShowsLoadedByRatingState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) {
-    if (loadedByRating != null) {
-      return loadedByRating(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
@@ -603,8 +450,7 @@ class _$ShowsFailureState implements ShowsFailureState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<ShowsByDate> showsByDate) loadedByDate,
-    required TResult Function(List<EventShort> showsByRating) loadedByRating,
+    required TResult Function(List<EventShort> showsByRating) loaded,
     required TResult Function() failure,
   }) {
     return failure();
@@ -615,8 +461,7 @@ class _$ShowsFailureState implements ShowsFailureState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<ShowsByDate> showsByDate)? loadedByDate,
-    TResult Function(List<EventShort> showsByRating)? loadedByRating,
+    TResult Function(List<EventShort> showsByRating)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -631,8 +476,7 @@ class _$ShowsFailureState implements ShowsFailureState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByDateState value) loadedByDate,
-    required TResult Function(ShowsLoadedByRatingState value) loadedByRating,
+    required TResult Function(ShowsLoadedByRatingState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) {
     return failure(this);
@@ -643,8 +487,7 @@ class _$ShowsFailureState implements ShowsFailureState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByDateState value)? loadedByDate,
-    TResult Function(ShowsLoadedByRatingState value)? loadedByRating,
+    TResult Function(ShowsLoadedByRatingState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) {

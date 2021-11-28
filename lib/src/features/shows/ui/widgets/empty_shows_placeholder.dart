@@ -9,21 +9,8 @@ import '../../../../common/constants/my_text_styles.dart';
 import '../../../../common/geo_provider/current_city_provider.dart';
 import '../../../../common/widgets/other/placeholder_container.dart';
 
-class EmptyShowsPlaceholder extends StatefulWidget {
+class EmptyShowsPlaceholder extends StatelessWidget {
   const EmptyShowsPlaceholder({Key? key}) : super(key: key);
-
-  @override
-  _EmptyShowsPlaceholderState createState() => _EmptyShowsPlaceholderState();
-}
-
-class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
-  late City _currentCity;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _currentCity = Provider.of<CurrentCityProvider>(context).currentCity!;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +20,10 @@ class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'emptyShowsText'.tr(args: [_currentCity.localName]) + ' ',
+              text: 'emptyShowsText'.tr(args: [
+                    context.read<CurrentCityProvider>().currentCity!.localName
+                  ]) +
+                  ' ',
               style: MyTextStyles.body,
             ),
             WidgetSpan(

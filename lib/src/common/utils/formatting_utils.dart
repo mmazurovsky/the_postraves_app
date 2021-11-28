@@ -180,6 +180,13 @@ class FormattingUtils {
     ]);
   }
 
+  static String getMonthAndYear(DateTime dateTime) {
+    return sprintf('%s — %i', [
+      getMonthName(month: dateTime.month).toUpperCase(),
+      dateTime.year,
+    ]);
+  }
+
   TicketPriceRange? getPriceRangeOfTickets(List<TicketPrice>? ticketPrices) {
     return ticketPrices?.isEmpty == null || ticketPrices?.isEmpty == true
         ? null
@@ -196,7 +203,7 @@ class FormattingUtils {
       ).toUpperCase(),
     ]);
   }
-  
+
   static String getFormattedTime(DateTime dateTime) {
     return sprintf('%02i:%02i', [
       dateTime.hour,
