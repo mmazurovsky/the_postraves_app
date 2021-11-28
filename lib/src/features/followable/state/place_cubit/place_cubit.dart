@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_package/followable/cubit_related/complete_entities_loader.dart';
-import 'package:the_postraves_package/followable/cubit_related/complete_full_entities.dart';
+import 'package:the_postraves_package/followable/complete_entities_loader/complete_entities_loader.dart';
+import 'package:the_postraves_package/followable/complete_entities_loader/complete_full_entities.dart';
 import 'package:the_postraves_package/models/fulls/place_full.dart';
 import 'package:the_postraves_package/models/related_to_place/scene.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';

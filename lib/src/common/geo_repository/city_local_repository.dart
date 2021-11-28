@@ -5,7 +5,7 @@ import 'package:the_postraves_package/models/geo/city.dart';
 
 import '../local_data_sources/city_local_data_source.dart';
 
-abstract class CityRepository {
+abstract class CityLocalRepository {
   Future<ResponseSealed<List<City>>> fetchCitiesFromLocal();
   Future<ResponseSealed<City?>> fetchCurrentCityFromLocal();
   Future<ResponseSealed<void>> saveCitiesToLocalAndDeletePrevious(
@@ -16,7 +16,7 @@ abstract class CityRepository {
   Future<ResponseSealed<void>> removeCitiesFromLocal();
 }
 
-class CityRepositoryImpl implements CityRepository {
+class CityRepositoryImpl implements CityLocalRepository {
   final CityLocalDataSource _cityLocalDataSource;
 
   CityRepositoryImpl(

@@ -5,14 +5,14 @@ import 'package:the_postraves_package/models/geo/country.dart';
 
 import '../local_data_sources/country_local_data_source.dart';
 
-abstract class CountryRepository {
+abstract class CountryLocalRepository {
   Future<ResponseSealed<List<Country>>> fetchCountriesFromLocal();
   Future<ResponseSealed<void>> saveCountriesToLocalAndDeletePrevious(
       List<Country> countries);
   Future<ResponseSealed<void>> removeCountriesFromLocal();
 }
 
-class CountryRepositoryImpl implements CountryRepository {
+class CountryRepositoryImpl implements CountryLocalRepository {
   final CountryLocalDataSource _countryLocalDataSource;
 
   CountryRepositoryImpl(

@@ -1,5 +1,4 @@
-import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
-import 'package:the_postraves_package/client/followable_client_helper.dart';
+import 'package:the_postraves_package/client/client_helper.dart';
 import 'package:the_postraves_package/client/localized_request.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
@@ -18,26 +17,23 @@ class ChartsRemoteDataSourceImpl<
         SHORTFOLLOWABLE extends GeneralFollowableInterface>
     implements ChartsRemoteDataSource<SHORTFOLLOWABLE> {
   final LocalizedGetRequest _localizedGetRequest;
-  final FollowableClientHelper<SHORTFOLLOWABLE> _followableClientHelper;
+  final ClientHelper<SHORTFOLLOWABLE> _clientHelper;
 
   ChartsRemoteDataSourceImpl(
     this._localizedGetRequest,
-    this._followableClientHelper,
+    this._clientHelper,
   );
 
   @override
   Future<List<SHORTFOLLOWABLE>> fetchWeeklyChart(
       {required City city, required Map<String, String> httpHeaders}) async {
     final response = await _localizedGetRequest(
-      endpointWithPath: _followableClientHelper.getEndpointForFollowable() +
-          '/public/weeklyRating',
+      endpointWithPath: _clientHelper.getEndpoint() + '/public/weeklyRating',
       queryParameters: {'cityName': city.name, 'maxQuantity': 50.toString()},
       httpHeaders: httpHeaders,
     ) as List<dynamic>?;
 
-    return response
-            ?.map((json) => _followableClientHelper.deserializeFollowable(json))
-            .toList() ??
+    return response?.map((json) => _clientHelper.deserialize(json)).toList() ??
         [];
   }
 
@@ -45,30 +41,26 @@ class ChartsRemoteDataSourceImpl<
   Future<List<SHORTFOLLOWABLE>> fetchOverallChart(
       {required City city, required Map<String, String> httpHeaders}) async {
     final response = await _localizedGetRequest(
-      endpointWithPath: _followableClientHelper.getEndpointForFollowable() +
-          '/public/overallRating',
+      endpointWithPath: _clientHelper.getEndpoint() + '/public/overallRating',
       queryParameters: {'cityName': city.name, 'maxQuantity': 50.toString()},
       httpHeaders: httpHeaders,
     ) as List<dynamic>?;
 
-    return response
-        ?.map((json) => _followableClientHelper.deserializeFollowable(json))
-        .toList() ?? [];
+    return response?.map((json) => _clientHelper.deserialize(json)).toList() ??
+        [];
   }
 
   @override
   Future<SHORTFOLLOWABLE?> fetchWeeklyBest(
       {required City city, required Map<String, String> httpHeaders}) async {
     final response = await _localizedGetRequest(
-      endpointWithPath: _followableClientHelper.getEndpointForFollowable() +
-          '/public/weeklyBest',
+      endpointWithPath: _clientHelper.getEndpoint() + '/public/weeklyBest',
       queryParameters: {'cityName': city.name},
       httpHeaders: httpHeaders,
     );
 
-    final weeklyBest = response != null
-        ? _followableClientHelper.deserializeFollowable(response)
-        : null;
+    final weeklyBest =
+        response != null ? _clientHelper.deserialize(response) : null;
     return weeklyBest;
   }
 }

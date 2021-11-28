@@ -1,5 +1,4 @@
-import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
-import 'package:the_postraves_package/client/followable_client_helper.dart';
+import 'package:the_postraves_package/client/client_helper.dart';
 import 'package:the_postraves_package/client/localized_request.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 
@@ -13,24 +12,23 @@ class UserFollowingDataSourceImpl<
         SHORTFOLLOWABLE extends GeneralFollowableInterface>
     implements UserFollowingDataSource<SHORTFOLLOWABLE> {
   final LocalizedGetRequest _localizedGetRequest;
-  final FollowableClientHelper<SHORTFOLLOWABLE> followableClientHelper;
+  final ClientHelper<SHORTFOLLOWABLE> clientHelper;
 
   UserFollowingDataSourceImpl(
     this._localizedGetRequest,
-    this.followableClientHelper,
+    this.clientHelper,
   );
 
   @override
   Future<List<SHORTFOLLOWABLE>> getFollowing(
       {required Map<String, String> httpHeaders}) async {
     final decodedResponse = await _localizedGetRequest(
-      endpointWithPath:
-          followableClientHelper.getEndpointAndPathForUserFollowing(),
+      endpointWithPath: clientHelper.getEndpointAndPathForUserFollowing(),
       httpHeaders: httpHeaders,
     ) as List<dynamic>?;
 
     return decodedResponse
-            ?.map((json) => followableClientHelper.deserializeFollowable(json))
+            ?.map((json) => clientHelper.deserialize(json))
             .toList() ??
         [];
   }

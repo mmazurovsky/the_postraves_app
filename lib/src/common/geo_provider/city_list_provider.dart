@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
-import '../geo_repository/city_repository.dart';
+import '../geo_repository/city_local_repository.dart';
 
 
 
 class CityListProvider extends ChangeNotifier {
-  final CityRepository _cityRepository;
+  final CityLocalRepository _cityRepository;
   List<City> _myCityList = [];
   final Completer<List<City>> _citiesCompleter = Completer();
 

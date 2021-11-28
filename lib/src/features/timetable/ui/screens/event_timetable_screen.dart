@@ -159,7 +159,7 @@ class _PerformancesForSceneState extends State<PerformancesForScene>
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SceneCardForTimetable(widget.timetableForSceneDto.scene),
+            SceneCardForTimetable(widget.timetableForSceneDto.scene!),
             const SizedBox(height: 17),
             ...widget.timetableForSceneDto.timetableDayPerformances
                 .map(
@@ -169,16 +169,16 @@ class _PerformancesForSceneState extends State<PerformancesForScene>
                       MyHorizontalPadding(
                         child: Text(
                           FormattingUtils.getFormattedDateLong(
-                            dateTime: dayPerformances.date,
+                            dateTime: dayPerformances.date!,
                           ),
                           style: MyTextStyles.sectionTitle,
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       ArtistPerformancesList(
                         dayPerformances.performances,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 )

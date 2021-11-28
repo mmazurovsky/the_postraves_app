@@ -30,7 +30,7 @@ class SceneCardForTimetable extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('scene'.tr(), style: MyTextStyles.cardSceneSubtitle),
-                SizedBox(height: 3),
+                const SizedBox(height: 3),
                 Text(scene.name.toUpperCase(),
                     style: MyTextStyles.cardSceneTitle),
               ],

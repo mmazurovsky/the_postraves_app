@@ -154,7 +154,7 @@ class FormattingUtils {
           '%s%s',
           [
             priceRangeOfTickets.minPrice.ceil(),
-            priceRangeOfTickets.currency.currencySymbol,
+            priceRangeOfTickets.currency.symbol,
           ],
         );
       }
@@ -163,7 +163,7 @@ class FormattingUtils {
         '${'from'.tr()} %s%s',
         [
           priceRangeOfTickets.minPrice.ceil(),
-          priceRangeOfTickets.currency.currencySymbol,
+          priceRangeOfTickets.currency.symbol,
         ],
       );
     }

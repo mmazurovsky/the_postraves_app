@@ -22,8 +22,13 @@ abstract class UserProfileDataSource {
 class UserProfileDataSourceImpl implements UserProfileDataSource {
   final RemoteRequest _remoteRequest;
   final LocalizedGetRequest _localizedGetRequest;
+  final ServerConstantsAbstract _serverConstantsAbstract;
 
-  UserProfileDataSourceImpl(this._remoteRequest, this._localizedGetRequest);
+  UserProfileDataSourceImpl(
+    this._remoteRequest,
+    this._localizedGetRequest,
+    this._serverConstantsAbstract,
+  );
 
   @override
   Future<UserProfile?> getUserAccount(
@@ -42,9 +47,10 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
       {required Map<String, String> httpHeaders,
       required UserProfileToWrite userAccountToCreate}) async {
     await _remoteRequest(
+      isHttps: _serverConstantsAbstract.isHttps,
       httpMethod: HttpMethod.post,
-      host: ServerConstants.apiHost,
-      hostPath: ServerConstants.apiPath,
+      host: _serverConstantsAbstract.apiHost,
+      hostPath: _serverConstantsAbstract.apiPath,
       endpointWithPath: FollowableType.USER.endpoint + '/public/myProfile',
       httpHeaders: httpHeaders,
       body: userAccountToCreate.toJson(),
@@ -56,8 +62,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   Future<bool> checkNicknameIsFree(
       {required Map<String, String> httpHeaders,
       required String nickname}) async {
-    dynamic decodedResponse =
-        await _localizedGetRequest(
+    dynamic decodedResponse = await _localizedGetRequest(
       endpointWithPath:
           FollowableType.USER.endpoint + '/public/nicknameCheck/$nickname',
       httpHeaders: httpHeaders,
@@ -71,9 +76,10 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
     required UserProfileToWrite updatedUserProfile,
   }) async {
     await _remoteRequest(
+      isHttps: _serverConstantsAbstract.isHttps,
       httpMethod: HttpMethod.put,
-      host: ServerConstants.apiHost,
-      hostPath: ServerConstants.apiPath,
+      host: _serverConstantsAbstract.apiHost,
+      hostPath: _serverConstantsAbstract.apiPath,
       endpointWithPath: FollowableType.USER.endpoint + '/myProfile',
       httpHeaders: httpHeaders,
       body: updatedUserProfile.toJson(),

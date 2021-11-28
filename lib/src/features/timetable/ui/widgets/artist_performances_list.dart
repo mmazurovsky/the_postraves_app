@@ -16,8 +16,8 @@ class ArtistPerformancesList extends StatelessWidget {
       children: _artistPerformances
           .map((performance) => ArtistPerformanceItem(
                 artists: performance.artists,
-                startingDateTime: performance.startingDateTime,
-                endingDateTime: performance.endingDateTime,
+                startingDateTime: performance.startingDateTime!,
+                endingDateTime: performance.endingDateTime!,
               ))
           .toList(),
     );

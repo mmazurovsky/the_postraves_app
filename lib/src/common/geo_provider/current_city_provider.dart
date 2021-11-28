@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import '../../features/profile/state/profile_cubit/profile_cubit.dart';
-import '../geo_repository/city_repository.dart';
+import '../geo_repository/city_local_repository.dart';
 
 class CurrentCityProvider extends ChangeNotifier {
-  final CityRepository _cityRepository;
+  final CityLocalRepository _cityRepository;
   final ProfileCubit _userProfileCubit;
   City? _myCurrentCity;
 

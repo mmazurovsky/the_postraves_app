@@ -5,21 +5,22 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:the_postraves_app/src/common/utils/localized_get_request.dart';
-import 'package:the_postraves_package/client/followable_client_helper.dart';
+import 'package:the_postraves_package/client/client_helper.dart';
 import 'package:the_postraves_package/client/localized_request.dart';
 import 'package:the_postraves_package/client/remote_request.dart';
 import 'package:the_postraves_package/client/request_wrapper.dart';
-import 'package:the_postraves_package/followable/cubit_related/complete_entities_loader.dart';
+import 'package:the_postraves_package/constants/server_constants.dart';
+import 'package:the_postraves_package/followable/complete_entities_loader/complete_entities_loader.dart';
 import 'package:the_postraves_package/followable/data_sources/artist_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/event_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/followable_remote_data_source.dart';
-import 'package:the_postraves_package/followable/data_sources/locations_remote_data_source.dart';
+import 'package:the_postraves_package/followable/data_sources/general_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/place_remote_data_source.dart';
 import 'package:the_postraves_package/followable/data_sources/unity_remote_data_source.dart';
 import 'package:the_postraves_package/followable/repository/artist_repository.dart';
 import 'package:the_postraves_package/followable/repository/event_repository.dart';
 import 'package:the_postraves_package/followable/repository/followable_repository.dart';
-import 'package:the_postraves_package/followable/repository/locations_repository.dart';
+import 'package:the_postraves_package/followable/repository/general_repository.dart';
 import 'package:the_postraves_package/followable/repository/place_repository.dart';
 import 'package:the_postraves_package/followable/repository/unity_repository.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
@@ -41,8 +42,8 @@ import 'package:the_postraves_package/service/firebase_image_repository_impl.dar
 import 'common/authentication/repository/firebase_auth_repository.dart';
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'common/configs/dynamic_link_configurer.dart';
-import 'common/geo_repository/city_repository.dart';
-import 'common/geo_repository/country_repository.dart';
+import 'common/geo_repository/city_local_repository.dart';
+import 'common/geo_repository/country_local_repository.dart';
 import 'common/local_data_sources/city_local_data_source.dart';
 import 'common/local_data_sources/country_local_data_source.dart';
 import 'common/utils/network_info.dart';
@@ -76,6 +77,10 @@ final serviceLocator = GetIt.instance;
 void setupServiceLocatorInjection() async {
   // Services
 
+  serviceLocator.registerLazySingleton<ServerConstantsAbstract>(
+    () => ServerConstantsProd(),
+  );
+
   serviceLocator.registerLazySingleton<DynamicLinkService>(
     () => DynamicLinkService(),
   );
@@ -105,6 +110,7 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton<LocalizedGetRequest>(
     () => LocalizedGetRequestImpl(
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -112,29 +118,35 @@ void setupServiceLocatorInjection() async {
     () => RemoteRequestImpl(),
   );
 
-  serviceLocator.registerLazySingleton<FollowableClientHelper<ArtistShort>>(
+  serviceLocator.registerLazySingleton<ClientHelper<ArtistShort>>(
     () => ArtistShortClientHelper(),
   );
-  serviceLocator.registerLazySingleton<FollowableClientHelper<ArtistFull>>(
+  serviceLocator.registerLazySingleton<ClientHelper<ArtistFull>>(
     () => ArtistFullClientHelper(),
   );
-  serviceLocator.registerLazySingleton<FollowableClientHelper<UnityShort>>(
+  serviceLocator.registerLazySingleton<ClientHelper<UnityShort>>(
     () => UnityShortClientHelper(),
   );
-  serviceLocator.registerLazySingleton<FollowableClientHelper<UnityFull>>(
+  serviceLocator.registerLazySingleton<ClientHelper<UnityFull>>(
     () => UnityFullClientHelper(),
   );
-  serviceLocator.registerLazySingleton<FollowableClientHelper<PlaceShort>>(
+  serviceLocator.registerLazySingleton<ClientHelper<PlaceShort>>(
     () => PlaceShortClientHelper(),
   );
-  serviceLocator.registerLazySingleton<FollowableClientHelper<PlaceFull>>(
+  serviceLocator.registerLazySingleton<ClientHelper<PlaceFull>>(
     () => PlaceFullClientHelper(),
   );
-  serviceLocator.registerLazySingleton<FollowableClientHelper<EventFull>>(
+  serviceLocator.registerLazySingleton<ClientHelper<EventFull>>(
     () => EventFullClientHelper(),
   );
-  serviceLocator.registerLazySingleton<FollowableClientHelper<EventShort>>(
+  serviceLocator.registerLazySingleton<ClientHelper<EventShort>>(
     () => EventShortClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<ClientHelper<Country>>(
+    () => CountryClientHelper(),
+  );
+  serviceLocator.registerLazySingleton<ClientHelper<City>>(
+    () => CityClientHelper(),
   );
 
   // Request Wrapper
@@ -297,14 +309,23 @@ void setupServiceLocatorInjection() async {
 
   // Remote Data Source
 
-  serviceLocator.registerLazySingleton<LocationsRemoteDataSource>(
-    () => LocationsRemoteDataSourceImpl(
+  serviceLocator.registerLazySingleton<GeneralRemoteDataSource<Country>>(
+    () => GeneralRemoteDataSourceImpl<Country>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<GeneralRemoteDataSource<City>>(
+    () => GeneralRemoteDataSourceImpl<City>(
+      serviceLocator(),
       serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<UserProfileDataSource>(
     () => UserProfileDataSourceImpl(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -339,11 +360,13 @@ void setupServiceLocatorInjection() async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<EventRemoteDataSource>(
     () => EventRemoteDataSourceImpl(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -384,6 +407,7 @@ void setupServiceLocatorInjection() async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -400,11 +424,13 @@ void setupServiceLocatorInjection() async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<PlaceRemoteDataSource>(
     () => PlaceRemoteDataSourceImpl(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -417,6 +443,7 @@ void setupServiceLocatorInjection() async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -424,32 +451,33 @@ void setupServiceLocatorInjection() async {
     () => UnityRemoteDataSourceImpl(
       serviceLocator(),
       serviceLocator(),
-    ),
-  );
-
-  serviceLocator.registerLazySingleton<LocationsRemoteDataSource>(
-    () => LocationsRemoteDataSourceImpl(
       serviceLocator(),
     ),
   );
 
   // Repository
 
-  serviceLocator.registerLazySingleton<LocationsRepository>(
-    () => LocationsRepositoryImpl(
-      serviceLocator(),
+  serviceLocator.registerLazySingleton<GeneralRepository<Country>>(
+    () => GeneralRepositoryImpl<Country>(
       serviceLocator(),
       serviceLocator(),
     ),
   );
 
-  serviceLocator.registerLazySingleton<CityRepository>(
+  serviceLocator.registerLazySingleton<GeneralRepository<City>>(
+    () => GeneralRepositoryImpl<City>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<CityLocalRepository>(
     () => CityRepositoryImpl(
       serviceLocator(),
     ),
   );
 
-  serviceLocator.registerLazySingleton<CountryRepository>(
+  serviceLocator.registerLazySingleton<CountryLocalRepository>(
     () => CountryRepositoryImpl(
       serviceLocator(),
     ),
@@ -471,7 +499,10 @@ void setupServiceLocatorInjection() async {
   );
 
   serviceLocator.registerLazySingleton<FirebaseImageRepository>(
-    () => FirebaseImageRepositoryImpl(serviceLocator()),
+    () => FirebaseImageRepositoryImpl(
+      serviceLocator(),
+      serviceLocator(),
+    ),
   );
 
   serviceLocator.registerLazySingleton<UserFollowingRepository<EventShort>>(

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_package/followable/cubit_related/complete_entities_loader.dart';
-import 'package:the_postraves_package/followable/cubit_related/complete_full_entities.dart';
+import 'package:the_postraves_package/followable/complete_entities_loader/complete_entities_loader.dart';
+import 'package:the_postraves_package/followable/complete_entities_loader/complete_full_entities.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
@@ -22,11 +22,8 @@ class ArtistCubit extends Cubit<ArtistState> {
       success: (data) {
         CompleteArtistEntity completeArtist = data;
         emit(
-          ArtistState.loaded(
-            completeArtist.artistFull,
-            completeArtist.unions,
-            completeArtist.events
-          ),
+          ArtistState.loaded(completeArtist.artistFull, completeArtist.unions,
+              completeArtist.events),
         );
       },
       failure: (failure) {}, //TODO Exception:

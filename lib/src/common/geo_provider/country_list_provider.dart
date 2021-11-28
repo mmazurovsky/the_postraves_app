@@ -1,9 +1,9 @@
 import 'package:the_postraves_package/models/geo/country.dart';
 
-import '../geo_repository/country_repository.dart';
+import '../geo_repository/country_local_repository.dart';
 
 class CountryListProvider {
-  final CountryRepository _countryRepository;
+  final CountryLocalRepository _countryRepository;
   List<Country> _myCountryList = [];
 
   CountryListProvider(

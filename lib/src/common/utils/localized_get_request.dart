@@ -7,9 +7,13 @@ import 'package:the_postraves_package/constants/server_constants.dart';
 
 class LocalizedGetRequestImpl implements LocalizedGetRequest {
   final RemoteRequest _remoteRequest;
+  final ServerConstantsAbstract _serverConstantsAbstract;
 
-  LocalizedGetRequestImpl(this._remoteRequest);
-  
+  LocalizedGetRequestImpl(
+    this._remoteRequest,
+    this._serverConstantsAbstract,
+  );
+
   @override
   Future<dynamic> call(
       {required String endpointWithPath,
@@ -21,9 +25,10 @@ class LocalizedGetRequestImpl implements LocalizedGetRequest {
     };
     queryParametersWithLanguageCode.addAll(queryParameters ?? {});
     return _remoteRequest(
+      isHttps: _serverConstantsAbstract.isHttps,
       httpMethod: HttpMethod.get,
-      host: ServerConstants.apiHost,
-      hostPath: ServerConstants.apiPath,
+      host: _serverConstantsAbstract.apiHost,
+      hostPath: _serverConstantsAbstract.apiPath,
       endpointWithPath: endpointWithPath,
       httpHeaders: httpHeaders,
       queryParameters: queryParametersWithLanguageCode,
