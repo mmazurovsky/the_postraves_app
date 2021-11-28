@@ -141,7 +141,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
                           eventsByDate: state.showsByDate,
                           onRefresh: _onRefresh,
                           refreshController: _refreshController2)
-                      : LoadingContainer(),
+                      : const LoadingContainer(),
             );
           },
         ),
