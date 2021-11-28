@@ -59,31 +59,30 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
         context.read<CurrentCityProvider>();
 
     widget.cityLocalRepository.fetchCurrentCityFromLocal().then((value) {
-      value.when(
-          success: (data) {
-            final currentCityFromLocal = data;
-            if (currentCityFromLocal != null) {
-              currentCityProvider.changeCurrentCity(currentCityFromLocal);
-            }
-          },
-          failure: (failure) => {}); //TODO Exception
+      value.when(success: (data) {
+        final currentCityFromLocal = data;
+        if (currentCityFromLocal != null) {
+          currentCityProvider.changeCurrentCity(currentCityFromLocal);
+        }
+      }, failure: (failure) {
+        widget.cityLocalRepository.removeCurrentCityFromLocal();
+      }); //TODO Exception
     });
 
     CityListProvider cityListProvider = context.read<CityListProvider>();
 
     widget.cityLocalRepository.fetchCitiesFromLocal().then((value) {
-      value.when(
-          success: (data) {
-            final citiesFromLocal = data;
-            if (citiesFromLocal.isNotEmpty) {
-              cityListProvider.changeCityList(citiesFromLocal, false);
-              if (!cityListProvider.citiesFutureCompleter.isCompleted) {
-                cityListProvider.citiesFutureCompleter
-                    .complete(citiesFromLocal);
-              }
-            }
-          },
-          failure: (failure) {});
+      value.when(success: (data) {
+        final citiesFromLocal = data;
+        if (citiesFromLocal.isNotEmpty) {
+          cityListProvider.changeCityList(citiesFromLocal, false);
+          if (!cityListProvider.citiesFutureCompleter.isCompleted) {
+            cityListProvider.citiesFutureCompleter.complete(citiesFromLocal);
+          }
+        }
+      }, failure: (failure) {
+        widget.cityLocalRepository.removeCitiesFromLocal();
+      });
     });
 
     widget.cityRemoteRepository.fetchAllFromRemote().then((value) {
@@ -111,7 +110,9 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
               countryListProvider.changeCountryList(data, true);
             }
           },
-          failure: (failure) {});
+          failure: (failure) {
+            
+          });
     });
   }
 

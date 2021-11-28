@@ -83,7 +83,6 @@ class WikiShareScreen extends StatelessWidget {
                       data: shareLink.toString(),
                       version: QrVersions.auto,
                       foregroundColor: MyColors.main,
-                      size: ScreenSize.width - 95,
                       padding: EdgeInsets.all(0),
                     ),
                     SizedBox(height: 15),
