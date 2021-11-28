@@ -46,6 +46,12 @@ class _ExtendedChartScreenState<T extends GeneralFollowableInterface>
   }
 
   @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {

@@ -32,6 +32,7 @@ class ShowsScreen extends StatefulWidget {
 class _ShowsScreenState extends State<ShowsScreen> {
   late RefreshController _refreshController1;
   late RefreshController _refreshController2;
+  final ScrollController _scrollController = TabItem.shows.tabScrollController;
   City? _currentCity;
   List<City>? _cities;
 
@@ -40,6 +41,14 @@ class _ShowsScreenState extends State<ShowsScreen> {
     super.initState();
     _refreshController1 = RefreshController();
     _refreshController2 = RefreshController();
+  }
+
+  @override
+  void dispose() {
+    _refreshController1.dispose();
+    _refreshController2.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -61,7 +70,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: NestedScrollView(
-        controller: TabItem.shows.tabScrollController,
+        controller: _scrollController,
         physics: BouncingScrollPhysics(),
         // BUG! wtf it is so glithy
         // floatHeaderSlivers: true,

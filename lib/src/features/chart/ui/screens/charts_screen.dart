@@ -33,6 +33,7 @@ class ChartsScreen extends StatefulWidget {
 class _ChartsScreenState extends State<ChartsScreen>
     with TickerProviderStateMixin {
   late final RefreshController _refreshController;
+  final ScrollController _scrollController = TabItem.search.tabScrollController;
   City? _currentCity;
 
   void _onRefresh() {
@@ -43,6 +44,13 @@ class _ChartsScreenState extends State<ChartsScreen>
   void initState() {
     super.initState();
     _refreshController = RefreshController();
+  }
+
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -58,7 +66,7 @@ class _ChartsScreenState extends State<ChartsScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: NestedScrollView(
-        controller: TabItem.search.tabScrollController,
+        controller: _scrollController,
         physics: const BouncingScrollPhysics(),
         headerSliverBuilder: (context, value) {
           return [

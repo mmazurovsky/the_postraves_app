@@ -19,7 +19,6 @@ import '../../state/profile_cubit/profile_cubit.dart';
 import '../widgets/nickname_text_field.dart';
 import '../widgets/profile_image_chooser.dart';
 
-
 class ModifyProfileScreen extends StatefulWidget {
   // final Image? _profileImage;
   ModifyProfileScreen(
@@ -83,6 +82,9 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
   @override
   void dispose() {
     _nicknameEditingController.dispose();
+    _instagramEditingController.dispose();
+    _telegramEditingController.dispose();
+    _aboutEditingController.dispose();
     super.dispose();
   }
 

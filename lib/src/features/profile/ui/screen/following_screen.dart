@@ -43,6 +43,12 @@ class _FollowingScreenState extends State<FollowingScreen>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _tabNames = [
@@ -178,8 +184,7 @@ class _FollowableTabBarView<T extends GeneralFollowableInterface>
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text:
-                          'notFollowingEntity'.tr(args: [_entityName]),
+                      text: 'notFollowingEntity'.tr(args: [_entityName]),
                       style: MyTextStyles.body,
                     ),
                   ],

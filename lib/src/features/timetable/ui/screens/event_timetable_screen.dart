@@ -47,6 +47,15 @@ class _EventTimetableScreenState extends State<EventTimetableScreen>
         widget.initialTimetable.length, (i) => RefreshController());
   }
 
+  @override
+  void dispose() {
+    for (var element in _refreshControllers) {
+      element.dispose();
+    }
+    _tabController.dispose();
+    super.dispose();
+  }
+
   void _onRefresh() {
     BlocProvider.of<TimetableCubit>(context).refreshTimetable(widget.eventId);
   }

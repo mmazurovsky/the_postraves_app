@@ -37,6 +37,12 @@ class _WikiCanvasState extends State<WikiCanvas> {
     _scrollController = widget.scrollController ?? ScrollController();
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   Future<Uri> _setShareLinkToPage() async {
     final imageDimensions = widget.followableData.imageDimensions;
     String _pathToPage =

@@ -81,6 +81,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void dispose() {
     _textEditingController?.dispose();
     _searchTabFocusNode?.dispose();
+    _searchFieldTimer?.cancel();
     super.dispose();
   }
 
