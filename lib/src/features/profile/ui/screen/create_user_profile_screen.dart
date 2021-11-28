@@ -25,7 +25,6 @@ import '../../state/profile_cubit/profile_cubit.dart';
 import '../widgets/nickname_text_field.dart';
 import '../widgets/profile_image_chooser.dart';
 
-
 class CreateUserProfileScreen extends StatefulWidget {
   final bool isPoppable;
   final UserProfileRepository userProfileRepository;
@@ -56,18 +55,16 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
     _formKey = GlobalKey<FormState>();
   }
 
-  
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _buttonText = 'profileCreationCreate'.tr();
-    _userCity =
-        context.watch<CurrentCityProvider>().currentCity!;
+    _userCity = context.watch<CurrentCityProvider>().currentCity!;
   }
 
   @override
   void dispose() {
+    _nicknameFieldFocusNode.dispose();
     _nicknameEditingController.dispose();
     super.dispose();
   }
@@ -197,8 +194,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                           _unfocusTextFields();
                           if (_formKey.currentState!.validate()) {
                             setState(() {
-                              _buttonText =
-                                  'loading'.tr();
+                              _buttonText = 'loading'.tr();
                             });
                             BlocProvider.of<ProfileCubit>(context)
                                 .createUserProfile(_pickedImageAsFile,

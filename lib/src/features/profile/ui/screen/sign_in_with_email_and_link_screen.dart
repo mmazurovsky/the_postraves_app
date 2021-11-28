@@ -38,6 +38,7 @@ class _SignInWithEmailAndLinkScreenState
   @override
   void dispose() {
     _emailController.dispose();
+    _emailFocusNode.dispose();
     super.dispose();
   }
 
@@ -161,8 +162,7 @@ class LinkSentDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding:
-          EdgeInsets.symmetric(horizontal: 15.0, vertical: 24.0), 
+      insetPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 24.0),
       backgroundColor: MyColors.bottomNavBar,
       elevation: 2,
       child: Padding(
@@ -190,7 +190,7 @@ class LinkSentDialog extends StatelessWidget {
                 height: 30,
                 alignment: Alignment.center,
                 child: Text(
-                  'ok'.tr(), 
+                  'ok'.tr(),
                   style: MyTextStyles.bodyWithAccentColor,
                 ),
               ),

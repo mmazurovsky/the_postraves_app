@@ -85,6 +85,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
     _instagramEditingController.dispose();
     _telegramEditingController.dispose();
     _aboutEditingController.dispose();
+    _nicknameFieldFocusNode.dispose();
     super.dispose();
   }
 
