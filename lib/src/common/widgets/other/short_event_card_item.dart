@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/common/widgets/other/darkened_image_in_container.dart';
+import 'darkened_image_in_container.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';

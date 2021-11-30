@@ -3,7 +3,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/service/open_link_service.dart';
 import '../../../../common/constants/my_constants.dart';

@@ -2,7 +2,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import '../../../../common/utils/followable_type_utils.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
 import 'package:the_postraves_package/models/geo/country.dart';

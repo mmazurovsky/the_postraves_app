@@ -1,8 +1,8 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_postraves_app/src/common/authentication/repository/firebase_auth_repository.dart';
-import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import '../authentication/repository/firebase_auth_repository.dart';
+import '../authentication/state/cubit/authentication_cubit.dart';
 import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../geo_provider/current_tab_provider.dart';
 import '../../dependency_injection.dart';

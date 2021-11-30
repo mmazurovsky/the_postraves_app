@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/common/data/unified_search_model.dart';
+import '../../../common/data/unified_search_model.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import '../../../common/constants/my_constants.dart';
 import '../../../common/widgets/entity_presentation/unified_followable_with_type_data.dart';

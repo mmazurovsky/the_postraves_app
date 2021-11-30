@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
-import 'package:the_postraves_app/src/common/widgets/animations/my_slide_animated_switcher.dart';
-import 'package:the_postraves_app/src/common/widgets/other/loading_container.dart';
-import 'package:the_postraves_app/src/features/profile/ui/screen/create_user_profile_screen.dart';
-import 'package:the_postraves_app/src/features/profile/ui/screen/profile_screen.dart';
-import 'package:the_postraves_app/src/features/profile/ui/screen/sign_in_methods_screen.dart';
+import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
+import '../../../../common/widgets/animations/my_slide_animated_switcher.dart';
+import '../../../../common/widgets/other/loading_container.dart';
+import 'create_user_profile_screen.dart';
+import 'profile_screen.dart';
+import 'sign_in_methods_screen.dart';
 
 import '../../../../dependency_injection.dart';
 
