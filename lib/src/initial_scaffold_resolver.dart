@@ -123,7 +123,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     City? currentCity = context.watch<CurrentCityProvider>().currentCity;
     return currentCity == null
         ? const CityPickerScaffold()
-        : NavigationScaffold();
+        : const NavigationScaffold();
   }
 }
 

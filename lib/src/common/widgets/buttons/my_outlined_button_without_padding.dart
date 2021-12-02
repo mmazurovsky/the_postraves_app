@@ -13,7 +13,7 @@ class MyOutlinedButtonWithoutPadding extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final double contentHorizontalPadding;
   final double? distanceBetweenLeadingAndText;
-  final double width;
+  final double? width;
 
   const MyOutlinedButtonWithoutPadding({
     Key? key,
@@ -26,7 +26,7 @@ class MyOutlinedButtonWithoutPadding extends StatelessWidget {
     this.leadingIcon,
     this.trailingIcon,
     this.contentHorizontalPadding = 0,
-    this.width = double.infinity,
+    this.width,
   }) : super(key: key);
 
   @override

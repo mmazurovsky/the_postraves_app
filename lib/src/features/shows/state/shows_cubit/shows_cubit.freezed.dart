@@ -24,9 +24,9 @@ class _$ShowsStateTearOff {
     return const ShowsRefreshingState();
   }
 
-  ShowsLoadedByRatingState loaded(List<EventShort> showsByRating) {
-    return ShowsLoadedByRatingState(
-      showsByRating,
+  ShowsLoadedState loaded(List<EventShort> shows) {
+    return ShowsLoadedState(
+      shows,
     );
   }
 
@@ -44,7 +44,7 @@ mixin _$ShowsState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<EventShort> showsByRating) loaded,
+    required TResult Function(List<EventShort> shows) loaded,
     required TResult Function() failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ mixin _$ShowsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<EventShort> showsByRating)? loaded,
+    TResult Function(List<EventShort> shows)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) =>
@@ -61,7 +61,7 @@ mixin _$ShowsState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByRatingState value) loaded,
+    required TResult Function(ShowsLoadedState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -69,7 +69,7 @@ mixin _$ShowsState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByRatingState value)? loaded,
+    TResult Function(ShowsLoadedState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) =>
@@ -134,7 +134,7 @@ class _$ShowsLoadingState implements ShowsLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<EventShort> showsByRating) loaded,
+    required TResult Function(List<EventShort> shows) loaded,
     required TResult Function() failure,
   }) {
     return loading();
@@ -145,7 +145,7 @@ class _$ShowsLoadingState implements ShowsLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<EventShort> showsByRating)? loaded,
+    TResult Function(List<EventShort> shows)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -160,7 +160,7 @@ class _$ShowsLoadingState implements ShowsLoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByRatingState value) loaded,
+    required TResult Function(ShowsLoadedState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) {
     return loading(this);
@@ -171,7 +171,7 @@ class _$ShowsLoadingState implements ShowsLoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByRatingState value)? loaded,
+    TResult Function(ShowsLoadedState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) {
@@ -228,7 +228,7 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<EventShort> showsByRating) loaded,
+    required TResult Function(List<EventShort> shows) loaded,
     required TResult Function() failure,
   }) {
     return refreshing();
@@ -239,7 +239,7 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<EventShort> showsByRating)? loaded,
+    TResult Function(List<EventShort> shows)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -254,7 +254,7 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByRatingState value) loaded,
+    required TResult Function(ShowsLoadedState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) {
     return refreshing(this);
@@ -265,7 +265,7 @@ class _$ShowsRefreshingState implements ShowsRefreshingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByRatingState value)? loaded,
+    TResult Function(ShowsLoadedState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) {
@@ -281,33 +281,32 @@ abstract class ShowsRefreshingState implements ShowsState {
 }
 
 /// @nodoc
-abstract class $ShowsLoadedByRatingStateCopyWith<$Res> {
-  factory $ShowsLoadedByRatingStateCopyWith(ShowsLoadedByRatingState value,
-          $Res Function(ShowsLoadedByRatingState) then) =
-      _$ShowsLoadedByRatingStateCopyWithImpl<$Res>;
-  $Res call({List<EventShort> showsByRating});
+abstract class $ShowsLoadedStateCopyWith<$Res> {
+  factory $ShowsLoadedStateCopyWith(
+          ShowsLoadedState value, $Res Function(ShowsLoadedState) then) =
+      _$ShowsLoadedStateCopyWithImpl<$Res>;
+  $Res call({List<EventShort> shows});
 }
 
 /// @nodoc
-class _$ShowsLoadedByRatingStateCopyWithImpl<$Res>
+class _$ShowsLoadedStateCopyWithImpl<$Res>
     extends _$ShowsStateCopyWithImpl<$Res>
-    implements $ShowsLoadedByRatingStateCopyWith<$Res> {
-  _$ShowsLoadedByRatingStateCopyWithImpl(ShowsLoadedByRatingState _value,
-      $Res Function(ShowsLoadedByRatingState) _then)
-      : super(_value, (v) => _then(v as ShowsLoadedByRatingState));
+    implements $ShowsLoadedStateCopyWith<$Res> {
+  _$ShowsLoadedStateCopyWithImpl(
+      ShowsLoadedState _value, $Res Function(ShowsLoadedState) _then)
+      : super(_value, (v) => _then(v as ShowsLoadedState));
 
   @override
-  ShowsLoadedByRatingState get _value =>
-      super._value as ShowsLoadedByRatingState;
+  ShowsLoadedState get _value => super._value as ShowsLoadedState;
 
   @override
   $Res call({
-    Object? showsByRating = freezed,
+    Object? shows = freezed,
   }) {
-    return _then(ShowsLoadedByRatingState(
-      showsByRating == freezed
-          ? _value.showsByRating
-          : showsByRating // ignore: cast_nullable_to_non_nullable
+    return _then(ShowsLoadedState(
+      shows == freezed
+          ? _value.shows
+          : shows // ignore: cast_nullable_to_non_nullable
               as List<EventShort>,
     ));
   }
@@ -315,45 +314,43 @@ class _$ShowsLoadedByRatingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
-  const _$ShowsLoadedByRatingState(this.showsByRating);
+class _$ShowsLoadedState implements ShowsLoadedState {
+  const _$ShowsLoadedState(this.shows);
 
   @override
-  final List<EventShort> showsByRating;
+  final List<EventShort> shows;
 
   @override
   String toString() {
-    return 'ShowsState.loaded(showsByRating: $showsByRating)';
+    return 'ShowsState.loaded(shows: $shows)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ShowsLoadedByRatingState &&
-            (identical(other.showsByRating, showsByRating) ||
-                const DeepCollectionEquality()
-                    .equals(other.showsByRating, showsByRating)));
+        (other is ShowsLoadedState &&
+            (identical(other.shows, shows) ||
+                const DeepCollectionEquality().equals(other.shows, shows)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(showsByRating);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(shows);
 
   @JsonKey(ignore: true)
   @override
-  $ShowsLoadedByRatingStateCopyWith<ShowsLoadedByRatingState> get copyWith =>
-      _$ShowsLoadedByRatingStateCopyWithImpl<ShowsLoadedByRatingState>(
-          this, _$identity);
+  $ShowsLoadedStateCopyWith<ShowsLoadedState> get copyWith =>
+      _$ShowsLoadedStateCopyWithImpl<ShowsLoadedState>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<EventShort> showsByRating) loaded,
+    required TResult Function(List<EventShort> shows) loaded,
     required TResult Function() failure,
   }) {
-    return loaded(showsByRating);
+    return loaded(shows);
   }
 
   @override
@@ -361,12 +358,12 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<EventShort> showsByRating)? loaded,
+    TResult Function(List<EventShort> shows)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(showsByRating);
+      return loaded(shows);
     }
     return orElse();
   }
@@ -376,7 +373,7 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByRatingState value) loaded,
+    required TResult Function(ShowsLoadedState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) {
     return loaded(this);
@@ -387,7 +384,7 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByRatingState value)? loaded,
+    TResult Function(ShowsLoadedState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) {
@@ -398,13 +395,12 @@ class _$ShowsLoadedByRatingState implements ShowsLoadedByRatingState {
   }
 }
 
-abstract class ShowsLoadedByRatingState implements ShowsState {
-  const factory ShowsLoadedByRatingState(List<EventShort> showsByRating) =
-      _$ShowsLoadedByRatingState;
+abstract class ShowsLoadedState implements ShowsState {
+  const factory ShowsLoadedState(List<EventShort> shows) = _$ShowsLoadedState;
 
-  List<EventShort> get showsByRating => throw _privateConstructorUsedError;
+  List<EventShort> get shows => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ShowsLoadedByRatingStateCopyWith<ShowsLoadedByRatingState> get copyWith =>
+  $ShowsLoadedStateCopyWith<ShowsLoadedState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -450,7 +446,7 @@ class _$ShowsFailureState implements ShowsFailureState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() refreshing,
-    required TResult Function(List<EventShort> showsByRating) loaded,
+    required TResult Function(List<EventShort> shows) loaded,
     required TResult Function() failure,
   }) {
     return failure();
@@ -461,7 +457,7 @@ class _$ShowsFailureState implements ShowsFailureState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? refreshing,
-    TResult Function(List<EventShort> showsByRating)? loaded,
+    TResult Function(List<EventShort> shows)? loaded,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -476,7 +472,7 @@ class _$ShowsFailureState implements ShowsFailureState {
   TResult map<TResult extends Object?>({
     required TResult Function(ShowsLoadingState value) loading,
     required TResult Function(ShowsRefreshingState value) refreshing,
-    required TResult Function(ShowsLoadedByRatingState value) loaded,
+    required TResult Function(ShowsLoadedState value) loaded,
     required TResult Function(ShowsFailureState value) failure,
   }) {
     return failure(this);
@@ -487,7 +483,7 @@ class _$ShowsFailureState implements ShowsFailureState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ShowsLoadingState value)? loading,
     TResult Function(ShowsRefreshingState value)? refreshing,
-    TResult Function(ShowsLoadedByRatingState value)? loaded,
+    TResult Function(ShowsLoadedState value)? loaded,
     TResult Function(ShowsFailureState value)? failure,
     required TResult orElse(),
   }) {

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
 import '../../../../common/data/view_mode.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
@@ -15,6 +16,7 @@ part 'shows_cubit.freezed.dart';
 class ShowsCubit extends Cubit<ShowsState> {
   final ShowsRepository showsRepository;
   final ViewSwitcherCubit viewSwitcherBloc;
+  final DateTimeFilterChangeNotifier dateFilterChangeNotifier;
   late StreamSubscription _viewSwitcherBlocSubscription;
   List<EventShort>? _eventsByRating;
   List<ShowsByDate>? _eventsByDate;
@@ -23,7 +25,8 @@ class ShowsCubit extends Cubit<ShowsState> {
   ShowsCubit({
     required this.showsRepository,
     required this.viewSwitcherBloc,
-  }) : super(ShowsState.loading()) {
+    required this.dateFilterChangeNotifier,
+  }) : super(const ShowsState.loading()) {
     // _viewSwitcherBlocSubscription =
     //     viewSwitcherBloc.stream.listen((viewSwitcherState) {
     //   if (viewSwitcherState is ByDateViewState) {
@@ -62,6 +65,35 @@ class ShowsCubit extends Cubit<ShowsState> {
 
   void _loadShowsAndResolveView(City currentCity) async {
     await _loadShowsFromRemote(currentCity);
+    emit(ShowsState.loaded(_eventsByRating!));
+  }
+
+  void loadFilteredShows() {
+    final startDate = dateFilterChangeNotifier.startDateTimeWithTimezone;
+    late DateTime endDate;
+    List<EventShort> eventsFiltered = [];
+    if (_eventsByRating != null && startDate != null) {
+      emit(const ShowsState.loading());
+      if (dateFilterChangeNotifier.endDateTimeWithTimezone != null) {
+        endDate =
+            dateFilterChangeNotifier.endDateTimeWithTimezone!.add(const Duration(days: 1));
+      } else {
+        endDate = startDate.add(const Duration(days: 1));
+      }
+      eventsFiltered = _eventsByRating!
+          .where((e) =>
+              (e.startDateTime.isAtSameMomentAs(startDate) ||
+                  e.startDateTime.isAfter(startDate)) &&
+              e.startDateTime.isBefore(endDate))
+          .toList();
+      dateFilterChangeNotifier.applyFilter();
+      emit(ShowsState.loaded(eventsFiltered));
+    }
+  }
+
+  void dropFilter() {
+    emit(const ShowsState.loading());
+    dateFilterChangeNotifier.dropFilter();
     emit(ShowsState.loaded(_eventsByRating!));
   }
 

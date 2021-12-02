@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/followable/repository/general_repository.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
@@ -79,15 +80,15 @@ class AppState extends State<App> with WidgetsBindingObserver {
             create: (_) => CurrentTabProvider(TabItem.shows),
           ),
           ChangeNotifierProvider(
-            create: (_) => CurrentCityProvider(
-              serviceLocator<CityLocalRepository>(),
-              serviceLocator<ProfileCubit>(),
-            ),
+            create: (_) => serviceLocator<CurrentCityProvider>(),
           ),
           ChangeNotifierProvider(
             create: (_) => CityListProvider(
               serviceLocator<CityLocalRepository>(),
             ),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => serviceLocator<DateTimeFilterChangeNotifier>(),
           ),
           Provider(
             create: (_) => CountryListProvider(
@@ -107,7 +108,8 @@ class AppState extends State<App> with WidgetsBindingObserver {
                     .currentState!
                     .maybePop(),
                 child: InitialScaffoldResolver(
-                  countryLocalRepository: serviceLocator<CountryLocalRepository>(),
+                  countryLocalRepository:
+                      serviceLocator<CountryLocalRepository>(),
                   cityLocalRepository: serviceLocator<CityLocalRepository>(),
                   authenticationBloc: serviceLocator<AuthenticationCubit>(),
                   cityRemoteRepository:

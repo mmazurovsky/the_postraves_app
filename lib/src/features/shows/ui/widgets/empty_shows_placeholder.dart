@@ -10,17 +10,19 @@ import '../../../../common/geo_provider/current_city_provider.dart';
 import '../../../../common/widgets/other/placeholder_container.dart';
 
 class EmptyShowsPlaceholder extends StatelessWidget {
-  const EmptyShowsPlaceholder({Key? key}) : super(key: key);
+  final isFiltered;
+  const EmptyShowsPlaceholder({this.isFiltered, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final text = isFiltered ? 'emptyFilteredShowsText' : 'emptyShowsText';
     return PlaceholderContainer(
       child: RichText(
         textAlign: TextAlign.start,
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'emptyShowsText'.tr(args: [
+              text: text.tr(args: [
                     context.read<CurrentCityProvider>().currentCity!.localName
                   ]) +
                   ' ',

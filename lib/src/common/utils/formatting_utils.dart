@@ -169,6 +169,13 @@ class FormattingUtils {
     }
   }
 
+  static String getFormattedDateWithoutWeekday({required DateTime dateTime}) {
+    return sprintf('%02i.%02i', [
+      dateTime.day,
+      dateTime.month,
+    ]);
+  }
+
   static String getFormattedDateShort({required DateTime dateTime}) {
     return sprintf('%s — %02i.%02i', [
       getWeekdayName(

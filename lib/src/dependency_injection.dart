@@ -4,6 +4,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
+import 'common/geo_provider/current_city_provider.dart';
 import 'common/utils/localized_get_request.dart';
 import 'package:the_postraves_package/client/client_helper.dart';
 import 'package:the_postraves_package/client/localized_request.dart';
@@ -654,6 +656,17 @@ void setupServiceLocatorInjection() async {
 
   // State
 
+  serviceLocator.registerLazySingleton(
+    () => CurrentCityProvider(
+      serviceLocator<CityLocalRepository>(),
+      serviceLocator<ProfileCubit>(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton(
+    () => DateTimeFilterChangeNotifier(serviceLocator()),
+  );
+
   serviceLocator.registerLazySingleton<AuthenticationCubit>(
     () => AuthenticationCubit(
       serviceLocator(),
@@ -682,6 +695,7 @@ void setupServiceLocatorInjection() async {
     () => ShowsCubit(
       showsRepository: serviceLocator(),
       viewSwitcherBloc: serviceLocator(),
+      dateFilterChangeNotifier: serviceLocator(),
     ),
   );
 

@@ -7,20 +7,20 @@ import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:the_postraves_app/src/common/widgets/animations/slide_animation_wrapper.dart';
+import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/constants/my_text_styles.dart';
 import '../../../../common/geo_provider/city_list_provider.dart';
 import '../../../../common/geo_provider/current_city_provider.dart';
-import '../../../../common/widgets/animations/my_slide_animated_switcher.dart';
 import '../../../../common/widgets/app_bar/app_bar_button.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/my_flushbar.dart';
 import '../../../../common/widgets/selectors/current_city_selector.dart';
 import '../../state/shows_cubit/shows_cubit.dart';
 import '../widgets/events_list.dart';
-import '../widgets/sort_mode_selector.dart';
+import '../widgets/shows_date_filter_selector.dart';
 
 class ShowsScreen extends StatefulWidget {
   const ShowsScreen([Key? key]) : super(key: key);
@@ -51,6 +51,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    //todo refactor
     if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
       _currentCity = context.read<CurrentCityProvider>().currentCity!;
       BlocProvider.of<ShowsCubit>(context).fullyLoadShows(_currentCity!);
@@ -83,22 +84,29 @@ class _ShowsScreenState extends State<ShowsScreen> {
                       .changeCurrentCity(newCurrentCity),
                 ),
               ),
-              child:
-                  Text(_currentCity!.localName, style: MyTextStyles.appTitle),
+              child: Text(
+                _currentCity!.localName,
+                style: MyTextStyles.appTitle,
+              ),
             ),
             centerTitle: false,
             actions: [
               AppBarButton(
                 containerOpacity: 0,
-                iconWidget: const Icon(
-                  Ionicons.calendar_clear_outline,
-                  color: MyColors.main,
+                iconWidget: Icon(
+                  context.watch<DateTimeFilterChangeNotifier>().isFiltered
+                      ? Ionicons.calendar_clear
+                      : Ionicons.calendar_clear_outline,
+                  color:
+                      context.watch<DateTimeFilterChangeNotifier>().isFiltered
+                          ? MyColors.accent
+                          : MyColors.main,
                   size: 25,
                 ),
                 onTap: () => showModalBottomSheet(
                   isScrollControlled: true,
                   context: context,
-                  builder: (context) => SortModeSelector(),
+                  builder: (context) => ShowsDateFilterSelector(),
                 ),
               ),
             ],
@@ -107,7 +115,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
         ],
         body: BlocConsumer<ShowsCubit, ShowsState>(
           listener: (context, state) {
-            if (state is ShowsLoadedByRatingState) {
+            if (state is ShowsLoadedState) {
               _refreshController1.refreshCompleted();
             } else if (state is ShowsFailureState) {
               MyFlushbar.showMyFlushbar(
@@ -122,12 +130,15 @@ class _ShowsScreenState extends State<ShowsScreen> {
           buildWhen: (previousState, currentState) =>
               currentState is! ShowsRefreshingState,
           builder: (context, state) {
-            return state is ShowsLoadedByRatingState
+            return state is ShowsLoadedState
                 ? SlideAnimationWrapper(
-                    child: EventsList(
-                        eventsByRating: state.showsByRating,
-                        onRefresh: _onRefresh,
-                        refreshController: _refreshController1),
+                    child:
+                        context.watch<DateTimeFilterChangeNotifier>().isFiltered
+                            ? FilteredEventsList(state.shows)
+                            : UnfilteredEventsList(
+                                events: state.shows,
+                                onRefresh: _onRefresh,
+                                refreshController: _refreshController1),
                   )
                 : const LoadingContainer();
           },

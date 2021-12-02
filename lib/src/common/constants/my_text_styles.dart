@@ -10,6 +10,13 @@ class MyTextStyles {
     fontWeight: FontWeight.w700,
   );
 
+    static const TextStyle filtered = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.main,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle fullEventCardTitle = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 27,
@@ -170,6 +177,13 @@ class MyTextStyles {
   static const TextStyle closeModalBottomSheet = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle closeModalBottomSheetInactive = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.forInactiveStuff,
     fontSize: 15,
     fontWeight: FontWeight.w500,
   );
