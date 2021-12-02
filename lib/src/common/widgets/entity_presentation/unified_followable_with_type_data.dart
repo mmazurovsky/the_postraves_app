@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
+import '../../utils/followable_type_utils.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import '../../constants/my_text_styles.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/errors/failures.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/user/user_profile_to_write.dart';

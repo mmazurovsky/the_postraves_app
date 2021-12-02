@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
+import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../dependency_injection.dart';
 import '../../../../common/navigation/my_navigation.dart';
