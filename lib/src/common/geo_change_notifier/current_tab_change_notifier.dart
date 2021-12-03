@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
 
 
-class CurrentTabProvider extends ChangeNotifier {
+class CurrentTabChangeNotifier extends ChangeNotifier {
   TabItem _tabItem;
-  CurrentTabProvider(this._tabItem);
+  CurrentTabChangeNotifier(this._tabItem);
 
   TabItem get currentTab => _tabItem;
 

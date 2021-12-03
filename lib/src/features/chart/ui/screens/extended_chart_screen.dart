@@ -54,8 +54,8 @@ class _ExtendedChartScreenState<T extends GeneralFollowableInterface>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
-      _currentCity = context.read<CurrentCityProvider>().currentCity!;
+    if (_currentCity != context.watch<CurrentCityChangeNotifier>().currentCity) {
+      _currentCity = context.read<CurrentCityChangeNotifier>().currentCity!;
     }
   }
 

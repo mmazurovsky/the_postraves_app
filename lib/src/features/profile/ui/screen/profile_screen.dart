@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
 import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import '../../../followable/ui/screens/wiki_canvas.dart';
 import '../../../followable/ui/widgets/about_section.dart';
@@ -18,7 +19,6 @@ import 'package:the_postraves_package/service/open_link_service.dart';
 import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/city_list_provider.dart';
 import '../../../../common/geo_provider/current_city_provider.dart';
 import '../../../../common/utils/screen_size.dart';
 import '../../../../common/widgets/buttons/button_content.dart';
@@ -196,10 +196,10 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           onButtonTap: () => showModalBottomSheet(
             context: context,
             builder: (context) => CurrentCitySelector(
-              currentCity: context.watch<CurrentCityProvider>().currentCity!,
-              cities: context.watch<CityListProvider>().cityList,
+              currentCity: context.watch<CurrentCityChangeNotifier>().currentCity!,
+              cities: context.watch<CityListChangeNotifier>().cityList,
               onSelected: (City newCurrentCity) => context
-                  .read<CurrentCityProvider>()
+                  .read<CurrentCityChangeNotifier>()
                   .changeCurrentCity(newCurrentCity),
             ),
           ),

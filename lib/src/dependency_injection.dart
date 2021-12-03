@@ -657,7 +657,7 @@ void setupServiceLocatorInjection() async {
   // State
 
   serviceLocator.registerLazySingleton(
-    () => CurrentCityProvider(
+    () => CurrentCityChangeNotifier(
       serviceLocator<CityLocalRepository>(),
       serviceLocator<ProfileCubit>(),
     ),

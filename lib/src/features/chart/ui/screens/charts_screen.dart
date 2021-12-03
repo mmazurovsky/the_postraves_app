@@ -56,8 +56,8 @@ class _ChartsScreenState extends State<ChartsScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
-      _currentCity = context.read<CurrentCityProvider>().currentCity!;
+    if (_currentCity != context.watch<CurrentCityChangeNotifier>().currentCity) {
+      _currentCity = context.read<CurrentCityChangeNotifier>().currentCity!;
       BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity!);
     }
   }

@@ -5,12 +5,12 @@ import '../geo_repository/city_local_repository.dart';
 
 
 
-class CityListProvider extends ChangeNotifier {
+class CityListChangeNotifier extends ChangeNotifier {
   final CityLocalRepository _cityRepository;
   List<City> _myCityList = [];
   final Completer<List<City>> _citiesCompleter = Completer();
 
-  CityListProvider(
+  CityListChangeNotifier(
     this._cityRepository,
   );
 

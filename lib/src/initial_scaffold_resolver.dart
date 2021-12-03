@@ -4,6 +4,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/followable/repository/general_repository.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
@@ -11,7 +12,6 @@ import 'package:the_postraves_package/models/geo/country.dart';
 
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'common/constants/my_text_styles.dart';
-import 'common/geo_provider/city_list_provider.dart';
 import 'common/geo_provider/country_list_provider.dart';
 import 'common/geo_provider/current_city_provider.dart';
 import 'common/geo_repository/city_local_repository.dart';
@@ -50,13 +50,13 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
     widget.authenticationBloc.stream.listen((state) {
       state.maybeWhen(
           authenticated: (userProfile) => context
-              .read<CurrentCityProvider>()
+              .read<CurrentCityChangeNotifier>()
               .changeCurrentCity(userProfile.currentCity),
           orElse: () {}); //TODO Exception
     });
 
-    CurrentCityProvider currentCityProvider =
-        context.read<CurrentCityProvider>();
+    CurrentCityChangeNotifier currentCityProvider =
+        context.read<CurrentCityChangeNotifier>();
 
     widget.cityLocalRepository.fetchCurrentCityFromLocal().then((value) {
       value.when(success: (data) {
@@ -69,7 +69,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
       }); //TODO Exception
     });
 
-    CityListProvider cityListProvider = context.read<CityListProvider>();
+    CityListChangeNotifier cityListProvider = context.read<CityListChangeNotifier>();
 
     widget.cityLocalRepository.fetchCitiesFromLocal().then((value) {
       value.when(success: (data) {
@@ -120,7 +120,7 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
   Widget build(BuildContext context) {
     // check if there is current city in local storage or user is authenticated
     // and it has been assigned to current city
-    City? currentCity = context.watch<CurrentCityProvider>().currentCity;
+    City? currentCity = context.watch<CurrentCityChangeNotifier>().currentCity;
     return currentCity == null
         ? const CityPickerScaffold()
         : const NavigationScaffold();
@@ -141,7 +141,7 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Future.delayed(const Duration(seconds: 2),
-          () => context.read<CityListProvider>().citiesFuture),
+          () => context.read<CityListChangeNotifier>().citiesFuture),
       builder: (context, snapshot) {
         return Scaffold(
           backgroundColor: MyColors.screenBackground,
@@ -160,14 +160,14 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                       const MyMediumSpacer(),
                       SelectLocationListView<City>(
                         isShrinkWrap: true,
-                        locations: context.read<CityListProvider>().cityList,
+                        locations: context.read<CityListChangeNotifier>().cityList,
                         activeLocation: activeCity,
                         onLocationTap: (City cityTapped) {
                           setState(() {
                             activeCity = cityTapped;
                           });
                           context
-                              .read<CurrentCityProvider>()
+                              .read<CurrentCityChangeNotifier>()
                               .changeCurrentCity(cityTapped);
                         },
                       ),

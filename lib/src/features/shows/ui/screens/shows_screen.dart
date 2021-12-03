@@ -6,13 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
 import 'package:the_postraves_app/src/common/widgets/animations/slide_animation_wrapper.dart';
 import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/city_list_provider.dart';
 import '../../../../common/geo_provider/current_city_provider.dart';
 import '../../../../common/widgets/app_bar/app_bar_button.dart';
 import '../../../../common/widgets/other/loading_container.dart';
@@ -52,12 +52,12 @@ class _ShowsScreenState extends State<ShowsScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     //todo refactor
-    if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
-      _currentCity = context.read<CurrentCityProvider>().currentCity!;
+    if (_currentCity != context.watch<CurrentCityChangeNotifier>().currentCity) {
+      _currentCity = context.read<CurrentCityChangeNotifier>().currentCity!;
       BlocProvider.of<ShowsCubit>(context).fullyLoadShows(_currentCity!);
     }
 
-    _cities = context.watch<CityListProvider>().cityList;
+    _cities = context.watch<CityListChangeNotifier>().cityList;
   }
 
   void _onRefresh() async {
@@ -80,7 +80,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
                   currentCity: _currentCity!,
                   cities: _cities!,
                   onSelected: (City newCurrentCity) => context
-                      .read<CurrentCityProvider>()
+                      .read<CurrentCityChangeNotifier>()
                       .changeCurrentCity(newCurrentCity),
                 ),
               ),

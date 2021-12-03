@@ -3,12 +3,12 @@ import 'package:the_postraves_package/models/geo/city.dart';
 import '../../features/profile/state/profile_cubit/profile_cubit.dart';
 import '../geo_repository/city_local_repository.dart';
 
-class CurrentCityProvider extends ChangeNotifier {
+class CurrentCityChangeNotifier extends ChangeNotifier {
   final CityLocalRepository _cityRepository;
   final ProfileCubit _userProfileCubit;
   City? _myCurrentCity;
 
-  CurrentCityProvider(
+  CurrentCityChangeNotifier(
     this._cityRepository,
     this._userProfileCubit,
   );

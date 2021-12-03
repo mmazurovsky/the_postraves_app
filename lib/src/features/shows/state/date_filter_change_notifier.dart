@@ -4,7 +4,7 @@ import 'package:the_postraves_app/src/common/geo_provider/current_city_provider.
 import 'package:the_postraves_package/models/geo/city.dart';
 
 class DateTimeFilterChangeNotifier with ChangeNotifier {
-  final CurrentCityProvider _currentCityProvider;
+  final CurrentCityChangeNotifier _currentCityProvider;
   DateTime? _startDateTime;
   DateTime? _endDateTime;
   City? _currentCity;
@@ -12,9 +12,9 @@ class DateTimeFilterChangeNotifier with ChangeNotifier {
 
   DateTimeFilterChangeNotifier(this._currentCityProvider) {
     _currentCityProvider.addListener(() {
-    if (_currentCity != _currentCityProvider.currentCity) {
-    dropFilter();
-    }
+      if (_currentCity != _currentCityProvider.currentCity) {
+        dropFilter();
+      }
     });
   }
 

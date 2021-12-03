@@ -2,11 +2,11 @@ import 'package:the_postraves_package/models/geo/country.dart';
 
 import '../geo_repository/country_local_repository.dart';
 
-class CountryListProvider {
+class CountryListChangeNotifier {
   final CountryLocalRepository _countryRepository;
   List<Country> _myCountryList = [];
 
-  CountryListProvider(
+  CountryListChangeNotifier(
     this._countryRepository,
   );
 

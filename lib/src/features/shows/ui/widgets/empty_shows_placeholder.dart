@@ -23,7 +23,7 @@ class EmptyShowsPlaceholder extends StatelessWidget {
           children: [
             TextSpan(
               text: text.tr(args: [
-                    context.read<CurrentCityProvider>().currentCity!.localName
+                    context.read<CurrentCityChangeNotifier>().currentCity!.localName
                   ]) +
                   ' ',
               style: MyTextStyles.body,
