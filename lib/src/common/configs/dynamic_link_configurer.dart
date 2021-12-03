@@ -75,6 +75,7 @@ class DynamicLinkService {
       iosParameters: IosParameters(
         appStoreId: MyConstants.iosAppStoreId,
         bundleId: MyConstants.iosBundleId,
+        fallbackUrl: null, //TODO !!!
       ),
       androidParameters: AndroidParameters(
         packageName: MyConstants.androidPackageName,

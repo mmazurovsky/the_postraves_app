@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/common/widgets/entity_presentation/followable_item.dart';
+import 'package:the_postraves_app/src/common/widgets/other/section_title.dart';
+import 'package:the_postraves_app/src/common/widgets/spacers/section_divider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
@@ -10,6 +13,7 @@ import 'package:the_postraves_package/models/fulls/event_full.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
+import 'package:the_postraves_package/models/shorts/place_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
@@ -102,8 +106,8 @@ class _EventContent extends StatefulWidget {
   final List<ArtistShort> lineup;
   final List<TimetableForSceneByDay> timetable;
   final EventCubit eventBlocProvider;
-  final void Function<T extends GeneralFollowableInterface, S extends GeneralFollowableInterface>(BuildContext, T)
-      onIsFollowedChange;
+  final void Function<T extends GeneralFollowableInterface,
+      S extends GeneralFollowableInterface>(BuildContext, T) onIsFollowedChange;
 
   const _EventContent({
     required this.event,
@@ -124,7 +128,8 @@ class _EventContentState extends State<_EventContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context.watch<FollowCubit<EventFull, EventShort>>().state.isFollowed!;
+    _isFollowed =
+        context.watch<FollowCubit<EventFull, EventShort>>().state.isFollowed!;
     super.didChangeDependencies();
   }
 
@@ -182,10 +187,12 @@ class _EventContentState extends State<_EventContent> {
             },
           ),
           AboutSection(widget.event.about, areSpacerAndDividerNeeded: false),
-          FollowableListSection(
-            'placeEntityNameSingular'.tr(),
-            [widget.event.place],
-          ),
+          widget.event.place.isJustCity
+              ? PlaceIsCityPlaceholder(widget.event.place)
+              : FollowableListSection(
+                  'placeEntityNameSingular'.tr(),
+                  [widget.event.place],
+                ),
           FollowableListSection(
             'wikiEventOrganizers'.tr(),
             widget.unities,
@@ -226,6 +233,41 @@ class _EventContentState extends State<_EventContent> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PlaceIsCityPlaceholder extends StatelessWidget {
+  final PlaceShort _place;
+
+  const PlaceIsCityPlaceholder(this._place, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const MyBigSpacer(),
+        const SectionDivider(needHorizontalMargin: true),
+        const MyMediumPlusSpacer(),
+        SectionTitle(
+          sectionTitle: 'placeEntityNameSingular'.tr(),
+        ),
+        const MySmallSpacer(),
+        FollowableItem(
+          entity: _place,
+        )
+        // FollowableList(
+        //   followables: _followables,
+        //   onItemTap: (BuildContext context, T entity,
+        //           ImageDimensions? imageDimensions) =>
+        //       NavigatorFunctions.pushFollowable(
+        //     context: context,
+        //     followableData:
+        //         entity.convertToFollowableData(imageDimensions),
+        //   ),
+        // ),
+      ],
     );
   }
 }
