@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:sprintf/sprintf.dart';
-import 'package:the_postraves_app/src/common/geo_provider/current_city_provider.dart';
+import 'package:the_postraves_app/src/common/geo_change_notifier/current_city_change_notifier.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 
 class DateTimeFilterChangeNotifier with ChangeNotifier {

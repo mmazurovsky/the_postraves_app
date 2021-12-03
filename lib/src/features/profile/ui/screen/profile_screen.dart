@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
+import 'package:the_postraves_app/src/common/widgets/dialogs.dart';
 import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import '../../../followable/ui/screens/wiki_canvas.dart';
 import '../../../followable/ui/widgets/about_section.dart';
@@ -19,7 +20,7 @@ import 'package:the_postraves_package/service/open_link_service.dart';
 import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/utils/screen_size.dart';
 import '../../../../common/widgets/buttons/button_content.dart';
 import '../../../../common/widgets/buttons/my_outlined_button_without_padding.dart';
@@ -81,7 +82,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    //* disposing this controller causes crash on city change
+    // _scrollController.dispose();
     super.dispose();
   }
 
@@ -109,7 +111,7 @@ class _ProfileDetails extends StatefulWidget {
 }
 
 class _ProfileDetailsState extends State<_ProfileDetails> {
-  void _closeModalBottomSheetAndPushModifyProfile(
+  void _functionToCloseModalBottomSheetAndDoSomething(
       void Function(BuildContext) function) {
     Navigator.of(context).pop();
     Future.delayed(
@@ -142,7 +144,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
                   onTap: () => showModalBottomSheet(
                     context: context,
                     builder: (context) => SettingsSelector(
-                        _closeModalBottomSheetAndPushModifyProfile),
+                        _functionToCloseModalBottomSheetAndDoSomething),
                   ),
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
@@ -196,7 +198,8 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           onButtonTap: () => showModalBottomSheet(
             context: context,
             builder: (context) => CurrentCitySelector(
-              currentCity: context.watch<CurrentCityChangeNotifier>().currentCity!,
+              currentCity:
+                  context.watch<CurrentCityChangeNotifier>().currentCity!,
               cities: context.watch<CityListChangeNotifier>().cityList,
               onSelected: (City newCurrentCity) => context
                   .read<CurrentCityChangeNotifier>()
@@ -229,7 +232,7 @@ class SettingsSelector extends StatelessWidget {
       {Key? key})
       : super(key: key);
 
-  List<_SettingsButtonData> _getSettingsList(BuildContext context) {
+  List<_SettingsButtonData> _getSettingsList() {
     return [
       _SettingsButtonData(
         text: 'modifyProfile'.tr(),
@@ -259,10 +262,11 @@ class SettingsSelector extends StatelessWidget {
         text: 'deleteProfile'.tr(),
         leadingIcon: const Icon(Ionicons.close_circle_outline,
             color: MyColors.main, size: 18),
-        onTap: (BuildContext _) =>
-            _functionToCloseModalBottomSheetAndDoSomething(
-          (BuildContext ctx) =>
-              BlocProvider.of<AuthenticationCubit>(ctx).deleteMyProfile(),
+        onTap: (_) => _functionToCloseModalBottomSheetAndDoSomething(
+          (BuildContext ctx) => showDialog(
+            context: ctx,
+            builder: (_) => const AccountDeletionConfirmationDialog(),
+          ),
         ),
       ),
     ];
@@ -270,7 +274,7 @@ class SettingsSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingsList = _getSettingsList(context);
+    final settingsList = _getSettingsList();
     return ModalBottomSheetContent(
       height: ScreenSize.height * 0.4,
       iconData: Ionicons.settings_outline,

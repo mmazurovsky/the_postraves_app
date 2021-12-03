@@ -12,8 +12,8 @@ import 'package:the_postraves_package/models/geo/country.dart';
 
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'common/constants/my_text_styles.dart';
-import 'common/geo_provider/country_list_provider.dart';
-import 'common/geo_provider/current_city_provider.dart';
+import 'common/geo_change_notifier/country_list_change_notifier.dart';
+import 'common/geo_change_notifier/current_city_change_notifier.dart';
 import 'common/geo_repository/city_local_repository.dart';
 import 'common/geo_repository/country_local_repository.dart';
 import 'common/widgets/other/loading_container.dart';
@@ -69,7 +69,8 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
       }); //TODO Exception
     });
 
-    CityListChangeNotifier cityListProvider = context.read<CityListChangeNotifier>();
+    CityListChangeNotifier cityListProvider =
+        context.read<CityListChangeNotifier>();
 
     widget.cityLocalRepository.fetchCitiesFromLocal().then((value) {
       value.when(success: (data) {
@@ -100,19 +101,17 @@ class _InitialScaffoldResolverState extends State<InitialScaffoldResolver> {
           failure: (failure) {});
     });
 
-    CountryListProvider countryListProvider =
-        context.read<CountryListProvider>();
+    CountryListChangeNotifier countryListChangeNotifier =
+        context.read<CountryListChangeNotifier>();
 
     widget.countryRemoteRepository.fetchAllFromRemote().then((value) {
       value.when(
           success: (data) {
             if (data.isNotEmpty) {
-              countryListProvider.changeCountryList(data, true);
+              countryListChangeNotifier.changeCountryList(data, true);
             }
           },
-          failure: (failure) {
-            
-          });
+          failure: (failure) {});
     });
   }
 
@@ -160,7 +159,8 @@ class _CityPickerScaffoldState extends State<CityPickerScaffold> {
                       const MyMediumSpacer(),
                       SelectLocationListView<City>(
                         isShrinkWrap: true,
-                        locations: context.read<CityListChangeNotifier>().cityList,
+                        locations:
+                            context.read<CityListChangeNotifier>().cityList,
                         activeLocation: activeCity,
                         onLocationTap: (City cityTapped) {
                           setState(() {

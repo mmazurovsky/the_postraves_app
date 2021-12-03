@@ -3,9 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../bottom_navigation_bar/my_bottom_navigation_bar.dart';
-import '../geo_provider/current_tab_provider.dart';
+import '../geo_change_notifier/current_tab_provider.dart';
 import 'my_navigation.dart';
-
 
 class NavigationScaffold extends StatelessWidget {
   const NavigationScaffold({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class NavigationScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColors.screenBackground,
       body: IndexedStack(
-        index: context.watch<CurrentTabProvider>().currentTab.index,
+        index: context.watch<CurrentTabChangeNotifier>().currentTab.index,
         children: [
           _buildNavigatorForTab(TabItem.shows),
           _buildNavigatorForTab(TabItem.search),

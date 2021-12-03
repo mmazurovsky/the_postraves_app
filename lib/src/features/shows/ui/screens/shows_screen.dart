@@ -13,7 +13,7 @@ import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/widgets/app_bar/app_bar_button.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/my_flushbar.dart';
@@ -52,7 +52,8 @@ class _ShowsScreenState extends State<ShowsScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     //todo refactor
-    if (_currentCity != context.watch<CurrentCityChangeNotifier>().currentCity) {
+    if (_currentCity !=
+        context.watch<CurrentCityChangeNotifier>().currentCity) {
       _currentCity = context.read<CurrentCityChangeNotifier>().currentCity!;
       BlocProvider.of<ShowsCubit>(context).fullyLoadShows(_currentCity!);
     }

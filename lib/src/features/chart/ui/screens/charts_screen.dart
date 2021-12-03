@@ -11,7 +11,7 @@ import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/constants/my_assets.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/widgets/other/failure_container.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/search_container.dart';
@@ -56,7 +56,8 @@ class _ChartsScreenState extends State<ChartsScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_currentCity != context.watch<CurrentCityChangeNotifier>().currentCity) {
+    if (_currentCity !=
+        context.watch<CurrentCityChangeNotifier>().currentCity) {
       _currentCity = context.read<CurrentCityChangeNotifier>().currentCity!;
       BlocProvider.of<ChartsCubit>(context).showCharts(_currentCity!);
     }

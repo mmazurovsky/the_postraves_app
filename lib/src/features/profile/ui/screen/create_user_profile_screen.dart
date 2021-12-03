@@ -12,7 +12,7 @@ import 'package:the_postraves_package/models/geo/city.dart';
 import '../../../../common/constants/my_assets.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
 import '../../../../common/widgets/app_bar/app_bar_button.dart';
 import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
@@ -157,7 +157,9 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                             context: context,
                             builder: (context) => CurrentCitySelector(
                               currentCity: _userCity,
-                              cities: context.read<CityListChangeNotifier>().cityList,
+                              cities: context
+                                  .read<CityListChangeNotifier>()
+                                  .cityList,
                               onSelected: _selectActiveCity,
                             ),
                           );

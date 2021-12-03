@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/utils/followable_type_utils.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
@@ -37,9 +38,12 @@ class _WikiCanvasState extends State<WikiCanvas> {
     _scrollController = widget.scrollController ?? ScrollController();
   }
 
+  //* disposing this scroll controller causes crash when city is changed in user profile
   @override
   void dispose() {
-    _scrollController.dispose();
+    if (_scrollController != TabItem.profile.tabScrollController) {
+      _scrollController.dispose();
+    }
     super.dispose();
   }
 

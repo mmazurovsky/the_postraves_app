@@ -6,7 +6,7 @@ import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/service/open_link_service.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/widgets/other/placeholder_container.dart';
 
 class EmptyShowsPlaceholder extends StatelessWidget {
@@ -23,7 +23,10 @@ class EmptyShowsPlaceholder extends StatelessWidget {
           children: [
             TextSpan(
               text: text.tr(args: [
-                    context.read<CurrentCityChangeNotifier>().currentCity!.localName
+                    context
+                        .read<CurrentCityChangeNotifier>()
+                        .currentCity!
+                        .localName
                   ]) +
                   ' ',
               style: MyTextStyles.body,
