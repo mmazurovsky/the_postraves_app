@@ -12,7 +12,7 @@ import 'package:the_postraves_package/models/geo/country.dart';
 
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'common/constants/my_text_styles.dart';
-import 'common/geo_change_notifier/country_list_provider.dart';
+import 'common/geo_change_notifier/country_list_change_notifier.dart';
 import 'common/geo_change_notifier/current_city_change_notifier.dart';
 import 'common/geo_repository/city_local_repository.dart';
 import 'common/geo_repository/country_local_repository.dart';

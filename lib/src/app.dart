@@ -11,7 +11,7 @@ import 'package:the_postraves_package/models/geo/country.dart';
 import 'common/configs/cities_cleaner.dart';
 import 'common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import 'common/configs/my_refresh_configuration.dart';
-import 'common/geo_change_notifier/country_list_provider.dart';
+import 'common/geo_change_notifier/country_list_change_notifier.dart';
 import 'common/geo_change_notifier/current_city_change_notifier.dart';
 import 'common/geo_change_notifier/current_tab_change_notifier.dart';
 import 'common/geo_repository/city_local_repository.dart';
