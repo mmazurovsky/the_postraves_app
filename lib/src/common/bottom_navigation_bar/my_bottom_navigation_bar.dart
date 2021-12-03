@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
-import '../geo_change_notifier/current_tab_provider.dart';
+import '../geo_change_notifier/current_tab_change_notifier.dart';
 import '../widgets/animations/scale_animation_wrapper.dart';
 import 'bottom_navigation_tab_item.dart';
 

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../bottom_navigation_bar/my_bottom_navigation_bar.dart';
-import '../geo_change_notifier/current_tab_provider.dart';
+import '../geo_change_notifier/current_tab_change_notifier.dart';
 import 'my_navigation.dart';
 
 class NavigationScaffold extends StatelessWidget {
