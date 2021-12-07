@@ -9,24 +9,22 @@ import '../data_sources/shows_remote_data_source.dart';
 
 abstract class ShowsRepository {
   Future<ResponseSealed<List<EventShort>>> fetchEventsByRatingFromRemote(City city);
-  Future<ResponseSealed<List<ShowsByDate>>> fetchEventsByDateFromRemote(City city);
+  Future<ResponseSealed<List<EventShort>>> fetchEventsByDateFromRemote(City city);
 }
 
 class ShowsRepositoryImpl implements ShowsRepository {
   final ShowsRemoteDataSource showsRemoteDataSource;
-  final RemoteRequestWrapper<List<ShowsByDate>> remoteRequestWrapperByDate;
-  final RemoteRequestWrapper<List<EventShort>> remoteRequestWrapperByRating;
+  final RemoteRequestWrapper<List<EventShort>> remoteRequestWrapper;
 
   ShowsRepositoryImpl({
     required this.showsRemoteDataSource,
-    required this.remoteRequestWrapperByDate,
-    required this.remoteRequestWrapperByRating,
+    required this.remoteRequestWrapper,
   });
 
   @override
-  Future<ResponseSealed<List<ShowsByDate>>> fetchEventsByDateFromRemote(
+  Future<ResponseSealed<List<EventShort>>> fetchEventsByDateFromRemote(
       City city) async {
-    return await remoteRequestWrapperByDate((httpHeaders) =>
+    return await remoteRequestWrapper((httpHeaders) =>
         showsRemoteDataSource.fetchEventsByDate(
             city: city, httpHeaders: httpHeaders));
   }
@@ -34,7 +32,7 @@ class ShowsRepositoryImpl implements ShowsRepository {
   @override
   Future<ResponseSealed<List<EventShort>>> fetchEventsByRatingFromRemote(
       City city) async {
-    return await remoteRequestWrapperByRating((httpHeaders) =>
+    return await remoteRequestWrapper((httpHeaders) =>
         showsRemoteDataSource.fetchEventsByRating(
             city: city, httpHeaders: httpHeaders));
   }

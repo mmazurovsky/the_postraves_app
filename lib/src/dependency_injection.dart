@@ -80,7 +80,7 @@ void setupServiceLocatorInjection() async {
   // Services
 
   serviceLocator.registerLazySingleton<ServerConstantsAbstract>(
-    () => ServerConstantsProd(),
+    () => ServerConstantsDevelopment(),
   );
 
   serviceLocator.registerLazySingleton<DynamicLinkService>(
@@ -566,8 +566,7 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton<ShowsRepository>(
     () => ShowsRepositoryImpl(
       showsRemoteDataSource: serviceLocator(),
-      remoteRequestWrapperByDate: serviceLocator(),
-      remoteRequestWrapperByRating: serviceLocator(),
+      remoteRequestWrapper: serviceLocator(),
     ),
   );
 
@@ -722,7 +721,6 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton(
     () => ShowsCubit(
       showsRepository: serviceLocator(),
-      viewSwitcherBloc: serviceLocator(),
       dateFilterChangeNotifier: serviceLocator(),
     ),
   );

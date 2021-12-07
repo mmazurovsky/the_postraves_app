@@ -15,44 +15,42 @@ part 'shows_cubit.freezed.dart';
 
 class ShowsCubit extends Cubit<ShowsState> {
   final ShowsRepository showsRepository;
-  final ViewSwitcherCubit viewSwitcherBloc;
   final DateTimeFilterChangeNotifier dateFilterChangeNotifier;
-  late StreamSubscription _viewSwitcherBlocSubscription;
-  List<EventShort>? _eventsByRating;
-  List<ShowsByDate>? _eventsByDate;
-  ViewMode? _currentView;
+  List<EventShort>? _eventsByDate;
+  // final ViewSwitcherCubit viewSwitcherBloc;
+  // late StreamSubscription _viewSwitcherBlocSubscription;
+  // ViewMode? _currentView;
 
   ShowsCubit({
     required this.showsRepository,
-    required this.viewSwitcherBloc,
     required this.dateFilterChangeNotifier,
-  }) : super(const ShowsState.loading()) {
-    // _viewSwitcherBlocSubscription =
-    //     viewSwitcherBloc.stream.listen((viewSwitcherState) {
-    //   if (viewSwitcherState is ByDateViewState) {
-    //     _currentView = ViewMode.SORT_BY_DATE;
-    //     showByDateView();
-    //   } else if (viewSwitcherState is ByRatingViewState) {
-    //     _currentView = ViewMode.SORT_BY_RATING;
-    //     showByRatingView();
-    //   }
-    // });
-  }
+    // required this.viewSwitcherBloc,
+  }) : super(const ShowsState.loading());
+  // _viewSwitcherBlocSubscription =
+  //     viewSwitcherBloc.stream.listen((viewSwitcherState) {
+  //   if (viewSwitcherState is ByDateViewState) {
+  //     _currentView = ViewMode.SORT_BY_DATE;
+  //     showByDateView();
+  //   } else if (viewSwitcherState is ByRatingViewState) {
+  //     _currentView = ViewMode.SORT_BY_RATING;
+  //     showByRatingView();
+  //   }
+  // });
 
-  @override
-  Future<void> close() async {
-    _viewSwitcherBlocSubscription.cancel();
-    return super.close();
-  }
+  // @override
+  // Future<void> close() async {
+  //   _viewSwitcherBlocSubscription.cancel();
+  //   return super.close();
+  // }
 
   void fullyLoadShows(City currentCity) {
     emit(const ShowsState.loading());
-    _loadShowsAndResolveView(currentCity);
+    _loadShows(currentCity);
   }
 
   void refreshShows(City currentCity) {
     emit(const ShowsState.refreshing());
-    _loadShowsAndResolveView(currentCity);
+    _loadShows(currentCity);
   }
 
   // void showByDateView() {
@@ -63,24 +61,24 @@ class ShowsCubit extends Cubit<ShowsState> {
   //   emit(ShowsState.loaded(_eventsByRating!));
   // }
 
-  void _loadShowsAndResolveView(City currentCity) async {
+  void _loadShows(City currentCity) async {
     await _loadShowsFromRemote(currentCity);
-    emit(ShowsState.loaded(_eventsByRating!));
+    emit(ShowsState.loaded(_eventsByDate!));
   }
 
   void loadFilteredShows() {
     final startDate = dateFilterChangeNotifier.startDateTimeWithTimezone;
     late DateTime endDate;
     List<EventShort> eventsFiltered = [];
-    if (_eventsByRating != null && startDate != null) {
+    if (_eventsByDate != null && startDate != null) {
       emit(const ShowsState.loading());
       if (dateFilterChangeNotifier.endDateTimeWithTimezone != null) {
-        endDate =
-            dateFilterChangeNotifier.endDateTimeWithTimezone!.add(const Duration(days: 1));
+        endDate = dateFilterChangeNotifier.endDateTimeWithTimezone!
+            .add(const Duration(days: 1));
       } else {
         endDate = startDate.add(const Duration(days: 1));
       }
-      eventsFiltered = _eventsByRating!
+      eventsFiltered = _eventsByDate!
           .where((e) =>
               (e.startDateTime.isAtSameMomentAs(startDate) ||
                   e.startDateTime.isAfter(startDate)) &&
@@ -94,32 +92,20 @@ class ShowsCubit extends Cubit<ShowsState> {
   void dropFilter() {
     emit(const ShowsState.loading());
     dateFilterChangeNotifier.dropFilter();
-    emit(ShowsState.loaded(_eventsByRating!));
+    emit(ShowsState.loaded(_eventsByDate!));
   }
 
   Future<void> _loadShowsFromRemote(City currentCity) async {
-    final Future<ResponseSealed<List<EventShort>>> byRatingRequest =
-        showsRepository.fetchEventsByRatingFromRemote(currentCity);
-
-    final Future<ResponseSealed<List<ShowsByDate>>> byDateRequest =
+    final Future<ResponseSealed<List<EventShort>>> byDateRequest =
         showsRepository.fetchEventsByDateFromRemote(currentCity);
 
-    final resolvedByRating = await byRatingRequest;
     final resolvedByDate = await byDateRequest;
-
-    // if (resolvedByDate is SuccessResponse && resolvedByRating is SuccessResponse) {
 
     resolvedByDate.when(
         success: (data) {
           _eventsByDate = data;
         },
         failure: (failure) {}); //TODO Exception:
-
-    resolvedByRating.when(
-        success: (data) {
-          _eventsByRating = data;
-        },
-        failure: (failure) {}); // TODO Exception:
 
     return;
   }
