@@ -8,7 +8,7 @@ import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 class WikiExpandableTextDescription extends StatefulWidget {
   final String text;
 
-  const WikiExpandableTextDescription(this.text);
+  WikiExpandableTextDescription(this.text);
 
   @override
   _WikiExpandableTextDescriptionState createState() =>
@@ -34,8 +34,8 @@ class _WikiExpandableTextDescriptionState
   @override
   Widget build(BuildContext context) {
     return MyHorizontalPadding(
-      child: RichText(
-        text: TextSpan(
+      child: SelectableText.rich(
+        TextSpan(
           children: [
             TextSpan(
               text: widget.text.length > _minPreviewLength && !_isExpanded
