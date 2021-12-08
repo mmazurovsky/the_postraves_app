@@ -11,20 +11,18 @@ import '../../../../common/widgets/image/my_cached_network_image.dart';
 import '../../../../common/navigation/my_navigation.dart';
 
 class WikiSliverAppBar extends StatefulWidget {
+  final ScrollController scrollController;
+  final bool isBackButtonOn;
+  final bool isShareButtonOn;
+  final FollowableData followableData;
+
   const WikiSliverAppBar({
     Key? key,
     required this.scrollController,
     required this.isBackButtonOn,
     required this.isShareButtonOn,
     required this.followableData,
-    required this.shareLink,
   }) : super(key: key);
-
-  final ScrollController scrollController;
-  final bool isBackButtonOn;
-  final bool isShareButtonOn;
-  final FollowableData followableData;
-  final Uri? shareLink;
 
   @override
   _WikiSliverAppBarState createState() => _WikiSliverAppBarState();
@@ -118,14 +116,11 @@ class _WikiSliverAppBarState extends State<WikiSliverAppBar> {
                   Ionicons.share_outline,
                   color: MyColors.main,
                 ),
-                onTap: () => widget.shareLink != null
-                    ? NavigatorFunctions.pushShareWiki(
-                        context: context,
-                        shareLink: widget.shareLink!,
-                        followableData: widget.followableData,
-                      )
-                    : {},
-              )
+                onTap: () => NavigatorFunctions.pushShareWiki(
+                  context: context,
+                  followableData: widget.followableData,
+                ),
+              ),
             ]
           : null,
 

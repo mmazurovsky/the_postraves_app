@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
 
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/models/fulls/place_full.dart';
@@ -22,7 +23,6 @@ import '../../../../common/widgets/other/column_of_custom_cards.dart';
 import '../widgets/coordinates_section.dart';
 import '../widgets/followable_util.dart';
 import '../widgets/map_selector.dart';
-import '../../../../common/widgets/animations/slide_animation_wrapper.dart';
 import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';

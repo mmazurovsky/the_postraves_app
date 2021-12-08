@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
 import 'package:the_postraves_app/src/common/widgets/entity_presentation/followable_item.dart';
 import 'package:the_postraves_app/src/common/widgets/other/section_title.dart';
 import 'package:the_postraves_app/src/common/widgets/spacers/section_divider.dart';
@@ -31,7 +32,6 @@ import '../widgets/event_main_button.dart';
 import '../widgets/event_status_indicator.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
-import '../../../../common/widgets/animations/slide_animation_wrapper.dart';
 import 'followable_screen.dart';
 
 class EventScreen extends StatelessWidget {

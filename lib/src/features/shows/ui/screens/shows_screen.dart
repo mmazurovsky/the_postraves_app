@@ -7,7 +7,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
-import 'package:the_postraves_app/src/common/widgets/animations/slide_animation_wrapper.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
 import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/geo/city.dart';

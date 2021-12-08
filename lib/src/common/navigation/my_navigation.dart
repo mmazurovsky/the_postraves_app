@@ -119,8 +119,7 @@ class RouteGenerator {
       return MaterialPageRoute(
           settings: routeSettings,
           builder: (_) => WikiShareScreen(
-                shareLink: args!['shareLink'],
-                followableData: args['followableData'],
+                followableData: args!['followableData'],
               ));
     } else if (routeSettings.name == MyNavigationRoutes.actionResolver) {
       return MaterialPageRoute(
@@ -235,11 +234,9 @@ class NavigatorFunctions {
 
   static void pushShareWiki({
     required BuildContext context,
-    required Uri shareLink,
     required FollowableData followableData,
   }) {
     Navigator.of(context).pushNamed(MyNavigationRoutes.wikiShare, arguments: {
-      'shareLink': shareLink,
       'followableData': followableData,
     });
   }
