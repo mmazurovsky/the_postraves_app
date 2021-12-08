@@ -121,7 +121,7 @@
     "filterNew": "Filter again",
     "drop": "Drop",
     "from": "From",
-    "signInWithEmail": "Sign in with Email",
+    "signInWithEmail": "Sign in with\nEmail",
     "getLinkToSignIn": "Sign in",
     "linkHasBeenSent": "The link sent to your email,\nopen it to sign in",
     "emailIsNotCorrect": "Incorrect email",

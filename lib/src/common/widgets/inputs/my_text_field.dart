@@ -77,6 +77,21 @@ class MyTextField extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(8),
           ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              width: 1,
+              color: MyColors.forErrors,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              width: 1,
+              color: MyColors.forErrors,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          errorStyle: const TextStyle(color: MyColors.forErrors,),
         ),
         keyboardType: textInputType,
         obscureText: isSecret,

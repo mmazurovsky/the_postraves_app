@@ -121,7 +121,7 @@
     "filterNew": "Фильтровать еще",
     "drop": "Сбросить",
     "from": "От",
-    "signInWithEmail": "Вход с Email",
+    "signInWithEmail": "Вход с\nEmail",
     "getLinkToSignIn": " Войти",
     "linkHasBeenSent": "Ссылка отправлена на указанный email,\nоткройте ее",
     "emailIsNotCorrect": "Введен некорректный email",
