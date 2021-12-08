@@ -23,7 +23,7 @@ import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/image/my_cached_network_image.dart';
 
-class WikiShareScreen extends StatefulWidget {
+class WikiShareScreen extends StatelessWidget {
   final FollowableData followableData;
 
   const WikiShareScreen({
@@ -31,24 +31,16 @@ class WikiShareScreen extends StatefulWidget {
     required this.followableData,
   }) : super(key: key);
 
-  @override
-  State<WikiShareScreen> createState() => _WikiShareScreenState();
-}
-
-class _WikiShareScreenState extends State<WikiShareScreen> {
-  bool _canShareLink = false;
-
   Future<Uri> _setShareLinkToPage() async {
-    final imageDimensions = widget.followableData.imageDimensions;
+    final imageDimensions = followableData.imageDimensions;
     String _pathToPage =
-        '${FollowableTypeUtils.getNavigationRouteForType(widget.followableData.type)}?id=${widget.followableData.id}&name=${widget.followableData.name}';
-    if (widget.followableData.imageLink != null) {
-      _pathToPage +=
-          _pathToPage + '&imageLink=${widget.followableData.imageLink}';
+        '${FollowableTypeUtils.getNavigationRouteForType(followableData.type)}?id=${followableData.id}&name=${followableData.name}';
+    if (followableData.imageLink != null) {
+      _pathToPage += _pathToPage + '&imageLink=${followableData.imageLink}';
     }
-    if (widget.followableData.country != null) {
+    if (followableData.country != null) {
       _pathToPage +=
-          '&countryName=${widget.followableData.country!.name}&countryLocalizedName=${widget.followableData.country!.localName}&countryEmojiCode=${widget.followableData.country!.emojiCode}';
+          '&countryName=${followableData.country!.name}&countryLocalizedName=${followableData.country!.localName}&countryEmojiCode=${followableData.country!.emojiCode}';
     }
     if (imageDimensions != null) {
       _pathToPage +=
@@ -87,14 +79,14 @@ class _WikiShareScreenState extends State<WikiShareScreen> {
                             width: 50,
                             height: 50,
                             child: MyCachedNetworkImage(
-                              widget.followableData.imageLink,
+                              followableData.imageLink,
                             ),
                           ),
                         ),
                         SizedBox(width: 20),
                         Flexible(
                           child: UnifiedFollowableWithTypeData(
-                            followable: widget.followableData,
+                            followable: followableData,
                           ),
                         ),
                       ],
@@ -112,14 +104,14 @@ class _WikiShareScreenState extends State<WikiShareScreen> {
                         children: [
                           snapshot.hasData
                               ? ScaleAnimationWrapper(
-                                lowerBound: 0,
-                                child: QrImage(
+                                  lowerBound: 0,
+                                  child: QrImage(
                                     data: snapshot.data.toString(),
                                     version: QrVersions.auto,
                                     foregroundColor: MyColors.main,
                                     padding: const EdgeInsets.all(0),
                                   ),
-                              )
+                                )
                               : LayoutBuilder(
                                   builder: (context, constraints) => Container(
                                     color: MyColors.forEventCard,
@@ -147,18 +139,12 @@ class _WikiShareScreenState extends State<WikiShareScreen> {
                         size: 18,
                       ),
                     ),
-                    text: _canShareLink ? 'shareLink'.tr() : 'loading'.tr(),
+                    text: snapshot.hasData ? 'shareLink'.tr() : 'loading'.tr(),
                     buttonColor: MyColors.forEventCard,
                     textStyle: MyTextStyles.buttonWithMainColorThinner,
-                    onTap: _canShareLink
+                    onTap: snapshot.hasData
                         ? () async {
-                            setState(() {
-                              _canShareLink = false;
-                            });
                             await Share.share(snapshot.data.toString());
-                            setState(() {
-                              _canShareLink = true;
-                            });
                           }
                         : () {},
                   ),
