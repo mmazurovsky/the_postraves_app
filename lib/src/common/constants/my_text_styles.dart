@@ -290,7 +290,7 @@ class MyTextStyles {
 
   static const TextStyle authTitle = TextStyle(
     color: MyColors.main,
-    fontSize: 35,
+    fontSize: 42,
     fontWeight: FontWeight.w700,
   );
 
