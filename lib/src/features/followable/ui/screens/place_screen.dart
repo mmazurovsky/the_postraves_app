@@ -78,7 +78,6 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
           return _PlaceContent(
             place: state.place,
             events: state.events,
-            onIsFollowedChange: FollowableUtil.onIsFollowedChange,
           );
         } else {
           return LoadingContainer();
@@ -92,12 +91,9 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
 class _PlaceContent extends StatefulWidget {
   final PlaceFull place;
   final List<EventShort> events;
-  final void Function<T extends GeneralFollowableInterface, S extends GeneralFollowableInterface>(BuildContext, T)
-      onIsFollowedChange;
   const _PlaceContent({
     required this.place,
     required this.events,
-    required this.onIsFollowedChange,
     Key? key,
   }) : super(key: key);
 
@@ -110,7 +106,8 @@ class _PlaceContentState extends State<_PlaceContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context.watch<FollowCubit<PlaceFull, PlaceShort>>().state.isFollowed!;
+    _isFollowed =
+        context.watch<FollowCubit<PlaceFull, PlaceShort>>().state.isFollowed!;
     super.didChangeDependencies();
   }
 
@@ -125,7 +122,10 @@ class _PlaceContentState extends State<_PlaceContent> {
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
               onIsFollowedChange: () =>
-                  widget.onIsFollowedChange(context, widget.place),
+                  FollowableUtil.onIsFollowedChange<PlaceFull, PlaceShort>(
+                context,
+                widget.place,
+              ),
             ),
           ),
           SocialLinksList(

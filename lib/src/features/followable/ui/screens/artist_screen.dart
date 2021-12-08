@@ -116,7 +116,7 @@ class _ArtistContentState extends State<_ArtistContent> {
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
               onIsFollowedChange: () =>
-                  FollowableUtil.onIsFollowedChange(context, widget.artist),
+                  FollowableUtil.onIsFollowedChange<ArtistFull, ArtistShort>(context, widget.artist),
             ),
           ),
           SocialLinksList(

@@ -89,7 +89,6 @@ class _EventStateManagementState extends State<_EventStateManagement> {
             lineup: state.lineup,
             timetable: state.timetable,
             eventBlocProvider: _eventBlocProvider,
-            onIsFollowedChange: FollowableUtil.onIsFollowedChange,
           );
         } else {
           return LoadingContainer();
@@ -106,15 +105,12 @@ class _EventContent extends StatefulWidget {
   final List<ArtistShort> lineup;
   final List<TimetableForSceneByDay> timetable;
   final EventCubit eventBlocProvider;
-  final void Function<T extends GeneralFollowableInterface,
-      S extends GeneralFollowableInterface>(BuildContext, T) onIsFollowedChange;
 
   const _EventContent({
     required this.event,
     required this.unities,
     required this.lineup,
     required this.timetable,
-    required this.onIsFollowedChange,
     required this.eventBlocProvider,
     Key? key,
   }) : super(key: key);
@@ -146,7 +142,7 @@ class _EventContentState extends State<_EventContent> {
               ticketsLink: widget.event.ticketsLink,
               isFollowed: _isFollowed,
               onIsFollowedChange: () =>
-                  FollowableUtil.onIsFollowedChange(context, widget.event),
+                  FollowableUtil.onIsFollowedChange<EventFull, EventShort>(context, widget.event),
             ),
           ),
           DetailsHorizontalScrollableList(
