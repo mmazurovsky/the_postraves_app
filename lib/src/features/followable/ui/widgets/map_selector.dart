@@ -35,7 +35,7 @@ class MapSelector extends StatelessWidget {
             );
           } else {
             return ListView.separated(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 18),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, i) => ButtonWithIcons(
                 buttonText: snapshot.data![i].mapName,
@@ -45,7 +45,7 @@ class MapSelector extends StatelessWidget {
                 ),
                 verticalPadding: 0,
               ),
-              separatorBuilder: (context, i) => SizedBox(height: 20),
+              separatorBuilder: (context, i) => const SizedBox(height: 20),
             );
           }
         },

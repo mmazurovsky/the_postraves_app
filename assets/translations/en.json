@@ -141,5 +141,6 @@
     "ok": "Ok",
     "notFollowingEntity": "You don't follow {} yet.\nStart following them and they will appear here",
     "areYouSureToDeleteAccount": "Are you sure you want to delete your account completely?",
-    "delete": "Delete"
+    "delete": "Delete",
+    "myFollowing": "Open following"
 }

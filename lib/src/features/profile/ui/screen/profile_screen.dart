@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
+import 'package:the_postraves_app/src/common/widgets/buttons/my_elevated_button_without_padding.dart';
 import 'package:the_postraves_app/src/common/widgets/dialogs.dart';
 import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import '../../../followable/ui/screens/wiki_canvas.dart';
@@ -136,16 +137,17 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
           child: Row(
             children: [
               Expanded(
-                child: MyOutlinedButtonWithoutPadding(
-                  text: 'openSettings'.tr(),
-                  borderColor: MyColors.main,
-                  // buttonColor: MyColors.forEventCard,
-                  textStyle: MyTextStyles.buttonWithMainColor,
-                  onTap: () => showModalBottomSheet(
-                    context: context,
-                    builder: (context) => SettingsSelector(
-                        _functionToCloseModalBottomSheetAndDoSomething),
+                child: MyElevatedButtonWithoutPadding(
+                  text: 'myFollowing'.tr(),
+                  buttonColor: MyColors.accent,
+                  leadingIcon: const Icon(
+                    Ionicons.heart,
+                    size: 24,
+                    color: MyColors.mainOppositeColor,
                   ),
+                  // buttonColor: MyColors.forEventCard,
+                  textStyle: MyTextStyles.buttonWithOppositeColorBold,
+                  onTap: () => NavigatorFunctions.pushBookmarks(context),
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ),
@@ -153,19 +155,23 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
                 width: 10,
               ),
               InkWell(
-                onTap: () => NavigatorFunctions.pushBookmarks(context),
+                onTap: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => SettingsSelector(
+                      _functionToCloseModalBottomSheetAndDoSomething),
+                ),
                 child: Container(
                   height: MyConstants.heightOfContainers,
                   width: MyConstants.heightOfContainers,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    border: Border.all(color: MyColors.accent, width: 1.5),
+                    border: Border.all(color: MyColors.main, width: 1.5),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(
-                    Ionicons.heart,
+                    Ionicons.settings_outline,
                     size: 24,
-                    color: MyColors.accent,
+                    color: MyColors.main,
                   ),
                 ),
               ),
@@ -280,10 +286,10 @@ class SettingsSelector extends StatelessWidget {
       iconData: Ionicons.settings_outline,
       title: 'settings'.tr(),
       content: ListView.separated(
-        padding: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.only(top: 18),
         physics: const NeverScrollableScrollPhysics(),
         itemCount: settingsList.length,
-        separatorBuilder: (_, i) => const SizedBox(height: 10),
+        separatorBuilder: (_, i) => const SizedBox(height: 18),
         itemBuilder: (context, index) {
           return SettingsButton(settingsList[index]);
         },

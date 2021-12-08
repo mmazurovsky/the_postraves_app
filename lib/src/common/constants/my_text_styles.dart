@@ -334,6 +334,13 @@ class MyTextStyles {
     color: MyColors.mainOppositeColor,
   );
 
+  static TextStyle buttonWithOppositeColorBold = const TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 19,
+    fontWeight: FontWeight.w700,
+    color: MyColors.mainOppositeColor,
+  );
+
   static TextStyle buttonWithInactiveStuffColor = const TextStyle(
     fontFamily: 'Roboto',
     fontSize: 18,

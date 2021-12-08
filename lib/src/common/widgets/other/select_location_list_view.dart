@@ -23,12 +23,12 @@ class SelectLocationListView<LOCATION extends LocationInterface>
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 18),
       physics:
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       shrinkWrap: isShrinkWrap,
       itemCount: locations.length,
-      separatorBuilder: (context, i) => const SizedBox(height: 10),
+      separatorBuilder: (context, i) => const SizedBox(height: 18),
       itemBuilder: (context, i) {
         LOCATION location = locations[i];
         return InkWell(
