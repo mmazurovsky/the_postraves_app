@@ -315,11 +315,15 @@ void setupServiceLocatorInjection() async {
     () => GeneralRemoteDataSourceImpl<Country>(
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<GeneralRemoteDataSource<City>>(
     () => GeneralRemoteDataSourceImpl<City>(
+      serviceLocator(),
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -343,11 +347,15 @@ void setupServiceLocatorInjection() async {
     () => GeneralRemoteDataSourceImpl<ArtistShort>(
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<GeneralRemoteDataSource<EventShort>>(
     () => GeneralRemoteDataSourceImpl<EventShort>(
+      serviceLocator(),
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -357,11 +365,15 @@ void setupServiceLocatorInjection() async {
     () => GeneralRemoteDataSourceImpl<UnityShort>(
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<GeneralRemoteDataSource<PlaceShort>>(
     () => GeneralRemoteDataSourceImpl<PlaceShort>(
+      serviceLocator(),
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -491,11 +503,13 @@ void setupServiceLocatorInjection() async {
     () => GeneralRepositoryImpl<Country>(
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<GeneralRepository<City>>(
     () => GeneralRepositoryImpl<City>(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
