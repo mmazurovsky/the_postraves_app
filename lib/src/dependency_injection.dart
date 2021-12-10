@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
+import 'package:the_postraves_package/service/firebase_image_service.dart';
 import 'common/geo_change_notifier/current_city_change_notifier.dart';
 import 'common/utils/localized_get_request.dart';
 import 'package:the_postraves_package/client/client_helper.dart';
@@ -40,7 +41,6 @@ import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/place_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
 import 'package:the_postraves_package/models/user/user_profile.dart';
-import 'package:the_postraves_package/service/firebase_image_repository_impl.dart';
 import 'common/authentication/repository/firebase_auth_repository.dart';
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'common/configs/dynamic_link_configurer.dart';
@@ -556,8 +556,8 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
-  serviceLocator.registerLazySingleton<FirebaseImageRepository>(
-    () => FirebaseImageRepositoryImpl(
+  serviceLocator.registerLazySingleton<FirebaseImageService>(
+    () => FirebaseImageServiceImpl(
       serviceLocator(),
       serviceLocator(),
     ),

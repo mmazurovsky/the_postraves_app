@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_package/service/firebase_image_service.dart';
 import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/errors/failures.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/user/user_profile_to_write.dart';
-import 'package:the_postraves_package/service/firebase_image_repository_impl.dart';
 import '../../repository/user_profile_repository.dart';
 
 part 'profile_state.dart';
@@ -13,7 +13,7 @@ part 'profile_cubit.freezed.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final UserProfileRepository _userProfileRepository;
-  final FirebaseImageRepository _firebaseImageRepository;
+  final FirebaseImageService _firebaseImageRepository;
   final AuthenticationCubit _authenticationBloc;
 
   ProfileCubit(

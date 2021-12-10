@@ -559,7 +559,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.5"
+    version: "3.1.0"
   image_cropper:
     dependency: "direct main"
     description:
@@ -1073,8 +1073,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: "83852a422ac3215e8fbf317c24950bbaa0d1b692"
+      ref: dev
+      resolved-ref: "1fb474643ea43ac24770636b008cbd660414dae9"
       url: "https://github.com/mmazurovsky/the_postraves_package"
     source: git
     version: "0.0.1"

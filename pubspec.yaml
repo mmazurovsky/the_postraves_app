@@ -54,6 +54,8 @@ dependencies:
   the_postraves_package:
     git:
       url: https://github.com/mmazurovsky/the_postraves_package
+      ref: dev
+
 
 dev_dependencies:
   flutter_test:
