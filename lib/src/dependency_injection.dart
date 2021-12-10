@@ -160,8 +160,22 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<City>>(
+    () => RemoteRequestWrapperImpl<City>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
   serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<Country>>>(
     () => RemoteRequestWrapperImpl<List<Country>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<Country>>(
+    () => RemoteRequestWrapperImpl<Country>(
       serviceLocator(),
       serviceLocator(),
     ),
