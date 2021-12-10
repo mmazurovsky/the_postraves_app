@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
-import '../geo_provider/current_tab_provider.dart';
-import '../widgets/animations/scale_animation_wrapper.dart';
+import '../geo_change_notifier/current_tab_change_notifier.dart';
 import 'bottom_navigation_tab_item.dart';
-
 
 class MyBottomNavigationBar extends StatefulWidget {
   const MyBottomNavigationBar({Key? key}) : super(key: key);
@@ -43,7 +42,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    TabItem currentTab = context.watch<CurrentTabProvider>().currentTab;
+    TabItem currentTab = context.watch<CurrentTabChangeNotifier>().currentTab;
 
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
@@ -55,7 +54,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       onTap: (index) {
         thereWasTabChange = true;
         context
-            .read<CurrentTabProvider>()
+            .read<CurrentTabChangeNotifier>()
             .changeCurrentTab(TabItem.values[index]);
         if (index == currentTab.index) {
           if (currentTab.tabNavigatorKey.currentState!.canPop()) {

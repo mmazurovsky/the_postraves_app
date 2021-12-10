@@ -2,7 +2,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../common/widgets/animations/my_slide_animated_switcher.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
 import '../../../../common/widgets/other/column_of_custom_cards.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
@@ -89,9 +89,9 @@ class _FollowingScreenState extends State<FollowingScreen>
       ),
       body: BlocBuilder<FollowingCubit, FollowingState>(
           builder: (context, state) {
-        return MySlideAnimatedSwitcher(
-          child: state is FollowingLoadedState
-              ? TabBarView(
+        return state is FollowingLoadedState
+            ? SlideAnimationWrapper(
+              child: TabBarView(
                   controller: _tabController,
                   children: [
                     _FollowableTabBarView<EventShort>(
@@ -145,9 +145,9 @@ class _FollowingScreenState extends State<FollowingScreen>
                       ),
                     ),
                   ],
-                )
-              : const LoadingContainer(),
-        );
+                ),
+            )
+            : const LoadingContainer();
       }),
     );
   }

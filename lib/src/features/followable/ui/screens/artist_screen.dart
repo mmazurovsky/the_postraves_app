@@ -1,6 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
 
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
@@ -16,7 +17,6 @@ import '../../state/follow_cubit/follow_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
-import '../widgets/slide_animation_wrapper.dart';
 import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';
@@ -116,7 +116,7 @@ class _ArtistContentState extends State<_ArtistContent> {
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
               onIsFollowedChange: () =>
-                  FollowableUtil.onIsFollowedChange(context, widget.artist),
+                  FollowableUtil.onIsFollowedChange<ArtistFull, ArtistShort>(context, widget.artist),
             ),
           ),
           SocialLinksList(

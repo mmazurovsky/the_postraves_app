@@ -1,6 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
 
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/models/fulls/unity_full.dart';
@@ -17,7 +18,6 @@ import '../../state/unity_cubit/unity_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
-import '../widgets/slide_animation_wrapper.dart';
 import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';
@@ -70,7 +70,6 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
             unity: state.unity,
             artists: state.artists,
             events: state.events,
-            onIsFollowedChange: FollowableUtil.onIsFollowedChange,
           );
         } else {
           return LoadingContainer();
@@ -85,15 +84,12 @@ class _UnityContent extends StatefulWidget {
   final UnityFull unity;
   final List<ArtistShort> artists;
   final List<EventShort> events;
-  final void Function<T extends GeneralFollowableInterface, S extends GeneralFollowableInterface>(BuildContext, T)
-      onIsFollowedChange;
 
   const _UnityContent({
     Key? key,
     required this.unity,
     required this.artists,
     required this.events,
-    required this.onIsFollowedChange,
   }) : super(key: key);
 
   @override
@@ -106,7 +102,8 @@ class _UnityContentState extends State<_UnityContent> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _isFollowed = context.watch<FollowCubit<UnityFull, UnityShort>>().state.isFollowed!;
+    _isFollowed =
+        context.watch<FollowCubit<UnityFull, UnityShort>>().state.isFollowed!;
   }
 
   @override
@@ -120,7 +117,10 @@ class _UnityContentState extends State<_UnityContent> {
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
               onIsFollowedChange: () =>
-                  widget.onIsFollowedChange(context, widget.unity),
+                  FollowableUtil.onIsFollowedChange<UnityFull, UnityShort>(
+                context,
+                widget.unity,
+              ),
             ),
           ),
           SocialLinksList(

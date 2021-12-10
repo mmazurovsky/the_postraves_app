@@ -37,14 +37,14 @@ class WikiWideBookmarkButton extends StatelessWidget {
             Ionicons.heart,
             size: 22,
             color: isFollowed
-                ? MyColors.forInactiveStuffDarker
+                ? MyColors.forInactiveStuff
                 : MyColors.mainOppositeColor,
           ),
           distanceBetweenLeadingAndText: 5,
           text: isFollowed ? 'wikiUnfollow'.tr() : 'wikiFollow'.tr(),
           textStyle: isFollowed
-              ? MyTextStyles.buttonWithInactiveStuffDarkerColor
-              : MyTextStyles.buttonWithOppositeColor,
+              ? MyTextStyles.buttonWithInactiveStuffColor
+              : MyTextStyles.buttonWithOppositeColorBold,
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ),

@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         canvasColor: Colors.transparent,
-        textSelectionTheme: const TextSelectionThemeData(
+        textSelectionTheme: TextSelectionThemeData(
           cursorColor: MyColors.accent,
-          selectionColor: MyColors.accent,
+          selectionColor: MyColors.main.withOpacity(0.2),
           selectionHandleColor: MyColors.accent,
         ),
         cupertinoOverrideTheme: const CupertinoThemeData(

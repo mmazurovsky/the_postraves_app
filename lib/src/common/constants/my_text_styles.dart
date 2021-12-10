@@ -10,6 +10,13 @@ class MyTextStyles {
     fontWeight: FontWeight.w700,
   );
 
+    static const TextStyle filtered = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.main,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle fullEventCardTitle = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 27,
@@ -174,6 +181,13 @@ class MyTextStyles {
     fontWeight: FontWeight.w500,
   );
 
+  static const TextStyle closeModalBottomSheetInactive = TextStyle(
+    fontFamily: 'IBMPlexMono',
+    color: MyColors.forInactiveStuff,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle termsInactive = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.forInactiveStuff,
@@ -276,7 +290,7 @@ class MyTextStyles {
 
   static const TextStyle authTitle = TextStyle(
     color: MyColors.main,
-    fontSize: 35,
+    fontSize: 42,
     fontWeight: FontWeight.w700,
   );
 
@@ -317,6 +331,13 @@ class MyTextStyles {
     fontFamily: 'Roboto',
     fontSize: 18,
     fontWeight: FontWeight.w600,
+    color: MyColors.mainOppositeColor,
+  );
+
+  static TextStyle buttonWithOppositeColorBold = const TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 19,
+    fontWeight: FontWeight.w700,
     color: MyColors.mainOppositeColor,
   );
 

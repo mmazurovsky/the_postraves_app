@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
 
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/models/fulls/place_full.dart';
@@ -22,7 +23,6 @@ import '../../../../common/widgets/other/column_of_custom_cards.dart';
 import '../widgets/coordinates_section.dart';
 import '../widgets/followable_util.dart';
 import '../widgets/map_selector.dart';
-import '../widgets/slide_animation_wrapper.dart';
 import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';
@@ -78,7 +78,6 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
           return _PlaceContent(
             place: state.place,
             events: state.events,
-            onIsFollowedChange: FollowableUtil.onIsFollowedChange,
           );
         } else {
           return LoadingContainer();
@@ -92,12 +91,9 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
 class _PlaceContent extends StatefulWidget {
   final PlaceFull place;
   final List<EventShort> events;
-  final void Function<T extends GeneralFollowableInterface, S extends GeneralFollowableInterface>(BuildContext, T)
-      onIsFollowedChange;
   const _PlaceContent({
     required this.place,
     required this.events,
-    required this.onIsFollowedChange,
     Key? key,
   }) : super(key: key);
 
@@ -110,7 +106,8 @@ class _PlaceContentState extends State<_PlaceContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context.watch<FollowCubit<PlaceFull, PlaceShort>>().state.isFollowed!;
+    _isFollowed =
+        context.watch<FollowCubit<PlaceFull, PlaceShort>>().state.isFollowed!;
     super.didChangeDependencies();
   }
 
@@ -125,7 +122,10 @@ class _PlaceContentState extends State<_PlaceContent> {
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
               onIsFollowedChange: () =>
-                  widget.onIsFollowedChange(context, widget.place),
+                  FollowableUtil.onIsFollowedChange<PlaceFull, PlaceShort>(
+                context,
+                widget.place,
+              ),
             ),
           ),
           SocialLinksList(

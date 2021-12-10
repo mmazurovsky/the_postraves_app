@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
+import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
 import 'common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/followable/repository/general_repository.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
@@ -9,10 +11,9 @@ import 'package:the_postraves_package/models/geo/country.dart';
 import 'common/configs/cities_cleaner.dart';
 import 'common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import 'common/configs/my_refresh_configuration.dart';
-import 'common/geo_provider/city_list_provider.dart';
-import 'common/geo_provider/country_list_provider.dart';
-import 'common/geo_provider/current_city_provider.dart';
-import 'common/geo_provider/current_tab_provider.dart';
+import 'common/geo_change_notifier/country_list_change_notifier.dart';
+import 'common/geo_change_notifier/current_city_change_notifier.dart';
+import 'common/geo_change_notifier/current_tab_change_notifier.dart';
 import 'common/geo_repository/city_local_repository.dart';
 import 'common/geo_repository/country_local_repository.dart';
 import 'common/configs/dynamic_link_configurer.dart';
@@ -76,21 +77,21 @@ class AppState extends State<App> with WidgetsBindingObserver {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (_) => CurrentTabProvider(TabItem.shows),
+            create: (_) => CurrentTabChangeNotifier(TabItem.shows),
           ),
           ChangeNotifierProvider(
-            create: (_) => CurrentCityProvider(
+            create: (_) => serviceLocator<CurrentCityChangeNotifier>(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => CityListChangeNotifier(
               serviceLocator<CityLocalRepository>(),
-              serviceLocator<ProfileCubit>(),
             ),
           ),
           ChangeNotifierProvider(
-            create: (_) => CityListProvider(
-              serviceLocator<CityLocalRepository>(),
-            ),
+            create: (_) => serviceLocator<DateTimeFilterChangeNotifier>(),
           ),
           Provider(
-            create: (_) => CountryListProvider(
+            create: (_) => CountryListChangeNotifier(
               serviceLocator<CountryLocalRepository>(),
             ),
           ),
@@ -101,13 +102,14 @@ class AppState extends State<App> with WidgetsBindingObserver {
             child: MyRefreshConfiguration(
               child: WillPopScope(
                 onWillPop: () async => !await context
-                    .watch<CurrentTabProvider>()
+                    .watch<CurrentTabChangeNotifier>()
                     .currentTab
                     .tabNavigatorKey
                     .currentState!
                     .maybePop(),
                 child: InitialScaffoldResolver(
-                  countryLocalRepository: serviceLocator<CountryLocalRepository>(),
+                  countryLocalRepository:
+                      serviceLocator<CountryLocalRepository>(),
                   cityLocalRepository: serviceLocator<CityLocalRepository>(),
                   authenticationBloc: serviceLocator<AuthenticationCubit>(),
                   cityRemoteRepository:

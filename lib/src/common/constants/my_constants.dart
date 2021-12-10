@@ -10,7 +10,7 @@ class MyConstants {
   static const double heightOfContainers = 57;
   static const double dividerThickness = 0.1;
   static const double heightOfCitySelectorModalBottomSheet = 270;
-  static const double heightOfSortModeSelectorModalBottomSheet = 340;
+  static const double heightOfFilterByDateSelectorModalBottomSheet = 420;
   static double appBarTitleWidth(BuildContext context) =>
       ScreenSize.width - 2 * horizontalPaddingOrMargin - 2 * heightOfContainers;
   static String googleApiKey = dotenv.env['GOOGLE_MAP_API_KEY'] ?? 'undefined';

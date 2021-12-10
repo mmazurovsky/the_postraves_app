@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/common/widgets/spacers/my_spacers.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import '../../../../common/constants/my_text_styles.dart';
 import '../../../../common/utils/screen_size.dart';
 import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
 import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
-
 
 class AuthenticationCanvas extends StatelessWidget {
   final String title;
@@ -31,67 +31,59 @@ class AuthenticationCanvas extends StatelessWidget {
         leading: backButtonNeeded ? const AppBarBackButton() : Container(),
       ),
       body:
-          // not sure about this screen for all device screen sizes...
           SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        child: SizedBox(
-          height: ScreenSize.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              MyHorizontalMargin(
-                child: Text(
-                  title,
-                  style: MyTextStyles.authTitle,
-                  textAlign: TextAlign.center,
-                ),
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 150),
+            MyHorizontalMargin(
+              child: Text(
+                title,
+                style: MyTextStyles.authTitle,
+                textAlign: TextAlign.center,
               ),
-              subTitle == null
-                  ? Container()
-                  : Column(
-                      children: [
-                        const SizedBox(
-                          height: 20,
+            ),
+            subTitle == null
+                ? Container()
+                : Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      MyHorizontalMargin(
+                        child: Text(
+                          subTitle!,
+                          style: MyTextStyles.authSubtitle,
+                          textAlign: TextAlign.center,
                         ),
-                        MyHorizontalMargin(
-                          child: Text(
-                            subTitle!,
-                            style: MyTextStyles.authSubtitle,
-                            textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+            const SizedBox(height: 50),
+            ...buttons.map(
+              (button) {
+                return button != null
+                    ? Column(
+                        children: [
+                          button,
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-                      ],
-                    ),
-              const SizedBox(
-                height: 30,
-              ),
-              ...buttons.map(
-                (button) {
-                  return button != null
-                      ? Column(
-                          children: [
-                            button,
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        )
-                      : Container();
-                },
-              ),
-              const SizedBox(
-                height: 120,
-              ),
-              bottomWidget == null
-                  ? Container()
-                  : MyHorizontalMargin(
-                      child: bottomWidget!,
-                    ),
-              const SizedBox(height: 20),
-            ],
-          ),
+                        ],
+                      )
+                    : Container();
+              },
+            ),
+            const SizedBox(height: 100),
+            bottomWidget == null
+                ? Container()
+                : MyHorizontalMargin(
+                    child: bottomWidget!,
+                  ),
+            const SizedBox(height: 20),
+          ],
         ),
       ),
     );

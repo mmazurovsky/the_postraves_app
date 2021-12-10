@@ -41,7 +41,7 @@ class EventMainButton extends StatelessWidget {
                   buttonColor: MyColors.accent,
                   mainAxisAlignment: MainAxisAlignment.center,
                   onTap: () => OpenLinkService.openUrl(ticketsLink!),
-                  textStyle: MyTextStyles.buttonWithOppositeColor,
+                  textStyle: MyTextStyles.buttonWithOppositeColorBold,
                   distanceBetweenLeadingAndText: 5,
                 ),
               ),

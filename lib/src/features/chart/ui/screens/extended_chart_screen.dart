@@ -6,7 +6,7 @@ import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
-import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
 import '../../../../common/widgets/app_bar/app_bar_title.dart';
 import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
@@ -54,8 +54,9 @@ class _ExtendedChartScreenState<T extends GeneralFollowableInterface>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (_currentCity != context.watch<CurrentCityProvider>().currentCity) {
-      _currentCity = context.read<CurrentCityProvider>().currentCity!;
+    if (_currentCity !=
+        context.watch<CurrentCityChangeNotifier>().currentCity) {
+      _currentCity = context.read<CurrentCityChangeNotifier>().currentCity!;
     }
   }
 

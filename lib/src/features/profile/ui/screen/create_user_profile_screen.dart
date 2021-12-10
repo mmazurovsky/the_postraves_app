@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
+import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
 import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import '../../../../common/constants/my_assets.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/city_list_provider.dart';
-import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
 import '../../../../common/widgets/app_bar/app_bar_button.dart';
 import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
@@ -59,7 +59,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _buttonText = 'profileCreationCreate'.tr();
-    _userCity = context.watch<CurrentCityProvider>().currentCity!;
+    _userCity = context.watch<CurrentCityChangeNotifier>().currentCity!;
   }
 
   @override
@@ -157,7 +157,9 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
                             context: context,
                             builder: (context) => CurrentCitySelector(
                               currentCity: _userCity,
-                              cities: context.read<CityListProvider>().cityList,
+                              cities: context
+                                  .read<CityListChangeNotifier>()
+                                  .cityList,
                               onSelected: _selectActiveCity,
                             ),
                           );

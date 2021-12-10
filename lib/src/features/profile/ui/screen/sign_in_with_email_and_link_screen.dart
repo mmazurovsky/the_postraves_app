@@ -2,6 +2,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:the_postraves_app/src/common/widgets/dialogs.dart';
 import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import '../../../../common/constants/my_text_styles.dart';
@@ -137,9 +138,7 @@ class _SignInWithEmailAndLinkScreenState
                         _isDialogOpen = true;
                         showDialog(
                           context: context,
-                          builder: (_) => LinkSentDialog(
-                            () => _closeDialog(),
-                          ),
+                          builder: (_) => LinkSentToEmailDialog(_closeDialog),
                         );
                       }
                     },
@@ -148,54 +147,6 @@ class _SignInWithEmailAndLinkScreenState
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class LinkSentDialog extends StatelessWidget {
-  final void Function() _closeDialogFunction;
-
-  const LinkSentDialog(this._closeDialogFunction, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 24.0),
-      backgroundColor: MyColors.bottomNavBar,
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'linkHasBeenSent'.tr(),
-              style: MyTextStyles.bodyFat,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const SectionDivider(needHorizontalMargin: false),
-            const SizedBox(
-              height: 15,
-            ),
-            InkWell(
-              onTap: () => _closeDialogFunction(),
-              child: Container(
-                width: 80,
-                height: 30,
-                alignment: Alignment.center,
-                child: Text(
-                  'ok'.tr(),
-                  style: MyTextStyles.bodyWithAccentColor,
-                ),
-              ),
-            ),
-          ],
         ),
       ),
     );

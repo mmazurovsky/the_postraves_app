@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+import 'package:the_postraves_package/models/shorts/place_short.dart';
 import '../image/my_cached_network_image.dart';
 import '../../constants/my_constants.dart';
 import '../spacers/my_rating_entity_vertical_padding.dart';
@@ -12,7 +13,7 @@ class FollowableItem<T extends GeneralFollowableInterface>
   final T entity;
   final double horizontalPadding;
   final Function? onIconTap;
-  final Function onItemTap;
+  final Function? onItemTap;
   final Widget? startingWidget;
   final bool showWeeklyFollowers;
   final String? hintText;
@@ -21,7 +22,7 @@ class FollowableItem<T extends GeneralFollowableInterface>
     Key? key,
     required this.entity,
     this.startingWidget,
-    required this.onItemTap,
+    this.onItemTap,
     this.onIconTap,
     this.horizontalPadding = MyConstants.horizontalPaddingOrMargin,
     this.showWeeklyFollowers = false,
@@ -47,11 +48,13 @@ class _FollowableItemState<T extends GeneralFollowableInterface>
     return InkWell(
       highlightColor: MyColors.forButtonHighlight,
       onTap: () async {
-        widget.onItemTap(
-          context,
-          widget.entity,
-          await _image.getImageDimensions(),
-        );
+        widget.onItemTap != null
+            ? widget.onItemTap!(
+                context,
+                widget.entity,
+                await _image.getImageDimensions(),
+              )
+            : {};
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
@@ -90,11 +93,13 @@ class _FollowableItemState<T extends GeneralFollowableInterface>
                         size: 26,
                       ),
                     )
-                  : const Icon(
-                      Ionicons.chevron_forward_outline,
-                      size: 26,
-                      color: MyColors.accent,
-                    )
+                  : widget.onItemTap != null
+                      ? const Icon(
+                          Ionicons.chevron_forward_outline,
+                          size: 26,
+                          color: MyColors.accent,
+                        )
+                      : Container(),
             ],
           ),
         ),

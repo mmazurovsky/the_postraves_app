@@ -6,34 +6,29 @@ import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/service/open_link_service.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/geo_provider/current_city_provider.dart';
+import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/widgets/other/placeholder_container.dart';
 
-class EmptyShowsPlaceholder extends StatefulWidget {
-  const EmptyShowsPlaceholder({Key? key}) : super(key: key);
-
-  @override
-  _EmptyShowsPlaceholderState createState() => _EmptyShowsPlaceholderState();
-}
-
-class _EmptyShowsPlaceholderState extends State<EmptyShowsPlaceholder> {
-  late City _currentCity;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _currentCity = Provider.of<CurrentCityProvider>(context).currentCity!;
-  }
+class EmptyShowsPlaceholder extends StatelessWidget {
+  final isFiltered;
+  const EmptyShowsPlaceholder({this.isFiltered, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final text = isFiltered ? 'emptyFilteredShowsText' : 'emptyShowsText';
     return PlaceholderContainer(
       child: RichText(
         textAlign: TextAlign.start,
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'emptyShowsText'.tr(args: [_currentCity.localName]) + ' ',
+              text: text.tr(args: [
+                    context
+                        .read<CurrentCityChangeNotifier>()
+                        .currentCity!
+                        .localName
+                  ]) +
+                  ' ',
               style: MyTextStyles.body,
             ),
             WidgetSpan(

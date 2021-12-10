@@ -169,6 +169,13 @@ class FormattingUtils {
     }
   }
 
+  static String getFormattedDateWithoutWeekday({required DateTime dateTime}) {
+    return sprintf('%02i.%02i', [
+      dateTime.day,
+      dateTime.month,
+    ]);
+  }
+
   static String getFormattedDateShort({required DateTime dateTime}) {
     return sprintf('%s — %02i.%02i', [
       getWeekdayName(
@@ -177,6 +184,13 @@ class FormattingUtils {
       ),
       dateTime.day,
       dateTime.month,
+    ]);
+  }
+
+  static String getMonthAndYear(DateTime dateTime) {
+    return sprintf('%s — %i', [
+      getMonthName(month: dateTime.month).toUpperCase(),
+      dateTime.year,
     ]);
   }
 
@@ -196,7 +210,7 @@ class FormattingUtils {
       ).toUpperCase(),
     ]);
   }
-  
+
   static String getFormattedTime(DateTime dateTime) {
     return sprintf('%02i:%02i', [
       dateTime.hour,

@@ -60,6 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
         });
       }
     } else {
+      _previousSearchValue = null;
       if (_toTriggerPreviousSearchesEvent) {
         _onClearSearch();
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/utils/followable_type_utils.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
@@ -37,29 +38,13 @@ class _WikiCanvasState extends State<WikiCanvas> {
     _scrollController = widget.scrollController ?? ScrollController();
   }
 
+  //* disposing this scroll controller causes crash when city is changed in user profile
   @override
   void dispose() {
-    _scrollController.dispose();
+    if (_scrollController != TabItem.profile.tabScrollController) {
+      _scrollController.dispose();
+    }
     super.dispose();
-  }
-
-  Future<Uri> _setShareLinkToPage() async {
-    final imageDimensions = widget.followableData.imageDimensions;
-    String _pathToPage =
-        '${FollowableTypeUtils.getNavigationRouteForType(widget.followableData.type)}?id=${widget.followableData.id}&name=${widget.followableData.name}';
-    if (widget.followableData.imageLink != null) {
-      _pathToPage +=
-          _pathToPage + '&imageLink=${widget.followableData.imageLink}';
-    }
-    if (widget.followableData.country != null) {
-      _pathToPage +=
-          '&countryName=${widget.followableData.country!.name}&countryLocalizedName=${widget.followableData.country!.localName}&countryEmojiCode=${widget.followableData.country!.emojiCode}';
-    }
-    if (imageDimensions != null) {
-      _pathToPage +=
-          '&imageHeight=${imageDimensions.height}&imageWidth=${imageDimensions.width}';
-    }
-    return await DynamicLinkService.createDynamicLink(_pathToPage);
   }
 
   @override
@@ -73,16 +58,11 @@ class _WikiCanvasState extends State<WikiCanvas> {
           physics:
               AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           slivers: [
-            FutureBuilder(
-              future: _setShareLinkToPage(),
-              builder: (context, AsyncSnapshot<Uri> snapshot) =>
-                  WikiSliverAppBar(
-                scrollController: _scrollController,
-                isBackButtonOn: widget.isBackButtonOn,
-                isShareButtonOn: widget.isShareButtonOn,
-                followableData: widget.followableData,
-                shareLink: snapshot.data,
-              ),
+            WikiSliverAppBar(
+              scrollController: _scrollController,
+              isBackButtonOn: widget.isBackButtonOn,
+              isShareButtonOn: widget.isShareButtonOn,
+              followableData: widget.followableData,
             ),
             SliverToBoxAdapter(
               child: Column(

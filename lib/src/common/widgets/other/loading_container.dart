@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'my_loading_indicator.dart';
 
-
 class LoadingContainer extends StatelessWidget {
   const LoadingContainer({Key? key}) : super(key: key);
 

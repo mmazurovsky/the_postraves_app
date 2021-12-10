@@ -4,6 +4,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
+import 'common/geo_change_notifier/current_city_change_notifier.dart';
 import 'common/utils/localized_get_request.dart';
 import 'package:the_postraves_package/client/client_helper.dart';
 import 'package:the_postraves_package/client/localized_request.dart';
@@ -78,7 +80,7 @@ void setupServiceLocatorInjection() async {
   // Services
 
   serviceLocator.registerLazySingleton<ServerConstantsAbstract>(
-    () => ServerConstantsProd(),
+    () => ServerConstantsDevelopment(),
   );
 
   serviceLocator.registerLazySingleton<DynamicLinkService>(
@@ -158,8 +160,22 @@ void setupServiceLocatorInjection() async {
     ),
   );
 
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<City>>(
+    () => RemoteRequestWrapperImpl<City>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
   serviceLocator.registerLazySingleton<RemoteRequestWrapper<List<Country>>>(
     () => RemoteRequestWrapperImpl<List<Country>>(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<RemoteRequestWrapper<Country>>(
+    () => RemoteRequestWrapperImpl<Country>(
       serviceLocator(),
       serviceLocator(),
     ),
@@ -313,11 +329,15 @@ void setupServiceLocatorInjection() async {
     () => GeneralRemoteDataSourceImpl<Country>(
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<GeneralRemoteDataSource<City>>(
     () => GeneralRemoteDataSourceImpl<City>(
+      serviceLocator(),
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -333,6 +353,42 @@ void setupServiceLocatorInjection() async {
 
   serviceLocator.registerLazySingleton<ShowsRemoteDataSource>(
     () => ShowsRemoteDataSourceImpl(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<GeneralRemoteDataSource<ArtistShort>>(
+    () => GeneralRemoteDataSourceImpl<ArtistShort>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<GeneralRemoteDataSource<EventShort>>(
+    () => GeneralRemoteDataSourceImpl<EventShort>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<GeneralRemoteDataSource<UnityShort>>(
+    () => GeneralRemoteDataSourceImpl<UnityShort>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<GeneralRemoteDataSource<PlaceShort>>(
+    () => GeneralRemoteDataSourceImpl<PlaceShort>(
+      serviceLocator(),
+      serviceLocator(),
+      serviceLocator(),
       serviceLocator(),
     ),
   );
@@ -461,11 +517,13 @@ void setupServiceLocatorInjection() async {
     () => GeneralRepositoryImpl<Country>(
       serviceLocator(),
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
   serviceLocator.registerLazySingleton<GeneralRepository<City>>(
     () => GeneralRepositoryImpl<City>(
+      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
     ),
@@ -536,8 +594,7 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton<ShowsRepository>(
     () => ShowsRepositoryImpl(
       showsRemoteDataSource: serviceLocator(),
-      remoteRequestWrapperByDate: serviceLocator(),
-      remoteRequestWrapperByRating: serviceLocator(),
+      remoteRequestWrapper: serviceLocator(),
     ),
   );
 
@@ -654,6 +711,17 @@ void setupServiceLocatorInjection() async {
 
   // State
 
+  serviceLocator.registerLazySingleton(
+    () => CurrentCityChangeNotifier(
+      serviceLocator<CityLocalRepository>(),
+      serviceLocator<ProfileCubit>(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton(
+    () => DateTimeFilterChangeNotifier(serviceLocator()),
+  );
+
   serviceLocator.registerLazySingleton<AuthenticationCubit>(
     () => AuthenticationCubit(
       serviceLocator(),
@@ -681,7 +749,7 @@ void setupServiceLocatorInjection() async {
   serviceLocator.registerLazySingleton(
     () => ShowsCubit(
       showsRepository: serviceLocator(),
-      viewSwitcherBloc: serviceLocator(),
+      dateFilterChangeNotifier: serviceLocator(),
     ),
   );
 
