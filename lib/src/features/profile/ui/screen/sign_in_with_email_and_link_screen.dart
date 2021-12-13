@@ -138,7 +138,10 @@ class _SignInWithEmailAndLinkScreenState
                         _isDialogOpen = true;
                         showDialog(
                           context: context,
-                          builder: (_) => LinkSentToEmailDialog(_closeDialog),
+                          builder: (_) => DialogWithOkButton(
+                            'linkHasBeenSent'.tr(),
+                            _closeDialog,
+                          ),
                         );
                       }
                     },

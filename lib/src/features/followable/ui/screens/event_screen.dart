@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
+import 'package:the_postraves_app/src/common/widgets/dialogs.dart';
 import 'package:the_postraves_app/src/common/widgets/entity_presentation/followable_item.dart';
 import 'package:the_postraves_app/src/common/widgets/other/section_title.dart';
 import 'package:the_postraves_app/src/common/widgets/spacers/section_divider.dart';
@@ -142,23 +143,21 @@ class _EventContentState extends State<_EventContent> {
               ticketsLink: widget.event.ticketsLink,
               isFollowed: _isFollowed,
               onIsFollowedChange: () =>
-                  FollowableUtil.onIsFollowedChange<EventFull, EventShort>(context, widget.event),
+                  FollowableUtil.onIsFollowedChange<EventFull, EventShort>(
+                      context, widget.event),
             ),
           ),
           DetailsHorizontalScrollableList(
             verticalPadding: 23,
             titleBodyMap: {
               'wikiEventStatus'.tr(): Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     FormattingUtils.getEventStatusNameTranslation(
                         widget.event.status),
                     style: MyTextStyles.body,
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SizedBox(width: 10),
                   EventStatusIndicator(widget.event.status),
                 ],
               ),
@@ -168,17 +167,55 @@ class _EventContentState extends State<_EventContent> {
                 ),
                 style: MyTextStyles.body,
               ),
-              'wikiEventStart'.tr(): Text(
-                FormattingUtils.getFormattedDateAndTime(
-                  dateTime: widget.event.startDateTime,
-                ),
-                style: MyTextStyles.body,
+              'wikiEventStart'.tr(): Row(
+                children: [
+                  Text(
+                    FormattingUtils.getFormattedDateAndTime(
+                      dateTime: widget.event.startDateTime,
+                    ),
+                    style: MyTextStyles.body,
+                  ),
+                  const SizedBox(width: 10),
+                  InkWell(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (ctx) => DialogWithOkButton(
+                        'eventStartTimeInfo'
+                            .tr(args: [widget.event.place.city.localName]),
+                        Navigator.of(ctx).pop,
+                      ),
+                    ),
+                    child: const Icon(
+                      Ionicons.information_circle_outline,
+                      color: MyColors.accent,
+                    ),
+                  ),
+                ],
               ),
-              'wikiEventEnd'.tr(): Text(
-                FormattingUtils.getFormattedDateAndTime(
-                  dateTime: widget.event.endDateTime,
-                ),
-                style: MyTextStyles.body,
+              'wikiEventEnd'.tr(): Row(
+                children: [
+                  Text(
+                    FormattingUtils.getFormattedDateAndTime(
+                      dateTime: widget.event.endDateTime,
+                    ),
+                    style: MyTextStyles.body,
+                  ),
+                  const SizedBox(width: 10),
+                  InkWell(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (ctx) => DialogWithOkButton(
+                        'eventEndTimeInfo'
+                            .tr(args: [widget.event.place.city.localName]),
+                        Navigator.of(ctx).pop,
+                      ),
+                    ),
+                    child: const Icon(
+                      Ionicons.information_circle_outline,
+                      color: MyColors.accent,
+                    ),
+                  ),
+                ],
               ),
             },
           ),
@@ -253,16 +290,6 @@ class PlaceIsCityPlaceholder extends StatelessWidget {
         FollowableItem(
           entity: _place,
         )
-        // FollowableList(
-        //   followables: _followables,
-        //   onItemTap: (BuildContext context, T entity,
-        //           ImageDimensions? imageDimensions) =>
-        //       NavigatorFunctions.pushFollowable(
-        //     context: context,
-        //     followableData:
-        //         entity.convertToFollowableData(imageDimensions),
-        //   ),
-        // ),
       ],
     );
   }

@@ -65,16 +65,18 @@ class DialogCanvas extends StatelessWidget {
   }
 }
 
-class LinkSentToEmailDialog extends StatelessWidget {
+class DialogWithOkButton extends StatelessWidget {
+  final String _alertText;
   final void Function() _closeDialogFunction;
 
-  const LinkSentToEmailDialog(this._closeDialogFunction, {Key? key})
+  const DialogWithOkButton(this._alertText, this._closeDialogFunction,
+      {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DialogCanvas(
-      alertText: 'linkHasBeenSent'.tr(),
+      alertText: _alertText, 
       buttonsRow: InkWell(
         onTap: _closeDialogFunction,
         child: Container(

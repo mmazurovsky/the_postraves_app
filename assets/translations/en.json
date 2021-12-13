@@ -138,5 +138,7 @@
     "notFollowingEntity": "You don't follow {} yet.\nStart following them and they will appear here",
     "areYouSureToDeleteAccount": "Are you sure you want to delete your account completely?",
     "delete": "Delete",
-    "myFollowing": "Open following"
+    "myFollowing": "Open following",
+    "eventStartTimeInfo": "This is the local time of {}\n\nStart time is approximate",
+    "eventEndTimeInfo": "This is the local time of {}\n\nEnd time is approximate"
 }
