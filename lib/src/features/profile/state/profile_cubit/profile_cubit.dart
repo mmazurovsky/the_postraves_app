@@ -28,7 +28,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     Failure? imageFailure;
     if (imageFile != null) {
       final response =
-          await _firebaseImageRepository.uploadUserImageFile(imageFile);
+          await _firebaseImageRepository.resizeAndUploadImageFileNonWeb(
+        imageFile: imageFile,
+        folderName: 'user',
+      );
       response.when(
           success: (data) => imageLink = data,
           failure: (incFailure) => imageFailure = incFailure);
@@ -64,7 +67,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     Failure? imageFailure;
     if (imageFile != null) {
       final response =
-          await _firebaseImageRepository.uploadUserImageFile(imageFile);
+          await _firebaseImageRepository.resizeAndUploadImageFileNonWeb(
+        imageFile: imageFile,
+        folderName: 'user',
+      );
       response.when(
         success: (data) => imageLink = data,
         failure: (incFailure) => imageFailure = incFailure,

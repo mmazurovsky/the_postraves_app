@@ -22,7 +22,7 @@ class ArtistCubit extends Cubit<ArtistState> {
       success: (data) {
         CompleteArtistEntity completeArtist = data;
         emit(
-          ArtistState.loaded(completeArtist.artistFull, completeArtist.unions,
+          ArtistState.loaded(completeArtist.artistFull, completeArtist.unities,
               completeArtist.events),
         );
       },
