@@ -48,16 +48,6 @@ class CoordinatesSection extends StatelessWidget {
                     mapId: MyConstants.googleMapId,
                     zoom: 14,
                     markers: [
-                      // Marker(
-                      //   color: MyColors.accent,
-                      //   label: 'A',
-                      //   locations: [
-                      //     Location(
-                      //       _place.coordinate.latitude,
-                      //       _place.coordinate.longitude,
-                      //     ),
-                      //   ],
-                      // ),
                       Marker.custom(
                         anchor: MarkerAnchor.bottom,
                         icon:
