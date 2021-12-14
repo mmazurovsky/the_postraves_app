@@ -48,3 +48,4 @@ app.*.map.json
 *.env
 flutterrepair.sh
 GoogleService-Info.plist
+android/app/google-services.json

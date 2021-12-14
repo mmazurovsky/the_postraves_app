@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
@@ -96,17 +97,33 @@ class AppState extends State<App> with WidgetsBindingObserver {
             ),
           ),
         ],
-        child: CitiesCleaner(
+        builder: (context, child) => CitiesCleaner(
           cityRepository: serviceLocator(),
           child: DynamicLinksConfigurer(
             child: MyRefreshConfiguration(
               child: WillPopScope(
-                onWillPop: () async => !await context
-                    .watch<CurrentTabChangeNotifier>()
-                    .currentTab
-                    .tabNavigatorKey
-                    .currentState!
-                    .maybePop(),
+                onWillPop: () async {
+                  final currentTab =
+                      context.read<CurrentTabChangeNotifier>().currentTab;
+                  final navigatorCurrentState =
+                      currentTab.tabNavigatorKey.currentState!;
+                  final canPop = navigatorCurrentState.canPop();
+                  if (canPop) {
+                    navigatorCurrentState.pop();
+                    return false;
+                  } else {
+                    if (currentTab.index != 0) {
+                      context
+                          .read<CurrentTabChangeNotifier>()
+                          .changeCurrentTab(TabItem.values.first);
+                      return false;
+                    } else {
+                      SystemChannels.platform
+                          .invokeMethod('SystemNavigator.pop'); // close the app
+                      return true;
+                    }
+                  }
+                },
                 child: InitialScaffoldResolver(
                   countryLocalRepository:
                       serviceLocator<CountryLocalRepository>(),

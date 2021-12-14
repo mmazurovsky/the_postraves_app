@@ -45,8 +45,8 @@ class MyNavigationRoutes {
   static const String extendedChart = '/extendedChart';
 }
 
-class MyNavigator extends StatelessWidget {
-  const MyNavigator({
+class MyNavigatorForTab extends StatelessWidget {
+  const MyNavigatorForTab({
     required this.navigatorKey,
     required this.activeBottomTab,
   });

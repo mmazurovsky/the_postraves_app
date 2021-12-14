@@ -27,7 +27,6 @@ class MyRefreshConfiguration extends StatelessWidget {
         idleText: '',
         refreshingText: '',
         completeText: '',
-        // TODO! Android: check android progress indicator
         refreshingIcon: MyLoadingIndicator(),
         completeIcon: Icon(Ionicons.checkmark,
             color: MyColors.forInactiveStuff, size: 25),

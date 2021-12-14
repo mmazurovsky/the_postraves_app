@@ -34,6 +34,7 @@ class UnfilteredEventsList extends StatelessWidget {
       onRefresh: onRefresh,
       child: events.isNotEmpty
           ? ListView.separated(
+            physics: BouncingScrollPhysics(),
               padding: const EdgeInsets.only(top: 15),
               itemCount: events.length,
               itemBuilder: (context, i) => EventCard(

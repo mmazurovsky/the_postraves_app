@@ -51,16 +51,16 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       //* https://github.com/flutter/flutter/issues/86545
       selectedFontSize: 0,
       showSelectedLabels: false,
-      onTap: (index) {
-        thereWasTabChange = true;
-        context
-            .read<CurrentTabChangeNotifier>()
-            .changeCurrentTab(TabItem.values[index]);
-        if (index == currentTab.index) {
+      onTap: (tappedTabIndex) {
+        // cases when tapped on active tab bar item
+        if (tappedTabIndex == currentTab.index) {
+          // case when navigation stack not empty
           if (currentTab.tabNavigatorKey.currentState!.canPop()) {
             currentTab.tabNavigatorKey.currentState!
                 .popUntil(ModalRoute.withName(currentTab.tabNavigatorRoute));
-          } else {
+          }
+          // case when navigation stack empty
+          else {
             if (currentTab.tabScrollController.hasClients) {
               currentTab.tabScrollController.animateTo(
                 0.0,
@@ -69,6 +69,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
               );
             }
           }
+        } else {
+          thereWasTabChange = true;
+          context
+              .read<CurrentTabChangeNotifier>()
+              .changeCurrentTab(TabItem.values[tappedTabIndex]);
         }
       },
       items: [

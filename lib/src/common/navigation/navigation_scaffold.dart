@@ -10,7 +10,7 @@ class NavigationScaffold extends StatelessWidget {
   const NavigationScaffold({Key? key}) : super(key: key);
 
   Widget _buildNavigatorForTab(TabItem tabItem) {
-    return MyNavigator(
+    return MyNavigatorForTab(
       navigatorKey: tabItem.tabNavigatorKey,
       activeBottomTab: tabItem.tabNavigatorRoute,
     );

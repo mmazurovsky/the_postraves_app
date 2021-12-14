@@ -10,7 +10,15 @@ class MyLoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Platform.isAndroid
-        ? const CircularProgressIndicator(color: MyColors.main)
+        ? Container(
+            height: 27,
+            width: 27,
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator(
+              strokeWidth: 2,
+              color: MyColors.main,
+            ),
+          )
         : const CupertinoActivityIndicator(radius: 12);
   }
 }
