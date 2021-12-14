@@ -1,4 +1,4 @@
-package com.mmazurovsky.the_postraves_app
+package com.mmazurovsky.postraves_android
 
 import io.flutter.embedding.android.FlutterActivity
 
