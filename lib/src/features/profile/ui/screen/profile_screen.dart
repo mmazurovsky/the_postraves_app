@@ -252,8 +252,11 @@ class SettingsSelector extends StatelessWidget {
         leadingIcon: const Icon(Ionicons.chatbox_outline,
             color: MyColors.main, size: 18),
         onTap: (_) => _functionToCloseModalBottomSheetAndDoSomething(
-            (BuildContext _) => OpenLinkService.openTelegram(
-                MyConstants.telegramSupportAccount)),
+          (BuildContext _) => OpenLinkService.openTelegramOrEmail(
+            MyConstants.telegramSupportAccount,
+            MyConstants.emailSupportAccount,
+          ),
+        ),
       ),
       _SettingsButtonData(
         text: 'signOut'.tr(),

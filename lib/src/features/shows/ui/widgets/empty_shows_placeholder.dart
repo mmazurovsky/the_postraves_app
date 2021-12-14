@@ -10,8 +10,9 @@ import '../../../../common/geo_change_notifier/current_city_change_notifier.dart
 import '../../../../common/widgets/other/placeholder_container.dart';
 
 class EmptyShowsPlaceholder extends StatelessWidget {
-  final isFiltered;
-  const EmptyShowsPlaceholder({this.isFiltered, Key? key}) : super(key: key);
+  final bool isFiltered;
+  const EmptyShowsPlaceholder({this.isFiltered = false, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,10 @@ class EmptyShowsPlaceholder extends StatelessWidget {
               baseline: TextBaseline.alphabetic,
               alignment: PlaceholderAlignment.baseline,
               child: InkWell(
-                onTap: () => OpenLinkService.openTelegram(
-                    MyConstants.telegramSupportAccount),
+                onTap: () => OpenLinkService.openTelegramOrEmail(
+                  MyConstants.telegramSupportAccount,
+                  MyConstants.emailSupportAccount,
+                ),
                 child: RichText(
                   text: TextSpan(
                     text: 'emptyShowsLinkText'.tr(),
