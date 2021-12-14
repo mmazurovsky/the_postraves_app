@@ -95,7 +95,7 @@
     "authDocsPolicy": "Privacy policy",
     "errorSigningIn": "Sign in error, try again",
     "profileCreationTitle": "Profile\ncreation",
-    "profileCreationSubtitle": "Create profile to unlock all functions",
+    "profileCreationSubtitle": "Create profile to unlock all features",
     "profileCreationAddAvatar": "Add avatar",
     "profileCreationEditAvatar": "Edit avatar",
     "profileCreationNickname": "Your nickname",
@@ -140,5 +140,6 @@
     "delete": "Delete",
     "myFollowing": "Open following",
     "eventStartTimeInfo": "This is the local time of {}\n\nStart time is approximate",
-    "eventEndTimeInfo": "This is the local time of {}\n\nEnd time is approximate"
+    "eventEndTimeInfo": "This is the local time of {}\n\nEnd time is approximate",
+    "cropImage": "Crop image"
 }

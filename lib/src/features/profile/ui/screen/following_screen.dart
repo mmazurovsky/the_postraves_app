@@ -91,7 +91,7 @@ class _FollowingScreenState extends State<FollowingScreen>
           builder: (context, state) {
         return state is FollowingLoadedState
             ? SlideAnimationWrapper(
-              child: TabBarView(
+                child: TabBarView(
                   controller: _tabController,
                   children: [
                     _FollowableTabBarView<EventShort>(
@@ -146,7 +146,7 @@ class _FollowingScreenState extends State<FollowingScreen>
                     ),
                   ],
                 ),
-            )
+              )
             : const LoadingContainer();
       }),
     );
@@ -166,8 +166,7 @@ class _FollowableTabBarView<T extends GeneralFollowableInterface>
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+      physics: const BouncingScrollPhysics(),
       child: _followables.isNotEmpty
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,

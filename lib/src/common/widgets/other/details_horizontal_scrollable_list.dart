@@ -20,8 +20,7 @@ class DetailsHorizontalScrollableList extends StatelessWidget {
       child: SizedBox(
         height: 70,
         child: ListView(
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           children: [
             const SizedBox(width: MyConstants.horizontalPaddingOrMargin),

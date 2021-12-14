@@ -89,66 +89,69 @@ class _SignInWithEmailAndLinkScreenState
           backgroundColor: MyColors.screenBackground,
           elevation: 0,
         ),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 120,
-              ),
-              MyHorizontalMargin(
-                child: Text(
-                  'signInWithEmail'.tr(),
-                  style: MyTextStyles.authTitle,
-                ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+        body: Center(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Form(
+              key: _formKey,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextField(
-                    focusNode: _emailFocusNode,
-                    activeBorderColor: MyColors.accent,
-                    inactiveBorderColor: MyColors.main,
-                    fillColor: Colors.transparent,
-                    title: 'Email',
-                    textInputType: TextInputType.emailAddress,
-                    isSecret: false,
-                    textEditingController: _emailController,
-                    validatorFunction: _emailValidator,
-                    autofillHints: const [AutofillHints.email],
-                    enableSuggestions: false,
-                    autocorrect: false,
+          
+                  MyHorizontalMargin(
+                    child: Text(
+                      'signInWithEmail'.tr(),
+                      style: MyTextStyles.authTitle,
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  MyElevatedButton(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    text: 'getLinkToSignIn'.tr(),
-                    buttonColor: MyColors.accent,
-                    textStyle: MyTextStyles.buttonWithOppositeColor,
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        _emailFocusNode.unfocus();
-                        BlocProvider.of<AuthenticationCubit>(context)
-                            .startSigningWithEmailLink(_emailController.text);
-                        _isDialogOpen = true;
-                        showDialog(
-                          context: context,
-                          builder: (_) => DialogWithOkButton(
-                            'linkHasBeenSent'.tr(),
-                            _closeDialog,
-                          ),
-                        );
-                      }
-                    },
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MyTextField(
+                        focusNode: _emailFocusNode,
+                        activeBorderColor: MyColors.accent,
+                        inactiveBorderColor: MyColors.main,
+                        fillColor: Colors.transparent,
+                        title: 'Email',
+                        textInputType: TextInputType.emailAddress,
+                        isSecret: false,
+                        textEditingController: _emailController,
+                        validatorFunction: _emailValidator,
+                        autofillHints: const [AutofillHints.email],
+                        enableSuggestions: false,
+                        autocorrect: false,
+                      ),
+                      const SizedBox(height: 20),
+                      MyElevatedButton(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        text: 'getLinkToSignIn'.tr(),
+                        buttonColor: MyColors.accent,
+                        textStyle: MyTextStyles.buttonWithOppositeColor,
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            _emailFocusNode.unfocus();
+                            BlocProvider.of<AuthenticationCubit>(context)
+                                .startSigningWithEmailLink(_emailController.text);
+                            _isDialogOpen = true;
+                            showDialog(
+                              context: context,
+                              builder: (_) => DialogWithOkButton(
+                                'linkHasBeenSent'.tr(),
+                                _closeDialog,
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

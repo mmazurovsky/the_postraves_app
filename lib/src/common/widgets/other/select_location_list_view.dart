@@ -5,7 +5,6 @@ import '../../constants/my_text_styles.dart';
 import '../buttons/button_content.dart';
 import '../spacers/my_horizontal_padding.dart';
 
-
 class SelectLocationListView<LOCATION extends LocationInterface>
     extends StatelessWidget {
   final void Function(LOCATION) onLocationTap;
@@ -24,8 +23,7 @@ class SelectLocationListView<LOCATION extends LocationInterface>
   Widget build(BuildContext context) {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(vertical: 18),
-      physics:
-          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      physics: const BouncingScrollPhysics(),
       shrinkWrap: isShrinkWrap,
       itemCount: locations.length,
       separatorBuilder: (context, i) => const SizedBox(height: 18),

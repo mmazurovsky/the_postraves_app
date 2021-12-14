@@ -31,8 +31,7 @@ class AuthenticationCanvas extends StatelessWidget {
         leading: backButtonNeeded ? const AppBarBackButton() : Container(),
       ),
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics()),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

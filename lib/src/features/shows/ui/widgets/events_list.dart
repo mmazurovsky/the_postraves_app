@@ -34,8 +34,7 @@ class UnfilteredEventsList extends StatelessWidget {
       onRefresh: onRefresh,
       child: events.isNotEmpty
           ? ListView.separated(
-              physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
+              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.only(top: 15),
               itemCount: events.length,
               itemBuilder: (context, i) => EventCard(
@@ -47,8 +46,7 @@ class UnfilteredEventsList extends StatelessWidget {
               ),
             )
           : const SingleChildScrollView(
-              physics: BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
+              physics: BouncingScrollPhysics(),
               child: EmptyShowsPlaceholder(isFiltered: false)),
     );
   }
@@ -65,12 +63,11 @@ class FilteredEventsList extends StatelessWidget {
     final endDate = context.read<DateTimeFilterChangeNotifier>().endDateTime;
     return events.isNotEmpty
         ? ListView.separated(
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
+            physics: const BouncingScrollPhysics(),
             itemCount: events.isEmpty ? 0 : events.length + 1,
             separatorBuilder: (context, i) => const SizedBox(
-                  height: MyConstants.endingOfScreenOrSpaceBetweenElements,
-                ),
+              height: MyConstants.endingOfScreenOrSpaceBetweenElements,
+            ),
             itemBuilder: (context, i) {
               if (i == 0) {
                 return MyHorizontalPadding(
@@ -105,10 +102,10 @@ class FilteredEventsList extends StatelessWidget {
                   loadedEvent: events[i],
                 );
               }
-            })
+            },
+          )
         : const SingleChildScrollView(
-            physics:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            physics: BouncingScrollPhysics(),
             child: EmptyShowsPlaceholder(isFiltered: true),
           );
   }

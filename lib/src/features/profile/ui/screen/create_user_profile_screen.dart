@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
+import 'package:the_postraves_app/src/common/utils/screen_size.dart';
 import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
@@ -89,125 +90,123 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
-      child: Scaffold(
-        appBar: MySimpleAppBar(
-          leading: widget.isPoppable
-              ? const AppBarBackButton()
-              : AppBarButton(
-                  onTap: () {
-                    _unfocusTextFields();
-                    context.read<AuthenticationCubit>().signOut();
-                  },
-                  iconWidget: const Icon(
-                    Ionicons.close_outline,
-                    color: Colors.white,
-                  ),
-                  containerOpacity: 0,
+    return Scaffold(
+      appBar: MySimpleAppBar(
+        leading: widget.isPoppable
+            ? const AppBarBackButton()
+            : AppBarButton(
+                onTap: () {
+                  _unfocusTextFields();
+                  context.read<AuthenticationCubit>().signOut();
+                },
+                iconWidget: const Icon(
+                  Ionicons.close_outline,
+                  color: Colors.white,
                 ),
-        ),
-        body: SafeArea(
-          child: Container(
-            color: MyColors.screenBackground,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      MyHorizontalPadding(
-                        child: Text(
-                          'profileCreationTitle'.tr(),
-                          style: MyTextStyles.authTitle,
-                          textAlign: TextAlign.center,
-                        ),
+                containerOpacity: 0,
+              ),
+      ),
+      body: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20),
+                    MyHorizontalPadding(
+                      child: Text(
+                        'profileCreationTitle'.tr(),
+                        style: MyTextStyles.authTitle,
+                        textAlign: TextAlign.center,
                       ),
-                      const SizedBox(
-                        height: 10,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    MyHorizontalPadding(
+                      child: Text(
+                        'profileCreationSubtitle'.tr(),
+                        style: MyTextStyles.authSubtitle,
+                        textAlign: TextAlign.center,
                       ),
-                      MyHorizontalPadding(
-                        child: Text(
-                          'profileCreationSubtitle'.tr(),
-                          style: MyTextStyles.authSubtitle,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ProfileImageChooser(
-                        pickImage: _pickImage,
-                        onTap: () => _unfocusTextFields(),
-                      ),
-                      const SizedBox(height: 20),
-                      NicknameTextField(
-                        focusNode: _nicknameFieldFocusNode,
-                        textEditingController: _nicknameEditingController,
-                        triggerValidation: () => _triggerFormValidation(),
-                      ),
-                      const SizedBox(height: 20),
-                      MyOutlinedButton(
-                        onTap: () {
-                          _nicknameFieldFocusNode.unfocus();
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) => CurrentCitySelector(
-                              currentCity: _userCity,
-                              cities: context
-                                  .read<CityListChangeNotifier>()
-                                  .cityList,
-                              onSelected: _selectActiveCity,
-                            ),
-                          );
-                        },
-                        contentHorizontalPadding:
-                            MyConstants.horizontalPaddingOrMargin,
-                        borderColor: MyColors.main,
-                        leadingIcon: Container(
-                          height: 30,
-                          width: 30,
-                          alignment: Alignment.center,
-                          child: Text(
-                            _userCity.country.emojiCode,
-                            style: const TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ProfileImageChooser(
+                      pickImage: _pickImage,
+                      onTap: () => _unfocusTextFields(),
+                    ),
+                    const SizedBox(height: 20),
+                    NicknameTextField(
+                      focusNode: _nicknameFieldFocusNode,
+                      textEditingController: _nicknameEditingController,
+                      triggerValidation: () => _triggerFormValidation(),
+                    ),
+                    const SizedBox(height: 20),
+                    MyOutlinedButton(
+                      onTap: () {
+                        _nicknameFieldFocusNode.unfocus();
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => CurrentCitySelector(
+                            currentCity: _userCity,
+                            cities:
+                                context.read<CityListChangeNotifier>().cityList,
+                            onSelected: _selectActiveCity,
                           ),
-                        ),
-                        text: _userCity.localName,
-                        textStyle: MyTextStyles.body,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        trailingIcon: const Icon(
-                          Ionicons.chevron_down_outline,
-                          color: MyColors.accent,
-                          size: 26,
+                        );
+                      },
+                      contentHorizontalPadding:
+                          MyConstants.horizontalPaddingOrMargin,
+                      borderColor: MyColors.main,
+                      leadingIcon: Container(
+                        height: 30,
+                        width: 30,
+                        alignment: Alignment.center,
+                        child: Text(
+                          _userCity.country.emojiCode,
+                          style: const TextStyle(fontSize: 20),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      MyElevatedButton(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        leadingIcon: Image.asset(MyEmoji.finish, width: 20),
-                        text: _buttonText!,
-                        buttonColor: MyColors.accent,
-                        textStyle: MyTextStyles.buttonWithOppositeColor,
-                        onTap: () {
-                          _unfocusTextFields();
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              _buttonText = 'loading'.tr();
-                            });
-                            BlocProvider.of<ProfileCubit>(context)
-                                .createUserProfile(_pickedImageAsFile,
-                                    _nicknameEditingController.text, _userCity);
-                          }
-                        },
+                      text: _userCity.localName,
+                      textStyle: MyTextStyles.body,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      trailingIcon: const Icon(
+                        Ionicons.chevron_down_outline,
+                        color: MyColors.accent,
+                        size: 26,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 20),
+                    MyElevatedButton(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      leadingIcon: Image.asset(MyEmoji.finish, width: 20),
+                      text: _buttonText!,
+                      buttonColor: MyColors.accent,
+                      textStyle: MyTextStyles.buttonWithOppositeColor,
+                      onTap: () {
+                        _unfocusTextFields();
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            _buttonText = 'loading'.tr();
+                          });
+                          BlocProvider.of<ProfileCubit>(context)
+                              .createUserProfile(_pickedImageAsFile,
+                                  _nicknameEditingController.text, _userCity);
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

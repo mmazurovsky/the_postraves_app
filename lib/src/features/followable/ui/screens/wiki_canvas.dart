@@ -55,7 +55,8 @@ class _WikiCanvasState extends State<WikiCanvas> {
         child: CustomScrollView(
           controller: _scrollController,
           physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           slivers: [
             WikiSliverAppBar(
               scrollController: _scrollController,

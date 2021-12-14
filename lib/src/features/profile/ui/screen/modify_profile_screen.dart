@@ -113,8 +113,7 @@ class _ModifyProfileScreenState extends State<ModifyProfileScreen> {
       ),
       body: SafeArea(
         child: CustomScrollView(
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           slivers: [
             SliverToBoxAdapter(

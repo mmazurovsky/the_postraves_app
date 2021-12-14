@@ -35,8 +35,7 @@ class MapSelector extends StatelessWidget {
             );
           } else {
             return ListView.separated(
-              physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(vertical: 18),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, i) => ButtonWithIcons(

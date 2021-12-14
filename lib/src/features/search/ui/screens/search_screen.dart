@@ -93,8 +93,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: SafeArea(
         child: CustomScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(),
           slivers: [
             SliverPersistentHeader(
               pinned: true,
