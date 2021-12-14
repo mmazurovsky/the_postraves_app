@@ -166,6 +166,8 @@ class _PerformancesForSceneState extends State<PerformancesForScene>
       controller: widget.refreshController,
       onRefresh: () => widget.onRefresh(),
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         child: Column(
           children: [
             SceneCardForTimetable(widget.timetableForSceneDto.scene!),

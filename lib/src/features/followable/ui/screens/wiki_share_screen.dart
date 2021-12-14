@@ -63,7 +63,7 @@ class WikiShareScreen extends StatelessWidget {
           future: _setShareLinkToPage(),
           builder: (context, AsyncSnapshot<Uri> snapshot) {
             return SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,

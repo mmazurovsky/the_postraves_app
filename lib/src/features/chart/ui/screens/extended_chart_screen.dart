@@ -117,6 +117,8 @@ class _ExtendedChartBody<T extends GeneralFollowableInterface>
       controller: refreshController,
       onRefresh: () => onRefresh(),
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
         padding: const EdgeInsets.only(top: 10),
         child: FollowableList(
           showWeeklyFollowers: showWeeklyFollowers,

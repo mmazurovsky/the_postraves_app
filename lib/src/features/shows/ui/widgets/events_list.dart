@@ -34,7 +34,8 @@ class UnfilteredEventsList extends StatelessWidget {
       onRefresh: onRefresh,
       child: events.isNotEmpty
           ? ListView.separated(
-            physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
               padding: const EdgeInsets.only(top: 15),
               itemCount: events.length,
               itemBuilder: (context, i) => EventCard(
@@ -46,6 +47,8 @@ class UnfilteredEventsList extends StatelessWidget {
               ),
             )
           : const SingleChildScrollView(
+              physics: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
               child: EmptyShowsPlaceholder(isFiltered: false)),
     );
   }
@@ -62,6 +65,8 @@ class FilteredEventsList extends StatelessWidget {
     final endDate = context.read<DateTimeFilterChangeNotifier>().endDateTime;
     return events.isNotEmpty
         ? ListView.separated(
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
             itemCount: events.isEmpty ? 0 : events.length + 1,
             separatorBuilder: (context, i) => const SizedBox(
                   height: MyConstants.endingOfScreenOrSpaceBetweenElements,
@@ -102,6 +107,8 @@ class FilteredEventsList extends StatelessWidget {
               }
             })
         : const SingleChildScrollView(
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             child: EmptyShowsPlaceholder(isFiltered: true),
           );
   }

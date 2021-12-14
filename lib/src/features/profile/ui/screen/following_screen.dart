@@ -166,6 +166,8 @@ class _FollowableTabBarView<T extends GeneralFollowableInterface>
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
       child: _followables.isNotEmpty
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,

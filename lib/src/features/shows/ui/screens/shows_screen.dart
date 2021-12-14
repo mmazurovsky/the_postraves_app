@@ -69,7 +69,8 @@ class _ShowsScreenState extends State<ShowsScreen> {
     return SafeArea(
       child: NestedScrollView(
         controller: _scrollController,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         headerSliverBuilder: (context, _) => [
           SliverAppBar(
             floating: true,

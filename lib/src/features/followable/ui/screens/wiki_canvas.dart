@@ -54,9 +54,8 @@ class _WikiCanvasState extends State<WikiCanvas> {
       body: SafeArea(
         child: CustomScrollView(
           controller: _scrollController,
-          //TODO! Android: check on android scrollable physics everywhere
-          physics:
-              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           slivers: [
             WikiSliverAppBar(
               scrollController: _scrollController,

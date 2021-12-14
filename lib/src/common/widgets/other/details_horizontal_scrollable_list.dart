@@ -3,7 +3,6 @@ import 'package:the_postraves_package/constants/my_colors.dart';
 import '../../constants/my_constants.dart';
 import 'details_item.dart';
 
-
 class DetailsHorizontalScrollableList extends StatelessWidget {
   final Map<String, Widget> titleBodyMap;
   final double verticalPadding;
@@ -21,6 +20,8 @@ class DetailsHorizontalScrollableList extends StatelessWidget {
       child: SizedBox(
         height: 70,
         child: ListView(
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           scrollDirection: Axis.horizontal,
           children: [
             const SizedBox(width: MyConstants.horizontalPaddingOrMargin),

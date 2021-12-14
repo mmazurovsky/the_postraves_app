@@ -68,7 +68,8 @@ class _ChartsScreenState extends State<ChartsScreen>
     return SafeArea(
       child: NestedScrollView(
         controller: _scrollController,
-        physics: const BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         headerSliverBuilder: (context, value) {
           return [
             SliverPersistentHeader(
@@ -128,6 +129,8 @@ class _Charts extends StatelessWidget {
       controller: refreshController,
       onRefresh: () => onRefresh(),
       child: CustomScrollView(
+        physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
         slivers: [
           _ChartsViewForEntity(
             sectionTitle: 'featuredTitle'.tr(),

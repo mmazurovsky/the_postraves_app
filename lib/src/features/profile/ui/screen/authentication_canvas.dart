@@ -30,9 +30,9 @@ class AuthenticationCanvas extends StatelessWidget {
         backgroundColor: MyColors.screenBackground,
         leading: backButtonNeeded ? const AppBarBackButton() : Container(),
       ),
-      body:
-          SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
