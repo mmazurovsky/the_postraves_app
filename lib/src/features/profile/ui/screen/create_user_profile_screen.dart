@@ -111,6 +111,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               physics: const BouncingScrollPhysics(),
               child: Form(
                 key: _formKey,
