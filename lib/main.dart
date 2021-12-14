@@ -29,6 +29,10 @@ void main() async {
           child: const MyApp()),
     );
   });
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: MyColors.screenBackground,
+    systemNavigationBarColor: MyColors.bottomNavBar,
+  ));
 }
 
 class MyApp extends StatelessWidget {
