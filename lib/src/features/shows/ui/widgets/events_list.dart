@@ -83,7 +83,7 @@ class FilteredEventsList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'filtered'.tr(),
+                            'filtered'.tr().toUpperCase(),
                             style: MyTextStyles.filtered,
                           ),
                           Text(
