@@ -16,23 +16,24 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocatorInjection();
   await Firebase.initializeApp();
-  HttpOverrides.global = MyHttpOverrides();
   await dotenv.load(fileName: ".env");
   await EasyLocalization.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(
-      EasyLocalization(
-          supportedLocales: const [Locale('en'), Locale('ru')],
-          path: 'assets/translations',
-          fallbackLocale: const Locale('en'),
-          child: const MyApp()),
-    );
-  });
+  HttpOverrides.global = MyHttpOverrides();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: MyColors.screenBackground,
     systemNavigationBarColor: MyColors.bottomNavBar,
   ));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(
+      EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ru')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('en'),
+        child: const MyApp(),
+      ),
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
