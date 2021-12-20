@@ -32,8 +32,9 @@ class _SignInWithEmailAndLinkScreenState
   void initState() {
     super.initState();
     _formKey = GlobalKey<FormState>();
-    _emailFocusNode = FocusNode()..requestFocus();
+    _emailFocusNode = FocusNode();
     _emailController = TextEditingController();
+    Future.delayed(const Duration(milliseconds: 300), () => _emailFocusNode.requestFocus());
   }
 
   @override
@@ -97,7 +98,6 @@ class _SignInWithEmailAndLinkScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-          
                   MyHorizontalMargin(
                     child: Text(
                       'signInWithEmail'.tr(),
@@ -135,7 +135,8 @@ class _SignInWithEmailAndLinkScreenState
                           if (_formKey.currentState!.validate()) {
                             _emailFocusNode.unfocus();
                             BlocProvider.of<AuthenticationCubit>(context)
-                                .startSigningWithEmailLink(_emailController.text);
+                                .startSigningWithEmailLink(
+                                    _emailController.text);
                             _isDialogOpen = true;
                             showDialog(
                               context: context,

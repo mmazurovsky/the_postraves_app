@@ -34,7 +34,7 @@ class EmptyShowsPlaceholder extends StatelessWidget {
             ),
             WidgetSpan(
               baseline: TextBaseline.alphabetic,
-              // alignment: PlaceholderAlignment.baseline,
+              alignment: PlaceholderAlignment.baseline,
               child: InkWell(
                 onTap: () => OpenLinkService.openTelegramOrEmail(
                   MyConstants.telegramSupportAccount,
