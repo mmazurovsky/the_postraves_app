@@ -76,11 +76,12 @@ import 'features/timetable/timetable_cubit/timetable_cubit.dart';
 
 final serviceLocator = GetIt.instance;
 
-void setupServiceLocatorInjection() async {
+void setupServiceLocatorInjection({bool isTesting = true}) async {
   // Services
 
   serviceLocator.registerLazySingleton<ServerConstantsAbstract>(
-    () => ServerConstantsDevelopment(),
+    () =>
+        isTesting ? ServerConstantsDevelopment() : ServerConstantsProduction(),
   );
 
   serviceLocator.registerLazySingleton<DynamicLinkService>(

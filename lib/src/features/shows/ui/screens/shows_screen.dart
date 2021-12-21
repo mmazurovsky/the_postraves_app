@@ -73,22 +73,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
         headerSliverBuilder: (context, _) => [
           SliverAppBar(
             floating: true,
-            title: InkWell(
-              onTap: () => showModalBottomSheet(
-                context: context,
-                builder: (context) => CurrentCitySelector(
-                  currentCity: _currentCity!,
-                  cities: _cities!,
-                  onSelected: (City newCurrentCity) => context
-                      .read<CurrentCityChangeNotifier>()
-                      .changeCurrentCity(newCurrentCity),
-                ),
-              ),
-              child: Text(
-                _currentCity!.localName,
-                style: MyTextStyles.appTitle,
-              ),
-            ),
+            title: ShowsTitleButton(_currentCity!, _cities!),
             centerTitle: false,
             actions: [
               AppBarButton(
@@ -143,6 +128,33 @@ class _ShowsScreenState extends State<ShowsScreen> {
                 : const LoadingContainer();
           },
         ),
+      ),
+    );
+  }
+}
+
+class ShowsTitleButton extends StatelessWidget {
+  final City _currentCity;
+  final List<City> _cities;
+  const ShowsTitleButton(this._currentCity, this._cities, {Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => showModalBottomSheet(
+        context: context,
+        builder: (context) => CurrentCitySelector(
+          currentCity: _currentCity,
+          cities: _cities,
+          onSelected: (City newCurrentCity) => context
+              .read<CurrentCityChangeNotifier>()
+              .changeCurrentCity(newCurrentCity),
+        ),
+      ),
+      child: Text(
+        _currentCity.localName,
+        style: MyTextStyles.appTitle,
       ),
     );
   }
