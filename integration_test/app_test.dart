@@ -11,6 +11,10 @@ import 'package:the_postraves_app/src/common/authentication/repository/firebase_
 import 'package:the_postraves_app/src/common/geo_repository/city_local_repository.dart';
 import 'package:the_postraves_app/src/common/navigation/navigation_scaffold.dart';
 import 'package:the_postraves_app/src/dependency_injection.dart';
+import 'package:the_postraves_app/src/features/chart/ui/screens/charts_screen.dart';
+import 'package:the_postraves_app/src/features/profile/ui/screen/profile_screen.dart';
+import 'package:the_postraves_app/src/features/profile/ui/screen/sign_in_methods_screen.dart';
+import 'package:the_postraves_app/src/features/search/ui/screens/search_screen.dart';
 import 'package:the_postraves_app/src/features/shows/ui/screens/shows_screen.dart';
 import 'package:the_postraves_app/src/initial_scaffold_resolver.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
@@ -60,7 +64,6 @@ void main() async {
     testWidgets(
         'Given first load of app without city When app is initialized Then city selector must open',
         (WidgetTester tester) async {
-
       when(_mockCityLocalRepo.fetchCitiesFromLocal())
           .thenAnswer((_) async => const ResponseSealed.success([]));
       when(_mockCityLocalRepo.fetchCurrentCityFromLocal())
@@ -79,7 +82,6 @@ void main() async {
     testWidgets(
         'Given load of app with current city When app is initialized Then shows screen must return',
         (WidgetTester tester) async {
-
       when(_mockCityLocalRepo.fetchCitiesFromLocal())
           .thenAnswer((_) async => const ResponseSealed.success([]));
       when(_mockCityLocalRepo.fetchCurrentCityFromLocal()).thenAnswer(
@@ -106,6 +108,10 @@ void main() async {
       await tester.pumpAndSettle();
 
       expect(find.byType(ShowsScreen), findsOneWidget);
+      expect(find.byType(ChartsScreen), findsOneWidget);
+      expect(find.byType(SignInMethodsScreen), findsOneWidget);
+      expect(find.byType(ProfileScreen), findsNothing);
+      expect(find.byType(SearchScreen), findsNothing);
     });
   });
 }
