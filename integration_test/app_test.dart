@@ -18,6 +18,8 @@ import 'package:the_postraves_app/src/features/profile/ui/screen/profile_screen.
 import 'package:the_postraves_app/src/features/profile/ui/screen/sign_in_methods_screen.dart';
 import 'package:the_postraves_app/src/features/search/ui/screens/search_screen.dart';
 import 'package:the_postraves_app/src/features/shows/ui/screens/shows_screen.dart';
+import 'package:the_postraves_app/src/features/shows/ui/widgets/events_list.dart';
+import 'package:the_postraves_app/src/features/shows/ui/widgets/shows_date_filter_selector.dart';
 import 'package:the_postraves_app/src/initial_scaffold_resolver.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
@@ -131,20 +133,11 @@ void main() async {
         fallbackLocale: const Locale('en'),
         child: const MyApp(),
       );
+    });
 
-      serviceLocator.pushNewScope();
-      setupServiceLocatorInjection();
 
       _mockCityLocalRepo = MockCityLocalRepository();
       _mockFirebaseAuthRepo = MockFirebaseAuthRepository();
-
-      serviceLocator.unregister<CityLocalRepository>();
-      serviceLocator.unregister<FirebaseAuthRepository>();
-
-      serviceLocator
-          .registerLazySingleton<CityLocalRepository>(() => _mockCityLocalRepo);
-      serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
-          () => _mockFirebaseAuthRepo);
 
       when(_mockCityLocalRepo.fetchCitiesFromLocal())
           .thenAnswer((_) async => const ResponseSealed.success([]));
@@ -167,19 +160,49 @@ void main() async {
       when(_mockCityLocalRepo.saveCurrentCityToLocalAndDeletePrevious(any))
           .thenAnswer((_) async => const ResponseSealed.success(null));
       when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
+
+
+    setUp(() {
+      serviceLocator.pushNewScope();
+      setupServiceLocatorInjection();
+
+      serviceLocator.unregister<CityLocalRepository>();
+      serviceLocator.unregister<FirebaseAuthRepository>();
+
+      serviceLocator
+          .registerLazySingleton<CityLocalRepository>(() => _mockCityLocalRepo);
+      serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
+          () => _mockFirebaseAuthRepo);
     });
 
     testWidgets(
-        'Given first load of app without city When app is initialized Then city selector must open',
+        'Given shows screen When city button tapped Then city selector must open',
         (WidgetTester tester) async {
       await tester.pumpWidget(_appWithLocalization);
       await tester.pumpAndSettle();
 
-      // expect(find.byType(ShowsScreen), findsOneWidget);
+      expect(find.byType(ShowsScreen), findsOneWidget);
 
-      await tester.tap(find.byType(ShowsTitleButton));
+      final button = find.byType(ShowsTitleButton);
+      await tester.tap(button);
       await tester.pumpAndSettle();
-      expect(CurrentCitySelector, findsOneWidget);
+      expect(find.byType(CurrentCitySelector), findsOneWidget);
+    });
+
+    testWidgets(
+        'Given shows screen When date filter tapped Then date filter must open',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(_appWithLocalization);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ShowsScreen), findsOneWidget);
+
+      final button = find.byKey(
+        const Key('shows-date-filter-button'),
+      );
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+      expect(find.byType(ShowsDateFilterSelector), findsOneWidget);
     });
   });
 }

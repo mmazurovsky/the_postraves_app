@@ -43,7 +43,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
   @override
   void dispose() {
     _refreshController1.dispose();
-    _scrollController.dispose();
+    // _scrollController.dispose();
     super.dispose();
   }
 
@@ -77,6 +77,7 @@ class _ShowsScreenState extends State<ShowsScreen> {
             centerTitle: false,
             actions: [
               AppBarButton(
+                key: const Key('shows-date-filter-button'),
                 containerOpacity: 0,
                 iconWidget: Icon(
                   context.watch<DateTimeFilterChangeNotifier>().isFiltered

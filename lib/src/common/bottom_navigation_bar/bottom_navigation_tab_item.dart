@@ -37,7 +37,7 @@ extension TabItemExtension on TabItem {
   };
 
   static final _scrollControllers = {
-    TabItem.shows: ScrollController(),
+    TabItem.shows: ScrollController(), //todo move to service locator and uncomment dispose
     TabItem.search: ScrollController(),
     TabItem.profile: ScrollController(),
   };

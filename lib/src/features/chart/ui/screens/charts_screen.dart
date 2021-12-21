@@ -49,7 +49,7 @@ class _ChartsScreenState extends State<ChartsScreen>
   @override
   void dispose() {
     _refreshController.dispose();
-    _scrollController.dispose();
+    // _scrollController.dispose();
     super.dispose();
   }
 
