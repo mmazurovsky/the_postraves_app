@@ -1,10 +1,10 @@
-package com.mmazurovsky.postraves_android;
+package com.mmazurovsky.thePostravesApp;
 
 import androidx.test.rule.ActivityTestRule;
 import dev.flutter.plugins.integration_test.FlutterTestRunner;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
-import com.mmazurovsky.postraves_android.MainActivity;
+import com.mmazurovsky.thePostravesApp.MainActivity;
 
 @RunWith(FlutterTestRunner.class)
 public class MainActivityTest {
