@@ -31,7 +31,7 @@ class MyConstants {
   static const String emailSupportAccount = "postraves.support@gmail.com";
   static const String iosBundleId = 'com.mmazurovsky.thePostravesApp';
   static const String iosAppStoreId = '1592361916';
-  static const String androidPackageName = 'com.mmazurovsky.postraves_android';
+  static const String androidPackageName = 'com.mmazurovsky.thePostravesApp';
   static const String dynamicLinkUrlPrefix =
       'https://thepostravesapp.page.link';
 

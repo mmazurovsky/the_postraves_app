@@ -49,7 +49,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.mmazurovsky.postraves_android"
+        applicationId "com.mmazurovsky.thePostravesApp"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
