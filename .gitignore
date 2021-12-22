@@ -49,3 +49,4 @@ app.*.map.json
 flutterrepair.sh
 GoogleService-Info.plist
 android/app/google-services.json
+.gradle
