@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,80 +12,74 @@ import 'package:the_postraves_app/src/common/geo_repository/city_local_repositor
 import 'package:the_postraves_app/src/common/navigation/navigation_scaffold.dart';
 import 'package:the_postraves_app/src/dependency_injection.dart';
 import 'package:the_postraves_app/src/features/chart/ui/screens/charts_screen.dart';
+import 'package:the_postraves_app/src/features/profile/state/profile_cubit/profile_cubit.dart';
 import 'package:the_postraves_app/src/features/profile/ui/screen/profile_screen.dart';
 import 'package:the_postraves_app/src/features/profile/ui/screen/sign_in_methods_screen.dart';
 import 'package:the_postraves_app/src/features/search/ui/screens/search_screen.dart';
 import 'package:the_postraves_app/src/features/shows/ui/screens/shows_screen.dart';
-import 'package:the_postraves_app/src/features/shows/ui/widgets/shows_date_filter_selector.dart';
 import 'package:the_postraves_app/src/initial_scaffold_resolver.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
 import 'package:the_postraves_package/models/geo/country.dart';
-import 'dart:ui' as ui;
-
 import 'app_test.mocks.dart';
 
-// @GenerateMocks([CityLocalRepository, FirebaseAuthRepository])
+@GenerateMocks([CityLocalRepository, FirebaseAuthRepository, ProfileCubit])
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  // await EasyLocalization.ensureInitialized();
-  // await dotenv.load();
+  await EasyLocalization.ensureInitialized();
+  await dotenv.load();
 
   // // group('General app boot tests', () {
-  // late EasyLocalization _appWithLocalization;
-  // late MockCityLocalRepository _mockCityLocalRepo;
-  // late MockFirebaseAuthRepository _mockFirebaseAuthRepo;
+  late EasyLocalization _appWithLocalization;
+  late MockCityLocalRepository _mockCityLocalRepo;
+  late MockFirebaseAuthRepository _mockFirebaseAuthRepo;
+  late MockProfileCubit _mockProfileCubit;
 
   // // setUpAll(() async {
-  // await Firebase.initializeApp();
 
-  // _appWithLocalization = EasyLocalization(
-  //   supportedLocales: const [Locale('en'), Locale('ru')],
-  //   path: 'assets/translations',
-  //   fallbackLocale: const Locale('en'),
-  //   child: const MyApp(),
-  // );
+  _appWithLocalization = EasyLocalization(
+    supportedLocales: const [Locale('en'), Locale('ru')],
+    path: 'assets/translations',
+    fallbackLocale: const Locale('en'),
+    child: const MyApp(),
+  );
   // // });
 
-  // setUp(() {
-  // serviceLocator.pushNewScope();
-  // setupServiceLocatorInjection();
+  setUp(() {
+    serviceLocator.pushNewScope();
+    setupServiceLocatorInjection();
 
-  // _mockCityLocalRepo = MockCityLocalRepository();
-  // _mockFirebaseAuthRepo = MockFirebaseAuthRepository();
+    _mockCityLocalRepo = MockCityLocalRepository();
+    _mockFirebaseAuthRepo = MockFirebaseAuthRepository();
+    _mockProfileCubit = MockProfileCubit();
 
-  // serviceLocator.unregister<CityLocalRepository>();
-  // serviceLocator.unregister<FirebaseAuthRepository>();
+    serviceLocator.unregister<CityLocalRepository>();
+    serviceLocator.unregister<FirebaseAuthRepository>();
+    serviceLocator.unregister<ProfileCubit>();
 
-  // serviceLocator
-  //     .registerLazySingleton<CityLocalRepository>(() => _mockCityLocalRepo);
-  // serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
-  //     () => _mockFirebaseAuthRepo);
-  // });
+    serviceLocator
+        .registerLazySingleton<CityLocalRepository>(() => _mockCityLocalRepo);
+    serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
+        () => _mockFirebaseAuthRepo);
+    serviceLocator.registerLazySingleton<ProfileCubit>(() => _mockProfileCubit);
+  });
 
   testWidgets(
       'Given first load of app without city When app is initialized Then city selector must open',
       (WidgetTester tester) async {
-    // when(_mockCityLocalRepo.fetchCitiesFromLocal())
-    //     .thenAnswer((_) async => const ResponseSealed.success([]));
-    // when(_mockCityLocalRepo.fetchCurrentCityFromLocal())
-    //     .thenAnswer((_) async => const ResponseSealed.success(null));
-    // when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
-    //     .thenAnswer((_) async => const ResponseSealed.success(null));
-    // when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
+    when(_mockCityLocalRepo.fetchCitiesFromLocal())
+        .thenAnswer((_) async => const ResponseSealed.success([]));
+    when(_mockCityLocalRepo.fetchCurrentCityFromLocal())
+        .thenAnswer((_) async => const ResponseSealed.success(null));
+    when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
+        .thenAnswer((_) async => const ResponseSealed.success(null));
+    when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
 
-    await tester.pumpWidget(
-      const Directionality(
-        textDirection: ui.TextDirection.ltr,
-        child: Text('hello'),
-      ),
-    );
+    await tester.pumpWidget(_appWithLocalization);
     await tester.pumpAndSettle();
 
-    expect(find.byType(Text), findsOneWidget);
-
-    // expect(find.byType(CityPickerScaffold), findsOneWidget);
-    // expect(find.byType(NavigationScaffold), findsNothing);
+    expect(find.byType(CityPickerScaffold), findsOneWidget);
+    expect(find.byType(NavigationScaffold), findsNothing);
   });
 
   // testWidgets(

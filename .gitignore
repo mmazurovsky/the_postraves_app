@@ -50,3 +50,4 @@ flutterrepair.sh
 GoogleService-Info.plist
 android/app/google-services.json
 .gradle
+buildtest.sh
