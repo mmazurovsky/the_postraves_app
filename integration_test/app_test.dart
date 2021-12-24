@@ -11,16 +11,9 @@ import 'package:the_postraves_app/src/common/authentication/repository/firebase_
 import 'package:the_postraves_app/src/common/geo_repository/city_local_repository.dart';
 import 'package:the_postraves_app/src/common/navigation/navigation_scaffold.dart';
 import 'package:the_postraves_app/src/dependency_injection.dart';
-import 'package:the_postraves_app/src/features/chart/ui/screens/charts_screen.dart';
 import 'package:the_postraves_app/src/features/profile/state/profile_cubit/profile_cubit.dart';
-import 'package:the_postraves_app/src/features/profile/ui/screen/profile_screen.dart';
-import 'package:the_postraves_app/src/features/profile/ui/screen/sign_in_methods_screen.dart';
-import 'package:the_postraves_app/src/features/search/ui/screens/search_screen.dart';
-import 'package:the_postraves_app/src/features/shows/ui/screens/shows_screen.dart';
 import 'package:the_postraves_app/src/initial_scaffold_resolver.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
-import 'package:the_postraves_package/models/geo/city.dart';
-import 'package:the_postraves_package/models/geo/country.dart';
 import 'app_test.mocks.dart';
 
 @GenerateMocks([CityLocalRepository, FirebaseAuthRepository, ProfileCubit])
@@ -75,10 +68,11 @@ void main() async {
         .thenAnswer((_) async => const ResponseSealed.success(null));
     when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
 
-    await tester.pumpWidget(_appWithLocalization);
+    // await tester.pumpWidget(_appWithLocalization);
+    await tester.pumpWidget(Container());
     await tester.pumpAndSettle();
 
-    expect(find.byType(CityPickerScaffold), findsOneWidget);
+    expect(find.byType(Container), findsOneWidget);
     expect(find.byType(NavigationScaffold), findsNothing);
   });
 
