@@ -11,14 +11,12 @@ import 'package:the_postraves_app/main.dart';
 import 'package:the_postraves_app/src/common/authentication/repository/firebase_auth_repository.dart';
 import 'package:the_postraves_app/src/common/geo_repository/city_local_repository.dart';
 import 'package:the_postraves_app/src/common/navigation/navigation_scaffold.dart';
-import 'package:the_postraves_app/src/common/widgets/selectors/current_city_selector.dart';
 import 'package:the_postraves_app/src/dependency_injection.dart';
 import 'package:the_postraves_app/src/features/chart/ui/screens/charts_screen.dart';
 import 'package:the_postraves_app/src/features/profile/ui/screen/profile_screen.dart';
 import 'package:the_postraves_app/src/features/profile/ui/screen/sign_in_methods_screen.dart';
 import 'package:the_postraves_app/src/features/search/ui/screens/search_screen.dart';
 import 'package:the_postraves_app/src/features/shows/ui/screens/shows_screen.dart';
-import 'package:the_postraves_app/src/features/shows/ui/widgets/events_list.dart';
 import 'package:the_postraves_app/src/features/shows/ui/widgets/shows_date_filter_selector.dart';
 import 'package:the_postraves_app/src/initial_scaffold_resolver.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
@@ -33,176 +31,196 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await dotenv.load();
 
-  group('General app boot tests', () {
-    late EasyLocalization _appWithLocalization;
-    late MockCityLocalRepository _mockCityLocalRepo;
-    late MockFirebaseAuthRepository _mockFirebaseAuthRepo;
+  // group('General app boot tests', () {
+  late EasyLocalization _appWithLocalization;
+  late MockCityLocalRepository _mockCityLocalRepo;
+  late MockFirebaseAuthRepository _mockFirebaseAuthRepo;
 
-    setUpAll(() async {
-      await Firebase.initializeApp();
+  // setUpAll(() async {
+  await Firebase.initializeApp();
 
-      _appWithLocalization = EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ru')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        child: const MyApp(),
-      );
-    });
+  _appWithLocalization = EasyLocalization(
+    supportedLocales: const [Locale('en'), Locale('ru')],
+    path: 'assets/translations',
+    fallbackLocale: const Locale('en'),
+    child: const MyApp(),
+  );
+  // });
 
-    setUp(() {
-      serviceLocator.pushNewScope();
-      setupServiceLocatorInjection();
+  setUp(() {
+    serviceLocator.pushNewScope();
+    setupServiceLocatorInjection();
 
-      _mockCityLocalRepo = MockCityLocalRepository();
-      _mockFirebaseAuthRepo = MockFirebaseAuthRepository();
+    _mockCityLocalRepo = MockCityLocalRepository();
+    _mockFirebaseAuthRepo = MockFirebaseAuthRepository();
 
-      serviceLocator.unregister<CityLocalRepository>();
-      serviceLocator.unregister<FirebaseAuthRepository>();
+    serviceLocator.unregister<CityLocalRepository>();
+    serviceLocator.unregister<FirebaseAuthRepository>();
 
-      serviceLocator
-          .registerLazySingleton<CityLocalRepository>(() => _mockCityLocalRepo);
-      serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
-          () => _mockFirebaseAuthRepo);
-    });
-
-    testWidgets(
-        'Given first load of app without city When app is initialized Then city selector must open',
-        (WidgetTester tester) async {
-      when(_mockCityLocalRepo.fetchCitiesFromLocal())
-          .thenAnswer((_) async => const ResponseSealed.success([]));
-      when(_mockCityLocalRepo.fetchCurrentCityFromLocal())
-          .thenAnswer((_) async => const ResponseSealed.success(null));
-      when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
-          .thenAnswer((_) async => const ResponseSealed.success(null));
-      when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
-
-      await tester.pumpWidget(_appWithLocalization);
-      await tester.pumpAndSettle();
-
-      expect(find.byType(CityPickerScaffold), findsOneWidget);
-      expect(find.byType(NavigationScaffold), findsNothing);
-    });
-
-    testWidgets(
-        'Given load of app with current city When app is initialized Then shows screen must return',
-        (WidgetTester tester) async {
-      when(_mockCityLocalRepo.fetchCitiesFromLocal())
-          .thenAnswer((_) async => const ResponseSealed.success([]));
-      when(_mockCityLocalRepo.fetchCurrentCityFromLocal()).thenAnswer(
-        (_) async => const ResponseSealed.success(
-          City(
-            name: 'RU_Moscow',
-            localName: 'Moscow',
-            timeOffset: 3,
-            country: Country(
-              name: 'RU',
-              localName: 'Russia',
-              emojiCode: '🇷🇺',
-            ),
-          ),
-        ),
-      );
-      when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
-          .thenAnswer((_) async => const ResponseSealed.success(null));
-      when(_mockCityLocalRepo.saveCurrentCityToLocalAndDeletePrevious(any))
-          .thenAnswer((_) async => const ResponseSealed.success(null));
-      when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
-
-      await tester.pumpWidget(_appWithLocalization);
-      await tester.pumpAndSettle();
-
-      expect(find.byType(ShowsScreen), findsOneWidget);
-      expect(find.byType(ChartsScreen), findsOneWidget);
-      expect(find.byType(SignInMethodsScreen), findsOneWidget);
-      expect(find.byType(ProfileScreen), findsNothing);
-      expect(find.byType(SearchScreen), findsNothing);
-    });
+    serviceLocator
+        .registerLazySingleton<CityLocalRepository>(() => _mockCityLocalRepo);
+    serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
+        () => _mockFirebaseAuthRepo);
   });
 
-  group('App screens tests', () {
-    late EasyLocalization _appWithLocalization;
-    late MockCityLocalRepository _mockCityLocalRepo;
-    late MockFirebaseAuthRepository _mockFirebaseAuthRepo;
+  testWidgets(
+      'Given first load of app without city When app is initialized Then city selector must open',
+      (WidgetTester tester) async {
+    when(_mockCityLocalRepo.fetchCitiesFromLocal())
+        .thenAnswer((_) async => const ResponseSealed.success([]));
+    when(_mockCityLocalRepo.fetchCurrentCityFromLocal())
+        .thenAnswer((_) async => const ResponseSealed.success(null));
+    when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
+        .thenAnswer((_) async => const ResponseSealed.success(null));
+    when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
 
-    setUpAll(() async {
-      await Firebase.initializeApp();
+    await tester.pumpWidget(_appWithLocalization);
+    await tester.pumpAndSettle();
 
-      _appWithLocalization = EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ru')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        child: const MyApp(),
-      );
-    });
-
-
-      _mockCityLocalRepo = MockCityLocalRepository();
-      _mockFirebaseAuthRepo = MockFirebaseAuthRepository();
-
-      when(_mockCityLocalRepo.fetchCitiesFromLocal())
-          .thenAnswer((_) async => const ResponseSealed.success([]));
-      when(_mockCityLocalRepo.fetchCurrentCityFromLocal()).thenAnswer(
-        (_) async => const ResponseSealed.success(
-          City(
-            name: 'RU_Moscow',
-            localName: 'Moscow',
-            timeOffset: 3,
-            country: Country(
-              name: 'RU',
-              localName: 'Russia',
-              emojiCode: '🇷🇺',
-            ),
-          ),
-        ),
-      );
-      when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
-          .thenAnswer((_) async => const ResponseSealed.success(null));
-      when(_mockCityLocalRepo.saveCurrentCityToLocalAndDeletePrevious(any))
-          .thenAnswer((_) async => const ResponseSealed.success(null));
-      when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
-
-
-    setUp(() {
-      serviceLocator.pushNewScope();
-      setupServiceLocatorInjection();
-
-      serviceLocator.unregister<CityLocalRepository>();
-      serviceLocator.unregister<FirebaseAuthRepository>();
-
-      serviceLocator
-          .registerLazySingleton<CityLocalRepository>(() => _mockCityLocalRepo);
-      serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
-          () => _mockFirebaseAuthRepo);
-    });
-
-    testWidgets(
-        'Given shows screen When city button tapped Then city selector must open',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(_appWithLocalization);
-      await tester.pumpAndSettle();
-
-      expect(find.byType(ShowsScreen), findsOneWidget);
-
-      final button = find.byType(ShowsTitleButton);
-      await tester.tap(button);
-      await tester.pumpAndSettle();
-      expect(find.byType(CurrentCitySelector), findsOneWidget);
-    });
-
-    testWidgets(
-        'Given shows screen When date filter tapped Then date filter must open',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(_appWithLocalization);
-      await tester.pumpAndSettle();
-
-      expect(find.byType(ShowsScreen), findsOneWidget);
-
-      final button = find.byKey(
-        const Key('shows-date-filter-button'),
-      );
-      await tester.tap(button);
-      await tester.pumpAndSettle();
-      expect(find.byType(ShowsDateFilterSelector), findsOneWidget);
-    });
+    expect(find.byType(CityPickerScaffold), findsOneWidget);
+    expect(find.byType(NavigationScaffold), findsNothing);
   });
+
+  // testWidgets(
+  //     'Given load of app with current city When app is initialized Then shows screen must return',
+  //     (WidgetTester tester) async {
+  //   when(_mockCityLocalRepo.fetchCitiesFromLocal())
+  //       .thenAnswer((_) async => const ResponseSealed.success([]));
+  //   when(_mockCityLocalRepo.fetchCurrentCityFromLocal()).thenAnswer(
+  //     (_) async => const ResponseSealed.success(
+  //       City(
+  //         name: 'RU_Moscow',
+  //         localName: 'Moscow',
+  //         timeOffset: 3,
+  //         country: Country(
+  //           name: 'RU',
+  //           localName: 'Russia',
+  //           emojiCode: '🇷🇺',
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  //   when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
+  //       .thenAnswer((_) async => const ResponseSealed.success(null));
+  //   when(_mockCityLocalRepo.saveCurrentCityToLocalAndDeletePrevious(any))
+  //       .thenAnswer((_) async => const ResponseSealed.success(null));
+  //   when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
+
+  //   await tester.pumpWidget(_appWithLocalization);
+  //   await tester.pumpAndSettle();
+
+  //   expect(find.byType(ShowsScreen), findsOneWidget);
+  //   expect(find.byType(ChartsScreen), findsOneWidget);
+  //   expect(find.byType(SignInMethodsScreen), findsOneWidget);
+  //   expect(find.byType(ProfileScreen), findsNothing);
+  //   expect(find.byType(SearchScreen), findsNothing);
+  // });
+// }
+
+  // group('App screens tests', () {
+  //   late EasyLocalization _appWithLocalization;
+  //   late MockCityLocalRepository _mockCityLocalRepo;
+  //   late MockFirebaseAuthRepository _mockFirebaseAuthRepo;
+
+  //   setUpAll(() async {
+  //     await Firebase.initializeApp();
+
+  //     _appWithLocalization = EasyLocalization(
+  //       supportedLocales: const [Locale('en'), Locale('ru')],
+  //       path: 'assets/translations',
+  //       fallbackLocale: const Locale('en'),
+  //       child: const MyApp(),
+  //     );
+  //   });
+
+  //     _mockCityLocalRepo = MockCityLocalRepository();
+  //     _mockFirebaseAuthRepo = MockFirebaseAuthRepository();
+
+  //     when(_mockCityLocalRepo.fetchCitiesFromLocal())
+  //         .thenAnswer((_) async => const ResponseSealed.success([]));
+  //     when(_mockCityLocalRepo.fetchCurrentCityFromLocal()).thenAnswer(
+  //       (_) async => const ResponseSealed.success(
+  //         City(
+  //           name: 'RU_Moscow',
+  //           localName: 'Moscow',
+  //           timeOffset: 3,
+  //           country: Country(
+  //             name: 'RU',
+  //             localName: 'Russia',
+  //             emojiCode: '🇷🇺',
+  //           ),
+  //         ),
+  //       ),
+  //     );
+  //     when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
+  //         .thenAnswer((_) async => const ResponseSealed.success(null));
+  //     when(_mockCityLocalRepo.saveCurrentCityToLocalAndDeletePrevious(any))
+  //         .thenAnswer((_) async => const ResponseSealed.success(null));
+  //     when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
+
+  //   setUp(() {
+  //     serviceLocator.pushNewScope();
+  //     setupServiceLocatorInjection();
+
+  //     serviceLocator.unregister<CityLocalRepository>();
+  //     serviceLocator.unregister<FirebaseAuthRepository>();
+
+  //     serviceLocator
+  //         .registerLazySingleton<CityLocalRepository>(() => _mockCityLocalRepo);
+  //     serviceLocator.registerLazySingleton<FirebaseAuthRepository>(
+  //         () => _mockFirebaseAuthRepo);
+  //   });
+
+  //   testWidgets(
+  //       'Given shows screen When city button tapped Then city selector must open',
+  //       (WidgetTester tester) async {
+  //     await tester.pumpWidget(_appWithLocalization);
+  //     await tester.pumpAndSettle();
+
+  //     expect(find.byType(ShowsScreen), findsOneWidget);
+
+  //     final button = find.byType(ShowsTitleButton);
+  //     await tester.tap(button);
+  //     await tester.pumpAndSettle();
+  //     expect(find.byType(CurrentCitySelector), findsOneWidget);
+  //   });
+
+//   testWidgets(
+//       'Given shows screen When date filter tapped Then date filter must open',
+//       (WidgetTester tester) async {
+//     when(_mockCityLocalRepo.fetchCitiesFromLocal())
+//         .thenAnswer((_) async => const ResponseSealed.success([]));
+//     when(_mockCityLocalRepo.fetchCurrentCityFromLocal()).thenAnswer(
+//       (_) async => const ResponseSealed.success(
+//         City(
+//           name: 'RU_Moscow',
+//           localName: 'Moscow',
+//           timeOffset: 3,
+//           country: Country(
+//             name: 'RU',
+//             localName: 'Russia',
+//             emojiCode: '🇷🇺',
+//           ),
+//         ),
+//       ),
+//     );
+//     when(_mockCityLocalRepo.saveCitiesToLocalAndDeletePrevious(any))
+//         .thenAnswer((_) async => const ResponseSealed.success(null));
+//     when(_mockCityLocalRepo.saveCurrentCityToLocalAndDeletePrevious(any))
+//         .thenAnswer((_) async => const ResponseSealed.success(null));
+//     when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
+
+//     await tester.pumpWidget(_appWithLocalization);
+//     await tester.pumpAndSettle();
+
+//     expect(find.byType(ShowsScreen), findsOneWidget);
+
+//     final button = find.byKey(
+//       const Key('shows-date-filter-button'),
+//     );
+//     await tester.tap(button);
+//     await tester.pumpAndSettle();
+//     expect(find.byType(ShowsDateFilterSelector), findsOneWidget);
+//   });
 }
+// });
