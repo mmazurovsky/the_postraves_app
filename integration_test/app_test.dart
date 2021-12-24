@@ -6,7 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:the_postraves_app/main.dart';
 import 'package:the_postraves_app/src/common/authentication/repository/firebase_auth_repository.dart';
 import 'package:the_postraves_app/src/common/geo_repository/city_local_repository.dart';
 import 'package:the_postraves_app/src/common/navigation/navigation_scaffold.dart';
@@ -19,23 +18,23 @@ import 'app_test.mocks.dart';
 @GenerateMocks([CityLocalRepository, FirebaseAuthRepository, ProfileCubit])
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-  await dotenv.load();
+  // await EasyLocalization.ensureInitialized();
+  // await dotenv.load();
 
   // // group('General app boot tests', () {
-  late EasyLocalization _appWithLocalization;
+  // late EasyLocalization _appWithLocalization;
   late MockCityLocalRepository _mockCityLocalRepo;
   late MockFirebaseAuthRepository _mockFirebaseAuthRepo;
   late MockProfileCubit _mockProfileCubit;
 
   // // setUpAll(() async {
 
-  _appWithLocalization = EasyLocalization(
-    supportedLocales: const [Locale('en'), Locale('ru')],
-    path: 'assets/translations',
-    fallbackLocale: const Locale('en'),
-    child: const MyApp(),
-  );
+  // _appWithLocalization = EasyLocalization(
+  //   supportedLocales: const [Locale('en'), Locale('ru')],
+  //   path: 'assets/translations',
+  //   fallbackLocale: const Locale('en'),
+  //   child: const MyApp(),
+  // );
   // // });
 
   setUp(() {
