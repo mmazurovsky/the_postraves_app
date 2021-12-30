@@ -24,7 +24,9 @@ class _DarkenedImageInContainerState extends State<DarkenedImageInContainer> {
   @override
   void initState() {
     super.initState();
-    _eventImage = MyCachedNetworkImage(widget.imageLink, );
+    _eventImage = MyCachedNetworkImage(
+      widget.imageLink,
+    );
   }
 
   @override

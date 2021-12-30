@@ -3,7 +3,8 @@ import '../../utils/followable_type_utils.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import '../../constants/my_text_styles.dart';
 
-class UnifiedFollowableWithTypeData<T extends FollowableInterfaceWithType> extends StatelessWidget {
+class UnifiedFollowableWithTypeData<T extends FollowableInterfaceWithType>
+    extends StatelessWidget {
   final T followable;
 
   const UnifiedFollowableWithTypeData({

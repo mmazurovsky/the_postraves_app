@@ -26,19 +26,19 @@ class EventCardDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 topLeftWidget,
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 bottomLeftWidget,
               ],
             ),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Flexible(
             flex: 1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 topRightWidget,
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 bottomRightWidget,
               ],
             ),

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../../../common/utils/screen_size.dart';
 import '../../../../common/widgets/entity_presentation/followable_item.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
 import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../../../common/widgets/image/my_cached_network_image.dart';
-import '../../../../common/navigation/my_navigation.dart';
 
 class RatingWeeklyWinnerCard<T extends GeneralFollowableInterface>
     extends StatefulWidget {

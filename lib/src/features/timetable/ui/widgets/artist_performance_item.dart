@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
-import '../../../../common/widgets/entity_presentation/followable_item.dart';
-import '../../../../common/utils/formatting_utils.dart';
-import '../../../../common/constants/my_assets.dart';
+
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
-import '../../../../common/utils/screen_size.dart';
-import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/navigation/my_navigation.dart';
+import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/utils/screen_size.dart';
+import '../../../../common/widgets/entity_presentation/followable_item.dart';
+import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 
 class ArtistPerformanceItem extends StatefulWidget {
   final List<ArtistShort> artists;
@@ -140,7 +140,7 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
               ],
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           MyHorizontalPadding(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,7 +153,7 @@ class _ArtistPerformanceItemState extends State<ArtistPerformanceItem> {
               ],
             ),
           ),
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
         ],
       ),
     );

@@ -5,7 +5,6 @@ import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import '../../constants/my_text_styles.dart';
 import '../../utils/formatting_utils.dart';
 
-
 class FollowableItemData<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final T entity;
@@ -76,7 +75,9 @@ class FollowableItemData<T extends GeneralFollowableInterface>
                 Icon(
                   entity.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
                   size: 19,
-                  color: entity.isFollowed ? MyColors.accent : MyColors.forInactiveStuff,
+                  color: entity.isFollowed
+                      ? MyColors.accent
+                      : MyColors.forInactiveStuff,
                 ),
                 const SizedBox(width: 8),
                 Text(

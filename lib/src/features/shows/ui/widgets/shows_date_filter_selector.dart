@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/common/data/view_mode.dart';
-import 'package:the_postraves_app/src/common/utils/formatting_utils.dart';
-import 'package:the_postraves_app/src/common/widgets/buttons/my_outlined_button_without_padding.dart';
-import 'package:the_postraves_app/src/features/shows/state/date_filter_change_notifier.dart';
-import 'package:the_postraves_app/src/features/shows/state/shows_cubit/shows_cubit.dart';
+import '../../../../common/data/view_mode.dart';
+import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/widgets/buttons/my_outlined_button_without_padding.dart';
+import '../../state/date_filter_change_notifier.dart';
+import '../../state/shows_cubit/shows_cubit.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
@@ -115,7 +115,6 @@ class _MyCalendarState extends State<MyCalendar> {
         context.read<DateTimeFilterChangeNotifier>().startDateTime = startRange;
         context.read<DateTimeFilterChangeNotifier>().endDateTime = endRange;
       },
-
       firstDay: today,
       focusedDay: context.read<DateTimeFilterChangeNotifier>().endDateTime ??
           context.read<DateTimeFilterChangeNotifier>().startDateTime ??
@@ -254,7 +253,7 @@ class SortMode extends StatelessWidget {
               color: isSelected ? MyColors.accent : MyColors.main,
               size: 25,
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Text(
@@ -265,7 +264,7 @@ class SortMode extends StatelessWidget {
               maxLines: 3,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               width: 12,
             ),
           ],

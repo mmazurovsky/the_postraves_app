@@ -35,7 +35,8 @@ class SearchContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(Ionicons.search, size: 17, color: MyColors.forInactiveStuff),
+              const Icon(Ionicons.search,
+                  size: 17, color: MyColors.forInactiveStuff),
               const SizedBox(
                 width: 10,
               ),

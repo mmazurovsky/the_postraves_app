@@ -47,11 +47,11 @@ class ShortEventCardItem extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             SectionDivider(needHorizontalMargin: false),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             EventCardDetailsConcrete(

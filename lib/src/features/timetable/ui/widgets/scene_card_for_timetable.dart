@@ -1,7 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-
 import 'package:the_postraves_package/models/related_to_place/scene.dart';
+
 import '../../../../common/constants/my_text_styles.dart';
 import '../../../../common/widgets/image/my_cached_network_image.dart';
 

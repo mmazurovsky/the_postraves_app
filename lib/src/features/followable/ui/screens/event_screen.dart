@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
-import 'package:the_postraves_app/src/common/widgets/dialogs.dart';
-import 'package:the_postraves_app/src/common/widgets/entity_presentation/followable_item.dart';
-import 'package:the_postraves_app/src/common/widgets/other/section_title.dart';
-import 'package:the_postraves_app/src/common/widgets/spacers/section_divider.dart';
+import '../../../../common/widgets/animations/wrappers.dart';
+import '../../../../common/widgets/dialogs.dart';
+import '../../../../common/widgets/entity_presentation/followable_item.dart';
+import '../../../../common/widgets/other/section_title.dart';
+import '../../../../common/widgets/spacers/section_divider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';

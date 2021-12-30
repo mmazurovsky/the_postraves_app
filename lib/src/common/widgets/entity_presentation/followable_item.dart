@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
-import 'package:the_postraves_package/models/shorts/place_short.dart';
-import '../image/my_cached_network_image.dart';
+
 import '../../constants/my_constants.dart';
+import '../image/my_cached_network_image.dart';
 import '../spacers/my_rating_entity_vertical_padding.dart';
 import 'followable_item_data.dart';
 

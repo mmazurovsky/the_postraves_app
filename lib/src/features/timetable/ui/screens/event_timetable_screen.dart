@@ -1,13 +1,13 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ionicons/ionicons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
-import '../../../../common/utils/formatting_utils.dart';
+
 import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/formatting_utils.dart';
 import '../../../../common/widgets/app_bar/app_bar_title.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_postraves_app/src/common/widgets/animations/switchers.dart';
+import '../../../../common/widgets/animations/switchers.dart';
 import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import 'create_user_profile_screen.dart';

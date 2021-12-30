@@ -1,9 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
+
 import '../geo_repository/city_local_repository.dart';
-
-
 
 class CityListChangeNotifier extends ChangeNotifier {
   final CityLocalRepository _cityRepository;
@@ -22,7 +22,6 @@ class CityListChangeNotifier extends ChangeNotifier {
     } else {
       if (_myCityList.isEmpty) {
         _myCityList = cities;
-        // notifyListeners(); // I don't know about here
       }
     }
   }

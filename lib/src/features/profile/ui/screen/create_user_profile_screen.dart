@@ -1,18 +1,17 @@
 import 'dart:io';
+
 import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
-import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
-import 'package:the_postraves_app/src/common/utils/screen_size.dart';
-import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
-import '../../../../common/constants/my_assets.dart';
+
+import '../../../../common/authentication/state/cubit/authentication_cubit.dart';
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/geo_change_notifier/city_change_notifier.dart';
 import '../../../../common/geo_change_notifier/current_city_change_notifier.dart';
 import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
 import '../../../../common/widgets/app_bar/app_bar_button.dart';
@@ -28,12 +27,14 @@ import '../widgets/profile_image_chooser.dart';
 
 class CreateUserProfileScreen extends StatefulWidget {
   final bool isPoppable;
-  final UserProfileRepository userProfileRepository;
+
   const CreateUserProfileScreen({
     Key? key,
     required this.isPoppable,
     required this.userProfileRepository,
   }) : super(key: key);
+
+  final UserProfileRepository userProfileRepository;
 
   @override
   _CreateUserProfileScreenState createState() =>

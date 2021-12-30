@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../features/followable/ui/widgets/button_with_icons.dart';
 import 'package:the_postraves_package/service/open_link_service.dart';
 import 'package:the_postraves_package/service/social_links_helper.dart';
-import '../../constants/my_assets.dart';
 import '../../constants/my_constants.dart';
 import '../spacers/my_spacers.dart';
 import '../spacers/section_divider.dart';

@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:the_postraves_package/models/user/user_profile.dart';
-import '../../repository/firebase_auth_repository.dart';
-import '../../../../features/profile/repository/user_profile_repository.dart';
 
-part 'authentication_state.dart';
+import '../../../../features/profile/repository/user_profile_repository.dart';
+import '../../repository/firebase_auth_repository.dart';
+
 part 'authentication_cubit.freezed.dart';
+part 'authentication_state.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   final FirebaseAuthRepository _firebaseRepository;

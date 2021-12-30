@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import '../utils/followable_type_utils.dart';
-import '../../features/followable/ui/screens/artist_screen.dart';
-import '../../features/followable/ui/screens/event_screen.dart';
-import '../../features/followable/ui/screens/place_screen.dart';
-import '../../features/followable/ui/screens/unity_screen.dart';
-import '../../features/followable/ui/screens/wiki_share_screen.dart';
-import '../../features/profile/ui/screen/profile_resolver.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import 'package:the_postraves_package/models/geo/country.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
-import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
+
 import '../../features/chart/data/chart_type.dart';
 import '../../features/chart/ui/screens/charts_screen.dart';
 import '../../features/chart/ui/screens/extended_chart_screen.dart';
+import '../../features/followable/ui/screens/artist_screen.dart';
+import '../../features/followable/ui/screens/event_screen.dart';
+import '../../features/followable/ui/screens/place_screen.dart';
+import '../../features/followable/ui/screens/unity_screen.dart';
+import '../../features/followable/ui/screens/wiki_share_screen.dart';
 import '../../features/profile/ui/screen/auth_on_action_screen_resolver.dart';
 import '../../features/profile/ui/screen/following_screen.dart';
 import '../../features/profile/ui/screen/modify_profile_screen.dart';
+import '../../features/profile/ui/screen/profile_resolver.dart';
 import '../../features/profile/ui/screen/sign_in_with_email_and_link_screen.dart';
 import '../../features/search/ui/screens/search_screen.dart';
 import '../../features/shows/ui/screens/shows_screen.dart';
 import '../../features/timetable/ui/screens/event_timetable_screen.dart';
+import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
+import '../utils/followable_type_utils.dart';
 
 class MyNavigationRoutes {
   static const String shows = 'shows';
@@ -34,9 +35,6 @@ class MyNavigationRoutes {
   static const String unity = '/unity';
   static const String profileResolver = 'profile-resolver';
   static const String actionResolver = 'action-resolver';
-  // static const String profile = 'profile';
-  // static const String signInMethods = '/signInMethods';
-  // static const String signInWithEmail = '/signInWithEmail';
   static const String wikiShare = '/wikiShare';
   static const String user = '/user';
   static const String modifyUser = '/modifyUser';
@@ -49,7 +47,8 @@ class MyNavigatorForTab extends StatelessWidget {
   const MyNavigatorForTab({
     required this.navigatorKey,
     required this.activeBottomTab,
-  });
+    Key? key,
+  }) : super(key: key);
   final GlobalKey<NavigatorState> navigatorKey;
   final String activeBottomTab;
 
@@ -226,7 +225,7 @@ class NavigatorFunctions {
     required FollowableData followableData,
   }) {
     Navigator.of(context).pushNamed(
-      FollowableTypeUtils.getNavigationRouteForType(followableData.type),
+        FollowableTypeUtils.getNavigationRouteForType(followableData.type),
         arguments: {
           'FollowableData': followableData,
         });

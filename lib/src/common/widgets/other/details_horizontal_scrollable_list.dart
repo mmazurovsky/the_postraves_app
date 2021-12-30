@@ -41,7 +41,7 @@ class DetailsHorizontalScrollableList extends StatelessWidget {
                 separatorBuilder: (context, index) => Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: const [
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     VerticalDivider(
                       thickness: MyConstants.dividerThickness,
                       // width: 0.5,
@@ -49,7 +49,7 @@ class DetailsHorizontalScrollableList extends StatelessWidget {
                       // indent: 6,
                       // endIndent: 6,
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                   ],
                 ),
                 itemBuilder: (context, index) => DetailsItem(

@@ -1,14 +1,14 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-
 import 'package:ionicons/ionicons.dart';
-import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
-import '../../../../common/utils/followable_type_utils.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
 import 'package:the_postraves_package/models/geo/country.dart';
+
 import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/followable_type_utils.dart';
 import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/widgets/animations/wrappers.dart';
 import '../../../../common/widgets/other/row_of_widgets.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 

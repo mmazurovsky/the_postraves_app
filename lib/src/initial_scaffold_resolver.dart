@@ -4,7 +4,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:the_postraves_app/src/common/geo_change_notifier/city_change_notifier.dart';
+import 'common/geo_change_notifier/city_change_notifier.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/followable/repository/general_repository.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
@@ -16,11 +16,11 @@ import 'common/geo_change_notifier/country_list_change_notifier.dart';
 import 'common/geo_change_notifier/current_city_change_notifier.dart';
 import 'common/geo_repository/city_local_repository.dart';
 import 'common/geo_repository/country_local_repository.dart';
+import 'common/navigation/navigation_scaffold.dart';
 import 'common/widgets/other/loading_container.dart';
 import 'common/widgets/other/select_location_list_view.dart';
 import 'common/widgets/spacers/my_horizontal_padding.dart';
 import 'common/widgets/spacers/my_spacers.dart';
-import 'common/navigation/navigation_scaffold.dart';
 
 class InitialScaffoldResolver extends StatefulWidget {
   final CityLocalRepository cityLocalRepository;

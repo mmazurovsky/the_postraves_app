@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:developer' as dev;
 import 'dart:math';
+
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import '../../constants/my_constants.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/errors/failures.dart';
+
+import '../../constants/my_constants.dart';
 
 abstract class FirebaseAuthRepository {
   Future<ResponseSealed<UserCredential>> signUpWithEmailAndPassword(

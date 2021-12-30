@@ -1,27 +1,26 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:ionicons/ionicons.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:the_postraves_app/src/common/configs/dynamic_link_configurer.dart';
-import 'package:the_postraves_app/src/common/utils/followable_type_utils.dart';
-import 'package:the_postraves_app/src/common/widgets/animations/wrappers.dart';
-import 'package:the_postraves_app/src/common/widgets/other/loading_container.dart';
-import 'package:the_postraves_app/src/common/widgets/other/my_loading_indicator.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
+
+import '../../../../common/configs/dynamic_link_configurer.dart';
 import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/utils/followable_type_utils.dart';
+import '../../../../common/widgets/animations/wrappers.dart';
 import '../../../../common/widgets/app_bar/app_bar_back_button.dart';
 import '../../../../common/widgets/app_bar/app_bar_title.dart';
 import '../../../../common/widgets/app_bar/my_simple_app_bar.dart';
 import '../../../../common/widgets/buttons/my_elevated_button.dart';
 import '../../../../common/widgets/entity_presentation/unified_followable_with_type_data.dart';
+import '../../../../common/widgets/image/my_cached_network_image.dart';
+import '../../../../common/widgets/other/my_loading_indicator.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../../../common/widgets/image/my_cached_network_image.dart';
 
 class WikiShareScreen extends StatelessWidget {
   final FollowableData followableData;
@@ -83,7 +82,7 @@ class WikiShareScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         Flexible(
                           child: UnifiedFollowableWithTypeData(
                             followable: followableData,

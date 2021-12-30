@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants/my_text_styles.dart';
 
+import '../../constants/my_text_styles.dart';
 
 class DetailsItem extends StatelessWidget {
   final String title;

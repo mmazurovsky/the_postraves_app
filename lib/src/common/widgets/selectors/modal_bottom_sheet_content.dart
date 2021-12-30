@@ -6,7 +6,6 @@ import '../buttons/my_outlined_button.dart';
 import '../spacers/my_horizontal_padding.dart';
 import '../spacers/section_divider.dart';
 
-
 class ModalBottomSheetContent extends StatelessWidget {
   final IconData iconData;
   final String title;

@@ -1,13 +1,14 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../dependency_injection.dart';
 import '../authentication/repository/firebase_auth_repository.dart';
 import '../authentication/state/cubit/authentication_cubit.dart';
 import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
-import '../geo_change_notifier/current_tab_change_notifier.dart';
-import '../../dependency_injection.dart';
-import '../navigation/my_navigation.dart';
 import '../constants/my_constants.dart';
+import '../geo_change_notifier/current_tab_change_notifier.dart';
+import '../navigation/my_navigation.dart';
 
 class DynamicLinksConfigurer extends StatefulWidget {
   final Widget child;

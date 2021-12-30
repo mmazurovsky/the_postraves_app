@@ -1,11 +1,11 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_postraves_app/src/common/authentication/state/cubit/authentication_cubit.dart';
-import 'package:the_postraves_app/src/common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
-import 'package:the_postraves_app/src/common/constants/my_text_styles.dart';
-import 'package:the_postraves_app/src/common/widgets/spacers/my_horizontal_padding.dart';
-import 'package:the_postraves_app/src/common/widgets/spacers/section_divider.dart';
+import '../authentication/state/cubit/authentication_cubit.dart';
+import '../bottom_navigation_bar/bottom_navigation_tab_item.dart';
+import '../constants/my_text_styles.dart';
+import 'spacers/my_horizontal_padding.dart';
+import 'spacers/section_divider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 
 class DialogCanvas extends StatelessWidget {
@@ -76,7 +76,7 @@ class DialogWithOkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DialogCanvas(
-      alertText: _alertText, 
+      alertText: _alertText,
       buttonsRow: InkWell(
         onTap: _closeDialogFunction,
         child: Container(

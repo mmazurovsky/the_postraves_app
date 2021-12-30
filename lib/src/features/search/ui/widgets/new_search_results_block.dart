@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_postraves_package/dto/image_dimensions.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
+
+import '../../../../common/navigation/my_navigation.dart';
 import '../../../../common/widgets/entity_presentation/followable_list.dart';
 import '../../../../common/widgets/other/section_title.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../../../common/widgets/spacers/section_divider.dart';
-import '../../../../common/navigation/my_navigation.dart';
 import '../../state/cubit/search_cubit.dart';
 
 class NewSearchResultsBlock<T extends GeneralFollowableInterface>
@@ -29,7 +30,7 @@ class NewSearchResultsBlock<T extends GeneralFollowableInterface>
         SectionTitle(
           sectionTitle: resultsName,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         FollowableList<T>(
           followables: results,
           onItemTap: <T extends GeneralFollowableInterface>(context, T entity,
