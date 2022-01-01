@@ -26,23 +26,23 @@ import 'package:the_postraves_package/models/geo/country.dart';
 import 'app_test.mocks.dart';
 
 @GenerateMocks([CityLocalRepository, FirebaseAuthRepository, ProfileCubit])
-void main() async {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
+void main() {
+  // IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('General app boot tests', () {
-    late EasyLocalization _appWithLocalization;
+    late Widget _appWithLocalization;
     late MockCityLocalRepository _mockCityLocalRepo;
     late MockFirebaseAuthRepository _mockFirebaseAuthRepo;
     late MockProfileCubit _mockProfileCubit;
 
     setUpAll(() async {
+      IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+      await EasyLocalization.ensureInitialized();
       _appWithLocalization = EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ru')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        child: const MyApp(),
-      );
+          supportedLocales: const [Locale('en'), Locale('ru')],
+          path: 'assets/translations',
+          fallbackLocale: const Locale('en'),
+          child: const MyApp());
 
       _mockCityLocalRepo = MockCityLocalRepository();
       _mockFirebaseAuthRepo = MockFirebaseAuthRepository();
@@ -77,7 +77,6 @@ void main() async {
       when(_mockFirebaseAuthRepo.currentUser).thenReturn(null);
 
       await tester.pumpWidget(_appWithLocalization);
-      // await tester.pumpWidget(Container());
       await tester.pumpAndSettle();
 
       expect(find.byType(CityPickerScaffold), findsOneWidget);
@@ -127,6 +126,8 @@ void main() async {
     late MockProfileCubit _mockProfileCubit;
 
     setUpAll(() async {
+      IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+      await EasyLocalization.ensureInitialized();
       _appWithLocalization = EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('ru')],
         path: 'assets/translations',
