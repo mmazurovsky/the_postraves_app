@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -106,8 +106,8 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
   serviceLocator.registerLazySingleton<FirebaseFirestore>(
       () => FirebaseFirestore.instance);
 
-  serviceLocator.registerLazySingleton<FirebaseMessaging>(
-      () => FirebaseMessaging.instance);
+  // serviceLocator.registerLazySingleton<FirebaseMessaging>(
+  //     () => FirebaseMessaging.instance);
 
   // Request
 
@@ -633,7 +633,6 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
-      serviceLocator(),
     ),
   );
 
@@ -649,7 +648,6 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
 
   serviceLocator.registerLazySingleton<ArtistRepository>(
     () => ArtistRepositoryImpl(
-      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
@@ -672,7 +670,6 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),
-      serviceLocator(),
     ),
   );
 
@@ -688,7 +685,6 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
 
   serviceLocator.registerLazySingleton<UnityRepository>(
     () => UnityRepositoryImpl(
-      serviceLocator(),
       serviceLocator(),
       serviceLocator(),
       serviceLocator(),

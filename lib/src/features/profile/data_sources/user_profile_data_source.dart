@@ -34,7 +34,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
   Future<UserProfile?> getUserAccount(
       {required Map<String, String> httpHeaders}) async {
     final decodedResponse = await _localizedGetRequest(
-      endpointWithPath: FollowableType.USER.endpoint + '/public/myProfile',
+      endpointWithPath: FollowableType.USER.path + '/public/myProfile',
       httpHeaders: httpHeaders,
     );
     return decodedResponse == null
@@ -51,7 +51,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
       httpMethod: HttpMethod.post,
       host: _serverConstantsAbstract.apiHost,
       hostPath: _serverConstantsAbstract.apiPath,
-      endpointWithPath: FollowableType.USER.endpoint + '/public/myProfile',
+      endpointWithPath: FollowableType.USER.path + '/public/myProfile',
       httpHeaders: httpHeaders,
       body: userAccountToCreate.toJson(),
     );
@@ -64,7 +64,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
       required String nickname}) async {
     dynamic decodedResponse = await _localizedGetRequest(
       endpointWithPath:
-          FollowableType.USER.endpoint + '/public/nicknameCheck/$nickname',
+          FollowableType.USER.path + '/public/nicknameCheck/$nickname',
       httpHeaders: httpHeaders,
     );
     return decodedResponse;
@@ -80,7 +80,7 @@ class UserProfileDataSourceImpl implements UserProfileDataSource {
       httpMethod: HttpMethod.put,
       host: _serverConstantsAbstract.apiHost,
       hostPath: _serverConstantsAbstract.apiPath,
-      endpointWithPath: FollowableType.USER.endpoint + '/myProfile',
+      endpointWithPath: FollowableType.USER.path + '/myProfile',
       httpHeaders: httpHeaders,
       body: updatedUserProfile.toJson(),
     );

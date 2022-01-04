@@ -32,7 +32,7 @@ dependencies:
   sign_in_with_apple: ^3.0.0 
   firebase_storage: ^10.0.3
   cloud_firestore: ^3.1.1
-  firebase_messaging: ^10.0.7
+  # firebase_messaging: ^10.0.7
   # firebase_crashlytics: ^2.0.7
   firebase_dynamic_links: ^2.0.9
   logging: ^1.0.1
