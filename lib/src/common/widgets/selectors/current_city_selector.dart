@@ -28,8 +28,8 @@ class _CurrentCitySelectorState extends State<CurrentCitySelector> {
 
   @override
   void initState() {
-    _currentCity = widget.currentCity;
     super.initState();
+    _currentCity = widget.currentCity;
   }
 
   @override
