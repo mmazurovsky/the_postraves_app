@@ -1,32 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../common/widgets/animations/wrappers.dart';
-
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/models/fulls/place_full.dart';
-import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/place_short.dart';
 
+import '../../../../common/widgets/animations/wrappers.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/social_links_list.dart';
-import '../../../../common/widgets/spacers/my_horizontal_margin.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../../../common/widgets/spacers/section_divider.dart';
-import '../../../../common/navigation/my_navigation.dart';
 import '../../state/follow_cubit/follow_cubit.dart';
 import '../../state/place_cubit/place_cubit.dart';
 import '../widgets/about_section.dart';
-import '../widgets/address_section.dart';
-import '../../../../common/widgets/other/column_of_custom_cards.dart';
 import '../widgets/coordinates_section.dart';
 import '../widgets/followable_util.dart';
-import '../widgets/map_selector.dart';
 import '../widgets/upcoming_events_section.dart';
 import '../widgets/wiki_wide_bookmark_button.dart';
 import 'followable_screen.dart';
-import 'wiki_canvas.dart';
 
 class PlaceScreen extends StatelessWidget {
   final FollowableData _followableData;

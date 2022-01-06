@@ -776,6 +776,7 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
   serviceLocator.registerFactory(
     () => FollowCubit<EventFull, EventShort>(
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -788,6 +789,7 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
   serviceLocator.registerFactory(
     () => FollowCubit<ArtistFull, ArtistShort>(
       serviceLocator(),
+      serviceLocator(),
     ),
   );
 
@@ -799,6 +801,7 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
 
   serviceLocator.registerFactory(
     () => FollowCubit<PlaceFull, PlaceShort>(
+      serviceLocator(),
       serviceLocator(),
     ),
   );
@@ -816,6 +819,7 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
   );
   serviceLocator.registerFactory(
     () => FollowCubit<UnityFull, UnityShort>(
+      serviceLocator(),
       serviceLocator(),
     ),
   );

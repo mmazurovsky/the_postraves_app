@@ -1,65 +1,69 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../date_filter_change_notifier.dart';
-import '../../../../common/data/view_mode.dart';
 import 'package:the_postraves_package/client/response_sealed.dart';
 import 'package:the_postraves_package/models/geo/city.dart';
-import 'package:the_postraves_package/models/related_to_event/shows_by_date.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
-import '../../repository/shows_repository_impl.dart';
-import '../view_switcher_cubit/view_switcher_cubit.dart';
+import 'package:the_postraves_package/models/shorts/place_short.dart';
 
-part 'shows_state.dart';
+import '../../repository/shows_repository_impl.dart';
+import '../date_filter_change_notifier.dart';
+
 part 'shows_cubit.freezed.dart';
+part 'shows_state.dart';
 
 class ShowsCubit extends Cubit<ShowsState> {
   final ShowsRepository showsRepository;
   final DateTimeFilterChangeNotifier dateFilterChangeNotifier;
   List<EventShort>? _eventsByDate;
-  // final ViewSwitcherCubit viewSwitcherBloc;
-  // late StreamSubscription _viewSwitcherBlocSubscription;
-  // ViewMode? _currentView;
 
   ShowsCubit({
     required this.showsRepository,
     required this.dateFilterChangeNotifier,
-    // required this.viewSwitcherBloc,
   }) : super(const ShowsState.loading());
-  // _viewSwitcherBlocSubscription =
-  //     viewSwitcherBloc.stream.listen((viewSwitcherState) {
-  //   if (viewSwitcherState is ByDateViewState) {
-  //     _currentView = ViewMode.SORT_BY_DATE;
-  //     showByDateView();
-  //   } else if (viewSwitcherState is ByRatingViewState) {
-  //     _currentView = ViewMode.SORT_BY_RATING;
-  //     showByRatingView();
-  //   }
-  // });
-
-  // @override
-  // Future<void> close() async {
-  //   _viewSwitcherBlocSubscription.cancel();
-  //   return super.close();
-  // }
 
   void fullyLoadShows(City currentCity) {
     emit(const ShowsState.loading());
     _loadShows(currentCity);
   }
 
+  void toggleFollowShow(int id) {
+    final eventIndex = _eventsByDate?.indexWhere((event) => event.id == id);
+    if (eventIndex != null && eventIndex > -1) {
+      final previousIsFollowed = _eventsByDate![eventIndex].isFollowed;
+      final newEvent =
+          _eventsByDate![eventIndex].copyWith(isFollowed: !previousIsFollowed);
+      _eventsByDate![eventIndex] = newEvent;
+      emit(const ShowsState.refreshing());
+      emit(ShowsState.loaded(_eventsByDate!));
+    }
+  }
+
+  void toggleFollowPlace(int id) {
+    Map<int, EventShort> mapOfUpdatedEvents = {};
+    int i = 0;
+    _eventsByDate?.forEach((e) {
+      if (e.place.id == id) {
+        final updatedEvent = e.copyWith(
+            place: e.place.copyWith(isFollowed: !e.place.isFollowed));
+        mapOfUpdatedEvents[i] = updatedEvent;
+      }
+      i++;
+    });
+
+    for (var element in mapOfUpdatedEvents.entries) {
+      _eventsByDate![element.key] = element.value;
+    }
+
+    emit(const ShowsState.refreshing());
+    emit(ShowsState.loaded(_eventsByDate!));
+  }
+
   void refreshShows(City currentCity) {
     emit(const ShowsState.refreshing());
     _loadShows(currentCity);
   }
-
-  // void showByDateView() {
-  //   emit(ShowsState.loadedByDate(_eventsByDate!));
-  // }
-
-  // void showByRatingView() {
-  //   emit(ShowsState.loaded(_eventsByRating!));
-  // }
 
   void _loadShows(City currentCity) async {
     await _loadShowsFromRemote(currentCity);
