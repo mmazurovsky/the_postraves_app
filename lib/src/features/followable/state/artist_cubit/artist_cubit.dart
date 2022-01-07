@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
 import 'package:the_postraves_package/followable/complete_entities_loader/complete_entities_loader.dart';
 import 'package:the_postraves_package/followable/complete_entities_loader/complete_full_entities.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
@@ -11,8 +12,11 @@ part 'artist_state.dart';
 
 class ArtistCubit extends Cubit<ArtistState> {
   final CompleteEntitiesLoader _completeEntitiesLoader;
-  ArtistCubit(this._completeEntitiesLoader)
-      : super(const ArtistState.loading());
+  final FollowableChangeNotifier _followableChangeNotifier;
+  ArtistCubit(
+    this._completeEntitiesLoader,
+    this._followableChangeNotifier,
+  ) : super(const ArtistState.loading());
 
   void loadArtist(int id) async {
     emit(const ArtistState.loading());
@@ -21,6 +25,9 @@ class ArtistCubit extends Cubit<ArtistState> {
     completeArtistResponse.when(
       success: (data) {
         CompleteArtistEntity completeArtist = data;
+        _followableChangeNotifier
+            .updateFollowablesBasedOnCompleteArtist(completeArtist);
+
         emit(
           ArtistState.loaded(completeArtist.artistFull, completeArtist.unities,
               completeArtist.events),

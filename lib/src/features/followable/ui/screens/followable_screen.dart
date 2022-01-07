@@ -1,12 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_package/dto/followable_params.dart';
+import '../../state/followable_change_notifier.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import '../../../../dependency_injection.dart';
 import '../widgets/wiki_subtitle.dart';
 import 'wiki_canvas.dart';
 
-class FollowableScreen<FollowableCubitGeneric extends Cubit,
-    FollowCubitGeneric extends Cubit> extends StatelessWidget {
+class FollowableScreen<FollowableCubitGeneric extends Cubit>
+    extends StatelessWidget {
   final FollowableData _followableData;
   final Widget _contents;
   const FollowableScreen(
@@ -17,18 +19,14 @@ class FollowableScreen<FollowableCubitGeneric extends Cubit,
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => serviceLocator<FollowableCubitGeneric>(),
-        ),
-        BlocProvider(
-          create: (context) => serviceLocator<FollowCubitGeneric>(),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) {
+        final newFollowableCubit = serviceLocator<FollowableCubitGeneric>();
+        return newFollowableCubit;
+      },
       child: WikiCanvas(
         followableData: _followableData,
-        wikiContent: _FollowableScreenContents<FollowCubitGeneric>(
+        wikiContent: _FollowableScreenContents<FollowableCubitGeneric>(
             _followableData, _contents),
       ),
     );
@@ -36,7 +34,7 @@ class FollowableScreen<FollowableCubitGeneric extends Cubit,
 }
 
 class _FollowableScreenContents<FollowCubitGeneric extends Cubit>
-    extends StatefulWidget {
+    extends StatelessWidget {
   final FollowableData _followableData;
   final Widget _contents;
   const _FollowableScreenContents(this._followableData, this._contents,
@@ -44,40 +42,25 @@ class _FollowableScreenContents<FollowCubitGeneric extends Cubit>
       : super(key: key);
 
   @override
-  _FollowableScreenContentsState<FollowCubitGeneric> createState() =>
-      _FollowableScreenContentsState<FollowCubitGeneric>();
-}
-
-class _FollowableScreenContentsState<FollowCubitGeneric extends Cubit>
-    extends State<_FollowableScreenContents<FollowCubitGeneric>> {
-  late int? _overallFollowers;
-  late int? _weeklyFollowers;
-  late bool? _isFollowed;
-
-  @override
-  void didChangeDependencies() {
-    _overallFollowers =
-        context.watch<FollowCubitGeneric>().state.overallFollowers;
-    _weeklyFollowers =
-        context.watch<FollowCubitGeneric>().state.weeklyFollowers;
-    _isFollowed = context.watch<FollowCubitGeneric>().state.isFollowed;
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final followableVariables = context.watch<FollowableChangeNotifier>().get(
+          FollowableId(
+            id: _followableData.id,
+            type: _followableData.type,
+          ),
+        );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 5),
         WikiSubtitle(
-          entityType: widget._followableData.type,
-          country: widget._followableData.country,
-          overallFollowers: _overallFollowers,
-          weeklyFollowers: _weeklyFollowers,
-          isFollowed: _isFollowed,
+          entityType: _followableData.type,
+          country: _followableData.country,
+          overallFollowers: followableVariables?.overallFollowers,
+          weeklyFollowers: followableVariables?.weeklyFollowers,
+          isFollowed: followableVariables?.isFollowed,
         ),
-        widget._contents,
+        _contents,
       ],
     );
   }

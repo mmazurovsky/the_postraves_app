@@ -19,7 +19,8 @@ dependencies:
   json_annotation: ^4.0.1
   get_it: ^7.2.0
   another_flushbar: ^1.10.20
-  dartz: ^0.10.0
+  # dartz: ^0.10.0
+  tuple: ^2.0.0
   internet_connection_checker: ^0.0.1+2
   sembast: ^3.0.0+4
   path_provider: ^2.0.1

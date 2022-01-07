@@ -6,12 +6,19 @@ import 'package:the_postraves_package/models/fulls/place_full.dart';
 import 'package:the_postraves_package/models/related_to_place/scene.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 
-part 'place_state.dart';
+import '../followable_change_notifier.dart';
+
 part 'place_cubit.freezed.dart';
+part 'place_state.dart';
 
 class PlaceCubit extends Cubit<PlaceState> {
   final CompleteEntitiesLoader _completeEntitiesLoader;
-  PlaceCubit(this._completeEntitiesLoader) : super(const PlaceState.loading());
+  final FollowableChangeNotifier _followableChangeNotifier;
+
+  PlaceCubit(
+    this._completeEntitiesLoader,
+    this._followableChangeNotifier,
+  ) : super(const PlaceState.loading());
 
   void loadPlace(int id) async {
     emit(const PlaceState.loading());
@@ -20,6 +27,8 @@ class PlaceCubit extends Cubit<PlaceState> {
     completePlaceResponse.when(
       success: (data) {
         CompletePlaceEntity completePlace = data;
+        _followableChangeNotifier
+            .updateFollowablesBasedOnCompletePlace(completePlace);
         emit(PlaceState.loaded(completePlace.placeFull, completePlace.scenes,
             completePlace.events));
       },

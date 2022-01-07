@@ -12,6 +12,7 @@ import 'common/geo_repository/city_local_repository.dart';
 import 'common/geo_repository/country_local_repository.dart';
 import 'dependency_injection.dart';
 import 'features/chart/state/cubit/charts_cubit.dart';
+import 'features/followable/state/followable_change_notifier.dart';
 import 'features/profile/state/following_cubit/following_cubit.dart';
 import 'features/profile/state/profile_cubit/profile_cubit.dart';
 import 'features/search/state/cubit/search_cubit.dart';
@@ -58,6 +59,9 @@ class ProvidersInjection extends StatelessWidget {
       ],
       child: MultiProvider(
         providers: [
+          ChangeNotifierProvider(
+            create: (_) => serviceLocator<FollowableChangeNotifier>(),
+          ),
           ChangeNotifierProvider(
             create: (_) => CurrentTabChangeNotifier(TabItem.shows),
           ),

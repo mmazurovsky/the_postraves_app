@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/src/provider.dart';
+import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
+import 'package:the_postraves_package/dto/followable_params.dart';
 import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import '../../constants/my_text_styles.dart';
 import '../../utils/formatting_utils.dart';
 
 class FollowableItemData<T extends GeneralFollowableInterface>
-    extends StatelessWidget {
+    extends StatefulWidget {
   final T entity;
   final bool showWeeklyFollowers;
   final String? hintText;
@@ -18,12 +21,35 @@ class FollowableItemData<T extends GeneralFollowableInterface>
     this.hintText,
   }) : super(key: key);
 
-  TextStyle _resolveFollowersTextStyle() {
-    if (showWeeklyFollowers) {
-      return FormattingUtils.resolveTextStyleForWeeklyFollowers(
-          entity.weeklyFollowers);
+  @override
+  State<FollowableItemData<T>> createState() => _FollowableItemDataState<T>();
+}
+
+class _FollowableItemDataState<T extends GeneralFollowableInterface>
+    extends State<FollowableItemData<T>> {
+  FollowableVariables? _followableVariables;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final watched = context
+        .watch<FollowableChangeNotifier>()
+        .get(widget.entity.followableId);
+    if (watched != null) {
+      if (_followableVariables != watched) {
+        _followableVariables = watched;
+      }
     } else {
-      if (entity.isFollowed) {
+      _followableVariables = widget.entity.followableVariables;
+    }
+  }
+
+  TextStyle _resolveFollowersTextStyle() {
+    if (widget.showWeeklyFollowers) {
+      return FormattingUtils.resolveTextStyleForWeeklyFollowers(
+          _followableVariables!.weeklyFollowers);
+    } else {
+      if (_followableVariables!.isFollowed) {
         return MyTextStyles.shortEntityRatingAccent;
       } else {
         return MyTextStyles.shortEntityOverallRating;
@@ -42,11 +68,11 @@ class FollowableItemData<T extends GeneralFollowableInterface>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            entity.country != null
+            widget.entity.country != null
                 ? Row(
                     children: [
                       Text(
-                        entity.country!.emojiCode,
+                        widget.entity.country!.emojiCode,
                         style: MyTextStyles.countryFlag,
                       ),
                       const SizedBox(width: 8),
@@ -55,7 +81,7 @@ class FollowableItemData<T extends GeneralFollowableInterface>
                 : Container(),
             Flexible(
               child: Text(
-                entity.name,
+                widget.entity.name,
                 style: MyTextStyles.shortEntityName,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -73,18 +99,20 @@ class FollowableItemData<T extends GeneralFollowableInterface>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
-                  entity.isFollowed ? Ionicons.heart : Ionicons.heart_outline,
+                  _followableVariables!.isFollowed
+                      ? Ionicons.heart
+                      : Ionicons.heart_outline,
                   size: 19,
-                  color: entity.isFollowed
+                  color: _followableVariables!.isFollowed
                       ? MyColors.accent
                       : MyColors.forInactiveStuff,
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  showWeeklyFollowers
+                  widget.showWeeklyFollowers
                       ? FormattingUtils.resolveTextForWeeklyFollowers(
-                          entity.weeklyFollowers)
-                      : entity.overallFollowers.toString(),
+                          _followableVariables!.weeklyFollowers)
+                      : _followableVariables!.overallFollowers.toString(),
                   style: _resolveFollowersTextStyle(),
                 ),
               ],

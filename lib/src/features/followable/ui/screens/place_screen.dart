@@ -10,7 +10,7 @@ import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/social_links_list.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../state/follow_cubit/follow_cubit.dart';
+import '../../state/followable_change_notifier.dart';
 import '../../state/place_cubit/place_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/coordinates_section.dart';
@@ -28,7 +28,7 @@ class PlaceScreen extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return FollowableScreen<PlaceCubit, FollowCubit<PlaceFull, PlaceShort>>(
+    return FollowableScreen<PlaceCubit>(
       _followableData,
       _PlaceStateManagement(_followableData),
     );
@@ -45,7 +45,6 @@ class _PlaceStateManagement extends StatefulWidget {
 }
 
 class _PlaceStateManagementState extends State<_PlaceStateManagement> {
-  
   @override
   void initState() {
     super.initState();
@@ -54,16 +53,7 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PlaceCubit, PlaceState>(
-      listener: (context, state) {
-        if (state is PlaceLoadedState) {
-          context.read<FollowCubit<PlaceFull, PlaceShort>>().defineFollowState(
-                weeklyFollowers: state.place.weeklyFollowers,
-                overallFollowers: state.place.overallFollowers,
-                isFollowed: state.place.isFollowed,
-              );
-        }
-      },
+    return BlocBuilder<PlaceCubit, PlaceState>(
       builder: (context, state) {
         if (state is PlaceLoadedState) {
           return _PlaceContent(
@@ -71,7 +61,7 @@ class _PlaceStateManagementState extends State<_PlaceStateManagement> {
             events: state.events,
           );
         } else {
-          return LoadingContainer();
+          return const LoadingContainer();
           // TODO Exception
         }
       },
@@ -97,8 +87,11 @@ class _PlaceContentState extends State<_PlaceContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed =
-        context.watch<FollowCubit<PlaceFull, PlaceShort>>().state.isFollowed!;
+    _isFollowed = context
+        .watch<FollowableChangeNotifier>()
+        .get(widget.place.followableId)
+        ?.isFollowed ??
+        false;
     super.didChangeDependencies();
   }
 

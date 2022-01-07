@@ -239,13 +239,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  dartz:
-    dependency: "direct main"
-    description:
-      name: dartz
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.1"
   easy_localization:
     dependency: "direct main"
     description:
@@ -1187,7 +1180,7 @@ packages:
     description:
       path: "."
       ref: dev
-      resolved-ref: "2bf93dc51c63e8efdb92256f28bd446c94bfe02c"
+      resolved-ref: "8e14e6a050b57969a856e83fd4eb061fd87d832d"
       url: "https://github.com/mmazurovsky/the_postraves_package"
     source: git
     version: "0.0.2"
@@ -1198,6 +1191,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  tuple:
+    dependency: "direct main"
+    description:
+      name: tuple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   typed_data:
     dependency: transitive
     description:

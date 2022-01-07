@@ -1,32 +1,31 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ionicons/ionicons.dart';
-import '../../../../common/widgets/animations/wrappers.dart';
-import '../../../../common/widgets/dialogs.dart';
-import '../../../../common/widgets/entity_presentation/followable_item.dart';
-import '../../../../common/widgets/other/section_title.dart';
-import '../../../../common/widgets/spacers/section_divider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import 'package:the_postraves_package/models/fulls/event_full.dart';
-import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/place_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
+
 import '../../../../common/constants/my_constants.dart';
 import '../../../../common/constants/my_text_styles.dart';
+import '../../../../common/navigation/my_navigation.dart';
 import '../../../../common/utils/formatting_utils.dart';
+import '../../../../common/widgets/animations/wrappers.dart';
+import '../../../../common/widgets/dialogs.dart';
+import '../../../../common/widgets/entity_presentation/followable_item.dart';
 import '../../../../common/widgets/other/details_horizontal_scrollable_list.dart';
 import '../../../../common/widgets/other/loading_container.dart';
+import '../../../../common/widgets/other/section_title.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../../../common/navigation/my_navigation.dart';
+import '../../../../common/widgets/spacers/section_divider.dart';
 import '../../state/event_cubit/event_cubit.dart';
-import '../../state/follow_cubit/follow_cubit.dart';
+import '../../state/followable_change_notifier.dart';
 import '../widgets/about_section.dart';
 import '../widgets/button_with_icons.dart';
 import '../widgets/event_main_button.dart';
@@ -44,7 +43,7 @@ class EventScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FollowableScreen<EventCubit, FollowCubit<EventFull, EventShort>>(
+    return FollowableScreen<EventCubit>(
       _followableData,
       _EventStateManagement(_followableData),
     );
@@ -72,16 +71,7 @@ class _EventStateManagementState extends State<_EventStateManagement> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<EventCubit, EventState>(
-      listener: (context, state) {
-        if (state is EventLoadedState) {
-          context.read<FollowCubit<EventFull, EventShort>>().defineFollowState(
-                weeklyFollowers: state.event.weeklyFollowers,
-                overallFollowers: state.event.overallFollowers,
-                isFollowed: state.event.isFollowed,
-              );
-        }
-      },
+    return BlocBuilder<EventCubit, EventState>(
       builder: (context, state) {
         if (state is EventLoadedState) {
           return _EventContent(
@@ -92,7 +82,7 @@ class _EventStateManagementState extends State<_EventStateManagement> {
             eventBlocProvider: _eventBlocProvider,
           );
         } else {
-          return LoadingContainer();
+          return const LoadingContainer();
           // TODO Exception
         }
       },
@@ -125,8 +115,11 @@ class _EventContentState extends State<_EventContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed =
-        context.watch<FollowCubit<EventFull, EventShort>>().state.isFollowed!;
+    _isFollowed = context
+        .watch<FollowableChangeNotifier>()
+        .get(widget.event.followableId)
+        ?.isFollowed ??
+        false;
     super.didChangeDependencies();
   }
 

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
 import 'features/shows/state/date_filter_change_notifier.dart';
 import 'package:the_postraves_package/client/client_helper.dart';
 import 'package:the_postraves_package/client/localized_request.dart';
@@ -709,6 +710,9 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
 
   // State
 
+  serviceLocator.registerLazySingleton<FollowableChangeNotifier>(
+      () => FollowableChangeNotifierImpl());
+
   serviceLocator.registerLazySingleton(
     () => CurrentCityChangeNotifier(
       serviceLocator<CityLocalRepository>(),
@@ -748,6 +752,7 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
     () => ShowsCubit(
       showsRepository: serviceLocator(),
       dateFilterChangeNotifier: serviceLocator(),
+      followableChangeNotifier: serviceLocator(),
     ),
   );
 
@@ -764,17 +769,12 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
   serviceLocator.registerLazySingleton(
     () => ChartsCubit(
       serviceLocator(),
-    ),
-  );
-
-  serviceLocator.registerFactory(
-    () => EventCubit(
       serviceLocator(),
     ),
   );
 
   serviceLocator.registerFactory(
-    () => FollowCubit<EventFull, EventShort>(
+    () => EventCubit(
       serviceLocator(),
       serviceLocator(),
     ),
@@ -783,24 +783,12 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
   serviceLocator.registerFactory(
     () => ArtistCubit(
       serviceLocator(),
-    ),
-  );
-
-  serviceLocator.registerFactory(
-    () => FollowCubit<ArtistFull, ArtistShort>(
-      serviceLocator(),
       serviceLocator(),
     ),
   );
 
   serviceLocator.registerFactory(
     () => PlaceCubit(
-      serviceLocator(),
-    ),
-  );
-
-  serviceLocator.registerFactory(
-    () => FollowCubit<PlaceFull, PlaceShort>(
       serviceLocator(),
       serviceLocator(),
     ),
@@ -814,11 +802,6 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
 
   serviceLocator.registerFactory(
     () => UnityCubit(
-      serviceLocator(),
-    ),
-  );
-  serviceLocator.registerFactory(
-    () => FollowCubit<UnityFull, UnityShort>(
       serviceLocator(),
       serviceLocator(),
     ),

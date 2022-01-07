@@ -1,6 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
 import '../../../../common/widgets/animations/wrappers.dart';
 
 import 'package:the_postraves_package/dto/followable_data.dart';
@@ -29,7 +30,7 @@ class UnityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FollowableScreen<UnityCubit, FollowCubit<UnityFull, UnityShort>>(
+    return FollowableScreen<UnityCubit>(
       _followableData,
       _UnityStateManagement(_followableData),
     );
@@ -54,16 +55,7 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UnityCubit, UnityState>(
-      listener: (context, state) {
-        if (state is UnityLoadedState) {
-          context.read<FollowCubit<UnityFull, UnityShort>>().defineFollowState(
-                weeklyFollowers: state.unity.weeklyFollowers,
-                overallFollowers: state.unity.overallFollowers,
-                isFollowed: state.unity.isFollowed,
-              );
-        }
-      },
+    return BlocBuilder<UnityCubit, UnityState>(
       builder: (context, state) {
         if (state is UnityLoadedState) {
           return _UnityContent(
@@ -72,7 +64,7 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
             events: state.events,
           );
         } else {
-          return LoadingContainer();
+          return const LoadingContainer();
           // TODO Exception
         }
       },
@@ -102,8 +94,11 @@ class _UnityContentState extends State<_UnityContent> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _isFollowed =
-        context.watch<FollowCubit<UnityFull, UnityShort>>().state.isFollowed!;
+    _isFollowed = context
+            .watch<FollowableChangeNotifier>()
+            .get(widget.unity.followableId)
+            ?.isFollowed ??
+        false;
   }
 
   @override

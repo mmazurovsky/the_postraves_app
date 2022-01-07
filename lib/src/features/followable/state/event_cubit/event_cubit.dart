@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
 import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import 'package:the_postraves_package/followable/complete_entities_loader/complete_entities_loader.dart';
 import 'package:the_postraves_package/followable/complete_entities_loader/complete_full_entities.dart';
@@ -12,8 +13,11 @@ part 'event_state.dart';
 
 class EventCubit extends Cubit<EventState> {
   final CompleteEntitiesLoader _completeEntitiesLoader;
+  final FollowableChangeNotifier _followableChangeNotifier;
+
   EventCubit(
     this._completeEntitiesLoader,
+    this._followableChangeNotifier,
   ) : super(const EventState.loading());
 
   void loadEvent(int eventId) {
@@ -32,6 +36,8 @@ class EventCubit extends Cubit<EventState> {
     completeEventResponse.when(
       success: (data) {
         CompleteEventEntity completeEvent = data;
+        _followableChangeNotifier
+            .updateFollowablesBasedOnCompleteEvent(completeEvent);
         emit(
           EventState.loaded(
             event: completeEvent.eventFull,

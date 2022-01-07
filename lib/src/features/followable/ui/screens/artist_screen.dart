@@ -1,6 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
 import '../../../../common/widgets/animations/wrappers.dart';
 
 import 'package:the_postraves_package/dto/followable_data.dart';
@@ -13,7 +14,6 @@ import '../../../../common/widgets/other/social_links_list.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
 import '../../state/artist_cubit/artist_cubit.dart';
-import '../../state/follow_cubit/follow_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
 import '../widgets/followable_util.dart';
@@ -30,7 +30,7 @@ class ArtistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FollowableScreen<ArtistCubit, FollowCubit<ArtistFull, ArtistShort>>(
+    return FollowableScreen<ArtistCubit>(
       _followableData,
       _ArtistStateManagement(_followableData),
     );
@@ -55,16 +55,7 @@ class _ArtistStateManagementState extends State<_ArtistStateManagement> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ArtistCubit, ArtistState>(
-      listener: (context, state) {
-        if (state is ArtistLoadedState) {
-          context.read<FollowCubit<ArtistFull, ArtistShort>>().defineFollowState(
-                weeklyFollowers: state.artist.weeklyFollowers,
-                overallFollowers: state.artist.overallFollowers,
-                isFollowed: state.artist.isFollowed,
-              );
-        }
-      },
+    return BlocBuilder<ArtistCubit, ArtistState>(
       builder: (context, state) {
         if (state is ArtistLoadedState) {
           return _ArtistContent(
@@ -101,7 +92,11 @@ class _ArtistContentState extends State<_ArtistContent> {
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context.watch<FollowCubit<ArtistFull, ArtistShort>>().state.isFollowed!;
+    _isFollowed = context
+            .watch<FollowableChangeNotifier>()
+            .get(widget.artist.followableId)
+            ?.isFollowed ??
+        false;
     super.didChangeDependencies();
   }
 
@@ -116,7 +111,8 @@ class _ArtistContentState extends State<_ArtistContent> {
             child: WikiWideBookmarkButton(
               isFollowed: _isFollowed,
               onIsFollowedChange: () =>
-                  FollowableUtil.onIsFollowedChange<ArtistFull, ArtistShort>(context, widget.artist),
+                  FollowableUtil.onIsFollowedChange<ArtistFull, ArtistShort>(
+                      context, widget.artist),
             ),
           ),
           SocialLinksList(
