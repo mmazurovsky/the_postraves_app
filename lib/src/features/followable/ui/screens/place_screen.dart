@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/dto/followable_params.dart';
 import 'package:the_postraves_package/models/fulls/place_full.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/place_short.dart';
@@ -83,15 +84,14 @@ class _PlaceContent extends StatefulWidget {
 }
 
 class _PlaceContentState extends State<_PlaceContent> {
-  late bool _isFollowed;
+  late FollowableVariables _followableVariables;
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context
-        .watch<FollowableChangeNotifier>()
-        .get(widget.place.followableId)
-        ?.isFollowed ??
-        false;
+    _followableVariables = context
+            .watch<FollowableChangeNotifier>()
+            .get(widget.place.followableId) ??
+        widget.place.followableVariables;
     super.didChangeDependencies();
   }
 
@@ -104,7 +104,8 @@ class _PlaceContentState extends State<_PlaceContent> {
           const MyBigSpacer(),
           MyHorizontalPadding(
             child: WikiWideBookmarkButton(
-              isFollowed: _isFollowed,
+              isFollowed: _followableVariables.isFollowed,
+              overallFollowers: _followableVariables.overallFollowers,
               onIsFollowedChange: () =>
                   FollowableUtil.onIsFollowedChange<PlaceFull, PlaceShort>(
                 context,

@@ -26,42 +26,8 @@ class FollowableScreen<FollowableCubitGeneric extends Cubit>
       },
       child: WikiCanvas(
         followableData: _followableData,
-        wikiContent: _FollowableScreenContents<FollowableCubitGeneric>(
-            _followableData, _contents),
+        wikiContent: _contents,
       ),
-    );
-  }
-}
-
-class _FollowableScreenContents<FollowCubitGeneric extends Cubit>
-    extends StatelessWidget {
-  final FollowableData _followableData;
-  final Widget _contents;
-  const _FollowableScreenContents(this._followableData, this._contents,
-      {Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final followableVariables = context.watch<FollowableChangeNotifier>().get(
-          FollowableId(
-            id: _followableData.id,
-            type: _followableData.type,
-          ),
-        );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 5),
-        WikiSubtitle(
-          entityType: _followableData.type,
-          country: _followableData.country,
-          overallFollowers: followableVariables?.overallFollowers,
-          weeklyFollowers: followableVariables?.weeklyFollowers,
-          isFollowed: followableVariables?.isFollowed,
-        ),
-        _contents,
-      ],
     );
   }
 }

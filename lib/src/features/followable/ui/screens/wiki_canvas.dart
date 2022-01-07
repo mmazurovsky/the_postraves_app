@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_postraves_app/src/features/followable/ui/widgets/wiki_subtitle.dart';
 import '../../../../common/bottom_navigation_bar/bottom_navigation_tab_item.dart';
 import '../../../../common/utils/followable_type_utils.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
@@ -70,6 +71,11 @@ class _WikiCanvasState extends State<WikiCanvas> {
                 children: [
                   const SizedBox(height: 20),
                   WikiTitle(title: widget.followableData.name),
+                  const SizedBox(height: 5),
+                  WikiSubtitle(
+                    entityType: widget.followableData.type,
+                    country: widget.followableData.country,
+                  ),
                   widget.wikiContent,
                   const EndingOfScreen(),
                 ],

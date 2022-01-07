@@ -130,7 +130,7 @@ class _ProfileDetailsState extends State<_ProfileDetails> {
         const SizedBox(height: 5),
         WikiSubtitle(
           entityType: FollowableType.USER,
-          overallFollowers: widget.userProfile.overallFollowers,
+          // overallFollowers: widget.userProfile.overallFollowers,
         ),
         const MyBigSpacer(),
         MyHorizontalPadding(

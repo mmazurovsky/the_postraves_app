@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/dto/followable_params.dart';
 import 'package:the_postraves_package/dto/timetable_for_scene_by_day.dart';
 import 'package:the_postraves_package/models/fulls/event_full.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
@@ -111,15 +112,20 @@ class _EventContent extends StatefulWidget {
 }
 
 class _EventContentState extends State<_EventContent> {
-  late bool _isFollowed;
+  // late bool _isFollowed;
+  late FollowableVariables _followableVariables;
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context
-        .watch<FollowableChangeNotifier>()
-        .get(widget.event.followableId)
-        ?.isFollowed ??
-        false;
+    _followableVariables = context
+            .watch<FollowableChangeNotifier>()
+            .get(widget.event.followableId) ??
+        widget.event.followableVariables;
+    // _isFollowed = context
+    //         .watch<FollowableChangeNotifier>()
+    //         .get(widget.event.followableId)
+    //         ?.isFollowed ??
+    //     false;
     super.didChangeDependencies();
   }
 
@@ -134,7 +140,8 @@ class _EventContentState extends State<_EventContent> {
             child: EventMainButton(
               status: widget.event.status,
               ticketsLink: widget.event.ticketsLink,
-              isFollowed: _isFollowed,
+              isFollowed: _followableVariables.isFollowed,
+              overallFollowers: _followableVariables.overallFollowers,
               onIsFollowedChange: () =>
                   FollowableUtil.onIsFollowedChange<EventFull, EventShort>(
                       context, widget.event),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 
 class MyTextStyles {
-
   static const TextStyle appTitle = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.accent,
@@ -10,7 +9,7 @@ class MyTextStyles {
     fontWeight: FontWeight.w700,
   );
 
-    static const TextStyle filtered = TextStyle(
+  static const TextStyle filtered = TextStyle(
     fontFamily: 'IBMPlexMono',
     color: MyColors.main,
     fontSize: 20,
@@ -47,11 +46,10 @@ class MyTextStyles {
   static const TextStyle wikiTitle = fullEventCardTitle;
 
   static const TextStyle cardEventDetailsInActive = TextStyle(
-    fontFamily: 'IBMPlexMono',
-    fontSize: 17,
-    fontWeight: FontWeight.w500,
-    color: MyColors.forInactiveStuff
-  );
+      fontFamily: 'IBMPlexMono',
+      fontSize: 17,
+      fontWeight: FontWeight.w500,
+      color: MyColors.forInactiveStuff);
 
   static TextStyle cardEventDetailsAccent =
       cardEventDetailsInActive.copyWith(color: MyColors.accent);
@@ -234,6 +232,12 @@ class MyTextStyles {
   static TextStyle sectionTitleAccent =
       sectionTitle.copyWith(color: MyColors.accent);
 
+  static TextStyle activeFollowers = sectionTitle.copyWith(
+    fontSize: 14,
+    color: MyColors.accent,
+  );
+  static TextStyle inactiveFollowers = sectionTitle.copyWith(fontSize: 14);
+
   static const TextStyle longTextThinSmallAccentColor = TextStyle(
     fontFamily: 'Roboto',
     color: MyColors.accent,
@@ -318,6 +322,10 @@ class MyTextStyles {
     fontSize: 18,
     fontWeight: FontWeight.w600,
     color: MyColors.accent,
+  );
+
+  static TextStyle buttonWithAccentColorBold = buttonWithAccentColor.copyWith(
+    fontWeight: FontWeight.w700,
   );
 
   static TextStyle buttonWithMainColorThinner = const TextStyle(

@@ -3,7 +3,6 @@ import 'package:the_postraves_app/src/dependency_injection.dart';
 import 'package:the_postraves_package/dto/followable_params.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
 import 'package:the_postraves_package/followable/complete_entities_loader/complete_full_entities.dart';
-import 'package:the_postraves_package/followable/repository/artist_repository.dart';
 import 'package:the_postraves_package/followable/repository/followable_repository.dart';
 import 'package:the_postraves_package/models/fulls/artist_full.dart';
 import 'package:the_postraves_package/models/fulls/event_full.dart';

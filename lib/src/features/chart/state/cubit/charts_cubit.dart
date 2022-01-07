@@ -34,11 +34,9 @@ class ChartsCubit extends Cubit<ChartsState> {
     final overallArtists =
         artistChartsRepository.fetchOverallChart(currentCity);
     final weeklyArtists = artistChartsRepository.fetchWeeklyChart(currentCity);
-    // final bestArtist = artistChartsRepository.fetchWeeklyBest(currentCity);
 
     final resolvedOverallArtists = await overallArtists;
     final resolvedWeeklyArtists = await weeklyArtists;
-    // final resolvedBestArtist = await bestArtist;
 
     resolvedOverallArtists.when(
         success: (data) => _stateOverallArtists = data,
@@ -47,10 +45,6 @@ class ChartsCubit extends Cubit<ChartsState> {
     resolvedWeeklyArtists.when(
         success: (data) => _stateWeeklyArtists = data,
         failure: (failure) => {}); //TODO Exception:
-
-    // resolvedBestArtist.when(
-    //     success: (data) => _stateBestArtist = data,
-    //     failure: (failure) => {}); //TODO Exception:
 
      _updateFollowableChangeNotifier();
 
@@ -66,9 +60,5 @@ class ChartsCubit extends Cubit<ChartsState> {
         .updateFollowablesBasedOnArtistList(_stateOverallArtists);
     followableChangeNotifier
         .updateFollowablesBasedOnArtistList(_stateWeeklyArtists);
-    // if (_stateBestArtist != null) {
-    //   followableChangeNotifier
-    //       .updateFollowablesBasedOnArtistList([_stateBestArtist!]);
-    // }
   }
 }

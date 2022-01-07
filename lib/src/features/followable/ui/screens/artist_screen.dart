@@ -2,6 +2,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
+import 'package:the_postraves_package/dto/followable_params.dart';
 import '../../../../common/widgets/animations/wrappers.dart';
 
 import 'package:the_postraves_package/dto/followable_data.dart';
@@ -88,15 +89,15 @@ class _ArtistContent extends StatefulWidget {
 }
 
 class _ArtistContentState extends State<_ArtistContent> {
-  late bool _isFollowed;
+  late FollowableVariables _followableVariables;
 
   @override
   void didChangeDependencies() {
-    _isFollowed = context
+    _followableVariables = context
             .watch<FollowableChangeNotifier>()
-            .get(widget.artist.followableId)
-            ?.isFollowed ??
-        false;
+            .get(widget.artist.followableId) ??
+        widget.artist.followableVariables;
+
     super.didChangeDependencies();
   }
 
@@ -109,7 +110,8 @@ class _ArtistContentState extends State<_ArtistContent> {
           const MyBigSpacer(),
           MyHorizontalPadding(
             child: WikiWideBookmarkButton(
-              isFollowed: _isFollowed,
+              isFollowed: _followableVariables.isFollowed,
+              overallFollowers: _followableVariables.overallFollowers,
               onIsFollowedChange: () =>
                   FollowableUtil.onIsFollowedChange<ArtistFull, ArtistShort>(
                       context, widget.artist),

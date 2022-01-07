@@ -15,11 +15,13 @@ class EventMainButton extends StatelessWidget {
   final String? ticketsLink;
   final bool isFollowed;
   final void Function() onIsFollowedChange;
+  final int overallFollowers;
   const EventMainButton(
       {required this.status,
       required this.ticketsLink,
       required this.isFollowed,
       required this.onIsFollowedChange,
+      required this.overallFollowers,
       Key? key})
       : super(key: key);
 
@@ -32,11 +34,6 @@ class EventMainButton extends StatelessWidget {
             children: [
               Expanded(
                 child: MyElevatedButtonWithoutPadding(
-                  leadingIcon: const Icon(
-                    Ionicons.ticket,
-                    size: 21,
-                    color: MyColors.mainOppositeColor,
-                  ),
                   text: 'wikiEventBuyTicket'.tr(),
                   buttonColor: MyColors.accent,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -51,12 +48,14 @@ class EventMainButton extends StatelessWidget {
               WikiSquaredOutlinedBookmarkButton(
                 isFollowed: isFollowed,
                 onIsFollowedChange: onIsFollowedChange,
+                overallFollowers: overallFollowers,
               ),
             ],
           )
         : WikiWideBookmarkButton(
             isFollowed: isFollowed,
             onIsFollowedChange: onIsFollowedChange,
+            overallFollowers: overallFollowers,
           );
   }
 }

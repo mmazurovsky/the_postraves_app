@@ -10,10 +10,12 @@ import '../../../../common/widgets/buttons/button_content.dart';
 class WikiWideBookmarkButton extends StatelessWidget {
   final Function() onIsFollowedChange;
   final bool isFollowed;
+  final int overallFollowers;
 
   const WikiWideBookmarkButton({
     required this.onIsFollowedChange,
     required this.isFollowed,
+    required this.overallFollowers,
     Key? key,
   }) : super(key: key);
 
@@ -24,27 +26,25 @@ class WikiWideBookmarkButton extends StatelessWidget {
       child: Container(
         height: MyConstants.heightOfContainers,
         decoration: BoxDecoration(
-          color: isFollowed ? Colors.transparent : MyColors.accent,
+          // color: isFollowed ? Colors.transparent : MyColors.accent,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
               color: isFollowed
                   ? MyColors.forInactiveStuffDarker
-                  : Colors.transparent,
+                  : MyColors.accent,
               width: 1.5),
         ),
         child: ButtonContent(
           leading: Icon(
-            Ionicons.heart,
+            isFollowed ? Ionicons.heart : Ionicons.heart_outline,
             size: 22,
-            color: isFollowed
-                ? MyColors.forInactiveStuff
-                : MyColors.mainOppositeColor,
+            color: MyColors.accent,
           ),
           distanceBetweenLeadingAndText: 5,
           text: isFollowed ? 'wikiUnfollow'.tr() : 'wikiFollow'.tr(),
-          textStyle: isFollowed
-              ? MyTextStyles.buttonWithInactiveStuffColor
-              : MyTextStyles.buttonWithOppositeColorBold,
+          extraText: overallFollowers.toString(),
+          extraTextStyle: isFollowed ? MyTextStyles.bodyWithAccentColor : MyTextStyles.bodyWithInactiveColor,
+          textStyle: MyTextStyles.buttonWithAccentColorBold,
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ),

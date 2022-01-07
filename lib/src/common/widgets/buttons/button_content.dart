@@ -5,6 +5,8 @@ class ButtonContent extends StatelessWidget {
   final Widget? trailing;
   final String text;
   final TextStyle textStyle;
+  final String? extraText;
+  final TextStyle? extraTextStyle;
   final MainAxisAlignment mainAxisAlignment;
   final double? distanceBetweenLeadingAndText;
 
@@ -15,6 +17,8 @@ class ButtonContent extends StatelessWidget {
     required this.text,
     required this.textStyle,
     required this.mainAxisAlignment,
+    this.extraText,
+    this.extraTextStyle,
     this.distanceBetweenLeadingAndText,
   }) : super(key: key);
 
@@ -41,13 +45,33 @@ class ButtonContent extends StatelessWidget {
                     )
                   : Container(),
               Flexible(
-                child: Text(
-                  text,
-                  style: textStyle,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
+                  child:
+                      // Text(
+                      //   text,
+                      //   style: textStyle,
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      // ),
+                      RichText(
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                text: TextSpan(children: [
+                  TextSpan(
+                    text: text,
+                    style: textStyle,
+
+                    // maxLines: 1,
+                    // overflow: TextOverflow.ellipsis,
+                  ),
+                  if (extraText != null)
+                    TextSpan(
+                      text: ' (${extraText!})',
+                      style: extraTextStyle,
+                      // maxLines: 1,
+                      // overflow: TextOverflow.ellipsis,
+                    ),
+                ]),
+              )),
             ],
           ),
         ),

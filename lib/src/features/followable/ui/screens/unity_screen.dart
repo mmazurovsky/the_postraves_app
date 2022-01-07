@@ -1,20 +1,19 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
-import '../../../../common/widgets/animations/wrappers.dart';
-
 import 'package:the_postraves_package/dto/followable_data.dart';
+import 'package:the_postraves_package/dto/followable_params.dart';
 import 'package:the_postraves_package/models/fulls/unity_full.dart';
-import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import 'package:the_postraves_package/models/shorts/artist_short.dart';
 import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
+
+import '../../../../common/widgets/animations/wrappers.dart';
 import '../../../../common/widgets/other/loading_container.dart';
 import '../../../../common/widgets/other/social_links_list.dart';
 import '../../../../common/widgets/spacers/my_horizontal_padding.dart';
 import '../../../../common/widgets/spacers/my_spacers.dart';
-import '../../state/follow_cubit/follow_cubit.dart';
+import '../../state/followable_change_notifier.dart';
 import '../../state/unity_cubit/unity_cubit.dart';
 import '../widgets/about_section.dart';
 import '../widgets/followable_list_section.dart';
@@ -89,16 +88,15 @@ class _UnityContent extends StatefulWidget {
 }
 
 class _UnityContentState extends State<_UnityContent> {
-  late bool _isFollowed;
+  late FollowableVariables _followableVariables;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _isFollowed = context
+    _followableVariables = context
             .watch<FollowableChangeNotifier>()
-            .get(widget.unity.followableId)
-            ?.isFollowed ??
-        false;
+            .get(widget.unity.followableId) ??
+        widget.unity.followableVariables;
   }
 
   @override
@@ -110,7 +108,8 @@ class _UnityContentState extends State<_UnityContent> {
           const MyBigSpacer(),
           MyHorizontalPadding(
             child: WikiWideBookmarkButton(
-              isFollowed: _isFollowed,
+              isFollowed: _followableVariables.isFollowed,
+              overallFollowers: _followableVariables.overallFollowers,
               onIsFollowedChange: () =>
                   FollowableUtil.onIsFollowedChange<UnityFull, UnityShort>(
                 context,
