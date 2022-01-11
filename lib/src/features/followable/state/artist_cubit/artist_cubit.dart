@@ -12,7 +12,7 @@ part 'artist_state.dart';
 
 class ArtistCubit extends Cubit<ArtistState> {
   final CompleteEntitiesLoader _completeEntitiesLoader;
-  final FollowableChangeNotifier _followableChangeNotifier;
+  final FollowableVariablesService _followableChangeNotifier;
   ArtistCubit(
     this._completeEntitiesLoader,
     this._followableChangeNotifier,

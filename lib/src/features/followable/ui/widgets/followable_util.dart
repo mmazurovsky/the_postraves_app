@@ -13,8 +13,8 @@ class FollowableUtil {
       Navigator.of(context).pushNamed(MyNavigationRoutes.actionResolver);
     } else {
       context
-          .read<FollowableChangeNotifier>()
-          .toggleFollow(followable.followableId);
+          .read<FollowableVariablesService>()
+          .toggleFollow(followable.newFollowableId);
     }
   }
 }

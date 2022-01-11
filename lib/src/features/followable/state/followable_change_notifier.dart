@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:the_postraves_app/src/dependency_injection.dart';
 import 'package:the_postraves_package/dto/followable_params.dart';
 import 'package:the_postraves_package/dto/followable_type.dart';
@@ -14,7 +13,7 @@ import 'package:the_postraves_package/models/shorts/event_short.dart';
 import 'package:the_postraves_package/models/shorts/place_short.dart';
 import 'package:the_postraves_package/models/shorts/unity_short.dart';
 
-abstract class FollowableChangeNotifier implements ChangeNotifier {
+abstract class FollowableVariablesService {
   void toggleFollow(FollowableId followableId);
   FollowableVariables? get(FollowableId followableId);
   void updateFollowablesBasedOnEventList(List<EventShort> events);
@@ -25,39 +24,29 @@ abstract class FollowableChangeNotifier implements ChangeNotifier {
   void updateFollowablesBasedOnCompletePlace(CompletePlaceEntity place);
 }
 
-class FollowableChangeNotifierImpl
-    with ChangeNotifier
-    implements FollowableChangeNotifier {
+class FollowableVariablesServiceImpl implements FollowableVariablesService {
   final Map<FollowableId, FollowableVariables> _map = {};
 
   @override
   void toggleFollow(FollowableId followableId) {
     final followableVariables = _map[followableId];
     if (followableVariables != null) {
-      FollowableVariables? newFollowableVariables;
       if (followableVariables.isFollowed) {
-        newFollowableVariables = followableVariables.copyWith(
-          isFollowed: false,
-          overallFollowers: followableVariables.overallFollowers - 1,
-          weeklyFollowers: followableVariables.weeklyFollowers - 1,
-        );
         followableId.type.getRepo().unfollowFollowable(followableId.id);
       } else {
-        newFollowableVariables = followableVariables.copyWith(
-          isFollowed: true,
-          overallFollowers: followableVariables.overallFollowers + 1,
-          weeklyFollowers: followableVariables.weeklyFollowers + 1,
-        );
         followableId.type.getRepo().followFollowable(followableId.id);
       }
-      _update(followableId, newFollowableVariables);
+      followableVariables.toggleFollow();
     }
   }
 
   void _update(FollowableId followableId, FollowableVariables variables) {
     if (_map[followableId] != variables) {
-      _map[followableId] = variables;
-      notifyListeners();
+      if (_map[followableId] == null) {
+        _map[followableId] = variables;
+      } else {
+        _map[followableId]!.setNewVariableData(variables);
+      }
     }
   }
 
@@ -122,7 +111,8 @@ class FollowableChangeNotifierImpl
 
   void _updateFollowablesBasedOnGeneralFollowable(
       GeneralFollowableInterface followable) {
-    _updateFollowables(followable.followableId, followable.followableVariables);
+    _updateFollowables(
+        followable.newFollowableId, followable.newFollowableVariables);
   }
 
   void _updateFollowables(

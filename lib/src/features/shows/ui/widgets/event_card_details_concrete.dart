@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
 import 'package:the_postraves_package/dto/followable_params.dart';
@@ -11,7 +12,7 @@ import '../../../../common/utils/formatting_utils.dart';
 import '../../../../common/widgets/other/widget_text_row.dart';
 import 'event_card_details.dart';
 
-class EventCardDetailsConcrete extends StatefulWidget {
+class EventCardDetailsConcrete extends StatelessWidget {
   final EventShort _event;
   const EventCardDetailsConcrete(
     this._event, {
@@ -19,91 +20,75 @@ class EventCardDetailsConcrete extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<EventCardDetailsConcrete> createState() =>
-      _EventCardDetailsConcreteState();
-}
-
-class _EventCardDetailsConcreteState extends State<EventCardDetailsConcrete> {
-  FollowableVariables? _eventFollowableVariables;
-  FollowableVariables? _placeFollowableVariables;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final watchedEvent = context
-        .watch<FollowableChangeNotifier>()
-        .get(widget._event.followableId);
-    final watchedPlace = context
-        .watch<FollowableChangeNotifier>()
-        .get(widget._event.place.followableId);
-
-    if (watchedEvent != null) {
-      if (_eventFollowableVariables != watchedEvent) {
-        _eventFollowableVariables = watchedEvent;
-      }
-    } else {
-      _eventFollowableVariables = widget._event.followableVariables;
-    }
-
-    if (watchedPlace != null) {
-      if (_placeFollowableVariables != watchedPlace) {
-        _placeFollowableVariables = watchedPlace;
-      }
-    } else {
-      _placeFollowableVariables = widget._event.place.followableVariables;
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return EventCardDetails(
-      topLeftWidget: WidgetTextRow(
-        widget: SizedBox(
-          width: 20,
-          child: Icon(
-            _placeFollowableVariables!.isFollowed
-                ? Ionicons.heart
-                : Ionicons.compass_outline,
-            size: 19,
-            color: _placeFollowableVariables!.isFollowed
-                ? MyColors.accent
-                : MyColors.forInactiveStuff,
-          ),
-        ),
-        isTextAccentColor: _placeFollowableVariables!.isFollowed,
-        text: widget._event.place.name,
+      topLeftWidget: ChangeNotifierProvider.value(
+        value: context
+            .read<FollowableVariablesService>()
+            .get(_event.place.newFollowableId),
+        builder: (context, _) {
+          final placeVariables = context.watch<FollowableVariables?>() ??
+              _event.place.newFollowableVariables;
+          return WidgetTextRow(
+            widget: SizedBox(
+              width: 20,
+              child: Icon(
+                placeVariables.isFollowed
+                    ? Ionicons.heart
+                    : Ionicons.compass_outline,
+                size: 19,
+                color: placeVariables.isFollowed
+                    ? MyColors.accent
+                    : MyColors.forInactiveStuff,
+              ),
+            ),
+            isTextAccentColor: placeVariables.isFollowed,
+            text: _event.place.name,
+          );
+        },
       ),
       bottomLeftWidget: WidgetTextRow(
         widget: SizedBox(
           width: 20,
-          child: widget._event.status != EventStatus.LIVE
+          child: _event.status != EventStatus.LIVE
               ? const Icon(Ionicons.calendar_clear_outline,
                   size: 19, color: MyColors.forInactiveStuff)
-              : EventStatusIndicator(widget._event.status),
+              : EventStatusIndicator(_event.status),
         ),
-        text: widget._event.status != EventStatus.UPCOMING &&
-                widget._event.status != EventStatus.PRESALE
-            ? FormattingUtils.getEventStatusNameTranslation(
-                widget._event.status)
+        text: _event.status != EventStatus.UPCOMING &&
+                _event.status != EventStatus.PRESALE
+            ? FormattingUtils.getEventStatusNameTranslation(_event.status)
             : FormattingUtils.getFormattedDateShort(
-                dateTime: widget._event.startDateTime,
+                dateTime: _event.startDateTime,
               ),
       ),
-      topRightWidget: WidgetTextRow(
-        widget: SizedBox(
-          width: 20,
-          child: Icon(
-            _eventFollowableVariables!.isFollowed
-                ? Ionicons.heart
-                : Ionicons.heart_outline,
-            size: 19,
-            color: _eventFollowableVariables!.isFollowed
-                ? MyColors.accent
-                : MyColors.forInactiveStuff,
-          ),
-        ),
-        isTextAccentColor: _eventFollowableVariables!.isFollowed,
-        text: _eventFollowableVariables!.overallFollowers.toString(),
+      topRightWidget: ChangeNotifierProvider.value(
+        value: context
+            .read<FollowableVariablesService>()
+            .get(_event.newFollowableId),
+        builder: (context, _) {
+          final eventVariables = context.watch<FollowableVariables?>() ??
+              _event.newFollowableVariables;
+          return WidgetTextRow(
+            widget: SizedBox(
+              width: 20,
+              child: Icon(
+                eventVariables.isFollowed
+                    ? Ionicons.heart
+                    : Ionicons.heart_outline,
+                size: 19,
+                color: eventVariables.isFollowed
+                    ? MyColors.accent
+                    : MyColors.forInactiveStuff,
+              ),
+            ),
+            isTextAccentColor: eventVariables.isFollowed,
+            text: context
+                .watch<FollowableVariables>()
+                .overallFollowers
+                .toString(),
+          );
+        },
       ),
       bottomRightWidget: WidgetTextRow(
         widget: const SizedBox(
@@ -114,7 +99,7 @@ class _EventCardDetailsConcreteState extends State<EventCardDetailsConcrete> {
             color: MyColors.forInactiveStuff,
           ),
         ),
-        text: FormattingUtils.resolveTicketsPrice(widget._event.ticketPrices),
+        text: FormattingUtils.resolveTicketsPrice(_event.ticketPrices),
       ),
       verticalPaddingOfContent: 20,
     );
