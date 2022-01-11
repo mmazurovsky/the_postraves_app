@@ -12,7 +12,7 @@ part 'unity_state.dart';
 
 class UnityCubit extends Cubit<UnityState> {
   final CompleteEntitiesLoader _completeEntitiesLoader;
-  final FollowableChangeNotifier _followableChangeNotifier;
+  final FollowableVariablesService _followableChangeNotifier;
 
   UnityCubit(
     this._completeEntitiesLoader,

@@ -1180,7 +1180,7 @@ packages:
     description:
       path: "."
       ref: dev
-      resolved-ref: "8e14e6a050b57969a856e83fd4eb061fd87d832d"
+      resolved-ref: "7b7a8d19c796fee9a8f948da37d7c3605a92a352"
       url: "https://github.com/mmazurovsky/the_postraves_package"
     source: git
     version: "0.0.2"

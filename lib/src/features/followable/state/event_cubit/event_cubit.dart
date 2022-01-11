@@ -13,7 +13,7 @@ part 'event_state.dart';
 
 class EventCubit extends Cubit<EventState> {
   final CompleteEntitiesLoader _completeEntitiesLoader;
-  final FollowableChangeNotifier _followableChangeNotifier;
+  final FollowableVariablesService _followableChangeNotifier;
 
   EventCubit(
     this._completeEntitiesLoader,

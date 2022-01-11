@@ -92,6 +92,7 @@ class _CreateUserProfileScreenState extends State<CreateUserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.screenBackground,
       appBar: MySimpleAppBar(
         leading: widget.isPoppable
             ? const AppBarBackButton()

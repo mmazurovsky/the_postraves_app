@@ -59,8 +59,8 @@ class ProvidersInjection extends StatelessWidget {
       ],
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            create: (_) => serviceLocator<FollowableChangeNotifier>(),
+          Provider(
+            create: (_) => serviceLocator<FollowableVariablesService>(),
           ),
           ChangeNotifierProvider(
             create: (_) => CurrentTabChangeNotifier(TabItem.shows),

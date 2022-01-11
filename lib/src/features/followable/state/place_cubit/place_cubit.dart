@@ -13,7 +13,7 @@ part 'place_state.dart';
 
 class PlaceCubit extends Cubit<PlaceState> {
   final CompleteEntitiesLoader _completeEntitiesLoader;
-  final FollowableChangeNotifier _followableChangeNotifier;
+  final FollowableVariablesService _followableChangeNotifier;
 
   PlaceCubit(
     this._completeEntitiesLoader,

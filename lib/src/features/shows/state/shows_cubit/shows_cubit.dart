@@ -17,7 +17,7 @@ part 'shows_state.dart';
 class ShowsCubit extends Cubit<ShowsState> {
   final ShowsRepository showsRepository;
   final DateTimeFilterChangeNotifier dateFilterChangeNotifier;
-  final FollowableChangeNotifier followableChangeNotifier;
+  final FollowableVariablesService followableChangeNotifier;
   List<EventShort>? _eventsByDate;
 
   ShowsCubit({

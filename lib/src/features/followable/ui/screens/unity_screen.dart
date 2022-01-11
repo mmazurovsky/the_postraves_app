@@ -1,6 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/dto/followable_params.dart';
 import 'package:the_postraves_package/models/fulls/unity_full.dart';
@@ -71,7 +72,7 @@ class _UnityStateManagementState extends State<_UnityStateManagement> {
   }
 }
 
-class _UnityContent extends StatefulWidget {
+class _UnityContent extends StatelessWidget {
   final UnityFull unity;
   final List<ArtistShort> artists;
   final List<EventShort> events;
@@ -83,21 +84,21 @@ class _UnityContent extends StatefulWidget {
     required this.events,
   }) : super(key: key);
 
-  @override
-  State<_UnityContent> createState() => _UnityContentState();
-}
+//   @override
+//   State<_UnityContent> createState() => _UnityContentState();
+// }
 
-class _UnityContentState extends State<_UnityContent> {
-  late FollowableVariables _followableVariables;
+// class _UnityContentState extends State<_UnityContent> {
+//   late FollowableVariables _followableVariables;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _followableVariables = context
-            .watch<FollowableChangeNotifier>()
-            .get(widget.unity.followableId) ??
-        widget.unity.followableVariables;
-  }
+//   @override
+//   void didChangeDependencies() {
+//     super.didChangeDependencies();
+//     _followableVariables = context
+//             .watch<FollowableVariablesService>()
+//             .get(widget.unity.followableId) ??
+//         widget.unity.followableVariables;
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -107,27 +108,35 @@ class _UnityContentState extends State<_UnityContent> {
         children: [
           const MyBigSpacer(),
           MyHorizontalPadding(
-            child: WikiWideBookmarkButton(
-              isFollowed: _followableVariables.isFollowed,
-              overallFollowers: _followableVariables.overallFollowers,
-              onIsFollowedChange: () =>
-                  FollowableUtil.onIsFollowedChange<UnityFull, UnityShort>(
-                context,
-                widget.unity,
-              ),
+            child: ChangeNotifierProvider.value(
+              value: context
+                  .read<FollowableVariablesService>()
+                  .get(unity.newFollowableId),
+              builder: (context, _) {
+                final variables = context.watch<FollowableVariables>();
+                return WikiWideBookmarkButton(
+                  isFollowed: variables.isFollowed,
+                  overallFollowers: variables.overallFollowers,
+                  onIsFollowedChange: () =>
+                      FollowableUtil.onIsFollowedChange<UnityFull, UnityShort>(
+                    context,
+                    unity,
+                  ),
+                );
+              },
             ),
           ),
           SocialLinksList(
-            soundcloudUsername: widget.unity.soundcloudUsername,
-            bandcampUsername: widget.unity.bandcampUsername,
-            instagramUsername: widget.unity.instagramUsername,
+            soundcloudUsername: unity.soundcloudUsername,
+            bandcampUsername: unity.bandcampUsername,
+            instagramUsername: unity.instagramUsername,
           ),
-          AboutSection(widget.unity.about),
+          AboutSection(unity.about),
           FollowableListSection(
             'artistEntityNamePlural'.tr(),
-            widget.artists,
+            artists,
           ),
-          UpcomingEventsSection(widget.events),
+          UpcomingEventsSection(events),
         ],
       ),
     );

@@ -708,8 +708,8 @@ void setupServiceLocatorInjection({bool isTesting = true}) async {
 
   // State
 
-  serviceLocator.registerLazySingleton<FollowableChangeNotifier>(
-      () => FollowableChangeNotifierImpl());
+  serviceLocator.registerLazySingleton<FollowableVariablesService>(
+      () => FollowableVariablesServiceImpl());
 
   serviceLocator.registerLazySingleton(
     () => CurrentCityChangeNotifier(

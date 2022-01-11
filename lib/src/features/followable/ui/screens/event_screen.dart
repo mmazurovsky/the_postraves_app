@@ -2,6 +2,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
 import 'package:the_postraves_package/dto/followable_data.dart';
 import 'package:the_postraves_package/dto/followable_params.dart';
@@ -91,7 +92,7 @@ class _EventStateManagementState extends State<_EventStateManagement> {
   }
 }
 
-class _EventContent extends StatefulWidget {
+class _EventContent extends StatelessWidget {
   final EventFull event;
   final List<UnityShort> unities;
   final List<ArtistShort> lineup;
@@ -107,27 +108,27 @@ class _EventContent extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<_EventContent> createState() => _EventContentState();
-}
+//   @override
+//   State<_EventContent> createState() => _EventContentState();
+// }
 
-class _EventContentState extends State<_EventContent> {
-  // late bool _isFollowed;
-  late FollowableVariables _followableVariables;
+// class _EventContentState extends State<_EventContent> {
+//   // late bool _isFollowed;
+//   late FollowableVariables _followableVariables;
 
-  @override
-  void didChangeDependencies() {
-    _followableVariables = context
-            .watch<FollowableChangeNotifier>()
-            .get(widget.event.followableId) ??
-        widget.event.followableVariables;
-    // _isFollowed = context
-    //         .watch<FollowableChangeNotifier>()
-    //         .get(widget.event.followableId)
-    //         ?.isFollowed ??
-    //     false;
-    super.didChangeDependencies();
-  }
+//   @override
+//   void didChangeDependencies() {
+//     _followableVariables = context
+//             .watch<FollowableVariablesService>()
+//             .get(event.followableId) ??
+//         event.followableVariables;
+//     // _isFollowed = context
+//     //         .watch<FollowableChangeNotifier>()
+//     //         .get(event.followableId)
+//     //         ?.isFollowed ??
+//     //     false;
+//     super.didChangeDependencies();
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -137,14 +138,22 @@ class _EventContentState extends State<_EventContent> {
         children: [
           const MyBigSpacer(),
           MyHorizontalPadding(
-            child: EventMainButton(
-              status: widget.event.status,
-              ticketsLink: widget.event.ticketsLink,
-              isFollowed: _followableVariables.isFollowed,
-              overallFollowers: _followableVariables.overallFollowers,
-              onIsFollowedChange: () =>
-                  FollowableUtil.onIsFollowedChange<EventFull, EventShort>(
-                      context, widget.event),
+            child: ChangeNotifierProvider.value(
+              value: context
+                  .read<FollowableVariablesService>()
+                  .get(event.newFollowableId),
+              builder: (context, _) {
+                final variables = context.watch<FollowableVariables>();
+                return EventMainButton(
+                  status: event.status,
+                  ticketsLink: event.ticketsLink,
+                  isFollowed: variables.isFollowed,
+                  overallFollowers: variables.overallFollowers,
+                  onIsFollowedChange: () =>
+                      FollowableUtil.onIsFollowedChange<EventFull, EventShort>(
+                          context, event),
+                );
+              },
             ),
           ),
           DetailsHorizontalScrollableList(
@@ -153,17 +162,16 @@ class _EventContentState extends State<_EventContent> {
               'wikiEventStatus'.tr(): Row(
                 children: [
                   Text(
-                    FormattingUtils.getEventStatusNameTranslation(
-                        widget.event.status),
+                    FormattingUtils.getEventStatusNameTranslation(event.status),
                     style: MyTextStyles.body,
                   ),
                   const SizedBox(width: 10),
-                  EventStatusIndicator(widget.event.status),
+                  EventStatusIndicator(event.status),
                 ],
               ),
               'wikiEventPrice'.tr(): Text(
                 FormattingUtils.resolveTicketsPrice(
-                  widget.event.ticketPrices,
+                  event.ticketPrices,
                 ),
                 style: MyTextStyles.body,
               ),
@@ -171,7 +179,7 @@ class _EventContentState extends State<_EventContent> {
                 children: [
                   Text(
                     FormattingUtils.getFormattedDateAndTime(
-                      dateTime: widget.event.startDateTime,
+                      dateTime: event.startDateTime,
                     ),
                     style: MyTextStyles.body,
                   ),
@@ -181,7 +189,7 @@ class _EventContentState extends State<_EventContent> {
                       context: context,
                       builder: (ctx) => DialogWithOkButton(
                         'eventStartTimeInfo'
-                            .tr(args: [widget.event.place.city.localName]),
+                            .tr(args: [event.place.city.localName]),
                         Navigator.of(ctx).pop,
                       ),
                     ),
@@ -196,7 +204,7 @@ class _EventContentState extends State<_EventContent> {
                 children: [
                   Text(
                     FormattingUtils.getFormattedDateAndTime(
-                      dateTime: widget.event.endDateTime,
+                      dateTime: event.endDateTime,
                     ),
                     style: MyTextStyles.body,
                   ),
@@ -206,7 +214,7 @@ class _EventContentState extends State<_EventContent> {
                       context: context,
                       builder: (ctx) => DialogWithOkButton(
                         'eventEndTimeInfo'
-                            .tr(args: [widget.event.place.city.localName]),
+                            .tr(args: [event.place.city.localName]),
                         Navigator.of(ctx).pop,
                       ),
                     ),
@@ -219,21 +227,21 @@ class _EventContentState extends State<_EventContent> {
               ),
             },
           ),
-          AboutSection(widget.event.about, areSpacerAndDividerNeeded: false),
-          widget.event.place.isJustCity
-              ? PlaceIsCityPlaceholder(widget.event.place)
+          AboutSection(event.about, areSpacerAndDividerNeeded: false),
+          event.place.isJustCity
+              ? PlaceIsCityPlaceholder(event.place)
               : FollowableListSection(
                   'placeEntityNameSingular'.tr(),
-                  [widget.event.place],
+                  [event.place],
                 ),
           FollowableListSection(
             'wikiEventOrganizers'.tr(),
-            widget.unities,
+            unities,
           ),
           FollowableListSection(
             'wikiEventLineup'.tr(),
-            widget.lineup,
-            leadingWidget: widget.timetable.isEmpty
+            lineup,
+            leadingWidget: timetable.isEmpty
                 ? Container()
                 : ButtonWithIcons(
                     leadingIcon: Stack(
@@ -257,9 +265,9 @@ class _EventContentState extends State<_EventContent> {
                     buttonText: 'wikiEventOpenTimetable'.tr(),
                     onButtonTap: () => NavigatorFunctions.pushTimetable(
                       context: context,
-                      eventId: widget.event.id,
-                      eventName: widget.event.name,
-                      timetableDto: widget.timetable,
+                      eventId: event.id,
+                      eventName: event.name,
+                      timetableDto: timetable,
                     ),
                     verticalPadding: MyConstants.ratingEntityVerticalPadding,
                   ),

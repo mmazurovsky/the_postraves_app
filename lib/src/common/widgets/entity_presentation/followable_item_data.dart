@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 import 'package:the_postraves_app/src/features/followable/state/followable_change_notifier.dart';
 import 'package:the_postraves_package/constants/my_colors.dart';
@@ -9,7 +10,7 @@ import '../../constants/my_text_styles.dart';
 import '../../utils/formatting_utils.dart';
 
 class FollowableItemData<T extends GeneralFollowableInterface>
-    extends StatefulWidget {
+    extends StatelessWidget {
   final T entity;
   final bool showWeeklyFollowers;
   final String? hintText;
@@ -21,35 +22,13 @@ class FollowableItemData<T extends GeneralFollowableInterface>
     this.hintText,
   }) : super(key: key);
 
-  @override
-  State<FollowableItemData<T>> createState() => _FollowableItemDataState<T>();
-}
-
-class _FollowableItemDataState<T extends GeneralFollowableInterface>
-    extends State<FollowableItemData<T>> {
-  FollowableVariables? _followableVariables;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final watched = context
-        .watch<FollowableChangeNotifier>()
-        .get(widget.entity.followableId);
-    if (watched != null) {
-      if (_followableVariables != watched) {
-        _followableVariables = watched;
-      }
-    } else {
-      _followableVariables = widget.entity.followableVariables;
-    }
-  }
-
-  TextStyle _resolveFollowersTextStyle() {
-    if (widget.showWeeklyFollowers) {
+  TextStyle _resolveFollowersTextStyle(
+      FollowableVariables followableVariables) {
+    if (showWeeklyFollowers) {
       return FormattingUtils.resolveTextStyleForWeeklyFollowers(
-          _followableVariables!.weeklyFollowers);
+          followableVariables.weeklyFollowers);
     } else {
-      if (_followableVariables!.isFollowed) {
+      if (followableVariables.isFollowed) {
         return MyTextStyles.shortEntityRatingAccent;
       } else {
         return MyTextStyles.shortEntityOverallRating;
@@ -68,11 +47,11 @@ class _FollowableItemDataState<T extends GeneralFollowableInterface>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            widget.entity.country != null
+            entity.country != null
                 ? Row(
                     children: [
                       Text(
-                        widget.entity.country!.emojiCode,
+                        entity.country!.emojiCode,
                         style: MyTextStyles.countryFlag,
                       ),
                       const SizedBox(width: 8),
@@ -81,7 +60,7 @@ class _FollowableItemDataState<T extends GeneralFollowableInterface>
                 : Container(),
             Flexible(
               child: Text(
-                widget.entity.name,
+                entity.name,
                 style: MyTextStyles.shortEntityName,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -94,28 +73,37 @@ class _FollowableItemDataState<T extends GeneralFollowableInterface>
             const SizedBox(
               height: 5,
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  _followableVariables!.isFollowed
-                      ? Ionicons.heart
-                      : Ionicons.heart_outline,
-                  size: 19,
-                  color: _followableVariables!.isFollowed
-                      ? MyColors.accent
-                      : MyColors.forInactiveStuff,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  widget.showWeeklyFollowers
-                      ? FormattingUtils.resolveTextForWeeklyFollowers(
-                          _followableVariables!.weeklyFollowers)
-                      : _followableVariables!.overallFollowers.toString(),
-                  style: _resolveFollowersTextStyle(),
-                ),
-              ],
+            ChangeNotifierProvider.value(
+              value: context
+                  .read<FollowableVariablesService>()
+                  .get(entity.newFollowableId),
+              builder: (context, _) {
+                final variables = context.watch<FollowableVariables?>() ??
+                    entity.newFollowableVariables;
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      variables.isFollowed
+                          ? Ionicons.heart
+                          : Ionicons.heart_outline,
+                      size: 19,
+                      color: variables.isFollowed
+                          ? MyColors.accent
+                          : MyColors.forInactiveStuff,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      showWeeklyFollowers
+                          ? FormattingUtils.resolveTextForWeeklyFollowers(
+                              variables.weeklyFollowers)
+                          : variables.overallFollowers.toString(),
+                      style: _resolveFollowersTextStyle(variables),
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         ),

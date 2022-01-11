@@ -3,7 +3,6 @@ import 'package:the_postraves_package/models/interfaces/data_interfaces.dart';
 import '../../constants/my_constants.dart';
 import 'followable_item.dart';
 
-
 class FollowableList<T extends GeneralFollowableInterface>
     extends StatelessWidget {
   final List<T> followables;

@@ -11,7 +11,7 @@ part 'charts_state.dart';
 
 class ChartsCubit extends Cubit<ChartsState> {
   final ChartsRepository<ArtistShort> artistChartsRepository;
-  final FollowableChangeNotifier followableChangeNotifier;
+  final FollowableVariablesService followableChangeNotifier;
 
   ChartsCubit(this.artistChartsRepository, this.followableChangeNotifier)
       : super(const ChartsState.loading());
